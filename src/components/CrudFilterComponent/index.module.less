@@ -1,0 +1,28 @@
+.curdComponent {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .searchWrap {
+        flex: 0 0 auto;
+    }
+    .insertWrap {
+        padding: 8px 24px;
+        flex: 0 0 48px;
+        button {
+            margin-right: 20px;
+        }
+    }
+    .tableWrap {
+        // padding: 0 24px;
+        flex: 1;
+        overflow: auto;
+    }
+    :global {
+        .ant-table-header {
+            background: #f2f3fc;
+        }
+        .ant-time-picker {
+            width: 174px;
+        }
+    }
+}

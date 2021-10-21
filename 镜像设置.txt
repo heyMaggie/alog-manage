@@ -1,0 +1,6 @@
+1.淘宝镜像:  npm config set registry https://registry.npm.taobao.org
+
+2.设置electron淘宝镜像:    
+npm config set ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/
+
+

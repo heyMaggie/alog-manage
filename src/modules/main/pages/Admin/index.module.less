@@ -1,0 +1,43 @@
+:global {
+    #root > .ant-layout {
+        height: 100%;
+    }
+    .ant-layout-header {
+        height: 30px;
+        line-height: 30px;
+    }
+    .ant-layout-sider {
+        height: calc(100%);
+        background: white !important;
+        overflow-y: auto;
+    }
+    .ant-layout-sider-children {
+        background: #000c17;
+    }
+    .ant-layout-content {
+        background: #fff;
+        margin: 0;
+        height: 100% !important;
+    }
+    .ant-layout-content > div {
+        background: white;
+        height: 100%;
+        overflow: auto;
+    }
+    .ant-menu-inline .ant-menu-item,
+    .ant-menu-inline .ant-menu-submenu-title {
+        width: 100% !important;
+    }
+    .ant-layout-footer {
+        background: lightgray !important;
+        padding: 0;
+        // height: 0;
+    }
+}
+
+.mylayout {
+    // height: auto;
+    height: 100%; //加入 react-split-pane 后改
+    min-height: 100%;
+    padding-left: 10px;
+}

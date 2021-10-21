@@ -1,0 +1,40 @@
+:global {
+    .ant-empty-normal {
+        margin: 90px 0;
+    }
+    //斑马线行 样式！
+    .ant-table-tbody > tr:nth-child(even) {
+        background: rgba(242, 244, 250, 1) !important;
+    }
+    .ant-table-tbody > tr:nth-child(old) {
+        background: rgba(255, 255, 255, 1) !important;
+    }
+
+    // #1890ff  f2f3fc   rgba(242, 244, 250, 1)
+    .ant-table-thead,
+    .ant-table-thead > tr > th {
+        // background: rgba(242, 244, 250, 1) !important;
+        background: #f2f3fc !important;
+    }
+    // 分页
+    .ant-pagination-item-active {
+        background: #1890ff;
+    }
+    .ant-pagination-item-active a {
+        font-size: 12px;
+        color: white !important;
+    }
+
+    .ant-pagination-jump-prev:focus i,
+    .ant-pagination-jump-prev:hover i,
+    .ant-pagination-jump-next:focus i,
+    .ant-pagination-jump-next:hover i,
+    .ant-pagination-item:focus a,
+    .ant-pagination-item:focus a,
+    .ant-pagination-prev:focus a,
+    .ant-pagination-prev:hover a,
+    .ant-pagination-next:focus a,
+    .ant-pagination-next:hover a {
+        color: #1890ff;
+    }
+}
