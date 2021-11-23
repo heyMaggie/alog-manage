@@ -48,6 +48,10 @@ export default class Axios {
                                 content:
                                     res.msg || res.message || "获取数据失败",
                             });
+                            //失败回调
+                            if (typeof options.error == "function") {
+                                options.error();
+                            }
                         }
                     } else {
                         reject(response.data);
@@ -93,7 +97,53 @@ export default class Axios {
                                 title: "提示",
                                 content:
                                     res.msg || res.message || "获取数据失败",
+                                duration: "3",
                             });
+                            //失败回调
+                            if (typeof options.error == "function") {
+                                options.error();
+                            }
+                        }
+                    } else {
+                        reject(response.data);
+                    }
+                })
+                .catch((e) => {
+                    // console.log(e);
+                    message.warning({
+                        title: "提示",
+                        content: "数据请求失败!",
+                    });
+                });
+        });
+    }
+    static request(options) {
+        return new Promise((resolve, reject) => {
+            axios({
+                ...options,
+                url: options.url,
+                timeout: 5000,
+                params: options.data || "",
+            })
+                .then((response) => {
+                    if (response.status == "200") {
+                        let res = response.data;
+                        if (
+                            res.code == "0" ||
+                            res.code == "2000" ||
+                            res.code == "10000"
+                        ) {
+                            resolve(res);
+                        } else {
+                            message.info({
+                                title: "提示",
+                                content:
+                                    res.msg || res.message || "获取数据失败",
+                            });
+                            //失败回调
+                            if (typeof options.error == "function") {
+                                options.error();
+                            }
                         }
                     } else {
                         reject(response.data);

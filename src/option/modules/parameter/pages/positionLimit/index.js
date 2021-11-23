@@ -98,58 +98,48 @@ const getUpdateFormFields = () => {
 const columns = (params) => {
     return [
         {
-            title: "保证金账户",
-            dataIndex: "assetAccount",
-            width: 120,
-        },
-        {
-            title: "用户ID",
-            dataIndex: "uuserId",
+            title: "标的物ID",
+            dataIndex: "usecurityId",
             width: 100,
+            // ...params("switchId"),
         },
         {
-            title: "余额",
-            dataIndex: "balance",
-            width: 100,
+            title: "股东账户ID",
+            dataIndex: "uaccountId",
         },
         {
-            title: "冻结资金",
-            dataIndex: "frozen",
-            width: 100,
+            title: "持仓等级",
+            dataIndex: "posLevel",
+            // width: 130,
         },
         {
-            title: "实时保证金",
-            dataIndex: "marginAmount",
-            width: 120,
-        },
-        {
-            title: "注册时间",
-            dataIndex: "createTime",
+            title: "单权利仓持仓限额",
+            dataIndex: "rightsPosLimitQty",
             width: 150,
         },
         {
-            title: "更新时间",
-            dataIndex: "updateTime",
+            title: "总持仓限额",
+            dataIndex: "positionLimitQty",
             width: 150,
         },
         {
-            title: "版本号",
-            dataIndex: "vers",
-            width: 100,
+            title: "单日买入开仓限额",
+            dataIndex: "dayBuyLimitQty",
+            width: 150,
         },
     ];
 };
 let getSearchFormFields = () => {
     return [
         {
-            label: "保证金账户",
-            id: "assetAccount",
-            component: <Input placeholder="请输入保证金账户" />,
+            label: "标的物",
+            id: "usecurityId",
+            component: <Input placeholder="请输入标的物" />,
         },
         {
-            label: "用户ID",
-            id: "uuserId",
-            component: <Input placeholder="请输入用户ID" />,
+            label: "股东账户",
+            id: "uaccountId",
+            component: <Input placeholder="请输入股东账户" />,
         },
     ];
 };
@@ -206,13 +196,13 @@ export default class uoeSetting extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.get({
-            url: "/option/tb-asset-info/selectByCondition",
+            url: "/option/positionLimit/selectByCondition",
             data: params,
         }).then((res) => {
             console.log(res);
             //解析数据字典
             if (res.data.length > 0) {
-                parseDict(res.data);
+                parseDictValue(res.data);
                 showStip(this);
             } else {
                 message.info("查询结果为空");
@@ -264,4 +254,40 @@ export default class uoeSetting extends React.PureComponent {
             </div>
         );
     }
+}
+
+{
+    /* <CurdComponent
+        rowKey={"id"}
+        isShowSearchForm={false}
+        // onSearchClick={this.handleSearch}
+        // getSearchFormFields={this.state.formArr}
+        // getSearchFormFields={getSearchFormFields}
+        // searchLoading={this.state.searchLoading}
+        hasSlot={true}
+        // insertBtnText={"文件上传"} // 不传 就没新增按钮
+        // getInsertFormFields={getInsertFormFields}
+        // insertRecord={this.handleInsertRecord}
+        // col="2"
+        // width="600px"
+        // getUpdateFormFields={getUpdateFormFields}
+        // setUpdateModal={this.setUpdateModal}
+        // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+        // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
+        centered={true}
+        columns={columns}
+        dataSource={info}
+        scroll={scroll}
+        // rowSelection={rowSelection} //批量选择 操作
+    >
+        <Upload {...props}>
+            <Button type="primary">
+                <Icon type="upload" /> 持仓限额上传
+            </Button>
+        </Upload>
+        <Button type="primary" onClick={this.handleDownload}>
+            <Icon type="download" /> 持仓限额导出
+        </Button>
+    </CurdComponent>
+</div> */
 }

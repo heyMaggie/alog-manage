@@ -53,11 +53,49 @@ export let parseDict = (dict) => {
                         let dictionary = dict[key][j];
                         // console.log(dictionary);
                         if (item[key] == dictionary.key) {
+                            // item[key] = dictionary.value;
+                            item[key] = item[key] + "-" + dictionary.value;
+                        }
+                    }
+                }
+            }
+        });
+    };
+    window.parseDictValue = (resArr) => {
+        let dictKeys = Object.keys(dict);
+        // console.log(dictKeys);
+        resArr.forEach((item, index) => {
+            if (!item.hasOwnProperty("id")) {
+                item.id = index;
+            }
+            for (let i = 0; i < dictKeys.length; i++) {
+                let key = dictKeys[i];
+                if (item.hasOwnProperty(key)) {
+                    item[key + "Value"] = item[key];
+                    for (let j = 0; j < dict[key].length; j++) {
+                        let dictionary = dict[key][j];
+                        // console.log(dictionary);
+                        if (item[key] == dictionary.key) {
+                            // item[key] = dictionary.value;
                             item[key + "Value"] = dictionary.value;
                         }
                     }
                 }
             }
         });
+    };
+    window.parseArrDict = (arr, mykey, realKey) => {
+        let dictArr = dict[realKey];
+        // console.log(arr, dictArr);
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < dictArr.length; j++) {
+                // console.log(dictArr[j].key, arr[i][mykey]);
+                if (dictArr[j].key == arr[i][mykey]) {
+                    arr[i][mykey] = arr[i][mykey] + "-" + dictArr[j].value;
+                    break;
+                }
+            }
+        }
+        return arr;
     };
 };

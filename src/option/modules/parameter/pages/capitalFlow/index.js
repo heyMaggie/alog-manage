@@ -98,43 +98,59 @@ const getUpdateFormFields = () => {
 const columns = (params) => {
     return [
         {
-            title: "保证金账户",
-            dataIndex: "assetAccount",
+            title: "期权ID",
+            dataIndex: "uoptionId",
+            width: 100,
+        },
+        {
+            title: "股东账户ID",
+            dataIndex: "uaccountId",
             width: 120,
         },
         {
-            title: "用户ID",
-            dataIndex: "uuserId",
+            title: "持仓ID",
+            dataIndex: "uposId",
             width: 100,
         },
         {
-            title: "余额",
-            dataIndex: "balance",
+            title: "组合策略持仓ID",
+            dataIndex: "ustrategyPosId",
+            width: 200,
+        },
+        {
+            title: "执行编号",
+            dataIndex: "execId",
             width: 100,
         },
         {
-            title: "冻结资金",
-            dataIndex: "frozen",
-            width: 100,
-        },
-        {
-            title: "实时保证金",
-            dataIndex: "marginAmount",
+            title: "成交前余额",
+            dataIndex: "fromBalance",
             width: 120,
         },
         {
-            title: "注册时间",
+            title: "成交前余额",
+            dataIndex: "fromFrozen",
+            width: 120,
+        },
+        {
+            title: "成交后余额",
+            dataIndex: "toBalance",
+            width: 120,
+        },
+        {
+            title: "成交后冻结",
+            dataIndex: "toFrozen",
+            width: 120,
+        },
+        // 字典
+        {
+            title: "资金交易类型",
+            dataIndex: "tradeType",
+            width: 150,
+        },
+        {
+            title: "创建时间",
             dataIndex: "createTime",
-            width: 150,
-        },
-        {
-            title: "更新时间",
-            dataIndex: "updateTime",
-            width: 150,
-        },
-        {
-            title: "版本号",
-            dataIndex: "vers",
             width: 100,
         },
     ];
@@ -142,18 +158,18 @@ const columns = (params) => {
 let getSearchFormFields = () => {
     return [
         {
-            label: "保证金账户",
-            id: "assetAccount",
-            component: <Input placeholder="请输入保证金账户" />,
+            label: "期权ID",
+            id: "uoptionId",
+            component: <Input placeholder="请输入期权ID" />,
         },
         {
             label: "用户ID",
-            id: "uuserId",
+            id: "uaccountId",
             component: <Input placeholder="请输入用户ID" />,
         },
     ];
 };
-export default class uoeSetting extends React.PureComponent {
+export default class CapitalFlow extends React.PureComponent {
     state = {
         searchLoading: false,
         selectRow: [],
@@ -205,8 +221,8 @@ export default class uoeSetting extends React.PureComponent {
     };
     getData = (params = {}) => {
         // params.token = "";
-        http.get({
-            url: "/option/tb-asset-info/selectByCondition",
+        http.post({
+            url: "/option/tb-asset/selectByCondition",
             data: params,
         }).then((res) => {
             console.log(res);

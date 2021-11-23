@@ -14,15 +14,15 @@ class FormLogin extends React.Component {
                 let params = this.props.form.getFieldsValue();
                 // params.oper = "Q";
                 console.log(params);
-                http.post({
-                    url: "/tellInfo/login",
-                    data: params,
-                }).then((res) => {
-                    console.log(res);
-                    sessionStorage.isLogin = true;
-                    sessionStorage.userArr = JSON.stringify(res.data);
-                    this.props.history.push("/main/parameter/userInfoUpload");
-                });
+                // http.get({
+                //     url: "/option/tellInfo/login",
+                //     data: params,
+                // }).then((res) => {
+                //     console.log(res);
+                sessionStorage.isLogin = true;
+                // sessionStorage.userArr = JSON.stringify(res.data);
+                this.props.history.push("/main/updown/userInfoUpload");
+                // });
             }
         });
     };
@@ -69,7 +69,7 @@ class FormLogin extends React.Component {
                         期权项目管理系统
                     </div>
                     <FormItem>
-                        {getFieldDecorator("USERID", {
+                        {getFieldDecorator("userName", {
                             initialValue: "admin",
                             rules: [
                                 {
@@ -77,7 +77,6 @@ class FormLogin extends React.Component {
                                     message: "用户名不能为空",
                                 },
                                 {
-                                    min: 3,
                                     max: 15,
                                     message: "长度不在范围内",
                                 },
@@ -94,7 +93,7 @@ class FormLogin extends React.Component {
                         )}
                     </FormItem>
                     <FormItem>
-                        {getFieldDecorator("USERPASSWORD", {
+                        {getFieldDecorator("password", {
                             initialValue: "123456",
                             rules: [],
                         })(
