@@ -62,6 +62,10 @@ const configData = {
         { key: "101", value: "上海证券交易所" },
         { key: "102", value: "深圳证券交易所" },
     ],
+    optionIdSource: [
+        { key: "101", value: "上海证券交易所" },
+        { key: "102", value: "深圳证券交易所" },
+    ],
     securityIdSource: [
         { key: "101", value: "上海证券交易所" },
         { key: "102", value: "深圳证券交易所" },
@@ -305,8 +309,8 @@ const configData = {
         { key: "2", value: "现金" },
     ],
     optionStatus: [
-        { key: "1", value: "正常" },
-        { key: "2", value: "冻结" },
+        { key: "0", value: "正常" },
+        { key: "1", value: "冻结" },
     ],
     marketMakeFlag: [
         { key: "89", value: "是" },
@@ -339,13 +343,259 @@ const configData = {
         { key: "0", value: "正常" },
         { key: "1", value: "其他" },
     ],
-    strategyType: [
-        { key: "1", value: "CNSJC" },
-        { key: "2", value: "CXSJC" },
-        { key: "3", value: "PNSJC" },
-        { key: "4", value: "PXSJC" },
-        { key: "5", value: "KS" },
-        { key: "6", value: "KKS" },
+    availableStrategy: [
+        {
+            key: 1,
+            value: "CNSJC",
+        },
+        {
+            key: 2,
+            value: "CXSJC",
+        },
+        {
+            key: 3,
+            value: "CXSJC,CNSJC",
+        },
+        {
+            key: 4,
+            value: "PNSJC",
+        },
+        {
+            key: 5,
+            value: "PNSJC,CNSJC",
+        },
+        {
+            key: 6,
+            value: "PNSJC,CXSJC",
+        },
+        {
+            key: 7,
+            value: "PNSJC,CXSJC,CNSJC",
+        },
+        {
+            key: 8,
+            value: "PXSJC",
+        },
+        {
+            key: 9,
+            value: "PXSJC,CNSJC",
+        },
+        {
+            key: 10,
+            value: "PXSJC,CXSJC",
+        },
+        {
+            key: 11,
+            value: "PXSJC,CXSJC,CNSJC",
+        },
+        {
+            key: 12,
+            value: "PXSJC,PNSJC",
+        },
+        {
+            key: 13,
+            value: "PXSJC,PNSJC,CNSJC",
+        },
+        {
+            key: 14,
+            value: "PXSJC,PNSJC,CXSJC",
+        },
+        {
+            key: 15,
+            value: "PXSJC,PNSJC,CXSJC,CNSJC",
+        },
+        {
+            key: 16,
+            value: "KS",
+        },
+        {
+            key: 17,
+            value: "KS,CNSJC",
+        },
+        {
+            key: 18,
+            value: "KS,CXSJC",
+        },
+        {
+            key: 19,
+            value: "KS,CXSJC,CNSJC",
+        },
+        {
+            key: 20,
+            value: "KS,PNSJC",
+        },
+        {
+            key: 21,
+            value: "KS,PNSJC,CNSJC",
+        },
+        {
+            key: 22,
+            value: "KS,PNSJC,CXSJC",
+        },
+        {
+            key: 23,
+            value: "KS,PNSJC,CXSJC,CNSJC",
+        },
+        {
+            key: 24,
+            value: "KS,PXSJC",
+        },
+        {
+            key: 25,
+            value: "KS,PXSJC,CNSJC",
+        },
+        {
+            key: 26,
+            value: "KS,PXSJC,CXSJC",
+        },
+        {
+            key: 27,
+            value: "KS,PXSJC,CXSJC,CNSJC",
+        },
+        {
+            key: 28,
+            value: "KS,PXSJC,PNSJC",
+        },
+        {
+            key: 29,
+            value: "KS,PXSJC,PNSJC,CNSJC",
+        },
+        {
+            key: 30,
+            value: "KS,PXSJC,PNSJC,CXSJC",
+        },
+        {
+            key: 31,
+            value: "KS,PXSJC,PNSJC,CXSJC,CNSJC",
+        },
+        {
+            key: 32,
+            value: "KKS",
+        },
+        {
+            key: 33,
+            value: "KKS,CNSJC",
+        },
+        {
+            key: 34,
+            value: "KKS,CXSJC",
+        },
+        {
+            key: 35,
+            value: "KKS,CXSJC,CNSJC",
+        },
+        {
+            key: 36,
+            value: "KKS,PNSJC",
+        },
+        {
+            key: 37,
+            value: "KKS,PNSJC,CNSJC",
+        },
+        {
+            key: 38,
+            value: "KKS,PNSJC,CXSJC",
+        },
+        {
+            key: 39,
+            value: "KKS,PNSJC,CXSJC,CNSJC",
+        },
+        {
+            key: 40,
+            value: "KKS,PXSJC",
+        },
+        {
+            key: 41,
+            value: "KKS,PXSJC,CNSJC",
+        },
+        {
+            key: 42,
+            value: "KKS,PXSJC,CXSJC",
+        },
+        {
+            key: 43,
+            value: "KKS,PXSJC,CXSJC,CNSJC",
+        },
+        {
+            key: 44,
+            value: "KKS,PXSJC,PNSJC",
+        },
+        {
+            key: 45,
+            value: "KKS,PXSJC,PNSJC,CNSJC",
+        },
+        {
+            key: 46,
+            value: "KKS,PXSJC,PNSJC,CXSJC",
+        },
+        {
+            key: 47,
+            value: "KKS,PXSJC,PNSJC,CXSJC,CNSJC",
+        },
+        {
+            key: 48,
+            value: "KKS,KS",
+        },
+        {
+            key: 49,
+            value: "KKS,KS,CNSJC",
+        },
+        {
+            key: 50,
+            value: "KKS,KS,CXSJC",
+        },
+        {
+            key: 51,
+            value: "KKS,KS,CXSJC,CNSJC",
+        },
+        {
+            key: 52,
+            value: "KKS,KS,PNSJC",
+        },
+        {
+            key: 53,
+            value: "KKS,KS,PNSJC,CNSJC",
+        },
+        {
+            key: 54,
+            value: "KKS,KS,PNSJC,CXSJC",
+        },
+        {
+            key: 55,
+            value: "KKS,KS,PNSJC,CXSJC,CNSJC",
+        },
+        {
+            key: 56,
+            value: "KKS,KS,PXSJC",
+        },
+        {
+            key: 57,
+            value: "KKS,KS,PXSJC,CNSJC",
+        },
+        {
+            key: 58,
+            value: "KKS,KS,PXSJC,CXSJC",
+        },
+        {
+            key: 59,
+            value: "KKS,KS,PXSJC,CXSJC,CNSJC",
+        },
+        {
+            key: 60,
+            value: "KKS,KS,PXSJC,PNSJC",
+        },
+        {
+            key: 61,
+            value: "KKS,KS,PXSJC,PNSJC,CNSJC",
+        },
+        {
+            key: 62,
+            value: "KKS,KS,PXSJC,PNSJC,CXSJC",
+        },
+        {
+            key: 63,
+            value: "KKS,KS,PXSJC,PNSJC,CXSJC,CNSJC",
+        },
     ],
 };
 

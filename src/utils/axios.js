@@ -121,6 +121,7 @@ export default class Axios {
         return new Promise((resolve, reject) => {
             axios({
                 ...options,
+                method: options.method || "get",
                 url: options.url,
                 timeout: 5000,
                 params: options.data || "",

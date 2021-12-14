@@ -18,11 +18,13 @@ const columns = (params) => {
             title: "组合自动解除日配置",
             dataIndex: "autoSplitDayParam",
             key: "autoSplitDayParam",
+            width: 160,
         },
         {
             title: "成份合约到期日要求",
             dataIndex: "lastTradeDayParam",
             key: "lastTradeDayParam",
+            width: 160,
         },
         {
             title: "成份合约标的要求",
@@ -53,11 +55,13 @@ const columns = (params) => {
             title: "期权1单份组合策略包含的此合约张数",
             dataIndex: "legPositionQty1",
             key: "legPositionQty1",
+            width: 280,
         },
         {
             title: "期权1行权价高低顺序",
             dataIndex: "legExercisePriceSeq1",
             key: "legExercisePriceSeq1",
+            width: 170,
         },
         {
             title: "期权1到期日顺序",
@@ -78,11 +82,13 @@ const columns = (params) => {
             title: "期权2单份组合策略包含的此合约张数",
             dataIndex: "legPositionQty2",
             key: "legPositionQty2",
+            width: 280,
         },
         {
             title: "期权2行权价高低顺序",
             dataIndex: "legExercisePriceSeq2",
             key: "legExercisePriceSeq2",
+            width: 170,
         },
         {
             title: "期权2到期日顺序",
@@ -103,11 +109,13 @@ const columns = (params) => {
             title: "期权3单份组合策略包含的此合约张数",
             dataIndex: "legPositionQty3",
             key: "legPositionQty3",
+            width: 280,
         },
         {
             title: "期权3行权价高低顺序",
             dataIndex: "legExercisePriceSeq3",
             key: "legExercisePriceSeq3",
+            width: 170,
         },
         {
             title: "期权3到期日顺序",
@@ -128,11 +136,13 @@ const columns = (params) => {
             title: "期权4单份组合策略包含的此合约张数",
             dataIndex: "legPositionQty4",
             key: "legPositionQty4",
+            width: 280,
         },
         {
             title: "期权4行权价高低顺序",
             dataIndex: "legExercisePriceSeq4",
             key: "legExercisePriceSeq4",
+            width: 170,
         },
         {
             title: "期权4到期日顺序",
@@ -203,7 +213,7 @@ export default class combinationStrategy extends React.PureComponent {
                 }
             },
         };
-        let scroll = { x: 2000, y: 445 };
+        let scroll = { x: 4600, y: 445 };
         let info = this.state.info;
         return (
             <div>

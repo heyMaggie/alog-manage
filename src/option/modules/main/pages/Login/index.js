@@ -21,7 +21,7 @@ class FormLogin extends React.Component {
                 //     console.log(res);
                 sessionStorage.isLogin = true;
                 // sessionStorage.userArr = JSON.stringify(res.data);
-                this.props.history.push("/main/updown/userInfoUpload");
+                this.props.history.push("/main/updown/userInfo");
                 // });
             }
         });

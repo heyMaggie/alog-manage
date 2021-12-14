@@ -222,7 +222,7 @@ export default class CapitalFlow extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.post({
-            url: "/option/tb-asset/selectByCondition",
+            url: "/tb-asset/selectByCondition",
             data: params,
         }).then((res) => {
             console.log(res);

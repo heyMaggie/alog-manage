@@ -195,8 +195,8 @@ export default class uoeSetting extends React.PureComponent {
     };
     getData = (params = {}) => {
         // params.token = "";
-        http.get({
-            url: "/option/positionLimit/selectByCondition",
+        http.post({
+            url: "/positionLimit/selectByCondition",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -254,40 +254,4 @@ export default class uoeSetting extends React.PureComponent {
             </div>
         );
     }
-}
-
-{
-    /* <CurdComponent
-        rowKey={"id"}
-        isShowSearchForm={false}
-        // onSearchClick={this.handleSearch}
-        // getSearchFormFields={this.state.formArr}
-        // getSearchFormFields={getSearchFormFields}
-        // searchLoading={this.state.searchLoading}
-        hasSlot={true}
-        // insertBtnText={"文件上传"} // 不传 就没新增按钮
-        // getInsertFormFields={getInsertFormFields}
-        // insertRecord={this.handleInsertRecord}
-        // col="2"
-        // width="600px"
-        // getUpdateFormFields={getUpdateFormFields}
-        // setUpdateModal={this.setUpdateModal}
-        // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
-        // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
-        centered={true}
-        columns={columns}
-        dataSource={info}
-        scroll={scroll}
-        // rowSelection={rowSelection} //批量选择 操作
-    >
-        <Upload {...props}>
-            <Button type="primary">
-                <Icon type="upload" /> 持仓限额上传
-            </Button>
-        </Upload>
-        <Button type="primary" onClick={this.handleDownload}>
-            <Icon type="download" /> 持仓限额导出
-        </Button>
-    </CurdComponent>
-</div> */
 }
