@@ -52,12 +52,13 @@ export default class userPbuGwConfig extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href = window.baseURL + "/tb-user-pbu-gw-cfg/download";
+        window.location.href =
+            window.baseURL + "/option/tb-user-pbu-gw-cfg/download";
     };
     getData = (params) => {
         http.get({
-            // url: "/assetInfo/selectList",
-            url: "/tb-user-pbu-gw-cfg/selectList",
+            // url: "/option/assetInfo/selectList",
+            url: "/option/tb-user-pbu-gw-cfg/selectList",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -82,7 +83,7 @@ export default class userPbuGwConfig extends React.PureComponent {
             // accept: ".xlsx",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/tb-user-pbu-gw-cfg/upload",
+            action: window.baseURL + "/option/tb-user-pbu-gw-cfg/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);

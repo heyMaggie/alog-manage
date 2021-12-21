@@ -29,7 +29,7 @@ export default class network extends React.PureComponent {
     };
     getData = (params, count = 0) => {
         http.get({
-            url: "/base/net",
+            url: "/option/base/net",
             data: params,
         }).then((res) => {
             console.log(res);

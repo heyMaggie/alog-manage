@@ -67,12 +67,12 @@ export default class gwConfig extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href = window.baseURL + "/tb-gw-config/download";
+        window.location.href = window.baseURL + "/option/tb-gw-config/download";
     };
     getData = (params) => {
         http.get({
-            // url: "/assetInfo/selectList",
-            url: "/tb-gw-config/selectList",
+            // url: "/option/assetInfo/selectList",
+            url: "/option/tb-gw-config/selectList",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -97,7 +97,7 @@ export default class gwConfig extends React.PureComponent {
             // accept: ".xlsx",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/tb-gw-config/upload",
+            action: window.baseURL + "/option/tb-gw-config/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);

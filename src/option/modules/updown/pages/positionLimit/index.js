@@ -48,12 +48,13 @@ export default class positionLimitUpdown extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href = window.baseURL + "/positionLimit/download";
+        window.location.href =
+            window.baseURL + "/option/positionLimit/download";
     };
     getData = (params) => {
         http.get({
-            // url: "/assetInfo/selectList",
-            url: "/positionLimit/selectList",
+            // url: "/option/assetInfo/selectList",
+            url: "/option/positionLimit/selectList",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -77,7 +78,7 @@ export default class positionLimitUpdown extends React.PureComponent {
             name: "file",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/positionLimit/upload",
+            action: window.baseURL + "/option/positionLimit/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);

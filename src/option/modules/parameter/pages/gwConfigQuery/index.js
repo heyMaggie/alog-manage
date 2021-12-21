@@ -108,7 +108,7 @@ export default class gwConfigQuery extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.get({
-            url: "/tb-gw-config/selectList",
+            url: "/option/tb-gw-config/selectList",
             data: params,
         }).then((res) => {
             console.log(res);

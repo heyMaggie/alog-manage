@@ -200,7 +200,7 @@ export default class execReport extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.post({
-            url: "/tb-exec-report/selectList",
+            url: "/option/tb-exec-report/selectList",
             data: params,
         }).then((res) => {
             console.log(res);

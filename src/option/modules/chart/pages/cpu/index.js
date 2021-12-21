@@ -29,7 +29,7 @@ export default class cpu extends React.PureComponent {
     };
     getData = (params, count = 0) => {
         http.get({
-            url: "/base/cpu",
+            url: "/option/base/cpu",
             data: params,
         }).then((res) => {
             console.log(res);

@@ -72,12 +72,13 @@ export default class stockholder extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href = window.baseURL + "/tb-stockholder-info/download";
+        window.location.href =
+            window.baseURL + "/option/tb-stockholder-info/download";
     };
     getData = (params) => {
         http.get({
-            // url: "/assetInfo/selectList",
-            url: "/tb-stockholder-info/selectList",
+            // url: "/option/assetInfo/selectList",
+            url: "/option/tb-stockholder-info/selectList",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -101,7 +102,7 @@ export default class stockholder extends React.PureComponent {
             name: "file",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/tb-stockholder-info/upload",
+            action: window.baseURL + "/option/tb-stockholder-info/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);

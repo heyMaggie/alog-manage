@@ -113,7 +113,7 @@ export default class userConfigQuery extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.get({
-            url: "/tb-user-config/selectList",
+            url: "/option/tb-user-config/selectList",
             data: params,
         }).then((res) => {
             console.log(res);

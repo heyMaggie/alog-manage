@@ -215,7 +215,7 @@ export default class strategyPositionQuery extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.post({
-            url: "/tb-strategy-combine-log/queryList",
+            url: "/option/tb-strategy-combine-log/queryList",
             data: params,
         }).then((res) => {
             console.log(res);

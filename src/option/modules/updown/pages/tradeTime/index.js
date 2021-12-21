@@ -57,12 +57,13 @@ export default class serverSetting extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href = window.baseURL + "/tb-trade-time/download";
+        window.location.href =
+            window.baseURL + "/option/tb-trade-time/download";
     };
     getData = (params) => {
         http.get({
-            // url: "/assetInfo/selectList",
-            url: "/tb-trade-time/selectList",
+            // url: "/option/assetInfo/selectList",
+            url: "/option/tb-trade-time/selectList",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -86,7 +87,7 @@ export default class serverSetting extends React.PureComponent {
             name: "file",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/tb-trade-time/upload",
+            action: window.baseURL + "/option/tb-trade-time/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);

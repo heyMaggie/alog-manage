@@ -193,7 +193,7 @@ export default class CapitalFlow extends React.PureComponent {
         let params = form.getFieldsValue();
         params.name = this.record.name;
         http.post({
-            url: "/tcp/uoeMore/1011",
+            url: "/option/tcp/uoeMore/1011",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -222,7 +222,7 @@ export default class CapitalFlow extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.post({
-            url: "/tb-asset/selectByCondition",
+            url: "/option/tb-asset/selectByCondition",
             data: params,
         }).then((res) => {
             console.log(res);

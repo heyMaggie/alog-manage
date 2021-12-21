@@ -29,7 +29,7 @@ export default class orderCancel extends React.PureComponent {
     };
     getData = (params, count = 0) => {
         http.post({
-            url: "/orderCancel/countGroup",
+            url: "/option/orderCancel/countGroup",
             data: params,
         }).then((res) => {
             // console.log(res);

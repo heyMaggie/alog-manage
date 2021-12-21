@@ -18,7 +18,7 @@ export default class Demo extends React.Component {
             uploading: true,
         });
         http.post({
-            url: window.baseURL.replace("/option", "") + "/file/fileUpload",
+            url: "/file/fileUpload",
             method: "post",
             processData: false,
             data: formData,

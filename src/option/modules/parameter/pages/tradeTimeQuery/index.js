@@ -99,7 +99,7 @@ export default class tradeTimeQuery extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.get({
-            url: "/tb-trade-time/selectList",
+            url: "/option/tb-trade-time/selectList",
             data: params,
         }).then((res) => {
             console.log(res);

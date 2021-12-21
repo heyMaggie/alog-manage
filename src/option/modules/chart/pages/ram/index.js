@@ -29,7 +29,7 @@ export default class cpu extends React.PureComponent {
     };
     getData = (params) => {
         http.get({
-            url: "/base/ram",
+            url: "/option/base/ram",
             // data: params,
         }).then((res) => {
             console.log(res);
@@ -60,7 +60,7 @@ export default class cpu extends React.PureComponent {
     };
     getHugeData = (params) => {
         http.get({
-            url: "/base/hugePage",
+            url: "/option/base/hugePage",
             // data: params,
         }).then((res) => {
             console.log(res);

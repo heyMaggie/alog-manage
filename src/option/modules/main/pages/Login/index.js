@@ -15,7 +15,7 @@ class FormLogin extends React.Component {
                 // params.oper = "Q";
                 console.log(params);
                 // http.get({
-                //     url: "/option/tellInfo/login",
+                //     url: "/option/option/tellInfo/login",
                 //     data: params,
                 // }).then((res) => {
                 //     console.log(res);

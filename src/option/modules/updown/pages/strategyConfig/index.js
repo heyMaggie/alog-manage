@@ -163,14 +163,12 @@ export default class combinationStrategy extends React.PureComponent {
     };
     handleDownload = () => {
         window.location.href =
-            window.baseURL.replace("/option", "") +
-            "/tb-strategy-config-info/download";
+            window.baseURL + "/tb-strategy-config-info/download";
     };
     getData = (params) => {
         http.request({
             method: "get",
             url: "/tb-strategy-config-info/selectList",
-            baseURL: window.baseURL.replace("/option", ""),
             data: params,
         }).then((res) => {
             console.log(res);
@@ -194,9 +192,7 @@ export default class combinationStrategy extends React.PureComponent {
             name: "file",
             accept: ".xml",
             showUploadList: false,
-            action:
-                window.baseURL.replace("/option", "") +
-                "/tb-strategy-config-info/upload",
+            action: "/tb-strategy-config-info/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);

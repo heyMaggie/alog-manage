@@ -233,12 +233,12 @@ export default class optionInfo extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href = window.baseURL + "/optionInfo/download";
+        window.location.href = window.baseURL + "/option/optionInfo/download";
     };
     getData = (params) => {
         http.post({
-            // url: "/assetInfo/selectList",
-            url: "/optionInfo/selectList",
+            // url: "/option/assetInfo/selectList",
+            url: "/option/optionInfo/selectList",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -264,7 +264,7 @@ export default class optionInfo extends React.PureComponent {
             // accept: ".xls,.xlsx",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/optionInfo/upload",
+            action: window.baseURL + "/option/optionInfo/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);

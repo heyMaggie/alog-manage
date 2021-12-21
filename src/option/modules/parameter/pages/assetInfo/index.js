@@ -178,7 +178,7 @@ export default class uoeSetting extends React.PureComponent {
         let params = form.getFieldsValue();
         params.name = this.record.name;
         http.post({
-            url: "/tcp/uoeMore/1011",
+            url: "/option/tcp/uoeMore/1011",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -207,7 +207,7 @@ export default class uoeSetting extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.post({
-            url: "/tb-asset-info/queryList",
+            url: "/option/tb-asset-info/queryList",
             data: params,
         }).then((res) => {
             console.log(res);

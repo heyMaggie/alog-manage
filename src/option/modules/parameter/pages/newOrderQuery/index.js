@@ -228,7 +228,7 @@ export default class newOrderQuery extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.post({
-            url: "/tb-new-order/queryOrderList",
+            url: "/option/tb-new-order/queryOrderList",
             data: params,
         }).then((res) => {
             console.log(res);

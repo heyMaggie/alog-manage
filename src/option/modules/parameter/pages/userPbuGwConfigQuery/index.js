@@ -94,7 +94,7 @@ export default class userPbuGwConfigQuery extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.get({
-            url: "/tb-user-pbu-gw-cfg/selectList",
+            url: "/option/tb-user-pbu-gw-cfg/selectList",
             data: params,
         }).then((res) => {
             console.log(res);

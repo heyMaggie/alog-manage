@@ -211,7 +211,7 @@ export default class optionPositionQuery extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.post({
-            url: "/tb-option-position/queryList",
+            url: "/option/tb-option-position/queryList",
             data: params,
         }).then((res) => {
             console.log(res);

@@ -181,7 +181,7 @@ export default class cancelOrderQuery extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.post({
-            url: "/tb-cancel-order/queryList",
+            url: "/option/tb-cancel-order/queryList",
             data: params,
         }).then((res) => {
             console.log(res);

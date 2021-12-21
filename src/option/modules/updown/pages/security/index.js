@@ -127,12 +127,13 @@ export default class security extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href = window.baseURL + "/tb-security-info/download";
+        window.location.href =
+            window.baseURL + "/option/tb-security-info/download";
     };
     getData = (params) => {
         http.post({
-            // url: "/assetInfo/selectList",
-            url: "/tb-security-info/selectList",
+            // url: "/option/assetInfo/selectList",
+            url: "/option/tb-security-info/selectList",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -157,7 +158,7 @@ export default class security extends React.PureComponent {
             // accept: ".xls,.xlsx",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/tb-security-info/upload",
+            action: window.baseURL + "/option/tb-security-info/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);

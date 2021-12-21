@@ -88,12 +88,12 @@ export default class strategyPosition extends React.PureComponent {
     };
     handleDownload = () => {
         window.location.href =
-            window.baseURL + "/tb-strategy-position/download";
+            window.baseURL + "/option/tb-strategy-position/download";
     };
     getData = (params) => {
         http.get({
-            // url: "/assetInfo/selectList",
-            url: "/tb-strategy-position/selectList",
+            // url: "/option/assetInfo/selectList",
+            url: "/option/tb-strategy-position/selectList",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -118,7 +118,7 @@ export default class strategyPosition extends React.PureComponent {
             name: "file",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/tb-strategy-position/upload",
+            action: window.baseURL + "/option/tb-strategy-position/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);

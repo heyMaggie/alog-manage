@@ -168,7 +168,7 @@ export default class securityQuery extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.post({
-            url: "/tb-security-info/selectList",
+            url: "/option/tb-security-info/selectList",
             data: params,
         }).then((res) => {
             console.log(res);

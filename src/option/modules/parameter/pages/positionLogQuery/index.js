@@ -149,7 +149,7 @@ export default class exerciseRecordQuery extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.post({
-            url: "/tb-position-log/queryList",
+            url: "/option/tb-position-log/queryList",
             data: params,
         }).then((res) => {
             console.log(res);

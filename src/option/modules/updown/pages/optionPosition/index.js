@@ -73,12 +73,13 @@ export default class positionLimit extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href = window.baseURL + "/tb-option-position/download";
+        window.location.href =
+            window.baseURL + "/option/tb-option-position/download";
     };
     getData = (params) => {
         http.get({
-            // url: "/assetInfo/selectList",
-            url: "/tb-option-position/selectList",
+            // url: "/option/assetInfo/selectList",
+            url: "/option/tb-option-position/selectList",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -102,7 +103,7 @@ export default class positionLimit extends React.PureComponent {
             name: "file",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/tb-option-position/upload",
+            action: window.baseURL + "/option/tb-option-position/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);

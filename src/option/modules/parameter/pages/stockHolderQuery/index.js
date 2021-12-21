@@ -113,7 +113,7 @@ export default class stockHolderQuery extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.get({
-            url: "/tb-stockholder-info/selectList",
+            url: "/option/tb-stockholder-info/selectList",
             data: params,
         }).then((res) => {
             console.log(res);

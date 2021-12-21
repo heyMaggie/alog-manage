@@ -67,12 +67,12 @@ export default class userInfoUpload extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href = window.baseURL + "/tb-user-info/download";
+        window.location.href = window.baseURL + "/option/tb-user-info/download";
     };
     getData = (params) => {
         http.get({
-            // url: "/assetInfo/selectList",
-            url: "/tb-user-info/selectList",
+            // url: "/option/assetInfo/selectList",
+            url: "/option/tb-user-info/selectList",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -97,7 +97,7 @@ export default class userInfoUpload extends React.PureComponent {
             // accept: ".xlsx",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/tb-user-info/upload",
+            action: window.baseURL + "/option/tb-user-info/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);

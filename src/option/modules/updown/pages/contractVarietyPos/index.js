@@ -53,15 +53,14 @@ export default class contractVarietyPos extends React.PureComponent {
     };
     handleDownload = () => {
         window.location.href =
-            window.baseURL.replace("/option", "") +
-            "/tb-contract-variety-pos/download";
+            window.baseURL + "/tb-contract-variety-pos/download";
     };
     getData = (params) => {
         http.request({
-            // url: "/assetInfo/selectList",
+            // url: "/option/assetInfo/selectList",
             method: "post",
             url: "/tb-contract-variety-pos/selectList",
-            baseURL: window.baseURL.replace("/option", ""),
+            // baseURL: window.baseURL.replace("/option", ""),
             data: params,
         }).then((res) => {
             console.log(res);
