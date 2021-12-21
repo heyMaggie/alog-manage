@@ -98,63 +98,78 @@ const getUpdateFormFields = () => {
 const columns = (params) => {
     return [
         {
-            title: "保证金账户",
-            dataIndex: "assetAccount",
+            title: "期权ID",
+            dataIndex: "uoptionId",
+            width: 100,
+        },
+        {
+            title: "股东账户ID",
+            dataIndex: "uaccountId",
             width: 120,
         },
         {
-            title: "用户ID",
-            dataIndex: "uuserId",
+            title: "持仓ID",
+            dataIndex: "uposId",
             width: 100,
         },
         {
-            title: "余额",
-            dataIndex: "balance",
+            title: "组合策略持仓ID",
+            dataIndex: "ustrategyPosId",
+            width: 200,
+        },
+        {
+            title: "执行编号",
+            dataIndex: "execId",
             width: 100,
         },
         {
-            title: "冻结资金",
-            dataIndex: "frozen",
-            width: 100,
-        },
-        {
-            title: "实时保证金",
-            dataIndex: "marginAmount",
+            title: "成交前余额",
+            dataIndex: "fromBalance",
             width: 120,
         },
         {
-            title: "注册时间",
+            title: "成交前余额",
+            dataIndex: "fromFrozen",
+            width: 120,
+        },
+        {
+            title: "成交后余额",
+            dataIndex: "toBalance",
+            width: 120,
+        },
+        {
+            title: "成交后冻结",
+            dataIndex: "toFrozen",
+            width: 120,
+        },
+        // 字典
+        {
+            title: "资金交易类型",
+            dataIndex: "tradeType",
+            width: 150,
+        },
+        {
+            title: "创建时间",
             dataIndex: "createTime",
-            width: 150,
-        },
-        {
-            title: "更新时间",
-            dataIndex: "updateTime",
-            width: 150,
-        },
-        {
-            title: "版本号",
-            dataIndex: "vers",
             width: 100,
         },
     ];
 };
 let getSearchFormFields = () => {
     return [
-        // {
-        //     label: "保证金账户",
-        //     id: "assetAccount",
-        //     component: <Input placeholder="请输入保证金账户" />,
-        // },
         {
-            label: "用户ID",
-            // id: "userId",
-            id: "user_id",
-            component: <Input placeholder="请输入用户ID" />,
+            label: "期权编码",
+            id: "optionId",
+            component: <Input placeholder="请输入期权编码" />,
         },
+        // {
+        //     label: "用户ID",
+        //     id: "uaccountId",
+        //     component: <Input placeholder="请输入用户ID" />,
+        // },
     ];
 };
-export default class uoeSetting extends React.PureComponent {
+export default class optionPositionQuery extends React.PureComponent {
     state = {
         searchLoading: false,
         selectRow: [],
@@ -174,18 +189,7 @@ export default class uoeSetting extends React.PureComponent {
     //更新记录
     handleUpdateRecord = ({ form }) => {
         console.log(form.getFieldsValue());
-        // return;
-        let params = form.getFieldsValue();
-        params.name = this.record.name;
-        http.post({
-            url: "/tcp/uoeMore/1011",
-            data: params,
-        }).then((res) => {
-            console.log(res);
-            message.success(res.msg);
-            this.isAction = true;
-            this.getData();
-        });
+        // return
     };
     //删除记录
     handleDeleteRecord = (record) => {
@@ -207,7 +211,7 @@ export default class uoeSetting extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.post({
-            url: "/tb-asset-info/queryList",
+            url: "/tb-option-position/queryList",
             data: params,
         }).then((res) => {
             console.log(res);

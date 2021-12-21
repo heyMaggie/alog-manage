@@ -5,129 +5,60 @@ import CurdComponent from "@/components/CurdComponent";
 const columns = (params) => {
     return [
         {
-            title: "用户ID",
-            dataIndex: "uuserId",
-            key: "uuserId",
-        },
-        {
             title: "期权ID",
             dataIndex: "uoptionId",
-            key: "uoptionId",
+            width: 100,
         },
         {
             title: "股东账户ID",
             dataIndex: "uaccountId",
-            key: "uaccountId",
+            width: 120,
         },
         {
-            title: "权利仓",
-            dataIndex: "rightsQty",
-            key: "rightsQty",
+            title: "持仓ID",
+            dataIndex: "uposId",
+            width: 100,
         },
         {
-            title: "义务仓",
-            dataIndex: "obligQty",
-            key: "obligQty",
+            title: "组合策略持仓ID",
+            dataIndex: "ustrategyPosId",
+            width: 200,
         },
         {
-            title: "备兑持仓",
-            dataIndex: "coverQty",
-            key: "coverQty",
+            title: "执行编号",
+            dataIndex: "execId",
+            width: 100,
         },
         {
-            title: "权利冻结仓",
-            dataIndex: "rightsFrozenQty",
-            key: "rightsFrozenQty",
+            title: "成交前余额",
+            dataIndex: "fromBalance",
+            width: 120,
         },
         {
-            title: "义务冻结仓",
-            dataIndex: "obligFrozenQty",
-            key: "obligFrozenQty",
+            title: "成交前余额",
+            dataIndex: "fromFrozen",
+            width: 120,
         },
         {
-            title: "备兑冻结仓",
-            dataIndex: "coverFrozenQty",
-            key: "coverFrozenQty",
+            title: "成交后余额",
+            dataIndex: "toBalance",
+            width: 120,
         },
         {
-            title: "权利价格",
-            dataIndex: "rightsPrice",
-            key: "rightsPrice",
+            title: "成交后冻结",
+            dataIndex: "toFrozen",
+            width: 120,
         },
+        // 字典
         {
-            title: "义务价格",
-            dataIndex: "obligPrice",
-            key: "obligPrice",
-        },
-        {
-            title: "当日权利仓开仓数量",
-            dataIndex: "cumRightsQty",
-            key: "cumRightsQty",
-        },
-        {
-            title: "当日义务仓开仓数量",
-            dataIndex: "cumObligQty",
-            key: "cumObligQty",
-        },
-        {
-            title: "盈亏",
-            dataIndex: "profitAndLoss",
-            key: "profitAndLoss",
-        },
-        {
-            title: "收益率",
-            dataIndex: "rateOfReturn",
-            key: "rateOfReturn",
-        },
-        {
-            title: "行权标识",
-            dataIndex: "excercise",
-            key: "excercise",
-        },
-        {
-            title: "买平权利仓",
-            dataIndex: "close_rights_qty",
-            key: "close_rights_qty",
-        },
-        {
-            title: "备平权利仓",
-            dataIndex: "cover_rights_qty",
-            key: "cover_rights_qty",
-        },
-        {
-            title: "买平冻结仓",
-            dataIndex: "close_rights_frozen_qty",
-            key: "close_rights_frozen_qty",
-        },
-        {
-            title: "备平冻结仓",
-            dataIndex: "cover_rights_frozen_qty",
-            key: "cover_rights_frozen_qty",
-        },
-        {
-            title: "日权利仓开仓",
-            dataIndex: "day_rights_qty",
-            key: "day_rights_qty",
-        },
-        {
-            title: "日义务仓开仓",
-            dataIndex: "day_oblig_qty",
-            key: "day_oblig_qty",
-        },
-        {
-            title: "版本号",
-            dataIndex: "vers",
-            key: "vers",
+            title: "资金交易类型",
+            dataIndex: "tradeType",
+            width: 150,
         },
         {
             title: "创建时间",
             dataIndex: "createTime",
-            key: "createTime",
-        },
-        {
-            title: "更新时间",
-            dataIndex: "updateTime",
-            key: "updateTime",
+            width: 100,
         },
     ];
 };

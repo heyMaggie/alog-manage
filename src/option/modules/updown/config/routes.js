@@ -76,6 +76,11 @@ const main = (root = "/main/updown") => [
         component: `${pages}/strategyConfig`,
         title: "组合持仓配置",
     },
+    {
+        path: `${root}/contractVarietyPos`,
+        component: `${pages}/contractVarietyPos`,
+        title: "合约品种持仓",
+    },
 ];
 
 export default main;

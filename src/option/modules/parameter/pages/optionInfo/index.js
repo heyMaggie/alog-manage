@@ -230,15 +230,25 @@ const columns = (params) => {
 let getSearchFormFields = () => {
     return [
         {
-            label: "合约代码",
-            id: "contractCode",
-            component: <Input placeholder="请输入合约代码" />,
-        },
-        {
             label: "合约编码",
             id: "optionId",
             component: <Input placeholder="请输入合约编码" />,
         },
+        // {
+        //     label: "合约代码",
+        //     id: "contractCode",
+        //     component: <Input placeholder="请输入合约代码" />,
+        // },
+        // {
+        //     label: "合约简称",
+        //     id: "contractName",
+        //     component: <Input placeholder="请输入合约简称" />,
+        // },
+        // {
+        //     label: "合约账户标识",
+        //     id: "contractAccountCode",
+        //     component: <Input placeholder="请输入合约账户标识" />,
+        // },
     ];
 };
 export default class uoeSetting extends React.PureComponent {
@@ -295,7 +305,7 @@ export default class uoeSetting extends React.PureComponent {
         // params.token = "";
         http.post({
             // url: "/optionInfo/selectList",
-            url: "/optionInfo/queryByCondition",
+            url: "/optionInfo/selectList",
             data: params,
         }).then((res) => {
             console.log(res);

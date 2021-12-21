@@ -5,118 +5,43 @@ import CurdComponent from "@/components/CurdComponent";
 const columns = (params) => {
     return [
         {
-            title: "证券代码",
-            dataIndex: "securityId",
-            key: "securityId",
+            title: "事务ID",
+            dataIndex: "txId",
+            key: "txId",
         },
         {
-            title: "证券代码源",
-            dataIndex: "securityIdSource",
-            key: "securityIdSource",
+            title: "标的物ID",
+            dataIndex: "usecurityId",
+            key: "usecurityId",
         },
         {
-            title: "证券名称",
-            dataIndex: "securityName",
-            key: "securityName",
+            title: "持仓限额ID",
+            dataIndex: "uposLimitId",
+            key: "uposLimitId",
         },
         {
-            title: "昨收价",
-            dataIndex: "prevClosePx",
-            key: "prevClosePx",
+            title: "股东账户ID",
+            dataIndex: "uaccountId",
+            key: "uaccountId",
         },
         {
-            title: "证券状态",
-            dataIndex: "securityStatus",
-            key: "securityStatus",
+            title: "权利仓持仓",
+            dataIndex: "rightsPosQty",
+            key: "rightsPosQty",
         },
         {
-            title: "股票板块属性",
-            dataIndex: "property",
-            key: "property",
+            title: "总持仓",
+            dataIndex: "positionQty",
+            key: "positionQty",
         },
         {
-            title: "限价买数量上限",
-            dataIndex: "buyQtyUpperLimit",
-            key: "buyQtyUpperLimit",
-        },
-        {
-            title: "限价卖数量上限",
-            dataIndex: "sellQtyUpperLimit",
-            key: "sellQtyUpperLimit",
-        },
-        {
-            title: "市价买数量上限",
-            dataIndex: "marketBuyQtyUpperLimit",
-            key: "marketBuyQtyUpperLimit",
-        },
-        {
-            title: "市价卖数量上限",
-            dataIndex: "marketSellQtyUpperLimit",
-            key: "marketSellQtyUpperLimit",
-        },
-        {
-            title: "是否有涨跌限制",
-            dataIndex: "hasPriceLimit",
-            key: "hasPriceLimit",
-        },
-        {
-            title: "涨跌限制类型",
-            dataIndex: "limitType",
-            key: "limitType",
-        },
-        {
-            title: "上涨幅度",
-            dataIndex: "limitUpRate",
-            key: "limitUpRate",
-        },
-        {
-            title: "下跌幅度",
-            dataIndex: "limitDownRate",
-            key: "limitDownRate",
-        },
-        {
-            title: "上涨限价",
-            dataIndex: "limitUpperAbsolute",
-            key: "limitUpperAbsolute",
-        },
-        {
-            title: "下跌限价",
-            dataIndex: "limitDownAbsolute",
-            key: "limitDownAbsolute",
-        },
-        {
-            title: "上涨限价计算值",
-            dataIndex: "upperLimitPrice",
-            key: "upperLimitPrice",
-        },
-        {
-            title: "下跌限价计算值",
-            dataIndex: "lowerLimitPrice",
-            key: "lowerLimitPrice",
-        },
-        {
-            title: "手续费",
-            dataIndex: "feeRate",
-            key: "feeRate",
-        },
-        {
-            title: "交易时间组",
-            dataIndex: "tradeTimeGroup",
-            key: "tradeTimeGroup",
-        },
-        {
-            title: "ST当用户日买入上限",
-            dataIndex: "cumBuyUpper",
-            key: "cumBuyUpper",
-        },
-        {
-            title: "更新时间",
-            dataIndex: "updateTime",
-            key: "updateTime",
+            title: "单日买入量",
+            dataIndex: "dayBuyQty",
+            key: "dayBuyQty",
         },
     ];
 };
-export default class security extends React.PureComponent {
+export default class contractVarietyPos extends React.PureComponent {
     state = {
         searchLoading: false,
         info: [],
@@ -127,12 +52,16 @@ export default class security extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href = window.baseURL + "/tb-security-info/download";
+        window.location.href =
+            window.baseURL.replace("/option", "") +
+            "/tb-contract-variety-pos/download";
     };
     getData = (params) => {
-        http.post({
+        http.request({
             // url: "/assetInfo/selectList",
-            url: "/tb-security-info/selectList",
+            method: "post",
+            url: "/tb-contract-variety-pos/selectList",
+            baseURL: window.baseURL.replace("/option", ""),
             data: params,
         }).then((res) => {
             console.log(res);
@@ -154,10 +83,12 @@ export default class security extends React.PureComponent {
         let that = this;
         let props = {
             name: "file",
-            // accept: ".xls,.xlsx",
+            // accept: ".xlsx",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/tb-security-info/upload",
+            action:
+                window.baseURL.replace("/option", "") +
+                "/tb-contract-variety-pos/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);
@@ -174,7 +105,7 @@ export default class security extends React.PureComponent {
                 }
             },
         };
-        let scroll = { x: 3300, y: 445 };
+        let scroll = { x: 1000, y: 445 };
         let info = this.state.info;
         return (
             <div>
@@ -199,15 +130,16 @@ export default class security extends React.PureComponent {
                     columns={columns}
                     dataSource={info}
                     scroll={scroll}
+                    dtColumns={columns()}
                     // rowSelection={rowSelection} //批量选择 操作
                 >
                     <Upload {...props}>
                         <Button type="primary">
-                            <Icon type="upload" /> 证券信息上传
+                            <Icon type="upload" /> 合约品种持仓上传
                         </Button>
                     </Upload>
                     <Button type="primary" onClick={this.handleDownload}>
-                        <Icon type="download" /> 证券信息导出
+                        <Icon type="download" /> 合约品种持仓导出
                     </Button>
                 </CurdComponent>
             </div>

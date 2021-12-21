@@ -7,209 +7,218 @@ const columns = (params) => {
         {
             title: "合约简称",
             dataIndex: "contractName",
-            key: "contractName",
             width: 200,
         },
         {
             title: "合约代码",
             dataIndex: "contractCode",
-            key: "contractCode",
             width: 150,
         },
+        // {
+        //     title: "合约账户标识码",
+        //     dataIndex: "contractAccountCode",
+        //     width: 150,
+        // },
         {
             title: "合约编码",
             dataIndex: "optionId",
-            key: "optionId",
+            width: 100,
         },
         {
             title: "证券代码源",
             dataIndex: "optionIdSource",
-            key: "optionIdSource",
+            width: 160,
         },
         {
             title: "标的资产",
             dataIndex: "usecurityId",
-            key: "usecurityId",
+            width: 100,
         },
         {
             title: "合约类型",
             dataIndex: "contractType",
-            key: "contractType",
+            width: 200,
         },
         {
             title: "合约单位",
             dataIndex: "contractUnit",
-            key: "contractUnit",
+            width: 100,
         },
         {
             title: "到期月份",
             dataIndex: "expirateMonth",
-            key: "expirateMonth",
+            width: 100,
         },
         {
             title: "行权日",
             dataIndex: "exerciseDate",
-            key: "exerciseDate",
+            width: 150,
         },
         {
             title: "到期日",
             dataIndex: "expirateDate",
-            key: "expirateDate",
+            width: 150,
         },
         {
             title: "交收日",
             dataIndex: "deliverDate",
-            key: "deliverDate",
+            width: 150,
         },
+        // 字典
         {
             title: "行权价格",
             dataIndex: "strikePrice",
-            key: "strikePrice",
+            width: 100,
         },
         {
             title: "行权价格间距",
             dataIndex: "strikePriceStep",
-            key: "strikePriceStep",
+            width: 150,
         },
         {
             title: "行权方式",
             dataIndex: "exerciseMethod",
-            key: "exerciseMethod",
+            width: 150,
         },
         {
             title: "交割方式",
             dataIndex: "deliverMethod",
-            key: "deliverMethod",
+            width: 100,
         },
         {
             title: "最小变动单位",
             dataIndex: "minChangeUnit",
-            key: "minChangeUnit",
+            width: 150,
         },
         {
             title: "期权状态",
             dataIndex: "optionStatus",
-            key: "optionStatus",
+            width: 100,
         },
         {
             title: "前收盘价",
             dataIndex: "prevClosePrice",
-            key: "prevClosePrice",
+            width: 100,
         },
         {
             title: "线性浮动比例",
             dataIndex: "floatRatio",
-            key: "floatRatio",
+            width: 150,
         },
         {
             title: "认购非线性比例参数1",
             dataIndex: "firstRatioCall",
-            key: "firstRatioCall",
+            width: 200,
         },
         {
             title: "认购非线性比例参数2",
             dataIndex: "secondRatioCall",
-            key: "secondRatioCall",
+            width: 200,
         },
         {
             title: "认沽非线性比例参数1",
             dataIndex: "firstRatioPut",
-            key: "firstRatioPut",
+            width: 200,
         },
         {
             title: "认沽维持保证金参数2",
             dataIndex: "secondRatioPut",
-            key: "secondRatioPut",
+            width: 200,
         },
         {
             title: "限价买数量上限",
             dataIndex: "buyQtyUpperLimit",
-            key: "buyQtyUpperLimit",
+            width: 150,
         },
         {
             title: "限价卖数量上限",
             dataIndex: "sellQtyUpperLimit",
-            key: "sellQtyUpperLimit",
+            width: 150,
         },
         {
             title: "市价买数量上限",
             dataIndex: "marketBuyQtyUpLimit",
-            key: "marketBuyQtyUpLimit",
+            width: 150,
         },
         {
             title: "市价卖数量上限",
             dataIndex: "marketSellQtyUpLimit",
-            key: "marketSellQtyUpLimit",
+            width: 150,
         },
         {
             title: "买数量单位",
             dataIndex: "buyQtyUnit",
-            key: "buyQtyUnit",
+            width: 120,
         },
         {
             title: "卖数量单位",
             dataIndex: "sellQtyUnit",
-            key: "sellQtyUnit",
+            width: 120,
         },
         {
             title: "价格档次",
             dataIndex: "priceTick",
-            key: "priceTick",
+            width: 100,
         },
         {
             title: "涨价限制值",
             dataIndex: "upperLimitPrice",
-            key: "upperLimitPrice",
+            width: 120,
         },
         {
             title: "跌价限制值",
             dataIndex: "lowerLimitPrice",
-            key: "lowerLimitPrice",
+            width: 120,
+        },
+        {
+            title: "昨卖开每张保证金",
+            dataIndex: "lastSellMargin",
+            width: 200,
         },
         {
             title: "今卖开每张保证金",
             dataIndex: "sellMargin",
-            key: "sellMargin",
+            width: 200,
         },
         {
             title: "做市商标识",
             dataIndex: "marketMakeFlag",
-            key: "marketMakeFlag",
+            width: 120,
         },
         {
             title: "交易时间组",
             dataIndex: "tradeTimeGroup",
-            key: "tradeTimeGroup",
+            width: 120,
         },
         {
             title: "当日权利仓上限",
             dataIndex: "dayRightsUpper",
-            key: "dayRightsUpper",
+            width: 150,
         },
         {
             title: "当日义务仓上限",
             dataIndex: "dayObligUpper",
-            key: "dayObligUpper",
+            width: 150,
         },
         {
             title: "累计权利仓上限",
             dataIndex: "cumRightsUpper",
-            key: "cumRightsUpper",
+            width: 150,
         },
         {
             title: "累计义务仓上限",
             dataIndex: "cumObligUpper",
-            key: "cumObligUpper",
+            width: 150,
         },
         {
             title: "可用的组合策略",
             dataIndex: "availableStrategy",
-            key: "availableStrategy",
+            width: 280,
         },
         {
             title: "策略自动解除日",
             dataIndex: "autoSplitDay",
-            key: "autoSplitDay",
+            width: 150,
         },
     ];
 };
@@ -227,7 +236,7 @@ export default class optionInfo extends React.PureComponent {
         window.location.href = window.baseURL + "/optionInfo/download";
     };
     getData = (params) => {
-        http.get({
+        http.post({
             // url: "/assetInfo/selectList",
             url: "/optionInfo/selectList",
             data: params,

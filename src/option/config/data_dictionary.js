@@ -343,6 +343,10 @@ const configData = {
         { key: "0", value: "正常" },
         { key: "1", value: "其他" },
     ],
+    coveredOrUncoverd: [
+        { key: "0", value: "备兑" },
+        { key: "1", value: "非备兑" },
+    ],
     availableStrategy: [
         {
             key: 1,

@@ -158,15 +158,15 @@ const columns = (params) => {
 let getSearchFormFields = () => {
     return [
         {
-            label: "期权ID",
-            id: "uoptionId",
-            component: <Input placeholder="请输入期权ID" />,
+            label: "期权编码",
+            id: "optionId",
+            component: <Input placeholder="请输入期权编码" />,
         },
-        {
-            label: "用户ID",
-            id: "uaccountId",
-            component: <Input placeholder="请输入用户ID" />,
-        },
+        // {
+        //     label: "用户ID",
+        //     id: "uaccountId",
+        //     component: <Input placeholder="请输入用户ID" />,
+        // },
     ];
 };
 export default class CapitalFlow extends React.PureComponent {

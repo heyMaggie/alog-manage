@@ -76,6 +76,7 @@ export default class Demo extends React.Component {
                 <div>费率配置： feeRateConf.xml</div>
                 <div>组合持仓策略： strategyPosition.xml</div>
                 <div>组合持仓配置： optionCombinationStrategy.xml</div>
+                <div>合约品种持仓： contractVarietyPos.xml</div>
             </div>
         );
         return (

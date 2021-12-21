@@ -1,7 +1,7 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 // import SelectOption from "@/components/SelectOption";
-import { Input } from "antd";
+import { Input, message } from "antd";
 
 const getUpdateFormFields = () => {
     return [
@@ -98,19 +98,40 @@ const getUpdateFormFields = () => {
 const columns = (params) => {
     return [
         {
-            title: "标的物ID",
-            dataIndex: "usecurityId",
+            title: "证券代码",
+            dataIndex: "securityId",
             width: 100,
             // ...params("switchId"),
         },
         {
-            title: "股东账户ID",
-            dataIndex: "uaccountId",
+            title: "交易等级",
+            dataIndex: "posiLimitLevel",
+            width: 130,
         },
         {
-            title: "持仓等级",
-            dataIndex: "posLevel",
-            // width: 130,
+            title: "交易等级",
+            dataIndex: "tradeLimitLevel",
+            width: 130,
+        },
+        {
+            title: "单日买入量",
+            dataIndex: "dayBuyQty",
+            width: 130,
+        },
+        {
+            title: "权利仓持仓",
+            dataIndex: "rightsPosQty",
+            width: 130,
+        },
+        {
+            title: "总持仓",
+            dataIndex: "positionQty",
+            width: 130,
+        },
+        {
+            title: "单日买入开仓限额",
+            dataIndex: "dayBuyLimit",
+            width: 150,
         },
         {
             title: "单权利仓持仓限额",
@@ -122,24 +143,25 @@ const columns = (params) => {
             dataIndex: "positionLimitQty",
             width: 150,
         },
-        {
-            title: "单日买入开仓限额",
-            dataIndex: "dayBuyLimitQty",
-            width: 150,
-        },
     ];
 };
 let getSearchFormFields = () => {
     return [
+        // {
+        //     label: "标的物",
+        //     id: "usecurityId",
+        //     component: <Input placeholder="请输入标的物" />,
+        // },
         {
-            label: "标的物",
-            id: "usecurityId",
-            component: <Input placeholder="请输入标的物" />,
-        },
-        {
-            label: "股东账户",
-            id: "uaccountId",
-            component: <Input placeholder="请输入股东账户" />,
+            label: "证券代码",
+            id: "accountId",
+            rules: [
+                {
+                    required: true,
+                    message: "证券代码不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入证券代码" />,
         },
     ];
 };
@@ -196,7 +218,7 @@ export default class uoeSetting extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.post({
-            url: "/positionLimit/selectByCondition",
+            url: "/positionLimit/queryLimit",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -213,10 +235,15 @@ export default class uoeSetting extends React.PureComponent {
         });
     };
     handleSearch = (params) => {
+        console.log(params);
+        if (params.accountId == "") {
+            message.warning("请输入证券代码");
+            return;
+        }
         this.getData(params);
     };
     componentDidMount() {
-        this.getData();
+        // this.getData();
     }
     render() {
         let scroll = { x: 1000, y: 445 };

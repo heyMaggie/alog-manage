@@ -124,7 +124,7 @@ export default class Axios {
                 method: options.method || "get",
                 url: options.url,
                 timeout: 5000,
-                params: options.data || "",
+                data: options.data || {},
             })
                 .then((response) => {
                     if (response.status == "200") {
