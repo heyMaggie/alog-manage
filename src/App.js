@@ -19,14 +19,14 @@ import {
     Switch,
 } from "react-router-dom";
 // 去除 echart 函数
-// import {
-//     getBarOption,
-//     getLineOption,
-//     getMulLineOption,
-// } from "@/utils/echartOption";
-// window.getBarOption = getBarOption;
-// window.getLineOption = getLineOption;
-// window.getMulLineOption = getMulLineOption;
+import {
+    getBarOption,
+    getLineOption,
+    getMulLineOption,
+} from "@/utils/echartOption";
+window.getBarOption = getBarOption;
+window.getLineOption = getLineOption;
+window.getMulLineOption = getMulLineOption;
 import { routeModule, parseDict } from "@/utils/util.js";
 
 //引入demo项目路由 与菜单

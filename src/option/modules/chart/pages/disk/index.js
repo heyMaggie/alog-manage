@@ -29,7 +29,7 @@ export default class disk extends React.PureComponent {
     };
     getData = (params, count = 0) => {
         http.get({
-            url: "/option/base/disk",
+            url: "/sshInfo/disk",
             // data: params,
         }).then((res) => {
             console.log(res);

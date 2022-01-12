@@ -29,7 +29,7 @@ export default class order extends React.PureComponent {
     };
     getData = (params, count = 0) => {
         http.post({
-            url: "/option/order/countGroup",
+            url: "/option/tb-new-order/chartCount",
             data: params,
         }).then((res) => {
             console.log(res);

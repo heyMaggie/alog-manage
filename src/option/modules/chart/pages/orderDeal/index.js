@@ -60,7 +60,7 @@ export default class orderDeal extends React.PureComponent {
     };
     getData = (params, count = 0) => {
         http.post({
-            url: "/option/orderDeal/countGroup",
+            url: "/option/tb-exec-report/chartCount",
             data: params,
         }).then((res) => {
             // console.log(res);

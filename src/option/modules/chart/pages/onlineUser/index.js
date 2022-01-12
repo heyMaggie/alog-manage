@@ -31,7 +31,7 @@ export default class onlineUser extends React.PureComponent {
     };
     getData = (params, count = 0) => {
         http.get({
-            url: "/option/session/sessionTime",
+            url: "/tb-online-time/onlineNum",
             // data: params,
         }).then((res) => {
             // console.log(res);
@@ -63,7 +63,7 @@ export default class onlineUser extends React.PureComponent {
     };
     getCount = (params) => {
         http.get({
-            url: "/option/session/selectCount",
+            url: "/tb-session-first/currentOnline",
             // data: params,
         }).then((res) => {
             let count = res.data;
