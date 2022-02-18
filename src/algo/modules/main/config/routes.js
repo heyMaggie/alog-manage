@@ -1,4 +1,4 @@
-const pages = "@/option/modules/main/pages";
+const pages = "@/algo/modules/main/pages";
 
 const main = (root = "/main", childrenArr) => [
     {

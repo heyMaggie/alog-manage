@@ -33,9 +33,9 @@ import { routeModule, parseDict } from "@/utils/util.js";
 // import routes from "@/config/routes.js";
 // import menus from "@/config/menus";
 //引入 期权项目管理系统 的路由 与菜单、字典!
-import routes from "@/option/config/routes.js";
-import menus from "@/option/config/menus";
-import dict from "@/option/config/data_dictionary.js";
+import routes from "@/algo/config/routes.js";
+import menus from "@/algo/config/menus";
+import dict from "@/algo/config/data_dictionary.js";
 
 if (typeof dict != "undefined") {
     window.dict = dict;

@@ -18,7 +18,7 @@
         "redux": "^4.0.5"
     },
     "scripts": {
-        "start": "set port=3333 && node scripts/start.js",
+        "start": "set port=3334 && node scripts/start.js",
         "build": "set GENERATE_SOURCEMAP=false&& node scripts/build.js",
         "copy-files": "node scripts/copy_files.js",
         "test": "node scripts/rest.js",

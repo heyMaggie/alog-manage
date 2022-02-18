@@ -66,7 +66,7 @@ class FormLogin extends React.Component {
                             // backgroundColor: "rgba(48,128,232,0.3)"
                         }}
                     >
-                        期权项目管理系统
+                        算法项目管理系统
                     </div>
                     <FormItem>
                         {getFieldDecorator("userName", {

@@ -88,7 +88,7 @@ class Menus extends PureComponent {
         this.getOpenKeys(window.menus, path, true);
 
         this.defaultOpenKeys = this.keys ? this.keys : ["/main/option"];
-        this.defaultSelectedKeys = path ? [path] : ["/main/option/buy"];
+        this.defaultSelectedKeys = path ? [path] : ["/main/algo/buy"];
         // this.defaultOpenKeys = ["/main"];
         // this.defaultSelectedKeys = ["/main/test"];
         // console.log("默认展开菜单 :", this.defaultOpenKeys);

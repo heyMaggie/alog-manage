@@ -1,4 +1,4 @@
-const pages = "@/option/modules/updown/pages";
+const pages = "@/algo/modules/updown/pages";
 
 const main = (root = "/main/updown") => [
     {

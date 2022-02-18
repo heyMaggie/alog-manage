@@ -1,10 +1,10 @@
 import { withDynamicImport } from "@/components/DynamicImport";
 //引入 main 模块路由
-import main from "@/option/modules/main";
+import main from "@/algo/modules/main";
 
-import parameter from "@/option/modules/parameter";
-import charts from "@/option/modules/chart";
-import updown from "@/option/modules/updown";
+import parameter from "@/algo/modules/parameter";
+import charts from "@/algo/modules/chart";
+import updown from "@/algo/modules/updown";
 
 import axios from "axios";
 //根据环境  自动切换 IP

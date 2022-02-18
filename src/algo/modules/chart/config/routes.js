@@ -1,4 +1,4 @@
-const pages = "@/option/modules/chart/pages";
+const pages = "@/algo/modules/chart/pages";
 
 const main = (root = "/main/chart") => [
     {
