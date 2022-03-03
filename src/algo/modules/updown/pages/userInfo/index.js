@@ -15,45 +15,37 @@ const columns = (params) => {
             key: "userName",
         },
         {
-            title: "证券公司",
-            dataIndex: "companyId",
-            key: "companyId",
+            title: "用户类型",
+            dataIndex: "userType",
+            key: "userType",
         },
         {
-            title: "手机号",
-            dataIndex: "phone",
-            key: "phone",
+            title: "用户风控组别",
+            dataIndex: "riskGroup",
+            key: "riskGroup",
         },
         {
-            title: "开户账号",
-            dataIndex: "userAccount",
-            key: "userAccount",
+            title: "柜台用户ID",
+            dataIndex: "counterUserId",
         },
         {
-            title: "用户属性",
-            dataIndex: "userPropty",
-            key: "userPropty",
+            title: "业务类型",
+            dataIndex: "businessType",
         },
         {
-            title: "用户状态",
-            dataIndex: "userStatus",
-            key: "userStatus",
-        },
-        {
-            title: "用户费率组别",
-            dataIndex: "feeGroup",
-            key: "feeGroup",
+            title: "登录状态",
+            dataIndex: "loginStatus",
         },
         {
             title: "注册时间",
             dataIndex: "createTime",
             key: "createTime",
         },
-        {
-            title: "更新时间",
-            dataIndex: "updateTime",
-            key: "updateTime",
-        },
+        // {
+        //     title: "更新时间",
+        //     dataIndex: "updateTime",
+        //     key: "updateTime",
+        // },
     ];
 };
 export default class userInfoUpload extends React.PureComponent {
@@ -67,12 +59,12 @@ export default class userInfoUpload extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href = window.baseURL + "/option/tb-user-info/download";
+        window.location.href = window.baseURL + "/user/download";
     };
     getData = (params) => {
         http.get({
             // url: "/option/assetInfo/selectList",
-            url: "/option/tb-user-info/selectList",
+            url: "user/list",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -97,7 +89,7 @@ export default class userInfoUpload extends React.PureComponent {
             // accept: ".xlsx",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/option/tb-user-info/upload",
+            action: window.baseURL + "/user/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);

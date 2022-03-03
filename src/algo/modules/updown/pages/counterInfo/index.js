@@ -5,58 +5,34 @@ import CurdComponent from "@/components/CurdComponent";
 const columns = (params) => {
     return [
         {
-            title: "网关地址",
+            title: "券商编码",
+            dataIndex: "brokerCode",
+            key: "brokerCode",
+        },
+        {
+            title: "支持业务类型",
+            dataIndex: "supportType",
+            key: "supportType",
+        },
+        {
+            title: "柜台地址",
             dataIndex: "gwAddr",
             key: "gwAddr",
         },
         {
-            title: "发送方ID",
-            dataIndex: "sendCompId",
-            key: "sendCompId",
+            title: "柜台版本号",
+            dataIndex: "version",
+            key: "version",
         },
         {
-            title: "接受方ID",
-            dataIndex: "recvCompId",
-            key: "recvCompId",
+            title: "柜台状态",
+            dataIndex: "status",
+            key: "status",
         },
-        {
-            title: "网关密码",
-            dataIndex: "password",
-            key: "password",
-        },
-        {
-            title: "网关状态",
-            dataIndex: "gwStatus",
-            key: "gwStatus",
-        },
-        {
-            title: "连接状态",
-            dataIndex: "connStatus",
-            key: "connStatus",
-        },
-        {
-            title: "登录状态",
-            dataIndex: "loginStatus",
-            key: "loginStatus",
-        },
-        {
-            title: "版本号",
-            dataIndex: "vers",
-            key: "vers",
-        },
-        {
-            title: "创建时间",
-            dataIndex: "createTime",
-            key: "createTime",
-        },
-        {
-            title: "更新时间",
-            dataIndex: "updateTime",
-            key: "updateTime",
-        },
+        
     ];
 };
-export default class gwConfig extends React.PureComponent {
+export default class optionInfo extends React.PureComponent {
     state = {
         searchLoading: false,
         info: [],
@@ -67,17 +43,18 @@ export default class gwConfig extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href = window.baseURL + "/option/tb-gw-config/download";
+        window.location.href = window.baseURL + "/counter/download";
     };
     getData = (params) => {
         http.get({
             // url: "/option/assetInfo/selectList",
-            url: "/option/tb-gw-config/selectList",
+            url: "/counter/list",
             data: params,
         }).then((res) => {
             console.log(res);
             //解析数据字典
             if (res.data.length > 0) {
+                parseArrDict(res.data, "status", "counterStatus");
                 parseDict(res.data);
                 this.setState({
                     info: res.data,
@@ -94,10 +71,10 @@ export default class gwConfig extends React.PureComponent {
         let that = this;
         let props = {
             name: "file",
-            // accept: ".xlsx",
+            // accept: ".xls,.xlsx",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/option/tb-gw-config/upload",
+            action: window.baseURL + "/counter/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);
@@ -143,11 +120,11 @@ export default class gwConfig extends React.PureComponent {
                 >
                     <Upload {...props}>
                         <Button type="primary">
-                            <Icon type="upload" /> 网管配置上传
+                            <Icon type="upload" /> 柜台信息上传
                         </Button>
                     </Upload>
                     <Button type="primary" onClick={this.handleDownload}>
-                        <Icon type="download" /> 网管配置导出
+                        <Icon type="download" /> 柜台信息导出
                     </Button>
                 </CurdComponent>
             </div>

@@ -6,6 +6,34 @@ const configData = {
         { key: "3", value: "WINDOWS" },
         { key: "4", value: "MAC" },
     ],
+    userType: [
+        { key: "1", value: "个人用户" },
+        { key: "2", value: "算法厂商用户" },
+        { key: "3", value: "柜台用户" },
+        { key: "4", value: "多用户管理员" },
+    ],
+    businessType: [
+        { key: "1", value: "现货" },
+        { key: "2", value: "期权" },
+        { key: "3", value: "两融" },
+    ],
+    market: [
+        { key: "1", value: "深交所" },
+        { key: "2", value: "上交所" },
+    ],
+    accountType: [
+        { key: "1", value: "股票" },
+        { key: "2", value: "期权" },
+        { key: "3", value: "融资融券" },
+    ],
+    counterStatus: [
+        { key: "0", value: "使能" },
+        { key: "1", value: "关闭" },
+    ],
+    riskType: [
+        { key: "0", value: "用户" },
+        { key: "1", value: "算法" },
+    ],
     userStatus: [
         { key: "0", value: "正常" },
         { key: "1", value: "黑名单客户" },
@@ -27,8 +55,6 @@ const configData = {
         { key: "1", value: "不可交易" },
         { key: "2", value: "不可取消" },
     ],
-    //股东信息 - 账户类型
-    accountType: [{ key: "0", value: "股票" }],
     accountStatus: [
         { key: "0", value: "正常" },
         { key: "1", value: "冻结" },
@@ -110,16 +136,6 @@ const configData = {
         { key: "0", value: "当日有效" },
         { key: "3", value: "即时成交或取消" },
         { key: "9", value: "港股通竞价限盘" },
-    ],
-    timeInforce: [
-        { key: "0", value: "当日有效" },
-        { key: "3", value: "即时成交或取消" },
-        { key: "9", value: "港股通竞价限盘" },
-    ],
-    cashMargin: [
-        { key: "1", value: "普通交易" },
-        { key: "2", value: "融资融券开仓" },
-        { key: "3", value: "融资融券平仓" },
     ],
     ordStatus: [
         { key: "0", value: "新订单" },
@@ -213,44 +229,6 @@ const configData = {
         { key: "34", value: "用户禁止交易中小板" },
         { key: "35", value: "用户禁止交易主板B股" },
     ],
-    UserPropty: [
-        { key: "all", value: "全部" },
-        { key: "1", value: "主板A股" },
-        { key: "2", value: "中小板股票" },
-        { key: "3", value: "主板A股,中小板股票" },
-        { key: "4", value: "创业板股票" },
-        { key: "5", value: "主板A股,创业板股票" },
-        { key: "6", value: "中小板股票,创业板股票" },
-        { key: "7", value: "主板A股,中小板股票,创业板股票" },
-        { key: "8", value: "主板B股" },
-        { key: "9", value: "主板A股,主板B股" },
-        { key: "10", value: "中小板股票,主板B股" },
-        { key: "11", value: "主板A股,中小板股票,主板B股" },
-        { key: "12", value: "创业板股票,主板B股" },
-        { key: "13", value: "主板A股，创业板股票,主板B股" },
-        { key: "14", value: "中小板股票,创业板股票,主板B股" },
-        { key: "15", value: "主板A股,中小板股票,创业板股票,主板B股" },
-        { key: "16", value: "风险警示板" },
-        { key: "17", value: "主板A股,风险警示板" },
-        { key: "18", value: "中小板股票,风险警示板" },
-        { key: "19", value: "主板A股,中小板股票,风险警示板" },
-        { key: "20", value: "创业板股票,风险警示板" },
-        { key: "21", value: "主板A股,创业板股票,风险警示板" },
-        { key: "22", value: "中小板股票,创业板股票,风险警示板" },
-        { key: "23", value: "主板A股,中小板股票,创业板股票,风险警示板" },
-        { key: "24", value: "主板B股,风险警示板" },
-        { key: "25", value: "主板A股,主板B股,风险警示板" },
-        { key: "26", value: "中小板股票,主板B股,风险警示板" },
-        { key: "27", value: "主板A股,中小板股票,主板B股,风险警示板" },
-        { key: "28", value: "创业板股票,主板B股,风险警示板" },
-        { key: "29", value: "主板A股,创业板股票,主板B股,风险警示板" },
-        { key: "30", value: "中小板股票,创业板股票,主板B股,风险警示板" },
-        {
-            key: "31",
-            value: "主板A股,中小板股票,创业板股票,主板B股,风险警示板",
-        },
-        // { key: "5", value: "个人户" }
-    ],
     userPropty: [
         { key: "all", value: "全部" },
         { key: "1", value: "主板A股" },
@@ -293,313 +271,6 @@ const configData = {
         { key: "0", value: "正常" },
         { key: "1", value: "停盘" },
         { key: "2", value: "退市" },
-    ],
-    contractType: [
-        { key: "67", value: "认购" },
-        { key: "80", value: "认沽" },
-        { key: "C", value: "认购" },
-        { key: "P", value: "认沽" },
-    ],
-    exerciseMethod: [
-        { key: "1", value: "欧式" },
-        { key: "2", value: "美式" },
-    ],
-    deliverMethod: [
-        { key: "1", value: "实物" },
-        { key: "2", value: "现金" },
-    ],
-    optionStatus: [
-        { key: "0", value: "正常" },
-        { key: "1", value: "冻结" },
-    ],
-    marketMakeFlag: [
-        { key: "89", value: "是" },
-        { key: "78", value: "否" },
-        { key: "Y", value: "是" },
-        { key: "N", value: "否" },
-    ],
-    timeType: [
-        { key: "0", value: "连续竞价" },
-        { key: "1", value: "开盘集合竞价" },
-        { key: "2", value: "收盘集合竞价" },
-        { key: "3", value: "盘中临时停牌复牌集合竞价" },
-    ],
-    tradeType: [
-        { key: "0", value: "新交易下单" },
-        { key: "1", value: "撤单" },
-        { key: "2", value: "组合策略" },
-        { key: "3", value: "备兑互转" },
-        { key: "4", value: "行权订单" },
-    ],
-    excercise: [
-        { key: "0", value: "未行权" },
-        { key: "1", value: "行权" },
-    ],
-    connStatus: [
-        { key: "0", value: "登录失败" },
-        { key: "1", value: "登录成功" },
-    ],
-    gwStatus: [
-        { key: "0", value: "正常" },
-        { key: "1", value: "其他" },
-    ],
-    coveredOrUncoverd: [
-        { key: "0", value: "备兑" },
-        { key: "1", value: "非备兑" },
-    ],
-    availableStrategy: [
-        {
-            key: 1,
-            value: "CNSJC",
-        },
-        {
-            key: 2,
-            value: "CXSJC",
-        },
-        {
-            key: 3,
-            value: "CXSJC,CNSJC",
-        },
-        {
-            key: 4,
-            value: "PNSJC",
-        },
-        {
-            key: 5,
-            value: "PNSJC,CNSJC",
-        },
-        {
-            key: 6,
-            value: "PNSJC,CXSJC",
-        },
-        {
-            key: 7,
-            value: "PNSJC,CXSJC,CNSJC",
-        },
-        {
-            key: 8,
-            value: "PXSJC",
-        },
-        {
-            key: 9,
-            value: "PXSJC,CNSJC",
-        },
-        {
-            key: 10,
-            value: "PXSJC,CXSJC",
-        },
-        {
-            key: 11,
-            value: "PXSJC,CXSJC,CNSJC",
-        },
-        {
-            key: 12,
-            value: "PXSJC,PNSJC",
-        },
-        {
-            key: 13,
-            value: "PXSJC,PNSJC,CNSJC",
-        },
-        {
-            key: 14,
-            value: "PXSJC,PNSJC,CXSJC",
-        },
-        {
-            key: 15,
-            value: "PXSJC,PNSJC,CXSJC,CNSJC",
-        },
-        {
-            key: 16,
-            value: "KS",
-        },
-        {
-            key: 17,
-            value: "KS,CNSJC",
-        },
-        {
-            key: 18,
-            value: "KS,CXSJC",
-        },
-        {
-            key: 19,
-            value: "KS,CXSJC,CNSJC",
-        },
-        {
-            key: 20,
-            value: "KS,PNSJC",
-        },
-        {
-            key: 21,
-            value: "KS,PNSJC,CNSJC",
-        },
-        {
-            key: 22,
-            value: "KS,PNSJC,CXSJC",
-        },
-        {
-            key: 23,
-            value: "KS,PNSJC,CXSJC,CNSJC",
-        },
-        {
-            key: 24,
-            value: "KS,PXSJC",
-        },
-        {
-            key: 25,
-            value: "KS,PXSJC,CNSJC",
-        },
-        {
-            key: 26,
-            value: "KS,PXSJC,CXSJC",
-        },
-        {
-            key: 27,
-            value: "KS,PXSJC,CXSJC,CNSJC",
-        },
-        {
-            key: 28,
-            value: "KS,PXSJC,PNSJC",
-        },
-        {
-            key: 29,
-            value: "KS,PXSJC,PNSJC,CNSJC",
-        },
-        {
-            key: 30,
-            value: "KS,PXSJC,PNSJC,CXSJC",
-        },
-        {
-            key: 31,
-            value: "KS,PXSJC,PNSJC,CXSJC,CNSJC",
-        },
-        {
-            key: 32,
-            value: "KKS",
-        },
-        {
-            key: 33,
-            value: "KKS,CNSJC",
-        },
-        {
-            key: 34,
-            value: "KKS,CXSJC",
-        },
-        {
-            key: 35,
-            value: "KKS,CXSJC,CNSJC",
-        },
-        {
-            key: 36,
-            value: "KKS,PNSJC",
-        },
-        {
-            key: 37,
-            value: "KKS,PNSJC,CNSJC",
-        },
-        {
-            key: 38,
-            value: "KKS,PNSJC,CXSJC",
-        },
-        {
-            key: 39,
-            value: "KKS,PNSJC,CXSJC,CNSJC",
-        },
-        {
-            key: 40,
-            value: "KKS,PXSJC",
-        },
-        {
-            key: 41,
-            value: "KKS,PXSJC,CNSJC",
-        },
-        {
-            key: 42,
-            value: "KKS,PXSJC,CXSJC",
-        },
-        {
-            key: 43,
-            value: "KKS,PXSJC,CXSJC,CNSJC",
-        },
-        {
-            key: 44,
-            value: "KKS,PXSJC,PNSJC",
-        },
-        {
-            key: 45,
-            value: "KKS,PXSJC,PNSJC,CNSJC",
-        },
-        {
-            key: 46,
-            value: "KKS,PXSJC,PNSJC,CXSJC",
-        },
-        {
-            key: 47,
-            value: "KKS,PXSJC,PNSJC,CXSJC,CNSJC",
-        },
-        {
-            key: 48,
-            value: "KKS,KS",
-        },
-        {
-            key: 49,
-            value: "KKS,KS,CNSJC",
-        },
-        {
-            key: 50,
-            value: "KKS,KS,CXSJC",
-        },
-        {
-            key: 51,
-            value: "KKS,KS,CXSJC,CNSJC",
-        },
-        {
-            key: 52,
-            value: "KKS,KS,PNSJC",
-        },
-        {
-            key: 53,
-            value: "KKS,KS,PNSJC,CNSJC",
-        },
-        {
-            key: 54,
-            value: "KKS,KS,PNSJC,CXSJC",
-        },
-        {
-            key: 55,
-            value: "KKS,KS,PNSJC,CXSJC,CNSJC",
-        },
-        {
-            key: 56,
-            value: "KKS,KS,PXSJC",
-        },
-        {
-            key: 57,
-            value: "KKS,KS,PXSJC,CNSJC",
-        },
-        {
-            key: 58,
-            value: "KKS,KS,PXSJC,CXSJC",
-        },
-        {
-            key: 59,
-            value: "KKS,KS,PXSJC,CXSJC,CNSJC",
-        },
-        {
-            key: 60,
-            value: "KKS,KS,PXSJC,PNSJC",
-        },
-        {
-            key: 61,
-            value: "KKS,KS,PXSJC,PNSJC,CNSJC",
-        },
-        {
-            key: 62,
-            value: "KKS,KS,PXSJC,PNSJC,CXSJC",
-        },
-        {
-            key: 63,
-            value: "KKS,KS,PXSJC,PNSJC,CXSJC,CNSJC",
-        },
     ],
 };
 

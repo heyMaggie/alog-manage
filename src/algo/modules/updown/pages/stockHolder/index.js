@@ -5,59 +5,29 @@ import CurdComponent from "@/components/CurdComponent";
 const columns = (params) => {
     return [
         {
-            title: "用户ID",
+            title: "整型用户ID",
             dataIndex: "uuserId",
             key: "uuserId",
         },
         {
-            title: "资金账户ID",
-            dataIndex: "uassetInfoId",
-            key: "uassetInfoId",
-        },
-        {
-            title: "股东账户",
+            title: "股东账户ID",
             dataIndex: "accountId",
             key: "accountId",
         },
         {
-            title: "现货股东账户",
-            dataIndex: "stockholderAccount",
-            key: "stockholderAccount",
+            title: "市场代码",
+            dataIndex: "market",
+            key: "market",
         },
         {
-            title: "交易等级",
-            dataIndex: "tradeLimitLevel",
-            key: "tradeLimitLevel",
-        },
-        {
-            title: "持仓等级",
-            dataIndex: "posiLimitLevel",
-            key: "posiLimitLevel",
-        },
-        {
-            title: "账户状态",
-            dataIndex: "accountStatus",
-            key: "accountStatus",
-        },
-        {
-            title: "合约账户标识码",
-            dataIndex: "contractAccountCode",
-            key: "contractAccountCode",
-        },
-        {
-            title: "资金版本号",
-            dataIndex: "vers",
-            key: "vers",
+            title: "账户类型",
+            dataIndex: "accountType",
+            key: "accountType",
         },
         {
             title: "创建时间",
             dataIndex: "createTime",
             key: "createTime",
-        },
-        {
-            title: "更新时间",
-            dataIndex: "updateTime",
-            key: "updateTime",
         },
     ];
 };
@@ -72,13 +42,12 @@ export default class stockholder extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href =
-            window.baseURL + "/option/tb-stockholder-info/download";
+        window.location.href = window.baseURL + "/stockHolder/download";
     };
     getData = (params) => {
         http.get({
             // url: "/option/assetInfo/selectList",
-            url: "/option/tb-stockholder-info/selectList",
+            url: "/stockHolder/list",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -102,7 +71,7 @@ export default class stockholder extends React.PureComponent {
             name: "file",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/option/tb-stockholder-info/upload",
+            action: window.baseURL + "/stockHolder/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);

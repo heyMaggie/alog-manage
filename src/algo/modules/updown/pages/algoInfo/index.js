@@ -5,44 +5,44 @@ import CurdComponent from "@/components/CurdComponent";
 const columns = (params) => {
     return [
         {
-            title: "id",
-            dataIndex: "id",
-            key: "id",
+            title: "算法名称",
+            dataIndex: "algoName",
+            key: "algoName",
         },
         {
-            title: "交易时间组",
-            dataIndex: "tradeTimeGroup",
-            key: "tradeTimeGroup",
+            title: "算法厂商ID",
+            dataIndex: "uuserId",
+            key: "uuserId",
         },
         {
-            title: "开始时间",
-            dataIndex: "startTime",
-            key: "startTime",
+            title: "算法厂商名",
+            dataIndex: "providerName",
+            key: "providerName",
         },
         {
-            title: "结束时间",
-            dataIndex: "stopTime",
-            key: "stopTime",
+            title: "算法类型",
+            dataIndex: "algorithmType",
+            key: "algorithmType",
         },
         {
-            title: "交易时间类型",
-            dataIndex: "timeType",
-            key: "timeType",
+            title: "算法状态",
+            dataIndex: "algorithmStatus",
+            key: "algorithmStatus",
         },
         {
-            title: "交易类型",
-            dataIndex: "tradeType",
-            key: "tradeType",
+            title: "算法所需参数",
+            dataIndex: "parameter",
+            key: "parameter",
+        },
+        {
+            title: "算法风控组",
+            dataIndex: "riskGroup",
+            key: "riskGroup",
         },
         {
             title: "创建时间",
             dataIndex: "createTime",
             key: "createTime",
-        },
-        {
-            title: "更新时间",
-            dataIndex: "updateTime",
-            key: "updateTime",
         },
     ];
 };
@@ -58,12 +58,12 @@ export default class serverSetting extends React.PureComponent {
     };
     handleDownload = () => {
         window.location.href =
-            window.baseURL + "/option/tb-trade-time/download";
+            window.baseURL + "/algo/download";
     };
     getData = (params) => {
         http.get({
             // url: "/option/assetInfo/selectList",
-            url: "/option/tb-trade-time/selectList",
+            url: "/algo/list",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -87,7 +87,7 @@ export default class serverSetting extends React.PureComponent {
             name: "file",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/option/tb-trade-time/upload",
+            action: window.baseURL + "/algo/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);
@@ -133,11 +133,11 @@ export default class serverSetting extends React.PureComponent {
                 >
                     <Upload {...props}>
                         <Button type="primary">
-                            <Icon type="upload" /> 交易时间组上传
+                            <Icon type="upload" />算法信息上传
                         </Button>
                     </Upload>
                     <Button type="primary" onClick={this.handleDownload}>
-                        <Icon type="download" /> 交易时间组导出
+                        <Icon type="download" /> 算法信息导出
                     </Button>
                 </CurdComponent>
             </div>

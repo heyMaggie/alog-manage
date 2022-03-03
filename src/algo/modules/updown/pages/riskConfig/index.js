@@ -5,43 +5,117 @@ import CurdComponent from "@/components/CurdComponent";
 const columns = (params) => {
     return [
         {
-            title: "基数区间下限",
-            dataIndex: "baseLower",
-            key: "baseLower",
+            title: "风控类型",
+            dataIndex: "riskType",
+            key: "riskType",
         },
         {
-            title: "费用",
-            dataIndex: "fee",
-            key: "fee",
+            title: "风控启用委托数量",
+            dataIndex: "entrustItemThreshold",
+            key: "entrustItemThreshold",
         },
         {
-            title: "费率",
-            dataIndex: "feeRate",
-            key: "feeRate",
+            title: "时间量:总委托笔数",
+            dataIndex: "entrustItemLimit",
+            key: "entrustItemLimit",
         },
         {
-            title: "用户费率组别",
-            dataIndex: "feeGroup",
-            key: "feeGroup",
+            title: "总委托:时间量(s)",
+            dataIndex: "entrustSeconds",
+            key: "entrustSeconds",
         },
         {
-            title: "费率类型",
-            dataIndex: "feeType",
-            key: "feeType",
+            title: "总委托笔数",
+            dataIndex: "entrustTotalThreshold",
+            key: "entrustTotalThreshold",
         },
         {
-            title: "创建时间",
-            dataIndex: "createTime",
-            key: "createTime",
+            title: "撤单比:风控启用委托数量",
+            dataIndex: "cancelEntrustItemThreshold",
+            key: "cancelEntrustItemThreshold",
+            width:200
         },
         {
-            title: "更新时间",
-            dataIndex: "updateTime",
-            key: "updateTime",
+            title: "撤单比(s) x100",
+            dataIndex: "cancelRatioLimit",
+            key: "cancelRatioLimit",
         },
+        {
+            title: "废单比:风控启用委托数量",
+            dataIndex: "failedEntrustItemThreshold",
+            key: "failedEntrustItemThreshold",
+            width:200
+        },
+        {
+            title: "废单比(s) x100",
+            dataIndex: "failedRatioLimit",
+            key: "failedRatioLimit",
+        },
+        {
+            title: "委托成交比:风控启用委托数量",
+            dataIndex: "entrustExecEntrustItemThreshold",
+            key: "entrustExecEntrustItemThreshold",
+            width:240
+        },
+        {
+            title: "委托成交比(s) x100",
+            dataIndex: "entrustExecRatioLimit",
+            key: "entrustExecRatioLimit",
+        },
+        {
+            title: "净买入额度:风控启用委托数量",
+            dataIndex: "netBuyEntrustItemThreshold",
+            key: "netBuyEntrustItemThreshold",
+            width:220
+        },
+        {
+            title: "净买入额度 x10000",
+            dataIndex: "netBuyAmountLimit",
+            key: "netBuyAmountLimit",
+        },
+        {
+            title: "撤单频率笔数",
+            dataIndex: "cancelItemLimit",
+            key: "cancelItemLimit",
+        },
+        {
+            title: "撤单:时间量(s)",
+            dataIndex: "cancelSeconds",
+            key: "cancelSeconds",
+        },
+        {
+            title: "撤单间隔(s)",
+            dataIndex: "cancelGapSeconds",
+            key: "cancelGapSeconds",
+        },
+        {
+            title: "下单频率笔数",
+            dataIndex: "tradeItemLimit",
+            key: "tradeItemLimit",
+        },
+        {
+            title: "下单频率:时间量(s)",
+            dataIndex: "tradeSeconds",
+            key: "tradeSeconds",
+        },
+        {
+            title: "下单总量(股数)x100",
+            dataIndex: "tradeQtyLimit",
+            key: "tradeQtyLimit",
+        },
+        {
+            title: "下单总金额(元)x100",
+            dataIndex: "tradeAmountLimit",
+            key: "tradeAmountLimit",
+        },
+        // {
+        //     title: "更新时间",
+        //     dataIndex: "updateTime",
+        //     key: "updateTime",
+        // },
     ];
 };
-export default class serverSetting extends React.PureComponent {
+export default class userConfig extends React.PureComponent {
     state = {
         searchLoading: false,
         info: [],
@@ -53,12 +127,12 @@ export default class serverSetting extends React.PureComponent {
     };
     handleDownload = () => {
         window.location.href =
-            window.baseURL + "/option/tb-fee-rate-config/download";
+            window.baseURL + "/risk/download";
     };
     getData = (params) => {
         http.get({
             // url: "/option/assetInfo/selectList",
-            url: "/option/tb-fee-rate-config/selectList",
+            url: "/risk/list",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -80,9 +154,10 @@ export default class serverSetting extends React.PureComponent {
         let that = this;
         let props = {
             name: "file",
+            // accept: ".xlsx",
             accept: ".xml",
             showUploadList: false,
-            action: window.baseURL + "/option/tb-fee-rate-config/upload",
+            action: window.baseURL + "/risk/upload",
             onChange(info) {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);
@@ -99,7 +174,7 @@ export default class serverSetting extends React.PureComponent {
                 }
             },
         };
-        let scroll = { x: 1000, y: 445 };
+        let scroll = { x: 3500, y: 445 };
         let info = this.state.info;
         return (
             <div>
@@ -128,11 +203,11 @@ export default class serverSetting extends React.PureComponent {
                 >
                     <Upload {...props}>
                         <Button type="primary">
-                            <Icon type="upload" /> 费率上传
+                            <Icon type="upload" /> 算法风控配置上传
                         </Button>
                     </Upload>
                     <Button type="primary" onClick={this.handleDownload}>
-                        <Icon type="download" /> 费率导出
+                        <Icon type="download" /> 算法风控配置导出
                     </Button>
                 </CurdComponent>
             </div>
