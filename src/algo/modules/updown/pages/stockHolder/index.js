@@ -5,12 +5,12 @@ import CurdComponent from "@/components/CurdComponent";
 const columns = (params) => {
     return [
         {
-            title: "整型用户ID",
+            title: "用户ID",
             dataIndex: "uuserId",
             key: "uuserId",
         },
         {
-            title: "股东账户ID",
+            title: "股东账户",
             dataIndex: "accountId",
             key: "accountId",
         },

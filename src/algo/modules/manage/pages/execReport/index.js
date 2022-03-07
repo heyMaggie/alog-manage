@@ -7,65 +7,35 @@ const getUpdateFormFields = () => {};
 const columns = (params) => {
     return [
         {
-            title: "证券帐户",
-            dataIndex: "accountId",
+            title: "业务类型",
+            dataIndex: "businessType",
             width: 100,
         },
         {
-            title: "订单ID",
-            dataIndex: "uorderId",
+            title: "母单订单号",
+            dataIndex: "algoOrderId",
             width: 100,
         },
         {
-            title: "用户ID",
-            dataIndex: "uuserId",
+            title: "子单订单号",
+            dataIndex: "childOrderId",
             width: 100,
-        },
-        {
-            title: "应用标识",
-            dataIndex: "applId",
-            width: 120,
-        },
-
-        {
-            title: "证券代码",
-            dataIndex: "securityId",
-            width: 120,
-        },
-        {
-            title: "证券代码源",
-            dataIndex: "securityIdSource",
-            width: 120,
-        },
-        {
-            title: "交易所订单编号",
-            dataIndex: "orderId",
-            width: 150,
-        },
-        {
-            title: "客户订单编号",
-            dataIndex: "clOrdId",
-            width: 150,
         },
         {
             title: "执行编号",
             dataIndex: "execId",
             width: 120,
         },
-        {
-            title: "执行类型",
-            dataIndex: "execType",
-            width: 120,
-        },
+
         {
             title: "订单状态",
-            dataIndex: "ordStatus",
-            width: 100,
+            dataIndex: "childOrdStatus",
+            width: 120,
         },
         {
             title: "成交价",
             dataIndex: "lastPx",
-            width: 100,
+            width: 120,
         },
         {
             title: "成交数量",
@@ -75,7 +45,7 @@ const columns = (params) => {
         {
             title: "订单剩余数量",
             dataIndex: "leavesQty",
-            width: 120,
+            width: 150,
         },
         {
             title: "累计执行数量",
@@ -83,71 +53,15 @@ const columns = (params) => {
             width: 120,
         },
         {
-            title: "买卖方向",
-            dataIndex: "side",
-            width: 120,
-        },
-        {
-            title: "回报交易单元",
-            dataIndex: "reportingPbuid",
-            width: 120,
-        },
-        {
-            title: "申报交易单元",
-            dataIndex: "submitingPubid",
-            width: 120,
-        },
-        {
-            title: "订单所有者类型",
-            dataIndex: "ownerType",
-            width: 150,
-        },
-        {
-            title: "结算机构代码",
-            dataIndex: "clearingFirm",
-            width: 120,
-        },
-        {
-            title: "回报时间",
+            title: "成交时间",
             dataIndex: "transactTime",
-            width: 160,
-        },
-        {
-            title: "用户信息",
-            dataIndex: "userInfo",
             width: 120,
         },
-
-        {
-            title: "营业部代码",
-            dataIndex: "branchId",
-            width: 120,
-        },
-        {
-            title: "平仓标识",
-            dataIndex: "positionEffect",
-            width: 120,
-        },
-        {
-            title: "备兑标志",
-            dataIndex: "coveredOrUncovered",
-            width: 100,
-        },
-        {
-            title: "合约账户标识",
-            dataIndex: "contractAccountCode",
-            width: 120,
-        },
-        {
-            title: "平台分区号",
-            dataIndex: "partitionNo",
-            width: 120,
-        },
-        {
-            title: "回报记录号",
-            dataIndex: "reportIndex",
-            width: 120,
-        },
+        // {
+        //     title: "成交记录ID",
+        //     dataIndex: "version",
+        //     width: 100,
+        // },
     ];
 };
 let getSearchFormFields = () => {
@@ -199,8 +113,8 @@ export default class execReport extends React.PureComponent {
     setUpdateModal = ({ form, record }) => {};
     getData = (params = {}) => {
         // params.token = "";
-        http.post({
-            url: "/option/tb-exec-report/selectList",
+        http.get({
+            url: "/order-deal/list",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -235,10 +149,10 @@ export default class execReport extends React.PureComponent {
             <div>
                 <CurdComponent
                     // rowKey={"index"}
-                    // isShowSearchForm={false}
+                    isShowSearchForm={false}
                     // btnText2="查全部"
-                    onSearchClick={this.handleSearch}
-                    getSearchFormFields={getSearchFormFields}
+                    // onSearchClick={this.handleSearch}
+                    // getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
                     // getInsertFormFields={getInsertFormFields}

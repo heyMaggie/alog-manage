@@ -263,7 +263,7 @@ export default class newOrderQuery extends React.PureComponent {
             <div>
                 <CurdComponent
                     // rowKey={"index"}
-                    // isShowSearchForm={false}
+                    isShowSearchForm={false}
                     // btnText2="查全部"
                     onSearchClick={this.handleSearch}
                     getSearchFormFields={getSearchFormFields}

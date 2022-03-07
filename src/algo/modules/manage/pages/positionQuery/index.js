@@ -8,13 +8,13 @@ const getSearchFormFields = () => {
     return [
         {
             label: "证券帐户",
-            id: "AccountID",
+            id: "accountId",
             // initialValue: "",
             component: <Input placeholder="请输入证券帐户" />,
         },
         {
             label: "证券代码",
-            id: "SecurityID",
+            id: "securityId",
             // initialValue: "",
             component: <Input placeholder="请输入证券代码" />,
         },
@@ -40,81 +40,83 @@ const getUpdateFormFields = () => {
 let columns = () => {
     return [
         {
-            title: "序号",
-            dataIndex: "Sno",
-            key: "Sno",
+            title: "用户ID",
+            dataIndex: "uuserId",
+            key: "uuserId",
             width: 80,
         },
         {
             title: "证券帐户",
-            dataIndex: "AccountID",
-            key: "AccountID",
+            dataIndex: "accountId",
+            key: "accountId",
             width: 120,
         },
         {
             title: "证券代码",
-            dataIndex: "SecurityID",
-            key: "SecurityID",
+            dataIndex: "securityId",
+            key: "securityId",
             width: 100,
         },
         {
-            title: "持仓数量",
-            dataIndex: "Quantity",
-            key: "Quantity",
+            title: "证券代码源",
+            dataIndex: "securityIdSource",
+            key: "securityIdSource",
+            width: 120,
+        },
+        {
+            title: "持仓类型",
+            dataIndex: "positionType",
+            key: "positionType",
             width: 100,
         },
         {
-            title: "买入价格",
-            dataIndex: "Price",
-            key: "Price",
+            title: "持仓数量x100",
+            dataIndex: "positionQty",
+            key: "positionQty",
             width: 100,
         },
         {
-            title: "创建时间",
-            dataIndex: "createTime",
-            key: "createTime",
-            width: 150,
+            title: "当前开盘前的原始仓位数量x100",
+            dataIndex: "originQty",
+            width: 200,
+        },
+        {
+            title: "当天前的原始持仓的平均开仓价格x10000",
+            dataIndex: "originOpenPrice",
+            width: 250,
+        },
+        {
+            title: "可卖数量x100",
+            dataIndex: "freeQty",
+            key: "freeQty",
+            width: 100,
+        },
+        {
+            title: "冻结数量x100",
+            dataIndex: "frozenQty",
+            key: "frozenQty",
+            width: 100,
+        },
+        {
+            title: "平均价格x10000",
+            dataIndex: "price",
+            width: 100,
         },
         {
             title: "盈亏",
-            dataIndex: "ProfitAndLoss",
-            key: "ProfitAndLoss",
+            dataIndex: "profitAndLoss",
+            key: "profitAndLoss",
             width: 100,
         },
         {
             title: "收益率",
-            dataIndex: "RateOfReturn",
-            key: "RateOfReturn",
+            dataIndex: "profitRate",
+            key: "profitRate",
             width: 100,
         },
         {
-            title: "原始数量",
-            dataIndex: "OriginQty",
-            key: "OriginQty",
-            width: 100,
-        },
-        {
-            title: "原始开仓价格",
-            dataIndex: "OriginOpenPrice",
-            key: "OriginOpenPrice",
-            width: 120,
-        },
-        {
-            title: "可用数量",
-            dataIndex: "FreeQty",
-            key: "FreeQty",
-            width: 100,
-        },
-        {
-            title: "冻结数量",
-            dataIndex: "FrozenQty",
-            key: "FrozenQty",
-            width: 100,
-        },
-        {
-            title: "最后成交编号",
-            dataIndex: "lastExecId",
-            key: "lastExecId",
+            title: "版本号",
+            dataIndex: "version",
             width: 120,
         },
         {
@@ -126,91 +128,7 @@ let columns = () => {
     ];
 };
 let dtColumns = () => {
-    return [
-        {
-            title: "序号",
-            dataIndex: "Sno",
-            key: "Sno",
-            width: 100,
-        },
-        {
-            title: "证券帐户",
-            dataIndex: "AccountID",
-            key: "AccountID",
-            width: 100,
-        },
-        {
-            title: "证券代码",
-            dataIndex: "SecurityID",
-            key: "SecurityID",
-            width: 100,
-        },
-        {
-            title: "持仓数量",
-            dataIndex: "Quantity",
-            key: "Quantity",
-            width: 100,
-        },
-        {
-            title: "买入价格",
-            dataIndex: "Price",
-            key: "Price",
-            width: 100,
-        },
-        {
-            title: "创建时间",
-            dataIndex: "createTime",
-            key: "createTime",
-            width: 150,
-        },
-        {
-            title: "盈亏",
-            dataIndex: "ProfitAndLoss",
-            key: "ProfitAndLoss",
-            width: 100,
-        },
-        {
-            title: "收益率",
-            dataIndex: "RateOfReturn",
-            key: "RateOfReturn",
-            width: 100,
-        },
-        {
-            title: "原始数量",
-            dataIndex: "OriginQty",
-            key: "OriginQty",
-            width: 100,
-        },
-        {
-            title: "原始开仓价格",
-            dataIndex: "OriginOpenPrice",
-            key: "OriginOpenPrice",
-            width: 120,
-        },
-        {
-            title: "可用数量",
-            dataIndex: "FreeQty",
-            key: "FreeQty",
-            width: 100,
-        },
-        {
-            title: "冻结数量",
-            dataIndex: "FrozenQty",
-            key: "FrozenQty",
-            width: 100,
-        },
-        {
-            title: "最后成交编号",
-            dataIndex: "11",
-            key: "11",
-            width: 100,
-        },
-        {
-            title: "更新时间",
-            dataIndex: "updateTime",
-            width: 100,
-        },
-    ];
+    return columns();
 };
 export default class Cccx extends React.PureComponent {
     state = {
@@ -224,6 +142,22 @@ export default class Cccx extends React.PureComponent {
     };
     getData = (params, pagination = { current: 1, pageSize: 20 }) => {
         // console.log(pagination);
+        http.get({
+            url: "/user-position/list",
+            data: params,
+        }).then((res) => {
+            console.log(res);
+            //解析数据字典
+            if (res.data.length > 0) {
+                parseDict(res.data);
+                showStip(this);
+            } else {
+                message.info("查询结果为空");
+            }
+            this.setState({
+                info: res.data,
+            });
+        });
         // this.setState({ info: msg.content, pagination: pgn });
     };
     // handleInsertRecord = ({ form }) => {
@@ -256,7 +190,7 @@ export default class Cccx extends React.PureComponent {
                 getSearchFormFields={getSearchFormFields}
                 searchLoading={this.state.searchLoading}
                 isShowInsert={false}
-                rowKey="Sno"
+                // rowKey="sno"
                 pagination={this.state.pagination}
                 dataSource={info}
                 // insertBtnText={"撤销"}

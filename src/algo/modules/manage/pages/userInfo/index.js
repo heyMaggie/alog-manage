@@ -115,7 +115,7 @@ const columns = (params) => {
         {
             title: "用户风控组别",
             dataIndex: "riskGroup",
-            key: "riskGroup",
+            width: 120,
         },
         {
             title: "柜台用户ID",

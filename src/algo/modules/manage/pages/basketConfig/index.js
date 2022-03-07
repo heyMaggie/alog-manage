@@ -6,44 +6,67 @@ import { Input } from "antd";
 const columns = (params) => {
     return [
         {
-            title: "算法名称",
-            dataIndex: "algoName",
-            key: "algoName",
-        },
-        {
-            title: "算法厂商ID",
+            title: "用户Id",
             dataIndex: "uuserId",
-            key: "uuserId",
+            width:100
         },
         {
-            title: "算法厂商名",
-            dataIndex: "providerName",
-            key: "providerName",
+            title: "篮子名称",
+            dataIndex: "basketName",
         },
         {
-            title: "算法类型",
+            title: "篮子描述",
+            dataIndex: "remarks",
+            width:200
+        },
+        {
+            title: "篮子类型",
+            dataIndex: "basketType",
+            width:100
+        },
+        {
+            title: "篮子状态",
+            dataIndex: "bStatus",
+            width:100
+        },
+        {
+            title: "包含的母单数",
+            dataIndex: "basketNum",
+        },
+        {
+            title: "策略类型",
             dataIndex: "algorithmType",
-            key: "algorithmType",
         },
         {
-            title: "算法状态",
-            dataIndex: "algorithmStatus",
-            key: "algorithmStatus",
+            title: "策略编号",
+            dataIndex: "algorithmId",
+        },
+
+        {
+            title: "请求用户ID",
+            dataIndex: "reqUserId",
         },
         {
-            title: "算法所需参数",
-            dataIndex: "parameter",
-            key: "parameter",
+            title: "错误码",
+            dataIndex: "errorCode",
+            width:100
         },
         {
-            title: "算法风控组",
-            dataIndex: "riskGroup",
-            key: "riskGroup",
+            title: "错误信息",
+            dataIndex: "errorMsg",
         },
         {
-            title: "创建时间",
-            dataIndex: "createTime",
-            key: "createTime",
+            title: "客户端序列号",
+            dataIndex: "seq",
+        },
+        {
+            title: "成交记录ID",
+            dataIndex: "version",
+        },
+        {
+            title: "更新时间",
+            dataIndex: "updateTime",
+            key: "updateTime",
         },
     ];
 };
@@ -57,7 +80,7 @@ let getSearchFormFields = () => {
         {
             label: "用户ID",
             // id: "userId",
-            id: "user_id",
+            id: "userId",
             component: <Input placeholder="请输入用户ID" />,
         },
     ];
@@ -114,13 +137,14 @@ export default class uoeSetting extends React.PureComponent {
     };
     getData = (params = {}) => {
         // params.token = "";
-        http.post({
-            url: "/algo/list",
+        http.get({
+            url: "/basket-info/list",
             data: params,
         }).then((res) => {
             console.log(res);
             //解析数据字典
             if (res.data.length > 0) {
+                parseArrDict(res.data,"status","bStatus");
                 parseDict(res.data);
                 showStip(this);
             } else {
@@ -138,7 +162,7 @@ export default class uoeSetting extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 1000, y: 445 };
+        let scroll = { x: 2000, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;

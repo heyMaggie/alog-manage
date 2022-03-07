@@ -10,12 +10,12 @@ import { Input } from "antd";
 const columns = (params) => {
     return [
         {
-            title: "整型用户ID",
+            title: "用户ID",
             dataIndex: "uuserId",
             key: "uuserId",
         },
         {
-            title: "股东账户ID",
+            title: "股东账户",
             dataIndex: "accountId",
             key: "accountId",
         },
@@ -134,40 +134,8 @@ export default class uoeSetting extends React.PureComponent {
     componentDidMount() {
         this.getData();
     }
-    // getDataPermissionArr = (number) => {
-    //     // console.log(number);
-    //     let num = number / 1;
-    //     let decStr = num.toString(2);
-    //     // console.log(decStr);
-    //     // console.log(decStr);
-    //     let tmpArr = [];
-    //     for (let i = 0; i < decStr.length; i++) {
-    //         if (decStr.charAt(i) == 1 && i == decStr.length - 1) {
-    //             tmpArr.push("CNSJC");
-    //         }
-    //         if (decStr.charAt(i) == 1 && i == decStr.length - 2) {
-    //             console.log(decStr);
-    //             tmpArr.push("CXSJC");
-    //         }
-    //         if (decStr.charAt(i) == 1 && i == decStr.length - 3) {
-    //             tmpArr.push("PNSJC");
-    //         }
-    //         if (decStr.charAt(i) == 1 && i == decStr.length - 4) {
-    //             tmpArr.push("PXSJC");
-    //         }
-    //         if (decStr.charAt(i) == 1 && i == decStr.length - 5) {
-    //             tmpArr.push("KS");
-    //         }
-    //         if (decStr.charAt(i) == 1 && i == decStr.length - 6) {
-    //             tmpArr.push("KKS");
-    //         }
-    //     }
-    //     this.dictArr.push({ key: number, value: tmpArr.toString() });
-    //     // console.log(pmArr.reverse());
-    //     // return pmArr.reverse();
-    // };
     render() {
-        let scroll = { x: 2000, y: 445 };
+        let scroll = { x: 1000, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;

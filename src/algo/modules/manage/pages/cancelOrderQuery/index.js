@@ -12,122 +12,81 @@ const columns = (params) => {
         //     width: 100,
         // },
         {
-            title: "期权ID",
-            dataIndex: "uoptionId",
-            width: 100,
-        },
-        {
-            title: "股东账户ID",
-            dataIndex: "uaccountId",
-            width: 120,
-        },
-        {
-            title: "持仓ID",
-            dataIndex: "uposId",
-            width: 100,
-        },
-        {
-            title: "用户ID",
+            title: "个人账户",
             dataIndex: "uuserId",
             width: 100,
         },
-        // {
-        //     title: "申报交易单元ID",
-        //     dataIndex: "upbuId",
-        //     width: 100,
-        // },
         {
-            title: "应用标识",
-            dataIndex: "applId",
+            title: "篮子批次号",
+            dataIndex: "basketId",
             width: 120,
         },
         {
-            title: "申报交易单元",
-            dataIndex: "submittingPbuid",
+            title: "业务类型",
+            dataIndex: "businessType",
+            width: 100,
+        },
+        {
+            title: "策略类型",
+            dataIndex: "algorithmType",
+            width: 100,
+        },
+        {
+            title: "策略编号",
+            dataIndex: "algorithmId",
+            width: 100,
+        },
+        {
+            title: "取消标志",
+            dataIndex: "cancelFlag",
+            width: 120,
+        },
+        {
+            title: "原始订单号",
+            dataIndex: "origAlgoOrderId",
             width: 120,
         },
         {
             title: "证券代码",
-            dataIndex: "securityId",
+            dataIndex: "origAlgoOrderId",
             width: 120,
         },
         {
-            title: "证券代码源",
-            dataIndex: "securityIdSource",
+            title: "撤单订单状态",
+            dataIndex: "algoOrdStatus",
             width: 120,
         },
         {
-            title: "订单所有者类型",
-            dataIndex: "ownerType",
+            title: "母单在篮子表中的状态",
+            dataIndex: "basketStatus",
             width: 150,
         },
         {
-            title: "结算机构代码",
-            dataIndex: "clearingFirm",
+            title: "请求用户ID",
+            dataIndex: "reqUserId",
             width: 150,
         },
-
         {
-            title: "委托时间",
+            title: "错误码",
+            dataIndex: "errorCode",
+            width: 150,
+        },
+        {
+            title: "错误信息",
+            dataIndex: "errorMsg",
+            width: 100,
+        },
+        {
+            title: "客户端序列号",
+            dataIndex: "seq",
+            width: 150,
+        },
+        {
+            title: "交易时间",
             dataIndex: "transactTime",
             width: 150,
         },
-        {
-            title: "用户私有信息",
-            dataIndex: "userInfo",
-            width: 100,
-        },
-        {
-            title: "客户订单编号",
-            dataIndex: "clOrdId",
-            width: 150,
-        },
-        {
-            title: "原始订单编号",
-            dataIndex: "origClOrdId",
-            width: 150,
-        },
-        {
-            title: "买卖方向",
-            dataIndex: "side",
-            width: 150,
-        },
-        {
-            title: "订单编号",
-            dataIndex: "orderId",
-            width: 100,
-        },
-        {
-            title: "订单数量",
-            dataIndex: "orderQty",
-            width: 150,
-        },
-        // {
-        //     title: "营业部代码",
-        //     dataIndex: "branchId",
-        //     width: 150,
-        // },
-        // {
-        //     title: "订单状态",
-        //     dataIndex: "orderStatus",
-        //     width: 100,
-        // },
-
-        // {
-        //     title: "订单限定",
-        //     dataIndex: "orderRestrictions",
-        //     width: 100,
-        // },
-        // {
-        //     title: "订单类别",
-        //     dataIndex: "ordType",
-        //     width: 100,
-        // },
-        // {
-        //     title: "价格",
-        //     dataIndex: "price",
-        //     width: 100,
-        // },
+       
     ];
 };
 // console.log(columns().length);
@@ -180,8 +139,8 @@ export default class cancelOrderQuery extends React.PureComponent {
     setUpdateModal = ({ form, record }) => {};
     getData = (params = {}) => {
         // params.token = "";
-        http.post({
-            url: "/option/tb-cancel-order/queryList",
+        http.get({
+            url: "/cancel-algo-order/list",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -216,10 +175,10 @@ export default class cancelOrderQuery extends React.PureComponent {
             <div>
                 <CurdComponent
                     // rowKey={"index"}
-                    // isShowSearchForm={false}
+                    isShowSearchForm={false}
                     // btnText2="查全部"
-                    onSearchClick={this.handleSearch}
-                    getSearchFormFields={getSearchFormFields}
+                    // onSearchClick={this.handleSearch}
+                    // getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
                     // getInsertFormFields={getInsertFormFields}

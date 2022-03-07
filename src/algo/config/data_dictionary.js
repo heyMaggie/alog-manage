@@ -26,6 +26,34 @@ const configData = {
         { key: "2", value: "期权" },
         { key: "3", value: "融资融券" },
     ],
+    positionType: [
+        { key: "0", value: "现货" },
+        { key: "1", value: "权利持仓" },
+        { key: "2", value: "义务持仓" },
+        { key: "3", value: "备兑持仓" },
+    ],
+    cancelFlag: [
+        { key: "0", value: "无需撤销算法已下的单" },
+        { key: "1", value: "需要撤销算法已下的单" },
+    ],
+    basketStatus: [
+        // 0-Initial 1-running 2-delete 3-部分成交被撤销 4-全部成交
+        { key: "0", value: "初始化" },
+        { key: "1", value: "运行中" },
+        { key: "2", value: "删除" },
+        { key: "3", value: "部分成交被撤销" },
+        { key: "4", value: "全部成交" },
+    ],
+    basketType: [
+        { key: "1", value: "下单" },
+        { key: "2", value: "撤单" },
+    ],
+    bStatus: [
+        //0初始态 1删除 2启动
+        { key: "0", value: "初始态" },
+        { key: "1", value: "删除" },
+        { key: "2", value: "启动" },
+    ],
     counterStatus: [
         { key: "0", value: "使能" },
         { key: "1", value: "关闭" },
