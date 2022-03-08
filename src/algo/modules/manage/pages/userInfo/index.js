@@ -1,7 +1,7 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
-import { Input } from "antd";
+import { Input, Modal } from "antd";
 
 const getUpdateFormFields = () => {
     return [
@@ -95,56 +95,6 @@ const getUpdateFormFields = () => {
     ];
 };
 
-const columns = (params) => {
-    return [
-        {
-            title: "父级用户ID",
-            dataIndex: "fatherId",
-        },
-        {
-            title: "用户ID",
-            dataIndex: "userId",
-        },
-        {
-            title: "用户名",
-            dataIndex: "userName",
-            key: "userName",
-        },
-        {
-            title: "用户类型",
-            dataIndex: "userType",
-            key: "userType",
-        },
-        {
-            title: "用户风控组别",
-            dataIndex: "riskGroup",
-            width: 120,
-        },
-        {
-            title: "柜台用户ID",
-            dataIndex: "counterUserId",
-        },
-        {
-            title: "业务类型",
-            dataIndex: "businessType",
-        },
-        {
-            title: "登录状态",
-            dataIndex: "loginStatus",
-        },
-        {
-            title: "注册时间",
-            dataIndex: "createTime",
-            key: "createTime",
-        },
-        // {
-        //     title: "更新时间",
-        //     dataIndex: "updateTime",
-        //     key: "updateTime",
-        // },
-    ];
-};
-
 let getSearchFormFields = () => {
     return [
         {
@@ -164,9 +114,9 @@ let getSearchFormFields = () => {
             component: SelectOption(dict.userType, {
                 placeholder: "请选择用户类型",
                 allowClear: true,
-                style:{
-                    width: 183
-                }
+                style: {
+                    width: 183,
+                },
             }),
         },
         {
@@ -194,6 +144,7 @@ export default class userInfo extends React.PureComponent {
         searchLoading: false,
         selectRow: [],
         info: [],
+        updateModalVisible: false,
     };
     //批量选择
     handleTableChange = (selectedRowKeys) => {
@@ -206,20 +157,72 @@ export default class userInfo extends React.PureComponent {
     handleInsertRecord = (params) => {
         console.log(params);
     };
+    columns = (params) => {
+        return [
+            {
+                title: "父级用户ID",
+                dataIndex: "fatherId",
+            },
+            {
+                title: "用户ID",
+                dataIndex: "userId",
+            },
+            {
+                title: "用户名",
+                dataIndex: "userName",
+                key: "userName",
+            },
+            {
+                title: "用户类型",
+                dataIndex: "userType",
+                key: "userType",
+            },
+            {
+                title: "用户风控组别",
+                dataIndex: "riskGroup",
+                width: 120,
+            },
+            {
+                title: "柜台用户ID",
+                dataIndex: "counterUserId",
+            },
+            {
+                title: "业务类型",
+                dataIndex: "businessType",
+            },
+            {
+                title: "登录状态",
+                dataIndex: "loginStatus",
+            },
+            {
+                title: "注册时间",
+                dataIndex: "createTime",
+                key: "createTime",
+            },
+            {
+                title: "操作",
+                key: "operation",
+                fixed: "right",
+                width: 100,
+                render: () => <a onClick={this.handleUpdate}>编辑</a>,
+            },
+        ];
+    };
     //更新记录
-    handleUpdateRecord = ({ form }) => {
-        console.log(form.getFieldsValue());
-        // return;
-        let params = form.getFieldsValue();
-        params.name = this.record.name;
-        http.post({
-            url: "/option/tcp/uoeMore/1011",
-            data: params,
-        }).then((res) => {
-            console.log(res);
-            message.success(res.msg);
-            this.isAction = true;
-            this.getData();
+    handleUpdate = () => {
+        console.log("更新记录");
+        this.setState({
+            updateModalVisible: true,
+        });
+    };
+    handleUpdateModalOk = () => {
+        this.setState({
+            updateModalVisible: false,
+        });
+    };
+    handleUpdateModalCancel = () => {
+        this.setState({
+            updateModalVisible: false,
         });
     };
     //删除记录
@@ -242,7 +245,7 @@ export default class userInfo extends React.PureComponent {
     getData = (params = {}) => {
         http.post({
             // url: "/option/assetInfo/selectList",
-            url: "user/selectByCondition",
+            url: "/user/selectByCondition",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -289,14 +292,24 @@ export default class userInfo extends React.PureComponent {
                     width="600px"
                     getUpdateFormFields={getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
-                    updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                    // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
-                    columns={columns}
+                    columns={this.columns}
                     dataSource={info}
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
                 ></CurdComponent>
+                <Modal
+                    title="修改记录"
+                    visible={this.state.updateModalVisible}
+                    onOk={this.handleUpdateModalOk}
+                    onCancel={this.handleUpdateModalCancel}
+                >
+                    <p>Some contents...</p>
+                    <p>Some contents...</p>
+                    <p>Some contents...</p>
+                </Modal>
             </div>
         );
     }
