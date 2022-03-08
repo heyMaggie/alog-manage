@@ -29,7 +29,12 @@ const main = (root = "/main/manage") => [
     {
         path: `${root}/newOrderQuery`,
         component: `${pages}/newOrderQuery`,
-        title: "订单列表",
+        title: "母单列表",
+    },
+    {
+        path: `${root}/childOrderQuery`,
+        component: `${pages}/childOrderQuery`,
+        title: "子单列表",
     },
     {
         path: `${root}/cancelOrderQuery`,

@@ -98,9 +98,12 @@ const getUpdateFormFields = () => {
 const columns = (params) => {
     return [
         {
+            title: "父级用户ID",
+            dataIndex: "fatherId",
+        },
+        {
             title: "用户ID",
             dataIndex: "userId",
-            key: "userId",
         },
         {
             title: "用户名",
@@ -161,6 +164,9 @@ let getSearchFormFields = () => {
             component: SelectOption(dict.userType, {
                 placeholder: "请选择用户类型",
                 allowClear: true,
+                style:{
+                    width: 183
+                }
             }),
         },
         {
@@ -243,12 +249,12 @@ export default class userInfo extends React.PureComponent {
             //解析数据字典
             if (res.data.length > 0) {
                 parseDict(res.data);
-                this.setState({
-                    info: res.data,
-                });
             } else {
                 message.info("查询结果为空");
             }
+            this.setState({
+                info: res.data,
+            });
         });
     };
     handleSearch = (params) => {

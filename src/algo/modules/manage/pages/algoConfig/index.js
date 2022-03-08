@@ -114,7 +114,7 @@ export default class uoeSetting extends React.PureComponent {
     };
     getData = (params = {}) => {
         // params.token = "";
-        http.post({
+        http.get({
             url: "/algo/list",
             data: params,
         }).then((res) => {

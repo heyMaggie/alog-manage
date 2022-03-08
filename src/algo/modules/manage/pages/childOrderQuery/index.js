@@ -7,14 +7,9 @@ const getUpdateFormFields = () => {};
 const columns = (params) => {
     return [
         {
-            title: "个人账户",
+            title: "账户id",
             dataIndex: "uuserId",
             width: 100,
-        },
-        {
-            title: "篮子批次号",
-            dataIndex: "basketId",
-            width: 120,
         },
         {
             title: "业务类型",
@@ -32,6 +27,11 @@ const columns = (params) => {
             width: 100,
         },
         {
+            title: "母单订单号",
+            dataIndex: "algoOrderId",
+            width: 120,
+        },
+        {
             title: "证券代码",
             dataIndex: "securityId",
             width: 120,
@@ -39,40 +39,65 @@ const columns = (params) => {
         {
             title: "市场代码",
             dataIndex: "market",
-           
         },
         {
-            title: "所有方向",
-            dataIndex: "side",
-        },
-        // {
-        //     title: "母单订单数量 x100",
-        //     dataIndex: "algoOrderQty",
-        //     width: 120,
-        // },
-        {
-            title: "策略参数",
-            dataIndex: "strategyParam",
+            title: "订单数量 x100",
+            dataIndex: "orderQty",
             width: 120,
         },
         {
-            title: "客户端序列号",
-            dataIndex: "seq",
+            title: "订单价格 x10000",
+            dataIndex: "price",
+            width: 120,
+        },
+        {
+            title: "止损价",
+            dataIndex: "stopPx",
+        },
+        {
+            title: "订单类型",
+            dataIndex: "orderType",
+        },
+        {
+            title: "买卖方向",
+            dataIndex: "side",
+        },
+        {
+            title: "平仓标识",
+            dataIndex: "positionEffect",
+            width: 120,
+        },
+        {
+            title: "备兑标签",
+            dataIndex: "coveredOrUncovered",
             width: 150,
         },
         {
-            title: "策略状态",
-            dataIndex: "algorithmStatus",
+            title: "累计成交数量 x100",
+            dataIndex: "cumQty",
             width: 150,
         },
         {
-            title: "母单状态",
-            dataIndex: "algoOrdStatus",
+            title: "剩余未成交数量 x100",
+            dataIndex: "leavesQty",
         },
         {
-            title: "母单在篮子表中的状态",
-            dataIndex: "basketStatus",
-            width: 160,
+            title: "证券代码源",
+            dataIndex: "securityIdSource",
+            width: 120,
+        },
+        {
+            title: "母单篮子批次号",
+            dataIndex: "basketId",
+            width: 150,
+        },
+        {
+            title: "订单编号",
+            dataIndex: "clOrdId",
+        },
+        {
+            title: "子单状态",
+            dataIndex: "childOrdStatus",
         },
         {
             title: "请求用户ID",
@@ -88,159 +113,39 @@ const columns = (params) => {
             dataIndex: "errorMsg",
         },
         {
-            title: "个人账户",
-            dataIndex: "userId",
-        },
-        {
-            title: "算法平台账户",
-            dataIndex: "algoUserId",
-        },
-        {
-            title: "股东账户",
+            title: "证券账户",
             dataIndex: "accountId",
         },
         {
-            title: "证券代码源",
-            dataIndex: "securityIdSource",
+            title: "序列号",
+            dataIndex: "seq",
+        },
+        {
+            title: "柜台 序列号",
+            dataIndex: "counter_seq",
         },
         {
             title: "交易时间",
             dataIndex: "transactTime",
         },
         {
-            title: "母单订单数量 x100",
-            dataIndex: "algoOrderQty",
+            title: "撤单时间",
+            dataIndex: "cancel_time",
+        },
+        {
+            title: "成交计数",
+            dataIndex: "exec_count",
             width: 120,
         },
         {
-            title: "子单买订单数量 x100",
-            dataIndex: "buyOrderQty",
+            title: "累计成交金额 x10000",
+            dataIndex: "cum_amount",
             width: 120,
-        },
-        {
-            title: "子单卖订单数量 x100",
-            dataIndex: "sellOrderQty",
-            width: 120,
-        },
-        {
-            title: "累计成交买订单数量 x100",
-            dataIndex: "buyCumQty",
-            width: 120,
-        },
-        {
-            title: "累计成交卖订单数量 x100",
-            dataIndex: "sellCumQty",
-            width: 120,
-        },
-        {
-            title: "子单买撤单数量 x100",
-            dataIndex: "buyCancelQty",
-            width: 120,
-        },
-        {
-            title: "子单卖撤单数量 x100",
-            dataIndex: "sellCancelQty",
-            width: 120,
-        },
-        {
-            title: "累计买撤单成功数量 x100",
-            dataIndex: "buyCancelledCumQty",
-            width: 120,
-        },
-        {
-            title: "累计卖撤单成功数量 x100",
-            dataIndex: "sellCancelledCumQty",
-            width: 120,
-        },
-        {
-            title: "平均买入价格",
-            dataIndex: "buyPrice",
-        },
-        {
-            title: "平均卖出价格",
-            dataIndex: "sellPrice",
-        },
-        {
-            title: "平均买入开仓价格",
-            dataIndex: "buyOpenPrice",
-        },
-        {
-            title: "平均买入平仓价格",
-            dataIndex: "buyClosePrice",
-        },
-        {
-            title: "平均卖出开仓价格",
-            dataIndex: "sellOpenPrice",
-        },
-        {
-            title: "平均卖出平仓价格",
-            dataIndex: "sellClosePrice",
-        },
-
-        {
-            title: "盈亏",
-            dataIndex: "profitAndLoss",
-        },
-        {
-            title: "收益率",
-            dataIndex: "rateOfReturn",
-        },
-        {
-            title: "成功下单的买入总委托金额",
-            dataIndex: "buySuccAmount",
-        },
-        {
-            title: "成功撤单的买入总委托金额",
-            dataIndex: "sellSuccAmount",
-        },
-        {
-            title: "子单买订单总条数",
-            dataIndex: "buyItemTotal",
-        },
-        {
-            title: "子单卖订单总条数",
-            dataIndex: "sellItemTotal",
-        },
-        {
-            title: "子单买订单成功条数",
-            dataIndex: "buyItemCount",
-        },
-        {
-            title: "子单卖订单成功条数",
-            dataIndex: "sellItemCount",
-        },
-        {
-            title: "累计成交买订单条数",
-            dataIndex: "buyItemCum",
-        },
-        {
-            title: "累计成交卖订单条数",
-            dataIndex: "sellItemCum",
-        },
-
-        {
-            title: "子单买撤单条数",
-            dataIndex: "buyCancelItemCount",
-        },
-        {
-            title: "子单卖撤单条数",
-            dataIndex: "sellCancelItemCount",
-        },
-        {
-            title: "累计买撤单成功条数",
-            dataIndex: "buyCancelledItemCum",
-        },
-        {
-            title: "累计卖撤单成功条数",
-            dataIndex: "sellCancelledItemCum",
-        },
-        {
-            title: "风控自成交子单数计数",
-            dataIndex: "selfExecCount",
         },
         {
             title: "成交记录ID",
             dataIndex: "version",
+            width: 120,
         },
     ];
 };
@@ -294,7 +199,7 @@ export default class newOrderQuery extends React.PureComponent {
     getData = (params = {}) => {
         // params.token = "";
         http.get({
-            url: "/new-algo-order/list",
+            url: "/new-trade-order/list",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -317,7 +222,7 @@ export default class newOrderQuery extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 6000, y: 445 };
+        let scroll = { x: 4000, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;

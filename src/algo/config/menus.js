@@ -48,8 +48,14 @@ const menuList = [
             {
                 id: "1-3",
                 icon: "",
-                title: "订单列表",
+                title: "母单列表",
                 path: "/main/manage/newOrderQuery",
+            },
+            {
+                id: "1-13",
+                icon: "",
+                title: "子单列表",
+                path: "/main/manage/childOrderQuery",
             },
             {
                 id: "1-4",
