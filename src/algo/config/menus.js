@@ -92,20 +92,20 @@ const menuList = [
                 id: "5-1",
                 icon: "",
                 title: "风控配置",
-                path: "/main/manage/userInfo",
+                path: "/main/manage/riskConfig",
             },
-            {
-                id: "5-2",
-                icon: "",
-                title: "用户风险统计",
-                path: "/main/manage/optionInfo",
-            },
-            {
-                id: "5-3",
-                icon: "",
-                title: "算法风险统计",
-                path: "/main/manage/assetInfo",
-            },
+            // {
+            //     id: "5-2",
+            //     icon: "",
+            //     title: "用户风险统计",
+            //     path: "/main/manage/optionInfo",
+            // },
+            // {
+            //     id: "5-3",
+            //     icon: "",
+            //     title: "算法风险统计",
+            //     path: "/main/manage/assetInfo",
+            // },
         ],
     },
     {

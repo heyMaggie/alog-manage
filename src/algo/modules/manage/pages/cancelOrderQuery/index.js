@@ -47,11 +47,6 @@ const columns = (params) => {
             width: 120,
         },
         {
-            title: "证券代码",
-            dataIndex: "origAlgoOrderId",
-            width: 120,
-        },
-        {
             title: "撤单订单状态",
             dataIndex: "algoOrdStatus",
             width: 120,
@@ -86,7 +81,6 @@ const columns = (params) => {
             dataIndex: "transactTime",
             width: 150,
         },
-       
     ];
 };
 // console.log(columns().length);

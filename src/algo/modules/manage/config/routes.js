@@ -56,11 +56,11 @@ const main = (root = "/main/manage") => [
         component: `${pages}/basketConfig`,
         title: "篮子管理",
     },
-    // {
-    //     path: `${root}/stockHolderQuery`,
-    //     component: `${pages}/stockHolderQuery`,
-    //     title: "股东信息",
-    // },
+    {
+        path: `${root}/riskConfig`,
+        component: `${pages}/riskConfig`,
+        title: "风控配置",
+    },
     // {
     //     path: `${root}/securityQuery`,
     //     component: `${pages}/securityQuery`,
