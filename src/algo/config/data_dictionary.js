@@ -9,8 +9,8 @@ const configData = {
     userType: [
         { key: "1", value: "个人用户" },
         { key: "2", value: "算法厂商用户" },
-        { key: "3", value: "柜台用户" },
-        { key: "4", value: "多用户管理员" },
+        { key: "3", value: "多用户管理员" },
+        // { key: "4", value: "多用户管理员" },
     ],
     businessType: [
         { key: "1", value: "现货" },
@@ -72,14 +72,13 @@ const configData = {
         { key: "2", value: "禁止买卖" },
     ],
     algorithmStatus: [
-        //0未开始 1运行中 2已停止(母单运行结束) 3正在停止 4暂停 5准备运行
-        { key: "0", value: "未开始" },
-        { key: "1", value: "运行中" },
-        { key: "2", value: "已停止" },
-        { key: "3", value: "正在停止" },
-        { key: "4", value: "暂停" },
-        { key: "5", value: "准备运行" },
+        { key: "0", value: "不可用" },
+        { key: "1", value: "可用" },
     ],
+    // algorithmEnable: [
+    //     { key: "0", value: "不可用" },
+    //     { key: "1", value: "可用" },
+    // ],
     algoOrdStatus: [
         //0总线接收 1总线拒绝 2算法平台接收 3算法平台拒绝 4撤销
         { key: "0", value: "总线接收" },

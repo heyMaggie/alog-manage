@@ -25,17 +25,21 @@ const columns = (params) => {
             key: "riskGroup",
         },
         {
-            title: "柜台用户ID",
-            dataIndex: "counterUserId",
+            title: "uuserId",
+            dataIndex: "uuserId",
         },
-        {
-            title: "业务类型",
-            dataIndex: "businessType",
-        },
-        {
-            title: "登录状态",
-            dataIndex: "loginStatus",
-        },
+        // {
+        //     title: "柜台用户ID",
+        //     dataIndex: "counterUserId",
+        // },
+        // {
+        //     title: "业务类型",
+        //     dataIndex: "businessType",
+        // },
+        // {
+        //     title: "登录状态",
+        //     dataIndex: "loginStatus",
+        // },
         {
             title: "注册时间",
             dataIndex: "createTime",

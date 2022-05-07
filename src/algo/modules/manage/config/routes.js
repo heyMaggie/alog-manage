@@ -27,6 +27,11 @@ const main = (root = "/main/manage") => [
         title: "算法管理",
     },
     {
+        path: `${root}/counterGw`,
+        component: `${pages}/counterGw`,
+        title: "网关管理",
+    },
+    {
         path: `${root}/newOrderQuery`,
         component: `${pages}/newOrderQuery`,
         title: "母单列表",

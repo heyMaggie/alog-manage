@@ -26,6 +26,15 @@ class riskConfigManage extends React.PureComponent {
         info: [],
         updateModalVisible: false,
         userRiskConfig: {},
+        disabled0: false,
+        disabled1: false,
+        disabled2: false,
+        disabled3: false,
+        disabled4: false,
+        disabled5: false,
+        disabled6: false,
+        disabled7: false,
+        disabled8: false,
     };
     columns = (params) => {
         return [
@@ -178,6 +187,15 @@ class riskConfigManage extends React.PureComponent {
         this.setState(
             {
                 updateModalVisible: true,
+                disabled0: false,
+                disabled1: false,
+                disabled2: false,
+                disabled3: false,
+                disabled4: false,
+                disabled5: false,
+                disabled6: false,
+                disabled7: false,
+                disabled8: false,
             },
             () => {
                 let config = record;
@@ -188,15 +206,15 @@ class riskConfigManage extends React.PureComponent {
                 // console.log(enableArr);
                 this.props.form.setFieldsValue({
                     // riskGroup: record.riskGroup + "",
-                    byte0: enableArr[0],
-                    byte1: enableArr[1],
-                    byte2: enableArr[2],
-                    byte3: enableArr[3],
+                    byte0: enableArr[8],
+                    byte1: enableArr[7],
+                    byte2: enableArr[6],
+                    byte3: enableArr[5],
                     byte4: enableArr[4],
-                    byte5: enableArr[5],
-                    byte6: enableArr[6],
-                    byte7: enableArr[7],
-                    byte8: enableArr[8],
+                    byte5: enableArr[3],
+                    byte6: enableArr[2],
+                    byte7: enableArr[1],
+                    byte8: enableArr[0],
                     riskName: config.RiskName,
                     entrustItemThreshold: config.EntrustItemThreshold,
                     entrustItemLimit: config.EntrustItemLimit,
@@ -256,15 +274,15 @@ class riskConfigManage extends React.PureComponent {
     addRiskGroup = (data) => {
         data.riskEnable =
             ("0b" +
-                data.byte0 +
-                data.byte1 +
-                data.byte2 +
-                data.byte3 +
-                data.byte4 +
-                data.byte5 +
-                data.byte6 +
+                data.byte8 +
                 data.byte7 +
-                data.byte8) /
+                data.byte6 +
+                data.byte5 +
+                data.byte4 +
+                data.byte3 +
+                data.byte2 +
+                data.byte1 +
+                data.byte0) /
                 1 +
             "";
         // let params = {
@@ -292,17 +310,18 @@ class riskConfigManage extends React.PureComponent {
         console.log(data);
         let enable =
             ("0b" +
-                data.byte0 +
-                data.byte1 +
-                data.byte2 +
-                data.byte3 +
-                data.byte4 +
-                data.byte5 +
-                data.byte6 +
+                data.byte8 +
                 data.byte7 +
-                data.byte8) /
+                data.byte6 +
+                data.byte5 +
+                data.byte4 +
+                data.byte3 +
+                data.byte2 +
+                data.byte1 +
+                data.byte0) /
             1;
         // console.log(enable);
+        // return enable;
         let riskArr = [
             {
                 RiskType: "0", // 修改风控名
@@ -428,7 +447,7 @@ class riskConfigManage extends React.PureComponent {
         }).then((res) => {
             // console.log(res);
             let arr = [];
-            if (res.data.length > 0) {
+            if (res.data && res.data.length > 0) {
                 let dataObj = JSON.parse(res.data);
                 // console.log(dataObj);
                 if (dataObj.TotalCount > 0) {
@@ -437,7 +456,7 @@ class riskConfigManage extends React.PureComponent {
                     parseDict(arr);
                 }
             } else {
-                message.info("查询结果为空");
+                message.info(res.message || "查询结果为空", 4);
             }
             this.setState({
                 info: arr,
@@ -478,6 +497,15 @@ class riskConfigManage extends React.PureComponent {
         } else {
             // console.log("getDataByParams");
             this.getDataByParams(params);
+        }
+    };
+    formChange = (idx) => {
+        // console.log("formChange!", idx);
+        if (this.isInsert) {
+            let formData = this.props.form.getFieldsValue();
+            let stateKey = "disabled" + idx;
+            let formKey = "byte" + idx;
+            this.setState({ [stateKey]: formData[formKey] == 1 });
         }
     };
     componentDidMount() {
@@ -559,7 +587,16 @@ class riskConfigManage extends React.PureComponent {
                                     ],
                                 })(<Input placeholder="请输入" />)}
                             </Form.Item>
-                            <Form.Item label="风控组类型">
+                            <Form.Item
+                                label={
+                                    <label
+                                        title="用户:该风控只能给用户使用
+                            算法:该风控只能给算法使用"
+                                    >
+                                        风控组类型
+                                    </label>
+                                }
+                            >
                                 {getFieldDecorator("riskType", {
                                     rules: [
                                         {
@@ -577,7 +614,12 @@ class riskConfigManage extends React.PureComponent {
                             </Form.Item>
                         </div>
                         <div>
-                            <div className={styles.tit}>时间量总委托笔数</div>
+                            <div
+                                className={styles.tit}
+                                title="账户总委托笔数超过【风控启用数量】后,在【时间量(s)】时间内,委托数量不能超过【时间量总委托笔数】,超过的数量将会被拒绝"
+                            >
+                                时间量总委托笔数
+                            </div>
                             <Form.Item label="是否启用">
                                 {getFieldDecorator("byte0", {
                                     rules: [
@@ -588,14 +630,20 @@ class riskConfigManage extends React.PureComponent {
                                     ],
                                     initialValue: "1",
                                 })(
-                                    <Radio.Group>
+                                    <Radio.Group
+                                        onChange={() => this.formChange(0)}
+                                    >
                                         <Radio value="1">是</Radio>
                                         <Radio value="0">否</Radio>
                                     </Radio.Group>
                                 )}
                             </Form.Item>
                             <Form.Item
-                                label="风控启用委托数量"
+                                label={
+                                    <label title="当委托数量到达该阈值时才启用【时间量总委托笔数】风控">
+                                        风控启用委托数量
+                                    </label>
+                                }
                                 {...formItemLayout}
                             >
                                 {getFieldDecorator("entrustItemThreshold", {
@@ -609,10 +657,20 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled0}
+                                    />
+                                )}
                             </Form.Item>
                             <Form.Item
-                                label="时间量总委托笔数"
+                                label={
+                                    <label title="账户总委托笔数超过【风控启用数量】后,在【时间量(s)】时间内,委托数量不能超过【时间量总委托笔数】,超过的数量将会被拒绝">
+                                        时间量总委托笔数
+                                    </label>
+                                }
                                 {...formItemLayout}
                             >
                                 {getFieldDecorator("entrustItemLimit", {
@@ -626,10 +684,23 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled0}
+                                    />
+                                )}
                             </Form.Item>
 
-                            <Form.Item label="时间量" {...formItemLayout}>
+                            <Form.Item
+                                label={
+                                    <label title="时间段，建议[1-10]">
+                                        时间量
+                                    </label>
+                                }
+                                {...formItemLayout}
+                            >
                                 {getFieldDecorator("entrustSeconds", {
                                     rules: [
                                         {
@@ -641,11 +712,23 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        suffix="秒"
+                                        disabled={this.state.disabled0}
+                                    />
+                                )}
                             </Form.Item>
                         </div>
                         <div>
-                            <div className={styles.tit}>总委托笔数</div>
+                            <div
+                                className={styles.tit}
+                                title="账户/算法委托总数不能超过【总委托笔数】"
+                            >
+                                总委托笔数
+                            </div>
                             <Form.Item label="是否启用">
                                 {getFieldDecorator("byte1", {
                                     rules: [
@@ -656,13 +739,22 @@ class riskConfigManage extends React.PureComponent {
                                     ],
                                     initialValue: "1",
                                 })(
-                                    <Radio.Group>
+                                    <Radio.Group
+                                        onChange={() => this.formChange(1)}
+                                    >
                                         <Radio value="1">是</Radio>
                                         <Radio value="0">否</Radio>
                                     </Radio.Group>
                                 )}
                             </Form.Item>
-                            <Form.Item label="总委托笔数" {...formItemLayout}>
+                            <Form.Item
+                                label={
+                                    <label title="委托笔数阈值">
+                                        总委托笔数
+                                    </label>
+                                }
+                                {...formItemLayout}
+                            >
                                 {getFieldDecorator("entrustTotalThreshold", {
                                     rules: [
                                         {
@@ -674,11 +766,23 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled1}
+                                    />
+                                )}
                             </Form.Item>
                         </div>
                         <div>
-                            <div className={styles.tit}>撤单比</div>
+                            <div
+                                className={styles.tit}
+                                title="账户/算法总委托数超过【风控启用委托数量】后,客户总撤单比超过【撤单比%】后,不允许撤单;
+撤单比=成功撤单笔数/成功下单笔数*100%=成功撤单笔数/(总委托笔数-成功撤单笔数-总废单笔数)*100%"
+                            >
+                                撤单比
+                            </div>
                             <Form.Item label="是否启用">
                                 {getFieldDecorator("byte2", {
                                     rules: [
@@ -689,14 +793,20 @@ class riskConfigManage extends React.PureComponent {
                                     ],
                                     initialValue: "1",
                                 })(
-                                    <Radio.Group>
+                                    <Radio.Group
+                                        onChange={() => this.formChange(2)}
+                                    >
                                         <Radio value="1">是</Radio>
                                         <Radio value="0">否</Radio>
                                     </Radio.Group>
                                 )}
                             </Form.Item>
                             <Form.Item
-                                label="风控启用委托数量"
+                                label={
+                                    <label title="当委托数量到达该阈值时才启用【撤单比】风控">
+                                        风控启用委托数量
+                                    </label>
+                                }
                                 {...formItemLayout}
                             >
                                 {getFieldDecorator(
@@ -707,11 +817,24 @@ class riskConfigManage extends React.PureComponent {
                                                 required: true,
                                                 message: "请输入",
                                             },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
                                         ],
+                                        initialValue: "0",
                                     }
-                                )(<Input placeholder="请输入" />)}
+                                )(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled2}
+                                    />
+                                )}
                             </Form.Item>
-                            <Form.Item label="撤单比" {...formItemLayout}>
+                            <Form.Item
+                                label={<label title="撤单比阈值">撤单比</label>}
+                                {...formItemLayout}
+                            >
                                 {getFieldDecorator("cancelRatioLimit", {
                                     rules: [
                                         {
@@ -723,11 +846,24 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        suffix="%"
+                                        disabled={this.state.disabled2}
+                                    />
+                                )}
                             </Form.Item>
                         </div>
                         <div>
-                            <div className={styles.tit}>废单比</div>
+                            <div
+                                className={styles.tit}
+                                title="账户/算法总委托数超过【风控启用委托数量】后,客户总废单比超过【废单比%】后,不允许再进行委托;
+废单比=总废单笔数/(成功下单笔数+总废单笔数)*100%"
+                            >
+                                废单比
+                            </div>
                             <Form.Item label="是否启用">
                                 {getFieldDecorator("byte3", {
                                     rules: [
@@ -738,14 +874,20 @@ class riskConfigManage extends React.PureComponent {
                                     ],
                                     initialValue: "1",
                                 })(
-                                    <Radio.Group>
+                                    <Radio.Group
+                                        onChange={() => this.formChange(3)}
+                                    >
                                         <Radio value="1">是</Radio>
                                         <Radio value="0">否</Radio>
                                     </Radio.Group>
                                 )}
                             </Form.Item>
                             <Form.Item
-                                label="风控启用委托数量"
+                                label={
+                                    <label title="当委托数量到达该阈值时才启用【废单比】风控">
+                                        风控启用委托数量
+                                    </label>
+                                }
                                 {...formItemLayout}
                             >
                                 {getFieldDecorator(
@@ -756,11 +898,24 @@ class riskConfigManage extends React.PureComponent {
                                                 required: true,
                                                 message: "请输入",
                                             },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
                                         ],
+                                        initialValue: "0",
                                     }
-                                )(<Input placeholder="请输入" />)}
+                                )(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled3}
+                                    />
+                                )}
                             </Form.Item>
-                            <Form.Item label="废单比" {...formItemLayout}>
+                            <Form.Item
+                                label={<label title="废单比阈值">废单比</label>}
+                                {...formItemLayout}
+                            >
                                 {getFieldDecorator("failedRatioLimit", {
                                     rules: [
                                         {
@@ -772,11 +927,23 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        suffix="%"
+                                        disabled={this.state.disabled3}
+                                    />
+                                )}
                             </Form.Item>
                         </div>
                         <div>
-                            <div className={styles.tit}>委托成交比</div>
+                            <div
+                                className={styles.tit}
+                                title="账户/算法总委托笔数超过【风控启用委托数量】后,账户委托成交比小于【委托成交比(%)】后,后续委托前端会有相应体术(不影响委托);"
+                            >
+                                委托成交比
+                            </div>
                             <Form.Item label="是否启用">
                                 {getFieldDecorator("byte4", {
                                     rules: [
@@ -787,14 +954,20 @@ class riskConfigManage extends React.PureComponent {
                                     ],
                                     initialValue: "1",
                                 })(
-                                    <Radio.Group>
+                                    <Radio.Group
+                                        onChange={() => this.formChange(4)}
+                                    >
                                         <Radio value="1">是</Radio>
                                         <Radio value="0">否</Radio>
                                     </Radio.Group>
                                 )}
                             </Form.Item>
                             <Form.Item
-                                label="风控启用委托数量"
+                                label={
+                                    <label title="当委托数量到达该阈值时才启用【成交委托比】风控">
+                                        风控启用委托数量
+                                    </label>
+                                }
                                 {...formItemLayout}
                             >
                                 {getFieldDecorator(
@@ -805,11 +978,28 @@ class riskConfigManage extends React.PureComponent {
                                                 required: true,
                                                 message: "请输入",
                                             },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
                                         ],
+                                        initialValue: "0",
                                     }
-                                )(<Input placeholder="请输入" />)}
+                                )(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled4}
+                                    />
+                                )}
                             </Form.Item>
-                            <Form.Item label="委托成交比" {...formItemLayout}>
+                            <Form.Item
+                                label={
+                                    <label title="委托成交比阈值">
+                                        委托成交比
+                                    </label>
+                                }
+                                {...formItemLayout}
+                            >
                                 {getFieldDecorator("entrustExecRatioLimit", {
                                     rules: [
                                         {
@@ -821,11 +1011,23 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled4}
+                                    />
+                                )}
                             </Form.Item>
                         </div>
                         <div>
-                            <div className={styles.tit}>净买入额度</div>
+                            <div
+                                className={styles.tit}
+                                title="账户/算法净买入额度不能超过【净买入额度】超过阈值后，不允许委托;
+净买入额度=成功买入总委托金额-成功卖出总委托金额-成功撤单买入总金额"
+                            >
+                                净买入额度
+                            </div>
                             <Form.Item label="是否启用">
                                 {getFieldDecorator("byte5", {
                                     rules: [
@@ -836,14 +1038,20 @@ class riskConfigManage extends React.PureComponent {
                                     ],
                                     initialValue: "1",
                                 })(
-                                    <Radio.Group>
+                                    <Radio.Group
+                                        onChange={() => this.formChange(5)}
+                                    >
                                         <Radio value="1">是</Radio>
                                         <Radio value="0">否</Radio>
                                     </Radio.Group>
                                 )}
                             </Form.Item>
                             <Form.Item
-                                label="风控启用委托数量"
+                                label={
+                                    <label title="当委托数量到达该阈值时才启用【净买入额度】风控">
+                                        风控启用委托数量
+                                    </label>
+                                }
                                 {...formItemLayout}
                             >
                                 {getFieldDecorator(
@@ -854,11 +1062,28 @@ class riskConfigManage extends React.PureComponent {
                                                 required: true,
                                                 message: "请输入",
                                             },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
                                         ],
+                                        initialValue: "0",
                                     }
-                                )(<Input placeholder="请输入" />)}
+                                )(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled5}
+                                    />
+                                )}
                             </Form.Item>
-                            <Form.Item label="净买入额度" {...formItemLayout}>
+                            <Form.Item
+                                label={
+                                    <label title="净买入额度阈值">
+                                        净买入额度
+                                    </label>
+                                }
+                                {...formItemLayout}
+                            >
                                 {getFieldDecorator("netBuyAmountLimit", {
                                     rules: [
                                         {
@@ -870,11 +1095,22 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled5}
+                                    />
+                                )}
                             </Form.Item>
                         </div>
                         <div>
-                            <div className={styles.tit}>账户撤单频率</div>
+                            <div
+                                className={styles.tit}
+                                title="账户撤单频率在【时间量(s)】时间内,撤单数量不能超过【撤单频率笔数】,超过的撤单将会被拒绝;"
+                            >
+                                账户撤单频率
+                            </div>
                             <Form.Item label="是否启用">
                                 {getFieldDecorator("byte6", {
                                     rules: [
@@ -885,13 +1121,22 @@ class riskConfigManage extends React.PureComponent {
                                     ],
                                     initialValue: "1",
                                 })(
-                                    <Radio.Group>
+                                    <Radio.Group
+                                        onChange={() => this.formChange(6)}
+                                    >
                                         <Radio value="1">是</Radio>
                                         <Radio value="0">否</Radio>
                                     </Radio.Group>
                                 )}
                             </Form.Item>
-                            <Form.Item label="撤单频率笔数" {...formItemLayout}>
+                            <Form.Item
+                                label={
+                                    <label title="撤单频率笔数阈值">
+                                        撤单频率笔数
+                                    </label>
+                                }
+                                {...formItemLayout}
+                            >
                                 {getFieldDecorator("cancelItemLimit", {
                                     rules: [
                                         {
@@ -903,9 +1148,22 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled6}
+                                    />
+                                )}
                             </Form.Item>
-                            <Form.Item label="时间量" {...formItemLayout}>
+                            <Form.Item
+                                label={
+                                    <label title="时间段，建议[1-10]">
+                                        时间量
+                                    </label>
+                                }
+                                {...formItemLayout}
+                            >
                                 {getFieldDecorator("cancelSeconds", {
                                     rules: [
                                         {
@@ -917,11 +1175,23 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        suffix="秒"
+                                        disabled={this.state.disabled6}
+                                    />
+                                )}
                             </Form.Item>
                         </div>
                         <div>
-                            <div className={styles.tit}>撤单间隔</div>
+                            <div
+                                className={styles.tit}
+                                title="账户/算法同笔撤单间隔不能小于【撤单间隔】阈值,【撤单间隔】之内的同比撤单将会被拒绝"
+                            >
+                                撤单间隔
+                            </div>
                             <Form.Item label="是否启用">
                                 {getFieldDecorator("byte7", {
                                     rules: [
@@ -932,13 +1202,20 @@ class riskConfigManage extends React.PureComponent {
                                     ],
                                     initialValue: "1",
                                 })(
-                                    <Radio.Group>
+                                    <Radio.Group
+                                        onChange={() => this.formChange(7)}
+                                    >
                                         <Radio value="1">是</Radio>
                                         <Radio value="0">否</Radio>
                                     </Radio.Group>
                                 )}
                             </Form.Item>
-                            <Form.Item label="撤单间隔" {...formItemLayout}>
+                            <Form.Item
+                                label={
+                                    <label title="撤单间隔阈值">撤单间隔</label>
+                                }
+                                {...formItemLayout}
+                            >
                                 {getFieldDecorator("cancelGapSeconds", {
                                     rules: [
                                         {
@@ -950,11 +1227,22 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled7}
+                                    />
+                                )}
                             </Form.Item>
                         </div>
                         <div>
-                            <div className={styles.tit}>下单频率</div>
+                            <div
+                                className={styles.tit}
+                                title="在【时间量(s)】时间内，账户下单频率笔数不能超过【下单频率笔数】,账户下单总量不能超过【下单总量】,账户下单总金额不能超过【下单总金额】,超过上面的任意一个将会拒绝该委托"
+                            >
+                                下单频率
+                            </div>
                             <Form.Item label="是否启用">
                                 {getFieldDecorator("byte8", {
                                     rules: [
@@ -965,13 +1253,22 @@ class riskConfigManage extends React.PureComponent {
                                     ],
                                     initialValue: "1",
                                 })(
-                                    <Radio.Group>
+                                    <Radio.Group
+                                        onChange={() => this.formChange(8)}
+                                    >
                                         <Radio value="1">是</Radio>
                                         <Radio value="0">否</Radio>
                                     </Radio.Group>
                                 )}
                             </Form.Item>
-                            <Form.Item label="下单频率笔数" {...formItemLayout}>
+                            <Form.Item
+                                label={
+                                    <label title="下单频率笔数阈值">
+                                        下单频率笔数
+                                    </label>
+                                }
+                                {...formItemLayout}
+                            >
                                 {getFieldDecorator("tradeItemLimit", {
                                     rules: [
                                         {
@@ -983,9 +1280,22 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled8}
+                                    />
+                                )}
                             </Form.Item>
-                            <Form.Item label="时间量" {...formItemLayout}>
+                            <Form.Item
+                                label={
+                                    <label title="时间段，建议[1-10]">
+                                        时间量
+                                    </label>
+                                }
+                                {...formItemLayout}
+                            >
                                 {getFieldDecorator("tradeSeconds", {
                                     rules: [
                                         {
@@ -997,9 +1307,23 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        suffix="秒"
+                                        disabled={this.state.disabled8}
+                                    />
+                                )}
                             </Form.Item>
-                            <Form.Item label="下单总量" {...formItemLayout}>
+                            <Form.Item
+                                label={
+                                    <label title="下单总量笔数阈值">
+                                        下单总量
+                                    </label>
+                                }
+                                {...formItemLayout}
+                            >
                                 {getFieldDecorator("tradeQtyLimit", {
                                     rules: [
                                         {
@@ -1011,9 +1335,22 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled8}
+                                    />
+                                )}
                             </Form.Item>
-                            <Form.Item label="下单总金额" {...formItemLayout}>
+                            <Form.Item
+                                label={
+                                    <label title="下单总金额阈值">
+                                        下单总金额
+                                    </label>
+                                }
+                                {...formItemLayout}
+                            >
                                 {getFieldDecorator("tradeAmountLimit", {
                                     rules: [
                                         {
@@ -1025,7 +1362,13 @@ class riskConfigManage extends React.PureComponent {
                                             pattern: /^\d+$/i,
                                         },
                                     ],
-                                })(<Input placeholder="请输入" />)}
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        disabled={this.state.disabled8}
+                                    />
+                                )}
                             </Form.Item>
                         </div>
                     </Form>

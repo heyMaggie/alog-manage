@@ -1,7 +1,7 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 // import SelectOption from "@/components/SelectOption";
-import { Input, Modal, Radio, Form, message } from "antd";
+import { Input, Modal, Radio, Form, message, Switch } from "antd";
 import styles from "./style.module.less";
 
 let getSearchFormFields = () => {
@@ -47,6 +47,21 @@ class algoConfig extends React.PureComponent {
                 dataIndex: "algorithmStatus",
                 key: "algorithmStatus",
             },
+            // {
+            //     title: "管理状态",
+            //     dataIndex: "algorithmEnable",
+            //     key: "algorithmEnable",
+            //     render: (text, record) => (
+            //         <Switch
+            //             checked={record.algorithmEnable == 1}
+            //             size="small"
+            //             onChange={(e) => {
+            //                 // console.log(text, record);
+            //                 this.onSwitchChange(e, record);
+            //             }}
+            //         />
+            //     ),
+            // },
             {
                 title: "算法所需参数",
                 dataIndex: "parameter",
@@ -88,7 +103,27 @@ class algoConfig extends React.PureComponent {
         riskGroup: [],
         userRiskConfig: {},
     };
-
+    onSwitchChange = (val, record) => {
+        // console.log(val, record);
+        // return;
+        let params = {
+            AlgorithmId: record.id,
+            AlgorithmStatus: val ? 1 : 0,
+        };
+        http.post({
+            url: "/algo/updateAlgoStatus",
+            data: params,
+        }).then((res) => {
+            console.log(res);
+            this.isAction = true;
+            if (res.code == 0) {
+                message.success("修改管理状态成功");
+                this.getData();
+            } else {
+                message.error("修改管理状态失败");
+            }
+        });
+    };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
         // console.log(record, form);
@@ -228,6 +263,22 @@ class algoConfig extends React.PureComponent {
             console.log(res);
             //解析数据字典
             if (res.data.length > 0) {
+                res.data.forEach((item) => {
+                    // console.log(item.algorithmStatus);
+                    if (item.algorithmStatus == 0) {
+                        item.algorithmStatus = 0;
+                        item.algorithmEnable = 0;
+                    } else if (item.algorithmStatus == 1) {
+                        item.algorithmStatus = 0;
+                        item.algorithmEnable = 1;
+                    } else if (item.algorithmStatus == 2) {
+                        item.algorithmStatus = 1;
+                        item.algorithmEnable = 0;
+                    } else if (item.algorithmStatus == 3) {
+                        item.algorithmStatus = 1;
+                        item.algorithmEnable = 1;
+                    }
+                });
                 parseDict(res.data);
                 showStip(this);
             } else {
