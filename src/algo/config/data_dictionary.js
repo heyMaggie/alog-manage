@@ -36,13 +36,14 @@ const configData = {
         { key: "0", value: "无需撤销算法已下的单" },
         { key: "1", value: "需要撤销算法已下的单" },
     ],
+    //篮子监控状态
     basketStatus: [
-        // 0-Initial 1-running 2-delete 3-部分成交被撤销 4-全部成交
-        { key: "0", value: "初始化" },
-        { key: "1", value: "运行中" },
-        { key: "2", value: "删除" },
-        { key: "3", value: "部分成交被撤销" },
-        { key: "4", value: "全部成交" },
+        { key: "1", value: "正常" },
+        { key: "2", value: "启动中冻结" },
+        { key: "4", value: "删除" },
+        { key: "8", value: "篮子运行中" },
+        { key: "16", value: "篮子停止" },
+        { key: "32", value: "篮子运行结束" },
     ],
     basketType: [
         { key: "1", value: "下单" },
@@ -59,6 +60,7 @@ const configData = {
         { key: "1", value: "关闭" },
     ],
     RiskType: [
+        // { key: "0", value: "" },
         { key: "1", value: "用户" },
         { key: "2", value: "算法" },
     ],
@@ -331,7 +333,7 @@ const configData = {
         { key: "66", value: " 融资融券柜台未登录" },
         { key: "67", value: "母单和篮子的算法不一致" },
         { key: "68", value: "行情客户端未找到" },
-        { key: "69", value: "/获取静态文件失败" },
+        { key: "69", value: "获取静态文件失败" },
     ],
 };
 

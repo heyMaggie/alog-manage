@@ -44,12 +44,12 @@ const menuList = [
                 title: "算法管理",
                 path: "/main/manage/algoConfig",
             },
-            // {
-            //     id: "1-14",
-            //     icon: "",
-            //     title: "网关管理",
-            //     path: "/main/manage/counterGw",
-            // },
+            {
+                id: "1-14",
+                icon: "",
+                title: "网关管理",
+                path: "/main/manage/counterGw",
+            },
             // 订单列表 持仓列表 成交回执  撤单列表   篮子管理
             {
                 id: "1-3",

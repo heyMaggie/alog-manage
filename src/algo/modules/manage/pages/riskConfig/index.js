@@ -216,6 +216,7 @@ class riskConfigManage extends React.PureComponent {
                     byte7: enableArr[1],
                     byte8: enableArr[0],
                     riskName: config.RiskName,
+                    riskType: config.RiskType,
                     entrustItemThreshold: config.EntrustItemThreshold,
                     entrustItemLimit: config.EntrustItemLimit,
                     entrustSeconds: config.EntrustSeconds,

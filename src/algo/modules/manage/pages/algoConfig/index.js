@@ -47,21 +47,21 @@ class algoConfig extends React.PureComponent {
                 dataIndex: "algorithmStatus",
                 key: "algorithmStatus",
             },
-            // {
-            //     title: "管理状态",
-            //     dataIndex: "algorithmEnable",
-            //     key: "algorithmEnable",
-            //     render: (text, record) => (
-            //         <Switch
-            //             checked={record.algorithmEnable == 1}
-            //             size="small"
-            //             onChange={(e) => {
-            //                 // console.log(text, record);
-            //                 this.onSwitchChange(e, record);
-            //             }}
-            //         />
-            //     ),
-            // },
+            {
+                title: "管理状态",
+                dataIndex: "algorithmEnable",
+                key: "algorithmEnable",
+                render: (text, record) => (
+                    <Switch
+                        checked={record.algorithmEnable == 1}
+                        size="small"
+                        onChange={(e) => {
+                            // console.log(text, record);
+                            this.onSwitchChange(e, record);
+                        }}
+                    />
+                ),
+            },
             {
                 title: "算法所需参数",
                 dataIndex: "parameter",
