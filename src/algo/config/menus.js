@@ -47,7 +47,7 @@ const menuList = [
             {
                 id: "1-14",
                 icon: "",
-                title: "网关管理",
+                title: "柜台网关",
                 path: "/main/manage/counterGw",
             },
             // 订单列表 持仓列表 成交回执  撤单列表   篮子管理
@@ -173,12 +173,12 @@ const menuList = [
                 title: "算法信息",
                 path: "/main/updown/algoInfo",
             },
-            // {
-            //     id: "2-9",
-            //     icon: "",
-            //     title: "持仓限额",
-            //     path: "/main/updown/positionLimit",
-            // },
+            {
+                id: "2-9",
+                icon: "",
+                title: "柜台网关",
+                path: "/main/updown/counterGw",
+            },
             // {
             //     id: "2-10",
             //     icon: "",

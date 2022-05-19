@@ -29,7 +29,7 @@ const main = (root = "/main/manage") => [
     {
         path: `${root}/counterGw`,
         component: `${pages}/counterGw`,
-        title: "网关管理",
+        title: "柜台网关",
     },
     {
         path: `${root}/newOrderQuery`,

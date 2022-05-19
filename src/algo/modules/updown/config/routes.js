@@ -41,6 +41,11 @@ const main = (root = "/main/updown") => [
         component: `${pages}/riskConfig`,
         title: "算法风控配置",
     },
+    {
+        path: `${root}/counterGw`,
+        component: `${pages}/counterGw`,
+        title: "柜台网关",
+    },
     // {
     //     path: `${root}/assetInfo`,
     //     component: `${pages}/assetInfo`,
