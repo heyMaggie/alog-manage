@@ -73,10 +73,10 @@ const configData = {
         { key: "1", value: "黑名单客户" },
         { key: "2", value: "禁止买卖" },
     ],
-    algorithmStatus: [
-        { key: "0", value: "不可用" },
-        { key: "1", value: "可用" },
-    ],
+    // algorithmStatus: [
+    //     { key: "0", value: "不可用" },
+    //     { key: "1", value: "可用" },
+    // ],
     // algorithmEnable: [
     //     { key: "0", value: "不可用" },
     //     { key: "1", value: "可用" },

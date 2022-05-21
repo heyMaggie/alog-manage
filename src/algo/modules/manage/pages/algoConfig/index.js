@@ -42,13 +42,28 @@ class algoConfig extends React.PureComponent {
                 dataIndex: "algorithmType",
                 key: "algorithmType",
             },
+            // {
+            //     title: "算法状态",
+            //     dataIndex: "algorithmStatus",
+            //     key: "algorithmStatus",
+            // },
             {
-                title: "算法状态",
-                dataIndex: "algorithmStatus",
-                key: "algorithmStatus",
+                title: "是否显示",
+                dataIndex: "algorithmShow",
+                key: "algorithmShow",
+                render: (text, record) => (
+                    <Switch
+                        checked={record.algorithmShow == 1}
+                        size="small"
+                        onChange={(e) => {
+                            // console.log(text, record);
+                            this.onSwitchChange(e, record, 1);
+                        }}
+                    />
+                ),
             },
             {
-                title: "管理状态",
+                title: "是否可用",
                 dataIndex: "algorithmEnable",
                 key: "algorithmEnable",
                 render: (text, record) => (
@@ -57,7 +72,7 @@ class algoConfig extends React.PureComponent {
                         size="small"
                         onChange={(e) => {
                             // console.log(text, record);
-                            this.onSwitchChange(e, record);
+                            this.onSwitchChange(e, record, 2);
                         }}
                     />
                 ),
@@ -103,13 +118,29 @@ class algoConfig extends React.PureComponent {
         riskGroup: [],
         userRiskConfig: {},
     };
-    onSwitchChange = (val, record) => {
-        // console.log(val, record);
-        // return;
+    // type 1 : 是否显示    type:2  是否可用
+    onSwitchChange = (val, record, type) => {
+        console.log(val, record, type);
+        // console.log(type);
+        let algorithmStatus;
+        let paramVal = 0;
+        if (type == 1) {
+            //是否显示
+            paramVal = val ? 2 : 0;
+            algorithmStatus = paramVal + record.algorithmEnable;
+        } else {
+            //是否可用
+            paramVal = val ? 1 : 0;
+            algorithmStatus = record.algorithmShow + paramVal;
+        }
+        console.log("paramVal", paramVal);
+        console.log("algorithmStatus", algorithmStatus);
+
         let params = {
             AlgorithmId: record.id,
-            AlgorithmStatus: val ? 1 : 0,
+            algorithmStatus: algorithmStatus,
         };
+        // return;
         http.post({
             url: "/algo/updateAlgoStatus",
             data: params,
@@ -264,18 +295,18 @@ class algoConfig extends React.PureComponent {
             //解析数据字典
             if (res.data.length > 0) {
                 res.data.forEach((item) => {
-                    // console.log(item.algorithmStatus);
+                    // console.log(item.algorithmShow);
                     if (item.algorithmStatus == 0) {
-                        item.algorithmStatus = 0;
+                        item.algorithmShow = 0;
                         item.algorithmEnable = 0;
                     } else if (item.algorithmStatus == 1) {
-                        item.algorithmStatus = 0;
+                        item.algorithmShow = 0;
                         item.algorithmEnable = 1;
                     } else if (item.algorithmStatus == 2) {
-                        item.algorithmStatus = 1;
+                        item.algorithmShow = 1;
                         item.algorithmEnable = 0;
                     } else if (item.algorithmStatus == 3) {
-                        item.algorithmStatus = 1;
+                        item.algorithmShow = 1;
                         item.algorithmEnable = 1;
                     }
                 });
