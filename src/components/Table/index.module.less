@@ -1,20 +1,31 @@
+.tableWrap {
+    padding-left: 32px;
+}
 :global {
     .ant-empty-normal {
         margin: 90px 0;
     }
     //斑马线行 样式！
     .ant-table-tbody > tr:nth-child(even) {
-        background: rgba(242, 244, 250, 1) !important;
-    }
-    .ant-table-tbody > tr:nth-child(old) {
+        // background: rgba(242, 244, 250, 1) !important;
         background: rgba(255, 255, 255, 1) !important;
+    }
+    .ant-table-tbody > tr:nth-child(odd) {
+        // background: rgba(255, 255, 255, 1) !important;
+        background: rgba(50, 129, 255, 0.04) !important;
     }
 
     // #1890ff  f2f3fc   rgba(242, 244, 250, 1)
     .ant-table-thead,
     .ant-table-thead > tr > th {
         // background: rgba(242, 244, 250, 1) !important;
-        background: #f2f3fc !important;
+        // background: #f2f3fc !important;
+        background: white !important;
+    }
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+        padding-left: 8px;
+        padding-right: 32px;
     }
     // 分页
     .ant-pagination-item-active {

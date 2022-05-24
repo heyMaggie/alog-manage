@@ -1,13 +1,38 @@
-.head {
-  background: lightcoral;
-  height: calc(100% - 300px);
+// .head {
+//   background: lightcoral;
+//   height: calc(100% - 300px);
+// }
+.flexbox {
+    display: flex;
+    background-color: #000813;
+    color: white;
+    .left {
+        flex: 1;
+        flex-shrink: 0;
+    }
+    .right {
+        width: 116px;
+    }
 }
-.setting {
-  float: right;
-  line-height: 35px;
-  color: rgba(255, 255, 255, 0.8);
-  padding-left: 15px;
-  i {
-    font-size: 21px;
-  }
+.logo {
+    padding-left: 77px;
+    font-size: 20px;
+    font-weight: bold;
+    background: 21px 14px url(./logo.png) no-repeat;
+    background-size: 44px 33px;
+}
+.out {
+    display: inline-block;
+    box-sizing: border-box;
+    padding-left: 32px;
+    width: 68px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 4px;
+    background: 8px 12px url(./out.png) no-repeat;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.16);
+    }
 }

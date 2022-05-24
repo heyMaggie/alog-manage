@@ -10,8 +10,10 @@ class BasicTable extends React.PureComponent {
             showSizeChanger: true,
             current: 1,
             // total:0,
-            pageSize: 20,
-            pageSizeOption: ["10", "20", "30", "50"],
+            // pageSize: 20,
+            pageSize: 13,
+            // pageSizeOptions: ["10", "13", "20", "30","50"],
+            pageSizeOptions: ["10", "12", "13", "20", "30"],
             showTotal: (total) => `共${total}条`,
         },
     };
@@ -53,7 +55,12 @@ class BasicTable extends React.PureComponent {
         if (pagination === false) {
             newPagination = false;
         }
-        // console.log(dataSource);
+        // console.log(pagination === false);
+        // console.log(newPagination);
+        console.log(this.props.pageSize);
+        if (this.props.pageSize) {
+            newPagination.pageSize = this.props.pageSize;
+        }
         let onRow = null;
         if (this.props.showDetail) {
             onRow = (record) => {
@@ -67,7 +74,7 @@ class BasicTable extends React.PureComponent {
             };
         }
         return (
-            <div>
+            <div className={styles.tableWrap}>
                 <Table
                     rowKey={rowKey}
                     className="basicTable"

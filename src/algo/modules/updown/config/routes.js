@@ -44,7 +44,7 @@ const main = (root = "/main/updown") => [
     {
         path: `${root}/counterGw`,
         component: `${pages}/counterGw`,
-        title: "柜台网关",
+        title: "柜台用户",
     },
     // {
     //     path: `${root}/assetInfo`,

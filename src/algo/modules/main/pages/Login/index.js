@@ -2,6 +2,8 @@ import React from "react";
 import { Form, Input, Button, message, Icon, Checkbox } from "antd";
 import { withRouter } from "react-router-dom";
 import backImg from "@/img/login.jpg";
+import md5 from "js-md5"; //全局引入
+
 const FormItem = Form.Item;
 class FormLogin extends React.Component {
     state = {
@@ -12,19 +14,26 @@ class FormLogin extends React.Component {
         this.props.form.validateFields((err) => {
             if (!err) {
                 let params = this.props.form.getFieldsValue();
+                params.password = md5(params.password);
                 // params.oper = "Q";
                 console.log(params);
-                // http.get({
-                //     url: "/option/option/tellInfo/login",
-                //     data: params,
-                // }).then((res) => {
-                //     console.log(res);
-                sessionStorage.isLogin = true;
-                // sessionStorage.userArr = JSON.stringify(res.data);
-                // this.props.history.push("/main/updown/userInfo");
-                this.props.history.push("/main/manage/userInfo");
-
-                // });
+                http.post({
+                    url: "/tell-info/login",
+                    data: params,
+                }).then((res) => {
+                    console.log(res);
+                    if (res.code == 0) {
+                        sessionStorage.isLogin = true;
+                        // 0  有   导入导出权限
+                        // 1  没有 导入导出权限
+                        sessionStorage.userPrivilege = res.data.userPrivilege;
+                        // sessionStorage.userArr = JSON.stringify(res.data);
+                        // this.props.history.push("/main/updown/userInfo");
+                        this.props.history.push("/main/user/userInfo");
+                    } else {
+                        message.error(res.message || "用户名或密码错误");
+                    }
+                });
             }
         });
     };
@@ -36,6 +45,11 @@ class FormLogin extends React.Component {
     componentDidMount() {}
     render() {
         const { getFieldDecorator } = this.props.form;
+        message.config({
+            duration: 2.0,
+            top: 360,
+            maxCount: 1,
+        });
         return (
             <div
                 style={{

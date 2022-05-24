@@ -1,21 +1,21 @@
 const pages = "@/algo/modules/manage/pages";
 
 const main = (root = "/main/manage") => [
-    {
-        path: `${root}/userInfo`,
-        component: `${pages}/userInfo`,
-        title: "用户管理",
-    },
-    {
-        path: `${root}/stockHolder`,
-        component: `${pages}/stockHolder`,
-        title: "股东信息",
-    },
-    {
-        path: `${root}/assetInfo`,
-        component: `${pages}/assetInfo`,
-        title: "资金信息",
-    },
+    // {
+    //     path: `/main/user/userInfo`,
+    //     component: `${pages}/userInfo`,
+    //     title: "用户管理",
+    // },
+    // {
+    //     path: `/main/user/stockHolder`,
+    //     component: `${pages}/stockHolder`,
+    //     title: "股东信息",
+    // },
+    // {
+    //     path: `/main/user/assetInfo`,
+    //     component: `${pages}/assetInfo`,
+    //     title: "资金信息",
+    // },
     {
         path: `${root}/security`,
         component: `${pages}/security`,
@@ -29,7 +29,7 @@ const main = (root = "/main/manage") => [
     {
         path: `${root}/counterGw`,
         component: `${pages}/counterGw`,
-        title: "柜台网关",
+        title: "柜台用户",
     },
     {
         path: `${root}/newOrderQuery`,
@@ -60,11 +60,6 @@ const main = (root = "/main/manage") => [
         path: `${root}/basketConfig`,
         component: `${pages}/basketConfig`,
         title: "篮子管理",
-    },
-    {
-        path: `${root}/riskConfig`,
-        component: `${pages}/riskConfig`,
-        title: "风控配置",
     },
     // {
     //     path: `${root}/securityQuery`,

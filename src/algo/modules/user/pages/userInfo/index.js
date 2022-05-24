@@ -309,7 +309,6 @@ class userInfo extends React.PureComponent {
                     // getInsertFormFields={getInsertFormFields}
                     // insertRecord={this.handleInsertRecord}
                     // col="2"
-                    pagination={{ pageSize: 10 }}
                     width="600px"
                     // getUpdateFormFields={getUpdateFormFields}
                     // setUpdateModal={this.setUpdateModal}

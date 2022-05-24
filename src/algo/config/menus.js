@@ -4,32 +4,34 @@
 const menuList = [
     {
         id: "4",
-        path: "/main/manage",
+        path: "/main/user",
+        icon: "icon1",
         title: "用户管理",
         children: [
             {
                 id: "4-1",
                 icon: "",
                 title: "用户管理",
-                path: "/main/manage/userInfo",
+                path: "/main/user/userInfo",
             },
             {
                 id: "4-2",
                 icon: "",
                 title: "股东信息",
-                path: "/main/manage/stockHolder",
+                path: "/main/user/stockHolder",
             },
             {
                 id: "4-3",
                 icon: "",
                 title: "资金信息",
-                path: "/main/manage/assetInfo",
+                path: "/main/user/assetInfo",
             },
         ],
     },
     {
         id: "1",
         path: "/main/trade",
+        icon: "icon1",
         title: "交易管理",
         children: [
             {
@@ -47,7 +49,7 @@ const menuList = [
             {
                 id: "1-14",
                 icon: "",
-                title: "柜台网关",
+                title: "柜台用户",
                 path: "/main/manage/counterGw",
             },
             // 订单列表 持仓列表 成交回执  撤单列表   篮子管理
@@ -92,13 +94,14 @@ const menuList = [
     {
         id: "5",
         path: "/main/risk",
+        icon: "icon2",
         title: "风控管理",
         children: [
             {
                 id: "5-1",
                 icon: "",
                 title: "风控配置",
-                path: "/main/manage/riskConfig",
+                path: "/main/risk/riskConfig",
             },
             // {
             //     id: "5-2",
@@ -118,6 +121,7 @@ const menuList = [
         id: "2",
         path: "/main/updown",
         title: "数据导入导出",
+        icon: "icon3",
         children: [
             // {
             //     id: "2-31",
@@ -176,7 +180,7 @@ const menuList = [
             {
                 id: "2-9",
                 icon: "",
-                title: "柜台网关",
+                title: "柜台用户",
                 path: "/main/updown/counterGw",
             },
             // {

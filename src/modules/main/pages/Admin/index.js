@@ -21,11 +21,34 @@ class Admin extends React.PureComponent {
     }
     render() {
         message.config({
-            duration: 1.5,
+            duration: 2.0,
             top: 360,
-            maxCount: 2,
+            maxCount: 1,
         });
         // console.log("Admin Render! ", this.props);
+        let path = this.props.location.pathname;
+        let arr = this.props.children.props.children;
+        let menuTitle = "";
+        let menuPath = "";
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].props.path == path) {
+                menuTitle = arr[i].props.title;
+                menuPath = arr[i].props.path;
+                break;
+            }
+        }
+        // console.log(menuTitle);
+        // console.log(menuPath);
+        let firstTitle = "首页";
+        if (menuPath.indexOf("/main/user") > -1) {
+            firstTitle = "用户管理";
+        } else if (menuPath.indexOf("/main/manage") > -1) {
+            firstTitle = "交易管理";
+        } else if (menuPath.indexOf("/main/risk") > -1) {
+            firstTitle = "风控管理";
+        } else if (menuPath.indexOf("/main/updown") > -1) {
+            firstTitle = "数据导入导出";
+        }
         return (
             <Layout>
                 <Header style={{ background: "#002140" }}>
@@ -34,13 +57,15 @@ class Admin extends React.PureComponent {
                 <Layout>
                     <SplitPane
                         split="vertical"
-                        minSize={150}
-                        defaultSize={parseInt(
-                            localStorage.getItem("splitPos") || 265
-                        )}
-                        onChange={(size) =>
-                            localStorage.setItem("splitPos", size)
-                        }
+                        minSize={216}
+                        maxSize={216}
+                        // defaultSize={parseInt(
+                        //     localStorage.getItem("splitPos") || 265
+                        // )}
+                        defaultSize={216}
+                        // onChange={(size) =>
+                        //     localStorage.setItem("splitPos", size)
+                        // }
                     >
                         <Sider
                             className="menuSlider"
@@ -53,11 +78,18 @@ class Admin extends React.PureComponent {
                             //   style={{ padding: "0 0 12px 12px " }}
                             className={styles.mylayout}
                         >
-                            {/* <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>List</Breadcrumb.Item>
-              <Breadcrumb.Item>App</Breadcrumb.Item>
-            </Breadcrumb> */}
+                            <Breadcrumb style={{ margin: "14px 0" }}>
+                                <Breadcrumb.Item
+                                    style={{ height: "20px", color: "#999" }}
+                                >
+                                    {firstTitle}
+                                </Breadcrumb.Item>
+                                <Breadcrumb.Item
+                                    style={{ height: "20px", color: "#666" }}
+                                >
+                                    {menuTitle}
+                                </Breadcrumb.Item>
+                            </Breadcrumb>
                             <Content>
                                 <TabsLayout></TabsLayout>
                             </Content>

@@ -19,7 +19,8 @@ class Menus extends PureComponent {
                     <SubMenu
                         title={
                             <span>
-                                <Icon type={item.icon || "home"}></Icon>
+                                {/* <Icon type={item.icon || "home"}></Icon> */}
+                                <span className={styles[`${item.icon}`]}></span>
                                 <span>{item.title}</span>
                             </span>
                         }
@@ -86,7 +87,6 @@ class Menus extends PureComponent {
         //获取默认 展开菜单
         this.keys = [];
         this.getOpenKeys(window.menus, path, true);
-
         this.defaultOpenKeys = this.keys ? this.keys : ["/main/option"];
         this.defaultSelectedKeys = path ? [path] : ["/main/algo/buy"];
         // this.defaultOpenKeys = ["/main"];
@@ -94,14 +94,14 @@ class Menus extends PureComponent {
         // console.log("默认展开菜单 :", this.defaultOpenKeys);
         // console.log("默认选中 :", this.defaultSelectedKeys);
         return (
-            <div>
-                <div className={styles.logo}>
+            <div className={styles.slider}>
+                {/* <div className={styles.logo}>
                     <img src="./assets/logo.png" alt="" />
                     <h1>华云信息</h1>
-                </div>
+                </div> */}
                 <Menu
                     mode="inline"
-                    theme="dark"
+                    // theme="dark"
                     defaultSelectedKeys={this.defaultSelectedKeys}
                     defaultOpenKeys={this.defaultOpenKeys}
                     // onOpenChange={this.onOpenChange}

@@ -130,11 +130,11 @@ export default class counterGw extends React.PureComponent {
                     <Upload {...props}>
                         <Button type="primary">
                             <Icon type="upload" />
-                            柜台网关上传
+                            柜台用户上传
                         </Button>
                     </Upload>
                     <Button type="primary" onClick={this.handleDownload}>
-                        <Icon type="download" /> 柜台网关导出
+                        <Icon type="download" /> 柜台用户导出
                     </Button>
                 </CurdComponent>
             </div>

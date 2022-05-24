@@ -1,8 +1,8 @@
 .searchform {
     display: flex;
-    align-items: center;
+    // align-items: center;
     //   background: #eee;
-    padding: 16px 24px;
+    padding: 24px 32px 32px 30px;
     .left {
         flex: 1;
     }
@@ -11,9 +11,39 @@
         text-align: right;
         overflow: hidden;
     }
+    .right2 {
+        flex: 0 0 208px; //94px;
+        text-align: right;
+        overflow: hidden;
+    }
+    button {
+        margin-top: 4px;
+    }
     :global {
         .ant-select-selection {
             min-width: 165px;
+        }
+        .ant-btn-ghost {
+            color: #3281ff;
+            width: 76px;
+            border-color: #3281ff !important;
+            &:hover {
+                background-color: rgba(50, 129, 255, 0.12);
+            }
+            // &:active {
+            //     background-color: rgba(50, 129, 255, 0.12);
+            // }
+        }
+        .ant-btn-primary {
+            background-color: rgba(50, 129, 255, 1);
+            width: 104px;
+            margin-left: 24px;
+            &:hover {
+                background-color: rgba(50, 129, 255, 0.8);
+            }
+            &:active {
+                background-color: #0b68ff;
+            }
         }
         .ant-form-item-label {
             width: 100px !important;

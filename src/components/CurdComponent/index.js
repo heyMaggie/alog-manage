@@ -5,6 +5,7 @@ import SearchForm from "@/components/SearchForm";
 import DynamicModal from "@/components/DynamicModal";
 import Table from "@/components/Table";
 import DynamicDescriptions from "@/components/DynamicDescriptions";
+import SplitPane from "react-split-pane";
 
 class CurdComponent extends React.PureComponent {
     state = {
@@ -78,6 +79,7 @@ class CurdComponent extends React.PureComponent {
     addUpdateDeleteColumns = (columns) => {
         let newCol = columns;
         let { updateRecord, deleteRecord, setUpdateModal } = this.props;
+        columns.forEach((item) => (item.ellipsis = true));
         if (updateRecord || deleteRecord) {
             newCol = [
                 ...columns,
@@ -261,7 +263,7 @@ class CurdComponent extends React.PureComponent {
         return newData;
     };
     handlePagination = (pagination) => {
-        // console.log("手动分页 ", pagination);
+        console.log("手动分页 ", pagination);
         let params = this.getSearchFormValue(pagination);
         this.props.onSearchClick(params, pagination);
     };
@@ -320,7 +322,6 @@ class CurdComponent extends React.PureComponent {
             detailTitle, //详情标题
             ...rest
         } = this.props;
-
         // this.pageId = window.pageId++;
         if (!this.pageId) {
             if (!window.pageId) {
@@ -331,6 +332,10 @@ class CurdComponent extends React.PureComponent {
         if (this.props.onRef) {
             //如果父组件传来该方法 则调用方法将子组件this指针传过去
             this.props.onRef(this);
+        }
+        let pagaSize = 0;
+        if (insertBtnText || this.props.hasSlot) {
+            pagaSize = 12;
         }
         // console.log("CurdComponent 渲染 ", this.pageId);
         return (
@@ -348,10 +353,26 @@ class CurdComponent extends React.PureComponent {
                             // fields={this.getSearchFormFields()}
                             fields={this.props.getSearchFormFields()}
                             onSearchClick={this.handleSearch}
+                            insertBtnText={insertBtnText}
                             searchLoading={searchLoading}
                             pageId={this.pageId}
                             onReady={this.onSearchReady}
-                        ></SearchForm>
+                        >
+                            {!this.props.hasSlot && insertBtnText && (
+                                <Button
+                                    type="primary"
+                                    icon="plus"
+                                    onClick={this.handleInsertBtn}
+                                >
+                                    {insertBtnText}
+                                </Button>
+                            )}
+                            {this.props.hasSlot && (
+                                <React.Fragment>
+                                    {this.props.children}
+                                </React.Fragment>
+                            )}
+                        </SearchForm>
                         <div
                             style={{
                                 position: "relative",
@@ -361,26 +382,27 @@ class CurdComponent extends React.PureComponent {
                                 style={{
                                     position: "absolute",
                                     width: "100%",
-                                    height: "5px",
-                                    background: "#ddd",
-                                    top: "-5px",
+                                    height: "1px",
+                                    background: "#EBEBEB",
+                                    top: "-1px",
                                 }}
                             ></div>
                         </div>
                     </div>
                 )}
-                {insertBtnText != "" && (
+                {/* {insertBtnText != "" && (
                     <div className={styles.insertWrap}>
                         {insertBtnText && (
                             <Button
                                 type="primary"
+                                icon="plus"
                                 onClick={this.handleInsertBtn}
                             >
                                 {insertBtnText}
                             </Button>
                         )}
                     </div>
-                )}
+                )} */}
                 {this.props.hasSlot && (
                     <div className={styles.insertWrap}>
                         {this.props.children}
@@ -395,6 +417,7 @@ class CurdComponent extends React.PureComponent {
                         rowSelection={rowSelection}
                         handlePagination={this.handlePagination}
                         pagination={this.props.pagination}
+                        pagaSize={pagaSize}
                         onDoubleClick={this.onDoubleClick}
                         showDetail={dtColumns.length > 0}
                     ></Table>

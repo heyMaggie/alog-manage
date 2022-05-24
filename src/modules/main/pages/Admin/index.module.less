@@ -1,18 +1,50 @@
 :global {
-    #root > .ant-layout {
-        height: 100%;
+    font-size: 14px;
+    @font-face {
+        font-family: "webfont";
+        font-display: swap;
+        src: url("webfont.eot"); /* IE9 */
+        src: url("webfont.eot?#iefix") format("embedded-opentype"),
+            /* IE6-IE8 */ url("webfont.woff2") format("woff2"),
+            url("webfont.woff") format("woff"),
+            /* chrome、firefox */ url("webfont.ttf") format("truetype"),
+            /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+                url("webfont.svg#webfont") format("svg"); /* iOS 4.1- */
     }
+    html,
+    body {
+        font-family: "webfont" !important;
+    }
+
+    .ant-layout {
+        height: 100%;
+        background-color: #f4f5f9 !important;
+    }
+
     .ant-layout-header {
-        height: 30px;
-        line-height: 30px;
+        height: 60px;
+        line-height: 60px;
+        padding: 0;
     }
     .ant-layout-sider {
         height: calc(100%);
         background: white !important;
         overflow-y: auto;
     }
-    .ant-layout-sider-children {
-        background: #000c17;
+    // .ant-layout-sider-children {
+    //     background: #000c17;
+    // }
+    .ant-tabs-bar {
+        display: none;
+    }
+    .ant-breadcrumb {
+        height: 20px;
+    }
+    .ant-table-header .ant-table-row-cell-ellipsis {
+        color: #666666 !important;
+    }
+    .ant-table-tbody .ant-table-row-cell-ellipsis {
+        color: #333333 !important;
     }
     .ant-layout-content {
         background: #fff;
@@ -39,5 +71,6 @@
     // height: auto;
     height: 100%; //加入 react-split-pane 后改
     min-height: 100%;
-    padding-left: 10px;
+    padding-left: 24px;
+    padding-right: 24px;
 }

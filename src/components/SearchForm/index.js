@@ -22,7 +22,13 @@ class SearchForm extends React.PureComponent {
         }
     };
     render() {
-        let { fields = [], form, searchLoading, btnText = "查询" } = this.props;
+        let {
+            fields = [],
+            form,
+            searchLoading,
+            btnText = "查询",
+            insertBtnText = "新增",
+        } = this.props;
         let { getFieldDecorator } = form;
         // let labelCol = {
         //     xs: 8,
@@ -34,6 +40,11 @@ class SearchForm extends React.PureComponent {
         //     labelCol,
         //     wrapperCol,
         // };
+        let right = "right";
+        if (insertBtnText) {
+            right = "right2";
+        }
+        // console.log(this.props.children);
         return (
             <div className={styles.searchform}>
                 <div className={styles.left}>
@@ -60,14 +71,24 @@ class SearchForm extends React.PureComponent {
                         })}
                     </Form>
                 </div>
-                <div className={styles.right}>
+                <div className={styles[right]}>
                     <Button
-                        type="primary"
+                        type="ghost"
                         loading={searchLoading}
                         onClick={this.handleClick}
                     >
                         {btnText}
                     </Button>
+                    {/* <Button
+                        type="primary"
+                        icon="plus"
+                        style={{ width: "104px", marginLeft: "24px" }}
+                        loading={searchLoading}
+                        onClick={this.handleClick}
+                    >
+                        {insertBtnText}
+                    </Button> */}
+                    {this.props.children}
                 </div>
             </div>
         );

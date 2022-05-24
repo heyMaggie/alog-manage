@@ -536,6 +536,7 @@ class riskConfigManage extends React.PureComponent {
         if (this.isUpdate) {
             modalTitle = "修改记录";
         }
+        // let pagination = { pageSize: 12 };
         return (
             <div className={styles.userInfo}>
                 <CurdComponent
@@ -546,10 +547,14 @@ class riskConfigManage extends React.PureComponent {
                     getSearchFormFields={getSearchFormFields}
                     // hasSlot={true}
                     // searchLoading={this.state.searchLoading}
-                    // insertBtnText={"新增风控"} // 不传 就没新增按钮
+                    insertBtnText={"新增风控"} // 不传 就没新增按钮
                     hasSlot={true}
                     children={
-                        <Button type="primary" onClick={this.handleInsertBtn}>
+                        <Button
+                            type="primary"
+                            icon="plus"
+                            onClick={this.handleInsertBtn}
+                        >
                             新增风控
                         </Button>
                     }
@@ -557,6 +562,7 @@ class riskConfigManage extends React.PureComponent {
                     // insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
+                    // pagination={pagination}
                     // getUpdateFormFields={getUpdateFormFields}
                     // setUpdateModal={this.setUpdateModal}
                     // updateRecord={this.handleUpdateRecord} // 不传 就没编辑

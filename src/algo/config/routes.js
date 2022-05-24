@@ -6,13 +6,15 @@ import main from "@/algo/modules/main";
 import charts from "@/algo/modules/chart";
 import updown from "@/algo/modules/updown";
 import manage from "@/algo/modules/manage";
+import risk from "@/algo/modules/risk";
+import user from "@/algo/modules/user";
 
 import axios from "axios";
 //根据环境  自动切换 IP
 if (process.env.NODE_ENV == "development") {
     //开发环境
-    axios.defaults.baseURL = "http://192.168.2.105:20010";
-    // axios.defaults.baseURL = "http://192.168.1.81:20010";
+    // axios.defaults.baseURL = "http://192.168.2.105:20010";
+    axios.defaults.baseURL = "http://192.168.1.81:20010";
 } else {
     //生产环境
     axios.defaults.baseURL = "/algoManageApi";
@@ -20,7 +22,7 @@ if (process.env.NODE_ENV == "development") {
 window.baseURL = axios.defaults.baseURL;
 //注册 main 模块路由
 // let routes = [...parameter(), ...updown(), ...charts(), ...manage()];
-let routes = [...updown(), ...charts(), ...manage()];
+let routes = [...updown(), ...charts(), ...user(), ...manage(), ...risk()];
 //动态引入 component对应地址的组件
 let res = withDynamicImport(main("/main", routes));
 export default res.routes;

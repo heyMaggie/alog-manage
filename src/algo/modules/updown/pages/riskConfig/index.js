@@ -33,7 +33,7 @@ const columns = (params) => {
             title: "撤单比:风控启用委托数量",
             dataIndex: "cancelEntrustItemThreshold",
             key: "cancelEntrustItemThreshold",
-            width:200
+            width: 200,
         },
         {
             title: "撤单比(s) x100",
@@ -44,7 +44,7 @@ const columns = (params) => {
             title: "废单比:风控启用委托数量",
             dataIndex: "failedEntrustItemThreshold",
             key: "failedEntrustItemThreshold",
-            width:200
+            width: 200,
         },
         {
             title: "废单比(s) x100",
@@ -55,7 +55,7 @@ const columns = (params) => {
             title: "委托成交比:风控启用委托数量",
             dataIndex: "entrustExecEntrustItemThreshold",
             key: "entrustExecEntrustItemThreshold",
-            width:240
+            width: 240,
         },
         {
             title: "委托成交比(s) x100",
@@ -66,7 +66,7 @@ const columns = (params) => {
             title: "净买入额度:风控启用委托数量",
             dataIndex: "netBuyEntrustItemThreshold",
             key: "netBuyEntrustItemThreshold",
-            width:220
+            width: 220,
         },
         {
             title: "净买入额度 x10000",
@@ -126,8 +126,7 @@ export default class userConfig extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href =
-            window.baseURL + "/risk/download";
+        window.location.href = window.baseURL + "/risk/download";
     };
     getData = (params) => {
         http.get({
