@@ -338,6 +338,8 @@ class CurdComponent extends React.PureComponent {
             pagaSize = 12;
         }
         // console.log("CurdComponent 渲染 ", this.pageId);
+        // console.log(!this.props.hasSlot && insertBtnText);
+        // console.log(this.props.hasSlot);
         return (
             <div
                 className={
@@ -403,11 +405,11 @@ class CurdComponent extends React.PureComponent {
                         )}
                     </div>
                 )} */}
-                {this.props.hasSlot && (
+                {/* {this.props.hasSlot && (
                     <div className={styles.insertWrap}>
                         {this.props.children}
                     </div>
-                )}
+                )} */}
                 <div ref="tableWrap" className={styles.tableWrap}>
                     <Table
                         rowKey={rowKey}

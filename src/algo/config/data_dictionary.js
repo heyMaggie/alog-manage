@@ -99,6 +99,15 @@ const configData = {
         { key: "6", value: "市价最优五档全额成交剩余撤销" },
         { key: "7", value: "限价全额成交或撤销" },
     ],
+    supportType: [
+        { key: "1", value: "现货" },
+        { key: "2", value: "期权" },
+        { key: "3", value: "现货、期权" },
+        { key: "4", value: "两融" },
+        { key: "5", value: "现货、两融" },
+        { key: "6", value: "期权、两融" },
+        { key: "7", value: "现货、期权、两融" },
+    ],
     positionEffect: [
         { key: "O", value: "开仓" },
         { key: "C", value: "平仓" },
