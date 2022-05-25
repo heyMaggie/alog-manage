@@ -80,7 +80,7 @@ class riskConfigManage extends React.PureComponent {
                 width: 200,
             },
             {
-                title: "撤单比(s) x100",
+                title: "撤单比(s) ",
                 dataIndex: "CancelRatioLimit",
                 width: 100,
             },
@@ -91,7 +91,7 @@ class riskConfigManage extends React.PureComponent {
                 width: 200,
             },
             {
-                title: "废单比(s) x100",
+                title: "废单比(s) ",
                 dataIndex: "FailedRatioLimit",
                 key: "FailedRatioLimit",
             },
@@ -102,7 +102,7 @@ class riskConfigManage extends React.PureComponent {
                 width: 240,
             },
             {
-                title: "委托成交比(s) x100",
+                title: "委托成交比(s) ",
                 dataIndex: "EntrustExecRatioLimit",
                 key: "EntrustExecRatioLimit",
             },
@@ -113,7 +113,7 @@ class riskConfigManage extends React.PureComponent {
                 width: 220,
             },
             {
-                title: "净买入额度 x10000",
+                title: "净买入额度 00",
                 dataIndex: "NetBuyAmountLimit",
                 key: "NetBuyAmountLimit",
             },
@@ -143,12 +143,12 @@ class riskConfigManage extends React.PureComponent {
                 key: "TradeSeconds",
             },
             {
-                title: "下单总量(股数)x100",
+                title: "下单总量(股数)",
                 dataIndex: "TradeQtyLimit",
                 key: "TradeQtyLimit",
             },
             {
-                title: "下单总金额(元)x100",
+                title: "下单总金额(元)",
                 dataIndex: "TradeAmountLimit",
                 key: "TradeAmountLimit",
             },
@@ -358,7 +358,7 @@ class riskConfigManage extends React.PureComponent {
             },
             {
                 RiskType: "4", // 风控类型:撤单比 (bit2)
-                RadioSecond: data.cancelRatioLimit + "", // 撤单比(s) x100
+                RadioSecond: data.cancelRatioLimit + "", // 撤单比(s)
                 Threshold: data.cancelEntrustItemThreshold + "", // 撤单比:风控启用委托数量
                 TradeLimit: "0",
                 TradeAmount: "0",
@@ -366,7 +366,7 @@ class riskConfigManage extends React.PureComponent {
             },
             {
                 RiskType: "5", // 风控类型:废单比 (bit3)
-                RadioSecond: data.failedRatioLimit + "", // 废单比(s) x100
+                RadioSecond: data.failedRatioLimit + "", // 废单比(s)
                 Threshold: data.failedEntrustItemThreshold + "", // 废单比:风控启用委托数量
                 TradeLimit: "0",
                 TradeAmount: "0",
@@ -374,7 +374,7 @@ class riskConfigManage extends React.PureComponent {
             },
             {
                 RiskType: "6", // 风控类型:委托成交比 (bit4)
-                RadioSecond: data.entrustExecRatioLimit + "", // 委托成交比(s) x100, 仅显示
+                RadioSecond: data.entrustExecRatioLimit + "", // 委托成交比(s) , 仅显示
                 Threshold: data.entrustExecEntrustItemThreshold + "", // 委托成交比:风控启用委托数量
                 TradeLimit: "0",
                 TradeAmount: "0",
@@ -384,7 +384,7 @@ class riskConfigManage extends React.PureComponent {
                 RiskType: "7", // 风控类型:净买入额度 (bit5)
                 RadioSecond: "0",
                 Threshold: data.netBuyEntrustItemThreshold + "", // 净买入额度:风控启用委托数量
-                TradeLimit: data.netBuyAmountLimit + "", // 净买入额度 x10000
+                TradeLimit: data.netBuyAmountLimit + "", // 净买入额度 00
                 TradeAmount: "0",
                 RiskName: "",
             },
@@ -407,9 +407,9 @@ class riskConfigManage extends React.PureComponent {
             {
                 RiskType: "10", // 风控类型:下单频率 (bit8)
                 RadioSecond: data.tradeSeconds + "", // 下单频率:时间量(s)
-                Threshold: data.tradeQtyLimit + "", // 下单总量(股数)x100
+                Threshold: data.tradeQtyLimit + "", // 下单总量(股数)
                 TradeLimit: data.tradeItemLimit + "", // 下单频率笔数
-                TradeAmount: data.tradeAmountLimit + "", // 下单总金额(元)x100
+                TradeAmount: data.tradeAmountLimit + "", // 下单总金额(元)
                 RiskName: "",
             },
         ];

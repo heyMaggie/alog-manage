@@ -39,14 +39,13 @@ const columns = (params) => {
         {
             title: "市场代码",
             dataIndex: "market",
-           
         },
         {
             title: "所有方向",
             dataIndex: "side",
         },
         // {
-        //     title: "母单订单数量 x100",
+        //     title: "母单订单数量 ",
         //     dataIndex: "algoOrderQty",
         //     width: 120,
         // },
@@ -81,7 +80,7 @@ const columns = (params) => {
         {
             title: "错误码",
             dataIndex: "errorCode",
-            width:100
+            width: 100,
         },
         {
             title: "错误信息",
@@ -108,47 +107,47 @@ const columns = (params) => {
             dataIndex: "transactTime",
         },
         {
-            title: "母单订单数量 x100",
+            title: "母单订单数量 ",
             dataIndex: "algoOrderQty",
             width: 120,
         },
         {
-            title: "子单买订单数量 x100",
+            title: "子单买订单数量 ",
             dataIndex: "buyOrderQty",
             width: 120,
         },
         {
-            title: "子单卖订单数量 x100",
+            title: "子单卖订单数量 ",
             dataIndex: "sellOrderQty",
             width: 120,
         },
         {
-            title: "累计成交买订单数量 x100",
+            title: "累计成交买订单数量 ",
             dataIndex: "buyCumQty",
             width: 120,
         },
         {
-            title: "累计成交卖订单数量 x100",
+            title: "累计成交卖订单数量 ",
             dataIndex: "sellCumQty",
             width: 120,
         },
         {
-            title: "子单买撤单数量 x100",
+            title: "子单买撤单数量 ",
             dataIndex: "buyCancelQty",
             width: 120,
         },
         {
-            title: "子单卖撤单数量 x100",
+            title: "子单卖撤单数量 ",
             dataIndex: "sellCancelQty",
             width: 120,
         },
         {
-            title: "累计买撤单成功数量 x100",
+            title: "累计买撤单成功数量 ",
             dataIndex: "buyCancelledCumQty",
             width: 120,
         },
         {
-            title: "累计卖撤单成功数量 x100",
+            title: "累计卖撤单成功数量 ",
             dataIndex: "sellCancelledCumQty",
             width: 120,
         },

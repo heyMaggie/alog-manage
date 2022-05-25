@@ -1,7 +1,8 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 // import SelectOption from "@/components/SelectOption";
-import { Input, Modal, Radio, Form, message, Switch } from "antd";
+import { Input, Modal, Form, message } from "antd";
+import Table from "@/components/Table";
 import styles from "./style.module.less";
 
 let getSearchFormFields = () => {
@@ -95,15 +96,15 @@ class CounterGw extends React.PureComponent {
             },
             {
                 title: "业务类型",
-                dataIndex: "businessType",
+                dataIndex: "businessTypeValue",
             },
             {
                 title: "登录状态",
-                dataIndex: "loginStatus",
+                dataIndex: "loginStatusValue",
             },
             {
                 title: "客户类型",
-                dataIndex: "clientType",
+                dataIndex: "clientTypeValue",
             },
             {
                 title: "算法平台用户Id",
@@ -114,16 +115,129 @@ class CounterGw extends React.PureComponent {
                 title: "创建时间",
                 dataIndex: "createTime",
             },
+            {
+                title: "操作",
+                key: "operation",
+                fixed: "right",
+                width: 100,
+                render: (text, record) => (
+                    <a
+                        onClick={(e) => {
+                            this.handleUpdateBtn(record);
+                        }}
+                    >
+                        编辑
+                    </a>
+                ),
+            },
+        ];
+    };
+    columns2 = (params) => {
+        return [
+            {
+                title: "网关ID",
+                dataIndex: "id",
+                width: 100,
+                ellipsis: true,
+            },
+            {
+                title: "券商编码",
+                dataIndex: "brokerCode",
+                width: 135,
+                ellipsis: true,
+            },
+            {
+                title: "券商名称",
+                dataIndex: "brokerName",
+                width: 130,
+                ellipsis: true,
+            },
+            {
+                title: "支持的业务类型",
+                dataIndex: "supportType",
+                ellipsis: true,
+            },
+            {
+                title: "柜台地址",
+                dataIndex: "gwAddr",
+                width: 180,
+                ellipsis: true,
+            },
+            {
+                title: "柜台状态",
+                dataIndex: "status",
+                ellipsis: true,
+            },
+            {
+                title: "柜台版本号",
+                dataIndex: "version",
+                width: 120,
+                ellipsis: true,
+            },
         ];
     };
 
     state = {
         searchLoading: false,
-        selectRow: [],
+        selectedRowKeys: [],
         info: [],
+        updateArr: [],
         updateModalVisible: false,
-        riskGroup: [],
-        userRiskConfig: {},
+    };
+    //批量选择
+    handleTableChange = (selectedRowKeys, row) => {
+        // console.log("批量选择", selectedRowKeys, row);
+        this.setState({
+            selectedRowKeys: selectedRowKeys,
+        });
+    };
+    getCounterInfo = (params = {}) => {
+        // params.token = "";
+        // console.log(this.record);
+        params.businessType = this.record.businessType;
+        http.post({
+            url: "/counter-info/getCounterInfo",
+            data: params,
+        })
+            .then((res) => {
+                console.log("柜台信息", res);
+                //解析数据字典
+                if (res.data.length > 0) {
+                    parseDict(res.data);
+                    // showStip(this);
+                    this.setState(
+                        {
+                            updateModalVisible: true,
+                            selectedRowKeys: [this.record.counterGwId],
+                        },
+                        () => {
+                            this.setState(
+                                {
+                                    updateArr: res.data,
+                                },
+                                () => {
+                                    this.refs.counterTable.querySelector(
+                                        ".ant-table-body"
+                                    ).style.height = "600px";
+                                }
+                            );
+                        }
+                    );
+                } else {
+                    message.info("柜台信息查询结果为空");
+                }
+            })
+            .catch((e) => {
+                message.error("柜台信息查询失败");
+            });
+    };
+    // 编辑按钮点击事件
+    handleUpdateBtn = (record) => {
+        console.log("更新记录", record);
+        this.record = record;
+        this.isInsert = false;
+        this.isUpdate = true;
+        this.getCounterInfo();
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
@@ -141,6 +255,54 @@ class CounterGw extends React.PureComponent {
             createTime: record.createTime,
         });
     };
+    //弹窗确定
+    handleUpdateModalOk = () => {
+        if (this.state.selectedRowKeys.length == 0) {
+            message.error("请选择柜台网关");
+            return;
+        }
+        // console.log("selectedRowKeys", this.state.selectedRowKeys);
+        // console.log("record", this.record);
+        // return;
+        this.handleUpdateRecord();
+    };
+    //更新记录
+    handleUpdateRecord = () => {
+        // let formData = form.getFieldsValue();
+        let params = {};
+        params.UuserId = this.record.uuserId;
+        params.BusinessType = this.record.businessType;
+        // let dataArr = this.record.businessType.split("-");
+        // console.log(dataArr);
+        // if (dataArr.length == 2) {
+        //     params.BusinessType = dataArr[0] / 1;
+        // }
+        params.GwId = this.state.selectedRowKeys[0] / 1;
+        console.log("更新记录", params);
+        // return;
+        http.post({
+            url: "/counter-user-info/updateUserCounterGw",
+            data: params,
+        }).then((res) => {
+            console.log(res);
+            this.isAction = true;
+            //解析数据字典
+            if (res.code == 0) {
+                message.success("修改柜台网关Id成功");
+                this.setState({
+                    updateModalVisible: false,
+                });
+                this.getData();
+            } else {
+                message.error("修改柜台网关Id失败");
+            }
+        });
+    };
+    handleUpdateModalCancel = () => {
+        this.setState({
+            updateModalVisible: false,
+        });
+    };
     getData = (params = {}) => {
         // params.token = "";
         http.get({
@@ -150,7 +312,8 @@ class CounterGw extends React.PureComponent {
             console.log(res);
             //解析数据字典
             if (res.data.length > 0) {
-                parseDict(res.data);
+                // parseDict(res.data);
+                parseDictValue(res.data);
                 showStip(this);
             } else {
                 message.info("查询结果为空");
@@ -163,40 +326,13 @@ class CounterGw extends React.PureComponent {
     handleSearch = (params) => {
         this.getData(params);
     };
-    //更新记录
-    handleUpdateRecord = ({ form }) => {
-        let formData = form.getFieldsValue();
-        let params = {};
-        params.UuserId = this.record.uuserId;
-        params.BusinessType = 1;
-        let dataArr = this.record.businessType.split("-");
-        console.log(dataArr);
-        if (dataArr.length == 2) {
-            params.BusinessType = dataArr[0] / 1;
-        }
-        params.GwId = formData.counterGwId / 1;
-        console.log("更新记录", params);
-        // return;
-        http.post({
-            url: "/counter-user-info/updateUserCounterGw",
-            data: params,
-        }).then((res) => {
-            console.log(res);
-            this.isAction = true;
-            //解析数据字典
-            if (res.code == 0) {
-                message.success("修改柜台网关Id成功");
-                this.getData();
-            } else {
-                message.error("修改柜台网关Id失败");
-            }
-        });
-    };
+
     componentDidMount() {
         this.getData();
     }
     render() {
         let scroll = { x: 1000, y: 445 };
+        let scroll2 = { x: 1000, y: 900 };
         let info = this.state.info;
         let { getFieldDecorator } = this.props.form;
         let labelCol = {
@@ -208,6 +344,12 @@ class CounterGw extends React.PureComponent {
         let formItemLayout = {
             labelCol,
             wrapperCol,
+        };
+        let { selectedRowKeys } = this.state;
+        const rowSelection = {
+            selectedRowKeys,
+            type: "radio",
+            onChange: this.handleTableChange,
         };
         return (
             <div>
@@ -223,10 +365,10 @@ class CounterGw extends React.PureComponent {
                     // insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
-                    updateModalText="修改柜台网关Id"
-                    getUpdateFormFields={getUpdateFormFields}
-                    setUpdateModal={this.setUpdateModal}
-                    updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                    // updateModalText="修改柜台网关Id"
+                    // getUpdateFormFields={getUpdateFormFields}
+                    // setUpdateModal={this.setUpdateModal}
+                    // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={this.columns}
@@ -234,6 +376,33 @@ class CounterGw extends React.PureComponent {
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
                 ></CurdComponent>
+                <Modal
+                    title={"修改柜台网关Id"}
+                    visible={this.state.updateModalVisible}
+                    onOk={this.handleUpdateModalOk}
+                    onCancel={this.handleUpdateModalCancel}
+                    width={1288}
+                    centered
+                >
+                    <Form layout={"inline"}>
+                        <div ref="counterTable" className="counterTable">
+                            <Table
+                                rowKey={"id"}
+                                columns={this.columns2()}
+                                dataSource={this.state.updateArr}
+                                scroll={scroll2}
+                                size="small"
+                                rowSelection={rowSelection}
+                                // handlePagination={this.handlePagination}
+                                // pagination={this.props.pagination}
+                                pagination={false}
+                                // pagaSize={pagaSize}
+                                // onDoubleClick={this.onDoubleClick}
+                                // showDetail={dtColumns.length > 0}
+                            ></Table>
+                        </div>
+                    </Form>
+                </Modal>
             </div>
         );
     }

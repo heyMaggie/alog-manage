@@ -41,12 +41,12 @@ const columns = (params) => {
             dataIndex: "market",
         },
         {
-            title: "订单数量 x100",
+            title: "订单数量 ",
             dataIndex: "orderQty",
             width: 120,
         },
         {
-            title: "订单价格 x10000",
+            title: "订单价格 00",
             dataIndex: "price",
             width: 120,
         },
@@ -73,12 +73,12 @@ const columns = (params) => {
             width: 150,
         },
         {
-            title: "累计成交数量 x100",
+            title: "累计成交数量 ",
             dataIndex: "cumQty",
             width: 150,
         },
         {
-            title: "剩余未成交数量 x100",
+            title: "剩余未成交数量 ",
             dataIndex: "leavesQty",
         },
         {
@@ -106,7 +106,7 @@ const columns = (params) => {
         {
             title: "错误码",
             dataIndex: "errorCode",
-            width:100
+            width: 100,
         },
         {
             title: "错误信息",
@@ -138,7 +138,7 @@ const columns = (params) => {
             width: 120,
         },
         {
-            title: "累计成交金额 x10000",
+            title: "累计成交金额 00",
             dataIndex: "cum_amount",
             width: 120,
         },

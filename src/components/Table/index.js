@@ -57,7 +57,6 @@ class BasicTable extends React.PureComponent {
         }
         // console.log(pagination === false);
         // console.log(newPagination);
-        console.log(this.props.pageSize);
         if (this.props.pageSize) {
             newPagination.pageSize = this.props.pageSize;
         }
@@ -73,6 +72,7 @@ class BasicTable extends React.PureComponent {
                 };
             };
         }
+
         return (
             <div className={styles.tableWrap}>
                 <Table

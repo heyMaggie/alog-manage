@@ -36,7 +36,7 @@ const columns = (params) => {
             width: 200,
         },
         {
-            title: "撤单比(s) x100",
+            title: "撤单比(s) ",
             dataIndex: "cancelRatioLimit",
             key: "cancelRatioLimit",
         },
@@ -47,7 +47,7 @@ const columns = (params) => {
             width: 200,
         },
         {
-            title: "废单比(s) x100",
+            title: "废单比(s) ",
             dataIndex: "failedRatioLimit",
             key: "failedRatioLimit",
         },
@@ -58,7 +58,7 @@ const columns = (params) => {
             width: 240,
         },
         {
-            title: "委托成交比(s) x100",
+            title: "委托成交比(s) ",
             dataIndex: "entrustExecRatioLimit",
             key: "entrustExecRatioLimit",
         },
@@ -69,7 +69,7 @@ const columns = (params) => {
             width: 220,
         },
         {
-            title: "净买入额度 x10000",
+            title: "净买入额度 00",
             dataIndex: "netBuyAmountLimit",
             key: "netBuyAmountLimit",
         },
@@ -99,12 +99,12 @@ const columns = (params) => {
             key: "tradeSeconds",
         },
         {
-            title: "下单总量(股数)x100",
+            title: "下单总量(股数)",
             dataIndex: "tradeQtyLimit",
             key: "tradeQtyLimit",
         },
         {
-            title: "下单总金额(元)x100",
+            title: "下单总金额(元)",
             dataIndex: "tradeAmountLimit",
             key: "tradeAmountLimit",
         },

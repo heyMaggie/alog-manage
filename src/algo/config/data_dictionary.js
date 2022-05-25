@@ -108,6 +108,16 @@ const configData = {
         { key: "6", value: "期权、两融" },
         { key: "7", value: "现货、期权、两融" },
     ],
+    status: [
+        { key: "0", value: "不可用" },
+        { key: "1", value: "现货可用" },
+        { key: "2", value: "期权可用" },
+        { key: "3", value: "现货可用、期权可用" },
+        { key: "4", value: "两融可用" },
+        { key: "5", value: "现货可用、两融可用" },
+        { key: "6", value: "期权可用、两融可用" },
+        { key: "7", value: "现货可用、期权可用、两融可用" },
+    ],
     positionEffect: [
         { key: "O", value: "开仓" },
         { key: "C", value: "平仓" },

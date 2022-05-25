@@ -77,7 +77,8 @@ export let parseDict = (dict) => {
                         // console.log(dictionary);
                         if (item[key] == dictionary.key) {
                             // item[key] = dictionary.value;
-                            item[key + "Value"] = dictionary.value;
+                            item[key + "Value"] =
+                                item[key] + "-" + dictionary.value;
                         }
                     }
                 }
