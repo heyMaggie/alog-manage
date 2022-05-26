@@ -202,8 +202,9 @@ class riskConfigManage extends React.PureComponent {
                 let enable = (record.RiskEnable / 1)
                     .toString(2)
                     .padStart(9, "0");
-                let enableArr = enable.split("");
+                let enableArr = enable.split("").map((item) => item == 1);
                 // console.log(enableArr);
+                // return;
                 this.props.form.setFieldsValue({
                     // riskGroup: record.riskGroup + "",
                     byte0: enableArr[8],
@@ -311,15 +312,15 @@ class riskConfigManage extends React.PureComponent {
         console.log(data);
         let enable =
             ("0b" +
-                data.byte8 +
-                data.byte7 +
-                data.byte6 +
-                data.byte5 +
-                data.byte4 +
-                data.byte3 +
-                data.byte2 +
-                data.byte1 +
-                data.byte0) /
+                Number(data.byte8) +
+                Number(data.byte7) +
+                Number(data.byte6) +
+                Number(data.byte5) +
+                Number(data.byte4) +
+                Number(data.byte3) +
+                Number(data.byte2) +
+                Number(data.byte1) +
+                Number(data.byte0)) /
             1;
         // console.log(enable);
         // return enable;
@@ -342,9 +343,9 @@ class riskConfigManage extends React.PureComponent {
             },
             {
                 RiskType: "2", // 风控类型:时间量总委托笔数 (bit0)
-                RadioSecond: data.entrustItemLimit + "", // 时间量:总委托笔数
+                RadioSecond: data.entrustSeconds + "", // 总委托:时间量(s)
                 Threshold: data.entrustItemThreshold + "", // 风控启用委托数量
-                TradeLimit: data.entrustSeconds + "", // 总委托:时间量(s)
+                TradeLimit: data.entrustItemLimit + "", // 时间量:总委托笔数
                 TradeAmount: "0",
                 RiskName: "",
             },
@@ -450,7 +451,7 @@ class riskConfigManage extends React.PureComponent {
             let arr = [];
             if (res.data && res.data.length > 0) {
                 let dataObj = JSON.parse(res.data);
-                // console.log(dataObj);
+                console.log(dataObj);
                 if (dataObj.TotalCount > 0) {
                     arr = dataObj.Datas;
                     // console.log(arr);
@@ -537,10 +538,13 @@ class riskConfigManage extends React.PureComponent {
             modalTitle = "修改记录";
         }
         // let pagination = { pageSize: 12 };
+        let pageSize = 11;
+        // console.log(byte0);
         return (
             <div className={styles.userInfo}>
                 <CurdComponent
                     rowKey={"Id"}
+                    pageSize={pageSize}
                     // isShowSearchForm={false}
                     // btnText2="查全部"
                     onSearchClick={this.handleSearch}
@@ -576,6 +580,7 @@ class riskConfigManage extends React.PureComponent {
                 <Modal
                     title={modalTitle}
                     visible={this.state.updateModalVisible}
+                    onOk={this.handleUpdateModalOk}
                     onCancel={this.handleUpdateModalCancel}
                     width={788}
                     centered
@@ -635,13 +640,7 @@ class riskConfigManage extends React.PureComponent {
                                 <div className={styles.swi}>
                                     <Form.Item>
                                         {getFieldDecorator("byte0", {
-                                            rules: [
-                                                {
-                                                    required: true,
-                                                    message: "请选择是否启用",
-                                                },
-                                            ],
-                                            initialValue: "1",
+                                            valuePropName: "checked",
                                         })(
                                             <Switch
                                                 size="small"
@@ -684,6 +683,7 @@ class riskConfigManage extends React.PureComponent {
                                     })(
                                         <Input
                                             placeholder="请输入"
+                                            suffix="笔"
                                             disabled={this.state.disabled0}
                                         />
                                     )}
@@ -713,6 +713,7 @@ class riskConfigManage extends React.PureComponent {
                                     })(
                                         <Input
                                             placeholder="请输入"
+                                            suffix="笔"
                                             disabled={this.state.disabled0}
                                         />
                                     )}
@@ -757,13 +758,7 @@ class riskConfigManage extends React.PureComponent {
                                 <div className={styles.swi}>
                                     <Form.Item>
                                         {getFieldDecorator("byte1", {
-                                            rules: [
-                                                {
-                                                    required: true,
-                                                    message: "请选择是否启用",
-                                                },
-                                            ],
-                                            initialValue: "1",
+                                            valuePropName: "checked",
                                         })(
                                             <Switch
                                                 size="small"
@@ -804,6 +799,7 @@ class riskConfigManage extends React.PureComponent {
                                 })(
                                     <Input
                                         placeholder="请输入"
+                                        suffix="笔"
                                         disabled={this.state.disabled1}
                                     />
                                 )}
@@ -819,13 +815,7 @@ class riskConfigManage extends React.PureComponent {
                                 <div className={styles.swi}>
                                     <Form.Item>
                                         {getFieldDecorator("byte2", {
-                                            rules: [
-                                                {
-                                                    required: true,
-                                                    message: "请选择是否启用",
-                                                },
-                                            ],
-                                            initialValue: "1",
+                                            valuePropName: "checked",
                                         })(
                                             <Switch
                                                 size="small"
@@ -870,6 +860,7 @@ class riskConfigManage extends React.PureComponent {
                                     )(
                                         <Input
                                             placeholder="请输入"
+                                            suffix="笔"
                                             disabled={this.state.disabled2}
                                         />
                                     )}
@@ -913,13 +904,7 @@ class riskConfigManage extends React.PureComponent {
                                 <div className={styles.swi}>
                                     <Form.Item>
                                         {getFieldDecorator("byte3", {
-                                            rules: [
-                                                {
-                                                    required: true,
-                                                    message: "请选择是否启用",
-                                                },
-                                            ],
-                                            initialValue: "1",
+                                            valuePropName: "checked",
                                         })(
                                             <Switch
                                                 size="small"
@@ -964,6 +949,7 @@ class riskConfigManage extends React.PureComponent {
                                     )(
                                         <Input
                                             placeholder="请输入"
+                                            suffix="笔"
                                             disabled={this.state.disabled3}
                                         />
                                     )}
@@ -1006,13 +992,7 @@ class riskConfigManage extends React.PureComponent {
                                 <div className={styles.swi}>
                                     <Form.Item>
                                         {getFieldDecorator("byte4", {
-                                            rules: [
-                                                {
-                                                    required: true,
-                                                    message: "请选择是否启用",
-                                                },
-                                            ],
-                                            initialValue: "1",
+                                            valuePropName: "checked",
                                         })(
                                             <Switch
                                                 size="small"
@@ -1057,6 +1037,7 @@ class riskConfigManage extends React.PureComponent {
                                     )(
                                         <Input
                                             placeholder="请输入"
+                                            suffix="笔"
                                             disabled={this.state.disabled4}
                                         />
                                     )}
@@ -1088,6 +1069,7 @@ class riskConfigManage extends React.PureComponent {
                                     )(
                                         <Input
                                             placeholder="请输入"
+                                            suffix="%"
                                             disabled={this.state.disabled4}
                                         />
                                     )}
@@ -1104,13 +1086,7 @@ class riskConfigManage extends React.PureComponent {
                                 <div className={styles.swi}>
                                     <Form.Item>
                                         {getFieldDecorator("byte5", {
-                                            rules: [
-                                                {
-                                                    required: true,
-                                                    message: "请选择是否启用",
-                                                },
-                                            ],
-                                            initialValue: "1",
+                                            valuePropName: "checked",
                                         })(
                                             <Switch
                                                 size="small"
@@ -1155,6 +1131,7 @@ class riskConfigManage extends React.PureComponent {
                                     )(
                                         <Input
                                             placeholder="请输入"
+                                            suffix="笔"
                                             disabled={this.state.disabled5}
                                         />
                                     )}
@@ -1183,6 +1160,7 @@ class riskConfigManage extends React.PureComponent {
                                     })(
                                         <Input
                                             placeholder="请输入"
+                                            suffix="元"
                                             disabled={this.state.disabled5}
                                         />
                                     )}
@@ -1198,13 +1176,7 @@ class riskConfigManage extends React.PureComponent {
                                 <div className={styles.swi}>
                                     <Form.Item>
                                         {getFieldDecorator("byte6", {
-                                            rules: [
-                                                {
-                                                    required: true,
-                                                    message: "请选择是否启用",
-                                                },
-                                            ],
-                                            initialValue: "1",
+                                            valuePropName: "checked",
                                         })(
                                             <Switch
                                                 size="small"
@@ -1246,6 +1218,7 @@ class riskConfigManage extends React.PureComponent {
                                     })(
                                         <Input
                                             placeholder="请输入"
+                                            suffix="笔"
                                             disabled={this.state.disabled6}
                                         />
                                     )}
@@ -1290,13 +1263,7 @@ class riskConfigManage extends React.PureComponent {
                                 <div className={styles.swi}>
                                     <Form.Item>
                                         {getFieldDecorator("byte7", {
-                                            rules: [
-                                                {
-                                                    required: true,
-                                                    message: "请选择是否启用",
-                                                },
-                                            ],
-                                            initialValue: "1",
+                                            valuePropName: "checked",
                                         })(
                                             <Switch
                                                 size="small"
@@ -1335,6 +1302,7 @@ class riskConfigManage extends React.PureComponent {
                                 })(
                                     <Input
                                         placeholder="请输入"
+                                        suffix="秒"
                                         disabled={this.state.disabled7}
                                     />
                                 )}
@@ -1349,13 +1317,7 @@ class riskConfigManage extends React.PureComponent {
                                 <div className={styles.swi}>
                                     <Form.Item>
                                         {getFieldDecorator("byte8", {
-                                            rules: [
-                                                {
-                                                    required: true,
-                                                    message: "请选择是否启用",
-                                                },
-                                            ],
-                                            initialValue: "1",
+                                            valuePropName: "checked",
                                         })(
                                             <Switch
                                                 size="small"
@@ -1397,6 +1359,7 @@ class riskConfigManage extends React.PureComponent {
                                     })(
                                         <Input
                                             placeholder="请输入"
+                                            suffix="笔"
                                             disabled={this.state.disabled8}
                                         />
                                     )}
@@ -1459,6 +1422,7 @@ class riskConfigManage extends React.PureComponent {
                                     })(
                                         <Input
                                             placeholder="请输入"
+                                            suffix="笔"
                                             disabled={this.state.disabled8}
                                         />
                                     )}
@@ -1487,6 +1451,7 @@ class riskConfigManage extends React.PureComponent {
                                     })(
                                         <Input
                                             placeholder="请输入"
+                                            suffix="元"
                                             disabled={this.state.disabled8}
                                         />
                                     )}

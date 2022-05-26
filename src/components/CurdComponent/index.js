@@ -333,9 +333,12 @@ class CurdComponent extends React.PureComponent {
             //如果父组件传来该方法 则调用方法将子组件this指针传过去
             this.props.onRef(this);
         }
-        let pagaSize = 0;
+        let pageSize = 0;
         if (insertBtnText || this.props.hasSlot) {
-            pagaSize = 12;
+            pageSize = 12;
+        }
+        if (this.props.pageSize) {
+            pageSize = this.props.pageSize;
         }
         // console.log("CurdComponent 渲染 ", this.pageId);
         // console.log(!this.props.hasSlot && insertBtnText);
@@ -419,7 +422,7 @@ class CurdComponent extends React.PureComponent {
                         rowSelection={rowSelection}
                         handlePagination={this.handlePagination}
                         pagination={this.props.pagination}
-                        pagaSize={pagaSize}
+                        pageSize={pageSize}
                         onDoubleClick={this.onDoubleClick}
                         showDetail={dtColumns.length > 0}
                     ></Table>
