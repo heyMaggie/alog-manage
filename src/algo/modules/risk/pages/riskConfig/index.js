@@ -56,12 +56,12 @@ class riskConfigManage extends React.PureComponent {
             {
                 title: "风控启用委托数量",
                 dataIndex: "EntrustItemThreshold",
-                width: 150,
+                width: 200,
             },
             {
                 title: "时间量:总委托笔数",
                 dataIndex: "EntrustItemLimit",
-                width: 150,
+                width: 200,
             },
             {
                 title: "总委托:时间量(s)",
@@ -514,7 +514,7 @@ class riskConfigManage extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 3000, y: 445 };
+        let scroll = { x: 4000, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;
@@ -538,7 +538,7 @@ class riskConfigManage extends React.PureComponent {
             modalTitle = "修改记录";
         }
         // let pagination = { pageSize: 12 };
-        let pageSize = 11;
+        let pageSize = 12;
         // console.log(byte0);
         return (
             <div className={styles.userInfo}>
@@ -552,7 +552,8 @@ class riskConfigManage extends React.PureComponent {
                     // hasSlot={true}
                     // searchLoading={this.state.searchLoading}
                     insertBtnText={"新增风控"} // 不传 就没新增按钮
-                    hasSlot={true}
+                    // hasSlot={true}
+                    hasSearchSlot={true}
                     children={
                         <Button
                             type="primary"

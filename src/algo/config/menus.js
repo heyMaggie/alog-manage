@@ -103,18 +103,18 @@ const menuList = [
                 title: "风控配置",
                 path: "/main/risk/riskConfig",
             },
-            // {
-            //     id: "5-2",
-            //     icon: "",
-            //     title: "用户风险统计",
-            //     path: "/main/manage/optionInfo",
-            // },
-            // {
-            //     id: "5-3",
-            //     icon: "",
-            //     title: "算法风险统计",
-            //     path: "/main/manage/assetInfo",
-            // },
+            {
+                id: "5-2",
+                icon: "",
+                title: "用户风险统计",
+                path: "/main/risk/userRisk",
+            },
+            {
+                id: "5-3",
+                icon: "",
+                title: "算法风险统计",
+                path: "/main/risk/algoRisk",
+            },
         ],
     },
     {

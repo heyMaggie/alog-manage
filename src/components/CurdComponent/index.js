@@ -337,12 +337,18 @@ class CurdComponent extends React.PureComponent {
         if (insertBtnText || this.props.hasSlot) {
             pageSize = 12;
         }
+        if (
+            this.props.getSearchFormFields &&
+            this.props.getSearchFormFields().length > 0
+        ) {
+            pageSize = 12;
+        }
         if (this.props.pageSize) {
             pageSize = this.props.pageSize;
         }
         // console.log("CurdComponent 渲染 ", this.pageId);
-        // console.log(!this.props.hasSlot && insertBtnText);
-        // console.log(this.props.hasSlot);
+        // console.log("insertBtnText", insertBtnText);
+        // console.log("hasSlot", this.props.hasSlot);
         return (
             <div
                 className={
@@ -363,7 +369,7 @@ class CurdComponent extends React.PureComponent {
                             pageId={this.pageId}
                             onReady={this.onSearchReady}
                         >
-                            {!this.props.hasSlot && insertBtnText && (
+                            {!this.props.hasSearchSlot && insertBtnText && (
                                 <Button
                                     type="primary"
                                     icon="plus"
@@ -372,7 +378,7 @@ class CurdComponent extends React.PureComponent {
                                     {insertBtnText}
                                 </Button>
                             )}
-                            {this.props.hasSlot && (
+                            {this.props.hasSearchSlot && (
                                 <React.Fragment>
                                     {this.props.children}
                                 </React.Fragment>
@@ -408,11 +414,11 @@ class CurdComponent extends React.PureComponent {
                         )}
                     </div>
                 )} */}
-                {/* {this.props.hasSlot && (
+                {this.props.hasSlot && (
                     <div className={styles.insertWrap}>
                         {this.props.children}
                     </div>
-                )} */}
+                )}
                 <div ref="tableWrap" className={styles.tableWrap}>
                     <Table
                         rowKey={rowKey}

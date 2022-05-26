@@ -13,7 +13,7 @@ class BasicTable extends React.PureComponent {
             // pageSize: 20,
             pageSize: 13,
             // pageSizeOptions: ["10", "13", "20", "30","50"],
-            pageSizeOptions: ["10", "12", "13", "20", "30"],
+            pageSizeOptions: ["10", "11", "12", "13", "20"],
             showTotal: (total) => `共${total}条`,
         },
     };

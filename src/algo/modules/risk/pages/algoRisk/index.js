@@ -40,97 +40,76 @@ const getUpdateFormFields = () => {
 let columns = () => {
     return [
         {
-            title: "用户ID",
-            dataIndex: "uuserId",
-            key: "uuserId",
-            width: 80,
+            title: "算法AlgorithmId",
+            dataIndex: "id",
+            width: 150,
         },
         {
-            title: "证券帐户",
-            dataIndex: "accountId",
-            key: "accountId",
-            width: 120,
-        },
-        {
-            title: "证券代码",
-            dataIndex: "securityId",
-            key: "securityId",
-            width: 100,
-        },
-        {
-            title: "证券代码源",
-            dataIndex: "securityIdSource",
-            key: "securityIdSource",
-            width: 120,
-        },
-        {
-            title: "持仓类型",
-            dataIndex: "positionType",
-            key: "positionType",
-            width: 100,
-        },
-        {
-            title: "持仓数量",
-            dataIndex: "positionQty",
-            key: "positionQty",
-            width: 100,
-        },
-        {
-            title: "当前开盘前的原始仓位数量",
-            dataIndex: "originQty",
+            title: "子单买订单总条数",
+            dataIndex: "buyItemTotal",
             width: 200,
         },
         {
-            title: "当天前的原始持仓的平均开仓价格00",
-            dataIndex: "originOpenPrice",
-            width: 250,
+            title: "子单卖订单总条数",
+            dataIndex: "sellItemTotal",
+            width: 200,
         },
         {
-            title: "可卖数量",
-            dataIndex: "freeQty",
-            key: "freeQty",
-            width: 100,
+            title: "子单买订单成功条数",
+            dataIndex: "buyItemCount",
+            width: 200,
         },
         {
-            title: "冻结数量",
-            dataIndex: "frozenQty",
-            key: "frozenQty",
-            width: 100,
+            title: "子单卖订单成功条数",
+            dataIndex: "sellItemCount",
+            width: 200,
         },
         {
-            title: "平均价格00",
-            dataIndex: "price",
-            width: 100,
+            title: "累计成交买订单条数",
+            dataIndex: "buyItemCum",
+            width: 200,
         },
         {
-            title: "盈亏",
-            dataIndex: "profitAndLoss",
-            key: "profitAndLoss",
-            width: 100,
+            title: "累计成交卖订单条数",
+            dataIndex: "sellItemCum",
+            width: 200,
         },
         {
-            title: "收益率",
-            dataIndex: "profitRate",
-            key: "profitRate",
-            width: 100,
+            title: "子单买撤单条数",
+            dataIndex: "buyCancelItemCount",
+            width: 200,
         },
         {
-            title: "版本号",
+            title: "子单卖撤单条数",
+            dataIndex: "sellCancelItemCount",
+            width: 200,
+        },
+        {
+            title: "累计买撤单成功条数",
+            dataIndex: "buyCancelledItemCum",
+            width: 200,
+        },
+        {
+            title: "累计卖撤单成功条数",
+            dataIndex: "sellCancelledItemCum",
+            width: 200,
+        },
+        {
+            title: "风控自成交子单数计数",
+            dataIndex: "selfExecCount",
+            width: 200,
+        },
+        {
+            title: "订单事务ID",
             dataIndex: "version",
-            width: 120,
-        },
-        {
-            title: "更新时间",
-            dataIndex: "updateTime",
-            key: "updateTime",
-            width: 150,
+            width: 200,
         },
     ];
 };
 let dtColumns = () => {
     return columns();
 };
-export default class Cccx extends React.PureComponent {
+export default class algoRisk extends React.PureComponent {
     state = {
         searchLoading: false,
         info: [],
@@ -142,8 +121,8 @@ export default class Cccx extends React.PureComponent {
     };
     getData = (params, pagination = { current: 1, pageSize: 20 }) => {
         // console.log(pagination);
-        http.get({
-            url: "/user-position/list",
+        http.post({
+            url: "/algo-risk-statistics/list",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -185,9 +164,9 @@ export default class Cccx extends React.PureComponent {
         let info = this.state.info;
         return (
             <CurdComponent
-                // isShowSearchForm={false}
-                onSearchClick={this.handleSearch}
-                getSearchFormFields={getSearchFormFields}
+                isShowSearchForm={false}
+                // onSearchClick={this.handleSearch}
+                // getSearchFormFields={getSearchFormFields}
                 searchLoading={this.state.searchLoading}
                 isShowInsert={false}
                 // rowKey="sno"

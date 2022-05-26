@@ -1,31 +1,55 @@
 .tit {
-    font-weight: bold;
-    font-size: 15px;
+    font-size: 14px;
     color: #333;
-}
-:global {
-    .ant-modal-body {
-        .ant-radio-wrapper-disabled {
-            .ant-radio.ant-radio-disabled .ant-radio-inner {
-                background-color: #fff !important;
-            }
-            .ant-radio-disabled + span {
-                color: initial !important;
-            }
-        }
-        .ant-radio-wrapper-checked {
-            .ant-radio-checked .ant-radio-inner::after {
-                background-color: #1890ff;
-            }
-            .ant-radio.ant-radio-disabled .ant-radio-inner {
-                border-color: #1890ff !important;
-            }
-            .ant-radio-disabled + span {
-                color: initial !important;
-            }
-        }
-        input[readonly] {
-            border-color: white;
+    // display: flex;
+    margin-bottom: 8px;
+    .text {
+        display: inline-block;
+        margin-left: 8px;
+        font-weight: bold;
+    }
+    &::before {
+        content: "";
+        width: 2px;
+        height: 10px;
+        background: #0b68ff;
+        border-radius: 1px;
+        display: inline-block;
+    }
+    .swi {
+        float: right;
+        .swiText {
+            color: #666666;
+            display: inline-block;
+            margin-left: 6px;
         }
     }
+
+    :global {
+        .ant-form-item-control {
+            line-height: 0;
+        }
+        .ant-select-selectiont {
+            width: 245px !important;
+        }
+        .ant-form-item {
+            margin-bottom: -8px;
+        }
+    }
+}
+.rowFlex {
+    display: flex;
+    justify-content: space-between;
+    :global {
+        .ant-form-item {
+            // width: 50%;
+            flex: 1;
+        }
+        .ant-select {
+            width: 100% !important;
+        }
+    }
+}
+.marLose14 {
+    margin-top: -14px;
 }

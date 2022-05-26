@@ -1,4 +1,4 @@
-const pages = "@/algo/modules/manage/pages";
+const pages = "@/algo/modules/user/pages";
 
 const main = (root = "/main/user") => [
     {

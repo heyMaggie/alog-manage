@@ -1,7 +1,7 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
-import { Input, Modal, Radio, Form, message } from "antd";
+import { Input, Modal, Switch, Form, message } from "antd";
 import styles from "./style.module.less";
 
 let getSearchFormFields = () => {
@@ -138,7 +138,7 @@ class userInfo extends React.PureComponent {
                 riskGroup: [],
             },
             () => {
-                this.getRiskGroup(record.id);
+                this.getRiskGroup(record.riskGroup);
                 this.props.form.setFieldsValue({
                     riskGroup: record.riskGroup + "",
                     userName: record.userName,
@@ -213,7 +213,8 @@ class userInfo extends React.PureComponent {
             // this.setState({ userRiskConfig: config });
             // console.log(config);
             let enable = (config.RiskEnable / 1).toString(2).padStart(9, "0");
-            let enableArr = enable.split("");
+            // let enableArr = enable.split("");
+            let enableArr = enable.split("").map((item) => item == 1);
             // console.log(enableArr);
             this.props.form.setFieldsValue({
                 // riskGroup: record.riskGroup + "",
@@ -320,18 +321,7 @@ class userInfo extends React.PureComponent {
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
                 ></CurdComponent>
-                <Modal
-                    title={"修改记录"}
-                    visible={this.state.updateModalVisible}
-                    onOk={this.handleUpdateModalOk}
-                    onCancel={this.handleUpdateModalCancel}
-                    width={1370}
-                    centered
-                >
-                    <Form layout={"inline"}>
-                        <div>
-                            <div className={styles.tit}>修改风控组</div>
-                            <Form.Item label="用户名">
+                {/* <Form.Item label="用户名">
                                 {getFieldDecorator("userName")(
                                     <Input placeholder="" readOnly />
                                 )}
@@ -345,300 +335,836 @@ class userInfo extends React.PureComponent {
                                         },
                                     ],
                                 })(
-                                    // SelectOption(this.state.riskGroup, {
-                                    //     placeholder: "请选择",
-                                    // })
+
                                     <Input
                                         placeholder=""
                                         onChange={this.inputChange}
                                     />
                                 )}
-                            </Form.Item>
+                            </Form.Item> */}
+                <Modal
+                    title={"修改记录"}
+                    visible={this.state.updateModalVisible}
+                    onOk={this.handleUpdateModalOk}
+                    onCancel={this.handleUpdateModalCancel}
+                    width={788}
+                    centered
+                >
+                    <Form layout={"vertical"}>
+                        <div>
+                            <div className={styles.tit}>
+                                <div className={styles.text}>风控组</div>
+                            </div>
+                            <div className={styles.rowFlex}>
+                                <Form.Item label="用户名">
+                                    {getFieldDecorator("userName")(
+                                        <Input placeholder="请输入" disabled />
+                                    )}
+                                </Form.Item>
+                                <div style={{ width: 60 }}></div>
+                                <Form.Item
+                                    // className={styles.marLose14}
+                                    label="修改风控组"
+                                >
+                                    {getFieldDecorator("riskGroup", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: "请输入",
+                                            },
+                                        ],
+                                    })(
+                                        <Input
+                                            placeholder=""
+                                            onChange={this.inputChange}
+                                        />
+                                    )}
+                                </Form.Item>
+                            </div>
                         </div>
                         <div>
-                            <div className={styles.tit}>时间量总委托笔数</div>
-                            <Form.Item label="是否启用">
-                                {getFieldDecorator("byte0", {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: "请选择是否启用",
-                                        },
-                                    ],
-                                    initialValue: "",
-                                })(
-                                    <Radio.Group disabled>
-                                        <Radio value="1">是</Radio>
-                                        <Radio value="0">否</Radio>
-                                    </Radio.Group>
-                                )}
-                            </Form.Item>
-                            <Form.Item
-                                label="风控启用委托数量"
-                                {...formItemLayout}
+                            <div
+                                className={styles.tit}
+                                title="账户总委托笔数超过【风控启用数量】后,在【时间量(s)】时间内,委托数量不能超过【时间量总委托笔数】,超过的数量将会被拒绝"
                             >
-                                {getFieldDecorator("entrustItemThreshold")(
-                                    <Input placeholder="" readOnly />
-                                )}
-                            </Form.Item>
+                                <div className={styles.text}>
+                                    时间量总委托笔数
+                                </div>
+                                <div className={styles.swi}>
+                                    <Form.Item>
+                                        {getFieldDecorator("byte0", {
+                                            valuePropName: "checked",
+                                        })(
+                                            <Switch size="small" disabled>
+                                                {/* <Radio value="1">是</Radio>
+                                        <Radio value="0">否</Radio> */}
+                                            </Switch>
+                                        )}
+                                        <div className={styles.swiText}>
+                                            是否启用
+                                        </div>
+                                    </Form.Item>
+                                </div>
+                            </div>
+                            <div className={styles.rowFlex}>
+                                <Form.Item
+                                    style={{ width: 20 + "%" }}
+                                    label={
+                                        <label title="当委托数量到达该阈值时才启用【时间量总委托笔数】风控">
+                                            风控启用委托数量
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator("entrustItemThreshold", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: "请输入",
+                                            },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
+                                        ],
+                                        initialValue: "0",
+                                    })(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="笔"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                                <div style={{ width: 60 }}></div>
+                                <Form.Item
+                                    style={{ width: 20 + "%" }}
+                                    label={
+                                        <label title="账户总委托笔数超过【风控启用数量】后,在【时间量(s)】时间内,委托数量不能超过【时间量总委托笔数】,超过的数量将会被拒绝">
+                                            时间量总委托笔数
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator("entrustItemLimit", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: "请输入",
+                                            },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
+                                        ],
+                                        initialValue: "0",
+                                    })(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="笔"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                            </div>
                             <Form.Item
-                                label="时间量总委托笔数"
-                                {...formItemLayout}
+                                className={styles.marLose14}
+                                label={
+                                    <label title="时间段，建议[1-10]">
+                                        时间量
+                                    </label>
+                                }
+                                // {...formItemLayout}
                             >
-                                {getFieldDecorator("entrustItemLimit")(
-                                    <Input placeholder="" readOnly />
-                                )}
-                            </Form.Item>
-
-                            <Form.Item label="时间量" {...formItemLayout}>
-                                {getFieldDecorator("entrustSeconds")(
-                                    <Input placeholder="" readOnly />
+                                {getFieldDecorator("entrustSeconds", {
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: "请输入",
+                                        },
+                                        {
+                                            message: "请输入正整数",
+                                            pattern: /^\d+$/i,
+                                        },
+                                    ],
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        suffix="秒"
+                                        disabled={true}
+                                    />
                                 )}
                             </Form.Item>
                         </div>
                         <div>
-                            <div className={styles.tit}>总委托笔数</div>
-                            <Form.Item label="是否启用">
-                                {getFieldDecorator("byte1", {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: "请选择是否启用",
-                                        },
-                                    ],
-                                    initialValue: "",
-                                })(
-                                    <Radio.Group disabled>
-                                        <Radio value="1">是</Radio>
-                                        <Radio value="0">否</Radio>
-                                    </Radio.Group>
-                                )}
-                            </Form.Item>
-                            <Form.Item label="总委托笔数" {...formItemLayout}>
-                                {getFieldDecorator("entrustTotalThreshold")(
-                                    <Input placeholder="" readOnly />
-                                )}
-                            </Form.Item>
-                        </div>
-                        <div>
-                            <div className={styles.tit}>撤单比</div>
-                            <Form.Item label="是否启用">
-                                {getFieldDecorator("byte2", {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: "请选择是否启用",
-                                        },
-                                    ],
-                                    initialValue: "",
-                                })(
-                                    <Radio.Group disabled>
-                                        <Radio value="1">是</Radio>
-                                        <Radio value="0">否</Radio>
-                                    </Radio.Group>
-                                )}
-                            </Form.Item>
+                            <div
+                                className={styles.tit}
+                                title="账户/算法委托总数不能超过【总委托笔数】"
+                            >
+                                <div className={styles.text}>总委托笔数</div>
+                                <div className={styles.swi}>
+                                    <Form.Item>
+                                        {getFieldDecorator("byte1", {
+                                            valuePropName: "checked",
+                                        })(
+                                            <Switch size="small" disabled>
+                                                {/* <Radio value="1">是</Radio>
+                                        <Radio value="0">否</Radio> */}
+                                            </Switch>
+                                        )}
+                                        <div className={styles.swiText}>
+                                            是否启用
+                                        </div>
+                                    </Form.Item>
+                                </div>
+                            </div>
                             <Form.Item
-                                label="风控启用委托数量"
-                                {...formItemLayout}
+                                label={
+                                    <label title="委托笔数阈值">
+                                        总委托笔数
+                                    </label>
+                                }
+                                // {...formItemLayout}
                             >
-                                {getFieldDecorator(
-                                    "cancelEntrustItemThreshold"
-                                )(<Input placeholder="" readOnly />)}
-                            </Form.Item>
-                            <Form.Item label="撤单比" {...formItemLayout}>
-                                {getFieldDecorator("cancelRatioLimit")(
-                                    <Input placeholder="" readOnly />
+                                {getFieldDecorator("entrustTotalThreshold", {
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: "请输入",
+                                        },
+                                        {
+                                            message: "请输入正整数",
+                                            pattern: /^\d+$/i,
+                                        },
+                                    ],
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        suffix="笔"
+                                        disabled={true}
+                                    />
                                 )}
                             </Form.Item>
                         </div>
                         <div>
-                            <div className={styles.tit}>废单比</div>
-                            <Form.Item label="是否启用">
-                                {getFieldDecorator("byte3", {
-                                    rules: [
+                            <div
+                                className={styles.tit}
+                                title="账户/算法总委托数超过【风控启用委托数量】后,客户总撤单比超过【撤单比%】后,不允许撤单;
+撤单比=成功撤单笔数/成功下单笔数*100%=成功撤单笔数/(总委托笔数-成功撤单笔数-总废单笔数)*100%"
+                            >
+                                <div className={styles.text}>撤单比</div>
+                                <div className={styles.swi}>
+                                    <Form.Item>
+                                        {getFieldDecorator("byte2", {
+                                            valuePropName: "checked",
+                                        })(
+                                            <Switch size="small" disabled>
+                                                {/* <Radio value="1">是</Radio>
+                                        <Radio value="0">否</Radio> */}
+                                            </Switch>
+                                        )}
+                                        <div className={styles.swiText}>
+                                            是否启用
+                                        </div>
+                                    </Form.Item>
+                                </div>
+                            </div>
+                            <div className={styles.rowFlex}>
+                                <Form.Item
+                                    label={
+                                        <label title="当委托数量到达该阈值时才启用【撤单比】风控">
+                                            风控启用委托数量
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator(
+                                        "cancelEntrustItemThreshold",
                                         {
-                                            required: true,
-                                            message: "请选择是否启用",
-                                        },
-                                    ],
-                                    initialValue: "",
-                                })(
-                                    <Radio.Group disabled>
-                                        <Radio value="1">是</Radio>
-                                        <Radio value="0">否</Radio>
-                                    </Radio.Group>
-                                )}
-                            </Form.Item>
+                                            rules: [
+                                                {
+                                                    required: true,
+                                                    message: "请输入",
+                                                },
+                                                {
+                                                    message: "请输入正整数",
+                                                    pattern: /^\d+$/i,
+                                                },
+                                            ],
+                                            initialValue: "0",
+                                        }
+                                    )(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="笔"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                                <div style={{ width: 60 }}></div>
+                                <Form.Item
+                                    label={
+                                        <label title="撤单比阈值">撤单比</label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator("cancelRatioLimit", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: "请输入",
+                                            },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
+                                        ],
+                                        initialValue: "0",
+                                    })(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="%"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                className={styles.tit}
+                                title="账户/算法总委托数超过【风控启用委托数量】后,客户总废单比超过【废单比%】后,不允许再进行委托;
+废单比=总废单笔数/(成功下单笔数+总废单笔数)*100%"
+                            >
+                                <div className={styles.text}>废单比</div>
+                                <div className={styles.swi}>
+                                    <Form.Item>
+                                        {getFieldDecorator("byte3", {
+                                            valuePropName: "checked",
+                                        })(
+                                            <Switch size="small" disabled>
+                                                {/* <Radio value="1">是</Radio>
+                                        <Radio value="0">否</Radio> */}
+                                            </Switch>
+                                        )}
+                                        <div className={styles.swiText}>
+                                            是否启用
+                                        </div>
+                                    </Form.Item>
+                                </div>
+                            </div>
+                            <div className={styles.rowFlex}>
+                                <Form.Item
+                                    label={
+                                        <label title="当委托数量到达该阈值时才启用【废单比】风控">
+                                            风控启用委托数量
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator(
+                                        "failedEntrustItemThreshold",
+                                        {
+                                            rules: [
+                                                {
+                                                    required: true,
+                                                    message: "请输入",
+                                                },
+                                                {
+                                                    message: "请输入正整数",
+                                                    pattern: /^\d+$/i,
+                                                },
+                                            ],
+                                            initialValue: "0",
+                                        }
+                                    )(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="笔"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                                <div style={{ width: 60 }}></div>
+                                <Form.Item
+                                    label={
+                                        <label title="废单比阈值">废单比</label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator("failedRatioLimit", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: "请输入",
+                                            },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
+                                        ],
+                                        initialValue: "0",
+                                    })(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="%"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                className={styles.tit}
+                                title="账户/算法总委托笔数超过【风控启用委托数量】后,账户委托成交比小于【委托成交比(%)】后,后续委托前端会有相应体术(不影响委托);"
+                            >
+                                <div className={styles.text}>委托成交比</div>
+                                <div className={styles.swi}>
+                                    <Form.Item>
+                                        {getFieldDecorator("byte4", {
+                                            valuePropName: "checked",
+                                        })(
+                                            <Switch size="small" disabled>
+                                                {/* <Radio value="1">是</Radio>
+                                        <Radio value="0">否</Radio> */}
+                                            </Switch>
+                                        )}
+                                        <div className={styles.swiText}>
+                                            是否启用
+                                        </div>
+                                    </Form.Item>
+                                </div>
+                            </div>
+                            <div className={styles.rowFlex}>
+                                <Form.Item
+                                    label={
+                                        <label title="当委托数量到达该阈值时才启用【成交委托比】风控">
+                                            风控启用委托数量
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator(
+                                        "entrustExecEntrustItemThreshold",
+                                        {
+                                            rules: [
+                                                {
+                                                    required: true,
+                                                    message: "请输入",
+                                                },
+                                                {
+                                                    message: "请输入正整数",
+                                                    pattern: /^\d+$/i,
+                                                },
+                                            ],
+                                            initialValue: "0",
+                                        }
+                                    )(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="笔"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                                <div style={{ width: 60 }}></div>
+                                <Form.Item
+                                    label={
+                                        <label title="委托成交比阈值">
+                                            委托成交比
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator(
+                                        "entrustExecRatioLimit",
+                                        {
+                                            rules: [
+                                                {
+                                                    required: true,
+                                                    message: "请输入",
+                                                },
+                                                {
+                                                    message: "请输入正整数",
+                                                    pattern: /^\d+$/i,
+                                                },
+                                            ],
+                                            initialValue: "0",
+                                        }
+                                    )(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="%"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                className={styles.tit}
+                                title="账户/算法净买入额度不能超过【净买入额度】超过阈值后，不允许委托;
+净买入额度=成功买入总委托金额-成功卖出总委托金额-成功撤单买入总金额"
+                            >
+                                <div className={styles.text}>净买入额度</div>
+                                <div className={styles.swi}>
+                                    <Form.Item>
+                                        {getFieldDecorator("byte5", {
+                                            valuePropName: "checked",
+                                        })(
+                                            <Switch size="small" disabled>
+                                                {/* <Radio value="1">是</Radio>
+                                        <Radio value="0">否</Radio> */}
+                                            </Switch>
+                                        )}
+                                        <div className={styles.swiText}>
+                                            是否启用
+                                        </div>
+                                    </Form.Item>
+                                </div>
+                            </div>
+                            <div className={styles.rowFlex}>
+                                <Form.Item
+                                    label={
+                                        <label title="当委托数量到达该阈值时才启用【净买入额度】风控">
+                                            风控启用委托数量
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator(
+                                        "netBuyEntrustItemThreshold",
+                                        {
+                                            rules: [
+                                                {
+                                                    required: true,
+                                                    message: "请输入",
+                                                },
+                                                {
+                                                    message: "请输入正整数",
+                                                    pattern: /^\d+$/i,
+                                                },
+                                            ],
+                                            initialValue: "0",
+                                        }
+                                    )(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="笔"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                                <div style={{ width: 60 }}></div>
+                                <Form.Item
+                                    label={
+                                        <label title="净买入额度阈值">
+                                            净买入额度
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator("netBuyAmountLimit", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: "请输入",
+                                            },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
+                                        ],
+                                        initialValue: "0",
+                                    })(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="元"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                className={styles.tit}
+                                title="账户撤单频率在【时间量(s)】时间内,撤单数量不能超过【撤单频率笔数】,超过的撤单将会被拒绝;"
+                            >
+                                <div className={styles.text}>账户撤单频率</div>
+                                <div className={styles.swi}>
+                                    <Form.Item>
+                                        {getFieldDecorator("byte6", {
+                                            valuePropName: "checked",
+                                        })(
+                                            <Switch size="small" disabled>
+                                                {/* <Radio value="1">是</Radio>
+                                        <Radio value="0">否</Radio> */}
+                                            </Switch>
+                                        )}
+                                        <div className={styles.swiText}>
+                                            是否启用
+                                        </div>
+                                    </Form.Item>
+                                </div>
+                            </div>
+                            <div className={styles.rowFlex}>
+                                <Form.Item
+                                    label={
+                                        <label title="撤单频率笔数阈值">
+                                            撤单频率笔数
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator("cancelItemLimit", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: "请输入",
+                                            },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
+                                        ],
+                                        initialValue: "0",
+                                    })(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="笔"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                                <div style={{ width: 60 }}></div>
+                                <Form.Item
+                                    label={
+                                        <label title="时间段，建议[1-10]">
+                                            时间量
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator("cancelSeconds", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: "请输入",
+                                            },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
+                                        ],
+                                        initialValue: "0",
+                                    })(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="秒"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                className={styles.tit}
+                                title="账户/算法同笔撤单间隔不能小于【撤单间隔】阈值,【撤单间隔】之内的同比撤单将会被拒绝"
+                            >
+                                <div className={styles.text}>撤单间隔</div>
+                                <div className={styles.swi}>
+                                    <Form.Item>
+                                        {getFieldDecorator("byte7", {
+                                            valuePropName: "checked",
+                                        })(
+                                            <Switch size="small" disabled>
+                                                {/* <Radio value="1">是</Radio>
+                                        <Radio value="0">否</Radio> */}
+                                            </Switch>
+                                        )}
+                                        <div className={styles.swiText}>
+                                            是否启用
+                                        </div>
+                                    </Form.Item>
+                                </div>
+                            </div>
                             <Form.Item
-                                label="风控启用委托数量"
-                                {...formItemLayout}
+                                label={
+                                    <label title="撤单间隔阈值">撤单间隔</label>
+                                }
+                                // {...formItemLayout}
                             >
-                                {getFieldDecorator(
-                                    "failedEntrustItemThreshold"
-                                )(<Input placeholder="" readOnly />)}
-                            </Form.Item>
-                            <Form.Item label="废单比" {...formItemLayout}>
-                                {getFieldDecorator("failedRatioLimit")(
-                                    <Input placeholder="" readOnly />
+                                {getFieldDecorator("cancelGapSeconds", {
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: "请输入",
+                                        },
+                                        {
+                                            message: "请输入正整数",
+                                            pattern: /^\d+$/i,
+                                        },
+                                    ],
+                                    initialValue: "0",
+                                })(
+                                    <Input
+                                        placeholder="请输入"
+                                        suffix="秒"
+                                        disabled={true}
+                                    />
                                 )}
                             </Form.Item>
                         </div>
                         <div>
-                            <div className={styles.tit}>委托成交比</div>
-                            <Form.Item label="是否启用">
-                                {getFieldDecorator("byte4", {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: "请选择是否启用",
-                                        },
-                                    ],
-                                    initialValue: "",
-                                })(
-                                    <Radio.Group disabled>
-                                        <Radio value="1">是</Radio>
-                                        <Radio value="0">否</Radio>
-                                    </Radio.Group>
-                                )}
-                            </Form.Item>
-                            <Form.Item
-                                label="风控启用委托数量"
-                                {...formItemLayout}
+                            <div
+                                className={styles.tit}
+                                title="在【时间量(s)】时间内，账户下单频率笔数不能超过【下单频率笔数】,账户下单总量不能超过【下单总量】,账户下单总金额不能超过【下单总金额】,超过上面的任意一个将会拒绝该委托"
                             >
-                                {getFieldDecorator(
-                                    "entrustExecEntrustItemThreshold"
-                                )(<Input placeholder="" readOnly />)}
-                            </Form.Item>
-                            <Form.Item label="委托成交比" {...formItemLayout}>
-                                {getFieldDecorator("entrustExecRatioLimit")(
-                                    <Input placeholder="" readOnly />
-                                )}
-                            </Form.Item>
-                        </div>
-                        <div>
-                            <div className={styles.tit}>净买入额度</div>
-                            <Form.Item label="是否启用">
-                                {getFieldDecorator("byte5", {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: "请选择是否启用",
-                                        },
-                                    ],
-                                    initialValue: "",
-                                })(
-                                    <Radio.Group disabled>
-                                        <Radio value="1">是</Radio>
-                                        <Radio value="0">否</Radio>
-                                    </Radio.Group>
-                                )}
-                            </Form.Item>
-                            <Form.Item
-                                label="风控启用委托数量"
-                                {...formItemLayout}
+                                <div className={styles.text}>下单频率</div>
+                                <div className={styles.swi}>
+                                    <Form.Item>
+                                        {getFieldDecorator("byte8", {
+                                            valuePropName: "checked",
+                                        })(
+                                            <Switch size="small" disabled>
+                                                {/* <Radio value="1">是</Radio>
+                                        <Radio value="0">否</Radio> */}
+                                            </Switch>
+                                        )}
+                                        <div className={styles.swiText}>
+                                            是否启用
+                                        </div>
+                                    </Form.Item>
+                                </div>
+                            </div>
+                            <div className={styles.rowFlex}>
+                                <Form.Item
+                                    label={
+                                        <label title="下单频率笔数阈值">
+                                            下单频率笔数
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator("tradeItemLimit", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: "请输入",
+                                            },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
+                                        ],
+                                        initialValue: "0",
+                                    })(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="笔"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                                <div style={{ width: 60 }}></div>
+                                <Form.Item
+                                    label={
+                                        <label title="时间段，建议[1-10]">
+                                            时间量
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator("tradeSeconds", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: "请输入",
+                                            },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
+                                        ],
+                                        initialValue: "0",
+                                    })(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="秒"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                            </div>
+                            <div
+                                className={
+                                    styles.rowFlex + " " + styles.marLose14
+                                }
                             >
-                                {getFieldDecorator(
-                                    "netBuyEntrustItemThreshold"
-                                )(<Input placeholder="" readOnly />)}
-                            </Form.Item>
-                            <Form.Item label="净买入额度" {...formItemLayout}>
-                                {getFieldDecorator("netBuyAmountLimit")(
-                                    <Input placeholder="" readOnly />
-                                )}
-                            </Form.Item>
-                        </div>
-                        <div>
-                            <div className={styles.tit}>账户撤单频率</div>
-                            <Form.Item label="是否启用">
-                                {getFieldDecorator("byte6", {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: "请选择是否启用",
-                                        },
-                                    ],
-                                    initialValue: "",
-                                })(
-                                    <Radio.Group disabled>
-                                        <Radio value="1">是</Radio>
-                                        <Radio value="0">否</Radio>
-                                    </Radio.Group>
-                                )}
-                            </Form.Item>
-                            <Form.Item label="撤单频率笔数" {...formItemLayout}>
-                                {getFieldDecorator("cancelItemLimit")(
-                                    <Input placeholder="" readOnly />
-                                )}
-                            </Form.Item>
-                            <Form.Item label="时间量" {...formItemLayout}>
-                                {getFieldDecorator("cancelSeconds")(
-                                    <Input placeholder="" readOnly />
-                                )}
-                            </Form.Item>
-                        </div>
-                        <div>
-                            <div className={styles.tit}>撤单间隔</div>
-                            <Form.Item label="是否启用">
-                                {getFieldDecorator("byte7", {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: "请选择是否启用",
-                                        },
-                                    ],
-                                    initialValue: "",
-                                })(
-                                    <Radio.Group disabled>
-                                        <Radio value="1">是</Radio>
-                                        <Radio value="0">否</Radio>
-                                    </Radio.Group>
-                                )}
-                            </Form.Item>
-                            <Form.Item label="撤单间隔" {...formItemLayout}>
-                                {getFieldDecorator("cancelGapSeconds")(
-                                    <Input placeholder="" readOnly />
-                                )}
-                            </Form.Item>
-                        </div>
-                        <div>
-                            <div className={styles.tit}>下单频率</div>
-                            <Form.Item label="是否启用">
-                                {getFieldDecorator("byte8", {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: "请选择是否启用",
-                                        },
-                                    ],
-                                    initialValue: "",
-                                })(
-                                    <Radio.Group disabled>
-                                        <Radio value="1">是</Radio>
-                                        <Radio value="0">否</Radio>
-                                    </Radio.Group>
-                                )}
-                            </Form.Item>
-                            <Form.Item label="下单频率笔数" {...formItemLayout}>
-                                {getFieldDecorator("tradeItemLimit")(
-                                    <Input placeholder="" readOnly />
-                                )}
-                            </Form.Item>
-                            <Form.Item label="时间量" {...formItemLayout}>
-                                {getFieldDecorator("tradeSeconds")(
-                                    <Input placeholder="" readOnly />
-                                )}
-                            </Form.Item>
-                            <Form.Item label="下单总量" {...formItemLayout}>
-                                {getFieldDecorator("tradeQtyLimit")(
-                                    <Input placeholder="" readOnly />
-                                )}
-                            </Form.Item>
-                            <Form.Item label="下单总金额" {...formItemLayout}>
-                                {getFieldDecorator("tradeAmountLimit")(
-                                    <Input placeholder="" readOnly />
-                                )}
-                            </Form.Item>
+                                <Form.Item
+                                    label={
+                                        <label title="下单总量笔数阈值">
+                                            下单总量
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator("tradeQtyLimit", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: "请输入",
+                                            },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
+                                        ],
+                                        initialValue: "0",
+                                    })(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="笔"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                                <div style={{ width: 60 }}></div>
+                                <Form.Item
+                                    label={
+                                        <label title="下单总金额阈值">
+                                            下单总金额
+                                        </label>
+                                    }
+                                    // {...formItemLayout}
+                                >
+                                    {getFieldDecorator("tradeAmountLimit", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: "请输入",
+                                            },
+                                            {
+                                                message: "请输入正整数",
+                                                pattern: /^\d+$/i,
+                                            },
+                                        ],
+                                        initialValue: "0",
+                                    })(
+                                        <Input
+                                            placeholder="请输入"
+                                            suffix="元"
+                                            disabled={true}
+                                        />
+                                    )}
+                                </Form.Item>
+                            </div>
                         </div>
                     </Form>
                 </Modal>
