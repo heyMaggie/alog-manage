@@ -16,6 +16,11 @@ const main = (root = "/main/user") => [
         component: `${pages}/assetInfo`,
         title: "资金信息",
     },
+    {
+        path: `${root}/session`,
+        component: `${pages}/session`,
+        title: "用户会话",
+    },
 ];
 
 export default main;

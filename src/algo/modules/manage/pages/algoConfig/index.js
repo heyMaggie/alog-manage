@@ -53,7 +53,7 @@ class algoConfig extends React.PureComponent {
                 key: "algorithmShow",
                 render: (text, record) => (
                     <Switch
-                        checked={record.algorithmShow == 1}
+                        checked={record.algorithmShow == 2}
                         size="small"
                         onChange={(e) => {
                             // console.log(text, record);
@@ -120,7 +120,7 @@ class algoConfig extends React.PureComponent {
     };
     // type 1 : 是否显示    type:2  是否可用
     onSwitchChange = (val, record, type) => {
-        console.log(val, record, type);
+        // console.log(val, record, type);
         // console.log(type);
         let algorithmStatus;
         let paramVal = 0;
@@ -133,8 +133,8 @@ class algoConfig extends React.PureComponent {
             paramVal = val ? 1 : 0;
             algorithmStatus = record.algorithmShow + paramVal;
         }
-        console.log("paramVal", paramVal);
-        console.log("algorithmStatus", algorithmStatus);
+        // console.log("paramVal", paramVal);
+        // console.log("algorithmStatus", algorithmStatus);
 
         let params = {
             AlgorithmId: record.id,
@@ -304,10 +304,10 @@ class algoConfig extends React.PureComponent {
                         item.algorithmShow = 0;
                         item.algorithmEnable = 1;
                     } else if (item.algorithmStatus == 2) {
-                        item.algorithmShow = 1;
+                        item.algorithmShow = 2;
                         item.algorithmEnable = 0;
                     } else if (item.algorithmStatus == 3) {
-                        item.algorithmShow = 1;
+                        item.algorithmShow = 2;
                         item.algorithmEnable = 1;
                     }
                 });

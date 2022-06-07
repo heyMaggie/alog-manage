@@ -48,6 +48,8 @@ class Admin extends React.PureComponent {
             firstTitle = "风控管理";
         } else if (menuPath.indexOf("/main/updown") > -1) {
             firstTitle = "数据导入导出";
+        } else if (menuPath.indexOf("/main/chart") > -1) {
+            firstTitle = "算法统计";
         }
         return (
             <Layout>
