@@ -118,6 +118,14 @@ const configData = {
         { key: "6", value: "期权可用、两融可用" },
         { key: "7", value: "现货可用、期权可用、两融可用" },
     ],
+    //0:未登录 1正常登录状态 2 网络异常断开 3 会话超时 4 正常登出
+    sessionStatus: [
+        { key: "0", value: "未登录" },
+        { key: "1", value: "正常登录状态" },
+        { key: "2", value: "网络异常断开" },
+        { key: "3", value: "会话超时" },
+        { key: "4", value: "正常登出" },
+    ],
     positionEffect: [
         { key: "O", value: "开仓" },
         { key: "C", value: "平仓" },

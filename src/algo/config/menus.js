@@ -26,6 +26,12 @@ const menuList = [
                 title: "资金信息",
                 path: "/main/user/assetInfo",
             },
+            {
+                id: "4-4",
+                icon: "",
+                title: "用户会话",
+                path: "/main/user/session",
+            },
         ],
     },
     {
@@ -263,7 +269,6 @@ const menuList = [
             //     title: "成交统计",
             //     path: "/main/chart/orderDeal",
             // },
-
             // {
             //     id: "3-6",
             //     icon: "",
