@@ -37,7 +37,7 @@ const menuList = [
     {
         id: "1",
         path: "/main/trade",
-        icon: "icon1",
+        icon: "icon7",
         title: "交易管理",
         children: [
             {
@@ -231,7 +231,7 @@ const menuList = [
         id: "3",
         path: "/main/chart",
         title: "运维监控",
-        icon: "icon3",
+        icon: "icon5",
         children: [
             {
                 id: "3-5",
@@ -293,7 +293,7 @@ const menuList = [
         id: "6",
         path: "/main/algostatis",
         title: "算法统计",
-        icon: "icon3",
+        icon: "icon6",
         children: [
             {
                 id: "6-1",
