@@ -53,7 +53,7 @@ export default class Cccx extends React.PureComponent {
             grid: {
                 left: "1%",
                 right: "4%",
-                bottom: "3%",
+                bottom: "9%",
                 containLabel: true,
             },
             xAxis: {
@@ -151,11 +151,11 @@ export default class Cccx extends React.PureComponent {
                                 [
                                     {
                                         offset: 0,
-                                        color: "rgba(50, 129, 255, 0.06)",
+                                        color: "rgba(50, 129, 255, 0.2)",
                                     },
                                     {
-                                        offset: 0.8,
-                                        color: "rgba(50, 129, 255, 0)",
+                                        offset: 1,
+                                        color: "rgba(255,255,255,0)",
                                     },
                                 ],
                                 false
@@ -189,11 +189,11 @@ export default class Cccx extends React.PureComponent {
                                 [
                                     {
                                         offset: 0,
-                                        color: "rgba(255, 215, 71, 0.06)",
+                                        color: "rgba(255, 215, 71, 0.2)",
                                     },
                                     {
-                                        offset: 0.8,
-                                        color: "rgba(255, 215, 71, 0)",
+                                        offset: 1,
+                                        color: "rgba(255, 255, 255, 0)",
                                     },
                                 ],
                                 false
@@ -204,6 +204,33 @@ export default class Cccx extends React.PureComponent {
                     },
                 },
             ],
+            dataZoom: [
+                {
+                    type: "inside",
+                },
+                {
+                    type: "slider",
+                    height: "20px",
+                },
+            ],
+            // dataZoom: [
+            //     {
+            //         type: "inside",
+            //         xAxisIndex: [0, 1],
+            //         start: 0,
+            //         end: 100,
+            //     },
+            //     {
+            //         height: "20px",
+            //         show: true,
+            //         xAxisIndex: [0, 1],
+            //         type: "slider",
+            //         // top: "80%",
+            //         bottom: "0px",
+            //         start: 0,
+            //         end: 100,
+            //     },
+            // ],
         };
         var myChart = echarts.init(document.getElementById("main"));
         myChart.setOption(option);
@@ -268,7 +295,7 @@ export default class Cccx extends React.PureComponent {
                 <div>
                     <div
                         id="main"
-                        style={{ width: "100%", height: "600px" }}
+                        style={{ width: "100%", height: "500px" }}
                     ></div>
                 </div>
             </div>
