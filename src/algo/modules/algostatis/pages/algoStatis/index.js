@@ -39,18 +39,15 @@ export default class Cccx extends React.PureComponent {
             // },
             tooltip: {
                 trigger: "axis",
-                lineStyle: {
-                    color: "#BDBEBF",
-                },
-            },
-            axisPointer: {
-                link: { xAxisIndex: "all" },
-                label: {
-                    backgroundColor: "#777",
+                backgroundColor: "#1F2329",
+                boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
+                borderColor: "#1F2329",
+                textStyle: {
+                    color: "#fff",
                 },
             },
             legend: {
-                data: ["人数", "股票量"],
+                data: ["人数", "股票数量"],
                 left: 0,
             },
             grid: {
@@ -87,6 +84,10 @@ export default class Cccx extends React.PureComponent {
                 axisLine: {
                     // 刻度线的颜色
                     show: false,
+                },
+                axisPointer: {
+                    type: "line",
+                    lineStyle: { color: "#BDBEBF" },
                 },
             },
             yAxis: [
@@ -140,9 +141,32 @@ export default class Cccx extends React.PureComponent {
                             color: "#83BDFF",
                         },
                     },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0,
+                                0,
+                                0,
+                                1,
+                                [
+                                    {
+                                        offset: 0,
+                                        color: "rgba(50, 129, 255, 0.06)",
+                                    },
+                                    {
+                                        offset: 0.8,
+                                        color: "rgba(50, 129, 255, 0)",
+                                    },
+                                ],
+                                false
+                            ),
+                            shadowColor: "rgba(0, 0, 0, 0.1)",
+                            shadowBlur: 10,
+                        },
+                    },
                 },
                 {
-                    name: "股票量",
+                    name: "股票数量",
                     type: "line",
                     stack: "总量",
                     data: [220, 182, 191, 234, 290, 330, 310],
@@ -151,6 +175,31 @@ export default class Cccx extends React.PureComponent {
                     itemStyle: {
                         normal: {
                             color: "#FFD747",
+                        },
+                    },
+                    areaStyle: {
+                        // background: linear-gradient(360deg, rgba(255, 255, 255, 0) 0%, rgba(50, 129, 255, 0.06) 100%);
+                        // background: linear-gradient(360deg, rgba(255, 255, 255, 0) 0%, rgba(255, 215, 71, 0.06) 100%);
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0,
+                                0,
+                                0,
+                                1,
+                                [
+                                    {
+                                        offset: 0,
+                                        color: "rgba(255, 215, 71, 0.06)",
+                                    },
+                                    {
+                                        offset: 0.8,
+                                        color: "rgba(255, 215, 71, 0)",
+                                    },
+                                ],
+                                false
+                            ),
+                            shadowColor: "rgba(0, 0, 0, 0.1)",
+                            shadowBlur: 10,
                         },
                     },
                 },
