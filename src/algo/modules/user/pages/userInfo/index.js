@@ -1,7 +1,16 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
-import { Input, Modal, Switch, Form, message } from "antd";
+import {
+    Input,
+    Modal,
+    Switch,
+    Form,
+    message,
+    Icon,
+    Button,
+    Upload,
+} from "antd";
 import styles from "./style.module.less";
 
 let getSearchFormFields = () => {
@@ -296,13 +305,35 @@ class userInfo extends React.PureComponent {
             labelCol,
             wrapperCol,
         };
-
+        let props = {
+            name: "file",
+            // accept: ".xlsx",
+            accept: ".xml",
+            showUploadList: false,
+            action: window.baseURL + "/user/upload",
+            onChange(info) {
+                if (info.file.status !== "uploading") {
+                    // console.log(info.file, info.fileList);
+                }
+                if (info.file.status === "done") {
+                    if (info.file.response.code == 0) {
+                        message.success(`${info.file.name} 上传成功`);
+                        that.getData();
+                    } else {
+                        message.error(`${info.file.response.message}`);
+                    }
+                } else if (info.file.status === "error") {
+                    message.error(`${info.file.name} 上传失败`);
+                }
+            },
+        };
         return (
             <div className={styles.userInfo}>
                 <CurdComponent
                     // rowKey={"index"}
                     // isShowSearchForm={false}
                     // btnText2="查全部"
+                    hasSlot={true}
                     onSearchClick={this.handleSearch}
                     getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
@@ -320,7 +351,16 @@ class userInfo extends React.PureComponent {
                     dataSource={info}
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
-                ></CurdComponent>
+                >
+                    <Upload {...props}>
+                        <Button type="primary">
+                            <Icon type="upload" /> 用户信息上传
+                        </Button>
+                    </Upload>
+                    <Button type="primary" onClick={this.handleDownload}>
+                        <Icon type="download" /> 用户信息导出
+                    </Button>
+                </CurdComponent>
                 {/* <Form.Item label="用户名">
                                 {getFieldDecorator("userName")(
                                     <Input placeholder="" readOnly />

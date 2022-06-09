@@ -358,6 +358,11 @@ class CurdComponent extends React.PureComponent {
                     this.pageId
                 }
             >
+                {this.props.hasSlot && (
+                    <div className={styles.insertWrap}>
+                        {this.props.children}
+                    </div>
+                )}
                 {isShowSearchForm && (
                     <div className={styles.searchWrap}>
                         <SearchForm
@@ -414,11 +419,6 @@ class CurdComponent extends React.PureComponent {
                         )}
                     </div>
                 )} */}
-                {this.props.hasSlot && (
-                    <div className={styles.insertWrap}>
-                        {this.props.children}
-                    </div>
-                )}
                 <div ref="tableWrap" className={styles.tableWrap}>
                     <Table
                         rowKey={rowKey}
