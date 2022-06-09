@@ -8,6 +8,7 @@ import updown from "@/algo/modules/updown";
 import manage from "@/algo/modules/manage";
 import risk from "@/algo/modules/risk";
 import user from "@/algo/modules/user";
+import algostatis from "@/algo/modules/algostatis";
 
 import axios from "axios";
 //根据环境  自动切换 IP
@@ -23,7 +24,14 @@ if (process.env.NODE_ENV == "development") {
 window.baseURL = axios.defaults.baseURL;
 //注册 main 模块路由
 // let routes = [...parameter(), ...updown(), ...charts(), ...manage()];
-let routes = [...updown(), ...charts(), ...user(), ...manage(), ...risk()];
+let routes = [
+    ...updown(),
+    ...charts(),
+    ...user(),
+    ...manage(),
+    ...risk(),
+    ...algostatis(),
+];
 //动态引入 component对应地址的组件
 let res = withDynamicImport(main("/main", routes));
 export default res.routes;

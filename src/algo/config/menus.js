@@ -37,7 +37,7 @@ const menuList = [
     {
         id: "1",
         path: "/main/trade",
-        icon: "icon1",
+        icon: "icon7",
         title: "交易管理",
         children: [
             {
@@ -230,8 +230,21 @@ const menuList = [
     {
         id: "3",
         path: "/main/chart",
-        title: "算法统计",
+        title: "运维监控",
+        icon: "icon5",
         children: [
+            {
+                id: "3-5",
+                icon: "",
+                title: "CPU信息",
+                path: "/main/chart/cpu",
+            },
+            {
+                id: "3-6",
+                icon: "",
+                title: "内存信息",
+                path: "/main/chart/ram",
+            },
             {
                 id: "3-1",
                 icon: "",
@@ -256,12 +269,6 @@ const menuList = [
             //     title: "成交统计",
             //     path: "/main/chart/orderDeal",
             // },
-            {
-                id: "3-5",
-                icon: "",
-                title: "cpu使用率",
-                path: "/main/chart/cpu",
-            },
             // {
             //     id: "3-6",
             //     icon: "",
@@ -280,6 +287,20 @@ const menuList = [
             //     title: "网络带宽",
             //     path: "/main/chart/network",
             // },
+        ],
+    },
+    {
+        id: "6",
+        path: "/main/algostatis",
+        title: "算法统计",
+        icon: "icon6",
+        children: [
+            {
+                id: "6-1",
+                icon: "",
+                title: "算法统计",
+                path: "/main/algostatis/algoStatis",
+            },
         ],
     },
 ];
