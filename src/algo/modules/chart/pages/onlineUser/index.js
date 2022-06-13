@@ -1,20 +1,11 @@
 import React from "react";
 import styles from "./style.module.less";
 import echarts from "echarts";
-import {
-    SearchForm,
-    Input,
-    TimePicker,
-    Form,
-    Button,
-    Icon,
-    DatePicker,
-    Select,
-} from "antd";
+import { TimePicker, Form, Button, Icon, DatePicker, Select } from "antd";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
-export default class Cccx extends React.PureComponent {
+class OnlineUser extends React.PureComponent {
     state = {
         searchLoading: false,
         info: [],
@@ -29,226 +20,155 @@ export default class Cccx extends React.PureComponent {
             }
         });
     };
-    getData2 = (params, count = 0) => {
-        let option = {
-            textStyle: {
-                color: "#333",
-            },
-            // title: {
-            //     text: "折线图堆叠",
-            // },
-            tooltip: {
-                trigger: "axis",
-                backgroundColor: "#1F2329",
-                boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
-                borderColor: "#1F2329",
-                textStyle: {
-                    color: "#fff",
-                },
-            },
-            legend: {
-                data: ["人数", "股票数量"],
-                left: 0,
-            },
-            grid: {
-                left: "1%",
-                right: "4%",
-                bottom: "9%",
-                containLabel: true,
-            },
-            xAxis: {
-                type: "category",
-                boundaryGap: false,
-                data: [
-                    "9-12 10:00",
-                    "9-13 10:00",
-                    "9-14 10:00",
-                    "9-15 10:00",
-                    "9-16 10:00",
-                    "9-17 10:00",
-                    "9-18 10:00",
-                ],
-                splitLine: {
-                    show: true,
-                    lineStyle: {
-                        color: "#E9E9E9",
-                        type: "dashed",
+    getData = (params, count = 0) => {
+        http.post({
+            url: "/session/getOnline",
+        }).then((res) => {
+            console.log(res.data, "请求成功111");
+            if (res.code == 0) {
+                let option = {
+                    textStyle: {
+                        color: "#333",
                     },
-                },
-                axisTick: {
-                    show: true, //显示X轴刻度
-                    lineStyle: {
-                        color: "#E9E9E9",
-                    },
-                },
-                axisLine: {
-                    // 刻度线的颜色
-                    show: false,
-                },
-                axisPointer: {
-                    type: "line",
-                    lineStyle: { color: "#BDBEBF" },
-                },
-            },
-            yAxis: [
-                {
-                    type: "value",
-                    name: "单位：（股）",
-                    nameLocation: "end",
-                    axisLine: {
-                        show: false,
-                    },
-                    nameTextStyle: {
-                        color: "#666",
-                    },
-                    axisTick: {
-                        show: false, //隐藏X轴刻度
-                    },
-                    splitLine: {
-                        show: true,
-                        lineStyle: {
-                            color: "#E9E9E9",
+                    tooltip: {
+                        trigger: "axis",
+                        backgroundColor: "#1F2329",
+                        boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
+                        borderColor: "#1F2329",
+                        textStyle: {
+                            color: "#fff",
                         },
                     },
-                },
-                {
-                    gridIndex: 0,
-                    type: "value",
-                    name: "单位：（个）",
-                    splitLine: {
-                        show: false,
+                    dataset: {
+                        dimensions: ["x", "y"],
+                        source: res.data,
                     },
-                    axisTick: {
-                        show: false, //隐藏X轴刻度
+                    grid: {
+                        left: "1%",
+                        right: "4%",
+                        bottom: "9%",
+                        top: "33px",
+                        containLabel: true,
                     },
-                    axisLine: {
-                        show: false,
-                    },
-                    min: "0",
-                    max: "100",
-                },
-            ],
-            series: [
-                {
-                    name: "人数",
-                    type: "line",
-                    stack: "总量",
-                    data: [120, 132, 101, 134, 90, 230, 210],
-                    smooth: true,
-                    showSymbol: false,
-                    itemStyle: {
-                        normal: {
-                            color: "#83BDFF",
+                    xAxis: {
+                        type: "category",
+                        boundaryGap: false,
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: "#E9E9E9",
+                                type: "dashed",
+                            },
+                        },
+                        axisLabel: {
+                            // interval: 0,
+                            // rotate: 30,
+                        },
+                        axisTick: {
+                            show: true, //显示X轴刻度
+                            lineStyle: {
+                                color: "#E9E9E9",
+                            },
+                        },
+                        axisLine: {
+                            // 刻度线的颜色
+                            show: false,
+                        },
+                        axisPointer: {
+                            type: "line",
+                            lineStyle: { color: "#BDBEBF" },
                         },
                     },
-                    areaStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(
-                                0,
-                                0,
-                                0,
-                                1,
-                                [
-                                    {
-                                        offset: 0,
-                                        color: "rgba(50, 129, 255, 0.2)",
-                                    },
-                                    {
-                                        offset: 1,
-                                        color: "rgba(255,255,255,0)",
-                                    },
-                                ],
-                                false
-                            ),
-                            shadowColor: "rgba(0, 0, 0, 0.1)",
-                            shadowBlur: 10,
+                    yAxis: [
+                        {
+                            type: "value",
+                            name: "单位：（个）",
+                            nameLocation: "end",
+                            axisLine: {
+                                show: false,
+                            },
+                            nameTextStyle: {
+                                color: "#666",
+                            },
+                            axisTick: {
+                                show: false, //隐藏X轴刻度
+                            },
+                            splitLine: {
+                                show: true,
+                                lineStyle: {
+                                    color: "#E9E9E9",
+                                    type: "dashed",
+                                },
+                            },
+                            nameTextStyle: {
+                                padding: [0, 0, 0, 40],
+                            },
                         },
-                    },
-                },
-                {
-                    name: "股票数量",
-                    type: "line",
-                    stack: "总量",
-                    data: [220, 182, 191, 234, 290, 330, 310],
-                    smooth: true,
-                    showSymbol: false,
-                    itemStyle: {
-                        normal: {
-                            color: "#FFD747",
+                    ],
+                    series: [
+                        {
+                            name: "在线人数",
+                            type: "line",
+                            smooth: true,
+                            showSymbol: false,
+                            // symbol: "circle",
+                            itemStyle: {
+                                normal: {
+                                    color: "#65A6FF",
+                                },
+                            },
+                            areaStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0,
+                                        0,
+                                        0,
+                                        1,
+                                        [
+                                            {
+                                                offset: 0,
+                                                color: "rgba(50, 129, 255, 0.2)",
+                                            },
+                                            {
+                                                offset: 1,
+                                                color: "rgba(255,255,255,0)",
+                                            },
+                                        ],
+                                        false
+                                    ),
+                                    shadowColor: "rgba(0, 0, 0, 0.1)",
+                                    shadowBlur: 10,
+                                },
+                            },
                         },
-                    },
-                    areaStyle: {
-                        // background: linear-gradient(360deg, rgba(255, 255, 255, 0) 0%, rgba(50, 129, 255, 0.06) 100%);
-                        // background: linear-gradient(360deg, rgba(255, 255, 255, 0) 0%, rgba(255, 215, 71, 0.06) 100%);
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(
-                                0,
-                                0,
-                                0,
-                                1,
-                                [
-                                    {
-                                        offset: 0,
-                                        color: "rgba(255, 215, 71, 0.2)",
-                                    },
-                                    {
-                                        offset: 1,
-                                        color: "rgba(255, 255, 255, 0)",
-                                    },
-                                ],
-                                false
-                            ),
-                            shadowColor: "rgba(0, 0, 0, 0.1)",
-                            shadowBlur: 10,
-                        },
-                    },
-                },
-            ],
-            dataZoom: [
-                {
-                    type: "inside",
-                },
-                {
-                    type: "slider",
-                    height: "20px",
-                },
-            ],
-            // dataZoom: [
-            //     {
-            //         type: "inside",
-            //         xAxisIndex: [0, 1],
-            //         start: 0,
-            //         end: 100,
-            //     },
-            //     {
-            //         height: "20px",
-            //         show: true,
-            //         xAxisIndex: [0, 1],
-            //         type: "slider",
-            //         // top: "80%",
-            //         bottom: "0px",
-            //         start: 0,
-            //         end: 100,
-            //     },
-            // ],
-        };
-        var myChart = echarts.init(document.getElementById("main"));
-        myChart.setOption(option);
+                    ],
+                    // dataZoom: [
+                    //     {
+                    //         type: "inside",
+                    //     },
+                    //     {
+                    //         type: "slider",
+                    //         height: "20px",
+                    //     },
+                    // ],
+                };
+                var myChart = echarts.init(document.getElementById("main3"));
+                myChart.setOption(option);
+                this.setState({
+                    info: option,
+                });
+            } else {
+                message.error("服务异常");
+            }
+        });
     };
     componentDidMount() {
-        this.getData2();
+        this.getData();
     }
     render() {
+        const { getFieldDecorator } = this.props.form;
         function onChange(value) {
             console.log(`selected ${value}`);
-        }
-
-        function onBlur() {
-            console.log("blur");
-        }
-
-        function onFocus() {
-            console.log("focus");
         }
 
         function onSearch(val) {
@@ -259,34 +179,20 @@ export default class Cccx extends React.PureComponent {
                 <div className={styles.search}>
                     <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item>
-                            <Select
-                                showSearch
-                                style={{ width: 200 }}
-                                placeholder="选择算法"
-                                optionFilterProp="children"
-                                onChange={onChange}
-                                onFocus={onFocus}
-                                onBlur={onBlur}
-                                onSearch={onSearch}
-                                filterOption={(input, option) =>
-                                    option.props.children
-                                        .toLowerCase()
-                                        .indexOf(input.toLowerCase()) >= 0
-                                }
-                            >
-                                <Option value="0">全部</Option>
-                                <Option value="1">Lucy</Option>
-                                <Option value="2">Tom</Option>
-                            </Select>
-                        </Form.Item>
-                        <Form.Item style={{ marginLeft: "12px" }}>
-                            <RangePicker
-                                showTime
-                                format="YYYY-MM-DD HH:mm:ss"
-                            />
+                            {getFieldDecorator("range-time-picker")(
+                                <RangePicker
+                                    style={{ width: 432 }}
+                                    showTime
+                                    format="YYYY-MM-DD HH:mm:ss"
+                                />
+                            )}
                         </Form.Item>
                         <Form.Item style={{ float: "right" }}>
-                            <Button type="primary" htmlType="submit">
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                style={{ width: 76 }}
+                            >
                                 确定
                             </Button>
                         </Form.Item>
@@ -294,7 +200,7 @@ export default class Cccx extends React.PureComponent {
                 </div>
                 <div>
                     <div
-                        id="main"
+                        id="main3"
                         style={{ width: "100%", height: "500px" }}
                     ></div>
                 </div>
@@ -302,3 +208,4 @@ export default class Cccx extends React.PureComponent {
         );
     }
 }
+export default Form.create()(OnlineUser);
