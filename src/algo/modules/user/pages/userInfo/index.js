@@ -282,6 +282,9 @@ class userInfo extends React.PureComponent {
         console.log(params);
         this.getData(params);
     };
+    handleDownload = () => {
+        window.location.href = window.baseURL + "/user/download";
+    };
     componentDidMount() {
         this.getData();
     }
@@ -311,14 +314,14 @@ class userInfo extends React.PureComponent {
             accept: ".xml",
             showUploadList: false,
             action: window.baseURL + "/user/upload",
-            onChange(info) {
+            onChange: (info) => {
                 if (info.file.status !== "uploading") {
                     // console.log(info.file, info.fileList);
                 }
                 if (info.file.status === "done") {
                     if (info.file.response.code == 0) {
                         message.success(`${info.file.name} 上传成功`);
-                        that.getData();
+                        this.getData();
                     } else {
                         message.error(`${info.file.response.message}`);
                     }

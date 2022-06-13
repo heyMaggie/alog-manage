@@ -334,7 +334,8 @@ class CurdComponent extends React.PureComponent {
             this.props.onRef(this);
         }
         let pageSize = 0;
-        if (insertBtnText || this.props.hasSlot) {
+        let hasInsert = this.props.hasSlot && sessionStorage.userPrivilege == 0;
+        if (insertBtnText || hasInsert) {
             pageSize = 12;
         }
         if (
@@ -342,6 +343,9 @@ class CurdComponent extends React.PureComponent {
             this.props.getSearchFormFields().length > 0
         ) {
             pageSize = 12;
+            if (insertBtnText || hasInsert) {
+                pageSize = 11;
+            }
         }
         if (this.props.pageSize) {
             pageSize = this.props.pageSize;
@@ -358,7 +362,7 @@ class CurdComponent extends React.PureComponent {
                     this.pageId
                 }
             >
-                {this.props.hasSlot && (
+                {hasInsert && (
                     <div className={styles.insertWrap}>
                         {this.props.children}
                     </div>
