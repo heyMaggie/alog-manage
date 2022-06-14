@@ -98,7 +98,7 @@ let columns = () => {
             width: 100,
         },
         {
-            title: "平均价格00",
+            title: "平均价格",
             dataIndex: "price",
             width: 100,
         },
@@ -181,7 +181,7 @@ export default class Cccx extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 1200, y: 445 };
+        let scroll = { x: 2500, y: 445 };
         let info = this.state.info;
         return (
             <CurdComponent
@@ -206,7 +206,14 @@ export default class Cccx extends React.PureComponent {
                 dtColumns={dtColumns()} //详情列表
                 dtCol={2} //详情列数
                 // dtWidth={800} //详情弹窗宽度
-            ></CurdComponent>
+            >
+                <div
+                    urlPrefix="/user-position"
+                    noUpload={true}
+                    title="持仓信息"
+                    sucCallback={this.getData}
+                ></div>
+            </CurdComponent>
         );
     }
 }

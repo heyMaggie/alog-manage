@@ -5,7 +5,8 @@ import SearchForm from "@/components/SearchForm";
 import DynamicModal from "@/components/DynamicModal";
 import Table from "@/components/Table";
 import DynamicDescriptions from "@/components/DynamicDescriptions";
-import SplitPane from "react-split-pane";
+// import SplitPane from "react-split-pane";
+import UploadWrap from "@/components/UploadWrap";
 
 class CurdComponent extends React.PureComponent {
     state = {
@@ -334,7 +335,10 @@ class CurdComponent extends React.PureComponent {
             this.props.onRef(this);
         }
         let pageSize = 0;
-        let hasInsert = this.props.hasSlot && sessionStorage.userPrivilege == 0;
+        // let hasInsert = this.props.hasSlot && sessionStorage.userPrivilege == 0;
+        let hasInsert =
+            this.props.children && sessionStorage.userPrivilege == 0;
+        // console.log(hasInsert);
         if (insertBtnText || hasInsert) {
             pageSize = 12;
         }
@@ -342,6 +346,7 @@ class CurdComponent extends React.PureComponent {
             this.props.getSearchFormFields &&
             this.props.getSearchFormFields().length > 0
         ) {
+            // if (this.props.isShowSearchForm) {
             pageSize = 12;
             if (insertBtnText || hasInsert) {
                 pageSize = 11;
@@ -353,6 +358,7 @@ class CurdComponent extends React.PureComponent {
         // console.log("CurdComponent 渲染 ", this.pageId);
         // console.log("insertBtnText", insertBtnText);
         // console.log("hasSlot", this.props.hasSlot);
+        console.log(this.props.children);
         return (
             <div
                 className={
@@ -362,9 +368,14 @@ class CurdComponent extends React.PureComponent {
                     this.pageId
                 }
             >
-                {hasInsert && (
+                {/* {hasInsert && (
                     <div className={styles.insertWrap}>
                         {this.props.children}
+                    </div>
+                )} */}
+                {hasInsert && (
+                    <div className={styles.insertWrap}>
+                        <UploadWrap {...this.props.children.props}></UploadWrap>
                     </div>
                 )}
                 {isShowSearchForm && (
@@ -389,11 +400,11 @@ class CurdComponent extends React.PureComponent {
                             )}
                             {this.props.hasSearchSlot && (
                                 <React.Fragment>
-                                    {this.props.children}
+                                    {this.props.addBtn}
                                 </React.Fragment>
                             )}
                         </SearchForm>
-                        <div
+                        {/* <div
                             style={{
                                 position: "relative",
                             }}
@@ -407,7 +418,7 @@ class CurdComponent extends React.PureComponent {
                                     top: "-1px",
                                 }}
                             ></div>
-                        </div>
+                        </div> */}
                     </div>
                 )}
                 {/* {insertBtnText != "" && (
@@ -423,6 +434,7 @@ class CurdComponent extends React.PureComponent {
                         )}
                     </div>
                 )} */}
+                <div className={styles.pad22}></div>
                 <div ref="tableWrap" className={styles.tableWrap}>
                     <Table
                         rowKey={rowKey}

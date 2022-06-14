@@ -195,7 +195,14 @@ export default class userRisk extends React.PureComponent {
                 dtColumns={dtColumns()} //详情列表
                 dtCol={2} //详情列数
                 // dtWidth={800} //详情弹窗宽度
-            ></CurdComponent>
+            >
+                <div
+                    urlPrefix="/user-risk-statistics"
+                    noUpload={true}
+                    title="用户风险"
+                    sucCallback={this.getData}
+                ></div>
+            </CurdComponent>
         );
     }
 }

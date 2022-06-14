@@ -364,7 +364,13 @@ class algoConfig extends React.PureComponent {
                     dataSource={info}
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
-                ></CurdComponent>
+                >
+                    <div
+                        urlPrefix="/algo"
+                        title="算法信息"
+                        sucCallback={this.getData}
+                    ></div>
+                </CurdComponent>
                 <Modal
                     title={"修改记录"}
                     visible={this.state.updateModalVisible}

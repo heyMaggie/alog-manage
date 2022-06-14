@@ -46,7 +46,7 @@ const columns = (params) => {
             width: 120,
         },
         {
-            title: "订单价格 00",
+            title: "订单价格",
             dataIndex: "price",
             width: 120,
         },
@@ -138,7 +138,7 @@ const columns = (params) => {
             width: 120,
         },
         {
-            title: "累计成交金额 00",
+            title: "累计成交金额",
             dataIndex: "cum_amount",
             width: 120,
         },
@@ -236,8 +236,8 @@ export default class newOrderQuery extends React.PureComponent {
                     // rowKey={"index"}
                     isShowSearchForm={false}
                     // btnText2="查全部"
-                    onSearchClick={this.handleSearch}
-                    getSearchFormFields={getSearchFormFields}
+                    // onSearchClick={this.handleSearch}
+                    // getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
                     // getInsertFormFields={getInsertFormFields}
@@ -253,7 +253,14 @@ export default class newOrderQuery extends React.PureComponent {
                     dataSource={info}
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
-                ></CurdComponent>
+                >
+                    <div
+                        urlPrefix="/new-trade-order"
+                        noUpload={true}
+                        title="子单信息"
+                        sucCallback={this.getData}
+                    ></div>
+                </CurdComponent>
             </div>
         );
     }

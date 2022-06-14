@@ -8,7 +8,7 @@ const columns = (params) => {
         {
             title: "用户Id",
             dataIndex: "uuserId",
-            width:100
+            width: 100,
         },
         {
             title: "篮子名称",
@@ -17,17 +17,17 @@ const columns = (params) => {
         {
             title: "篮子描述",
             dataIndex: "remarks",
-            width:200
+            width: 200,
         },
         {
             title: "篮子类型",
             dataIndex: "basketType",
-            width:100
+            width: 100,
         },
         {
             title: "篮子状态",
             dataIndex: "bStatus",
-            width:100
+            width: 100,
         },
         {
             title: "包含的母单数",
@@ -49,7 +49,7 @@ const columns = (params) => {
         {
             title: "错误码",
             dataIndex: "errorCode",
-            width:100
+            width: 100,
         },
         {
             title: "错误信息",
@@ -144,7 +144,7 @@ export default class uoeSetting extends React.PureComponent {
             console.log(res);
             //解析数据字典
             if (res.data.length > 0) {
-                parseArrDict(res.data,"status","bStatus");
+                parseArrDict(res.data, "status", "bStatus");
                 parseDict(res.data);
                 showStip(this);
             } else {
@@ -162,7 +162,7 @@ export default class uoeSetting extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 2000, y: 445 };
+        let scroll = { x: 2200, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;
@@ -193,7 +193,14 @@ export default class uoeSetting extends React.PureComponent {
                     dataSource={info}
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
-                ></CurdComponent>
+                >
+                    <div
+                        urlPrefix="/basket-info"
+                        noUpload={true}
+                        title="篮子管理"
+                        sucCallback={this.getData}
+                    ></div>
+                </CurdComponent>
             </div>
         );
     }

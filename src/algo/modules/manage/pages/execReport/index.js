@@ -168,7 +168,14 @@ export default class execReport extends React.PureComponent {
                     dataSource={info}
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
-                ></CurdComponent>
+                >
+                    <div
+                        urlPrefix="/order-deal"
+                        noUpload={true}
+                        title="成交回执"
+                        sucCallback={this.getData}
+                    ></div>
+                </CurdComponent>
             </div>
         );
     }

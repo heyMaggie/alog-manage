@@ -347,7 +347,14 @@ export default class newOrderQuery extends React.PureComponent {
                     dataSource={info}
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
-                ></CurdComponent>
+                >
+                    <div
+                        urlPrefix="/new-algo-order"
+                        noUpload={true}
+                        title="母单信息"
+                        sucCallback={this.getData}
+                    ></div>
+                </CurdComponent>
             </div>
         );
     }

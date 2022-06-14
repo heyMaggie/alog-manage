@@ -1,6 +1,7 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 // import SelectOption from "@/components/SelectOption";
+// import UploadWrap from "@/components/UploadWrap";
 import { Input } from "antd";
 
 const columns = (params) => {
@@ -170,7 +171,14 @@ export default class uoeSetting extends React.PureComponent {
                     dataSource={info}
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
-                ></CurdComponent>
+                >
+                    <div
+                        urlPrefix="/stockHolder"
+                        noUpload={true}
+                        title="资金信息"
+                        sucCallback={this.getData}
+                    ></div>
+                </CurdComponent>
             </div>
         );
     }

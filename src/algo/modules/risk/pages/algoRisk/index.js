@@ -185,7 +185,14 @@ export default class algoRisk extends React.PureComponent {
                 dtColumns={dtColumns()} //详情列表
                 dtCol={2} //详情列数
                 // dtWidth={800} //详情弹窗宽度
-            ></CurdComponent>
+            >
+                <div
+                    urlPrefix="/algo-risk-statistics"
+                    noUpload={true}
+                    title="算法风险"
+                    sucCallback={this.getData}
+                ></div>
+            </CurdComponent>
         );
     }
 }

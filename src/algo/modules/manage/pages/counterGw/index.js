@@ -375,7 +375,13 @@ class CounterGw extends React.PureComponent {
                     dataSource={info}
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
-                ></CurdComponent>
+                >
+                    <div
+                        urlPrefix="/counter-user-info"
+                        title="柜台用户"
+                        sucCallback={this.getData}
+                    ></div>
+                </CurdComponent>
                 <Modal
                     title={"修改柜台网关Id"}
                     visible={this.state.updateModalVisible}

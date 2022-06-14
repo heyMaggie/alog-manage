@@ -61,6 +61,11 @@ const main = (root = "/main/manage") => [
         component: `${pages}/basketConfig`,
         title: "篮子管理",
     },
+    {
+        path: `${root}/counterInfo`,
+        component: `${pages}/counterInfo`,
+        title: "柜台信息",
+    },
     // {
     //     path: `${root}/securityQuery`,
     //     component: `${pages}/securityQuery`,

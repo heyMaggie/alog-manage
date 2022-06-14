@@ -95,6 +95,12 @@ const menuList = [
                 title: "篮子管理",
                 path: "/main/manage/basketConfig",
             },
+            {
+                id: "1-8",
+                icon: "",
+                title: "柜台信息",
+                path: "/main/manage/counterInfo",
+            },
         ],
     },
     {

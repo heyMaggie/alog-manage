@@ -3,107 +3,55 @@ import CurdComponent from "@/components/CurdComponent";
 // import SelectOption from "@/components/SelectOption";
 import { Input } from "antd";
 
-const getUpdateFormFields = () => {};
 const columns = (params) => {
     return [
-        // {
-        //     title: "股东账户ID",
-        //     dataIndex: "uaccountId",
-        //     width: 100,
-        // },
         {
-            title: "个人账户",
-            dataIndex: "uuserId",
-            width: 100,
+            title: "id",
+            dataIndex: "id",
         },
         {
-            title: "篮子批次号",
-            dataIndex: "basketId",
-            width: 120,
+            title: "券商编码",
+            dataIndex: "brokerCode",
+            key: "brokerCode",
         },
         {
-            title: "业务类型",
-            dataIndex: "businessType",
-            width: 100,
+            title: "支持业务类型",
+            dataIndex: "supportType",
+            key: "supportType",
         },
         {
-            title: "策略类型",
-            dataIndex: "algorithmType",
-            width: 100,
+            title: "柜台地址",
+            dataIndex: "gwAddr",
+            key: "gwAddr",
         },
         {
-            title: "策略编号",
-            dataIndex: "algorithmId",
-            width: 100,
+            title: "柜台版本号",
+            dataIndex: "version",
+            key: "version",
         },
         {
-            title: "取消标志",
-            dataIndex: "cancelFlag",
-            width: 120,
-        },
-        {
-            title: "原始订单号",
-            dataIndex: "origAlgoOrderId",
-            width: 120,
-        },
-        {
-            title: "撤单订单状态",
-            dataIndex: "algoOrdStatus",
-            width: 120,
-        },
-        {
-            title: "母单在篮子表中的状态",
-            dataIndex: "basketStatus",
-            width: 150,
-        },
-        {
-            title: "请求用户ID",
-            dataIndex: "reqUserId",
-            width: 150,
-        },
-        {
-            title: "错误码",
-            dataIndex: "errorCode",
-            width: 150,
-        },
-        {
-            title: "错误信息",
-            dataIndex: "errorMsg",
-            width: 100,
-        },
-        {
-            title: "客户端序列号",
-            dataIndex: "seq",
-            width: 150,
-        },
-        {
-            title: "交易时间",
-            dataIndex: "transactTime",
-            width: 150,
+            title: "柜台状态",
+            dataIndex: "status",
+            key: "status",
         },
     ];
 };
-// console.log(columns().length);
 let getSearchFormFields = () => {
     return [
+        // {
+        //     label: "保证金账户",
+        //     id: "assetAccount",
+        //     component: <Input placeholder="请输入保证金账户" />,
+        // },
         {
-            label: "期权编码",
-            id: "optionId",
-            component: <Input placeholder="请输入期权编码" />,
-        },
-        {
-            label: "股东账户",
-            id: "accoundId",
-            component: <Input placeholder="请输入股东账户" />,
-        },
-        {
-            label: "原始订单编号",
-            id: "origClOrdId",
-            component: <Input placeholder="请输入原始订单编号" />,
+            label: "用户ID",
+            // id: "userId",
+            id: "userId",
+            component: <Input placeholder="请输入用户ID" />,
         },
     ];
 };
-export default class cancelOrderQuery extends React.PureComponent {
+export default class uoeSetting extends React.PureComponent {
     state = {
         searchLoading: false,
         selectRow: [],
@@ -123,31 +71,53 @@ export default class cancelOrderQuery extends React.PureComponent {
     //更新记录
     handleUpdateRecord = ({ form }) => {
         console.log(form.getFieldsValue());
-        // return
+        // return;
+        let params = form.getFieldsValue();
+        params.name = this.record.name;
+        http.post({
+            url: "/option/tcp/uoeMore/1011",
+            data: params,
+        }).then((res) => {
+            console.log(res);
+            message.success(res.msg);
+            this.isAction = true;
+            this.getData();
+        });
     };
     //删除记录
     handleDeleteRecord = (record) => {
         console.log("删除记录 ", record);
     };
     //填入更新数据
-    setUpdateModal = ({ form, record }) => {};
-    getData = (params = {}) => {
-        // params.token = "";
+    setUpdateModal = ({ form, record }) => {
+        // console.log(record, form);
+        this.record = record;
+        form.setFieldsValue({
+            switchId: record.switchId,
+            ip: record.ip,
+            mask: record.mask,
+            mac: record.mac,
+            gateway: record.gateway,
+            enable: record.enable + "",
+        });
+    };
+    getData = (params) => {
         http.get({
-            url: "/cancel-algo-order/list",
+            // url: "/option/assetInfo/selectList",
+            url: "/counter/list",
             data: params,
         }).then((res) => {
             console.log(res);
             //解析数据字典
             if (res.data.length > 0) {
+                parseArrDict(res.data, "status", "counterStatus");
                 parseDict(res.data);
-                showStip(this);
+                this.setState({
+                    info: res.data,
+                });
             } else {
                 message.info("查询结果为空");
             }
-            this.setState({
-                info: res.data,
-            });
         });
     };
     handleSearch = (params) => {
@@ -157,7 +127,7 @@ export default class cancelOrderQuery extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 1000, y: 445 };
+        let scroll = { x: 1200, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;
@@ -169,8 +139,8 @@ export default class cancelOrderQuery extends React.PureComponent {
             <div>
                 <CurdComponent
                     // rowKey={"index"}
-                    isShowSearchForm={false}
                     // btnText2="查全部"
+                    isShowSearchForm={false}
                     // onSearchClick={this.handleSearch}
                     // getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
@@ -190,9 +160,9 @@ export default class cancelOrderQuery extends React.PureComponent {
                     // rowSelection={rowSelection} //批量选择 操作
                 >
                     <div
-                        urlPrefix="/cancel-algo-order"
-                        noUpload={true}
-                        title="撤单信息"
+                        urlPrefix="/counter"
+                        // noUpload={true}
+                        title="柜台信息"
                         sucCallback={this.getData}
                     ></div>
                 </CurdComponent>

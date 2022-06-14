@@ -110,10 +110,10 @@ class riskConfigManage extends React.PureComponent {
                 title: "净买入额度:风控启用委托数量",
                 dataIndex: "NetBuyEntrustItemThreshold",
                 key: "NetBuyEntrustItemThreshold",
-                width: 220,
+                width: 240,
             },
             {
-                title: "净买入额度 00",
+                title: "净买入额度",
                 dataIndex: "NetBuyAmountLimit",
                 key: "NetBuyAmountLimit",
             },
@@ -385,7 +385,7 @@ class riskConfigManage extends React.PureComponent {
                 RiskType: "7", // 风控类型:净买入额度 (bit5)
                 RadioSecond: "0",
                 Threshold: data.netBuyEntrustItemThreshold + "", // 净买入额度:风控启用委托数量
-                TradeLimit: data.netBuyAmountLimit + "", // 净买入额度 00
+                TradeLimit: data.netBuyAmountLimit + "", // 净买入额度
                 TradeAmount: "0",
                 RiskName: "",
             },
@@ -554,7 +554,7 @@ class riskConfigManage extends React.PureComponent {
                     insertBtnText={"新增风控"} // 不传 就没新增按钮
                     // hasSlot={true}
                     hasSearchSlot={true}
-                    children={
+                    addBtn={
                         <Button
                             type="primary"
                             icon="plus"
@@ -576,8 +576,15 @@ class riskConfigManage extends React.PureComponent {
                     columns={this.columns}
                     dataSource={info}
                     scroll={scroll}
+                    pageSize={11}
                     // rowSelection={rowSelection} //批量选择 操作
-                ></CurdComponent>
+                >
+                    <div
+                        urlPrefix="/risk"
+                        title="风控配置"
+                        sucCallback={this.getData}
+                    ></div>
+                </CurdComponent>
                 <Modal
                     title={modalTitle}
                     visible={this.state.updateModalVisible}

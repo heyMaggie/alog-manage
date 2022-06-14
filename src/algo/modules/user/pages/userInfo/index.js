@@ -1,6 +1,8 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
+// import UploadWrap from "@/components/UploadWrap";
+
 import {
     Input,
     Modal,
@@ -101,7 +103,7 @@ class userInfo extends React.PureComponent {
             {
                 title: "用户风控组别",
                 dataIndex: "riskGroup",
-                width: 120,
+                // width: 120,
             },
             // {
             //     title: "柜台用户ID",
@@ -304,39 +306,16 @@ class userInfo extends React.PureComponent {
         let wrapperCol = {
             xs: 24 - labelCol.xs,
         };
-        let formItemLayout = {
-            labelCol,
-            wrapperCol,
-        };
-        let props = {
-            name: "file",
-            // accept: ".xlsx",
-            accept: ".xml",
-            showUploadList: false,
-            action: window.baseURL + "/user/upload",
-            onChange: (info) => {
-                if (info.file.status !== "uploading") {
-                    // console.log(info.file, info.fileList);
-                }
-                if (info.file.status === "done") {
-                    if (info.file.response.code == 0) {
-                        message.success(`${info.file.name} 上传成功`);
-                        this.getData();
-                    } else {
-                        message.error(`${info.file.response.message}`);
-                    }
-                } else if (info.file.status === "error") {
-                    message.error(`${info.file.name} 上传失败`);
-                }
-            },
-        };
+        // let formItemLayout = {
+        //     labelCol,
+        //     wrapperCol,
+        // };
         return (
             <div className={styles.userInfo}>
                 <CurdComponent
                     // rowKey={"index"}
                     // isShowSearchForm={false}
                     // btnText2="查全部"
-                    hasSlot={true}
                     onSearchClick={this.handleSearch}
                     getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
@@ -355,36 +334,13 @@ class userInfo extends React.PureComponent {
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
                 >
-                    <Upload {...props}>
-                        <Button type="primary">
-                            <Icon type="upload" /> 用户信息上传
-                        </Button>
-                    </Upload>
-                    <Button type="primary" onClick={this.handleDownload}>
-                        <Icon type="download" /> 用户信息导出
-                    </Button>
+                    <div
+                        urlPrefix="/user"
+                        title="用户信息"
+                        sucCallback={this.getData}
+                    ></div>
                 </CurdComponent>
-                {/* <Form.Item label="用户名">
-                                {getFieldDecorator("userName")(
-                                    <Input placeholder="" readOnly />
-                                )}
-                            </Form.Item>
-                            <Form.Item label="修改风控组">
-                                {getFieldDecorator("riskGroup", {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: "请选择",
-                                        },
-                                    ],
-                                })(
 
-                                    <Input
-                                        placeholder=""
-                                        onChange={this.inputChange}
-                                    />
-                                )}
-                            </Form.Item> */}
                 <Modal
                     title={"修改记录"}
                     visible={this.state.updateModalVisible}

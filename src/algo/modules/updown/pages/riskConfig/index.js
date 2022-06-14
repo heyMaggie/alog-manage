@@ -69,7 +69,7 @@ const columns = (params) => {
             width: 220,
         },
         {
-            title: "净买入额度 00",
+            title: "净买入额度",
             dataIndex: "netBuyAmountLimit",
             key: "netBuyAmountLimit",
         },

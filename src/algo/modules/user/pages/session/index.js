@@ -2,6 +2,7 @@ import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 // import SelectOption from "@/components/SelectOption";
 import { Input } from "antd";
+// import UploadWrap from "@/components/UploadWrap";
 
 const columns = (params) => {
     return [
@@ -180,7 +181,14 @@ export default class session extends React.PureComponent {
                     dataSource={info}
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
-                ></CurdComponent>
+                >
+                    <div
+                        urlPrefix="/session"
+                        noUpload={true}
+                        title="用户会话"
+                        sucCallback={this.getData}
+                    ></div>
+                </CurdComponent>
             </div>
         );
     }
