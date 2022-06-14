@@ -14,7 +14,7 @@ import {
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
-export default class Cccx extends React.PureComponent {
+class AlgorithmStatistical extends React.PureComponent {
     state = {
         searchLoading: false,
         info: [],
@@ -25,7 +25,7 @@ export default class Cccx extends React.PureComponent {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log("Received values of form: ", values);
+                console.log("查询的条件 ", values);
             }
         });
     };
@@ -54,6 +54,7 @@ export default class Cccx extends React.PureComponent {
                 left: "1%",
                 right: "4%",
                 bottom: "9%",
+                top: "60px",
                 containLabel: true,
             },
             xAxis: {
@@ -108,7 +109,11 @@ export default class Cccx extends React.PureComponent {
                         show: true,
                         lineStyle: {
                             color: "#E9E9E9",
+                            type: "dashed",
                         },
+                    },
+                    nameTextStyle: {
+                        padding: [0, 0, 0, 12],
                     },
                 },
                 {
@@ -204,53 +209,27 @@ export default class Cccx extends React.PureComponent {
                     },
                 },
             ],
-            dataZoom: [
-                {
-                    type: "inside",
-                },
-                {
-                    type: "slider",
-                    height: "20px",
-                },
-            ],
             // dataZoom: [
             //     {
             //         type: "inside",
-            //         xAxisIndex: [0, 1],
-            //         start: 0,
-            //         end: 100,
             //     },
             //     {
-            //         height: "20px",
-            //         show: true,
-            //         xAxisIndex: [0, 1],
             //         type: "slider",
-            //         // top: "80%",
-            //         bottom: "0px",
-            //         start: 0,
-            //         end: 100,
+            //         height: "20px",
             //     },
             // ],
         };
-        var myChart = echarts.init(document.getElementById("main"));
+        var myChart = echarts.init(document.getElementById("main4"));
         myChart.setOption(option);
     };
     componentDidMount() {
         this.getData2();
     }
     render() {
+        const { getFieldDecorator } = this.props.form;
         function onChange(value) {
             console.log(`selected ${value}`);
         }
-
-        function onBlur() {
-            console.log("blur");
-        }
-
-        function onFocus() {
-            console.log("focus");
-        }
-
         function onSearch(val) {
             console.log("search:", val);
         }
@@ -259,34 +238,48 @@ export default class Cccx extends React.PureComponent {
                 <div className={styles.search}>
                     <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item>
-                            <Select
-                                showSearch
-                                style={{ width: 200 }}
-                                placeholder="选择算法"
-                                optionFilterProp="children"
-                                onChange={onChange}
-                                onFocus={onFocus}
-                                onBlur={onBlur}
-                                onSearch={onSearch}
-                                filterOption={(input, option) =>
-                                    option.props.children
-                                        .toLowerCase()
-                                        .indexOf(input.toLowerCase()) >= 0
-                                }
-                            >
-                                <Option value="0">全部</Option>
-                                <Option value="1">Lucy</Option>
-                                <Option value="2">Tom</Option>
-                            </Select>
+                            {getFieldDecorator("arithmetic", {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: "Please select your gender!",
+                                    },
+                                ],
+                            })(
+                                <Select
+                                    showSearch
+                                    style={{ width: 160 }}
+                                    placeholder="选择算法"
+                                    optionFilterProp="children"
+                                    onChange={onChange}
+                                    onSearch={onSearch}
+                                    filterOption={(input, option) =>
+                                        option.props.children
+                                            .toLowerCase()
+                                            .indexOf(input.toLowerCase()) >= 0
+                                    }
+                                >
+                                    <Option value="0">全部</Option>
+                                    <Option value="1">Lucy</Option>
+                                    <Option value="2">Tom</Option>
+                                </Select>
+                            )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
-                            <RangePicker
-                                showTime
-                                format="YYYY-MM-DD HH:mm:ss"
-                            />
+                            {getFieldDecorator("range-time-picker")(
+                                <RangePicker
+                                    style={{ width: 432 }}
+                                    showTime
+                                    format="YYYY-MM-DD HH:mm:ss"
+                                />
+                            )}
                         </Form.Item>
                         <Form.Item style={{ float: "right" }}>
-                            <Button type="primary" htmlType="submit">
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                style={{ width: 76 }}
+                            >
                                 确定
                             </Button>
                         </Form.Item>
@@ -294,7 +287,7 @@ export default class Cccx extends React.PureComponent {
                 </div>
                 <div>
                     <div
-                        id="main"
+                        id="main4"
                         style={{ width: "100%", height: "500px" }}
                     ></div>
                 </div>
@@ -302,3 +295,4 @@ export default class Cccx extends React.PureComponent {
         );
     }
 }
+export default Form.create()(AlgorithmStatistical);
