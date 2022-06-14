@@ -44,8 +44,8 @@ class OnlineUser extends React.PureComponent {
                         source: res.data,
                     },
                     grid: {
-                        left: "1%",
-                        right: "4%",
+                        left: "25px",
+                        right: "5px",
                         bottom: "9%",
                         top: "33px",
                         containLabel: true,
@@ -154,9 +154,6 @@ class OnlineUser extends React.PureComponent {
                 };
                 var myChart = echarts.init(document.getElementById("main3"));
                 myChart.setOption(option);
-                this.setState({
-                    info: option,
-                });
             } else {
                 message.error("服务异常");
             }
