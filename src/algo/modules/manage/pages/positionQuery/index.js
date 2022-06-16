@@ -148,7 +148,7 @@ export default class Cccx extends React.PureComponent {
     };
     getData = (params, pagination = { current: 1, pageSize: 20 }) => {
         // console.log(pagination);
-        http.get({
+        http.post({
             url: "/user-position/list",
             data: params,
         }).then((res) => {
