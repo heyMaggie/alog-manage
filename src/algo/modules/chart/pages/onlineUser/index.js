@@ -4,95 +4,59 @@ import echarts from "echarts";
 import { TimePicker, Form, Button, Icon, DatePicker, Select } from "antd";
 
 const { RangePicker } = DatePicker;
-const { Option } = Select;
 class OnlineUser extends React.PureComponent {
-    state = {
-        searchLoading: false,
-        info: [],
-        pagination: { total: 0 },
-        username: "",
-    };
+    state = {};
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log("Received values of form: ", values);
+                let noTime = values["pickerTime"].length < 1;
+                let params = {
+                    startTime: noTime
+                        ? ""
+                        : Date.parse(values["pickerTime"][0]),
+                    endTime: noTime ? "" : Date.parse(values["pickerTime"][1]),
+                };
+                this.getData(params);
             }
         });
     };
     getData = (params, count = 0) => {
         http.post({
             url: "/session/getOnline",
+            data: params,
         }).then((res) => {
-            console.log(res.data, "请求成功111");
             if (res.code == 0) {
-                let option = {
-                    textStyle: {
-                        color: "#333",
-                    },
-                    tooltip: {
-                        trigger: "axis",
-                        backgroundColor: "#1F2329",
-                        boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
-                        borderColor: "#1F2329",
+                if (res.data == 0) {
+                    message.error("该时间段暂无数据");
+                } else {
+                    let option = {
                         textStyle: {
-                            color: "#fff",
+                            color: "#333",
                         },
-                    },
-                    dataset: {
-                        dimensions: ["x", "y"],
-                        source: res.data,
-                    },
-                    grid: {
-                        left: "25px",
-                        right: "5px",
-                        bottom: "9%",
-                        top: "33px",
-                        containLabel: true,
-                    },
-                    xAxis: {
-                        type: "category",
-                        boundaryGap: false,
-                        splitLine: {
-                            show: true,
-                            lineStyle: {
-                                color: "#E9E9E9",
-                                type: "dashed",
+                        tooltip: {
+                            trigger: "axis",
+                            backgroundColor: "#1F2329",
+                            boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
+                            borderColor: "#1F2329",
+                            textStyle: {
+                                color: "#fff",
                             },
                         },
-                        axisLabel: {
-                            // interval: 0,
-                            // rotate: 30,
+                        dataset: {
+                            dimensions: ["x", "y"],
+                            source: res.data,
                         },
-                        axisTick: {
-                            show: true, //显示X轴刻度
-                            lineStyle: {
-                                color: "#E9E9E9",
-                            },
+                        grid: {
+                            left: "25px",
+                            right: "5px",
+                            bottom: "9%",
+                            top: "33px",
+                            containLabel: true,
                         },
-                        axisLine: {
-                            // 刻度线的颜色
-                            show: false,
-                        },
-                        axisPointer: {
-                            type: "line",
-                            lineStyle: { color: "#BDBEBF" },
-                        },
-                    },
-                    yAxis: [
-                        {
-                            type: "value",
-                            name: "单位：（个）",
-                            nameLocation: "end",
-                            axisLine: {
-                                show: false,
-                            },
-                            nameTextStyle: {
-                                color: "#666",
-                            },
-                            axisTick: {
-                                show: false, //隐藏X轴刻度
-                            },
+                        xAxis: {
+                            type: "category",
+                            boundaryGap: false,
                             splitLine: {
                                 show: true,
                                 lineStyle: {
@@ -100,60 +64,95 @@ class OnlineUser extends React.PureComponent {
                                     type: "dashed",
                                 },
                             },
-                            nameTextStyle: {
-                                padding: [0, 0, 0, 40],
+                            axisLabel: {
+                                // interval: 0,
+                                // rotate: 30,
                             },
-                        },
-                    ],
-                    series: [
-                        {
-                            name: "在线人数",
-                            type: "line",
-                            smooth: true,
-                            showSymbol: false,
-                            // symbol: "circle",
-                            itemStyle: {
-                                normal: {
-                                    color: "#65A6FF",
+                            axisTick: {
+                                show: true, //显示X轴刻度
+                                lineStyle: {
+                                    color: "#E9E9E9",
                                 },
                             },
-                            areaStyle: {
-                                normal: {
-                                    color: new echarts.graphic.LinearGradient(
-                                        0,
-                                        0,
-                                        0,
-                                        1,
-                                        [
-                                            {
-                                                offset: 0,
-                                                color: "rgba(50, 129, 255, 0.2)",
-                                            },
-                                            {
-                                                offset: 1,
-                                                color: "rgba(255,255,255,0)",
-                                            },
-                                        ],
-                                        false
-                                    ),
-                                    shadowColor: "rgba(0, 0, 0, 0.1)",
-                                    shadowBlur: 10,
-                                },
+                            axisLine: {
+                                // 刻度线的颜色
+                                show: false,
+                            },
+                            axisPointer: {
+                                type: "line",
+                                lineStyle: { color: "#BDBEBF" },
                             },
                         },
-                    ],
-                    // dataZoom: [
-                    //     {
-                    //         type: "inside",
-                    //     },
-                    //     {
-                    //         type: "slider",
-                    //         height: "20px",
-                    //     },
-                    // ],
-                };
-                var myChart = echarts.init(document.getElementById("main3"));
-                myChart.setOption(option);
+                        yAxis: [
+                            {
+                                type: "value",
+                                name: "单位：（个）",
+                                nameLocation: "end",
+                                axisLine: {
+                                    show: false,
+                                },
+                                nameTextStyle: {
+                                    color: "#666",
+                                },
+                                axisTick: {
+                                    show: false, //隐藏X轴刻度
+                                },
+                                splitLine: {
+                                    show: true,
+                                    lineStyle: {
+                                        color: "#E9E9E9",
+                                        type: "dashed",
+                                    },
+                                },
+                                nameTextStyle: {
+                                    padding: [0, 0, 0, 40],
+                                },
+                            },
+                        ],
+                        series: [
+                            {
+                                name: "在线人数",
+                                type: "line",
+                                smooth: true,
+                                showSymbol: false,
+                                // symbol: "circle",
+                                itemStyle: {
+                                    normal: {
+                                        color: "#65A6FF",
+                                    },
+                                },
+                                areaStyle: {
+                                    normal: {
+                                        color: new echarts.graphic.LinearGradient(
+                                            0,
+                                            0,
+                                            0,
+                                            1,
+                                            [
+                                                {
+                                                    offset: 0,
+                                                    color: "rgba(50, 129, 255, 0.2)",
+                                                },
+                                                {
+                                                    offset: 1,
+                                                    color: "rgba(255,255,255,0)",
+                                                },
+                                            ],
+                                            false
+                                        ),
+                                        shadowColor: "rgba(0, 0, 0, 0.1)",
+                                        shadowBlur: 10,
+                                    },
+                                },
+                            },
+                        ],
+                    };
+                    var myChart = echarts.init(
+                        document.getElementById("main3")
+                    );
+                    myChart.resize();
+                    myChart.setOption(option);
+                }
             } else {
                 message.error("服务异常");
             }
@@ -164,19 +163,12 @@ class OnlineUser extends React.PureComponent {
     }
     render() {
         const { getFieldDecorator } = this.props.form;
-        function onChange(value) {
-            console.log(`selected ${value}`);
-        }
-
-        function onSearch(val) {
-            console.log("search:", val);
-        }
         return (
             <div className={styles.container}>
                 <div className={styles.search}>
                     <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item>
-                            {getFieldDecorator("range-time-picker")(
+                            {getFieldDecorator("pickerTime")(
                                 <RangePicker
                                     style={{ width: 432 }}
                                     showTime
