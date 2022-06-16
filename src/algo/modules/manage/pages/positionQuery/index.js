@@ -7,6 +7,12 @@ import CurdComponent from "@/components/CurdComponent";
 const getSearchFormFields = () => {
     return [
         {
+            label: "用户ID",
+            id: "uuserId",
+            // initialValue: "",
+            component: <Input placeholder="请输入" />,
+        },
+        {
             label: "证券帐户",
             id: "accountId",
             // initialValue: "",
@@ -18,16 +24,16 @@ const getSearchFormFields = () => {
             // initialValue: "",
             component: <Input placeholder="请输入" />,
         },
-        {
-            label: "开始时间",
-            id: "startTime",
-            component: <TimePicker placeholder="请输入" />,
-        },
-        {
-            label: "结束时间",
-            id: "endTime",
-            component: <TimePicker placeholder="请输入" />,
-        },
+        // {
+        //     label: "开始时间",
+        //     id: "startTime",
+        //     component: <TimePicker placeholder="请输入" />,
+        // },
+        // {
+        //     label: "结束时间",
+        //     id: "endTime",
+        //     component: <TimePicker placeholder="请输入" />,
+        // },
     ];
 };
 const getInsertFormFields = () => {
