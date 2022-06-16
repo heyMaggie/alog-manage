@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./style.module.less";
 import echarts from "echarts";
+import moment from "moment";
 import {
     SearchForm,
     Input,
@@ -15,97 +16,77 @@ import {
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 class Cpu extends React.PureComponent {
-    state = {
-        searchLoading: false,
-        info: [],
-        pagination: { total: 0 },
-        username: "",
-    };
+    state = {};
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log("Received values of form: ", values);
-            }
+            let noTime = values["pickerTime"].length < 1;
+            let params = {
+                hostId: values.hostId,
+                startTime: noTime
+                    ? ""
+                    : moment(values["pickerTime"][0]).format(
+                          "YYYY/MM/DD HH:mm:ss"
+                      ),
+                endTime: noTime
+                    ? ""
+                    : moment(values["pickerTime"][1]).format(
+                          "YYYY/MM/DD HH:mm:ss"
+                      ),
+            };
+            this.getData(params);
         });
     };
-    getData = (params, count = 0) => {
-        http.get({
+    getData = (params) => {
+        console.log(params, "传入的参数");
+        http.post({
+            data: params,
             url: "/ssh/cpu",
         }).then((res) => {
-            console.log(res.data, "请求成功");
-            let list = res.data;
             if (res.code == 0) {
-                let option = {
-                    textStyle: {
-                        color: "#333",
-                    },
-                    // title: {
-                    //     text: "折线图堆叠",
-                    // },
-                    tooltip: {
-                        trigger: "axis",
-                        backgroundColor: "#1F2329",
-                        boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
-                        borderColor: "#1F2329",
+                let list = res.data;
+                let seriesList = list.series;
+                if (seriesList.length == 0) {
+                    message.error("该时间段暂无数据");
+                } else {
+                    seriesList.forEach((item) => {
+                        item.data = item.y;
+                        item.smooth = true;
+                        item.showSymbol = false;
+                        item.itemStyle = {
+                            normal: {
+                                color: "#65A6FF",
+                            },
+                        };
+                    });
+                    let option = {
                         textStyle: {
-                            color: "#fff",
+                            color: "#333",
                         },
-                    },
-                    dataset: {
-                        dimensions: ["x", "y"],
-                        source: res.data,
-                    },
-                    legend: {
-                        data: ["CPU1", "CPU2", "CPU3"],
-                        left: 0,
-                    },
-                    grid: {
-                        left: "1%",
-                        right: "4%",
-                        bottom: "9%",
-                        top: "60px",
-                        containLabel: true,
-                    },
-                    xAxis: {
-                        type: "category",
-                        boundaryGap: false,
-                        splitLine: {
-                            show: true,
-                            lineStyle: {
-                                color: "#E9E9E9",
-                                type: "dashed",
-                            },
-                        },
-                        axisTick: {
-                            show: true, //显示X轴刻度
-                            lineStyle: {
-                                color: "#E9E9E9",
-                            },
-                        },
-                        axisLine: {
-                            // 刻度线的颜色
+                        tooltip: {
                             show: false,
+                            trigger: "axis",
+                            backgroundColor: "#1F2329",
+                            boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
+                            borderColor: "#1F2329",
+                            textStyle: {
+                                color: "#fff",
+                            },
                         },
-                        axisPointer: {
-                            type: "line",
-                            lineStyle: { color: "#BDBEBF" },
+                        legend: {
+                            // data: ["CPU1", "CPU2", "CPU3"],
+                            left: 0,
                         },
-                    },
-                    yAxis: [
-                        {
-                            type: "value",
-                            name: "单位：（GB）",
-                            nameLocation: "end",
-                            axisLine: {
-                                show: false,
-                            },
-                            nameTextStyle: {
-                                color: "#666",
-                            },
-                            axisTick: {
-                                show: false, //隐藏X轴刻度
-                            },
+                        grid: {
+                            left: "1%",
+                            right: "4%",
+                            bottom: "9%",
+                            top: "60px",
+                            containLabel: true,
+                        },
+                        xAxis: {
+                            type: "category",
+                            boundaryGap: false,
                             splitLine: {
                                 show: true,
                                 lineStyle: {
@@ -113,92 +94,98 @@ class Cpu extends React.PureComponent {
                                     type: "dashed",
                                 },
                             },
-                            axisLabel: {
-                                formatter: "{value} GB",
-                            },
-                            nameTextStyle: {
-                                padding: [0, 43, 0, 0],
-                            },
-                        },
-                        {
-                            gridIndex: 0,
-                            type: "value",
-                            name: "单位（%）",
-                            splitLine: {
-                                show: false,
-                            },
                             axisTick: {
-                                show: false, //隐藏X轴刻度
-                            },
-                            axisLine: {
-                                show: false,
-                            },
-                            min: "0",
-                            max: "100",
-                            axisLabel: {
-                                formatter: "{value}%",
-                            },
-                            nameTextStyle: {
-                                padding: [0, 0, 0, 34],
-                            },
-                        },
-                    ],
-                    series: [
-                        {
-                            name: "CPU1",
-                            type: "line",
-                            smooth: true,
-                            showSymbol: false,
-                            itemStyle: {
-                                normal: {
-                                    color: "#65A6FF",
+                                show: true, //显示X轴刻度
+                                lineStyle: {
+                                    color: "#E9E9E9",
                                 },
                             },
+                            axisLine: {
+                                // 刻度线的颜色
+                                show: false,
+                            },
+                            axisPointer: {
+                                type: "line",
+                                lineStyle: { color: "#BDBEBF" },
+                            },
+                            data: list.x,
                         },
-                    ],
-                    dataZoom: [
-                        {
-                            type: "inside",
-                        },
-                        {
-                            type: "slider",
-                            height: "20px",
-                        },
-                    ],
-                };
-                var myChart = echarts.init(document.getElementById("main1"));
-                myChart.setOption(option);
+                        yAxis: [
+                            {
+                                type: "value",
+                                name: "单位（%）",
+                                nameLocation: "end",
+                                axisLine: {
+                                    show: false,
+                                },
+                                nameTextStyle: {
+                                    color: "#666",
+                                },
+                                axisTick: {
+                                    show: false, //隐藏X轴刻度
+                                },
+                                splitLine: {
+                                    show: true,
+                                    lineStyle: {
+                                        color: "#E9E9E9",
+                                        type: "dashed",
+                                    },
+                                },
+                                axisLabel: {
+                                    formatter: "{value} GB",
+                                },
+                                nameTextStyle: {
+                                    padding: [0, 43, 0, 0],
+                                },
+                                axisLabel: {
+                                    formatter: "{value}%",
+                                },
+                            },
+                        ],
+                        series: list.series,
+                        dataZoom: [
+                            {
+                                type: "inside",
+                            },
+                            {
+                                type: "slider",
+                                height: "20px",
+                            },
+                        ],
+                    };
+                    var myChart = echarts.init(
+                        document.getElementById("main1")
+                    );
+                    myChart.resize();
+                    myChart.setOption(option);
+                }
             } else {
                 message.error("服务异常");
             }
         });
     };
     componentDidMount() {
-        this.getData();
-        echarts.init(document.getElementById("main1"));
+        this.getData({
+            hostId: "1",
+            startTime: "",
+            endTime: "",
+        });
     }
     render() {
         const { getFieldDecorator } = this.props.form;
-        function onChange(value) {
-            console.log(`selected ${value}`);
-        }
-
-        function onSearch(val) {
-            console.log("search:", val);
-        }
         return (
             <div className={styles.container}>
                 <div className={styles.search}>
                     <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item>
-                            {getFieldDecorator("arithmetic")(
+                            {getFieldDecorator("hostId", {
+                                initialValue: "1",
+                            })(
                                 <Select
                                     showSearch
                                     style={{ width: 160 }}
                                     placeholder="选择CPU"
                                     optionFilterProp="children"
-                                    onChange={onChange}
-                                    onSearch={onSearch}
                                     filterOption={(input, option) =>
                                         option.props.children
                                             .toLowerCase()
@@ -206,14 +193,14 @@ class Cpu extends React.PureComponent {
                                     }
                                 >
                                     <Option value="0">全部</Option>
-                                    <Option value="1">CPU1</Option>
-                                    <Option value="2">CPU2</Option>
-                                    <Option value="3">CPU3</Option>
+                                    <Option value="1">80</Option>
                                 </Select>
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
-                            {getFieldDecorator("range-time-picker")(
+                            {getFieldDecorator("pickerTime", {
+                                initialValue: [],
+                            })(
                                 <RangePicker
                                     style={{ width: 432 }}
                                     showTime
