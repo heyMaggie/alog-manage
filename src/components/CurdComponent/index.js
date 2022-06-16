@@ -358,7 +358,6 @@ class CurdComponent extends React.PureComponent {
         // console.log("CurdComponent 渲染 ", this.pageId);
         // console.log("insertBtnText", insertBtnText);
         // console.log("hasSlot", this.props.hasSlot);
-        console.log(this.props.children);
         return (
             <div
                 className={

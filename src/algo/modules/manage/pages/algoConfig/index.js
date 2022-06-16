@@ -1,21 +1,15 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
-import { Input, Modal, Radio, Form, message, Switch } from "antd";
+import { Input, Modal, Form, message, Switch, Tooltip, Icon } from "antd";
 import styles from "./style.module.less";
 
 let getSearchFormFields = () => {
     return [
-        // {
-        //     label: "保证金账户",
-        //     id: "assetAccount",
-        //     component: <Input placeholder="请输入保证金账户" />,
-        // },
         {
-            label: "用户ID",
-            // id: "userId",
-            id: "user_id",
-            component: <Input placeholder="请输入用户ID" />,
+            label: "算法名称",
+            id: "algoName",
+            component: <Input placeholder="请输入" />,
         },
     ];
 };
@@ -86,27 +80,40 @@ class algoConfig extends React.PureComponent {
                 title: "算法风控组",
                 dataIndex: "riskGroup",
                 key: "riskGroup",
+                render: (text, record) => (
+                    <div
+                        onClick={(e) => {
+                            this.handleUpdate(record);
+                        }}
+                    >
+                        <Tooltip title="修改网关">
+                            {record.riskGroup}
+                            <Icon type="edit" style={{ color: "#1899ff" }} />
+                        </Tooltip>
+                    </div>
+                ),
             },
             {
                 title: "创建时间",
                 dataIndex: "createTime",
                 key: "createTime",
+                width: 180,
             },
-            {
-                title: "操作",
-                key: "operation",
-                fixed: "right",
-                width: 100,
-                render: (text, record) => (
-                    <a
-                        onClick={(e) => {
-                            this.handleUpdate(record);
-                        }}
-                    >
-                        编辑
-                    </a>
-                ),
-            },
+            // {
+            //     title: "操作",
+            //     key: "operation",
+            //     fixed: "right",
+            //     width: 100,
+            //     render: (text, record) => (
+            //         <a
+            //             onClick={(e) => {
+            //                 this.handleUpdate(record);
+            //             }}
+            //         >
+            //             编辑
+            //         </a>
+            //     ),
+            // },
         ];
     };
 
@@ -346,9 +353,9 @@ class algoConfig extends React.PureComponent {
                 <CurdComponent
                     // rowKey={"index"}
                     // btnText2="查全部"
-                    isShowSearchForm={false}
-                    // onSearchClick={this.handleSearch}
-                    // getSearchFormFields={getSearchFormFields}
+                    // isShowSearchForm={false}
+                    onSearchClick={this.handleSearch}
+                    getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
                     // getInsertFormFields={getInsertFormFields}
@@ -1195,7 +1202,7 @@ class algoConfig extends React.PureComponent {
                                     })(
                                         <Input
                                             placeholder="请输入"
-                                            suffix="笔"
+                                            suffix="股"
                                             disabled={true}
                                         />
                                     )}

@@ -10,23 +10,23 @@ const getSearchFormFields = () => {
             label: "证券帐户",
             id: "accountId",
             // initialValue: "",
-            component: <Input placeholder="请输入证券帐户" />,
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "证券代码",
             id: "securityId",
             // initialValue: "",
-            component: <Input placeholder="请输入证券代码" />,
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "开始时间",
             id: "startTime",
-            component: <TimePicker placeholder="请输入开始时间" />,
+            component: <TimePicker placeholder="请输入" />,
         },
         {
             label: "结束时间",
             id: "endTime",
-            component: <TimePicker placeholder="请输入结束时间" />,
+            component: <TimePicker placeholder="请输入" />,
         },
     ];
 };

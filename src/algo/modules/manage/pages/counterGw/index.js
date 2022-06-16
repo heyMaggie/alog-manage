@@ -1,22 +1,16 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 // import SelectOption from "@/components/SelectOption";
-import { Input, Modal, Form, message } from "antd";
+import { Input, Modal, Form, message, Icon, Tooltip } from "antd";
 import Table from "@/components/Table";
 import styles from "./style.module.less";
 
 let getSearchFormFields = () => {
     return [
-        // {
-        //     label: "保证金账户",
-        //     id: "assetAccount",
-        //     component: <Input placeholder="请输入保证金账户" />,
-        // },
         {
             label: "用户ID",
-            // id: "userId",
-            id: "user_id",
-            component: <Input placeholder="请输入用户ID" />,
+            id: "uuserId",
+            component: <Input placeholder="请输入" />,
         },
     ];
 };
@@ -86,9 +80,25 @@ class CounterGw extends React.PureComponent {
                 title: "用户名",
                 dataIndex: "userName",
             },
+            // {
+            //     title: "柜台网关Id",
+            //     dataIndex: "counterGwId",
+            // },
             {
                 title: "柜台网关Id",
                 dataIndex: "counterGwId",
+                render: (text, record) => (
+                    <div
+                        onClick={(e) => {
+                            this.handleUpdateBtn(record);
+                        }}
+                    >
+                        <Tooltip title="修改网关">
+                            {record.counterGwId}
+                            <Icon type="edit" style={{ color: "#1899ff" }} />
+                        </Tooltip>
+                    </div>
+                ),
             },
             {
                 title: "来自柜台",
@@ -115,21 +125,21 @@ class CounterGw extends React.PureComponent {
                 title: "创建时间",
                 dataIndex: "createTime",
             },
-            {
-                title: "操作",
-                key: "operation",
-                fixed: "right",
-                width: 100,
-                render: (text, record) => (
-                    <a
-                        onClick={(e) => {
-                            this.handleUpdateBtn(record);
-                        }}
-                    >
-                        编辑
-                    </a>
-                ),
-            },
+            // {
+            //     title: "操作",
+            //     key: "operation",
+            //     fixed: "right",
+            //     width: 100,
+            //     render: (text, record) => (
+            //         <a
+            //             onClick={(e) => {
+            //                 this.handleUpdateBtn(record);
+            //             }}
+            //         >
+            //             编辑
+            //         </a>
+            //     ),
+            // },
         ];
     };
     columns2 = (params) => {
@@ -356,9 +366,9 @@ class CounterGw extends React.PureComponent {
                 <CurdComponent
                     // rowKey={"index"}
                     // btnText2="查全部"
-                    isShowSearchForm={false}
-                    // onSearchClick={this.handleSearch}
-                    // getSearchFormFields={getSearchFormFields}
+                    // isShowSearchForm={false}
+                    onSearchClick={this.handleSearch}
+                    getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
                     // getInsertFormFields={getInsertFormFields}

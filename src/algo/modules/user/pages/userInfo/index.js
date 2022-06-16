@@ -3,16 +3,7 @@ import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 // import UploadWrap from "@/components/UploadWrap";
 
-import {
-    Input,
-    Modal,
-    Switch,
-    Form,
-    message,
-    Icon,
-    Button,
-    Upload,
-} from "antd";
+import { Input, Modal, Switch, Form, message, Tooltip, Icon } from "antd";
 import styles from "./style.module.less";
 
 let getSearchFormFields = () => {
@@ -20,19 +11,19 @@ let getSearchFormFields = () => {
         {
             label: "父级用户ID",
             id: "fatherId",
-            component: <Input placeholder="请输入父级用户ID" />,
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "用户ID",
             id: "userId",
-            component: <Input placeholder="请输入用户ID" />,
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "用户类型",
             id: "userType",
             // initialValue: "",
             component: SelectOption(dict.userType, {
-                placeholder: "请选择用户类型",
+                placeholder: "请选择",
                 allowClear: true,
                 style: {
                     width: 183,
@@ -42,21 +33,21 @@ let getSearchFormFields = () => {
         {
             label: "用户风控组别",
             id: "riskGroup",
-            component: <Input placeholder="请输入用户风控组别" />,
+            component: <Input placeholder="请输入" />,
         },
         // {
         //     label: "柜台用户ID",
         //     id: "counterUserId",
         //     component: <Input placeholder="请输入柜台用户ID" />,
         // },
-        {
-            label: "业务类型",
-            id: "businessType",
-            component: SelectOption(dict.businessType, {
-                placeholder: "请选择业务类型",
-                allowClear: true,
-            }),
-        },
+        // {
+        //     label: "业务类型",
+        //     id: "businessType",
+        //     component: SelectOption(dict.businessType, {
+        //         placeholder: "请选择业务类型",
+        //         allowClear: true,
+        //     }),
+        // },
     ];
 };
 
@@ -104,6 +95,18 @@ class userInfo extends React.PureComponent {
                 title: "用户风控组别",
                 dataIndex: "riskGroup",
                 // width: 120,
+                render: (text, record) => (
+                    <div
+                        onClick={(e) => {
+                            this.handleUpdate(record);
+                        }}
+                    >
+                        <Tooltip title="修改网关">
+                            {record.riskGroup}
+                            <Icon type="edit" style={{ color: "#1899ff" }} />
+                        </Tooltip>
+                    </div>
+                ),
             },
             // {
             //     title: "柜台用户ID",
@@ -122,21 +125,21 @@ class userInfo extends React.PureComponent {
                 dataIndex: "createTime",
                 key: "createTime",
             },
-            {
-                title: "操作",
-                key: "operation",
-                fixed: "right",
-                width: 100,
-                render: (text, record) => (
-                    <a
-                        onClick={(e) => {
-                            this.handleUpdate(record);
-                        }}
-                    >
-                        编辑
-                    </a>
-                ),
-            },
+            // {
+            //     title: "操作",
+            //     key: "operation",
+            //     fixed: "right",
+            //     width: 100,
+            //     render: (text, record) => (
+            //         <a
+            //             onClick={(e) => {
+            //                 this.handleUpdate(record);
+            //             }}
+            //         >
+            //             编辑
+            //         </a>
+            //     ),
+            // },
         ];
     };
     //填入更新记录
@@ -1129,7 +1132,7 @@ class userInfo extends React.PureComponent {
                                     })(
                                         <Input
                                             placeholder="请输入"
-                                            suffix="笔"
+                                            suffix="股"
                                             disabled={true}
                                         />
                                     )}

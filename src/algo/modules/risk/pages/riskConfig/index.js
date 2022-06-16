@@ -274,6 +274,14 @@ class riskConfigManage extends React.PureComponent {
 
     //新增风控组
     addRiskGroup = (data) => {
+        for (let i = 0; i <= 8; i++) {
+            let key = "byte" + i;
+            if (data[key]) {
+                data[key] = 1;
+            } else {
+                data[key] = 0;
+            }
+        }
         data.riskEnable =
             ("0b" +
                 data.byte8 +
@@ -385,7 +393,7 @@ class riskConfigManage extends React.PureComponent {
                 RiskType: "7", // 风控类型:净买入额度 (bit5)
                 RadioSecond: "0",
                 Threshold: data.netBuyEntrustItemThreshold + "", // 净买入额度:风控启用委托数量
-                TradeLimit: data.netBuyAmountLimit + "", // 净买入额度
+                TradeLimit: data.netBuyAmountLimit * 10000 + "", // 净买入额度
                 TradeAmount: "0",
                 RiskName: "",
             },
@@ -410,7 +418,7 @@ class riskConfigManage extends React.PureComponent {
                 RadioSecond: data.tradeSeconds + "", // 下单频率:时间量(s)
                 Threshold: data.tradeQtyLimit + "", // 下单总量(股数)
                 TradeLimit: data.tradeItemLimit + "", // 下单频率笔数
-                TradeAmount: data.tradeAmountLimit + "", // 下单总金额(元)
+                TradeAmount: data.tradeAmountLimit * 10000 + "", // 下单总金额(元)
                 RiskName: "",
             },
         ];
@@ -1430,7 +1438,7 @@ class riskConfigManage extends React.PureComponent {
                                     })(
                                         <Input
                                             placeholder="请输入"
-                                            suffix="笔"
+                                            suffix="股"
                                             disabled={this.state.disabled8}
                                         />
                                     )}

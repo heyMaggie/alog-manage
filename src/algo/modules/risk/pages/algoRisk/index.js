@@ -4,29 +4,12 @@ import { Input, TimePicker } from "antd";
 import CurdComponent from "@/components/CurdComponent";
 // import SelectOption from "@/components/SelectOption";
 
-const getSearchFormFields = () => {
+let getSearchFormFields = () => {
     return [
         {
-            label: "证券帐户",
-            id: "accountId",
-            // initialValue: "",
-            component: <Input placeholder="请输入证券帐户" />,
-        },
-        {
-            label: "证券代码",
-            id: "securityId",
-            // initialValue: "",
-            component: <Input placeholder="请输入证券代码" />,
-        },
-        {
-            label: "开始时间",
-            id: "startTime",
-            component: <TimePicker placeholder="请输入开始时间" />,
-        },
-        {
-            label: "结束时间",
-            id: "endTime",
-            component: <TimePicker placeholder="请输入结束时间" />,
+            label: "算法Id",
+            id: "id",
+            component: <Input placeholder="请输入" />,
         },
     ];
 };
@@ -40,7 +23,7 @@ const getUpdateFormFields = () => {
 let columns = () => {
     return [
         {
-            title: "算法AlgorithmId",
+            title: "算法Id",
             dataIndex: "id",
             width: 150,
         },
@@ -164,9 +147,9 @@ export default class algoRisk extends React.PureComponent {
         let info = this.state.info;
         return (
             <CurdComponent
-                isShowSearchForm={false}
-                // onSearchClick={this.handleSearch}
-                // getSearchFormFields={getSearchFormFields}
+                // isShowSearchForm={false}
+                onSearchClick={this.handleSearch}
+                getSearchFormFields={getSearchFormFields}
                 searchLoading={this.state.searchLoading}
                 isShowInsert={false}
                 // rowKey="sno"

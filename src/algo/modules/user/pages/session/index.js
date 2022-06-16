@@ -60,16 +60,10 @@ const columns = (params) => {
 };
 let getSearchFormFields = () => {
     return [
-        // {
-        //     label: "保证金账户",
-        //     id: "assetAccount",
-        //     component: <Input placeholder="请输入保证金账户" />,
-        // },
         {
             label: "用户ID",
-            // id: "userId",
-            id: "user_id",
-            component: <Input placeholder="请输入用户ID" />,
+            id: "uuserId",
+            component: <Input placeholder="请输入" />,
         },
     ];
 };
@@ -163,9 +157,9 @@ export default class session extends React.PureComponent {
                 <CurdComponent
                     // rowKey={"index"}
                     // btnText2="查全部"
-                    isShowSearchForm={false}
-                    // onSearchClick={this.handleSearch}
-                    // getSearchFormFields={getSearchFormFields}
+                    // isShowSearchForm={false}
+                    onSearchClick={this.handleSearch}
+                    getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
                     // getInsertFormFields={getInsertFormFields}

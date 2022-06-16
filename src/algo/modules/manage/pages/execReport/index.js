@@ -7,6 +7,18 @@ const getUpdateFormFields = () => {};
 const columns = (params) => {
     return [
         {
+            title: "用户ID",
+            dataIndex: "uuserId",
+            key: "uuserId",
+            width: 80,
+        },
+        {
+            title: "证券代码",
+            dataIndex: "securityId",
+            key: "securityId",
+            width: 100,
+        },
+        {
             title: "业务类型",
             dataIndex: "businessType",
             width: 100,
@@ -14,12 +26,12 @@ const columns = (params) => {
         {
             title: "母单订单号",
             dataIndex: "algoOrderId",
-            width: 100,
+            width: 120,
         },
         {
             title: "子单订单号",
             dataIndex: "childOrderId",
-            width: 100,
+            width: 120,
         },
         {
             title: "执行编号",
@@ -55,7 +67,7 @@ const columns = (params) => {
         {
             title: "成交时间",
             dataIndex: "transactTime",
-            width: 120,
+            width: 180,
         },
         // {
         //     title: "成交记录ID",
@@ -64,22 +76,18 @@ const columns = (params) => {
         // },
     ];
 };
-let getSearchFormFields = () => {
+const getSearchFormFields = () => {
     return [
-        // {
-        //     label: "期权编码",
-        //     id: "optionId",
-        //     component: <Input placeholder="请输入期权编码" />,
-        // },
-        // {
-        //     label: "股东账户",
-        //     id: "accoundId",
-        //     component: <Input placeholder="请输入股东账户" />,
-        // },
         {
-            label: "订单号",
-            id: "clOrdId",
-            component: <Input placeholder="请输入订单号" />,
+            label: "用户ID",
+            id: "uuserId",
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "证券代码",
+            id: "securityId",
+            initialValue: "",
+            component: <Input placeholder="请输入" />,
         },
     ];
 };
@@ -137,7 +145,7 @@ export default class execReport extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 1000, y: 445 };
+        let scroll = { x: 1500, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;
@@ -149,10 +157,10 @@ export default class execReport extends React.PureComponent {
             <div>
                 <CurdComponent
                     // rowKey={"index"}
-                    isShowSearchForm={false}
+                    // isShowSearchForm={false}
                     // btnText2="查全部"
-                    // onSearchClick={this.handleSearch}
-                    // getSearchFormFields={getSearchFormFields}
+                    onSearchClick={this.handleSearch}
+                    getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
                     // getInsertFormFields={getInsertFormFields}

@@ -7,17 +7,24 @@ const getUpdateFormFields = () => {};
 const columns = (params) => {
     return [
         // {
-        //     title: "股东账户ID",
-        //     dataIndex: "uaccountId",
+        //     title: "个人账户",
+        //     dataIndex: "uuserId",
         //     width: 100,
         // },
         {
-            title: "个人账户",
+            title: "用户ID",
             dataIndex: "uuserId",
+            key: "uuserId",
             width: 100,
         },
         {
-            title: "篮子批次号",
+            title: "证券代码",
+            dataIndex: "securityId",
+            key: "securityId",
+            width: 100,
+        },
+        {
+            title: "篮子ID",
             dataIndex: "basketId",
             width: 120,
         },
@@ -39,7 +46,7 @@ const columns = (params) => {
         {
             title: "取消标志",
             dataIndex: "cancelFlag",
-            width: 120,
+            width: 100,
         },
         {
             title: "原始订单号",
@@ -49,12 +56,12 @@ const columns = (params) => {
         {
             title: "撤单订单状态",
             dataIndex: "algoOrdStatus",
-            width: 120,
+            width: 150,
         },
         {
             title: "母单在篮子表中的状态",
             dataIndex: "basketStatus",
-            width: 150,
+            width: 180,
         },
         {
             title: "请求用户ID",
@@ -64,12 +71,12 @@ const columns = (params) => {
         {
             title: "错误码",
             dataIndex: "errorCode",
-            width: 150,
+            width: 100,
         },
         {
             title: "错误信息",
             dataIndex: "errorMsg",
-            width: 100,
+            width: 150,
         },
         {
             title: "客户端序列号",
@@ -79,27 +86,23 @@ const columns = (params) => {
         {
             title: "交易时间",
             dataIndex: "transactTime",
-            width: 150,
+            width: 180,
         },
     ];
 };
 // console.log(columns().length);
-let getSearchFormFields = () => {
+const getSearchFormFields = () => {
     return [
         {
-            label: "期权编码",
-            id: "optionId",
-            component: <Input placeholder="请输入期权编码" />,
+            label: "用户ID",
+            id: "uuserId",
+            component: <Input placeholder="请输入" />,
         },
         {
-            label: "股东账户",
-            id: "accoundId",
-            component: <Input placeholder="请输入股东账户" />,
-        },
-        {
-            label: "原始订单编号",
-            id: "origClOrdId",
-            component: <Input placeholder="请输入原始订单编号" />,
+            label: "证券代码",
+            id: "securityId",
+            initialValue: "",
+            component: <Input placeholder="请输入" />,
         },
     ];
 };
@@ -157,7 +160,7 @@ export default class cancelOrderQuery extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 1000, y: 445 };
+        let scroll = { x: 1100, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;
@@ -169,10 +172,10 @@ export default class cancelOrderQuery extends React.PureComponent {
             <div>
                 <CurdComponent
                     // rowKey={"index"}
-                    isShowSearchForm={false}
+                    // isShowSearchForm={false}
                     // btnText2="查全部"
-                    // onSearchClick={this.handleSearch}
-                    // getSearchFormFields={getSearchFormFields}
+                    onSearchClick={this.handleSearch}
+                    getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
                     // getInsertFormFields={getInsertFormFields}

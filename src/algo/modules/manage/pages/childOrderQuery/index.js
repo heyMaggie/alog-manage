@@ -87,7 +87,7 @@ const columns = (params) => {
             width: 120,
         },
         {
-            title: "母单篮子批次号",
+            title: "母单篮子ID",
             dataIndex: "basketId",
             width: 150,
         },
@@ -149,22 +149,29 @@ const columns = (params) => {
         },
     ];
 };
-let getSearchFormFields = () => {
+const getSearchFormFields = () => {
     return [
         {
-            label: "期权编码",
-            id: "optionId",
-            component: <Input placeholder="请输入期权编码" />,
+            label: "用户ID",
+            id: "uuserId",
+            component: <Input placeholder="请输入" />,
         },
         {
-            label: "股东账户",
-            id: "accoundId",
-            component: <Input placeholder="请输入股东账户" />,
+            label: "篮子ID",
+            id: "basketId",
+            component: <Input placeholder="请输入" />,
         },
         {
-            label: "订单号",
-            id: "clOrdId",
-            component: <Input placeholder="请输入订单号" />,
+            label: "算法ID",
+            id: "algorithmId",
+            initialValue: "",
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "证券代码",
+            id: "securityId",
+            initialValue: "",
+            component: <Input placeholder="请输入" />,
         },
     ];
 };
@@ -234,10 +241,10 @@ export default class newOrderQuery extends React.PureComponent {
             <div>
                 <CurdComponent
                     // rowKey={"index"}
-                    isShowSearchForm={false}
+                    // isShowSearchForm={false}
                     // btnText2="查全部"
-                    // onSearchClick={this.handleSearch}
-                    // getSearchFormFields={getSearchFormFields}
+                    onSearchClick={this.handleSearch}
+                    getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
                     // getInsertFormFields={getInsertFormFields}

@@ -40,15 +40,15 @@ const columns = (params) => {
 let getSearchFormFields = () => {
     return [
         {
-            label: "合约编码",
-            id: "optionId",
-            component: <Input placeholder="请输入合约编码" />,
+            label: "用户ID",
+            id: "uuserId",
+            component: <Input placeholder="请输入" />,
         },
-        // {
-        //     label: "合约代码",
-        //     id: "contractCode",
-        //     component: <Input placeholder="请输入合约代码" />,
-        // },
+        {
+            label: "股东账户",
+            id: "accountId",
+            component: <Input placeholder="请输入" />,
+        },
         // {
         //     label: "合约简称",
         //     id: "contractName",
@@ -148,10 +148,10 @@ export default class uoeSetting extends React.PureComponent {
             <div>
                 <CurdComponent
                     // rowKey={"index"}
-                    isShowSearchForm={false}
+                    // isShowSearchForm={false}
                     // btnText2="查全部"
-                    // onSearchClick={this.handleSearch}
-                    // getSearchFormFields={getSearchFormFields}
+                    onSearchClick={this.handleSearch}
+                    getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
                     // getInsertFormFields={getInsertFormFields}
