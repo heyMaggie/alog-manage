@@ -205,7 +205,7 @@ export default class newOrderQuery extends React.PureComponent {
     setUpdateModal = ({ form, record }) => {};
     getData = (params = {}) => {
         // params.token = "";
-        http.get({
+        http.post({
             url: "/new-trade-order/list",
             data: params,
         }).then((res) => {

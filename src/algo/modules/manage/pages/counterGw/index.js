@@ -9,7 +9,7 @@ let getSearchFormFields = () => {
     return [
         {
             label: "用户ID",
-            id: "uuserId",
+            id: "userId",
             component: <Input placeholder="请输入" />,
         },
     ];
@@ -315,7 +315,7 @@ class CounterGw extends React.PureComponent {
     };
     getData = (params = {}) => {
         // params.token = "";
-        http.get({
+        http.post({
             url: "/counter-user-info/list",
             data: params,
         }).then((res) => {

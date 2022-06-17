@@ -57,7 +57,7 @@ export default class counterGw extends React.PureComponent {
         window.location.href = window.baseURL + "/counter-user-info/download";
     };
     getData = (params) => {
-        http.get({
+        http.post({
             // url: "/option/assetInfo/selectList",
             url: "/counter-user-info/list",
             data: params,
