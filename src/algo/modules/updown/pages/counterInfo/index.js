@@ -29,7 +29,6 @@ const columns = (params) => {
             dataIndex: "status",
             key: "status",
         },
-        
     ];
 };
 export default class optionInfo extends React.PureComponent {
@@ -46,7 +45,7 @@ export default class optionInfo extends React.PureComponent {
         window.location.href = window.baseURL + "/counter/download";
     };
     getData = (params) => {
-        http.get({
+        http.post({
             // url: "/option/assetInfo/selectList",
             url: "/counter/list",
             data: params,

@@ -121,7 +121,7 @@ export default class execReport extends React.PureComponent {
     setUpdateModal = ({ form, record }) => {};
     getData = (params = {}) => {
         // params.token = "";
-        http.get({
+        http.post({
             url: "/order-deal/list",
             data: params,
         }).then((res) => {

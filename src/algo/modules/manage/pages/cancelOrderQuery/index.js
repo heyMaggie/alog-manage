@@ -44,25 +44,46 @@ const columns = (params) => {
             width: 100,
         },
         {
-            title: "取消标志",
-            dataIndex: "cancelFlag",
-            width: 100,
+            title: "订单ID",
+            dataIndex: "id",
+            width: 120,
         },
         {
-            title: "原始订单号",
-            dataIndex: "origAlgoOrderId",
+            title: "订单编号",
+            dataIndex: "clOrdId",
             width: 120,
         },
         {
             title: "撤单订单状态",
-            dataIndex: "algoOrdStatus",
-            width: 150,
+            dataIndex: "childOrdStatus",
+            width: 120,
         },
         {
-            title: "母单在篮子表中的状态",
-            dataIndex: "basketStatus",
-            width: 180,
+            title: "柜台序列号",
+            dataIndex: "counter_seq",
+            width: 120,
         },
+        {
+            title: "原始订单号",
+            dataIndex: "origTradeOrderId",
+            width: 120,
+        },
+        {
+            title: "母单订单号",
+            dataIndex: "algoOrderId",
+            width: 120,
+        },
+        // {
+        //     title: "取消标志",
+        //     dataIndex: "cancelFlag",
+        //     width: 100,
+        // },
+        // {
+        // {
+        //     title: "母单在篮子表中的状态",
+        //     dataIndex: "basketStatus",
+        //     width: 180,
+        // },
         {
             title: "请求用户ID",
             dataIndex: "reqUserId",
@@ -86,6 +107,11 @@ const columns = (params) => {
         {
             title: "交易时间",
             dataIndex: "transactTime",
+            width: 180,
+        },
+        {
+            title: "请求时间",
+            dataIndex: "reqTime",
             width: 180,
         },
     ];
@@ -136,8 +162,8 @@ export default class cancelOrderQuery extends React.PureComponent {
     setUpdateModal = ({ form, record }) => {};
     getData = (params = {}) => {
         // params.token = "";
-        http.get({
-            url: "/cancel-algo-order/list",
+        http.post({
+            url: "/cancel-trade-order/list",
             data: params,
         }).then((res) => {
             console.log(res);

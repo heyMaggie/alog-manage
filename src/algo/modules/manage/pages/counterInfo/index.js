@@ -96,7 +96,7 @@ export default class uoeSetting extends React.PureComponent {
         });
     };
     getData = (params) => {
-        http.get({
+        http.post({
             // url: "/option/assetInfo/selectList",
             url: "/counter/list",
             data: params,
