@@ -6,7 +6,7 @@ import { Input } from "antd";
 const columns = (params) => {
     return [
         {
-            title: "id",
+            title: "ID",
             dataIndex: "id",
         },
         {

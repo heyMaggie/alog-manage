@@ -7,7 +7,7 @@ import CurdComponent from "@/components/CurdComponent";
 let getSearchFormFields = () => {
     return [
         {
-            label: "算法Id",
+            label: "算法ID",
             id: "id",
             component: <Input placeholder="请输入" />,
         },
@@ -23,7 +23,7 @@ const getUpdateFormFields = () => {
 let columns = () => {
     return [
         {
-            title: "算法Id",
+            title: "算法ID",
             dataIndex: "id",
             width: 150,
         },

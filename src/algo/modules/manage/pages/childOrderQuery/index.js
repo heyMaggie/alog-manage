@@ -7,7 +7,7 @@ const getUpdateFormFields = () => {};
 const columns = (params) => {
     return [
         {
-            title: "账户id",
+            title: "账户ID",
             dataIndex: "uuserId",
             width: 100,
         },

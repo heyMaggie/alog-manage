@@ -7,7 +7,7 @@ import styles from "./style.module.less";
 let getSearchFormFields = () => {
     return [
         {
-            label: "风控组Id",
+            label: "风控组ID",
             id: "id",
             component: <Input placeholder="请输入" />,
         },
@@ -39,7 +39,7 @@ class riskConfigManage extends React.PureComponent {
     columns = (params) => {
         return [
             {
-                title: "风控组Id",
+                title: "风控组ID",
                 dataIndex: "Id",
                 width: 100,
             },
@@ -80,9 +80,9 @@ class riskConfigManage extends React.PureComponent {
                 width: 200,
             },
             {
-                title: "撤单比(s) ",
+                title: "撤单比(%) ",
                 dataIndex: "CancelRatioLimit",
-                width: 100,
+                width: 110,
             },
             {
                 title: "废单比:风控启用委托数量",
@@ -91,7 +91,7 @@ class riskConfigManage extends React.PureComponent {
                 width: 200,
             },
             {
-                title: "废单比(s) ",
+                title: "废单比(%) ",
                 dataIndex: "FailedRatioLimit",
                 key: "FailedRatioLimit",
             },
@@ -102,7 +102,7 @@ class riskConfigManage extends React.PureComponent {
                 width: 240,
             },
             {
-                title: "委托成交比(s) ",
+                title: "委托成交比(%) ",
                 dataIndex: "EntrustExecRatioLimit",
                 key: "EntrustExecRatioLimit",
             },

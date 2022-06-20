@@ -27,7 +27,7 @@ const getUpdateFormFields = () => {
             component: <Input readOnly disabled />,
         },
         {
-            label: "柜台网关Id",
+            label: "柜台网关ID",
             id: "counterGwId",
             rules: [
                 {
@@ -58,7 +58,7 @@ const getUpdateFormFields = () => {
             component: <Input readOnly disabled />,
         },
         {
-            label: "算法平台用户Id",
+            label: "算法平台用户ID",
             id: "uuserId",
             component: <Input readOnly disabled />,
         },
@@ -85,7 +85,7 @@ class CounterGw extends React.PureComponent {
             //     dataIndex: "counterGwId",
             // },
             {
-                title: "柜台网关Id",
+                title: "柜台网关ID",
                 dataIndex: "counterGwId",
                 render: (text, record) => (
                     <div
@@ -117,7 +117,7 @@ class CounterGw extends React.PureComponent {
                 dataIndex: "clientTypeValue",
             },
             {
-                title: "算法平台用户Id",
+                title: "算法平台用户ID",
                 dataIndex: "uuserId",
                 width: 150,
             },
