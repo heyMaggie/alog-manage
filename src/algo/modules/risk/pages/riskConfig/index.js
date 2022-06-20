@@ -263,6 +263,8 @@ class riskConfigManage extends React.PureComponent {
                     console.log("修改风控");
                     this.updateRiskGroup(data);
                 }
+            } else {
+                message.error("输入内容有不合法,请完善");
             }
         });
     };
@@ -691,8 +693,8 @@ class riskConfigManage extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                             {
-                                                message: "请输入正整数",
-                                                pattern: /^\d+$/i,
+                                                message: "请输入1-13位正整数",
+                                                pattern: /^\d{1,13}$/i,
                                             },
                                         ],
                                         initialValue: "0",
@@ -721,8 +723,8 @@ class riskConfigManage extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                             {
-                                                message: "请输入正整数",
-                                                pattern: /^\d+$/i,
+                                                message: "请输入1-13位正整数",
+                                                pattern: /^\d{1,13}$/i,
                                             },
                                         ],
                                         initialValue: "0",
@@ -751,8 +753,8 @@ class riskConfigManage extends React.PureComponent {
                                             message: "请输入",
                                         },
                                         {
-                                            message: "请输入正整数",
-                                            pattern: /^\d+$/i,
+                                            message: "请输入0-10的正整数",
+                                            pattern: /^([0-9]|(1[0-0]))$/i,
                                         },
                                     ],
                                     initialValue: "0",
@@ -807,8 +809,8 @@ class riskConfigManage extends React.PureComponent {
                                             message: "请输入",
                                         },
                                         {
-                                            message: "请输入正整数",
-                                            pattern: /^\d+$/i,
+                                            message: "请输入1-13位正整数",
+                                            pattern: /^\d{1,13}$/i,
                                         },
                                     ],
                                     initialValue: "0",
@@ -867,8 +869,9 @@ class riskConfigManage extends React.PureComponent {
                                                     message: "请输入",
                                                 },
                                                 {
-                                                    message: "请输入正整数",
-                                                    pattern: /^\d+$/i,
+                                                    message:
+                                                        "请输入1-13位正整数",
+                                                    pattern: /^\d{1,13}$/i,
                                                 },
                                             ],
                                             initialValue: "0",
@@ -895,8 +898,10 @@ class riskConfigManage extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                             {
-                                                message: "请输入正整数",
-                                                pattern: /^\d+$/i,
+                                                message:
+                                                    "请输入0%-100% 之间的数",
+                                                pattern:
+                                                    /^([0-9]|[1-9]\d|100)?(.\d{0,2})$/,
                                             },
                                         ],
                                         initialValue: "0",
@@ -956,8 +961,9 @@ class riskConfigManage extends React.PureComponent {
                                                     message: "请输入",
                                                 },
                                                 {
-                                                    message: "请输入正整数",
-                                                    pattern: /^\d+$/i,
+                                                    message:
+                                                        "请输入1-13位正整数",
+                                                    pattern: /^\d{1,13}$/i,
                                                 },
                                             ],
                                             initialValue: "0",
@@ -984,8 +990,10 @@ class riskConfigManage extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                             {
-                                                message: "请输入正整数",
-                                                pattern: /^\d+$/i,
+                                                message:
+                                                    "请输入0%-100% 之间的数",
+                                                pattern:
+                                                    /^([0-9]|[1-9]\d|100)?(.\d{0,2})$/,
                                             },
                                         ],
                                         initialValue: "0",
@@ -1044,8 +1052,9 @@ class riskConfigManage extends React.PureComponent {
                                                     message: "请输入",
                                                 },
                                                 {
-                                                    message: "请输入正整数",
-                                                    pattern: /^\d+$/i,
+                                                    message:
+                                                        "请输入1-13位正整数",
+                                                    pattern: /^\d{1,13}$/i,
                                                 },
                                             ],
                                             initialValue: "0",
@@ -1076,8 +1085,10 @@ class riskConfigManage extends React.PureComponent {
                                                     message: "请输入",
                                                 },
                                                 {
-                                                    message: "请输入正整数",
-                                                    pattern: /^\d+$/i,
+                                                    message:
+                                                        "请输入0%-100% 之间的数",
+                                                    pattern:
+                                                        /^([0-9]|[1-9]\d|100)?(.\d{0,2})$/,
                                                 },
                                             ],
                                             initialValue: "0",
@@ -1138,8 +1149,9 @@ class riskConfigManage extends React.PureComponent {
                                                     message: "请输入",
                                                 },
                                                 {
-                                                    message: "请输入正整数",
-                                                    pattern: /^\d+$/i,
+                                                    message:
+                                                        "请输入1-13位正整数",
+                                                    pattern: /^\d{1,13}$/i,
                                                 },
                                             ],
                                             initialValue: "0",
@@ -1168,8 +1180,10 @@ class riskConfigManage extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                             {
-                                                message: "请输入正整数",
-                                                pattern: /^\d+$/i,
+                                                message:
+                                                    "请输入正数,最多保留4位小数",
+                                                pattern:
+                                                    /^0$|^[1-9]\d{0,15}$|^[1-9]\d{0,15}\.{1}\d{1,4}$|^0\.{1}\d{1,4}$/i,
                                             },
                                         ],
                                         initialValue: "0",
@@ -1226,8 +1240,8 @@ class riskConfigManage extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                             {
-                                                message: "请输入正整数",
-                                                pattern: /^\d+$/i,
+                                                message: "请输入1-13位正整数",
+                                                pattern: /^\d{1,13}$/i,
                                             },
                                         ],
                                         initialValue: "0",
@@ -1255,8 +1269,8 @@ class riskConfigManage extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                             {
-                                                message: "请输入正整数",
-                                                pattern: /^\d+$/i,
+                                                message: "请输入0-10的正整数",
+                                                pattern: /^([0-9]|(1[0-0]))$/i,
                                             },
                                         ],
                                         initialValue: "0",
@@ -1310,8 +1324,8 @@ class riskConfigManage extends React.PureComponent {
                                             message: "请输入",
                                         },
                                         {
-                                            message: "请输入正整数",
-                                            pattern: /^\d+$/i,
+                                            message: "请输入0-10的正整数",
+                                            pattern: /^([0-9]|(1[0-0]))$/i,
                                         },
                                     ],
                                     initialValue: "0",
@@ -1367,8 +1381,8 @@ class riskConfigManage extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                             {
-                                                message: "请输入正整数",
-                                                pattern: /^\d+$/i,
+                                                message: "请输入1-13位正整数",
+                                                pattern: /^\d{1,13}$/i,
                                             },
                                         ],
                                         initialValue: "0",
@@ -1396,8 +1410,8 @@ class riskConfigManage extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                             {
-                                                message: "请输入正整数",
-                                                pattern: /^\d+$/i,
+                                                message: "请输入0-10的正整数",
+                                                pattern: /^([0-9]|(1[0-0]))$/i,
                                             },
                                         ],
                                         initialValue: "0",
@@ -1459,8 +1473,10 @@ class riskConfigManage extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                             {
-                                                message: "请输入正整数",
-                                                pattern: /^\d+$/i,
+                                                message:
+                                                    "请输入正数,最多保留4位小数",
+                                                pattern:
+                                                    /^0$|^[1-9]\d{0,15}$|^[1-9]\d{0,15}\.{1}\d{1,4}$|^0\.{1}\d{1,4}$/i,
                                             },
                                         ],
                                         initialValue: "0",
