@@ -296,6 +296,26 @@ const menuList = [
         ],
     },
     {
+        id: "7",
+        path: "/main/tradeStatistics",
+        title: "交易统计",
+        icon: "icon3",
+        children: [
+            {
+                id: "7-1",
+                icon: "",
+                title: "普通交易",
+                path: "/main/tradeStatistics/regularWay",
+            },
+            {
+                id: "7-2",
+                icon: "",
+                title: "算法交易",
+                path: "/main/tradeStatistics/algorithmicTrad",
+            },
+        ],
+    },
+    {
         id: "6",
         path: "/main/algostatis",
         title: "算法统计",

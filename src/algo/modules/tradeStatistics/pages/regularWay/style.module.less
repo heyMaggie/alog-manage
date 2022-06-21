@@ -1,0 +1,27 @@
+.container {
+    // padding: 24px 32px;
+    .search {
+        padding: 24px 32px;
+        // margin-bottom: 18px;
+    }
+    .chart {
+        height: calc(100% - 88px);
+        background-color: #f4f5f9;
+        padding-top: 24px;
+        .chartBox {
+            display: inline-block;
+            background-color: #fff;
+            width: calc(50% - 16px);
+            height: calc(50% - 18px);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            &:nth-child(1) {
+                margin-right: 24px;
+            }
+            &:nth-child(3) {
+                width: calc(100%);
+                margin-bottom: 0px;
+            }
+        }
+    }
+}

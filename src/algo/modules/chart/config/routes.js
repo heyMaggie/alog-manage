@@ -24,12 +24,12 @@ const main = (root = "/main/chart") => [
     {
         path: `${root}/cpu`,
         component: `${pages}/cpu`,
-        title: "cpu使用率",
+        title: "cpu信息",
     },
     {
         path: `${root}/ram`,
         component: `${pages}/ram`,
-        title: "内存使用率",
+        title: "内存信息",
     },
     {
         path: `${root}/disk`,
