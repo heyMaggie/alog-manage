@@ -7,6 +7,11 @@ const getUpdateFormFields = () => {};
 const columns = (params) => {
     return [
         {
+            title: "母单ID",
+            dataIndex: "id",
+            width: 100,
+        },
+        {
             title: "个人账户",
             dataIndex: "uuserId",
             width: 100,
@@ -274,6 +279,11 @@ const columns = (params) => {
 const getSearchFormFields = () => {
     return [
         {
+            label: "母单ID",
+            id: "id",
+            component: <Input placeholder="请输入" />,
+        },
+        {
             label: "用户ID",
             id: "uuserId",
             component: <Input placeholder="请输入" />,
@@ -302,6 +312,7 @@ export default class newOrderQuery extends React.PureComponent {
         searchLoading: false,
         selectRow: [],
         info: [],
+        pagination: { total: 0 },
     };
     //批量选择
     handleTableChange = (selectedRowKeys) => {
@@ -325,27 +336,41 @@ export default class newOrderQuery extends React.PureComponent {
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {};
-    getData = (params = {}) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
         // params.token = "";
+        // params.pageId = 1;
+        // params.pageNum = 20;
+        params = {
+            ...params,
+            pageId: pagination.current,
+            pageNum: pagination.pageSize,
+        };
         http.post({
             url: "/new-algo-order/list",
             data: params,
         }).then((res) => {
             console.log(res);
             //解析数据字典
-            if (res.data.length > 0) {
-                parseDict(res.data);
+            if (res.data.records && res.data.records.length > 0) {
+                parseDict(res.data.records);
                 showStip(this);
             } else {
                 message.info("查询结果为空");
             }
+            let pgn = {
+                current: pagination.current,
+                pageSize: pagination.pageSize,
+                total: res.data.total || 0,
+            };
             this.setState({
-                info: res.data,
+                info: res.data.records,
+                pagination: pgn,
             });
         });
     };
-    handleSearch = (params) => {
-        this.getData(params);
+    handleSearch = (params, pagination) => {
+        // console.log("获取搜索栏数据 ", params);
+        this.getData(params, pagination);
     };
     componentDidMount() {
         this.getData();
@@ -353,12 +378,6 @@ export default class newOrderQuery extends React.PureComponent {
     render() {
         let scroll = { x: 6000, y: 445 };
         let info = this.state.info;
-        //批量
-        // let { selectRow } = this.state;
-        // const rowSelection = {
-        //     selectRow,
-        //     onChange: this.handleTableChange,
-        // };
         return (
             <div>
                 <CurdComponent
@@ -373,6 +392,7 @@ export default class newOrderQuery extends React.PureComponent {
                     // insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
+                    pagination={this.state.pagination}
                     // getUpdateFormFields={getUpdateFormFields}
                     // setUpdateModal={this.setUpdateModal}
                     // updateRecord={this.handleUpdateRecord} // 不传 就没编辑

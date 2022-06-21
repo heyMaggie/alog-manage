@@ -73,10 +73,19 @@ const configData = {
         { key: "1", value: "黑名单客户" },
         { key: "2", value: "禁止买卖" },
     ],
-    // algorithmStatus: [
-    //     { key: "0", value: "不可用" },
-    //     { key: "1", value: "可用" },
-    // ],
+    algorithmStatus: [
+        // 0未开始 1运行中 2已停止 3正在停止 4暂停 5准备运行 6补单 7补单结束 8运行结束部分成交 9运行结束完全成交
+        { key: "0", value: "未开始" },
+        { key: "1", value: "运行中" },
+        { key: "2", value: "已停止" },
+        { key: "3", value: "正在停止" },
+        { key: "4", value: "暂停" },
+        { key: "5", value: "准备运行" },
+        { key: "6", value: "补单" },
+        { key: "7", value: "补单结束" },
+        { key: "8", value: "运行结束部分成交" },
+        { key: "9", value: "运行结束完全成交" },
+    ],
     // algorithmEnable: [
     //     { key: "0", value: "不可用" },
     //     { key: "1", value: "可用" },
@@ -127,6 +136,8 @@ const configData = {
         { key: "4", value: "正常登出" },
     ],
     positionEffect: [
+        { key: 79, value: "开仓" },
+        { key: 67, value: "平仓" },
         { key: "O", value: "开仓" },
         { key: "C", value: "平仓" },
     ],
@@ -233,6 +244,12 @@ const configData = {
         { key: "E", value: "赎回" },
         { key: "F", value: "出借" },
         { key: "G", value: "借入" },
+        { key: 49, value: "买" },
+        { key: 50, value: "卖" },
+        { key: 68, value: "申购" },
+        { key: 69, value: "赎回" },
+        { key: 70, value: "出借" },
+        { key: 71, value: "借入" },
     ],
     ordType: [
         { key: "1", value: "市价" },
