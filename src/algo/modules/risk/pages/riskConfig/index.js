@@ -1180,15 +1180,10 @@ class riskConfigManage extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                             {
-<<<<<<< HEAD
-                                                message: "请保留4位小数以内",
-                                                pattern: /^\d+(?:\.\d{0,4})?$/i,
-=======
                                                 message:
                                                     "请输入正数,最多保留4位小数",
                                                 pattern:
                                                     /^0$|^[1-9]\d{0,15}$|^[1-9]\d{0,15}\.{1}\d{1,4}$|^0\.{1}\d{1,4}$/i,
->>>>>>> 47cdd9d07cf3574df27d44730b7742f4b6c6e377
                                             },
                                         ],
                                         initialValue: "0",
@@ -1478,15 +1473,10 @@ class riskConfigManage extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                             {
-<<<<<<< HEAD
-                                                message: "请保留4位小数以内",
-                                                pattern: /^\d+(?:\.\d{0,4})?$/i,
-=======
                                                 message:
                                                     "请输入正数,最多保留4位小数",
                                                 pattern:
                                                     /^0$|^[1-9]\d{0,15}$|^[1-9]\d{0,15}\.{1}\d{1,4}$|^0\.{1}\d{1,4}$/i,
->>>>>>> 47cdd9d07cf3574df27d44730b7742f4b6c6e377
                                             },
                                         ],
                                         initialValue: "0",
