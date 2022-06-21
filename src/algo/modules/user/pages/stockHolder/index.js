@@ -170,7 +170,7 @@ export default class uoeSetting extends React.PureComponent {
                 >
                     <div
                         urlPrefix="/stockHolder"
-                        title="持仓信息"
+                        title="股东信息"
                         sucCallback={this.getData}
                     ></div>
                 </CurdComponent>
