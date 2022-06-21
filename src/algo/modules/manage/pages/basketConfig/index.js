@@ -148,7 +148,7 @@ export default class uoeSetting extends React.PureComponent {
     };
     getData = (params = {}) => {
         // params.token = "";
-        http.get({
+        http.post({
             url: "/basket-info/list",
             data: params,
         }).then((res) => {

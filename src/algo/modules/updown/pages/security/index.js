@@ -92,11 +92,10 @@ export default class security extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href =
-            window.baseURL + "/security/download";
+        window.location.href = window.baseURL + "/security/download";
     };
     getData = (params) => {
-        http.get({
+        http.post({
             // url: "/option/assetInfo/selectList",
             url: "/security/list",
             data: params,

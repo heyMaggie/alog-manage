@@ -6,7 +6,7 @@ import { Input } from "antd";
 const columns = (params) => {
     return [
         {
-            title: "id",
+            title: "ID",
             dataIndex: "id",
         },
         {
@@ -96,7 +96,7 @@ export default class uoeSetting extends React.PureComponent {
         });
     };
     getData = (params) => {
-        http.get({
+        http.post({
             // url: "/option/assetInfo/selectList",
             url: "/counter/list",
             data: params,

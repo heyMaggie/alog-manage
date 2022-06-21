@@ -57,11 +57,10 @@ export default class serverSetting extends React.PureComponent {
         this.getData(params);
     };
     handleDownload = () => {
-        window.location.href =
-            window.baseURL + "/algo/download";
+        window.location.href = window.baseURL + "/algo/download";
     };
     getData = (params) => {
-        http.get({
+        http.post({
             // url: "/option/assetInfo/selectList",
             url: "/algo/list",
             data: params,
@@ -133,7 +132,8 @@ export default class serverSetting extends React.PureComponent {
                 >
                     <Upload {...props}>
                         <Button type="primary">
-                            <Icon type="upload" />算法信息上传
+                            <Icon type="upload" />
+                            算法信息上传
                         </Button>
                     </Upload>
                     <Button type="primary" onClick={this.handleDownload}>

@@ -13,7 +13,7 @@ const columns = (params) => {
             dataIndex: "userName",
         },
         {
-            title: "柜台网关Id",
+            title: "柜台网关ID",
             dataIndex: "counterGwId",
         },
         {
@@ -33,7 +33,7 @@ const columns = (params) => {
             dataIndex: "clientType",
         },
         {
-            title: "算法平台用户Id",
+            title: "算法平台用户ID",
             dataIndex: "uuserId",
             width: 150,
         },
@@ -57,7 +57,7 @@ export default class counterGw extends React.PureComponent {
         window.location.href = window.baseURL + "/counter-user-info/download";
     };
     getData = (params) => {
-        http.get({
+        http.post({
             // url: "/option/assetInfo/selectList",
             url: "/counter-user-info/list",
             data: params,

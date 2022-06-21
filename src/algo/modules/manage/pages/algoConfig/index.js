@@ -295,7 +295,7 @@ class algoConfig extends React.PureComponent {
     };
     getData = (params = {}) => {
         // params.token = "";
-        http.get({
+        http.post({
             url: "/algo/list",
             data: params,
         }).then((res) => {

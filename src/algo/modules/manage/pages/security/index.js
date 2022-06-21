@@ -143,7 +143,7 @@ export default class uoeSetting extends React.PureComponent {
     };
     getData = (params = {}) => {
         // params.token = "";
-        http.get({
+        http.post({
             url: "/security/list",
             data: params,
         }).then((res) => {

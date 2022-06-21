@@ -119,7 +119,7 @@ export default class session extends React.PureComponent {
     };
     getData = (params = {}) => {
         // params.token = "";
-        http.get({
+        http.post({
             // url: "/option/tb-asset-info/queryList",
             url: "/session/list",
             data: params,

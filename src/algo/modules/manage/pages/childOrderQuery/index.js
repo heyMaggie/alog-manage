@@ -7,7 +7,7 @@ const getUpdateFormFields = () => {};
 const columns = (params) => {
     return [
         {
-            title: "账户id",
+            title: "账户ID",
             dataIndex: "uuserId",
             width: 100,
         },
@@ -205,7 +205,7 @@ export default class newOrderQuery extends React.PureComponent {
     setUpdateModal = ({ form, record }) => {};
     getData = (params = {}) => {
         // params.token = "";
-        http.get({
+        http.post({
             url: "/new-trade-order/list",
             data: params,
         }).then((res) => {
