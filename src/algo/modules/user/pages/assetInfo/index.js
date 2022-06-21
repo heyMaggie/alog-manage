@@ -173,7 +173,7 @@ export default class uoeSetting extends React.PureComponent {
                     // rowSelection={rowSelection} //批量选择 操作
                 >
                     <div
-                        urlPrefix="/stockHolder"
+                        urlPrefix="/asset-info"
                         noUpload={true}
                         title="资金信息"
                         sucCallback={this.getData}

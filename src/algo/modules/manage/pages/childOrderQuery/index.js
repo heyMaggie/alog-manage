@@ -3,9 +3,14 @@ import CurdComponent from "@/components/CurdComponent";
 // import SelectOption from "@/components/SelectOption";
 import { Input } from "antd";
 
-const getUpdateFormFields = () => {};
+// const getUpdateFormFields = () => {};
 const columns = (params) => {
     return [
+        {
+            title: "子单ID",
+            dataIndex: "id",
+            width: 100,
+        },
         {
             title: "账户ID",
             dataIndex: "uuserId",
@@ -39,6 +44,7 @@ const columns = (params) => {
         {
             title: "市场代码",
             dataIndex: "market",
+            width: 100,
         },
         {
             title: "订单数量 ",
@@ -53,14 +59,17 @@ const columns = (params) => {
         {
             title: "止损价",
             dataIndex: "stopPx",
+            width: 120,
         },
         {
             title: "订单类型",
             dataIndex: "orderType",
+            width: 180,
         },
         {
             title: "买卖方向",
             dataIndex: "side",
+            width: 100,
         },
         {
             title: "平仓标识",
@@ -80,6 +89,7 @@ const columns = (params) => {
         {
             title: "剩余未成交数量 ",
             dataIndex: "leavesQty",
+            width: 150,
         },
         {
             title: "证券代码源",
@@ -94,14 +104,17 @@ const columns = (params) => {
         {
             title: "订单编号",
             dataIndex: "clOrdId",
+            width: 150,
         },
         {
             title: "子单状态",
             dataIndex: "childOrdStatus",
+            width: 120,
         },
         {
             title: "请求用户ID",
             dataIndex: "reqUserId",
+            width: 150,
         },
         {
             title: "错误码",
@@ -111,36 +124,42 @@ const columns = (params) => {
         {
             title: "错误信息",
             dataIndex: "errorMsg",
+            width: 180,
         },
         {
             title: "证券账户",
             dataIndex: "accountId",
+            width: 150,
         },
         {
             title: "序列号",
             dataIndex: "seq",
+            width: 100,
         },
         {
-            title: "柜台 序列号",
-            dataIndex: "counter_seq",
+            title: "柜台序列号",
+            dataIndex: "counterSeq",
+            width: 120,
         },
         {
             title: "交易时间",
             dataIndex: "transactTime",
+            width: 180,
         },
         {
             title: "撤单时间",
-            dataIndex: "cancel_time",
+            dataIndex: "cancelTime",
+            width: 180,
         },
         {
             title: "成交计数",
-            dataIndex: "exec_count",
+            dataIndex: "execCount",
             width: 120,
         },
         {
             title: "累计成交金额",
-            dataIndex: "cum_amount",
-            width: 120,
+            dataIndex: "cumAmount",
+            width: 150,
         },
         {
             title: "成交记录ID",
@@ -151,6 +170,11 @@ const columns = (params) => {
 };
 const getSearchFormFields = () => {
     return [
+        {
+            label: "子单ID",
+            id: "id",
+            component: <Input placeholder="请输入" />,
+        },
         {
             label: "用户ID",
             id: "uuserId",
@@ -203,33 +227,45 @@ export default class newOrderQuery extends React.PureComponent {
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {};
-    getData = (params = {}) => {
+    handleSearch = (params, pagination) => {
+        // console.log("获取搜索栏数据 ", params);
+        this.getData(params, pagination);
+    };
+    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
         // params.token = "";
+        params = {
+            ...params,
+            pageId: pagination.current,
+            pageNum: pagination.pageSize,
+        };
         http.post({
             url: "/new-trade-order/list",
             data: params,
         }).then((res) => {
             console.log(res);
             //解析数据字典
-            if (res.data.length > 0) {
-                parseDict(res.data);
+            if (res.data.records && res.data.records.length > 0) {
+                parseDict(res.data.records);
                 showStip(this);
             } else {
                 message.info("查询结果为空");
             }
+            let pgn = {
+                current: pagination.current,
+                pageSize: pagination.pageSize,
+                total: res.data.total || 0,
+            };
             this.setState({
-                info: res.data,
+                info: res.data.records,
+                pagination: pgn,
             });
         });
-    };
-    handleSearch = (params) => {
-        this.getData(params);
     };
     componentDidMount() {
         this.getData();
     }
     render() {
-        let scroll = { x: 4000, y: 445 };
+        let scroll = { x: 4200, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;
@@ -251,6 +287,7 @@ export default class newOrderQuery extends React.PureComponent {
                     // insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
+                    pagination={this.state.pagination}
                     // getUpdateFormFields={getUpdateFormFields}
                     // setUpdateModal={this.setUpdateModal}
                     // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
