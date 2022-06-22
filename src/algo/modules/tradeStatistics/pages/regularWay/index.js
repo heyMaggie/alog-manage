@@ -193,6 +193,12 @@ class OnlineUser extends React.PureComponent {
         myChart.setOption(option);
         myChart.resize();
     };
+    chartResize = () => {
+        let domList = ["tradeOrder", "cancelTradeOrder", "dealTradeOrder"];
+        domList.forEach((item) => {
+            echarts.init(document.getElementById(item)).resize();
+        });
+    };
     componentDidMount() {
         this.getData({
             securityId: "",
@@ -200,6 +206,12 @@ class OnlineUser extends React.PureComponent {
             startTime: "",
             endTime: "",
         });
+        window.addEventListener("resize", () => {
+            this.chartResize();
+        });
+    }
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.chartResize, false);
     }
     render() {
         const { getFieldDecorator } = this.props.form;

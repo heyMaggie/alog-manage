@@ -158,8 +158,18 @@ class OnlineUser extends React.PureComponent {
             }
         });
     };
+    chartResize = () => {
+        var dom1 = document.getElementById("main3");
+        echarts.init(dom1).resize();
+    };
     componentDidMount() {
         this.getData({ startTime: "", endTime: "" });
+        window.addEventListener("resize", () => {
+            this.chartResize();
+        });
+    }
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.chartResize, false);
     }
     render() {
         const { getFieldDecorator } = this.props.form;
