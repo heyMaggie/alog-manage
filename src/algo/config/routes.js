@@ -9,6 +9,7 @@ import manage from "@/algo/modules/manage";
 import risk from "@/algo/modules/risk";
 import user from "@/algo/modules/user";
 import algostatis from "@/algo/modules/algostatis";
+import tradeStatistics from "@/algo/modules/tradeStatistics";
 
 import axios from "axios";
 //根据环境  自动切换 IP
@@ -32,6 +33,7 @@ let routes = [
     ...manage(),
     ...risk(),
     ...algostatis(),
+    ...tradeStatistics(),
 ];
 //动态引入 component对应地址的组件
 let res = withDynamicImport(main("/main", routes));
