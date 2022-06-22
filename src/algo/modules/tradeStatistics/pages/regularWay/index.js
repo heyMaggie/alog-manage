@@ -4,8 +4,9 @@ import echarts from "echarts";
 import { TimePicker, Form, Button, Icon, DatePicker, Select } from "antd";
 
 const { RangePicker } = DatePicker;
+const { Option } = Select;
 class OnlineUser extends React.PureComponent {
-    state = { number: "个" };
+    state = { number: "笔" };
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -32,29 +33,10 @@ class OnlineUser extends React.PureComponent {
             data: params,
         }).then((res) => {
             if (res.code == 0) {
-                if (res.data == 0) {
+                if (res.data.length == 0) {
                     message.error("该时间段暂无数据");
                 } else {
-                    let data = {
-                        tradeOrder: [
-                            { x: "1970/01/01 08:00", y: 1 },
-                            { x: "2022/06/21 16:46", y: 4 },
-                            { x: "2022/06/22 16:46", y: 8 },
-                            { x: "2022/06/23 16:46", y: 1 },
-                            { x: "2022/06/24 16:46", y: 2 },
-                            { x: "2022/06/25 16:46", y: 5 },
-                            { x: "2022/06/26 16:46", y: 10 },
-                            { x: "2022/06/27 16:46", y: 2 },
-                        ],
-                        cancelTradeOrder: [
-                            { x: "1970/01/01 08:00", y: 1 },
-                            { x: "2022/06/21 16:46", y: 4 },
-                        ],
-                        dealTradeOrder: [
-                            { x: "1970/01/01 08:00", y: 1 },
-                            { x: "2022/06/21 16:46", y: 4 },
-                        ],
-                    };
+                    let data = res.data;
                     let echartLen = Object.keys(data);
                     echartLen.forEach((item) => {
                         this.generateChart(data[item], item);
@@ -109,7 +91,7 @@ class OnlineUser extends React.PureComponent {
                 left: "34px",
                 right: "32px",
                 bottom: "24px",
-                top: "80px",
+                top: "75px",
                 containLabel: true,
             },
             xAxis: {
@@ -162,8 +144,10 @@ class OnlineUser extends React.PureComponent {
                             type: "dashed",
                         },
                     },
+                    // nameLocation: "200px",
                     nameTextStyle: {
-                        padding: [0, 0, 0, 40],
+                        align: "center",
+                        padding: [0, 0, 0, 20],
                     },
                 },
             ],
@@ -210,7 +194,12 @@ class OnlineUser extends React.PureComponent {
         myChart.resize();
     };
     componentDidMount() {
-        this.getData();
+        this.getData({
+            securityId: "",
+            uuserId: "",
+            startTime: "",
+            endTime: "",
+        });
     }
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -219,21 +208,20 @@ class OnlineUser extends React.PureComponent {
                 <div className={styles.search}>
                     <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item>
-                            {getFieldDecorator("hostId", {
-                                initialValue: "个",
+                            {getFieldDecorator("number", {
+                                initialValue: "笔",
                             })(
                                 <Select
                                     showSearch
                                     style={{ width: 160 }}
                                     placeholder="选择单位"
-                                    optionFilterProp="number"
+                                    optionFilterProp="children"
                                     filterOption={(input, option) =>
                                         option.props.children
                                             .toLowerCase()
                                             .indexOf(input.toLowerCase()) >= 0
                                     }
                                 >
-                                    <Option value="个">数量</Option>
                                     <Option value="笔">笔数</Option>
                                     <Option value="元">金额</Option>
                                 </Select>
@@ -255,7 +243,7 @@ class OnlineUser extends React.PureComponent {
                                     }
                                 >
                                     <Option value="">全部股票</Option>
-                                    <Option value="1">80</Option>
+                                    <Option value="000001">平安银行</Option>
                                 </Select>
                             )}
                         </Form.Item>
@@ -279,7 +267,9 @@ class OnlineUser extends React.PureComponent {
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
-                            {getFieldDecorator("pickerTime")(
+                            {getFieldDecorator("pickerTime", {
+                                initialValue: [],
+                            })(
                                 <RangePicker
                                     style={{ width: 432 }}
                                     showTime

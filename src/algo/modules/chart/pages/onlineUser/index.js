@@ -27,7 +27,7 @@ class OnlineUser extends React.PureComponent {
             data: params,
         }).then((res) => {
             if (res.code == 0) {
-                if (res.data == 0) {
+                if (res.data.length == 0) {
                     message.error("该时间段暂无数据");
                 } else {
                     let option = {
@@ -159,7 +159,7 @@ class OnlineUser extends React.PureComponent {
         });
     };
     componentDidMount() {
-        this.getData();
+        this.getData({ startTime: "", endTime: "" });
     }
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -168,7 +168,9 @@ class OnlineUser extends React.PureComponent {
                 <div className={styles.search}>
                     <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item>
-                            {getFieldDecorator("pickerTime")(
+                            {getFieldDecorator("pickerTime", {
+                                initialValue: [],
+                            })(
                                 <RangePicker
                                     style={{ width: 432 }}
                                     showTime
