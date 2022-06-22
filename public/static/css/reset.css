@@ -175,7 +175,7 @@ table {
 
 /* 滚动条美化 */
 ::-webkit-scrollbar {
-    width: 0px;
+    width: 5px;
     height: 5px;
 }
 /*外层轨道。可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果*/
