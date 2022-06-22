@@ -59,7 +59,9 @@ class BasicTable extends React.PureComponent {
         // console.log(newPagination);
         if (this.props.pageSize) {
             newPagination.pageSize = this.props.pageSize;
+            // newPagination.pageSizeOptions=[this.props.pageSize]
         }
+
         let onRow = null;
         if (this.props.showDetail) {
             onRow = (record) => {

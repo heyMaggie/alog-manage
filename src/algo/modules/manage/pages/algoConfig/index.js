@@ -224,7 +224,9 @@ class algoConfig extends React.PureComponent {
         }).then((res) => {
             // console.log(res);
             if (res.code == 0) {
-                message.success(res.message);
+                // message.success(res.message);
+                showStip(this, "修改算法风控组成功");
+                this.isAction = true;
                 this.getData();
             }
         });
