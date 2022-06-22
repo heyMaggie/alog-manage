@@ -34,7 +34,7 @@ class AlgorithmStatistical extends React.PureComponent {
             url: "/statistics/algorithmStatistics",
         }).then((res) => {
             if (res.code == 0) {
-                if (res.data == 0) {
+                if (res.data.length == 0) {
                     message.error("该时间段暂无数据");
                 } else {
                     let option = {
@@ -216,7 +216,7 @@ class AlgorithmStatistical extends React.PureComponent {
         });
     };
     componentDidMount() {
-        this.getData();
+        this.getData({ algorithmId: "", startTime: "", endTime: "" });
     }
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -226,7 +226,7 @@ class AlgorithmStatistical extends React.PureComponent {
                     <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item>
                             {getFieldDecorator("algorithmId", {
-                                initialValue: "0",
+                                initialValue: "",
                             })(
                                 <Select
                                     showSearch
@@ -239,13 +239,15 @@ class AlgorithmStatistical extends React.PureComponent {
                                             .indexOf(input.toLowerCase()) >= 0
                                     }
                                 >
-                                    <Option value="0">全部</Option>
+                                    <Option value="">全部</Option>
                                     <Option value="1">日内回转</Option>
                                 </Select>
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
-                            {getFieldDecorator("pickerTime")(
+                            {getFieldDecorator("pickerTime", {
+                                initialValue: [],
+                            })(
                                 <RangePicker
                                     style={{ width: 432 }}
                                     showTime

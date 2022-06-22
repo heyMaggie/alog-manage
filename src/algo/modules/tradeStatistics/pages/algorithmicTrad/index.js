@@ -19,7 +19,7 @@ import { lte } from "semver";
 import { tuple } from "antd/lib/_util/type";
 class Ram2 extends React.PureComponent {
     state = {
-        number: "个",
+        number: "笔",
     };
     handleSubmit = (e) => {
         e.preventDefault();
@@ -48,30 +48,7 @@ class Ram2 extends React.PureComponent {
             data: params,
         }).then((res) => {
             if (res.code == 0) {
-                let data = {
-                    algoOrder: [
-                        { x: "1970/01/01 08:00", y: 1 },
-                        { x: "2022/06/21 16:46", y: 4 },
-                        { x: "2022/06/22 16:46", y: 8 },
-                        { x: "2022/06/23 16:46", y: 1 },
-                        { x: "2022/06/24 16:46", y: 2 },
-                        { x: "2022/06/25 16:46", y: 5 },
-                        { x: "2022/06/26 16:46", y: 10 },
-                        { x: "2022/06/27 16:46", y: 2 },
-                    ],
-                    cancelAlgoOrder: [
-                        { x: "1970/01/01 08:00", y: 1 },
-                        { x: "2022/06/21 16:46", y: 4 },
-                    ],
-                    childOrder: [
-                        { x: "1970/01/01 08:00", y: 1 },
-                        { x: "2022/06/21 16:46", y: 4 },
-                    ],
-                    dealAlgoOrder: [
-                        { x: "1970/01/01 08:00", y: 1 },
-                        { x: "2022/06/21 16:46", y: 4 },
-                    ],
-                };
+                let data = res.data;
                 let echartLen = Object.keys(data);
                 echartLen.forEach((item) => {
                     this.generateChart(data[item], item);
@@ -126,7 +103,7 @@ class Ram2 extends React.PureComponent {
                 left: "34px",
                 right: "32px",
                 bottom: "24px",
-                top: "80px",
+                top: "75px",
                 containLabel: true,
             },
             xAxis: {
@@ -180,7 +157,7 @@ class Ram2 extends React.PureComponent {
                         },
                     },
                     nameTextStyle: {
-                        padding: [0, 0, 0, 40],
+                        padding: [0, 0, 0, 20],
                     },
                 },
             ],
@@ -243,7 +220,7 @@ class Ram2 extends React.PureComponent {
                     <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item>
                             {getFieldDecorator("number", {
-                                initialValue: "个",
+                                initialValue: "笔",
                             })(
                                 <Select
                                     showSearch
@@ -256,7 +233,6 @@ class Ram2 extends React.PureComponent {
                                             .indexOf(input.toLowerCase()) >= 0
                                     }
                                 >
-                                    <Option value="个">数量</Option>
                                     <Option value="笔">笔数</Option>
                                     <Option value="元">金额</Option>
                                 </Select>
@@ -278,7 +254,7 @@ class Ram2 extends React.PureComponent {
                                     }
                                 >
                                     <Option value="">全部股票</Option>
-                                    <Option value="1">80</Option>
+                                    <Option value="000001">平安银行</Option>
                                 </Select>
                             )}
                         </Form.Item>
@@ -322,7 +298,9 @@ class Ram2 extends React.PureComponent {
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
-                            {getFieldDecorator("pickerTime")(
+                            {getFieldDecorator("pickerTime", {
+                                initialValue: [],
+                            })(
                                 <RangePicker
                                     style={{ width: 432 }}
                                     showTime

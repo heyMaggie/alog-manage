@@ -131,6 +131,7 @@ class Ram extends React.PureComponent {
                                 axisLabel: {
                                     formatter: "{value}%",
                                 },
+                                position: "right",
                                 nameTextStyle: {
                                     padding: [0, 0, 0, 0],
                                 },
@@ -221,7 +222,9 @@ class Ram extends React.PureComponent {
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
-                            {getFieldDecorator("pickerTime")(
+                            {getFieldDecorator("pickerTime", {
+                                initialValue: [],
+                            })(
                                 <RangePicker
                                     style={{ width: 432 }}
                                     showTime

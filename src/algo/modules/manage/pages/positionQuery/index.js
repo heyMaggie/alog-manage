@@ -87,7 +87,7 @@ let columns = () => {
             width: 200,
         },
         {
-            title: "当天前的原始持仓的平均开仓价格00",
+            title: "当天前的原始持仓的平均开仓价格",
             dataIndex: "originOpenPrice",
             width: 250,
         },
