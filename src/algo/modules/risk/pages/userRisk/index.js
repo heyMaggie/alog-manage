@@ -175,7 +175,7 @@ export default class userRisk extends React.PureComponent {
                 centered={true}
                 columns={columns}
                 scroll={scroll}
-                dtColumns={dtColumns()} //详情列表
+                //dtColumns={dtColumns()} //详情列表
                 dtCol={2} //详情列数
                 // dtWidth={800} //详情弹窗宽度
             >

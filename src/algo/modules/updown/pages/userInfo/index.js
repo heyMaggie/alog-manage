@@ -135,7 +135,7 @@ export default class userInfoUpload extends React.PureComponent {
                     columns={columns}
                     dataSource={info}
                     scroll={scroll}
-                    dtColumns={columns()}
+                    //dtColumns={columns()}
                     // rowSelection={rowSelection} //批量选择 操作
                 >
                     <Upload {...props}>

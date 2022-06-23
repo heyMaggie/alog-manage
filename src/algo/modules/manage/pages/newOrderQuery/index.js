@@ -12,7 +12,7 @@ const columns = (params) => {
             width: 100,
         },
         {
-            title: "个人账户",
+            title: "用户ID",
             dataIndex: "uuserId",
             width: 100,
         },
