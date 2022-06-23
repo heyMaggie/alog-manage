@@ -333,8 +333,8 @@ class CounterGw extends React.PureComponent {
             });
         });
     };
-    handleSearch = (params) => {
-        this.getData(params);
+    handleSearch = (params, pagination) => {
+        this.getData(params, pagination);
     };
 
     componentDidMount() {

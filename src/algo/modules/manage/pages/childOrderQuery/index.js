@@ -204,6 +204,7 @@ export default class newOrderQuery extends React.PureComponent {
         searchLoading: false,
         selectRow: [],
         info: [],
+        pagination: { total: 0 },
     };
     //批量选择
     handleTableChange = (selectedRowKeys) => {

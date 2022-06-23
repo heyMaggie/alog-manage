@@ -264,7 +264,7 @@ class CurdComponent extends React.PureComponent {
         return newData;
     };
     handlePagination = (pagination) => {
-        console.log("手动分页 ", pagination);
+        // console.log("手动分页 ", pagination);
         let params = this.getSearchFormValue(pagination);
         this.props.onSearchClick(params, pagination);
     };
