@@ -153,9 +153,6 @@ export default class uoeSetting extends React.PureComponent {
     handleSearch = (params, pagination) => {
         this.getData(params, pagination);
     };
-    handleSearch = (params) => {
-        this.getData(params, pagination);
-    };
     componentDidMount() {
         this.getData();
     }
