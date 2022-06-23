@@ -106,12 +106,12 @@ export default class uoeSetting extends React.PureComponent {
             if (res.data.length > 0) {
                 parseArrDict(res.data, "status", "counterStatus");
                 parseDict(res.data);
-                this.setState({
-                    info: res.data,
-                });
             } else {
                 message.info("查询结果为空");
             }
+            this.setState({
+                info: res.data,
+            });
         });
     };
     handleSearch = (params, pagination) => {

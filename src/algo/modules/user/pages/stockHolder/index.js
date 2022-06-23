@@ -121,12 +121,12 @@ export default class uoeSetting extends React.PureComponent {
             //解析数据字典
             if (res.data.length > 0) {
                 parseDict(res.data);
-                this.setState({
-                    info: res.data,
-                });
             } else {
                 message.info("查询结果为空");
             }
+            this.setState({
+                info: res.data,
+            });
         });
     };
     handleSearch = (params, pagination) => {

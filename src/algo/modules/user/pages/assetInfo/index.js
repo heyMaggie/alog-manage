@@ -42,11 +42,6 @@ const columns = (params) => {
             width: 150,
         },
         {
-            title: "资金版本号",
-            dataIndex: "vers",
-            width: 100,
-        },
-        {
             title: "版本号",
             dataIndex: "version",
             width: 100,
@@ -73,7 +68,6 @@ export default class uoeSetting extends React.PureComponent {
         searchLoading: false,
         selectRow: [],
         info: [],
-        pagination: { total: 0 },
     };
     //批量选择
     handleTableChange = (selectedRowKeys) => {
@@ -119,13 +113,8 @@ export default class uoeSetting extends React.PureComponent {
             enable: record.enable + "",
         });
     };
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}) => {
         // params.token = "";
-        params = {
-            ...params,
-            pageId: pagination.current,
-            pageNum: pagination.pageSize,
-        };
         http.post({
             // url: "/option/tb-asset-info/queryList",
             url: "asset-info/list",
@@ -133,25 +122,19 @@ export default class uoeSetting extends React.PureComponent {
         }).then((res) => {
             console.log(res);
             //解析数据字典
-            if (res.data.records && res.data.records.length > 0) {
-                parseDict(res.data.records);
+            if (res.data.length > 0) {
+                parseDict(res.data);
                 showTip(this);
             } else {
                 message.info("查询结果为空");
             }
-            let pgn = {
-                current: pagination.current,
-                pageSize: pagination.pageSize,
-                total: res.data.total || 0,
-            };
             this.setState({
-                info: res.data.records,
-                pagination: pgn,
+                info: res.data,
             });
         });
     };
-    handleSearch = (params, pagination) => {
-        this.getData(params, pagination);
+    handleSearch = (params) => {
+        this.getData(params);
     };
     componentDidMount() {
         this.getData();
@@ -179,7 +162,6 @@ export default class uoeSetting extends React.PureComponent {
                     // insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
-                    pagination={this.state.pagination}
                     // getUpdateFormFields={getUpdateFormFields}
                     // setUpdateModal={this.setUpdateModal}
                     // updateRecord={this.handleUpdateRecord} // 不传 就没编辑

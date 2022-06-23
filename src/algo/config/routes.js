@@ -4,7 +4,7 @@ import main from "@/algo/modules/main";
 
 // import parameter from "@/algo/modules/parameter";
 import charts from "@/algo/modules/chart";
-import updown from "@/algo/modules/updown";
+// import updown from "@/algo/modules/updown";
 import manage from "@/algo/modules/manage";
 import risk from "@/algo/modules/risk";
 import user from "@/algo/modules/user";
@@ -18,7 +18,7 @@ if (process.env.NODE_ENV == "development") {
     axios.defaults.baseURL = "http://192.168.2.105:20010";
     // axios.defaults.baseURL = "http://192.168.1.85:20010";
     // axios.defaults.baseURL = "http://192.168.1.81:20010";
-    // axios.defaults.baseURL = "http://192.168.1.80:20010";
+    axios.defaults.baseURL = "http://192.168.1.80:20010";
 } else {
     //生产环境
     axios.defaults.baseURL = "/algoManageApi";
@@ -27,7 +27,7 @@ window.baseURL = axios.defaults.baseURL;
 //注册 main 模块路由
 // let routes = [...parameter(), ...updown(), ...charts(), ...manage()];
 let routes = [
-    ...updown(),
+    // ...updown(),
     ...charts(),
     ...user(),
     ...manage(),
