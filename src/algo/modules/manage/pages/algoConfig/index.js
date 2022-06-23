@@ -324,7 +324,7 @@ class algoConfig extends React.PureComponent {
                     }
                 });
                 parseDict(res.data);
-                showTip(this);
+                // showTip(this);
             } else {
                 message.info("查询结果为空");
             }
