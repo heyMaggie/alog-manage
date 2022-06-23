@@ -156,7 +156,7 @@ export default class Cccx extends React.PureComponent {
             //解析数据字典
             if (res.data.length > 0) {
                 parseDict(res.data);
-                showTip(this);
+                // showTip(this);
             } else {
                 message.info("查询结果为空");
             }

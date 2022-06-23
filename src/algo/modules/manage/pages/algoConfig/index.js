@@ -124,6 +124,7 @@ class algoConfig extends React.PureComponent {
         updateModalVisible: false,
         riskGroup: [],
         userRiskConfig: {},
+        pagination: { total: 0 },
     };
     // type 1 : 是否显示    type:2  是否可用
     onSwitchChange = (val, record, type) => {
@@ -298,16 +299,20 @@ class algoConfig extends React.PureComponent {
             });
         });
     };
-    getData = (params = {}) => {
-        // params.token = "";
+    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+        params = {
+            ...params,
+            pageId: pagination.current,
+            pageNum: pagination.pageSize,
+        };
         http.post({
             url: "/algo/list",
             data: params,
         }).then((res) => {
             console.log(res);
             //解析数据字典
-            if (res.data.length > 0) {
-                res.data.forEach((item) => {
+            if (res.data.records && res.data.records.length > 0) {
+                res.data.records.forEach((item) => {
                     // console.log(item.algorithmShow);
                     if (item.algorithmStatus == 0) {
                         item.algorithmShow = 0;
@@ -323,13 +328,19 @@ class algoConfig extends React.PureComponent {
                         item.algorithmEnable = 1;
                     }
                 });
-                parseDict(res.data);
-                showTip(this);
+                parseDict(res.data.records);
+                // showTip(this);
             } else {
                 message.info("查询结果为空");
             }
+            let pgn = {
+                current: pagination.current,
+                pageSize: pagination.pageSize,
+                total: res.data.total || 0,
+            };
             this.setState({
-                info: res.data,
+                info: res.data.records,
+                pagination: pgn,
             });
         });
     };
@@ -367,6 +378,7 @@ class algoConfig extends React.PureComponent {
                     // insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
+                    pagination={this.state.pagination}
                     // getUpdateFormFields={getUpdateFormFields}
                     // setUpdateModal={this.setUpdateModal}
                     // updateRecord={this.handleUpdateRecord} // 不传 就没编辑

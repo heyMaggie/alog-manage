@@ -353,7 +353,7 @@ export default class newOrderQuery extends React.PureComponent {
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
                 parseDict(res.data.records);
-                showTip(this);
+                // showTip(this);
             } else {
                 message.info("查询结果为空");
             }

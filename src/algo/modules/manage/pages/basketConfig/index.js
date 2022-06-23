@@ -157,7 +157,7 @@ export default class uoeSetting extends React.PureComponent {
             if (res.data.length > 0) {
                 parseArrDict(res.data, "status", "bStatus");
                 parseDict(res.data);
-                showTip(this);
+                // showTip(this);
             } else {
                 message.info("查询结果为空");
             }

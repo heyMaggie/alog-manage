@@ -501,14 +501,14 @@ class riskConfigManage extends React.PureComponent {
             });
         });
     };
-    handleSearch = (params) => {
+    handleSearch = (params, pagination) => {
         console.log(params);
         if (params.id == "" && params.riskName == "") {
             // console.log("getData");
-            this.getData(params);
+            this.getData(params, pagination);
         } else {
             // console.log("getDataByParams");
-            this.getDataByParams(params);
+            this.getDataByParams(params, pagination);
         }
     };
     formChange = (idx) => {

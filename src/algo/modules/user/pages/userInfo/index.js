@@ -280,7 +280,7 @@ class userInfo extends React.PureComponent {
             //解析数据字典
             if (res.data.length > 0) {
                 parseDict(res.data);
-                showTip(this);
+                // showTip(this);
             } else {
                 message.info("查询结果为空");
             }
@@ -289,9 +289,8 @@ class userInfo extends React.PureComponent {
             });
         });
     };
-    handleSearch = (params) => {
-        console.log(params);
-        this.getData(params);
+    handleSearch = (params, pagination) => {
+        this.getData(params, pagination);
     };
     handleDownload = () => {
         window.location.href = window.baseURL + "/user/download";
