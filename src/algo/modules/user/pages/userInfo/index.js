@@ -289,9 +289,8 @@ class userInfo extends React.PureComponent {
             });
         });
     };
-    handleSearch = (params) => {
-        console.log(params);
-        this.getData(params);
+    handleSearch = (params, pagination) => {
+        this.getData(params, pagination);
     };
     handleDownload = () => {
         window.location.href = window.baseURL + "/user/download";
