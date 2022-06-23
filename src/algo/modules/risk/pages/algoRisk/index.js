@@ -102,7 +102,12 @@ export default class algoRisk extends React.PureComponent {
         // console.log("获取搜索栏数据 ", params);
         this.getData(params, pagination);
     };
-    getData = (params, pagination = { current: 1, pageSize: 20 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+        params = {
+            ...params,
+            pageId: pagination.current,
+            pageNum: pagination.pageSize,
+        };
         // console.log(pagination);
         http.post({
             url: "/algo-risk-statistics/list",
@@ -110,14 +115,20 @@ export default class algoRisk extends React.PureComponent {
         }).then((res) => {
             console.log(res);
             //解析数据字典
-            if (res.data.length > 0) {
-                parseDict(res.data);
+            if (res.data.records && res.data.records.length > 0) {
+                parseDict(res.data.records);
                 // showTip(this);
             } else {
                 message.info("查询结果为空");
             }
+            let pgn = {
+                current: pagination.current,
+                pageSize: pagination.pageSize,
+                total: res.data.total || 0,
+            };
             this.setState({
-                info: res.data,
+                info: res.data.records,
+                pagination: pgn,
             });
         });
         // this.setState({ info: msg.content, pagination: pgn });
@@ -153,7 +164,7 @@ export default class algoRisk extends React.PureComponent {
                 searchLoading={this.state.searchLoading}
                 isShowInsert={false}
                 // rowKey="sno"
-                // pagination={this.state.pagination}
+                pagination={this.state.pagination}
                 dataSource={info}
                 // insertBtnText={"撤销"}
                 // getInsertFormFields={getInsertFormFields}

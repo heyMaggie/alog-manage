@@ -137,6 +137,7 @@ export default class cancelOrderQuery extends React.PureComponent {
         searchLoading: false,
         selectRow: [],
         info: [],
+        pagination: { total: 0 },
     };
     //批量选择
     handleTableChange = (selectedRowKeys) => {
@@ -160,7 +161,12 @@ export default class cancelOrderQuery extends React.PureComponent {
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {};
-    getData = (params = {}) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+        params = {
+            ...params,
+            pageId: pagination.current,
+            pageNum: pagination.pageSize,
+        };
         // params.token = "";
         http.post({
             url: "/cancel-trade-order/list",
@@ -168,14 +174,20 @@ export default class cancelOrderQuery extends React.PureComponent {
         }).then((res) => {
             console.log(res);
             //解析数据字典
-            if (res.data.length > 0) {
-                parseDict(res.data);
+            if (res.data.records && res.data.records.length > 0) {
+                parseDict(res.data.records);
                 // showTip(this);
             } else {
                 message.info("查询结果为空");
             }
+            let pgn = {
+                current: pagination.current,
+                pageSize: pagination.pageSize,
+                total: res.data.total || 0,
+            };
             this.setState({
-                info: res.data,
+                info: res.data.records,
+                pagination: pgn,
             });
         });
     };
@@ -208,6 +220,7 @@ export default class cancelOrderQuery extends React.PureComponent {
                     // insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
+                    pagination={this.state.pagination}
                     // getUpdateFormFields={getUpdateFormFields}
                     // setUpdateModal={this.setUpdateModal}
                     // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
