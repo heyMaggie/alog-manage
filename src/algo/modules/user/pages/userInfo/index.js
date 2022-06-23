@@ -203,8 +203,13 @@ class userInfo extends React.PureComponent {
         }).then((res) => {
             // console.log(res);
             if (res.code == 0) {
-                message.success(res.message);
+                // message.success(res.message);
+                showTip(this, res.message);
+                this.isAction = true;
                 this.getData();
+            } else {
+                message.error(res.message);
+                this.isAction = true;
             }
         });
     };
@@ -275,6 +280,7 @@ class userInfo extends React.PureComponent {
             //解析数据字典
             if (res.data.length > 0) {
                 parseDict(res.data);
+                showTip(this);
             } else {
                 message.info("查询结果为空");
             }

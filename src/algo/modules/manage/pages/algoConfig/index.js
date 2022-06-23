@@ -156,11 +156,12 @@ class algoConfig extends React.PureComponent {
             // this.isAction = true;
             if (res.code == 0) {
                 // message.success("修改管理状态成功");
-                showStip(this, "修改管理状态成功");
+                showTip(this, "修改管理状态成功");
                 this.isAction = true;
                 this.getData();
             } else {
                 message.error("修改管理状态失败");
+                this.isAction = true;
             }
         });
     };
@@ -225,7 +226,7 @@ class algoConfig extends React.PureComponent {
             // console.log(res);
             if (res.code == 0) {
                 // message.success(res.message);
-                showStip(this, "修改算法风控组成功");
+                showTip(this, "修改算法风控组成功");
                 this.isAction = true;
                 this.getData();
             }
@@ -323,7 +324,7 @@ class algoConfig extends React.PureComponent {
                     }
                 });
                 parseDict(res.data);
-                showStip(this);
+                showTip(this);
             } else {
                 message.info("查询结果为空");
             }

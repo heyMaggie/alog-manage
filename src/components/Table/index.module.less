@@ -1,8 +1,10 @@
 .tableWrap {
     // padding-left: 32px;
     // padding-right: 32px;
-    ::-webkit-scrollbar {
-        width: 0px;
+    :global {
+        .ant-table-header.ant-table-hide-scrollbar {
+            overflow-y: hidden !important;
+        }
     }
 }
 :global {

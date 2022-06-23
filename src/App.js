@@ -3,7 +3,7 @@ import { ConfigProvider } from "antd";
 import zhCN from "antd/es/locale/zh_CN";
 import { message } from "antd";
 window.message = message;
-window.showStip = (that, text = "查询成功") => {
+window.showTip = (that, text = "查询成功") => {
     if (!that.isAction) {
         message.success(text);
     }

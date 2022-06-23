@@ -11,9 +11,9 @@ class BasicTable extends React.PureComponent {
             current: 1,
             // total:0,
             // pageSize: 20,
-            pageSize: 13,
+            pageSize: 0,
             // pageSizeOptions: ["10", "13", "20", "30","50"],
-            pageSizeOptions: ["10", "11", "12", "13", "20"],
+            pageSizeOptions: ["20", "40", "80"],
             showTotal: (total) => `共${total}条`,
         },
     };
@@ -56,10 +56,17 @@ class BasicTable extends React.PureComponent {
             newPagination = false;
         }
         // console.log(pagination === false);
-        // console.log(newPagination);
         if (this.props.pageSize) {
-            newPagination.pageSize = this.props.pageSize;
-            // newPagination.pageSizeOptions=[this.props.pageSize]
+            if (newPagination.pageSize == 0) {
+                newPagination.pageSize = this.props.pageSize;
+            }
+            if (
+                !newPagination.pageSizeOptions.includes(
+                    this.props.pageSize + ""
+                )
+            ) {
+                newPagination.pageSizeOptions.unshift(this.props.pageSize + "");
+            }
         }
 
         let onRow = null;
