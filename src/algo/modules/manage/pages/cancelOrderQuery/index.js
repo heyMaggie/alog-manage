@@ -34,12 +34,12 @@ const columns = (params) => {
             width: 100,
         },
         {
-            title: "策略类型",
+            title: "算法类型",
             dataIndex: "algorithmType",
             width: 100,
         },
         {
-            title: "策略编号",
+            title: "算法ID",
             dataIndex: "algorithmId",
             width: 100,
         },

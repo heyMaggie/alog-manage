@@ -85,17 +85,17 @@ let columns = () => {
         {
             title: "成功下单的买入总委托金额",
             dataIndex: "buySuccAmount",
-            width: 200,
+            width: 210,
         },
         {
             title: "成功下单的卖出总委托金额",
             dataIndex: "sellSuccAmount",
-            width: 200,
+            width: 210,
         },
         {
             title: "成功撤单的买入总委托金额",
             dataIndex: "cancelBuySuccAmount",
-            width: 200,
+            width: 210,
         },
     ];
 };

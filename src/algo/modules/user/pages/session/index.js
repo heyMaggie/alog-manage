@@ -9,7 +9,7 @@ const columns = (params) => {
         {
             title: "ID",
             dataIndex: "id",
-            width: 120,
+            width: 100,
         },
         {
             title: "用户ID",
@@ -24,7 +24,7 @@ const columns = (params) => {
         {
             title: "客户端类型",
             dataIndex: "clientType",
-            width: 100,
+            width: 120,
         },
         {
             title: "状态",

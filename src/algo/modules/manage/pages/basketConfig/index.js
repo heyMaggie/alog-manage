@@ -31,7 +31,7 @@ const columns = (params) => {
         },
         {
             title: "篮子状态",
-            dataIndex: "bStatus",
+            dataIndex: "status",
             width: 100,
         },
         {
@@ -39,11 +39,11 @@ const columns = (params) => {
             dataIndex: "basketNum",
         },
         {
-            title: "策略类型",
+            title: "算法类型",
             dataIndex: "algorithmType",
         },
         {
-            title: "策略编号",
+            title: "算法ID",
             dataIndex: "algorithmId",
         },
 
