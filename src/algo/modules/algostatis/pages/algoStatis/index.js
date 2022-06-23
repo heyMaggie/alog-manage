@@ -60,7 +60,7 @@ class AlgorithmStatistical extends React.PureComponent {
                         },
                         grid: {
                             left: "1%",
-                            right: "4%",
+                            right: "0%",
                             bottom: "9%",
                             top: "60px",
                             containLabel: true,
@@ -215,8 +215,18 @@ class AlgorithmStatistical extends React.PureComponent {
             }
         });
     };
+    chartResize = () => {
+        var dom1 = document.getElementById("main4");
+        echarts.init(dom1).resize();
+    };
     componentDidMount() {
         this.getData({ algorithmId: "", startTime: "", endTime: "" });
+        window.addEventListener("resize", () => {
+            this.chartResize();
+        });
+    }
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.chartResize, false);
     }
     render() {
         const { getFieldDecorator } = this.props.form;

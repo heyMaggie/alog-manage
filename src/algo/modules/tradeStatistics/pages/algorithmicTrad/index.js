@@ -203,6 +203,18 @@ class Ram2 extends React.PureComponent {
         myChart.setOption(option);
         myChart.resize();
     };
+    chartResize = () => {
+        let domList2 = [
+            "algoOrder",
+            "childOrder",
+            "cancelAlgoOrder",
+            "dealAlgoOrder",
+        ];
+        domList2.forEach((item) => {
+            console.log(999);
+            echarts.init(document.getElementById(item)).resize();
+        });
+    };
     componentDidMount() {
         this.getData({
             securityId: "",
@@ -211,6 +223,13 @@ class Ram2 extends React.PureComponent {
             startTime: "",
             endTime: "",
         });
+        window.addEventListener("resize", () => {
+            this.chartResize();
+        });
+    }
+    componentWillUnmount() {
+        console.log(222);
+        window.removeEventListener("resize", this.chartResize, false);
     }
     render() {
         const { getFieldDecorator } = this.props.form;

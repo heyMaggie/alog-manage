@@ -11,17 +11,19 @@
         .chartBox {
             display: inline-block;
             background-color: #fff;
-            width: calc(50% - 16px);
+            position: relative;
+            width: calc(50% - 12px);
             height: calc(50% - 18px);
             border-radius: 8px;
-            &:nth-child(2n-1) {
-                margin-right: 24px;
-            }
             &:nth-child(1) {
+                margin-right: 24px;
                 margin-bottom: 16px;
             }
             &:nth-child(2) {
                 margin-bottom: 16px;
+            }
+            &:nth-child(3) {
+                margin-right: 24px;
             }
         }
     }

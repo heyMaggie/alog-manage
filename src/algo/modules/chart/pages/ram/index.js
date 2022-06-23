@@ -82,7 +82,7 @@ class Ram extends React.PureComponent {
                         },
                         grid: {
                             left: "1%",
-                            right: "4%",
+                            right: "0%",
                             bottom: "9%",
                             top: "60px",
                             containLabel: true,
@@ -188,12 +188,22 @@ class Ram extends React.PureComponent {
             }
         });
     };
+    chartResize = () => {
+        var dom1 = document.getElementById("main2");
+        echarts.init(dom1).resize();
+    };
     componentDidMount() {
         this.getData({
             hostId: "1",
             startTime: "",
             endTime: "",
         });
+        window.addEventListener("resize", () => {
+            this.chartResize();
+        });
+    }
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.chartResize, false);
     }
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -216,7 +226,7 @@ class Ram extends React.PureComponent {
                                             .indexOf(input.toLowerCase()) >= 0
                                     }
                                 >
-                                    <Option value="0">全部</Option>
+                                    <Option value="">全部</Option>
                                     <Option value="1">80</Option>
                                 </Select>
                             )}
