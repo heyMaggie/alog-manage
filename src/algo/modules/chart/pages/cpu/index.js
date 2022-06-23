@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./style.module.less";
 import echarts from "echarts";
 import moment from "moment";
+import { connect } from "react-redux";
 import {
     SearchForm,
     Input,
@@ -172,6 +173,12 @@ class Cpu extends React.PureComponent {
         });
     }
     render() {
+        console.log(this.props.path);
+        if (this.props.path == "/main/chart/cpu") {
+            console.log("设置cpu resize 事件");
+        } else {
+            console.log("取消cpu resize 事件!");
+        }
         const { getFieldDecorator } = this.props.form;
         return (
             <div className={styles.container}>
@@ -229,4 +236,10 @@ class Cpu extends React.PureComponent {
         );
     }
 }
-export default Form.create()(Cpu);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        path: state.RouterModel.path,
+    };
+};
+export default connect(mapStateToProps, null)(Form.create()(Cpu));
+// export default Form.create()(Cpu);
