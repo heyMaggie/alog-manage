@@ -11,6 +11,7 @@ import {
     DatePicker,
     Select,
 } from "antd";
+import { connect } from "react-redux";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -221,14 +222,14 @@ class AlgorithmStatistical extends React.PureComponent {
     };
     componentDidMount() {
         this.getData({ algorithmId: "", startTime: "", endTime: "" });
-        window.addEventListener("resize", () => {
-            this.chartResize();
-        });
-    }
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.chartResize, false);
     }
     render() {
+        window.cpuResize = this.chartResize;
+        if (this.props.path == "/main/algostatis/algoStatis") {
+            window.addEventListener("resize", window.cpuResize);
+        } else {
+            window.removeEventListener("resize", window.cpuResize);
+        }
         const { getFieldDecorator } = this.props.form;
         return (
             <div className={styles.container}>
@@ -286,4 +287,12 @@ class AlgorithmStatistical extends React.PureComponent {
         );
     }
 }
-export default Form.create()(AlgorithmStatistical);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        path: state.RouterModel.path,
+    };
+};
+export default connect(
+    mapStateToProps,
+    null
+)(Form.create()(AlgorithmStatistical));

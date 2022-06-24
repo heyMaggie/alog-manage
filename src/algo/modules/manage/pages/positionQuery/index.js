@@ -112,13 +112,13 @@ let columns = () => {
             title: "盈亏",
             dataIndex: "profitAndLoss",
             key: "profitAndLoss",
-            width: 100,
+            width: 180,
         },
         {
             title: "收益率",
             dataIndex: "profitRate",
             key: "profitRate",
-            width: 100,
+            width: 180,
         },
         {
             title: "版本号",

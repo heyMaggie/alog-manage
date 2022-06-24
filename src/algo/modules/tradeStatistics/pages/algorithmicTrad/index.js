@@ -11,13 +11,14 @@ import {
     DatePicker,
     Select,
 } from "antd";
+import { connect } from "react-redux";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 import moment from "moment";
 import { lte } from "semver";
 import { tuple } from "antd/lib/_util/type";
-class Ram2 extends React.PureComponent {
+class AlgorithmicTrad extends React.PureComponent {
     state = {
         number: "笔",
     };
@@ -211,7 +212,6 @@ class Ram2 extends React.PureComponent {
             "dealAlgoOrder",
         ];
         domList2.forEach((item) => {
-            console.log(999);
             echarts.init(document.getElementById(item)).resize();
         });
     };
@@ -223,15 +223,15 @@ class Ram2 extends React.PureComponent {
             startTime: "",
             endTime: "",
         });
-        window.addEventListener("resize", () => {
-            this.chartResize();
-        });
-    }
-    componentWillUnmount() {
-        console.log(222);
-        window.removeEventListener("resize", this.chartResize, false);
     }
     render() {
+        console.log(this.props.path);
+        window.cpuResize = this.chartResize;
+        if (this.props.path == "/main/tradeStatistics/algorithmicTrad") {
+            window.addEventListener("resize", window.cpuResize);
+        } else {
+            window.removeEventListener("resize", window.cpuResize);
+        }
         const { getFieldDecorator } = this.props.form;
         return (
             <div className={styles.container}>
@@ -360,4 +360,9 @@ class Ram2 extends React.PureComponent {
         );
     }
 }
-export default Form.create()(Ram2);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        path: state.RouterModel.path,
+    };
+};
+export default connect(mapStateToProps, null)(Form.create()(AlgorithmicTrad));

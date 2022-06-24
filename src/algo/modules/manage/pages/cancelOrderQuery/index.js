@@ -56,7 +56,7 @@ const columns = (params) => {
         {
             title: "撤单订单状态",
             dataIndex: "childOrdStatus",
-            width: 120,
+            width: 140,
         },
         {
             title: "柜台序列号",

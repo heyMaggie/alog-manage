@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./style.module.less";
 import echarts from "echarts";
+import { connect } from "react-redux";
 import {
     SearchForm,
     Input,
@@ -193,20 +194,23 @@ class Ram extends React.PureComponent {
         echarts.init(dom1).resize();
     };
     componentDidMount() {
+        let yesterday = moment(new Date()).format("YYYY/MM/DD");
         this.getData({
             hostId: "1",
-            startTime: "",
-            endTime: "",
+            startTime: `${yesterday} 00:00:00`,
+            endTime: `${yesterday} 23:59:59`,
         });
-        // window.addEventListener("resize", () => {
-        //     this.chartResize();
-        // });
     }
-    // componentWillUnmount() {
-    //     window.removeEventListener("resize", this.chartResize, false);
-    // }
     render() {
+        window.cpuResize = this.chartResize;
+        if (this.props.path == "/main/chart/ram") {
+            window.addEventListener("resize", window.cpuResize);
+        } else {
+            window.removeEventListener("resize", window.cpuResize);
+        }
         const { getFieldDecorator } = this.props.form;
+        let yesterday = moment(new Date()).format("YYYY/MM/DD");
+        let dataFormatter = "YYYY-MM-DD HH:mm:ss";
         return (
             <div className={styles.container}>
                 <div className={styles.search}>
@@ -233,12 +237,21 @@ class Ram extends React.PureComponent {
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
                             {getFieldDecorator("pickerTime", {
-                                initialValue: [],
+                                initialValue: [
+                                    moment(
+                                        `${yesterday} 00:00:00`,
+                                        dataFormatter
+                                    ),
+                                    moment(
+                                        `${yesterday} 23:59:59`,
+                                        dataFormatter
+                                    ),
+                                ],
                             })(
                                 <RangePicker
                                     style={{ width: 432 }}
                                     showTime
-                                    format="YYYY-MM-DD HH:mm:ss"
+                                    format={dataFormatter}
                                 />
                             )}
                         </Form.Item>
@@ -263,4 +276,10 @@ class Ram extends React.PureComponent {
         );
     }
 }
-export default Form.create()(Ram);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        path: state.RouterModel.path,
+    };
+};
+export default connect(mapStateToProps, null)(Form.create()(Ram));
+// export default Form.create()(Ram);
