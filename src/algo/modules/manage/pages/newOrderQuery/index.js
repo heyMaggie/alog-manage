@@ -57,17 +57,17 @@ const columns = (params) => {
         {
             title: "算法参数",
             dataIndex: "strategyParam",
-            width: 120,
+            width: 200,
         },
         {
             title: "客户端序列号",
             dataIndex: "seq",
-            width: 150,
+            width: 130,
         },
         {
             title: "算法状态",
             dataIndex: "algorithmStatus",
-            width: 150,
+            width: 170,
         },
         {
             title: "母单状态",
@@ -391,12 +391,16 @@ export default class newOrderQuery extends React.PureComponent {
                     // getInsertFormFields={getInsertFormFields}
                     // insertRecord={this.handleInsertRecord}
                     // col="2"
+
                     width="600px"
                     pagination={this.state.pagination}
                     // getUpdateFormFields={getUpdateFormFields}
                     // setUpdateModal={this.setUpdateModal}
                     // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
+                    width="1200px"
+                    dtColumns={columns()} //详情列表
+                    // dtCol={2} //详情列数
                     centered={true}
                     columns={columns}
                     dataSource={info}

@@ -165,8 +165,11 @@ class Cpu extends React.PureComponent {
     };
 
     chartResize = () => {
+        console.log(this);
+        console.time("echarts");
         var dom1 = document.getElementById("main1");
         echarts.init(dom1).resize();
+        console.timeEnd("echarts");
     };
     componentDidMount() {
         this.getData({
@@ -174,19 +177,22 @@ class Cpu extends React.PureComponent {
             startTime: "",
             endTime: "",
         });
-        window.addEventListener("resize", () => {
-            this.chartResize();
-        });
-    }
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.chartResize, false);
+        // window.addEventListener("resize", () => {
+        //     this.chartResize();
+        // });
     }
     render() {
         console.log(this.props.path);
+        window.cpuResize = this.chartResize;
         if (this.props.path == "/main/chart/cpu") {
             console.log("设置cpu resize 事件");
+            window.addEventListener("resize", window.cpuResize);
         } else {
             console.log("取消cpu resize 事件!");
+            // console.log(window);
+            // window.removeEventListener("resize", chartResize, true);
+            window.removeEventListener("resize", window.cpuResize);
+            console.log(222);
         }
         const { getFieldDecorator } = this.props.form;
         return (

@@ -198,13 +198,13 @@ class Ram extends React.PureComponent {
             startTime: "",
             endTime: "",
         });
-        window.addEventListener("resize", () => {
-            this.chartResize();
-        });
+        // window.addEventListener("resize", () => {
+        //     this.chartResize();
+        // });
     }
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.chartResize, false);
-    }
+    // componentWillUnmount() {
+    //     window.removeEventListener("resize", this.chartResize, false);
+    // }
     render() {
         const { getFieldDecorator } = this.props.form;
         return (

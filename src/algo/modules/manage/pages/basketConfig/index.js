@@ -32,6 +32,21 @@ const columns = (params) => {
         {
             title: "篮子状态",
             dataIndex: "status",
+            width: 150,
+        },
+        {
+            title: "篮子参数",
+            dataIndex: "basketParam",
+            width: 200,
+        },
+        {
+            title: "开始时间",
+            dataIndex: "startTime",
+            width: 100,
+        },
+        {
+            title: "结束时间",
+            dataIndex: "endTime",
             width: 100,
         },
         {
@@ -63,6 +78,7 @@ const columns = (params) => {
         {
             title: "客户端序列号",
             dataIndex: "seq",
+            width: 150,
         },
         {
             title: "成交记录ID",
@@ -155,7 +171,7 @@ export default class uoeSetting extends React.PureComponent {
             console.log(res);
             //解析数据字典
             if (res.data.length > 0) {
-                parseArrDict(res.data, "status", "bStatus");
+                parseArrDict(res.data, "status", "basketStatus");
                 parseDict(res.data);
                 // showTip(this);
             } else {
@@ -173,7 +189,7 @@ export default class uoeSetting extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 2200, y: 445 };
+        let scroll = { x: 2600, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;
@@ -199,6 +215,8 @@ export default class uoeSetting extends React.PureComponent {
                     // setUpdateModal={this.setUpdateModal}
                     // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
+                    width="1200px"
+                    dtColumns={columns()} //详情列表
                     centered={true}
                     columns={columns}
                     dataSource={info}
