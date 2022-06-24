@@ -46,8 +46,8 @@ const configData = {
         { key: "32", value: "篮子运行结束" },
     ],
     basketType: [
-        { key: "1", value: "下单" },
-        { key: "2", value: "撤单" },
+        { key: "0", value: "客户创建" },
+        { key: "1", value: "自动创建" },
     ],
     bStatus: [
         //0初始态 1删除 2启动

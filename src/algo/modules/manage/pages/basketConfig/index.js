@@ -27,7 +27,7 @@ const columns = (params) => {
         {
             title: "篮子类型",
             dataIndex: "basketType",
-            width: 100,
+            width: 120,
         },
         {
             title: "篮子状态",

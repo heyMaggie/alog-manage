@@ -352,6 +352,7 @@ export default class newOrderQuery extends React.PureComponent {
             console.log(res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
+                parseArrDict(res.data.records, "basketStatus", "bStatus");
                 parseDict(res.data.records);
                 // showTip(this);
             } else {

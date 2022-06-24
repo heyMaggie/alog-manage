@@ -384,7 +384,7 @@ class algoConfig extends React.PureComponent {
                     // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     width="1200px"
-                    dtColumns={columns()} //详情列表
+                    dtColumns={this.columns()} //详情列表
                     centered={true}
                     columns={this.columns}
                     dataSource={info}
