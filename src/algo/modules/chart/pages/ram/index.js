@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./style.module.less";
 import echarts from "echarts";
+import { connect } from "react-redux";
 import {
     SearchForm,
     Input,
@@ -198,14 +199,14 @@ class Ram extends React.PureComponent {
             startTime: "",
             endTime: "",
         });
-        // window.addEventListener("resize", () => {
-        //     this.chartResize();
-        // });
     }
-    // componentWillUnmount() {
-    //     window.removeEventListener("resize", this.chartResize, false);
-    // }
     render() {
+        window.cpuResize = this.chartResize;
+        if (this.props.path == "/main/chart/ram") {
+            window.addEventListener("resize", window.cpuResize);
+        } else {
+            window.removeEventListener("resize", window.cpuResize);
+        }
         const { getFieldDecorator } = this.props.form;
         return (
             <div className={styles.container}>
@@ -263,4 +264,10 @@ class Ram extends React.PureComponent {
         );
     }
 }
-export default Form.create()(Ram);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        path: state.RouterModel.path,
+    };
+};
+export default connect(mapStateToProps, null)(Form.create()(Ram));
+// export default Form.create()(Ram);

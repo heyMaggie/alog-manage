@@ -264,7 +264,7 @@ class riskConfigManage extends React.PureComponent {
                     this.updateRiskGroup(data);
                 }
             } else {
-                message.error("输入内容有不合法,请完善");
+                message.error("输入内容不正确,请完善");
             }
         });
     };
