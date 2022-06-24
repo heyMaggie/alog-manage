@@ -283,6 +283,17 @@ const configData = {
         { key: "1", value: "幅度（百分比）" },
         { key: "2", value: "价格（绝对值）" },
     ],
+    // 运维系统 : 证券信息管理 - 证券状态0正常, 1停盘, 2退市',
+    securityStatus: [
+        { key: "0", value: "正常" },
+        { key: "1", value: "停盘" },
+        { key: "2", value: "退市" },
+    ],
+    // 运维系统 : 证券信息管理 - 是否有涨跌限制'是否有涨跌停价格限制,Y=是,N=否',
+    hasPriceLimit: [
+        { key: "0", value: "否" },
+        { key: "1", value: "是" },
+    ],
     property: [
         { key: "1", value: "主板A股" },
         { key: "2", value: "中小板股票" },
