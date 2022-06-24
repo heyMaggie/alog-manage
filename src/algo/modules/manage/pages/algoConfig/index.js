@@ -86,7 +86,7 @@ class algoConfig extends React.PureComponent {
                             this.handleUpdate(record);
                         }}
                     >
-                        <Tooltip title="修改网关">
+                        <Tooltip title="修改风控组">
                             {record.riskGroup}
                             <Icon type="edit" style={{ color: "#1899ff" }} />
                         </Tooltip>
@@ -398,7 +398,7 @@ class algoConfig extends React.PureComponent {
                     ></div>
                 </CurdComponent>
                 <Modal
-                    title={"修改记录"}
+                    title={"修改风控组"}
                     visible={this.state.updateModalVisible}
                     onOk={this.handleUpdateModalOk}
                     onCancel={this.handleUpdateModalCancel}
@@ -422,39 +422,14 @@ class algoConfig extends React.PureComponent {
                                         <Input placeholder="" disabled />
                                     )}
                                 </Form.Item>
-                                {/* <Form.Item
-                                    label={
-                                        <label
-                                            title="用户:该风控只能给用户使用
-                            算法:该风控只能给算法使用"
-                                        >
-                                            风控组类型
-                                        </label>
-                                    }
-                                >
-                                    {getFieldDecorator("riskType", {
-                                        rules: [
-                                            {
-                                                required: true,
-                                                message: "请选择",
-                                            },
-                                        ],
-                                        initialValue: "2",
-                                    })(
-                                        SelectOption(dict.riskType, {
-                                            placeholder: "请选择",
-                                            disabled: this.isUpdate,
-                                        })
-                                        // <Input
-                                        //     placeholder=""
-                                        //     onChange={this.inputChange}
-                                        // />
-                                    )}
-                                </Form.Item> */}
                             </div>
                             <Form.Item
                                 className={styles.marLose14}
-                                label="修改风控组"
+                                label={
+                                    <label title="请输入已配置成功的风控组,否则风控组不能修改成功!">
+                                        修改风控组
+                                    </label>
+                                }
                                 // {...formItemLayout}
                             >
                                 {getFieldDecorator("riskGroup", {

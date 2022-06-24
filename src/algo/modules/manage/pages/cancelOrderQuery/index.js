@@ -51,7 +51,7 @@ const columns = (params) => {
         {
             title: "订单编号",
             dataIndex: "clOrdId",
-            width: 120,
+            width: 150,
         },
         {
             title: "撤单订单状态",
