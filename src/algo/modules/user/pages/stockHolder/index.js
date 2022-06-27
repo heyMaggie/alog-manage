@@ -37,6 +37,171 @@ const columns = (params) => {
         },
     ];
 };
+const getInsertFormFields = () => {
+    return [
+        {
+            label: "用户ID",
+            id: "uuserId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "股东账户",
+            id: "accountId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "市场代码",
+            id: "market",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "账户类型",
+            id: "accountType",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+    ];
+};
+const getUpdateFormFields = () => {
+    return [
+        {
+            label: "用户ID",
+            id: "uuserId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "股东账户",
+            id: "accountId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "市场代码",
+            id: "market",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "账户类型",
+            id: "accountType",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        // {
+        //     label: "网关",
+        //     id: "gateway",
+        //     rules: [
+        //         {
+        //             required: true,
+        //             message: "网关不能为空",
+        //         },
+        //         {
+        //             message: "请输入正确的IP地址",
+        //             pattern:
+        //                 /^((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}$/,
+        //         },
+        //     ],
+        //     component: <Input placeholder="请输入网关" />,
+        // },
+        // {
+        //     label: "Mac地址",
+        //     id: "mac",
+        //     initialValue: "",
+        //     rules: [
+        //         {
+        //             required: true,
+        //             message: "Mac地址不能为空",
+        //         },
+        //         {
+        //             message: "请输入正确的mac地址,例如：1A-6F-38-C8-A4-07",
+        //             pattern: /^([a-f0-9]{2}-){5}[a-f0-9]{2}$/i,
+        //         },
+        //     ],
+        //     component: <Input placeholder="请输入Mac地址" />,
+        // },
+        // {
+        //     label: "子网掩码",
+        //     id: "mask",
+        //     initialValue: "",
+        //     rules: [
+        //         {
+        //             required: true,
+        //             message: "子网掩码不能为空",
+        //         },
+        //         {
+        //             message: "请输入正确的IP地址",
+        //             pattern:
+        //                 /^((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}$/,
+        //         },
+        //     ],
+        //     component: <Input placeholder="请输入子网掩码" />,
+        // },
+    ];
+};
 let getSearchFormFields = () => {
     return [
         {
@@ -77,7 +242,16 @@ export default class uoeSetting extends React.PureComponent {
     };
 
     handleInsertRecord = (params) => {
-        console.log(params);
+        console.log("新增接口", params);
+        // http.post({
+        //     url: "/option/tcp/uoeMore/1011",
+        //     data: params,
+        // }).then((res) => {
+        //     console.log(res);
+        //     message.success(res.msg);
+        //     this.isAction = true;
+        //     this.getData();
+        // });
     };
     //更新记录
     handleUpdateRecord = ({ form }) => {
@@ -85,15 +259,16 @@ export default class uoeSetting extends React.PureComponent {
         // return;
         let params = form.getFieldsValue();
         params.name = this.record.name;
-        http.post({
-            url: "/option/tcp/uoeMore/1011",
-            data: params,
-        }).then((res) => {
-            console.log(res);
-            message.success(res.msg);
-            this.isAction = true;
-            this.getData();
-        });
+        //发送更新请求
+        // http.post({
+        //     url: "/option/tcp/uoeMore/1011",
+        //     data: params,
+        // }).then((res) => {
+        //     console.log(res);
+        //     message.success(res.msg);
+        //     this.isAction = true;
+        //     this.getData();
+        // });
     };
     //删除记录
     handleDeleteRecord = (record) => {
@@ -104,12 +279,10 @@ export default class uoeSetting extends React.PureComponent {
         // console.log(record, form);
         this.record = record;
         form.setFieldsValue({
-            switchId: record.switchId,
-            ip: record.ip,
-            mask: record.mask,
-            mac: record.mac,
-            gateway: record.gateway,
-            enable: record.enable + "",
+            uuserId: record.uuserId,
+            market: record.market,
+            accountType: record.accountType,
+            accountId: record.accountId,
         });
     };
     getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
@@ -165,15 +338,15 @@ export default class uoeSetting extends React.PureComponent {
                     onSearchClick={this.handleSearch}
                     getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
-                    // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
-                    // getInsertFormFields={getInsertFormFields}
-                    // insertRecord={this.handleInsertRecord}
+                    insertBtnText={"新增"} // 不传 就没新增按钮
+                    getInsertFormFields={getInsertFormFields}
+                    insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
                     pagination={this.state.pagination}
-                    // getUpdateFormFields={getUpdateFormFields}
+                    getUpdateFormFields={getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
-                    // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                    updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={columns}
