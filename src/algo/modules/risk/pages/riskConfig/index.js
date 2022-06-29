@@ -35,6 +35,7 @@ class riskConfigManage extends React.PureComponent {
         disabled6: false,
         disabled7: false,
         disabled8: false,
+        configShow: false, // 风控是否显示
     };
     columns = (params) => {
         return [
@@ -520,6 +521,20 @@ class riskConfigManage extends React.PureComponent {
             this.setState({ [stateKey]: formData[formKey] == 1 });
         }
     };
+    typeChange = (type) => {
+        console.log("typeChange", type);
+        if (type == 1) {
+            //用户
+            this.setState({
+                configShow: true,
+            });
+        } else {
+            //算法
+            this.setState({
+                configShow: false,
+            });
+        }
+    };
     componentDidMount() {
         this.getData();
     }
@@ -642,12 +657,17 @@ class riskConfigManage extends React.PureComponent {
                                         SelectOption(dict.riskType, {
                                             placeholder: "请选择",
                                             disabled: this.isUpdate,
+                                            onChange: (record) => {
+                                                this.typeChange(record);
+                                            },
                                         })
                                     )}
                                 </Form.Item>
                             </div>
                         </div>
-                        <div>
+                        <div
+                            className={this.state.configShow ? "" : styles.hide}
+                        >
                             <div
                                 className={styles.tit}
                                 title="账户总委托笔数超过【风控启用数量】后,在【时间量(s)】时间内,委托数量不能超过【时间量总委托笔数】,超过的数量将会被拒绝"

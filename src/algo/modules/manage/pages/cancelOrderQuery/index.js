@@ -232,7 +232,7 @@ export default class cancelOrderQuery extends React.PureComponent {
                     // rowSelection={rowSelection} //批量选择 操作
                 >
                     <div
-                        urlPrefix="/cancel-algo-order"
+                        urlPrefix="/cancel-trade-order"
                         noUpload={true}
                         title="撤单信息"
                         sucCallback={this.getData}
