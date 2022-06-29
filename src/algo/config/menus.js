@@ -53,6 +53,12 @@ const menuList = [
                 path: "/main/manage/algoConfig",
             },
             {
+                id: "1-15",
+                icon: "",
+                title: "算法权限组",
+                path: "/main/manage/algoGroup",
+            },
+            {
                 id: "1-14",
                 icon: "",
                 title: "柜台用户",

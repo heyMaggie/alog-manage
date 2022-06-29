@@ -177,6 +177,9 @@ class userInfo extends React.PureComponent {
             updateModalVisible: false,
         });
     };
+    handleUpdateRecord = (record) => {
+        console.log("更新记录 ", record);
+    };
     //删除记录
     handleDeleteRecord = (record) => {
         console.log("删除记录 ", record);

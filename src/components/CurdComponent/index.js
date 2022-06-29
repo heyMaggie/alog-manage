@@ -60,11 +60,20 @@ class CurdComponent extends React.PureComponent {
     handleUpdateModalOk = () => {
         let { updateRecord } = this.props;
         if (typeof updateRecord == "function") {
-            updateRecord({ form: this.updateForm });
+            // updateRecord({ form: this.updateForm });
+            this.updateForm.validateFields((err, values) => {
+                if (!err) {
+                    updateRecord({ form: this.updateForm });
+                    // this.insertForm.resetFields();
+                    this.setState({
+                        updateModalVisible: false,
+                    });
+                }
+            });
         }
-        this.setState({
-            updateModalVisible: false,
-        });
+        // this.setState({
+        //     updateModalVisible: false,
+        // });
     };
     handleUpdateModalCancel = () => {
         this.setState({
@@ -87,9 +96,9 @@ class CurdComponent extends React.PureComponent {
                 {
                     title: "操作",
                     key: "action",
-                    align: "center",
+                    align: "left",
                     fixed: "right",
-                    width: 120,
+                    width: 144,
                     render: (text, record) => {
                         return (
                             <div>
@@ -130,8 +139,8 @@ class CurdComponent extends React.PureComponent {
                                     >
                                         <a
                                             style={{
-                                                color: "rgba(94,156,221,1)",
-                                                margin: "0 16px",
+                                                color: "rgba(240, 95, 94, 1)",
+                                                margin: "0 0 0 24px",
                                             }}
                                         >
                                             删除

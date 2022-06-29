@@ -27,6 +27,11 @@ const main = (root = "/main/manage") => [
         title: "算法管理",
     },
     {
+        path: `${root}/algoGroup`,
+        component: `${pages}/algoGroup`,
+        title: "算法权限组",
+    },
+    {
         path: `${root}/counterGw`,
         component: `${pages}/counterGw`,
         title: "柜台用户",
