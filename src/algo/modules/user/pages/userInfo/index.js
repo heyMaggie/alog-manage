@@ -5,7 +5,122 @@ import SelectOption from "@/components/SelectOption";
 
 import { Input, Modal, Switch, Form, message, Tooltip, Icon } from "antd";
 import styles from "./style.module.less";
-
+const getInsertFormFields = () => {
+    return [
+        {
+            label: "用户ID",
+            id: "uuserId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "股东账户",
+            id: "accountId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "市场代码",
+            id: "market",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "账户类型",
+            id: "accountType",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+    ];
+};
+const getUpdateFormFields = () => {
+    return [
+        {
+            label: "用户ID",
+            id: "uuserId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "股东账户",
+            id: "accountId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "市场代码",
+            id: "market",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "账户类型",
+            id: "accountType",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+    ];
+};
 let getSearchFormFields = () => {
     return [
         {
@@ -70,7 +185,35 @@ class userInfo extends React.PureComponent {
     };
 
     handleInsertRecord = (params) => {
-        console.log(params);
+        console.log("新增接口", params);
+    };
+    //更新记录
+    handleUpdateRecord = ({ form }) => {
+        console.log(form.getFieldsValue());
+        // return;
+        let params = form.getFieldsValue();
+        params.name = this.record.name;
+        //发送更新请求
+        // http.post({
+        //     url: "/option/tcp/uoeMore/1011",
+        //     data: params,
+        // }).then((res) => {
+        //     console.log(res);
+        //     message.success(res.msg);
+        //     this.isAction = true;
+        //     this.getData();
+        // });
+    };
+    //填入更新数据
+    setUpdateModal = ({ form, record }) => {
+        // console.log(record, form);
+        this.record = record;
+        form.setFieldsValue({
+            uuserId: record.uuserId,
+            market: record.market,
+            accountType: record.accountType,
+            accountId: record.accountId,
+        });
     };
     columns = (params) => {
         return [
@@ -339,15 +482,15 @@ class userInfo extends React.PureComponent {
                     onSearchClick={this.handleSearch}
                     getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
-                    // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
-                    // getInsertFormFields={getInsertFormFields}
-                    // insertRecord={this.handleInsertRecord}
+                    insertBtnText={"新增"} // 不传 就没新增按钮
+                    getInsertFormFields={getInsertFormFields}
+                    insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
                     pagination={this.state.pagination}
-                    // getUpdateFormFields={getUpdateFormFields}
-                    // setUpdateModal={this.setUpdateModal}
-                    // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                    getUpdateFormFields={getUpdateFormFields}
+                    setUpdateModal={this.setUpdateModal}
+                    updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={this.columns}
