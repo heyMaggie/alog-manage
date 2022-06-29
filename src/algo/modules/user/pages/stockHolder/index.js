@@ -1,6 +1,6 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
-// import SelectOption from "@/components/SelectOption";
+import SelectOption from "@/components/SelectOption";
 // import UploadWrap from "@/components/UploadWrap";
 import { Input } from "antd";
 
@@ -22,13 +22,11 @@ const columns = (params) => {
         },
         {
             title: "市场代码",
-            dataIndex: "market",
-            key: "market",
+            dataIndex: "marketValue",
         },
         {
             title: "账户类型",
-            dataIndex: "accountType",
-            key: "accountType",
+            dataIndex: "accountTypeValue",
         },
         {
             title: "创建时间",
@@ -134,10 +132,17 @@ const getUpdateFormFields = () => {
                     message: "参数不能为空",
                 },
             ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
+            // component: (
+            //     // <Input placeholder="请输入" readOnly disabled />
+            //     <Input placeholder="请输入" />
+            // ),
+            component: SelectOption(dict.market, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "账户类型",
@@ -280,8 +285,8 @@ export default class uoeSetting extends React.PureComponent {
         this.record = record;
         form.setFieldsValue({
             uuserId: record.uuserId,
-            market: record.market,
-            accountType: record.accountType,
+            market: record.market + "",
+            accountType: record.accountType + "",
             accountId: record.accountId,
         });
     };
@@ -299,7 +304,8 @@ export default class uoeSetting extends React.PureComponent {
             console.log(res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
-                parseDict(res.data.records);
+                //parseDict(res.data.records);
+                parseDictValue(res.data.records);
             } else {
                 message.info("查询结果为空");
             }
