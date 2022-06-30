@@ -64,7 +64,6 @@ class AlgorithmicTrad extends React.PureComponent {
         let lineObj = {
             algoOrder: { name: "母单信息", color: "#F78B7F" },
             childOrder: { name: "子单信息", color: "#FFD747" },
-            cancelAlgoOrder: { name: "撤单信息", color: "#72DF5A" },
             dealAlgoOrder: { name: "成交信息", color: "#65D2FF" },
         };
         let option = {
@@ -206,12 +205,7 @@ class AlgorithmicTrad extends React.PureComponent {
         myChart.resize();
     };
     chartResize = () => {
-        let domList2 = [
-            "algoOrder",
-            "childOrder",
-            "cancelAlgoOrder",
-            "dealAlgoOrder",
-        ];
+        let domList2 = ["algoOrder", "childOrder", "dealAlgoOrder"];
         domList2.forEach((item) => {
             echarts.init(document.getElementById(item)).resize();
         });
@@ -343,7 +337,6 @@ class AlgorithmicTrad extends React.PureComponent {
                 <div className={styles.chart}>
                     <div id="algoOrder" className={styles.chartBox}></div>
                     <div id="childOrder" className={styles.chartBox}></div>
-                    <div id="cancelAlgoOrder" className={styles.chartBox}></div>
                     <div id="dealAlgoOrder" className={styles.chartBox}></div>
                     {/* <div
                         id="main_1"
