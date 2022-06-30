@@ -2,7 +2,7 @@ import React from "react";
 import { Input, TimePicker } from "antd";
 
 import CurdComponent from "@/components/CurdComponent";
-// import SelectOption from "@/components/SelectOption";
+import SelectOption from "@/components/SelectOption";
 
 const getSearchFormFields = () => {
     return [
@@ -95,14 +95,20 @@ const getInsertFormFields = () => {
         {
             label: "持仓类型",
             id: "positionType",
-            initialValue: "",
+            initialValue: "0",
             rules: [
                 {
                     required: true,
                     message: "参数不能为空",
                 },
             ],
-            component: <Input placeholder="请输入" />,
+            component: SelectOption(dict.positionType, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "持仓数量",
@@ -153,7 +159,7 @@ const getInsertFormFields = () => {
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -235,7 +241,7 @@ const getUpdateFormFields = () => {
             // rules: [
             //     {
             //         required: true,
-            //         message: "IP地址不能为空",
+            //         message: "参数不能为空",
             //     },
             // ],
             component: <Input placeholder="请输入" />,
@@ -250,7 +256,13 @@ const getUpdateFormFields = () => {
                     message: "参数不能为空",
                 },
             ],
-            component: <Input placeholder="请输入" />,
+            component: SelectOption(dict.positionType, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "持仓数量",
@@ -301,7 +313,7 @@ const getUpdateFormFields = () => {
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -545,7 +557,7 @@ export default class Cccx extends React.PureComponent {
         this.record = record;
         form.setFieldsValue({
             // userName1: record.v_gthth,
-            id: record.id,
+            // id: record.id,
             uuserId: record.uuserId,
             accountId: record.accountId,
             securityId: record.securityId,
@@ -557,9 +569,9 @@ export default class Cccx extends React.PureComponent {
             freeQty: record.freeQty,
             frozenQty: record.frozenQty,
             avgPrice: record.avgPrice,
-            profitAndLoss: record.profitAndLoss,
-            profitRate: record.profitRate,
-            version: record.version,
+            // profitAndLoss: record.profitAndLoss,
+            // profitRate: record.profitRate,
+            // version: record.version,
             updateTime: record.updateTime,
         });
     };

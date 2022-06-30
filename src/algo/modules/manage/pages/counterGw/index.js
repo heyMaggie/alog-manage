@@ -1,6 +1,6 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
-// import SelectOption from "@/components/SelectOption";
+import SelectOption from "@/components/SelectOption";
 import { Input, Modal, Form, message, Icon, Tooltip } from "antd";
 import Table from "@/components/Table";
 import styles from "./style.module.less";
@@ -63,35 +63,56 @@ const getInsertFormFields = () => {
         {
             label: "业务类型",
             id: "businessType",
+            initialValue: "1",
             rules: [
                 {
                     required: true,
                     message: "参数不能为空",
                 },
             ],
-            component: <Input />,
+            component: SelectOption(dict.businessType, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
-        // {
-        //     label: "登录状态",
-        //     id: "loginStatus",
-        //     rules: [
-        //         {
-        //             required: true,
-        //             message: "参数不能为空",
-        //         },
-        //     ],
-        //     component: <Input />,
-        // },
+        {
+            label: "登录状态",
+            id: "loginStatus",
+            initialValue: "0",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.loginStatus, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
+        },
         {
             label: "客户类型",
             id: "clientType",
+            initialValue: "0",
             rules: [
                 {
                     required: true,
                     message: "参数不能为空",
                 },
             ],
-            component: <Input />,
+            component: SelectOption(dict.clientType, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "算法平台用户ID",
@@ -111,12 +132,24 @@ const getUpdateFormFields = () => {
         {
             label: "用户ID",
             id: "userId",
-            component: <Input readOnly disabled />,
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input />,
         },
         {
             label: "用户名",
             id: "userName",
-            component: <Input readOnly disabled />,
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input />,
         },
         {
             label: "柜台网关ID",
@@ -132,32 +165,81 @@ const getUpdateFormFields = () => {
         {
             label: "来自柜台",
             id: "counterUserId",
-            component: <Input readOnly disabled />,
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input />,
         },
         {
             label: "业务类型",
             id: "businessType",
-            component: <Input readOnly disabled />,
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.businessType, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "登录状态",
             id: "loginStatus",
-            component: <Input readOnly disabled />,
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.loginStatus, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "客户类型",
             id: "clientType",
-            component: <Input readOnly disabled />,
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.clientType, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "算法平台用户ID",
             id: "uuserId",
-            component: <Input readOnly disabled />,
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input />,
         },
         {
-            label: "创建时间",
+            label: "更新时间",
             id: "createTime",
-            component: <Input readOnly disabled />,
+            initialValue: "",
+            component: <Input placeholder="请输入" readOnly disabled />,
         },
     ];
 };
@@ -350,9 +432,9 @@ class CounterGw extends React.PureComponent {
             userName: record.userName,
             counterGwId: record.counterGwId,
             counterUserId: record.counterUserId,
-            businessType: record.businessType,
-            loginStatus: record.loginStatus,
-            clientType: record.clientType,
+            businessType: record.businessType + "",
+            loginStatus: record.loginStatus + "",
+            clientType: record.clientType + "",
             uuserId: record.uuserId,
             createTime: record.createTime,
         });

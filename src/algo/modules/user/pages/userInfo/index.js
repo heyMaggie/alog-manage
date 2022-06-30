@@ -56,7 +56,7 @@ const getInsertFormFields = () => {
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -114,7 +114,7 @@ const getUpdateFormFields = () => {
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
             component: <Input placeholder="请输入" />,

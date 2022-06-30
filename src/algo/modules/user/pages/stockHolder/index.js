@@ -67,7 +67,7 @@ const getInsertFormFields = () => {
         {
             label: "市场代码",
             id: "market",
-            initialValue: "",
+            initialValue: "1",
             rules: [
                 {
                     required: true,
@@ -85,11 +85,11 @@ const getInsertFormFields = () => {
         {
             label: "账户类型",
             id: "accountType",
-            initialValue: "",
+            initialValue: "1",
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
             component: SelectOption(dict.accountType, {
@@ -160,7 +160,7 @@ const getUpdateFormFields = () => {
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
             component: SelectOption(dict.accountType, {

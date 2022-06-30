@@ -1,6 +1,6 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
-// import SelectOption from "@/components/SelectOption";
+import SelectOption from "@/components/SelectOption";
 import { Input } from "antd";
 
 const columns = (params) => {
@@ -142,7 +142,7 @@ const getInsertFormFields = () => {
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -150,29 +150,38 @@ const getInsertFormFields = () => {
         {
             label: "证券状态",
             id: "securityStatus",
-            initialValue: "",
+            initialValue: "0",
             rules: [
                 {
                     required: true,
                     message: "参数不能为空",
                 },
             ],
-            component: <Input placeholder="请输入" />,
+            component: SelectOption(dict.securityStatus, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "股票板块属性",
             id: "property",
-            initialValue: "",
+            initialValue: "1",
             rules: [
                 {
                     required: true,
                     message: "参数不能为空",
                 },
             ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
+            component: SelectOption(dict.property, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "限价买数量上限",
@@ -196,7 +205,7 @@ const getInsertFormFields = () => {
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -231,29 +240,38 @@ const getInsertFormFields = () => {
         {
             label: "是否有涨跌限制",
             id: "hasPriceLimit",
-            initialValue: "",
+            initialValue: "0",
             rules: [
                 {
                     required: true,
                     message: "参数不能为空",
                 },
             ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
+            component: SelectOption(dict.hasPriceLimit, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "涨跌限制类型",
             id: "limitType",
-            initialValue: "",
+            initialValue: "1",
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
-            component: <Input placeholder="请输入" />,
+            component: SelectOption(dict.limitType, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "上涨限价",
@@ -277,7 +295,7 @@ const getInsertFormFields = () => {
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -335,7 +353,7 @@ const getUpdateFormFields = () => {
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -350,7 +368,13 @@ const getUpdateFormFields = () => {
                     message: "参数不能为空",
                 },
             ],
-            component: <Input placeholder="请输入" />,
+            component: SelectOption(dict.securityStatus, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "股票板块属性",
@@ -362,10 +386,13 @@ const getUpdateFormFields = () => {
                     message: "参数不能为空",
                 },
             ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
+            component: SelectOption(dict.property, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "限价买数量上限",
@@ -389,7 +416,7 @@ const getUpdateFormFields = () => {
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -431,10 +458,13 @@ const getUpdateFormFields = () => {
                     message: "参数不能为空",
                 },
             ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
+            component: SelectOption(dict.hasPriceLimit, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "涨跌限制类型",
@@ -443,10 +473,16 @@ const getUpdateFormFields = () => {
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
-            component: <Input placeholder="请输入" />,
+            component: SelectOption(dict.limitType, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "上涨限价",
@@ -470,7 +506,7 @@ const getUpdateFormFields = () => {
             rules: [
                 {
                     required: true,
-                    message: "IP地址不能为空",
+                    message: "参数不能为空",
                 },
             ],
             component: <Input placeholder="请输入" />,
