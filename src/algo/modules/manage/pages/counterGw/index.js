@@ -380,7 +380,7 @@ class CounterGw extends React.PureComponent {
         // console.log(this.record);
         params.businessType = this.record.businessType;
         http.post({
-            url: "/counter-info/getCounterInfo",
+            url: "/counter-info/listAll",
             data: params,
         })
             .then((res) => {
