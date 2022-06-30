@@ -8,14 +8,16 @@ const columns = (params) => {
         {
             title: "ID",
             dataIndex: "id",
+            width: 200,
         },
         {
             title: "权限",
             dataIndex: "algoProperty",
+            width: 200,
         },
         {
             title: "可用算法",
-            dataIndex: "securityName",
+            dataIndex: "algoUsed",
         },
     ];
 };
@@ -29,7 +31,7 @@ let getSearchFormFields = () => {
         },
         {
             label: "算法名称",
-            id: "algoProperty",
+            id: "algoName",
             component: <Input placeholder="请输入" />,
         },
     ];
@@ -51,7 +53,7 @@ export default class algoGroup extends React.PureComponent {
     };
 
     handleInsertRecord = (params) => {
-        console.log(params);
+        // console.log(params);
         http.post({
             url: "/algo-group-info/addAlgoGroupInfo",
             data: params,
@@ -129,7 +131,7 @@ export default class algoGroup extends React.PureComponent {
             data: params,
         }).then((res) => {
             console.log(res);
-            message.success(res.msg);
+            message.success(res.message);
             this.isAction = true;
             this.getData();
         });
@@ -196,6 +198,8 @@ export default class algoGroup extends React.PureComponent {
                     insertBtnText={"新增"} // 不传 就没新增按钮
                     getInsertFormFields={this.getInsertFormFields}
                     insertRecord={this.handleInsertRecord}
+                    insertModalText={"新增权限"}
+                    updateModalText={"修改权限"}
                     // col="2"
                     width="600px"
                     pagination={this.state.pagination}

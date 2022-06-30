@@ -35,12 +35,20 @@ class DynamicForm extends React.PureComponent {
                             label={item.label}
                             {...formItemLayout}
                         >
-                            {getFieldDecorator(item.id, {
-                                initialValue: item.initialValue
-                                    ? item.initialValue
-                                    : undefined,
-                                rules: item.rules,
-                            })(item.component)}
+                            {item.valuePropName
+                                ? getFieldDecorator(item.id, {
+                                      valuePropName: "checked",
+                                      initialValue: item.initialValue
+                                          ? item.initialValue
+                                          : undefined,
+                                      rules: item.rules,
+                                  })(item.component)
+                                : getFieldDecorator(item.id, {
+                                      initialValue: item.initialValue
+                                          ? item.initialValue
+                                          : undefined,
+                                      rules: item.rules,
+                                  })(item.component)}
                         </FormItem>
                     );
                 })}

@@ -9,7 +9,7 @@ const getInsertFormFields = () => {
     return [
         {
             label: "用户ID",
-            id: "uuserId",
+            id: "UserId",
             initialValue: "",
             rules: [
                 {
@@ -20,8 +20,62 @@ const getInsertFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "股东账户",
-            id: "accountId",
+            label: "用户密码",
+            id: "UserPasswd",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "用户名",
+            id: "UserName",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "用户类型",
+            id: "UserType",
+            initialValue: "1",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.userType, {
+                placeholder: "请选择",
+                // allowClear: true,
+                style: {
+                    width: 400,
+                },
+            }),
+        },
+        {
+            label: "父级用户Id",
+            id: "UuserId",
+            initialValue: "0",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "用户风控组",
+            id: "RiskGroup",
             initialValue: "",
             rules: [
                 {
@@ -35,8 +89,8 @@ const getInsertFormFields = () => {
             ),
         },
         {
-            label: "市场代码",
-            id: "market",
+            label: "算法权限组",
+            id: "AlgoGroup",
             initialValue: "",
             rules: [
                 {
@@ -44,30 +98,28 @@ const getInsertFormFields = () => {
                     message: "参数不能为空",
                 },
             ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
-        },
-        {
-            label: "账户类型",
-            id: "accountType",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "IP地址不能为空",
-                },
-            ],
             component: <Input placeholder="请输入" />,
         },
+        // {
+        //     label: "算法属性",
+        //     id: "AlgoProperty",
+        //     initialValue: "",
+        //     rules: [
+        //         // {
+        //         //     required: true,
+        //         //     message: "参数不能为空",
+        //         // },
+        //     ],
+        //     component: <Input placeholder="请输入" />,
+        // },
     ];
 };
+
 const getUpdateFormFields = () => {
     return [
         {
             label: "用户ID",
-            id: "uuserId",
+            id: "UserId",
             initialValue: "",
             rules: [
                 {
@@ -78,8 +130,62 @@ const getUpdateFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "股东账户",
-            id: "accountId",
+            label: "用户密码",
+            id: "UserPasswd",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "用户名",
+            id: "UserName",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "用户类型",
+            id: "UserType",
+            initialValue: "1",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.userType, {
+                placeholder: "请选择",
+                // allowClear: true,
+                style: {
+                    width: 400,
+                },
+            }),
+        },
+        {
+            label: "父级用户Id",
+            id: "UuserId",
+            initialValue: "0",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "用户风控组",
+            id: "RiskGroup",
             initialValue: "",
             rules: [
                 {
@@ -93,28 +199,13 @@ const getUpdateFormFields = () => {
             ),
         },
         {
-            label: "市场代码",
-            id: "market",
+            label: "算法权限组",
+            id: "AlgoGroup",
             initialValue: "",
             rules: [
                 {
                     required: true,
                     message: "参数不能为空",
-                },
-            ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
-        },
-        {
-            label: "账户类型",
-            id: "accountType",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "IP地址不能为空",
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -124,11 +215,6 @@ const getUpdateFormFields = () => {
 let getSearchFormFields = () => {
     return [
         {
-            label: "父级用户ID",
-            id: "fatherId",
-            component: <Input placeholder="请输入" />,
-        },
-        {
             label: "用户ID",
             id: "userId",
             component: <Input placeholder="请输入" />,
@@ -136,7 +222,7 @@ let getSearchFormFields = () => {
         {
             label: "用户类型",
             id: "userType",
-            // initialValue: "",
+            // initialValue: "1",
             component: SelectOption(dict.userType, {
                 placeholder: "请选择",
                 allowClear: true,
@@ -146,23 +232,20 @@ let getSearchFormFields = () => {
             }),
         },
         {
-            label: "用户风控组别",
+            label: "用户风控组",
             id: "riskGroup",
             component: <Input placeholder="请输入" />,
         },
-        // {
-        //     label: "柜台用户ID",
-        //     id: "counterUserId",
-        //     component: <Input placeholder="请输入柜台用户ID" />,
-        // },
-        // {
-        //     label: "业务类型",
-        //     id: "businessType",
-        //     component: SelectOption(dict.businessType, {
-        //         placeholder: "请选择业务类型",
-        //         allowClear: true,
-        //     }),
-        // },
+        {
+            label: "算法权限组",
+            id: "algoGroup",
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "父级用户ID",
+            id: "fatherId",
+            component: <Input placeholder="请输入" />,
+        },
     ];
 };
 
@@ -185,41 +268,72 @@ class userInfo extends React.PureComponent {
     };
 
     handleInsertRecord = (params) => {
+        // params = {
+        //     UserId: "atest0000003",
+        //     UserName: "test3",
+        //     UserPasswd: "test_0000003",
+        //     UserType: 1,
+        //     // RiskGroup: 1,
+        //     // AlgoGroup: 1,
+        //     // AlgoProperty: "20",
+        //     UuserId: 1,
+        // };
+        params.UserType = params.UserType / 1;
+        params.RiskGroup = params.RiskGroup / 1;
+        params.AlgoGroup = params.AlgoGroup / 1;
+        params.UuserId = params.UuserId / 1;
         console.log("新增接口", params);
+        http.post({
+            url: "/user/addUserInfo",
+            data: params,
+        }).then((res) => {
+            console.log(res);
+            message.success(res.message);
+            this.isAction = true;
+            this.getData();
+        });
     };
     //更新记录
     handleUpdateRecord = ({ form }) => {
-        console.log(form.getFieldsValue());
+        // console.log(form.getFieldsValue());
         // return;
         let params = form.getFieldsValue();
-        params.name = this.record.name;
+        params.id = this.record.id / 1;
+        params.UserType = params.UserType / 1;
+        params.RiskGroup = params.RiskGroup / 1;
+        params.AlgoGroup = params.AlgoGroup / 1;
+        params.UuserId = params.UuserId / 1;
         //发送更新请求
-        // http.post({
-        //     url: "/option/tcp/uoeMore/1011",
-        //     data: params,
-        // }).then((res) => {
-        //     console.log(res);
-        //     message.success(res.msg);
-        //     this.isAction = true;
-        //     this.getData();
-        // });
+        http.post({
+            url: "/user/updateUserInfo",
+            data: params,
+        }).then((res) => {
+            console.log(res);
+            message.success(res.message);
+            this.isAction = true;
+            this.getData();
+        });
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
         // console.log(record, form);
         this.record = record;
         form.setFieldsValue({
-            uuserId: record.uuserId,
-            market: record.market,
-            accountType: record.accountType,
-            accountId: record.accountId,
+            UserId: record.userId,
+            UserName: record.userName,
+            UserPasswd: record.userPasswd,
+            UserType: record.userType,
+            RiskGroup: record.riskGroup,
+            AlgoGroup: record.algoGroup,
+            UuserId: record.uuserId,
+            // UserType: record.UserType,
         });
     };
     columns = (params) => {
         return [
             {
-                title: "父级用户ID",
-                dataIndex: "fatherId",
+                title: "ID",
+                dataIndex: "id",
             },
             {
                 title: "用户ID",
@@ -236,7 +350,7 @@ class userInfo extends React.PureComponent {
                 key: "userType",
             },
             {
-                title: "用户风控组别",
+                title: "用户风控组",
                 dataIndex: "riskGroup",
                 // width: 120,
                 render: (text, record) => (
@@ -252,10 +366,24 @@ class userInfo extends React.PureComponent {
                     </div>
                 ),
             },
-            // {
-            //     title: "柜台用户ID",
-            //     dataIndex: "counterUserId",
-            // },
+            {
+                title: "算法权限组",
+                dataIndex: "algoGroup",
+                // width: 120,
+                render: (text, record) => (
+                    <div
+                        onClick={(e) => {
+                            console.log("修改算法权限组");
+                            // this.handleUpdate(record);
+                        }}
+                    >
+                        <Tooltip title="修改算法权限组">
+                            {record.algoGroup}
+                            <Icon type="edit" style={{ color: "#1899ff" }} />
+                        </Tooltip>
+                    </div>
+                ),
+            },
             // {
             //     title: "业务类型",
             //     dataIndex: "businessType",
@@ -265,9 +393,18 @@ class userInfo extends React.PureComponent {
             //     dataIndex: "loginStatus",
             // },
             {
+                title: "父级用户ID",
+                dataIndex: "uuserId",
+            },
+            {
+                title: "父级用户",
+                dataIndex: "fatherId",
+            },
+            {
                 title: "注册时间",
                 dataIndex: "createTime",
                 key: "createTime",
+                width: 180,
             },
             // {
             //     title: "操作",
@@ -319,9 +456,6 @@ class userInfo extends React.PureComponent {
         this.setState({
             updateModalVisible: false,
         });
-    };
-    handleUpdateRecord = (record) => {
-        console.log("更新记录 ", record);
     };
     //删除记录
     handleDeleteRecord = (record) => {

@@ -485,8 +485,8 @@ class CurdComponent extends React.PureComponent {
                     record={this.record}
                     onReady={this.handleUpdateModalReady}
                     column={this.props.dtCol}
-                    width={this.props.dtWidth}
                     {...rest}
+                    width={this.props.dtWidth}
                 ></DynamicDescriptions>
             </div>
         );

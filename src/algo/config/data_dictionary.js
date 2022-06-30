@@ -68,6 +68,12 @@ const configData = {
         { key: "1", value: "用户" },
         { key: "2", value: "算法" },
     ],
+    // 1:T0日内回转 2:智能委托 3:调仓
+    algorithmType: [
+        { key: "1", value: "T0日内回转" },
+        { key: "2", value: "智能委托" },
+        { key: "3", value: "调仓" },
+    ],
     userStatus: [
         { key: "0", value: "正常" },
         { key: "1", value: "黑名单客户" },
