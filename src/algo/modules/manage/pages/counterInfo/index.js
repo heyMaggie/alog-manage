@@ -246,14 +246,18 @@ export default class uoeSetting extends React.PureComponent {
             url: "/counter-info/addCounterInfo",
             data: params,
         }).then((res) => {
+            let msg = res.message;
             if (res.code == 0) {
-                message.success(res.message);
-                this.isAction = true;
+                message.success(msg);
                 this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                );
             } else {
-                message.error("新增柜台信息失败");
-                this.isAction = true;
+                message.error(msg);
             }
+            this.isAction = true;
         });
     };
     //更新记录
@@ -262,6 +266,7 @@ export default class uoeSetting extends React.PureComponent {
         // return;
         let fromData = form.getFieldsValue();
         let params = {
+            Id: this.record.id,
             BrokerCode: fromData.brokerCode,
             BrokerName: fromData.brokerName,
             SupportType: fromData.supportType / 1,
@@ -274,14 +279,18 @@ export default class uoeSetting extends React.PureComponent {
             url: "/counter-info/updateCounterInfo",
             data: params,
         }).then((res) => {
+            let msg = res.message;
             if (res.code == 0) {
-                message.success(res.message);
-                this.isAction = true;
+                message.success(msg);
                 this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                );
             } else {
-                message.error("新增柜台信息失败");
-                this.isAction = true;
+                message.error(msg);
             }
+            this.isAction = true;
         });
     };
     //删除记录

@@ -570,6 +570,7 @@ export default class uoeSetting extends React.PureComponent {
         // return;
         let fromData = form.getFieldsValue();
         let params = {
+            Id: this.record.id,
             SecurityId: fromData.securityId,
             SecurityIdSource: fromData.securityIdSource,
             SecurityName: fromData.securityName,

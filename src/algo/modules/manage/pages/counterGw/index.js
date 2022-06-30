@@ -466,14 +466,18 @@ class CounterGw extends React.PureComponent {
             url: "/counter/addCounterUserInfo",
             data: params,
         }).then((res) => {
+            let msg = res.message;
             if (res.code == 0) {
-                message.success(res.message);
-                this.isAction = true;
+                message.success(msg);
                 this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                );
             } else {
-                message.error("新增柜台用户信息失败");
-                this.isAction = true;
+                message.error(msg);
             }
+            this.isAction = true;
         });
     };
     //更新记录
@@ -505,17 +509,21 @@ class CounterGw extends React.PureComponent {
             // url: "/counter-user-info/updateUserCounterGw",
             data: params,
         }).then((res) => {
-            console.log(res);
+            let msg = res.message;
             this.isAction = true;
             //解析数据字典
             if (res.code == 0) {
-                message.success(res.message);
+                message.success(msg);
                 this.setState({
                     updateModalVisible: false,
                 });
                 this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                );
             } else {
-                message.error("修改柜台信息失败");
+                message.error(msg);
             }
         });
     };
