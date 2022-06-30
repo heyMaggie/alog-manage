@@ -84,12 +84,12 @@ const getInsertFormFields = () => {
             label: "证券代码源",
             id: "securityIdSource",
             initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "IP地址不能为空",
-                },
-            ],
+            // rules: [
+            //     {
+            //         required: true,
+            //         message: "参数不能为空",
+            //     },
+            // ],
             component: <Input placeholder="请输入" />,
         },
         {
@@ -187,18 +187,6 @@ const getInsertFormFields = () => {
 const getUpdateFormFields = () => {
     return [
         {
-            label: "ID",
-            id: "id",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" readOnly disabled />,
-        },
-        {
             label: "用户ID",
             id: "uuserId",
             initialValue: "",
@@ -244,12 +232,12 @@ const getUpdateFormFields = () => {
             label: "证券代码源",
             id: "securityIdSource",
             initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "IP地址不能为空",
-                },
-            ],
+            // rules: [
+            //     {
+            //         required: true,
+            //         message: "IP地址不能为空",
+            //     },
+            // ],
             component: <Input placeholder="请输入" />,
         },
         {
@@ -516,11 +504,11 @@ export default class Cccx extends React.PureComponent {
     };
     //更新记录
     handleUpdateRecord = ({ form }) => {
-        console.log(form.getFieldsValue());
+        console.log(form.getFieldsValue(), this.record);
         // return;
         let fromData = form.getFieldsValue();
         let params = {
-            Id: fromData.id / 1,
+            Id: this.record.id / 1,
             UuserId: fromData.uuserId,
             AccountId: fromData.accountId,
             SecurityId: fromData.securityId,
@@ -554,6 +542,7 @@ export default class Cccx extends React.PureComponent {
     // };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
+        this.record = record;
         form.setFieldsValue({
             // userName1: record.v_gthth,
             id: record.id,

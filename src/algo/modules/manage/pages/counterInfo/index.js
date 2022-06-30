@@ -299,8 +299,12 @@ export default class uoeSetting extends React.PureComponent {
             console.log(res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
-                parseArrDict(res.data.records, "status", "counterStatus");
-                parseDictValue(res.data.records);
+                parseArrDictValue(res.data.records, "status", "counterStatus");
+                parseArrDictValue(
+                    res.data.records,
+                    "supportType",
+                    "supportType"
+                );
             } else {
                 message.info("查询结果为空");
             }
