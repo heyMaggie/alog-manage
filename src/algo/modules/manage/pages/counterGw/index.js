@@ -14,6 +14,98 @@ let getSearchFormFields = () => {
         },
     ];
 };
+const getInsertFormFields = () => {
+    return [
+        {
+            label: "用户ID",
+            id: "userId",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input />,
+        },
+        {
+            label: "用户名",
+            id: "userName",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input />,
+        },
+        {
+            label: "柜台网关ID",
+            id: "counterGwId",
+            rules: [
+                {
+                    required: true,
+                    message: "柜台网关Id不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入交换机编号" />,
+        },
+        {
+            label: "来自柜台",
+            id: "counterUserId",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input />,
+        },
+        {
+            label: "业务类型",
+            id: "businessType",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input />,
+        },
+        // {
+        //     label: "登录状态",
+        //     id: "loginStatus",
+        //     rules: [
+        //         {
+        //             required: true,
+        //             message: "参数不能为空",
+        //         },
+        //     ],
+        //     component: <Input />,
+        // },
+        {
+            label: "客户类型",
+            id: "clientType",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input />,
+        },
+        {
+            label: "算法平台用户ID",
+            id: "uuserId",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input />,
+        },
+    ];
+};
 const getUpdateFormFields = () => {
     return [
         {
@@ -234,11 +326,11 @@ class CounterGw extends React.PureComponent {
                         }
                     );
                 } else {
-                    message.info("柜台信息查询结果为空");
+                    message.info("柜台用户信息查询结果为空");
                 }
             })
             .catch((e) => {
-                message.error("柜台信息查询失败");
+                message.error("柜台用户信息查询失败");
             });
     };
     // 编辑按钮点击事件
@@ -276,35 +368,72 @@ class CounterGw extends React.PureComponent {
         // return;
         this.handleUpdateRecord();
     };
+    handleInsertRecord = (fromData) => {
+        console.log("新增接口", fromData);
+        let params = {
+            UserId: fromData.userId,
+            UserName: fromData.userName,
+            // UserPasswd: fromData.userPasswd,
+            CounterUserId: fromData.counterUserId / 1,
+            BusinessType: fromData.businessType / 1,
+            ClientType: fromData.clientType / 1,
+            UuserId: fromData.uuserId / 1,
+            CounterGwId: fromData.counterGwId / 1,
+        };
+        http.post({
+            url: "/counter/addCounterUserInfo",
+            data: params,
+        }).then((res) => {
+            if (res.code == 0) {
+                message.success(res.message);
+                this.isAction = true;
+                this.getData();
+            } else {
+                message.error("新增柜台用户信息失败");
+                this.isAction = true;
+            }
+        });
+    };
     //更新记录
     handleUpdateRecord = () => {
         // let formData = form.getFieldsValue();
-        let params = {};
-        params.UuserId = this.record.uuserId;
-        params.BusinessType = this.record.businessType;
+        let params = {
+            Id: this.record.id,
+            UserId: this.record.userId,
+            UserName: this.record.userName,
+            UserPasswd: this.record.userPasswd,
+            CounterUserId: this.record.counterUserId / 1,
+            BusinessType: this.record.businessType / 1,
+            ClientType: this.record.clientType / 1,
+            UuserId: this.record.uuserId / 1,
+            CounterGwId: this.record.counterGwId / 1,
+        };
+        // params.UuserId = this.record.uuserId;
+        // params.BusinessType = this.record.businessType;
         // let dataArr = this.record.businessType.split("-");
         // console.log(dataArr);
         // if (dataArr.length == 2) {
         //     params.BusinessType = dataArr[0] / 1;
         // }
-        params.GwId = this.state.selectedRowKeys[0] / 1;
+        // params.GwId = this.state.selectedRowKeys[0] / 1;
         console.log("更新记录", params);
         // return;
         http.post({
-            url: "/counter-user-info/updateUserCounterGw",
+            url: "/counter/updateCounterUserInfo",
+            // url: "/counter-user-info/updateUserCounterGw",
             data: params,
         }).then((res) => {
             console.log(res);
             this.isAction = true;
             //解析数据字典
             if (res.code == 0) {
-                message.success("修改柜台网关Id成功");
+                message.success(res.message);
                 this.setState({
                     updateModalVisible: false,
                 });
                 this.getData();
             } else {
-                message.error("修改柜台网关Id失败");
+                message.error("修改柜台信息失败");
             }
         });
     };
@@ -381,16 +510,16 @@ class CounterGw extends React.PureComponent {
                     onSearchClick={this.handleSearch}
                     getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
-                    // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
-                    // getInsertFormFields={getInsertFormFields}
-                    // insertRecord={this.handleInsertRecord}
+                    insertBtnText={"新增"} // 不传 就没新增按钮
+                    getInsertFormFields={getInsertFormFields}
+                    insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
                     pagination={this.state.pagination}
                     // updateModalText="修改柜台网关Id"
-                    // getUpdateFormFields={getUpdateFormFields}
-                    // setUpdateModal={this.setUpdateModal}
-                    // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                    getUpdateFormFields={getUpdateFormFields}
+                    setUpdateModal={this.setUpdateModal}
+                    updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={this.columns}

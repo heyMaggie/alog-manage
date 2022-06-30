@@ -68,6 +68,188 @@ let getSearchFormFields = () => {
         },
     ];
 };
+const getInsertFormFields = () => {
+    return [
+        {
+            label: "保证金账户",
+            id: "assetAccount",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "用户ID",
+            id: "id",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "余额",
+            id: "balance",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "冻结资金",
+            id: "frozen",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "实时保证金",
+            id: "marginAmount",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+    ];
+};
+const getUpdateFormFields = () => {
+    return [
+        {
+            label: "保证金账户",
+            id: "assetAccount",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "用户ID",
+            id: "id",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "余额",
+            id: "balance",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "冻结资金",
+            id: "frozen",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "实时保证金",
+            id: "marginAmount",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "注册时间",
+            id: "createTime",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" readOnly disabled />
+            ),
+        },
+        {
+            label: "更新时间",
+            id: "updateTime",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" readOnly disabled />
+            ),
+        },
+        {
+            label: "版本号",
+            id: "version",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" readOnly disabled />,
+        },
+    ];
+};
 export default class uoeSetting extends React.PureComponent {
     state = {
         searchLoading: false,
@@ -83,40 +265,69 @@ export default class uoeSetting extends React.PureComponent {
         });
     };
 
-    handleInsertRecord = (params) => {
-        console.log(params);
+    handleInsertRecord = (fromData) => {
+        console.log("新增接口", fromData);
+        let params = {
+            Id: fromData.id / 1,
+            AssetAccount: fromData.assetAccount,
+            Balance: fromData.balance / 1,
+            Frozen: fromData.frozen / 1,
+            MarginAmount: fromData.marginAmount / 1,
+        };
+        http.post({
+            url: "/asset-info/addAssetInfo",
+            data: params,
+        }).then((res) => {
+            if (res.code == 0) {
+                message.success(res.message);
+                this.isAction = true;
+                this.getData();
+            } else {
+                message.error("新增资金信息失败");
+                this.isAction = true;
+            }
+        });
     };
     //更新记录
     handleUpdateRecord = ({ form }) => {
         console.log(form.getFieldsValue());
         // return;
-        let params = form.getFieldsValue();
-        params.name = this.record.name;
+        let fromData = form.getFieldsValue();
+        let params = {
+            Id: fromData.id / 1,
+            AssetAccount: fromData.assetAccount,
+            Balance: fromData.balance / 1,
+            Frozen: fromData.frozen / 1,
+            MarginAmount: fromData.marginAmount / 1,
+        };
+        // 发送更新请求
         http.post({
-            url: "/option/tcp/uoeMore/1011",
+            url: "/asset-info/updateAssetInfo",
             data: params,
         }).then((res) => {
-            console.log(res);
-            message.success(res.msg);
-            this.isAction = true;
-            this.getData();
+            if (res.code == 0) {
+                message.success(res.message);
+                this.isAction = true;
+                this.getData();
+            } else {
+                message.error("修改资金信息失败");
+                this.isAction = true;
+            }
         });
-    };
-    //删除记录
-    handleDeleteRecord = (record) => {
-        console.log("删除记录 ", record);
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
         // console.log(record, form);
         this.record = record;
         form.setFieldsValue({
-            switchId: record.switchId,
-            ip: record.ip,
-            mask: record.mask,
-            mac: record.mac,
-            gateway: record.gateway,
-            enable: record.enable + "",
+            assetAccount: record.assetAccount,
+            id: record.id,
+            balance: record.balance,
+            frozen: record.frozen,
+            marginAmount: record.marginAmount,
+            createTime: record.createTime,
+            updateTime: record.updateTime,
+            version: record.version,
         });
     };
     getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
@@ -174,15 +385,15 @@ export default class uoeSetting extends React.PureComponent {
                     onSearchClick={this.handleSearch}
                     getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
-                    // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
-                    // getInsertFormFields={getInsertFormFields}
-                    // insertRecord={this.handleInsertRecord}
+                    insertBtnText={"新增"} // 不传 就没新增按钮
+                    getInsertFormFields={getInsertFormFields}
+                    insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
                     pagination={this.state.pagination}
-                    // getUpdateFormFields={getUpdateFormFields}
-                    // setUpdateModal={this.setUpdateModal}
-                    // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                    getUpdateFormFields={getUpdateFormFields}
+                    setUpdateModal={this.setUpdateModal}
+                    updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={columns}

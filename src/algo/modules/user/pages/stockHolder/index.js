@@ -74,10 +74,13 @@ const getInsertFormFields = () => {
                     message: "参数不能为空",
                 },
             ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
+            component: SelectOption(dict.market, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         {
             label: "账户类型",
@@ -89,7 +92,13 @@ const getInsertFormFields = () => {
                     message: "IP地址不能为空",
                 },
             ],
-            component: <Input placeholder="请输入" />,
+            component: SelectOption(dict.accountType, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
     ];
 };
@@ -154,7 +163,13 @@ const getUpdateFormFields = () => {
                     message: "IP地址不能为空",
                 },
             ],
-            component: <Input placeholder="请输入" />,
+            component: SelectOption(dict.accountType, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
         // {
         //     label: "网关",
@@ -246,34 +261,53 @@ export default class uoeSetting extends React.PureComponent {
         });
     };
 
-    handleInsertRecord = (params) => {
-        console.log("新增接口", params);
-        // http.post({
-        //     url: "/option/tcp/uoeMore/1011",
-        //     data: params,
-        // }).then((res) => {
-        //     console.log(res);
-        //     message.success(res.msg);
-        //     this.isAction = true;
-        //     this.getData();
-        // });
+    handleInsertRecord = (fromData) => {
+        console.log("新增接口", fromData);
+        let params = {
+            UuserId: fromData.uuserId / 1,
+            AccountId: fromData.accountId,
+            Market: fromData.market / 1,
+            AccountType: fromData.accountType / 1,
+        };
+        http.post({
+            url: "/stockHolder/addStockHolderInfo",
+            data: params,
+        }).then((res) => {
+            if (res.code == 0) {
+                message.success(res.message);
+                this.isAction = true;
+                this.getData();
+            } else {
+                message.error("新增股东信息失败");
+                this.isAction = true;
+            }
+        });
     };
     //更新记录
     handleUpdateRecord = ({ form }) => {
         console.log(form.getFieldsValue());
         // return;
-        let params = form.getFieldsValue();
-        params.name = this.record.name;
-        //发送更新请求
-        // http.post({
-        //     url: "/option/tcp/uoeMore/1011",
-        //     data: params,
-        // }).then((res) => {
-        //     console.log(res);
-        //     message.success(res.msg);
-        //     this.isAction = true;
-        //     this.getData();
-        // });
+        let fromData = form.getFieldsValue();
+        let params = {
+            UuserId: fromData.uuserId / 1,
+            AccountId: fromData.accountId,
+            Market: fromData.market / 1,
+            AccountType: fromData.accountType / 1,
+        };
+        // 发送更新请求
+        http.post({
+            url: "/stockHolder/updateStockHolderInfo",
+            data: params,
+        }).then((res) => {
+            if (res.code == 0) {
+                message.success(res.message);
+                this.isAction = true;
+                this.getData();
+            } else {
+                message.error("修改股东信息失败");
+                this.isAction = true;
+            }
+        });
     };
     //删除记录
     handleDeleteRecord = (record) => {

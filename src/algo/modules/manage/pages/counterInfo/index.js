@@ -16,8 +16,7 @@ const columns = (params) => {
         },
         {
             title: "支持业务类型",
-            dataIndex: "supportType",
-            key: "supportType",
+            dataIndex: "supportTypeValue",
         },
         {
             title: "柜台地址",
@@ -31,8 +30,7 @@ const columns = (params) => {
         },
         {
             title: "柜台状态",
-            dataIndex: "status",
-            key: "status",
+            dataIndex: "statusValue",
         },
     ];
 };
@@ -41,6 +39,164 @@ const getSearchFormFields = () => {
         {
             label: "柜台地址",
             id: "gwAddr",
+            component: <Input placeholder="请输入" />,
+        },
+    ];
+};
+const getInsertFormFields = () => {
+    return [
+        {
+            label: "券商编码",
+            id: "brokerCode",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "支持业务类型",
+            id: "supportType",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "柜台地址",
+            id: "gwAddr",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "柜台版本号",
+            id: "version",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "柜台状态",
+            id: "status",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+    ];
+};
+const getUpdateFormFields = () => {
+    return [
+        {
+            label: "ID",
+            id: "id",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "券商编码",
+            id: "brokerCode",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "支持业务类型",
+            id: "supportType",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "柜台地址",
+            id: "gwAddr",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "柜台版本号",
+            id: "version",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "柜台状态",
+            id: "status",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
             component: <Input placeholder="请输入" />,
         },
     ];
@@ -60,23 +216,56 @@ export default class uoeSetting extends React.PureComponent {
         });
     };
 
-    handleInsertRecord = (params) => {
-        console.log(params);
+    handleInsertRecord = (fromData) => {
+        console.log("新增接口", fromData);
+        let params = {
+            BrokerCode: fromData.brokerCode,
+            BrokerName: fromData.brokerName,
+            SupportType: fromData.supportType / 1,
+            GwAddr: fromData.gwAddr,
+            Version: fromData.version,
+            Status: fromData.status / 1,
+        };
+        http.post({
+            url: "/counter-info/addCounterInfo",
+            data: params,
+        }).then((res) => {
+            if (res.code == 0) {
+                message.success(res.message);
+                this.isAction = true;
+                this.getData();
+            } else {
+                message.error("新增柜台信息失败");
+                this.isAction = true;
+            }
+        });
     };
     //更新记录
     handleUpdateRecord = ({ form }) => {
         console.log(form.getFieldsValue());
         // return;
-        let params = form.getFieldsValue();
-        params.name = this.record.name;
+        let fromData = form.getFieldsValue();
+        let params = {
+            BrokerCode: fromData.brokerCode,
+            BrokerName: fromData.brokerName,
+            SupportType: fromData.supportType / 1,
+            GwAddr: fromData.gwAddr,
+            Version: fromData.version,
+            Status: fromData.status / 1,
+        };
+        // 发送更新请求
         http.post({
-            url: "/option/tcp/uoeMore/1011",
+            url: "/counter-info/updateCounterInfo",
             data: params,
         }).then((res) => {
-            console.log(res);
-            message.success(res.msg);
-            this.isAction = true;
-            this.getData();
+            if (res.code == 0) {
+                message.success(res.message);
+                this.isAction = true;
+                this.getData();
+            } else {
+                message.error("新增柜台信息失败");
+                this.isAction = true;
+            }
         });
     };
     //删除记录
@@ -88,12 +277,12 @@ export default class uoeSetting extends React.PureComponent {
         // console.log(record, form);
         this.record = record;
         form.setFieldsValue({
-            switchId: record.switchId,
-            ip: record.ip,
-            mask: record.mask,
-            mac: record.mac,
-            gateway: record.gateway,
-            enable: record.enable + "",
+            id: record.id,
+            brokerCode: record.brokerCode,
+            supportType: record.supportType / 1,
+            gwAddr: record.gwAddr,
+            version: record.version,
+            status: record.status / 1,
         });
     };
     getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
@@ -110,8 +299,8 @@ export default class uoeSetting extends React.PureComponent {
             console.log(res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
-                parseArrDict(res.data, "status", "counterStatus");
-                parseDict(res.data.records);
+                parseArrDict(res.data.records, "status", "counterStatus");
+                parseDictValue(res.data.records);
             } else {
                 message.info("查询结果为空");
             }
@@ -150,15 +339,15 @@ export default class uoeSetting extends React.PureComponent {
                     onSearchClick={this.handleSearch}
                     getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
-                    // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
-                    // getInsertFormFields={getInsertFormFields}
-                    // insertRecord={this.handleInsertRecord}
+                    insertBtnText={"新增"} // 不传 就没新增按钮
+                    getInsertFormFields={getInsertFormFields}
+                    insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
                     pagination={this.state.pagination}
-                    // getUpdateFormFields={getUpdateFormFields}
-                    // setUpdateModal={this.setUpdateModal}
-                    // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                    getUpdateFormFields={getUpdateFormFields}
+                    setUpdateModal={this.setUpdateModal}
+                    updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={columns}

@@ -37,10 +37,318 @@ const getSearchFormFields = () => {
     ];
 };
 const getInsertFormFields = () => {
-    return [];
+    return [
+        {
+            label: "用户ID",
+            id: "uuserId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "证券帐户",
+            id: "accountId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "证券代码",
+            id: "securityId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "证券代码源",
+            id: "securityIdSource",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "持仓类型",
+            id: "positionType",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "持仓数量",
+            id: "positionQty",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "当前开盘前的原始仓位数量",
+            id: "originQty",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "当天前的原始持仓的平均开仓价格",
+            id: "originOpenPrice",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "可卖数量",
+            id: "freeQty",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "冻结数量",
+            id: "frozenQty",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "平均价格",
+            id: "avgPrice",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+    ];
 };
 const getUpdateFormFields = () => {
-    return [];
+    return [
+        {
+            label: "ID",
+            id: "id",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" readOnly disabled />,
+        },
+        {
+            label: "用户ID",
+            id: "uuserId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "证券帐户",
+            id: "accountId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "证券代码",
+            id: "securityId",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "证券代码源",
+            id: "securityIdSource",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "持仓类型",
+            id: "positionType",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "持仓数量",
+            id: "positionQty",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "当前开盘前的原始仓位数量",
+            id: "originQty",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "当天前的原始持仓的平均开仓价格",
+            id: "originOpenPrice",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "可卖数量",
+            id: "freeQty",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "IP地址不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "冻结数量",
+            id: "frozenQty",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "平均价格",
+            id: "avgPrice",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "更新时间",
+            id: "updateTime",
+            initialValue: "",
+            component: <Input placeholder="请输入" readOnly disabled />,
+        },
+    ];
 };
 
 let columns = () => {
@@ -105,7 +413,7 @@ let columns = () => {
         },
         {
             title: "平均价格",
-            dataIndex: "price",
+            dataIndex: "avgPrice",
             width: 100,
         },
         {
@@ -177,23 +485,95 @@ export default class Cccx extends React.PureComponent {
         });
         // this.setState({ info: msg.content, pagination: pgn });
     };
-    // handleInsertRecord = ({ form }) => {
-    //     console.log(form.getFieldsValue());
-    // };
-    // //更新记录
-    // handleUpdateRecord = ({ form }) => {
-    //   console.log(form.getFieldsValue());
-    // };
+    handleInsertRecord = (fromData) => {
+        console.log("新增接口", fromData);
+        let params = {
+            UuserId: fromData.uuserId / 1,
+            AccountId: fromData.accountId,
+            SecurityId: fromData.securityId,
+            SecurityIdSource: fromData.securityIdSource,
+            PositionType: fromData.positionType / 1,
+            PositionQty: fromData.positionQty / 1,
+            OriginQty: fromData.originQty / 1,
+            OriginOpenPrice: fromData.originOpenPrice / 1,
+            FreeQty: fromData.freeQty / 1,
+            FrozenQty: fromData.frozenQty / 1,
+            AvgPrice: fromData.avgPrice / 1,
+        };
+        http.post({
+            url: "/user-position/addUserPosition",
+            data: params,
+        }).then((res) => {
+            if (res.code == 0) {
+                message.success(res.message);
+                this.isAction = true;
+                this.getData();
+            } else {
+                message.error("新增资金信息失败");
+                this.isAction = true;
+            }
+        });
+    };
+    //更新记录
+    handleUpdateRecord = ({ form }) => {
+        console.log(form.getFieldsValue());
+        // return;
+        let fromData = form.getFieldsValue();
+        let params = {
+            Id: fromData.id / 1,
+            UuserId: fromData.uuserId,
+            AccountId: fromData.accountId,
+            SecurityId: fromData.securityId,
+            SecurityIdSource: fromData.securityIdSource,
+            PositionType: fromData.positionType / 1,
+            PositionQty: fromData.positionQty / 1,
+            OriginQty: fromData.originQty / 1,
+            OriginOpenPrice: fromData.originOpenPrice / 1,
+            FreeQty: fromData.freeQty / 1,
+            FrozenQty: fromData.frozenQty / 1,
+            AvgPrice: fromData.avgPrice / 1,
+        };
+        // 发送更新请求
+        http.post({
+            url: "/user-position/updateUserPosition",
+            data: params,
+        }).then((res) => {
+            if (res.code == 0) {
+                message.success(res.message);
+                this.isAction = true;
+                this.getData();
+            } else {
+                message.error("修改资金信息失败");
+                this.isAction = true;
+            }
+        });
+    };
     // //删除记录
     // handleDeleteRecord = record => {
     //   console.log("删除记录 ", record);
     // };
     //填入更新数据
-    // setUpdateModal = ({ form, record }) => {
-    //     form.setFieldsValue({
-    //         userName1: record.v_gthth,
-    //     });
-    // };
+    setUpdateModal = ({ form, record }) => {
+        form.setFieldsValue({
+            // userName1: record.v_gthth,
+            id: record.id,
+            uuserId: record.uuserId,
+            accountId: record.accountId,
+            securityId: record.securityId,
+            securityIdSource: record.securityIdSource,
+            positionType: record.positionType,
+            positionQty: record.positionQty,
+            originQty: record.originQty,
+            originOpenPrice: record.originOpenPrice,
+            freeQty: record.freeQty,
+            frozenQty: record.frozenQty,
+            avgPrice: record.avgPrice,
+            profitAndLoss: record.profitAndLoss,
+            profitRate: record.profitRate,
+            version: record.version,
+            updateTime: record.updateTime,
+        });
+    };
     componentDidMount() {
         this.getData();
     }
@@ -210,12 +590,12 @@ export default class Cccx extends React.PureComponent {
                 // rowKey="sno"
                 pagination={this.state.pagination}
                 dataSource={info}
-                // insertBtnText={"撤销"}
-                // getInsertFormFields={getInsertFormFields}
-                // insertRecord={this.handleInsertRecord}
-                // getUpdateFormFields={getUpdateFormFields}
-                // setUpdateModal={this.setUpdateModal}
-                // updateRecord={this.handleUpdateRecord}
+                insertBtnText={"新增"} // 不传 就没新增按钮
+                getInsertFormFields={getInsertFormFields}
+                insertRecord={this.handleInsertRecord}
+                getUpdateFormFields={getUpdateFormFields}
+                setUpdateModal={this.setUpdateModal}
+                updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                 // deleteRecord={this.handleDeleteRecord}
                 centered={true}
                 columns={columns}

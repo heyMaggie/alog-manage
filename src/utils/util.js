@@ -87,12 +87,12 @@ export let parseDict = (dict) => {
     };
     window.parseArrDict = (arr, mykey, realKey) => {
         let dictArr = dict[realKey];
-        // console.log(arr, dictArr);
         for (let i = 0; i < arr.length; i++) {
             for (let j = 0; j < dictArr.length; j++) {
-                // console.log(dictArr[j].key, arr[i][mykey]);
                 if (dictArr[j].key == arr[i][mykey]) {
-                    arr[i][mykey] = arr[i][mykey] + "-" + dictArr[j].value;
+                    arr[i][mykey + "Value"] =
+                        arr[i][mykey] + "-" + dictArr[j].value;
+                    // arr[i][mykey] = arr[i][mykey] + "-" + dictArr[j].value;
                     break;
                 }
             }
