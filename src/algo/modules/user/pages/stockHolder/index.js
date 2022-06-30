@@ -78,7 +78,7 @@ const getInsertFormFields = () => {
                 placeholder: "请选择",
                 allowClear: false,
                 style: {
-                    width: 183,
+                    width: 400,
                 },
             }),
         },
@@ -96,7 +96,7 @@ const getInsertFormFields = () => {
                 placeholder: "请选择",
                 allowClear: false,
                 style: {
-                    width: 183,
+                    width: 400,
                 },
             }),
         },
@@ -149,7 +149,7 @@ const getUpdateFormFields = () => {
                 placeholder: "请选择",
                 allowClear: false,
                 style: {
-                    width: 183,
+                    width: 400,
                 },
             }),
         },
@@ -167,7 +167,7 @@ const getUpdateFormFields = () => {
                 placeholder: "请选择",
                 allowClear: false,
                 style: {
-                    width: 183,
+                    width: 400,
                 },
             }),
         },
