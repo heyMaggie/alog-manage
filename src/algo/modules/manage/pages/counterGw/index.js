@@ -439,17 +439,6 @@ class CounterGw extends React.PureComponent {
             createTime: record.createTime,
         });
     };
-    //弹窗确定
-    handleUpdateModalOk = () => {
-        if (this.state.selectedRowKeys.length == 0) {
-            message.error("请选择柜台网关");
-            return;
-        }
-        // console.log("selectedRowKeys", this.state.selectedRowKeys);
-        // console.log("record", this.record);
-        // return;
-        this.handleUpdateRecord();
-    };
     handleInsertRecord = (fromData) => {
         console.log("新增接口", fromData);
         let params = {
@@ -480,7 +469,6 @@ class CounterGw extends React.PureComponent {
             this.isAction = true;
         });
     };
-    //更新记录
     handleUpdateRecord = ({ form }) => {
         let formData = form.getFieldsValue();
         let params = {
@@ -494,29 +482,14 @@ class CounterGw extends React.PureComponent {
             UuserId: formData.uuserId / 1,
             CounterGwId: formData.counterGwId / 1,
         };
-        // params.UuserId = this.record.uuserId;
-        // params.BusinessType = this.record.businessType;
-        // let dataArr = this.record.businessType.split("-");
-        // console.log(dataArr);
-        // if (dataArr.length == 2) {
-        //     params.BusinessType = dataArr[0] / 1;
-        // }
-        // params.GwId = this.state.selectedRowKeys[0] / 1;
-        console.log("更新记录", params);
-        // return;
+        console.log("更新编辑记录", params);
         http.post({
             url: "/counter/updateCounterUserInfo",
-            // url: "/counter-user-info/updateUserCounterGw",
             data: params,
         }).then((res) => {
             let msg = res.message;
-            this.isAction = true;
-            //解析数据字典
             if (res.code == 0) {
                 message.success(msg);
-                this.setState({
-                    updateModalVisible: false,
-                });
                 this.getData();
             } else if (res.code == 20000) {
                 message.error(
@@ -524,6 +497,50 @@ class CounterGw extends React.PureComponent {
                 );
             } else {
                 message.error(msg);
+            }
+            this.isAction = true;
+        });
+    };
+    //弹窗确定
+    handleUpdateModalOk = () => {
+        if (this.state.selectedRowKeys.length == 0) {
+            message.error("请选择柜台网关");
+            return;
+        }
+        // console.log("selectedRowKeys", this.state.selectedRowKeys);
+        // console.log("record", this.record);
+        // return;
+        this.handleUpdateRecord2();
+    };
+    //更新记录
+    handleUpdateRecord2 = () => {
+        // let formData = form.getFieldsValue();
+        let params = {};
+        params.UuserId = this.record.uuserId;
+        params.BusinessType = this.record.businessType;
+        // let dataArr = this.record.businessType.split("-");
+        // console.log(dataArr);
+        // if (dataArr.length == 2) {
+        //     params.BusinessType = dataArr[0] / 1;
+        // }
+        params.GwId = this.state.selectedRowKeys[0] / 1;
+        console.log("更新记录", params);
+        // return;
+        http.post({
+            url: "/counter-user-info/updateUserCounterGw",
+            data: params,
+        }).then((res) => {
+            console.log(res);
+            this.isAction = true;
+            //解析数据字典
+            if (res.code == 0) {
+                message.success("修改柜台网关Id成功");
+                this.setState({
+                    updateModalVisible: false,
+                });
+                this.getData();
+            } else {
+                message.error("修改柜台网关Id失败");
             }
         });
     };
