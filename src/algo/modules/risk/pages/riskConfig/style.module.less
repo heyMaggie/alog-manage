@@ -57,52 +57,89 @@
 .marLose14 {
     margin-top: -14px;
 }
+
+// :global {
+//     .riskConfig {
+//         .ant-modal-body {
+//             padding: 24px 32px;
+//             height: 739px;
+//             overflow-y: auto;
+//             .ant-radio-wrapper-disabled {
+//                 .ant-radio.ant-radio-disabled .ant-radio-inner {
+//                     background-color: #fff !important;
+//                 }
+//                 .ant-radio-disabled + span {
+//                     color: initial !important;
+//                 }
+//             }
+//             .ant-radio-wrapper-checked {
+//                 .ant-radio-checked .ant-radio-inner::after {
+//                     background-color: #1890ff;
+//                 }
+//                 .ant-radio.ant-radio-disabled .ant-radio-inner {
+//                     border-color: #1890ff !important;
+//                 }
+//                 .ant-radio-disabled + span {
+//                     color: initial !important;
+//                 }
+//             }
+//             input[readonly] {
+//                 border-color: white;
+//             }
+//             .ant-form-inline .ant-form-item-with-help {
+//                 margin-bottom: 0;
+//             }
+//         }
+//     }
+// }
 :global {
-    .ant-modal-body {
-        padding: 24px 32px;
-        height: 739px;
-        overflow-y: auto;
-        .ant-radio-wrapper-disabled {
-            .ant-radio.ant-radio-disabled .ant-radio-inner {
-                background-color: #fff !important;
+    .riskConfig {
+        .ant-modal-body {
+            padding: 24px 32px;
+            height: 739px;
+            overflow-y: auto;
+            .ant-radio-wrapper-disabled {
+                .ant-radio.ant-radio-disabled .ant-radio-inner {
+                    background-color: #fff !important;
+                }
+                .ant-radio-disabled + span {
+                    color: initial !important;
+                }
             }
-            .ant-radio-disabled + span {
-                color: initial !important;
+            .ant-radio-wrapper-checked {
+                .ant-radio-checked .ant-radio-inner::after {
+                    background-color: #1890ff;
+                }
+                .ant-radio.ant-radio-disabled .ant-radio-inner {
+                    border-color: #1890ff !important;
+                }
+                .ant-radio-disabled + span {
+                    color: initial !important;
+                }
+            }
+            input[readonly] {
+                border-color: white;
+            }
+            .ant-form-inline .ant-form-item-with-help {
+                margin-bottom: 0;
             }
         }
-        .ant-radio-wrapper-checked {
-            .ant-radio-checked .ant-radio-inner::after {
-                background-color: #1890ff;
+        .ant-modal-footer {
+            // padding-top: 18px;
+            // padding-bottom: 18px;
+        }
+        .ant-form-item {
+            margin-right: 0px !important;
+        }
+        .ant-form-item {
+            // margin-bottom: 20ppx;
+            padding-bottom: unset !important;
+            .ant-form-item-label {
+                padding: 0 0 6px;
             }
-            .ant-radio.ant-radio-disabled .ant-radio-inner {
-                border-color: #1890ff !important;
-            }
-            .ant-radio-disabled + span {
-                color: initial !important;
-            }
         }
-        input[readonly] {
-            border-color: white;
+        .ant-form-vertical .ant-form-explain {
+            margin-bottom: 5px;
         }
-        .ant-form-inline .ant-form-item-with-help {
-            margin-bottom: 0;
-        }
-    }
-    .ant-modal-footer {
-        // padding-top: 18px;
-        // padding-bottom: 18px;
-    }
-    .ant-form-item {
-        margin-right: 0px !important;
-    }
-    .ant-form-item {
-        // margin-bottom: 20ppx;
-        padding-bottom: unset !important;
-        .ant-form-item-label {
-            padding: 0 0 6px;
-        }
-    }
-    .ant-form-vertical .ant-form-explain {
-        margin-bottom: 5px;
     }
 }

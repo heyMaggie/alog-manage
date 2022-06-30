@@ -288,7 +288,17 @@ class userInfo extends React.PureComponent {
             data: params,
         }).then((res) => {
             console.log(res);
-            message.success(res.message);
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                );
+            } else {
+                message.error(msg);
+            }
             this.isAction = true;
             this.getData();
         });
@@ -309,9 +319,18 @@ class userInfo extends React.PureComponent {
             data: params,
         }).then((res) => {
             console.log(res);
-            message.success(res.message);
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                );
+            } else {
+                message.error(msg);
+            }
             this.isAction = true;
-            this.getData();
         });
     };
     //填入更新数据

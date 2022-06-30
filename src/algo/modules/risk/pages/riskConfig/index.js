@@ -616,6 +616,7 @@ class riskConfigManage extends React.PureComponent {
                     onOk={this.handleUpdateModalOk}
                     onCancel={this.handleUpdateModalCancel}
                     width={788}
+                    wrapClassName="riskConfig"
                     centered
                 >
                     <Form layout={"vertical"}>

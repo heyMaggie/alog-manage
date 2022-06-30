@@ -9,37 +9,37 @@ const columns = (params) => {
         {
             title: "保证金账户",
             dataIndex: "assetAccount",
-            width: 120,
+            width: 150,
         },
         {
             title: "用户ID",
             dataIndex: "id",
-            width: 100,
+            width: 150,
         },
         {
             title: "余额",
             dataIndex: "balance",
-            width: 100,
+            width: 150,
         },
         {
             title: "冻结资金",
             dataIndex: "frozen",
-            width: 100,
+            width: 150,
         },
         {
             title: "实时保证金",
             dataIndex: "marginAmount",
-            width: 120,
+            width: 150,
         },
         {
             title: "注册时间",
             dataIndex: "createTime",
-            width: 150,
+            // width: 200,
         },
         {
             title: "更新时间",
             dataIndex: "updateTime",
-            width: 150,
+            // width: 200,
         },
         // {
         //     title: "资金版本号",
@@ -49,7 +49,7 @@ const columns = (params) => {
         {
             title: "版本号",
             dataIndex: "version",
-            width: 100,
+            width: 120,
         },
     ];
 };
@@ -278,6 +278,7 @@ export default class uoeSetting extends React.PureComponent {
             url: "/asset-info/addAssetInfo",
             data: params,
         }).then((res) => {
+            let msg = res.message;
             if (res.code == 0) {
                 message.success(msg);
                 this.getData();
@@ -375,7 +376,7 @@ export default class uoeSetting extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 1000, y: 445 };
+        let scroll = { x: 900, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;
