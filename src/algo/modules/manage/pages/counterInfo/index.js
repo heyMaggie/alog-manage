@@ -1,6 +1,6 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
-// import SelectOption from "@/components/SelectOption";
+import SelectOption from "@/components/SelectOption";
 import { Input } from "antd";
 
 const columns = (params) => {
@@ -16,8 +16,7 @@ const columns = (params) => {
         },
         {
             title: "支持业务类型",
-            dataIndex: "supportType",
-            key: "supportType",
+            dataIndex: "supportTypeValue",
         },
         {
             title: "柜台地址",
@@ -31,8 +30,7 @@ const columns = (params) => {
         },
         {
             title: "柜台状态",
-            dataIndex: "status",
-            key: "status",
+            dataIndex: "statusValue",
         },
     ];
 };
@@ -42,6 +40,180 @@ const getSearchFormFields = () => {
             label: "柜台地址",
             id: "gwAddr",
             component: <Input placeholder="请输入" />,
+        },
+    ];
+};
+const getInsertFormFields = () => {
+    return [
+        {
+            label: "券商编码",
+            id: "brokerCode",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "支持业务类型",
+            id: "supportType",
+            initialValue: "1",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.supportType, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
+        },
+        {
+            label: "柜台地址",
+            id: "gwAddr",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "柜台版本号",
+            id: "version",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "柜台状态",
+            id: "status",
+            initialValue: "0",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.counterStatus, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
+        },
+    ];
+};
+const getUpdateFormFields = () => {
+    return [
+        {
+            label: "ID",
+            id: "id",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "券商编码",
+            id: "brokerCode",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "支持业务类型",
+            id: "supportType",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.supportType, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
+        },
+        {
+            label: "柜台地址",
+            id: "gwAddr",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "柜台版本号",
+            id: "version",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "柜台状态",
+            id: "status",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.counterStatus, {
+                placeholder: "请选择",
+                allowClear: false,
+                style: {
+                    width: 183,
+                },
+            }),
         },
     ];
 };
@@ -60,23 +232,65 @@ export default class uoeSetting extends React.PureComponent {
         });
     };
 
-    handleInsertRecord = (params) => {
-        console.log(params);
+    handleInsertRecord = (fromData) => {
+        console.log("新增接口", fromData);
+        let params = {
+            BrokerCode: fromData.brokerCode,
+            BrokerName: fromData.brokerName,
+            SupportType: fromData.supportType / 1,
+            GwAddr: fromData.gwAddr,
+            Version: fromData.version,
+            Status: fromData.status / 1,
+        };
+        http.post({
+            url: "/counter-info/addCounterInfo",
+            data: params,
+        }).then((res) => {
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                );
+            } else {
+                message.error(msg);
+            }
+            this.isAction = true;
+        });
     };
     //更新记录
     handleUpdateRecord = ({ form }) => {
         console.log(form.getFieldsValue());
         // return;
-        let params = form.getFieldsValue();
-        params.name = this.record.name;
+        let fromData = form.getFieldsValue();
+        let params = {
+            Id: this.record.id,
+            BrokerCode: fromData.brokerCode,
+            BrokerName: fromData.brokerName,
+            SupportType: fromData.supportType / 1,
+            GwAddr: fromData.gwAddr,
+            Version: fromData.version,
+            Status: fromData.status / 1,
+        };
+        // 发送更新请求
         http.post({
-            url: "/option/tcp/uoeMore/1011",
+            url: "/counter-info/updateCounterInfo",
             data: params,
         }).then((res) => {
-            console.log(res);
-            message.success(res.msg);
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                );
+            } else {
+                message.error(msg);
+            }
             this.isAction = true;
-            this.getData();
         });
     };
     //删除记录
@@ -88,12 +302,12 @@ export default class uoeSetting extends React.PureComponent {
         // console.log(record, form);
         this.record = record;
         form.setFieldsValue({
-            switchId: record.switchId,
-            ip: record.ip,
-            mask: record.mask,
-            mac: record.mac,
-            gateway: record.gateway,
-            enable: record.enable + "",
+            id: record.id,
+            brokerCode: record.brokerCode,
+            supportType: record.supportType + "",
+            gwAddr: record.gwAddr,
+            version: record.version,
+            status: record.status + "",
         });
     };
     getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
@@ -110,8 +324,12 @@ export default class uoeSetting extends React.PureComponent {
             console.log(res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
-                parseArrDict(res.data, "status", "counterStatus");
-                parseDict(res.data.records);
+                parseArrDictValue(res.data.records, "status", "counterStatus");
+                parseArrDictValue(
+                    res.data.records,
+                    "supportType",
+                    "supportType"
+                );
             } else {
                 message.info("查询结果为空");
             }
@@ -150,15 +368,15 @@ export default class uoeSetting extends React.PureComponent {
                     onSearchClick={this.handleSearch}
                     getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
-                    // insertBtnText={"新增UOE配置"} // 不传 就没新增按钮
-                    // getInsertFormFields={getInsertFormFields}
-                    // insertRecord={this.handleInsertRecord}
+                    insertBtnText={"新增"} // 不传 就没新增按钮
+                    getInsertFormFields={getInsertFormFields}
+                    insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
                     pagination={this.state.pagination}
-                    // getUpdateFormFields={getUpdateFormFields}
-                    // setUpdateModal={this.setUpdateModal}
-                    // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                    getUpdateFormFields={getUpdateFormFields}
+                    setUpdateModal={this.setUpdateModal}
+                    updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={columns}

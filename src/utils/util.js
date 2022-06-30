@@ -37,7 +37,7 @@ export let routeModule = (moduleName, routeArr) => {
     });
     return routeArr;
 };
-//解析字典
+//解析全部数据字典-覆盖原key值
 export let parseDict = (dict) => {
     window.parseDict = (resArr) => {
         let dictKeys = Object.keys(dict);
@@ -61,6 +61,7 @@ export let parseDict = (dict) => {
             }
         });
     };
+    //解析全部数据字典-新增value字段
     window.parseDictValue = (resArr) => {
         let dictKeys = Object.keys(dict);
         // console.log(dictKeys);
@@ -85,14 +86,28 @@ export let parseDict = (dict) => {
             }
         });
     };
+    // 单个字典-覆盖原key值
     window.parseArrDict = (arr, mykey, realKey) => {
         let dictArr = dict[realKey];
-        // console.log(arr, dictArr);
         for (let i = 0; i < arr.length; i++) {
             for (let j = 0; j < dictArr.length; j++) {
-                // console.log(dictArr[j].key, arr[i][mykey]);
                 if (dictArr[j].key == arr[i][mykey]) {
                     arr[i][mykey] = arr[i][mykey] + "-" + dictArr[j].value;
+                    break;
+                }
+            }
+        }
+        return arr;
+    };
+    // 单个字典-新增value字段
+    window.parseArrDictValue = (arr, mykey, realKey) => {
+        let dictArr = dict[realKey];
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < dictArr.length; j++) {
+                if (dictArr[j].key == arr[i][mykey]) {
+                    arr[i][mykey + "Value"] =
+                        arr[i][mykey] + "-" + dictArr[j].value;
+                    // arr[i][mykey] = arr[i][mykey] + "-" + dictArr[j].value;
                     break;
                 }
             }
