@@ -389,19 +389,19 @@ class userInfo extends React.PureComponent {
                 title: "算法权限组",
                 dataIndex: "algoGroup",
                 // width: 120,
-                render: (text, record) => (
-                    <div
-                        onClick={(e) => {
-                            console.log("修改算法权限组");
-                            // this.handleUpdate(record);
-                        }}
-                    >
-                        <Tooltip title="修改算法权限组">
-                            {record.algoGroup}
-                            <Icon type="edit" style={{ color: "#1899ff" }} />
-                        </Tooltip>
-                    </div>
-                ),
+                // render: (text, record) => (
+                //     <div
+                //         onClick={(e) => {
+                //             console.log("修改算法权限组");
+                //             // this.handleUpdate(record);
+                //         }}
+                //     >
+                //         <Tooltip title="修改算法权限组">
+                //             {record.algoGroup}
+                //             <Icon type="edit" style={{ color: "#1899ff" }} />
+                //         </Tooltip>
+                //     </div>
+                // ),
             },
             // {
             //     title: "业务类型",

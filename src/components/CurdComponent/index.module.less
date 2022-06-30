@@ -54,22 +54,63 @@
     }
 }
 :global {
-        .ant-table-header {
-            background: #f2f3fc;
+    .ant-table-header {
+        background: #f2f3fc;
+    }
+    .ant-time-picker {
+        width: 174px;
+    }
+    .ant-modal-header {
+        padding: 24px 32px;
+        color: #333333;
+        border-bottom: 1px solid #e8e8e8;
+        border-radius: 8px 8px 0 0;
+    }
+    .ant-modal-body {
+        // padding: 16px 32px 60px !important;
+        padding: 24px 32px;
+        max-height: 739px;
+        overflow-y: auto;
+        .ant-radio-wrapper-disabled {
+            .ant-radio.ant-radio-disabled .ant-radio-inner {
+                background-color: #fff !important;
+            }
+            .ant-radio-disabled + span {
+                color: initial !important;
+            }
         }
-        .ant-time-picker {
-            width: 174px;
+        .ant-radio-wrapper-checked {
+            .ant-radio-checked .ant-radio-inner::after {
+                background-color: #1890ff;
+            }
+            .ant-radio.ant-radio-disabled .ant-radio-inner {
+                border-color: #1890ff !important;
+            }
+            .ant-radio-disabled + span {
+                color: initial !important;
+            }
         }
-        .ant-modal-header {
-            padding: 24px 32px;
-            color: #333333;
-            border-bottom: 1px solid #e8e8e8;
-            border-radius: 8px 8px 0 0;
+        input[readonly] {
+            border-color: white;
         }
-        .ant-modal-body {
-            padding: 16px 32px 60px !important;
-        }
-        .ant-modal-footer {
-            padding: 31px 32px 24px;
+        .ant-form-inline .ant-form-item-with-help {
+            margin-bottom: 0;
         }
     }
+    .ant-modal-footer {
+        padding: 31px 32px 24px;
+    }
+    .ant-form-item {
+        margin-right: 0px !important;
+    }
+    .ant-form-item {
+        // margin-bottom: 20ppx;
+        padding-bottom: unset !important;
+        .ant-form-item-label {
+            padding: 0 0 6px;
+        }
+    }
+    .ant-form-vertical .ant-form-explain {
+        margin-bottom: 5px;
+    }
+}

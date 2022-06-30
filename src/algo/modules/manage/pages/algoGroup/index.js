@@ -60,22 +60,17 @@ export default class algoGroup extends React.PureComponent {
         }).then((res) => {
             console.log(res);
             //解析数据字典
-            // if (res.data.records && res.data.records.length > 0) {
-            //     parseDict(res.data.records);
-            //     // showTip(this);
-            // } else {
-            //     message.info("查询结果为空");
-            // }
-            // let pgn = {
-            //     current: pagination.current,
-            //     pageSize: pagination.pageSize,
-            //     total: res.data.total || 0,
-            // };
-            // this.setState({
-            //     info: res.data.records,
-            //     pagination: pgn,
-            // });
-            this.getData();
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                );
+            } else {
+                message.error(msg);
+            }
         });
     };
     getInsertFormFields = () => {
@@ -131,9 +126,17 @@ export default class algoGroup extends React.PureComponent {
             data: params,
         }).then((res) => {
             console.log(res);
-            message.success(res.message);
-            this.isAction = true;
-            this.getData();
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                );
+            } else {
+                message.error(msg);
+            }
         });
     };
     //删除记录
