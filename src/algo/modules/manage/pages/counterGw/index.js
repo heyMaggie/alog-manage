@@ -481,18 +481,18 @@ class CounterGw extends React.PureComponent {
         });
     };
     //更新记录
-    handleUpdateRecord = () => {
-        // let formData = form.getFieldsValue();
+    handleUpdateRecord = ({ form }) => {
+        let formData = form.getFieldsValue();
         let params = {
-            Id: this.record.id,
-            UserId: this.record.userId,
-            UserName: this.record.userName,
-            UserPasswd: this.record.userPasswd,
-            CounterUserId: this.record.counterUserId / 1,
-            BusinessType: this.record.businessType / 1,
-            ClientType: this.record.clientType / 1,
-            UuserId: this.record.uuserId / 1,
-            CounterGwId: this.record.counterGwId / 1,
+            Id: formData.id,
+            UserId: formData.userId,
+            UserName: formData.userName,
+            UserPasswd: formData.userPasswd,
+            CounterUserId: formData.counterUserId / 1,
+            BusinessType: formData.businessType / 1,
+            ClientType: formData.clientType / 1,
+            UuserId: formData.uuserId / 1,
+            CounterGwId: formData.counterGwId / 1,
         };
         // params.UuserId = this.record.uuserId;
         // params.BusinessType = this.record.businessType;
