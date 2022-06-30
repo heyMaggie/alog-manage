@@ -20,7 +20,7 @@ import { lte } from "semver";
 import { tuple } from "antd/lib/_util/type";
 class AlgorithmicTrad extends React.PureComponent {
     state = {
-        number: "笔",
+        numberText: "笔",
     };
     handleSubmit = (e) => {
         e.preventDefault();
@@ -31,15 +31,16 @@ class AlgorithmicTrad extends React.PureComponent {
                     securityId: values.securityId,
                     algorithmId: values.algorithmId,
                     uuserId: values.uuserId,
+                    countWay: values.countWay,
                     startTime: noTime
                         ? ""
                         : Date.parse(values["pickerTime"][0]),
                     endTime: noTime ? "" : Date.parse(values["pickerTime"][1]),
                 };
-                this.setState({
-                    number: values.number,
-                });
                 this.getData(params);
+                this.setState({
+                    numberText: values.countWay == "0" ? "笔" : "元",
+                });
             }
         });
     };
@@ -139,7 +140,7 @@ class AlgorithmicTrad extends React.PureComponent {
             yAxis: [
                 {
                     type: "value",
-                    name: `单位：(${this.state.number})`,
+                    name: `单位：(${this.state.numberText})`,
                     nameLocation: "end",
                     axisLine: {
                         show: false,
@@ -222,6 +223,7 @@ class AlgorithmicTrad extends React.PureComponent {
             uuserId: "",
             startTime: "",
             endTime: "",
+            countWay: "0",
         });
     }
     render() {
@@ -238,8 +240,8 @@ class AlgorithmicTrad extends React.PureComponent {
                 <div className={styles.search}>
                     <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item>
-                            {getFieldDecorator("number", {
-                                initialValue: "笔",
+                            {getFieldDecorator("countWay", {
+                                initialValue: "0",
                             })(
                                 <Select
                                     showSearch
@@ -252,8 +254,8 @@ class AlgorithmicTrad extends React.PureComponent {
                                             .indexOf(input.toLowerCase()) >= 0
                                     }
                                 >
-                                    <Option value="笔">笔数</Option>
-                                    <Option value="元">金额</Option>
+                                    <Option value="0">笔数</Option>
+                                    <Option value="1">金额</Option>
                                 </Select>
                             )}
                         </Form.Item>

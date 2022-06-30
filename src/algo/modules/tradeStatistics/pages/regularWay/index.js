@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 class RegularWay extends React.PureComponent {
-    state = { number: "笔" };
+    state = { numberText: "笔" };
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -16,13 +16,14 @@ class RegularWay extends React.PureComponent {
                 let params = {
                     securityId: values.securityId,
                     uuserId: values.uuserId,
+                    countWay: values.countWay,
                     startTime: noTime
                         ? ""
                         : Date.parse(values["pickerTime"][0]),
                     endTime: noTime ? "" : Date.parse(values["pickerTime"][1]),
                 };
                 this.setState({
-                    number: values.number,
+                    numberText: values.countWay == "0" ? "笔" : "元",
                 });
                 this.getData(params);
             }
@@ -127,7 +128,7 @@ class RegularWay extends React.PureComponent {
             yAxis: [
                 {
                     type: "value",
-                    name: `单位：(${this.state.number})`,
+                    name: `单位：(${this.state.numberText})`,
                     nameLocation: "end",
                     axisLine: {
                         show: false,
@@ -206,6 +207,7 @@ class RegularWay extends React.PureComponent {
             uuserId: "",
             startTime: "",
             endTime: "",
+            countWay: "0",
         });
     }
 
@@ -222,8 +224,8 @@ class RegularWay extends React.PureComponent {
                 <div className={styles.search}>
                     <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item>
-                            {getFieldDecorator("number", {
-                                initialValue: "笔",
+                            {getFieldDecorator("countWay", {
+                                initialValue: "0",
                             })(
                                 <Select
                                     showSearch
@@ -236,8 +238,8 @@ class RegularWay extends React.PureComponent {
                                             .indexOf(input.toLowerCase()) >= 0
                                     }
                                 >
-                                    <Option value="笔">笔数</Option>
-                                    <Option value="元">金额</Option>
+                                    <Option value="0">笔数</Option>
+                                    <Option value="1">金额</Option>
                                 </Select>
                             )}
                         </Form.Item>
