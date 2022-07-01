@@ -341,7 +341,7 @@ class userInfo extends React.PureComponent {
             UserId: record.userId,
             UserName: record.userName,
             UserPasswd: record.userPasswd,
-            UserType: record.userType,
+            UserType: record.userType + "",
             RiskGroup: record.riskGroup,
             AlgoGroup: record.algoGroup,
             UuserId: record.uuserId,
@@ -365,8 +365,8 @@ class userInfo extends React.PureComponent {
             },
             {
                 title: "用户类型",
-                dataIndex: "userType",
-                key: "userType",
+                dataIndex: "userTypeValue",
+                // key: "userType",
             },
             {
                 title: "用户风控组",
@@ -584,7 +584,7 @@ class userInfo extends React.PureComponent {
             console.log(res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
-                parseDict(res.data.records);
+                parseDictValue(res.data.records);
                 // showTip(this);
             } else {
                 message.info("查询结果为空");
