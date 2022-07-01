@@ -1,7 +1,15 @@
 import React from "react";
 import styles from "./style.module.less";
 import echarts from "echarts";
-import { TimePicker, Form, Button, Icon, DatePicker, Select } from "antd";
+import {
+    TimePicker,
+    Form,
+    Button,
+    Icon,
+    DatePicker,
+    Select,
+    Input,
+} from "antd";
 import { connect } from "react-redux";
 
 const { RangePicker } = DatePicker;
@@ -245,41 +253,43 @@ class RegularWay extends React.PureComponent {
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
                             {getFieldDecorator("securityId", {
-                                initialValue: "",
+                                initialValue: "全部证券",
                             })(
-                                <Select
-                                    showSearch
-                                    style={{ width: 160 }}
-                                    placeholder="选择股票"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                        option.props.children
-                                            .toLowerCase()
-                                            .indexOf(input.toLowerCase()) >= 0
-                                    }
-                                >
-                                    <Option value="">全部股票</Option>
-                                    <Option value="000001">平安银行</Option>
-                                </Select>
+                                <Input placeholder="请输入证券代码" />
+                                // <Select
+                                //     showSearch
+                                //     style={{ width: 160 }}
+                                //     placeholder="选择股票"
+                                //     optionFilterProp="children"
+                                //     filterOption={(input, option) =>
+                                //         option.props.children
+                                //             .toLowerCase()
+                                //             .indexOf(input.toLowerCase()) >= 0
+                                //     }
+                                // >
+                                //     <Option value="">全部股票</Option>
+                                //     <Option value="000001">平安银行</Option>
+                                // </Select>
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
                             {getFieldDecorator("uuserId", {
-                                initialValue: "",
+                                initialValue: "全部用户",
                             })(
-                                <Select
-                                    showSearch
-                                    style={{ width: 160 }}
-                                    placeholder="选择用户"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                        option.props.children
-                                            .toLowerCase()
-                                            .indexOf(input.toLowerCase()) >= 0
-                                    }
-                                >
-                                    <Option value="">全部用户</Option>
-                                </Select>
+                                <Input placeholder="请输入用户ID" />
+                                // <Select
+                                //     showSearch
+                                //     style={{ width: 160 }}
+                                //     placeholder="选择用户"
+                                //     optionFilterProp="children"
+                                //     filterOption={(input, option) =>
+                                //         option.props.children
+                                //             .toLowerCase()
+                                //             .indexOf(input.toLowerCase()) >= 0
+                                //     }
+                                // >
+                                //     <Option value="">全部用户</Option>
+                                // </Select>
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>

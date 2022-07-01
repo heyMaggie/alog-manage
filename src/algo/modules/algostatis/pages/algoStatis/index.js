@@ -237,22 +237,23 @@ class AlgorithmStatistical extends React.PureComponent {
                     <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item>
                             {getFieldDecorator("algorithmId", {
-                                initialValue: "",
+                                initialValue: "全部算法",
                             })(
-                                <Select
-                                    showSearch
-                                    style={{ width: 160 }}
-                                    placeholder="选择算法"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                        option.props.children
-                                            .toLowerCase()
-                                            .indexOf(input.toLowerCase()) >= 0
-                                    }
-                                >
-                                    <Option value="">全部</Option>
-                                    <Option value="1">日内回转</Option>
-                                </Select>
+                                <Input placeholder="请输入算法ID" />
+                                // <Select
+                                //     showSearch
+                                //     style={{ width: 160 }}
+                                //     placeholder="选择算法"
+                                //     optionFilterProp="children"
+                                //     filterOption={(input, option) =>
+                                //         option.props.children
+                                //             .toLowerCase()
+                                //             .indexOf(input.toLowerCase()) >= 0
+                                //     }
+                                // >
+                                //     <Option value="">全部</Option>
+                                //     <Option value="1">日内回转</Option>
+                                // </Select>
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>

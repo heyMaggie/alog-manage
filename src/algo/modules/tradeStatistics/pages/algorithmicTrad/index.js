@@ -21,6 +21,9 @@ import { tuple } from "antd/lib/_util/type";
 class AlgorithmicTrad extends React.PureComponent {
     state = {
         numberText: "笔",
+        securityList: [],
+        algoList: [],
+        userList: [],
     };
     handleSubmit = (e) => {
         e.preventDefault();
@@ -210,6 +213,7 @@ class AlgorithmicTrad extends React.PureComponent {
             echarts.init(document.getElementById(item)).resize();
         });
     };
+
     componentDidMount() {
         this.getData({
             securityId: "",
@@ -219,7 +223,33 @@ class AlgorithmicTrad extends React.PureComponent {
             endTime: "",
             countWay: "0",
         });
+        // this.getSelectList();
     }
+    getSelectList = () => {
+        //证券
+        http.get({
+            url: "security/listAll",
+        }).then((res) => {
+            // this.setState({
+            this.securityList = res.data;
+            // });
+            console.log(this.securityList);
+        });
+        // 算法
+        http.get({
+            url: "/algo/listAll",
+        }).then((res) => {
+            this.algoList = res.data;
+            console.log(this.algoList);
+        });
+        // 用户
+        http.get({
+            url: "/user/listAll",
+        }).then((res) => {
+            this.userList = res.data;
+            console.log(this.userList);
+        });
+    };
     render() {
         console.log(this.props.path);
         window.cpuResize = this.chartResize;
@@ -228,6 +258,9 @@ class AlgorithmicTrad extends React.PureComponent {
         } else {
             window.removeEventListener("resize", window.cpuResize);
         }
+        const securityOptions = this.state.securityList.map((d) => (
+            <Option key={d.securityId}>{d.securityName}</Option>
+        ));
         const { getFieldDecorator } = this.props.form;
         return (
             <div className={styles.container}>
@@ -255,61 +288,65 @@ class AlgorithmicTrad extends React.PureComponent {
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
                             {getFieldDecorator("algorithmId", {
-                                initialValue: "",
+                                initialValue: "全部证券",
                             })(
-                                <Select
-                                    showSearch
-                                    style={{ width: 160 }}
-                                    placeholder="选择股票"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                        option.props.children
-                                            .toLowerCase()
-                                            .indexOf(input.toLowerCase()) >= 0
-                                    }
-                                >
-                                    <Option value="">全部股票</Option>
-                                    <Option value="000001">平安银行</Option>
-                                </Select>
+                                <Input placeholder="请输入证券代码" />
+                                // <Select
+                                //     showSearch
+                                //     style={{ width: 160 }}
+                                //     placeholder="选择股票"
+                                //     optionFilterProp="children"
+                                //     filterOption={(input, option) =>
+                                //         option.props.children
+                                //             .toLowerCase()
+                                //             .indexOf(input.toLowerCase()) >= 0
+                                //     }
+                                // >
+                                //     {/* {securityOptions} */}
+                                //     <Option value="">全部股票</Option>
+                                //     <Option value="000001">平安银行</Option>
+                                // </Select>
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
                             {getFieldDecorator("length", {
-                                initialValue: "",
+                                initialValue: "全部算法",
                             })(
-                                <Select
-                                    showSearch
-                                    style={{ width: 160 }}
-                                    placeholder="选择算法"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                        option.props.children
-                                            .toLowerCase()
-                                            .indexOf(input.toLowerCase()) >= 0
-                                    }
-                                >
-                                    <Option value="">全部算法</Option>
-                                    <Option value="1">日内回转</Option>
-                                </Select>
+                                <Input placeholder="请输入算法ID" />
+                                // <Select
+                                //     showSearch
+                                //     style={{ width: 160 }}
+                                //     placeholder="选择算法"
+                                //     optionFilterProp="children"
+                                //     filterOption={(input, option) =>
+                                //         option.props.children
+                                //             .toLowerCase()
+                                //             .indexOf(input.toLowerCase()) >= 0
+                                //     }
+                                // >
+                                //     <Option value="">全部算法</Option>
+                                //     <Option value="1">日内回转</Option>
+                                // </Select>
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
                             {getFieldDecorator("uuserId", {
-                                initialValue: "",
+                                initialValue: "全部用户",
                             })(
-                                <Select
-                                    showSearch
-                                    style={{ width: 160 }}
-                                    placeholder="选择用户"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                        option.props.children
-                                            .toLowerCase()
-                                            .indexOf(input.toLowerCase()) >= 0
-                                    }
-                                >
-                                    <Option value="">全部用户</Option>
-                                </Select>
+                                <Input placeholder="请输入用户ID" />
+                                // <Select
+                                //     showSearch
+                                //     style={{ width: 160 }}
+                                //     placeholder="选择用户"
+                                //     optionFilterProp="children"
+                                //     filterOption={(input, option) =>
+                                //         option.props.children
+                                //             .toLowerCase()
+                                //             .indexOf(input.toLowerCase()) >= 0
+                                //     }
+                                // >
+                                //     <Option value="">全部用户</Option>
+                                // </Select>
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>

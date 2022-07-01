@@ -39,6 +39,18 @@ const getInsertFormFields = () => {
             component: <Input />,
         },
         {
+            label: "用户密码",
+            id: "userPasswd",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
             label: "柜台网关ID",
             id: "counterGwId",
             rules: [
@@ -150,6 +162,18 @@ const getUpdateFormFields = () => {
                 },
             ],
             component: <Input />,
+        },
+        {
+            label: "用户密码",
+            id: "userPasswd",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "柜台网关ID",
@@ -437,6 +461,7 @@ class CounterGw extends React.PureComponent {
             clientType: record.clientType + "",
             uuserId: record.uuserId,
             createTime: record.createTime,
+            userPasswd: record.userPasswd,
         });
     };
     handleInsertRecord = (fromData) => {
@@ -444,7 +469,7 @@ class CounterGw extends React.PureComponent {
         let params = {
             UserId: fromData.userId,
             UserName: fromData.userName,
-            // UserPasswd: fromData.userPasswd,
+            UserPasswd: fromData.userPasswd,
             CounterUserId: fromData.counterUserId / 1,
             BusinessType: fromData.businessType / 1,
             ClientType: fromData.clientType / 1,
@@ -583,7 +608,6 @@ class CounterGw extends React.PureComponent {
     handleSearch = (params, pagination) => {
         this.getData(params, pagination);
     };
-
     componentDidMount() {
         this.getData();
     }
