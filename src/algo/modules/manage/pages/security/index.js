@@ -27,12 +27,12 @@ const columns = (params) => {
         },
         {
             title: "证券状态",
-            dataIndex: "securityStatus",
+            dataIndex: "securityStatusValue",
             key: "securityStatus",
         },
         {
             title: "股票板块属性",
-            dataIndex: "property",
+            dataIndex: "propertyValue",
             key: "property",
         },
         {
@@ -57,12 +57,12 @@ const columns = (params) => {
         },
         {
             title: "是否有涨跌限制",
-            dataIndex: "hasPriceLimit",
+            dataIndex: "hasPriceLimitValue",
             key: "hasPriceLimit",
         },
         {
             title: "涨跌限制类型",
-            dataIndex: "limitType",
+            dataIndex: "limitTypeValue",
             key: "limitType",
         },
         {
@@ -629,10 +629,10 @@ export default class uoeSetting extends React.PureComponent {
             sellQtyUpperLimit: record.sellQtyUpperLimit,
             marketBuyQtyUpperLimit: record.marketBuyQtyUpperLimit,
             marketSellQtyUpperLimit: record.marketSellQtyUpperLimit,
-            securityStatus: record.securityStatus,
-            hasPriceLimit: record.hasPriceLimit,
-            limitType: record.limitType,
-            property: record.property,
+            securityStatus: record.securityStatus + "",
+            hasPriceLimit: record.hasPriceLimit + "",
+            limitType: record.limitType + "",
+            property: record.property + "",
             upperLimitPrice: record.upperLimitPrice,
             lowerLimitPrice: record.lowerLimitPrice,
             // BuyQtyUnit:record.
@@ -655,7 +655,8 @@ export default class uoeSetting extends React.PureComponent {
             console.log(res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
-                parseDict(res.data.records);
+                // parseDict(res.data.records);
+                parseDictValue(res.data.records);
                 // showTip(this);
             } else {
                 message.info("查询结果为空");
