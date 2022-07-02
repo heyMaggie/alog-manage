@@ -921,8 +921,9 @@ class riskConfigManage extends React.PureComponent {
                                             {
                                                 message:
                                                     "请输入0%-100% 之间的数",
-                                                pattern:
-                                                    /^([0-9]|[1-9]\d|100)?(.\d{0,2})$/,
+                                                pattern: new RegExp(
+                                                    "(^(\\d|[1-9]\\d)(\\.\\d{1,2})?$)|(^100$)"
+                                                ),
                                             },
                                         ],
                                         initialValue: "0",
@@ -1013,8 +1014,9 @@ class riskConfigManage extends React.PureComponent {
                                             {
                                                 message:
                                                     "请输入0%-100% 之间的数",
-                                                pattern:
-                                                    /^([0-9]|[1-9]\d|100)?(.\d{0,2})$/,
+                                                pattern: new RegExp(
+                                                    "(^(\\d|[1-9]\\d)(\\.\\d{1,2})?$)|(^100$)"
+                                                ),
                                             },
                                         ],
                                         initialValue: "0",
@@ -1107,9 +1109,9 @@ class riskConfigManage extends React.PureComponent {
                                                 },
                                                 {
                                                     message:
-                                                        "请输入0%-100% 之间的数",
+                                                        "请输入0%-65535% 之间的数",
                                                     pattern:
-                                                        /^([0-9]|[1-9]\d|100)?(.\d{0,2})$/,
+                                                        /^([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]|[1-5][0-9][0-9][0-9][0-9]|6[0-4][0-9][0-9][0-9]|65[0-5][0-3][0-5])$/,
                                                 },
                                             ],
                                             initialValue: "0",
