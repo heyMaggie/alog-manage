@@ -268,14 +268,20 @@ class algoConfig extends React.PureComponent {
                 dataIndex: "algorithmShow",
                 key: "algorithmShow",
                 render: (text, record) => (
-                    <Switch
-                        checked={record.algorithmShow == 2}
-                        size="small"
-                        onChange={(e) => {
-                            // console.log(text, record);
-                            this.onSwitchChange(e, record, 1);
+                    <div
+                        onDoubleClick={(e) => {
+                            e.stopPropagation();
                         }}
-                    />
+                    >
+                        <Switch
+                            checked={record.algorithmShow == 2}
+                            size="small"
+                            onChange={(e) => {
+                                // console.log(text, record);
+                                this.onSwitchChange(e, record, 1);
+                            }}
+                        />
+                    </div>
                 ),
             },
             {
@@ -283,14 +289,20 @@ class algoConfig extends React.PureComponent {
                 dataIndex: "algorithmEnable",
                 key: "algorithmEnable",
                 render: (text, record) => (
-                    <Switch
-                        checked={record.algorithmEnable == 1}
-                        size="small"
-                        onChange={(e) => {
-                            // console.log(text, record);
-                            this.onSwitchChange(e, record, 2);
+                    <div
+                        onDoubleClick={(e) => {
+                            e.stopPropagation();
                         }}
-                    />
+                    >
+                        <Switch
+                            checked={record.algorithmEnable == 1}
+                            size="small"
+                            onChange={(e) => {
+                                // console.log(text, record);
+                                this.onSwitchChange(e, record, 2);
+                            }}
+                        />
+                    </div>
                 ),
             },
             {

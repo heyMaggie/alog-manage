@@ -58,7 +58,7 @@ export default class DynamicDescriptions extends React.PureComponent {
                         <Descriptions.Item key={index} label={item.key}>
                             <div
                                 key={index}
-                                style={{ "word-break": "break-word" }}
+                                style={{ wordBreak: "break-word" }}
                             >
                                 {item.value}
                             </div>
