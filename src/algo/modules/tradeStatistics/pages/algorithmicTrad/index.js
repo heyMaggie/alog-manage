@@ -10,6 +10,7 @@ import {
     Icon,
     DatePicker,
     Select,
+    AutoComplete,
 } from "antd";
 import { connect } from "react-redux";
 
@@ -29,6 +30,7 @@ class AlgorithmicTrad extends React.PureComponent {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                console.log(values);
                 let noTime = values["pickerTime"].length < 1;
                 let params = {
                     securityId: values.securityId,
@@ -223,33 +225,31 @@ class AlgorithmicTrad extends React.PureComponent {
             endTime: "",
             countWay: "0",
         });
-        // this.getSelectList();
+        this.getSelectList();
     }
     getSelectList = () => {
         //证券
-        http.get({
-            url: "security/listAll",
-        }).then((res) => {
-            // this.setState({
-            this.securityList = res.data;
-            // });
-            console.log(this.securityList);
-        });
+        // http.get({
+        //     url: "security/listAll",
+        // }).then((res1) => {
         // 算法
         http.get({
             url: "/algo/listAll",
-        }).then((res) => {
-            this.algoList = res.data;
-            console.log(this.algoList);
+        }).then((res2) => {
+            // 用户
+            http.get({
+                url: "/user/listAll",
+            }).then((res3) => {
+                this.setState({
+                    // securityList: res1.data,
+                    algoList: res2.data,
+                    userList: res3.data,
+                });
+            });
         });
-        // 用户
-        http.get({
-            url: "/user/listAll",
-        }).then((res) => {
-            this.userList = res.data;
-            console.log(this.userList);
-        });
+        // });
     };
+
     render() {
         console.log(this.props.path);
         window.cpuResize = this.chartResize;
@@ -258,9 +258,17 @@ class AlgorithmicTrad extends React.PureComponent {
         } else {
             window.removeEventListener("resize", window.cpuResize);
         }
-        const securityOptions = this.state.securityList.map((d) => (
-            <Option key={d.securityId}>{d.securityName}</Option>
+        const { algoList, userList, securityList } = this.state;
+        const children = algoList.map((d) => (
+            <Option key={d.id}>{d.algoName}</Option>
         ));
+        const children2 = userList.map((d) => (
+            <Option key={d.id}>{d.userName}</Option>
+        ));
+        // const children3 = securityList.map((d) => (
+        //     <Option key={d.securityId}>{d.securityName}</Option>
+        // ));
+
         const { getFieldDecorator } = this.props.form;
         return (
             <div className={styles.container}>
@@ -287,14 +295,14 @@ class AlgorithmicTrad extends React.PureComponent {
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
-                            {getFieldDecorator("algorithmId", {
-                                initialValue: "全部证券",
+                            {getFieldDecorator("securityId", {
+                                initialValue: "",
                             })(
                                 <Input placeholder="请输入证券代码" />
                                 // <Select
+                                //     placeholder="请输入算法ID"
                                 //     showSearch
                                 //     style={{ width: 160 }}
-                                //     placeholder="选择股票"
                                 //     optionFilterProp="children"
                                 //     filterOption={(input, option) =>
                                 //         option.props.children
@@ -302,51 +310,47 @@ class AlgorithmicTrad extends React.PureComponent {
                                 //             .indexOf(input.toLowerCase()) >= 0
                                 //     }
                                 // >
-                                //     {/* {securityOptions} */}
-                                //     <Option value="">全部股票</Option>
-                                //     <Option value="000001">平安银行</Option>
+                                //     {children3}
                                 // </Select>
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
-                            {getFieldDecorator("length", {
-                                initialValue: "全部算法",
-                            })(
-                                <Input placeholder="请输入算法ID" />
-                                // <Select
-                                //     showSearch
-                                //     style={{ width: 160 }}
-                                //     placeholder="选择算法"
-                                //     optionFilterProp="children"
-                                //     filterOption={(input, option) =>
-                                //         option.props.children
-                                //             .toLowerCase()
-                                //             .indexOf(input.toLowerCase()) >= 0
-                                //     }
-                                // >
-                                //     <Option value="">全部算法</Option>
-                                //     <Option value="1">日内回转</Option>
-                                // </Select>
+                            {getFieldDecorator("algorithmId")(
+                                // <Input placeholder="请输入算法ID" />
+
+                                <Select
+                                    allowClear={true}
+                                    placeholder="请输入算法ID"
+                                    showSearch
+                                    style={{ width: 160 }}
+                                    optionFilterProp="children"
+                                    filterOption={(input, option) =>
+                                        option.props.children
+                                            .toLowerCase()
+                                            .indexOf(input.toLowerCase()) >= 0
+                                    }
+                                >
+                                    {children}
+                                </Select>
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
-                            {getFieldDecorator("uuserId", {
-                                initialValue: "全部用户",
-                            })(
-                                <Input placeholder="请输入用户ID" />
-                                // <Select
-                                //     showSearch
-                                //     style={{ width: 160 }}
-                                //     placeholder="选择用户"
-                                //     optionFilterProp="children"
-                                //     filterOption={(input, option) =>
-                                //         option.props.children
-                                //             .toLowerCase()
-                                //             .indexOf(input.toLowerCase()) >= 0
-                                //     }
-                                // >
-                                //     <Option value="">全部用户</Option>
-                                // </Select>
+                            {getFieldDecorator("uuserId")(
+                                // <Input placeholder="请输入用户ID" />
+                                <Select
+                                    allowClear={true}
+                                    showSearch
+                                    style={{ width: 160 }}
+                                    placeholder="请输入用户ID"
+                                    optionFilterProp="children"
+                                    filterOption={(input, option) =>
+                                        option.props.children
+                                            .toLowerCase()
+                                            .indexOf(input.toLowerCase()) >= 0
+                                    }
+                                >
+                                    {children2}
+                                </Select>
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>

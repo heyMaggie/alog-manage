@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 class RegularWay extends React.PureComponent {
-    state = { numberText: "笔" };
+    state = { numberText: "笔", userList: [] };
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -217,8 +217,19 @@ class RegularWay extends React.PureComponent {
             endTime: "",
             countWay: "0",
         });
+        this.getSelectList();
     }
-
+    getSelectList = () => {
+        // 用户
+        http.get({
+            url: "/user/listAll",
+        }).then((res3) => {
+            this.setState({
+                userList: res3.data,
+            });
+        });
+        // });
+    };
     render() {
         window.cpuResize = this.chartResize;
         if (this.props.path == "/main/tradeStatistics/regularWay") {
@@ -227,6 +238,10 @@ class RegularWay extends React.PureComponent {
             window.removeEventListener("resize", window.cpuResize);
         }
         const { getFieldDecorator } = this.props.form;
+        const { userList } = this.state;
+        const children = userList.map((d) => (
+            <Option key={d.id}>{d.userName}</Option>
+        ));
         return (
             <div className={styles.container}>
                 <div className={styles.search}>
@@ -253,7 +268,7 @@ class RegularWay extends React.PureComponent {
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
                             {getFieldDecorator("securityId", {
-                                initialValue: "全部证券",
+                                initialValue: "",
                             })(
                                 <Input placeholder="请输入证券代码" />
                                 // <Select
@@ -273,23 +288,22 @@ class RegularWay extends React.PureComponent {
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
-                            {getFieldDecorator("uuserId", {
-                                initialValue: "全部用户",
-                            })(
-                                <Input placeholder="请输入用户ID" />
-                                // <Select
-                                //     showSearch
-                                //     style={{ width: 160 }}
-                                //     placeholder="选择用户"
-                                //     optionFilterProp="children"
-                                //     filterOption={(input, option) =>
-                                //         option.props.children
-                                //             .toLowerCase()
-                                //             .indexOf(input.toLowerCase()) >= 0
-                                //     }
-                                // >
-                                //     <Option value="">全部用户</Option>
-                                // </Select>
+                            {getFieldDecorator("uuserId")(
+                                // <Input placeholder="" />
+                                <Select
+                                    allowClear={true}
+                                    showSearch
+                                    style={{ width: 160 }}
+                                    placeholder="请输入用户ID"
+                                    optionFilterProp="children"
+                                    filterOption={(input, option) =>
+                                        option.props.children
+                                            .toLowerCase()
+                                            .indexOf(input.toLowerCase()) >= 0
+                                    }
+                                >
+                                    {children}
+                                </Select>
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>

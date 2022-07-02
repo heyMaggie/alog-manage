@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 class AlgorithmStatistical extends React.PureComponent {
-    state = {};
+    state = { userList: [] };
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -222,7 +222,18 @@ class AlgorithmStatistical extends React.PureComponent {
     };
     componentDidMount() {
         this.getData({ algorithmId: "", startTime: "", endTime: "" });
+        this.getSelectList();
     }
+    getSelectList = () => {
+        // 用户
+        http.get({
+            url: "/user/listAll",
+        }).then((res3) => {
+            this.setState({
+                userList: res3.data,
+            });
+        });
+    };
     render() {
         window.cpuResize = this.chartResize;
         if (this.props.path == "/main/algostatis/algoStatis") {
@@ -231,29 +242,31 @@ class AlgorithmStatistical extends React.PureComponent {
             window.removeEventListener("resize", window.cpuResize);
         }
         const { getFieldDecorator } = this.props.form;
+        const { userList } = this.state;
+        const children = userList.map((d) => (
+            <Option key={d.id}>{d.userName}</Option>
+        ));
         return (
             <div className={styles.container}>
                 <div className={styles.search}>
                     <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item>
-                            {getFieldDecorator("algorithmId", {
-                                initialValue: "全部算法",
-                            })(
-                                <Input placeholder="请输入算法ID" />
-                                // <Select
-                                //     showSearch
-                                //     style={{ width: 160 }}
-                                //     placeholder="选择算法"
-                                //     optionFilterProp="children"
-                                //     filterOption={(input, option) =>
-                                //         option.props.children
-                                //             .toLowerCase()
-                                //             .indexOf(input.toLowerCase()) >= 0
-                                //     }
-                                // >
-                                //     <Option value="">全部</Option>
-                                //     <Option value="1">日内回转</Option>
-                                // </Select>
+                            {getFieldDecorator("algorithmId")(
+                                // <Input placeholder="请输入算法ID" />
+                                <Select
+                                    allowClear={true}
+                                    placeholder="请输入算法ID"
+                                    showSearch
+                                    style={{ width: 160 }}
+                                    optionFilterProp="children"
+                                    filterOption={(input, option) =>
+                                        option.props.children
+                                            .toLowerCase()
+                                            .indexOf(input.toLowerCase()) >= 0
+                                    }
+                                >
+                                    {children}
+                                </Select>
                             )}
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
