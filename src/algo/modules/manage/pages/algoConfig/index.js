@@ -513,12 +513,18 @@ class algoConfig extends React.PureComponent {
             url: "/risk/modifyAlgoRiskGroup",
             data: params,
         }).then((res) => {
-            // console.log(res);
+            let msg = res.message;
             if (res.code == 0) {
-                // message.success(res.message);
-                showTip(this, "修改算法风控组成功");
+                message.success(res.message);
+                // showTip(this, "修改算法风控组成功");
                 this.isAction = true;
                 this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                );
+            } else {
+                message.error(msg);
             }
         });
     };
@@ -737,7 +743,7 @@ class algoConfig extends React.PureComponent {
                                 )}
                             </Form.Item>
                         </div>
-                        <div>
+                        <div style={{ display: "none" }}>
                             <div
                                 className={styles.tit}
                                 title="账户总委托笔数超过【风控启用数量】后,在【时间量(s)】时间内,委托数量不能超过【时间量总委托笔数】,超过的数量将会被拒绝"
@@ -1245,7 +1251,7 @@ class algoConfig extends React.PureComponent {
                                 </Form.Item>
                             </div>
                         </div>
-                        <div>
+                        <div style={{ display: "none" }}>
                             <div
                                 className={styles.tit}
                                 title="账户撤单频率在【时间量(s)】时间内,撤单数量不能超过【撤单频率笔数】,超过的撤单将会被拒绝;"
@@ -1376,7 +1382,7 @@ class algoConfig extends React.PureComponent {
                                 )}
                             </Form.Item>
                         </div>
-                        <div>
+                        <div style={{ display: "none" }}>
                             <div
                                 className={styles.tit}
                                 title="在【时间量(s)】时间内，账户下单频率笔数不能超过【下单频率笔数】,账户下单总量不能超过【下单总量】,账户下单总金额不能超过【下单总金额】,超过上面的任意一个将会拒绝该委托"

@@ -51,7 +51,7 @@ class riskConfigManage extends React.PureComponent {
             },
             {
                 title: "风控类型",
-                dataIndex: "RiskType",
+                dataIndex: "RiskTypeValue",
                 width: 100,
             },
             {
@@ -185,6 +185,7 @@ class riskConfigManage extends React.PureComponent {
         this.record = record;
         this.isInsert = false;
         this.isUpdate = true;
+        this.typeChange(record.RiskType);
         this.setState(
             {
                 updateModalVisible: true,
@@ -308,13 +309,19 @@ class riskConfigManage extends React.PureComponent {
             url: "/risk/addRisk",
             data: data,
         }).then((res) => {
-            // console.log(res);
+            let msg = res.message;
             if (res.code == 0) {
-                message.success(res.message);
+                message.success(msg);
                 this.setState({
                     updateModalVisible: false,
                 });
                 this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                );
+            } else {
+                message.error(msg);
             }
         });
     };
@@ -466,7 +473,8 @@ class riskConfigManage extends React.PureComponent {
                 if (dataObj.TotalCount > 0) {
                     arr = dataObj.Datas;
                     // console.log(arr);
-                    parseDict(arr);
+                    // parseDict(arr);
+                    parseDictValue(arr);
                 }
             } else {
                 message.info(res.message || "查询结果为空", 4);
@@ -1111,7 +1119,7 @@ class riskConfigManage extends React.PureComponent {
                                                     message:
                                                         "请输入0%-65535% 之间的数",
                                                     pattern:
-                                                        /^([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]|[1-5][0-9][0-9][0-9][0-9]|6[0-4][0-9][0-9][0-9]|65[0-5][0-3][0-5])$/,
+                                                        /^([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]|[1-5][0-9][0-9][0-9][0-9]|6[0-4][0-9][0-9][0-9]|65[0-4][0-9][0-9]|655[0-2][0-9]|6553[0-5])$/,
                                                 },
                                             ],
                                             initialValue: "0",
@@ -1220,7 +1228,9 @@ class riskConfigManage extends React.PureComponent {
                                 </Form.Item>
                             </div>
                         </div>
-                        <div>
+                        <div
+                            className={this.state.configShow ? "" : styles.hide}
+                        >
                             <div
                                 className={styles.tit}
                                 title="账户撤单频率在【时间量(s)】时间内,撤单数量不能超过【撤单频率笔数】,超过的撤单将会被拒绝;"
@@ -1361,7 +1371,9 @@ class riskConfigManage extends React.PureComponent {
                                 )}
                             </Form.Item>
                         </div>
-                        <div>
+                        <div
+                            className={this.state.configShow ? "" : styles.hide}
+                        >
                             <div
                                 className={styles.tit}
                                 title="在【时间量(s)】时间内，账户下单频率笔数不能超过【下单频率笔数】,账户下单总量不能超过【下单总量】,账户下单总金额不能超过【下单总金额】,超过上面的任意一个将会拒绝该委托"
