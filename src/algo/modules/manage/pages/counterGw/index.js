@@ -322,6 +322,7 @@ class CounterGw extends React.PureComponent {
             {
                 title: "创建时间",
                 dataIndex: "createTime",
+                width: 180,
             },
             // {
             //     title: "操作",

@@ -379,7 +379,7 @@ let columns = () => {
         },
         {
             title: "持仓类型",
-            dataIndex: "positionType",
+            dataIndex: "positionTypeValue",
             key: "positionType",
             width: 100,
         },
@@ -437,7 +437,7 @@ let columns = () => {
             title: "更新时间",
             dataIndex: "updateTime",
             key: "updateTime",
-            width: 150,
+            width: 180,
         },
     ];
 };
@@ -468,7 +468,7 @@ export default class Cccx extends React.PureComponent {
             console.log(res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
-                parseDict(res.data.records);
+                parseDictValue(res.data.records);
                 // showTip(this);
             } else {
                 message.info("查询结果为空");
@@ -570,7 +570,7 @@ export default class Cccx extends React.PureComponent {
             accountId: record.accountId,
             securityId: record.securityId,
             securityIdSource: record.securityIdSource,
-            positionType: record.positionType,
+            positionType: record.positionType + "",
             positionQty: record.positionQty,
             originQty: record.originQty,
             originOpenPrice: record.originOpenPrice,
@@ -596,6 +596,7 @@ export default class Cccx extends React.PureComponent {
                 getSearchFormFields={getSearchFormFields}
                 searchLoading={this.state.searchLoading}
                 isShowInsert={false}
+                width="789px"
                 // rowKey="sno"
                 pagination={this.state.pagination}
                 dataSource={info}

@@ -1,4 +1,18 @@
 .dynamicForm {
+    display: flex !important;
+    flex-wrap: wrap;
+    
+    .rowFlex {
+        width: calc(50% - 30px);
+        &:nth-child(2n+1){
+            margin-right: 60px !important;
+        }
+        :global { 
+            .ant-select {
+                width: 100% !important;
+            }
+        }
+    }
     :global {
         .col2,
         .col3,
@@ -19,7 +33,7 @@
             width: 20%;
         }
         input.ant-input {
-            line-height: inherit;
+            // line-height: inherit;
         }
     }
 }

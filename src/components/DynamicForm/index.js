@@ -21,35 +21,37 @@ class DynamicForm extends React.PureComponent {
             xs: 24 - labelCol.xs,
         };
         let formItemLayout = {
-            labelCol,
-            wrapperCol,
+            // labelCol,
+            // wrapperCol,
         };
         // console.log(formItemLayout);
         return (
-            <Form layout="horizontal" className={styles.dynamicForm}>
+            <Form layout="vertical" className={styles.dynamicForm}>
                 {fields.map((item, index) => {
                     return (
-                        <FormItem
-                            className={"col" + this.props.col}
-                            key={item.id}
-                            label={item.label}
-                            {...formItemLayout}
-                        >
-                            {item.valuePropName
-                                ? getFieldDecorator(item.id, {
-                                      valuePropName: "checked",
-                                      initialValue: item.initialValue
-                                          ? item.initialValue
-                                          : undefined,
-                                      rules: item.rules,
-                                  })(item.component)
-                                : getFieldDecorator(item.id, {
-                                      initialValue: item.initialValue
-                                          ? item.initialValue
-                                          : undefined,
-                                      rules: item.rules,
-                                  })(item.component)}
-                        </FormItem>
+                        <div className={styles.rowFlex} key={item.id}>
+                            <FormItem
+                                className={"col" + this.props.col}
+                                key={item.id}
+                                label={item.label}
+                                {...formItemLayout}
+                            >
+                                {item.valuePropName
+                                    ? getFieldDecorator(item.id, {
+                                          valuePropName: "checked",
+                                          initialValue: item.initialValue
+                                              ? item.initialValue
+                                              : undefined,
+                                          rules: item.rules,
+                                      })(item.component)
+                                    : getFieldDecorator(item.id, {
+                                          initialValue: item.initialValue
+                                              ? item.initialValue
+                                              : undefined,
+                                          rules: item.rules,
+                                      })(item.component)}
+                            </FormItem>
+                        </div>
                     );
                 })}
             </Form>

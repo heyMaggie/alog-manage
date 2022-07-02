@@ -24,7 +24,7 @@ const columns = (params) => {
         {
             title: "算法类型",
             dataIndex: "algorithmType",
-            width: 100,
+            width: 140,
         },
         {
             title: "算法ID",
@@ -64,7 +64,7 @@ const columns = (params) => {
         {
             title: "订单类型",
             dataIndex: "orderType",
-            width: 180,
+            width: 260,
         },
         {
             title: "买卖方向",

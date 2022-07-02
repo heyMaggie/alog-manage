@@ -391,7 +391,7 @@ export default class uoeSetting extends React.PureComponent {
                     getInsertFormFields={getInsertFormFields}
                     insertRecord={this.handleInsertRecord}
                     // col="2"
-                    width="600px"
+                    width="789px"
                     pagination={this.state.pagination}
                     getUpdateFormFields={getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
