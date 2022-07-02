@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Descriptions } from "antd";
 // import DynamicForm from "@/components/DynamicForm";
 
-// import styles from "./index.module.less";
+import styles from "./index.module.less";
 
 export default class DynamicDescriptions extends React.PureComponent {
     handleReady = ({ form }) => {
@@ -56,7 +56,12 @@ export default class DynamicDescriptions extends React.PureComponent {
                 <Descriptions title={title} bordered column={column}>
                     {dict.map((item, index) => (
                         <Descriptions.Item key={index} label={item.key}>
-                            {item.value}
+                            <div
+                                key={index}
+                                style={{ "word-break": "break-word" }}
+                            >
+                                {item.value}
+                            </div>
                         </Descriptions.Item>
                     ))}
                 </Descriptions>
