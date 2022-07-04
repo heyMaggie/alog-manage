@@ -412,15 +412,15 @@ class algoConfig extends React.PureComponent {
         //     UuserId: 1,
         // };
         console.log("新增接口", params);
-        http.post({
-            url: "/user/addUserInfo",
-            data: params,
-        }).then((res) => {
-            console.log(res);
-            message.success(res.msg);
-            this.isAction = true;
-            this.getData();
-        });
+        // http.post({
+        //     url: "/user/addUserInfo",
+        //     data: params,
+        // }).then((res) => {
+        //     console.log(res);
+        //     message.success(res.msg);
+        //     this.isAction = true;
+        //     this.getData();
+        // });
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {

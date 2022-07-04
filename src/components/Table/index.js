@@ -68,7 +68,9 @@ class BasicTable extends React.PureComponent {
                 newPagination.pageSizeOptions.unshift(this.props.pageSize + "");
             }
         }
-
+        // if (this.props.pageSize != pagination.pageSize) {
+        //     console.log("分页参数pageSize 与 表格 pageSize 不匹配");
+        // }
         let onRow = null;
         if (this.props.showDetail) {
             onRow = (record) => {
