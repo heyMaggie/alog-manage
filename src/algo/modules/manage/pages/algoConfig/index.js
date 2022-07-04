@@ -390,13 +390,13 @@ class algoConfig extends React.PureComponent {
             console.log(res);
             // this.isAction = true;
             if (res.code == 0) {
-                // message.success("修改管理状态成功");
-                showTip(this, "修改管理状态成功");
-                this.isAction = true;
+                message.success("修改管理状态成功");
+                // showTip(this, "修改管理状态成功");
+                // this.isAction = true;
                 this.getData();
             } else {
                 message.error("修改管理状态失败");
-                this.isAction = true;
+                // this.isAction = true;
             }
         });
     };
@@ -412,15 +412,15 @@ class algoConfig extends React.PureComponent {
         //     UuserId: 1,
         // };
         console.log("新增接口", params);
-        http.post({
-            url: "/user/addUserInfo",
-            data: params,
-        }).then((res) => {
-            console.log(res);
-            message.success(res.msg);
-            this.isAction = true;
-            this.getData();
-        });
+        // http.post({
+        //     url: "/user/addUserInfo",
+        //     data: params,
+        // }).then((res) => {
+        //     console.log(res);
+        //     message.success(res.msg);
+        //     this.isAction = true;
+        //     this.getData();
+        // });
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {

@@ -570,7 +570,7 @@ class userInfo extends React.PureComponent {
             });
         });
     };
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 10 }) => {
         params = {
             ...params,
             pageId: pagination.current,
@@ -632,6 +632,7 @@ class userInfo extends React.PureComponent {
         return (
             <div className={styles.userInfo}>
                 <CurdComponent
+                    pageSize={10}
                     // rowKey={"index"}
                     // isShowSearchForm={false}
                     // btnText2="查全部"
