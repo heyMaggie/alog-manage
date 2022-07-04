@@ -390,13 +390,13 @@ class algoConfig extends React.PureComponent {
             console.log(res);
             // this.isAction = true;
             if (res.code == 0) {
-                // message.success("修改管理状态成功");
-                showTip(this, "修改管理状态成功");
-                this.isAction = true;
+                message.success("修改管理状态成功");
+                // showTip(this, "修改管理状态成功");
+                // this.isAction = true;
                 this.getData();
             } else {
                 message.error("修改管理状态失败");
-                this.isAction = true;
+                // this.isAction = true;
             }
         });
     };

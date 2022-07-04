@@ -4,6 +4,7 @@ import zhCN from "antd/es/locale/zh_CN";
 import { message } from "antd";
 window.message = message;
 window.showTip = (that, text = "查询成功") => {
+    // console.log(that.isAction);
     if (!that.isAction) {
         message.success(text);
     }
