@@ -23,8 +23,12 @@ class AlgorithmStatistical extends React.PureComponent {
             let noTime = values["pickerTime"].length < 1;
             let params = {
                 algorithmId: values.algorithmId,
-                startTime: noTime ? "" : Date.parse(values["pickerTime"][0]),
-                endTime: noTime ? "" : Date.parse(values["pickerTime"][1]),
+                startTime: noTime
+                    ? ""
+                    : Date.parse(values["pickerTime"][0]) * 1000,
+                endTime: noTime
+                    ? ""
+                    : Date.parse(values["pickerTime"][1]) * 1000,
             };
             this.getData(params);
         });

@@ -39,8 +39,10 @@ class AlgorithmicTrad extends React.PureComponent {
                     countWay: values.countWay,
                     startTime: noTime
                         ? ""
-                        : Date.parse(values["pickerTime"][0]),
-                    endTime: noTime ? "" : Date.parse(values["pickerTime"][1]),
+                        : Date.parse(values["pickerTime"][0]) * 1000,
+                    endTime: noTime
+                        ? ""
+                        : Date.parse(values["pickerTime"][1]) * 1000,
                 };
                 this.getData(params);
                 this.setState({
