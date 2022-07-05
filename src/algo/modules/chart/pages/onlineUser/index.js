@@ -52,7 +52,7 @@ class OnlineUser extends React.PureComponent {
                         },
                         grid: {
                             left: "25px",
-                            right: "5px",
+                            right: "50px",
                             bottom: "9%",
                             top: "33px",
                             containLabel: true,
@@ -60,6 +60,10 @@ class OnlineUser extends React.PureComponent {
                         xAxis: {
                             type: "category",
                             boundaryGap: false,
+                            // axisTick: {
+                            //     interval: "auto",
+                            //     alignWithLabel: true,
+                            // },
                             splitLine: {
                                 show: true,
                                 lineStyle: {
@@ -70,6 +74,7 @@ class OnlineUser extends React.PureComponent {
                             axisLabel: {
                                 // interval: 0,
                                 // rotate: 30,
+                                // showMaxLabel: true,
                             },
                             axisTick: {
                                 show: true, //显示X轴刻度

@@ -79,7 +79,7 @@ class Cpu extends React.PureComponent {
                         },
                         grid: {
                             left: "1%",
-                            right: "0%",
+                            right: "40px",
                             bottom: "9%",
                             top: "60px",
                             containLabel: true,
@@ -99,6 +99,9 @@ class Cpu extends React.PureComponent {
                                 lineStyle: {
                                     color: "#E9E9E9",
                                 },
+                            },
+                            axisLabel: {
+                                // showMaxLabel: true,
                             },
                             axisLine: {
                                 // 刻度线的颜色

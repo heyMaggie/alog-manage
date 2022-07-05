@@ -101,7 +101,7 @@ class RegularWay extends React.PureComponent {
             },
             grid: {
                 left: "34px",
-                right: "32px",
+                right: "52px",
                 bottom: "24px",
                 top: "75px",
                 containLabel: true,
@@ -119,6 +119,7 @@ class RegularWay extends React.PureComponent {
                 axisLabel: {
                     // interval: 0,
                     // rotate: 30,
+                    // showMaxLabel: true,
                 },
                 axisTick: {
                     show: true, //显示X轴刻度
