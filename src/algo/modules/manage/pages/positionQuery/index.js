@@ -507,7 +507,7 @@ export default class Cccx extends React.PureComponent {
             let msg = res.message;
             if (res.code == 0) {
                 message.success(msg);
-                this.getData();
+                // this.getData();
             } else if (res.code == 20000) {
                 message.error(
                     msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
@@ -545,7 +545,7 @@ export default class Cccx extends React.PureComponent {
             let msg = res.message;
             if (res.code == 0) {
                 message.success(msg);
-                this.getData();
+                // this.getData();
             } else if (res.code == 20000) {
                 message.error(
                     msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))

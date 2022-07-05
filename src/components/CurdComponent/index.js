@@ -41,6 +41,12 @@ class CurdComponent extends React.PureComponent {
                         }
                     }
                     insertRecord(formData);
+                    setTimeout(() => {
+                        this.props.onSearchClick(
+                            this.getSearchFormValue(),
+                            this.props.pagination
+                        );
+                    }, 200);
                     this.insertForm.resetFields();
                     this.setState({
                         insertModalVisible: false,
@@ -71,6 +77,12 @@ class CurdComponent extends React.PureComponent {
                 if (!err) {
                     updateRecord({ form: this.updateForm });
                     // this.insertForm.resetFields();
+                    setTimeout(() => {
+                        this.props.onSearchClick(
+                            this.getSearchFormValue(),
+                            this.props.pagination
+                        );
+                    }, 200);
                     this.setState({
                         updateModalVisible: false,
                     });
@@ -259,7 +271,12 @@ class CurdComponent extends React.PureComponent {
     };
     handleSearch = () => {
         let params = this.getSearchFormValue();
-        this.props.onSearchClick(params);
+        if (this.props.pagination) {
+            this.props.onSearchClick(params, this.props.pagination);
+        } else {
+            this.props.onSearchClick(params);
+        }
+        // this.props.onSearchClick(params);
     };
     //处理SearchForm结果
     getSearchFormValue = () => {

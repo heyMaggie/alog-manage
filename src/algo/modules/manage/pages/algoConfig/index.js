@@ -407,7 +407,7 @@ class algoConfig extends React.PureComponent {
                 message.success("修改管理状态成功");
                 // showTip(this, "修改管理状态成功");
                 // this.isAction = true;
-                this.getData({}, this.state.pagination);
+                this.getData(this.searchParam, this.state.pagination);
             } else {
                 message.error("修改管理状态失败");
                 // this.isAction = true;
@@ -449,7 +449,7 @@ class algoConfig extends React.PureComponent {
             console.log(res);
             message.success(res.message);
             // this.isAction = true;
-            this.getData({}, this.state.pagination);
+            // this.getData(this.searchParam, this.state.pagination);
         });
     };
     //填入更新数据
@@ -530,7 +530,7 @@ class algoConfig extends React.PureComponent {
             // console.log(res);
             message.success(res.message);
             // this.isAction = true;
-            this.getData({}, this.state.pagination);
+            // this.getData(this.searchParam, this.state.pagination);
         });
     };
     //填入更新记录
@@ -582,8 +582,8 @@ class algoConfig extends React.PureComponent {
             if (res.code == 0) {
                 message.success(res.message);
                 // showTip(this, "修改算法风控组成功");
-                this.isAction = true;
-                this.getData({}, this.state.pagination);
+                // this.isAction = true;
+                this.getData(this.searchParam, this.state.pagination);
             } else if (res.code == 20000) {
                 message.error(
                     msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
@@ -617,47 +617,6 @@ class algoConfig extends React.PureComponent {
                 message.error("风控配置组不存在,请重新填写！");
                 return;
             }
-            return;
-            let config = JSON.parse(res.data);
-            // this.setState({ userRiskConfig: config });
-            // console.log(config);
-            let enable = (config.RiskEnable / 1).toString(2).padStart(9, "0");
-            // let enableArr = enable.split("");
-            let enableArr = enable.split("").map((item) => item == 1);
-            // console.log(enableArr);
-            this.props.form.setFieldsValue({
-                // riskGroup: record.riskGroup + "",
-                byte0: enableArr[8],
-                byte1: enableArr[7],
-                byte2: enableArr[6],
-                byte3: enableArr[5],
-                byte4: enableArr[4],
-                byte5: enableArr[3],
-                byte6: enableArr[2],
-                byte7: enableArr[1],
-                byte8: enableArr[0],
-                // riskName: config.RiskName,
-                entrustItemThreshold: config.EntrustItemThreshold,
-                entrustItemLimit: config.EntrustItemLimit,
-                entrustSeconds: config.EntrustSeconds,
-                entrustTotalThreshold: config.EntrustTotalThreshold,
-                cancelEntrustItemThreshold: config.CancelEntrustItemThreshold,
-                cancelRatioLimit: config.CancelRatioLimit,
-                failedEntrustItemThreshold: config.FailedEntrustItemThreshold,
-                failedRatioLimit: config.FailedRatioLimit,
-                entrustExecEntrustItemThreshold:
-                    config.EntrustExecEntrustItemThreshold,
-                entrustExecRatioLimit: config.EntrustExecRatioLimit,
-                netBuyEntrustItemThreshold: config.NetBuyEntrustItemThreshold,
-                netBuyAmountLimit: config.NetBuyAmountLimit,
-                cancelItemLimit: config.CancelItemLimit,
-                cancelSeconds: config.CancelSeconds,
-                cancelGapSeconds: config.CancelGapSeconds,
-                tradeItemLimit: config.TradeItemLimit,
-                tradeSeconds: config.TradeSeconds,
-                tradeQtyLimit: config.TradeQtyLimit,
-                tradeAmountLimit: config.TradeAmountLimit,
-            });
         });
     };
     getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
@@ -671,7 +630,7 @@ class algoConfig extends React.PureComponent {
             data: params,
         }).then((res) => {
             // console.log(res);
-            console.log(this.state.pagination);
+            // console.log(this.state.pagination);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
                 res.data.records.forEach((item) => {
@@ -707,6 +666,8 @@ class algoConfig extends React.PureComponent {
         });
     };
     handleSearch = (params, pagination) => {
+        // console.log(params);
+        this.searchParam = params;
         this.getData(params, pagination);
     };
     componentDidMount() {
@@ -716,16 +677,6 @@ class algoConfig extends React.PureComponent {
         let scroll = { x: 1000, y: 445 };
         let info = this.state.info;
         let { getFieldDecorator } = this.props.form;
-        let labelCol = {
-            xs: 12,
-        };
-        let wrapperCol = {
-            xs: 24 - labelCol.xs,
-        };
-        let formItemLayout = {
-            labelCol,
-            wrapperCol,
-        };
         return (
             <div>
                 <CurdComponent
