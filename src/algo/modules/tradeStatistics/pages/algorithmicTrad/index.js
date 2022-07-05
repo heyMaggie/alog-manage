@@ -73,6 +73,7 @@ class AlgorithmicTrad extends React.PureComponent {
             childOrder: { name: "子单信息", color: "#FFD747" },
             dealAlgoOrder: { name: "成交信息", color: "#65D2FF" },
         };
+        let isNull = list.length ? false : true;
         let option = {
             title: {
                 top: "12px",
@@ -109,7 +110,7 @@ class AlgorithmicTrad extends React.PureComponent {
             },
             grid: {
                 left: "34px",
-                right: "32px",
+                right: "50px",
                 bottom: "24px",
                 top: "75px",
                 containLabel: true,
@@ -164,9 +165,11 @@ class AlgorithmicTrad extends React.PureComponent {
                             type: "dashed",
                         },
                     },
-                    nameTextStyle: {
-                        padding: [0, 0, 0, 20],
-                    },
+                    min: isNull ? 0 : null,
+                    max: isNull ? 100 : null,
+                    // nameTextStyle: {
+                    //     padding: [0, 0, 0, 20],
+                    // },
                 },
             ],
             series: [

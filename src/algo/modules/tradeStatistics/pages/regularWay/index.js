@@ -65,6 +65,7 @@ class RegularWay extends React.PureComponent {
             cancelTradeOrder: { name: "撤单信息", color: "#FFD747" },
             dealTradeOrder: { name: "成交信息", color: "#72DF5A" },
         };
+        let isNull = list.length ? false : true;
         let option = {
             title: {
                 top: "12px",
@@ -150,6 +151,8 @@ class RegularWay extends React.PureComponent {
                     axisTick: {
                         show: false, //隐藏X轴刻度
                     },
+                    min: isNull ? 0 : null,
+                    max: isNull ? 100 : null,
                     splitLine: {
                         show: true,
                         lineStyle: {
@@ -160,7 +163,7 @@ class RegularWay extends React.PureComponent {
                     // nameLocation: "200px",
                     nameTextStyle: {
                         align: "center",
-                        padding: [0, 0, 0, 20],
+                        // padding: [0, 0, 0, 20],
                     },
                 },
             ],

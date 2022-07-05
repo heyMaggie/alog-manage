@@ -30,40 +30,85 @@ class OnlineUser extends React.PureComponent {
             data: params,
         }).then((res) => {
             if (res.code == 0) {
+                let isNull = false;
                 if (res.data.length == 0) {
                     message.error("该时间段暂无数据");
+                    isNull = true;
                 } else {
-                    let option = {
+                    isNull = false;
+                }
+                let option = {
+                    textStyle: {
+                        color: "#333",
+                    },
+                    tooltip: {
+                        trigger: "axis",
+                        backgroundColor: "#1F2329",
+                        boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
+                        borderColor: "#1F2329",
                         textStyle: {
-                            color: "#333",
+                            color: "#fff",
                         },
-                        tooltip: {
-                            trigger: "axis",
-                            backgroundColor: "#1F2329",
-                            boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
-                            borderColor: "#1F2329",
-                            textStyle: {
-                                color: "#fff",
+                    },
+                    dataset: {
+                        dimensions: ["x", "y"],
+                        source: res.data,
+                    },
+                    grid: {
+                        left: "25px",
+                        right: "50px",
+                        bottom: "9%",
+                        top: "33px",
+                        containLabel: true,
+                    },
+                    xAxis: {
+                        type: "category",
+                        boundaryGap: false,
+                        // axisTick: {
+                        //     interval: "auto",
+                        //     alignWithLabel: true,
+                        // },
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: "#E9E9E9",
+                                type: "dashed",
                             },
                         },
-                        dataset: {
-                            dimensions: ["x", "y"],
-                            source: res.data,
+                        axisLabel: {
+                            // interval: 0,
+                            // rotate: 30,
+                            // showMaxLabel: true,
                         },
-                        grid: {
-                            left: "25px",
-                            right: "50px",
-                            bottom: "9%",
-                            top: "33px",
-                            containLabel: true,
+                        axisTick: {
+                            show: true, //显示X轴刻度
+                            lineStyle: {
+                                color: "#E9E9E9",
+                            },
                         },
-                        xAxis: {
-                            type: "category",
-                            boundaryGap: false,
-                            // axisTick: {
-                            //     interval: "auto",
-                            //     alignWithLabel: true,
-                            // },
+                        axisLine: {
+                            // 刻度线的颜色
+                            show: false,
+                        },
+                        axisPointer: {
+                            type: "line",
+                            lineStyle: { color: "#BDBEBF" },
+                        },
+                    },
+                    yAxis: [
+                        {
+                            type: "value",
+                            name: "单位：（个）",
+                            nameLocation: "end",
+                            axisLine: {
+                                show: false,
+                            },
+                            nameTextStyle: {
+                                color: "#666",
+                            },
+                            axisTick: {
+                                show: false, //隐藏X轴刻度
+                            },
                             splitLine: {
                                 show: true,
                                 lineStyle: {
@@ -71,96 +116,54 @@ class OnlineUser extends React.PureComponent {
                                     type: "dashed",
                                 },
                             },
-                            axisLabel: {
-                                // interval: 0,
-                                // rotate: 30,
-                                // showMaxLabel: true,
-                            },
-                            axisTick: {
-                                show: true, //显示X轴刻度
-                                lineStyle: {
-                                    color: "#E9E9E9",
+                            min: isNull ? 0 : null,
+                            max: isNull ? 100 : null,
+                            // nameTextStyle: {
+                            //     padding: [0, 0, 0, 40],
+                            // },
+                        },
+                    ],
+                    series: [
+                        {
+                            name: "在线人数",
+                            type: "line",
+                            smooth: true,
+                            showSymbol: false,
+                            // symbol: "circle",
+                            itemStyle: {
+                                normal: {
+                                    color: "#65A6FF",
                                 },
                             },
-                            axisLine: {
-                                // 刻度线的颜色
-                                show: false,
-                            },
-                            axisPointer: {
-                                type: "line",
-                                lineStyle: { color: "#BDBEBF" },
+                            areaStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0,
+                                        0,
+                                        0,
+                                        1,
+                                        [
+                                            {
+                                                offset: 0,
+                                                color: "rgba(50, 129, 255, 0.2)",
+                                            },
+                                            {
+                                                offset: 1,
+                                                color: "rgba(255,255,255,0)",
+                                            },
+                                        ],
+                                        false
+                                    ),
+                                    shadowColor: "rgba(0, 0, 0, 0.1)",
+                                    shadowBlur: 10,
+                                },
                             },
                         },
-                        yAxis: [
-                            {
-                                type: "value",
-                                name: "单位：（个）",
-                                nameLocation: "end",
-                                axisLine: {
-                                    show: false,
-                                },
-                                nameTextStyle: {
-                                    color: "#666",
-                                },
-                                axisTick: {
-                                    show: false, //隐藏X轴刻度
-                                },
-                                splitLine: {
-                                    show: true,
-                                    lineStyle: {
-                                        color: "#E9E9E9",
-                                        type: "dashed",
-                                    },
-                                },
-                                nameTextStyle: {
-                                    padding: [0, 0, 0, 40],
-                                },
-                            },
-                        ],
-                        series: [
-                            {
-                                name: "在线人数",
-                                type: "line",
-                                smooth: true,
-                                showSymbol: false,
-                                // symbol: "circle",
-                                itemStyle: {
-                                    normal: {
-                                        color: "#65A6FF",
-                                    },
-                                },
-                                areaStyle: {
-                                    normal: {
-                                        color: new echarts.graphic.LinearGradient(
-                                            0,
-                                            0,
-                                            0,
-                                            1,
-                                            [
-                                                {
-                                                    offset: 0,
-                                                    color: "rgba(50, 129, 255, 0.2)",
-                                                },
-                                                {
-                                                    offset: 1,
-                                                    color: "rgba(255,255,255,0)",
-                                                },
-                                            ],
-                                            false
-                                        ),
-                                        shadowColor: "rgba(0, 0, 0, 0.1)",
-                                        shadowBlur: 10,
-                                    },
-                                },
-                            },
-                        ],
-                    };
-                    var myChart = echarts.init(
-                        document.getElementById("main3")
-                    );
-                    myChart.resize();
-                    myChart.setOption(option);
-                }
+                    ],
+                };
+                var myChart = echarts.init(document.getElementById("main3"));
+                myChart.resize();
+                myChart.setOption(option);
             } else {
                 message.error("服务异常");
             }

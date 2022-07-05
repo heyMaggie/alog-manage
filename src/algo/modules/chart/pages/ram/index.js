@@ -50,9 +50,12 @@ class Ram extends React.PureComponent {
                 let list = res.data;
                 let seriesList = list.series;
                 let maxGB = (list.memTotal / 1024 / 2024).toFixed(0);
+                let isNull = false;
                 if (seriesList.length == 0) {
                     message.error("该时间段暂无数据");
+                    isNull = true;
                 } else {
+                    isNull = false;
                     seriesList.forEach((item) => {
                         item.data = item.y;
                         item.smooth = true;
@@ -63,34 +66,94 @@ class Ram extends React.PureComponent {
                             },
                         };
                     });
-                    let option = {
+                }
+                let option = {
+                    textStyle: {
+                        color: "#333",
+                    },
+                    tooltip: {
+                        show: false,
+                        trigger: "axis",
+                        backgroundColor: "#1F2329",
+                        boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
+                        borderColor: "#1F2329",
                         textStyle: {
-                            color: "#333",
+                            color: "#fff",
                         },
-                        tooltip: {
-                            show: false,
-                            trigger: "axis",
-                            backgroundColor: "#1F2329",
-                            boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
-                            borderColor: "#1F2329",
-                            textStyle: {
-                                color: "#fff",
+                    },
+                    legend: {
+                        // data: ["CPU1"],
+                        left: 0,
+                    },
+                    grid: {
+                        left: "2%",
+                        right: "0%",
+                        bottom: "9%",
+                        top: "60px",
+                        containLabel: true,
+                    },
+                    xAxis: {
+                        type: "category",
+                        boundaryGap: false,
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: "#E9E9E9",
+                                type: "dashed",
                             },
                         },
-                        legend: {
-                            // data: ["CPU1"],
-                            left: 0,
+                        axisTick: {
+                            show: true, //显示X轴刻度
+                            lineStyle: {
+                                color: "#E9E9E9",
+                            },
                         },
-                        grid: {
-                            left: "1%",
-                            right: "0%",
-                            bottom: "9%",
-                            top: "60px",
-                            containLabel: true,
+                        axisLine: {
+                            // 刻度线的颜色
+                            show: false,
                         },
-                        xAxis: {
-                            type: "category",
-                            boundaryGap: false,
+                        axisPointer: {
+                            type: "line",
+                            lineStyle: { color: "#BDBEBF" },
+                        },
+                        data: list.x,
+                    },
+                    yAxis: [
+                        {
+                            type: "value",
+                            name: "单位（%）",
+                            splitLine: {
+                                show: false,
+                            },
+                            axisTick: {
+                                show: false, //隐藏X轴刻度
+                            },
+                            axisLine: {
+                                show: false,
+                            },
+                            min: "0",
+                            max: "100",
+                            axisLabel: {
+                                formatter: "{value}%",
+                            },
+                            position: "right",
+                            // nameTextStyle: {
+                            //     padding: [0, 0, 0, 0],
+                            // },
+                        },
+                        {
+                            type: "value",
+                            name: "单位：（GB）",
+                            nameLocation: "end",
+                            axisLine: {
+                                show: false,
+                            },
+                            nameTextStyle: {
+                                color: "#666",
+                            },
+                            axisTick: {
+                                show: false, //隐藏X轴刻度
+                            },
                             splitLine: {
                                 show: true,
                                 lineStyle: {
@@ -98,92 +161,31 @@ class Ram extends React.PureComponent {
                                     type: "dashed",
                                 },
                             },
-                            axisTick: {
-                                show: true, //显示X轴刻度
-                                lineStyle: {
-                                    color: "#E9E9E9",
-                                },
+                            axisLabel: {
+                                formatter: "{value} GB",
                             },
-                            axisLine: {
-                                // 刻度线的颜色
-                                show: false,
-                            },
-                            axisPointer: {
-                                type: "line",
-                                lineStyle: { color: "#BDBEBF" },
-                            },
-                            data: list.x,
+                            // nameTextStyle: {
+                            //     padding: [0, 15, 0, 0],
+                            // },
+                            max: isNull ? 16 : maxGB,
+                            min: "0",
+                            // max: maxGB,
                         },
-                        yAxis: [
-                            {
-                                type: "value",
-                                name: "单位（%）",
-                                splitLine: {
-                                    show: false,
-                                },
-                                axisTick: {
-                                    show: false, //隐藏X轴刻度
-                                },
-                                axisLine: {
-                                    show: false,
-                                },
-                                min: "0",
-                                max: "100",
-                                axisLabel: {
-                                    formatter: "{value}%",
-                                },
-                                position: "right",
-                                nameTextStyle: {
-                                    padding: [0, 0, 0, 0],
-                                },
-                            },
-                            {
-                                type: "value",
-                                name: "单位：（GB）",
-                                nameLocation: "end",
-                                axisLine: {
-                                    show: false,
-                                },
-                                nameTextStyle: {
-                                    color: "#666",
-                                },
-                                axisTick: {
-                                    show: false, //隐藏X轴刻度
-                                },
-                                splitLine: {
-                                    show: true,
-                                    lineStyle: {
-                                        color: "#E9E9E9",
-                                        type: "dashed",
-                                    },
-                                },
-                                axisLabel: {
-                                    formatter: "{value} GB",
-                                },
-                                nameTextStyle: {
-                                    padding: [0, 15, 0, 0],
-                                },
-                                min: "0",
-                                max: maxGB,
-                            },
-                        ],
-                        series: list.series,
-                        dataZoom: [
-                            {
-                                type: "inside",
-                            },
-                            {
-                                type: "slider",
-                                height: "20px",
-                            },
-                        ],
-                    };
-                    var myChart = echarts.init(
-                        document.getElementById("main2")
-                    );
-                    myChart.resize();
-                    myChart.setOption(option);
-                }
+                    ],
+                    series: list.series,
+                    dataZoom: [
+                        {
+                            type: "inside",
+                        },
+                        {
+                            type: "slider",
+                            height: "20px",
+                        },
+                    ],
+                };
+                var myChart = echarts.init(document.getElementById("main2"));
+                myChart.resize();
+                myChart.setOption(option);
             } else {
                 message.error("服务异常");
             }

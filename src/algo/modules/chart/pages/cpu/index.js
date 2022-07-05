@@ -46,9 +46,12 @@ class Cpu extends React.PureComponent {
             if (res.code == 0) {
                 let list = res.data;
                 let seriesList = list.series;
+                let isNull = false;
                 if (seriesList.length == 0) {
                     message.error("该时间段暂无数据");
+                    isNull = true;
                 } else {
+                    isNull = false;
                     seriesList.forEach((item) => {
                         item.data = item.y;
                         item.smooth = true;
@@ -59,34 +62,75 @@ class Cpu extends React.PureComponent {
                             },
                         };
                     });
-                    let option = {
+                }
+                let option = {
+                    textStyle: {
+                        color: "#333",
+                    },
+                    tooltip: {
+                        show: false,
+                        trigger: "axis",
+                        backgroundColor: "#1F2329",
+                        boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
+                        borderColor: "#1F2329",
                         textStyle: {
-                            color: "#333",
+                            color: "#fff",
                         },
-                        tooltip: {
-                            show: false,
-                            trigger: "axis",
-                            backgroundColor: "#1F2329",
-                            boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
-                            borderColor: "#1F2329",
-                            textStyle: {
-                                color: "#fff",
+                    },
+                    legend: {
+                        // data: ["CPU1", "CPU2", "CPU3"],
+                        left: 0,
+                    },
+                    grid: {
+                        left: "1%",
+                        right: "40px",
+                        bottom: "9%",
+                        top: "60px",
+                        containLabel: true,
+                    },
+                    xAxis: {
+                        type: "category",
+                        boundaryGap: false,
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: "#E9E9E9",
+                                type: "dashed",
                             },
                         },
-                        legend: {
-                            // data: ["CPU1", "CPU2", "CPU3"],
-                            left: 0,
+                        axisTick: {
+                            show: true, //显示X轴刻度
+                            lineStyle: {
+                                color: "#E9E9E9",
+                            },
                         },
-                        grid: {
-                            left: "1%",
-                            right: "40px",
-                            bottom: "9%",
-                            top: "60px",
-                            containLabel: true,
+                        axisLabel: {
+                            // showMaxLabel: true,
                         },
-                        xAxis: {
-                            type: "category",
-                            boundaryGap: false,
+                        axisLine: {
+                            // 刻度线的颜色
+                            show: false,
+                        },
+                        axisPointer: {
+                            type: "line",
+                            lineStyle: { color: "#BDBEBF" },
+                        },
+                        data: list.x,
+                    },
+                    yAxis: [
+                        {
+                            type: "value",
+                            name: "单位（%）",
+                            nameLocation: "end",
+                            axisLine: {
+                                show: false,
+                            },
+                            nameTextStyle: {
+                                color: "#666",
+                            },
+                            axisTick: {
+                                show: false, //隐藏X轴刻度
+                            },
                             splitLine: {
                                 show: true,
                                 lineStyle: {
@@ -94,73 +138,34 @@ class Cpu extends React.PureComponent {
                                     type: "dashed",
                                 },
                             },
-                            axisTick: {
-                                show: true, //显示X轴刻度
-                                lineStyle: {
-                                    color: "#E9E9E9",
-                                },
-                            },
                             axisLabel: {
-                                // showMaxLabel: true,
+                                formatter: "{value} GB",
                             },
-                            axisLine: {
-                                // 刻度线的颜色
-                                show: false,
+                            // nameTextStyle: {
+                            //     padding: [0, 43, 0, 0],
+                            // },
+                            min: isNull ? 0 : null,
+                            max: isNull ? 100 : null,
+                            axisLabel: {
+                                formatter: "{value}%",
                             },
-                            axisPointer: {
-                                type: "line",
-                                lineStyle: { color: "#BDBEBF" },
-                            },
-                            data: list.x,
                         },
-                        yAxis: [
-                            {
-                                type: "value",
-                                name: "单位（%）",
-                                nameLocation: "end",
-                                axisLine: {
-                                    show: false,
-                                },
-                                nameTextStyle: {
-                                    color: "#666",
-                                },
-                                axisTick: {
-                                    show: false, //隐藏X轴刻度
-                                },
-                                splitLine: {
-                                    show: true,
-                                    lineStyle: {
-                                        color: "#E9E9E9",
-                                        type: "dashed",
-                                    },
-                                },
-                                axisLabel: {
-                                    formatter: "{value} GB",
-                                },
-                                nameTextStyle: {
-                                    padding: [0, 43, 0, 0],
-                                },
-                                axisLabel: {
-                                    formatter: "{value}%",
-                                },
-                            },
-                        ],
-                        series: list.series,
-                        dataZoom: [
-                            {
-                                type: "inside",
-                            },
-                            {
-                                type: "slider",
-                                height: "20px",
-                            },
-                        ],
-                    };
-                    var dom1 = document.getElementById("main1");
-                    var myChart = echarts.init(dom1);
-                    myChart.resize();
-                    myChart.setOption(option);
-                }
+                    ],
+                    series: list.series,
+                    dataZoom: [
+                        {
+                            type: "inside",
+                        },
+                        {
+                            type: "slider",
+                            height: "20px",
+                        },
+                    ],
+                };
+                var dom1 = document.getElementById("main1");
+                var myChart = echarts.init(dom1);
+                myChart.resize();
+                myChart.setOption(option);
             } else {
                 message.error("服务异常");
             }

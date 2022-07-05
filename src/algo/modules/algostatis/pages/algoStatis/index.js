@@ -39,40 +39,83 @@ class AlgorithmStatistical extends React.PureComponent {
             url: "/statistics/algorithmStatistics",
         }).then((res) => {
             if (res.code == 0) {
-                if (res.data.length == 0) {
+                let chartList = res.data;
+                let dom1 = document.getElementById("main4");
+                let isNull = false;
+                if (chartList.length == 0) {
                     message.error("该时间段暂无数据");
+                    isNull = true;
                 } else {
-                    let option = {
+                    isNull = false;
+                }
+                // else {
+                let option = {
+                    textStyle: {
+                        color: "#333",
+                    },
+                    dataset: {
+                        dimensions: ["x", "y1", "y2"],
+                        source: chartList,
+                    },
+                    tooltip: {
+                        trigger: "axis",
+                        backgroundColor: "#1F2329",
+                        boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
+                        borderColor: "#1F2329",
                         textStyle: {
-                            color: "#333",
+                            color: "#fff",
                         },
-                        dataset: {
-                            dimensions: ["x", "y1", "y2"],
-                            source: res.data,
-                        },
-                        tooltip: {
-                            trigger: "axis",
-                            backgroundColor: "#1F2329",
-                            boxShadow: "0px 2px 8px 0px rgba(0, 0, 0, 0.15)",
-                            borderColor: "#1F2329",
-                            textStyle: {
-                                color: "#fff",
+                    },
+                    legend: {
+                        data: ["股票数量", "人数"],
+                        left: 0,
+                    },
+                    grid: {
+                        left: "1%",
+                        right: "20px",
+                        bottom: "9%",
+                        top: "60px",
+                        containLabel: true,
+                    },
+                    xAxis: {
+                        type: "category",
+                        boundaryGap: false,
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: "#E9E9E9",
+                                type: "dashed",
                             },
                         },
-                        legend: {
-                            data: ["股票数量", "人数"],
-                            left: 0,
+                        axisTick: {
+                            show: true, //显示X轴刻度
+                            lineStyle: {
+                                color: "#E9E9E9",
+                            },
                         },
-                        grid: {
-                            left: "1%",
-                            right: "0%",
-                            bottom: "9%",
-                            top: "60px",
-                            containLabel: true,
+                        axisLine: {
+                            // 刻度线的颜色
+                            show: false,
                         },
-                        xAxis: {
-                            type: "category",
-                            boundaryGap: false,
+                        axisPointer: {
+                            type: "line",
+                            lineStyle: { color: "#BDBEBF" },
+                        },
+                    },
+                    yAxis: [
+                        {
+                            type: "value",
+                            name: "单位：（股）",
+                            nameLocation: "end",
+                            axisLine: {
+                                show: false,
+                            },
+                            nameTextStyle: {
+                                color: "#666",
+                            },
+                            axisTick: {
+                                show: false, //隐藏X轴刻度
+                            },
                             splitLine: {
                                 show: true,
                                 lineStyle: {
@@ -80,141 +123,106 @@ class AlgorithmStatistical extends React.PureComponent {
                                     type: "dashed",
                                 },
                             },
-                            axisTick: {
-                                show: true, //显示X轴刻度
-                                lineStyle: {
-                                    color: "#E9E9E9",
-                                },
-                            },
-                            axisLine: {
-                                // 刻度线的颜色
+                            min: isNull ? 0 : null,
+                            max: isNull ? 100 : null,
+                            // nameGap: "40",
+                            // nameTextStyle: {
+                            //     padding: [0, 83, 0, 0],
+                            // },
+                        },
+                        {
+                            gridIndex: 0,
+                            type: "value",
+                            name: "单位：（个）",
+                            splitLine: {
                                 show: false,
                             },
-                            axisPointer: {
-                                type: "line",
-                                lineStyle: { color: "#BDBEBF" },
+                            axisTick: {
+                                show: false, //隐藏X轴刻度
+                            },
+                            axisLine: {
+                                show: false,
+                            },
+                            min: "0",
+                            max: "100",
+                        },
+                    ],
+                    series: [
+                        {
+                            name: "股票数量",
+                            type: "line",
+                            smooth: true,
+                            showSymbol: false,
+                            itemStyle: {
+                                normal: {
+                                    color: "#83BDFF",
+                                },
+                            },
+                            areaStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0,
+                                        0,
+                                        0,
+                                        1,
+                                        [
+                                            {
+                                                offset: 0,
+                                                color: "rgba(50, 129, 255, 0.2)",
+                                            },
+                                            {
+                                                offset: 1,
+                                                color: "rgba(255,255,255,0)",
+                                            },
+                                        ],
+                                        false
+                                    ),
+                                    shadowColor: "rgba(0, 0, 0, 0.1)",
+                                    shadowBlur: 10,
+                                },
                             },
                         },
-                        yAxis: [
-                            {
-                                type: "value",
-                                name: "单位：（股）",
-                                nameLocation: "end",
-                                axisLine: {
-                                    show: false,
-                                },
-                                nameTextStyle: {
-                                    color: "#666",
-                                },
-                                axisTick: {
-                                    show: false, //隐藏X轴刻度
-                                },
-                                splitLine: {
-                                    show: true,
-                                    lineStyle: {
-                                        color: "#E9E9E9",
-                                        type: "dashed",
-                                    },
-                                },
-                                nameTextStyle: {
-                                    padding: [0, 83, 0, 0],
+                        {
+                            name: "人数",
+                            type: "line",
+                            stack: "总量",
+                            smooth: true,
+                            showSymbol: false,
+                            itemStyle: {
+                                normal: {
+                                    color: "#FFD747",
                                 },
                             },
-                            {
-                                gridIndex: 0,
-                                type: "value",
-                                name: "单位：（个）",
-                                splitLine: {
-                                    show: false,
-                                },
-                                axisTick: {
-                                    show: false, //隐藏X轴刻度
-                                },
-                                axisLine: {
-                                    show: false,
-                                },
-                                min: "0",
-                                max: "100",
-                            },
-                        ],
-                        series: [
-                            {
-                                name: "股票数量",
-                                type: "line",
-                                smooth: true,
-                                showSymbol: false,
-                                itemStyle: {
-                                    normal: {
-                                        color: "#83BDFF",
-                                    },
-                                },
-                                areaStyle: {
-                                    normal: {
-                                        color: new echarts.graphic.LinearGradient(
-                                            0,
-                                            0,
-                                            0,
-                                            1,
-                                            [
-                                                {
-                                                    offset: 0,
-                                                    color: "rgba(50, 129, 255, 0.2)",
-                                                },
-                                                {
-                                                    offset: 1,
-                                                    color: "rgba(255,255,255,0)",
-                                                },
-                                            ],
-                                            false
-                                        ),
-                                        shadowColor: "rgba(0, 0, 0, 0.1)",
-                                        shadowBlur: 10,
-                                    },
+                            areaStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0,
+                                        0,
+                                        0,
+                                        1,
+                                        [
+                                            {
+                                                offset: 0,
+                                                color: "rgba(255, 215, 71, 0.2)",
+                                            },
+                                            {
+                                                offset: 1,
+                                                color: "rgba(255, 255, 255, 0)",
+                                            },
+                                        ],
+                                        false
+                                    ),
+                                    shadowColor: "rgba(0, 0, 0, 0.1)",
+                                    shadowBlur: 10,
                                 },
                             },
-                            {
-                                name: "人数",
-                                type: "line",
-                                stack: "总量",
-                                smooth: true,
-                                showSymbol: false,
-                                itemStyle: {
-                                    normal: {
-                                        color: "#FFD747",
-                                    },
-                                },
-                                areaStyle: {
-                                    normal: {
-                                        color: new echarts.graphic.LinearGradient(
-                                            0,
-                                            0,
-                                            0,
-                                            1,
-                                            [
-                                                {
-                                                    offset: 0,
-                                                    color: "rgba(255, 215, 71, 0.2)",
-                                                },
-                                                {
-                                                    offset: 1,
-                                                    color: "rgba(255, 255, 255, 0)",
-                                                },
-                                            ],
-                                            false
-                                        ),
-                                        shadowColor: "rgba(0, 0, 0, 0.1)",
-                                        shadowBlur: 10,
-                                    },
-                                },
-                            },
-                        ],
-                    };
-                    var myChart = echarts.init(
-                        document.getElementById("main4")
-                    );
-                    myChart.resize();
-                    myChart.setOption(option);
-                }
+                        },
+                    ],
+                };
+                let myChart = echarts.init(dom1);
+                myChart.resize();
+                myChart.setOption(option);
+                // }
             } else {
                 message.error("服务异常");
             }
