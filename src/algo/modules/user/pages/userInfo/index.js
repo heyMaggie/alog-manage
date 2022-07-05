@@ -62,7 +62,7 @@ const getInsertFormFields = () => {
             }),
         },
         {
-            label: "父级用户Id",
+            label: "父级用户ID",
             id: "UuserId",
             initialValue: "0",
             rules: [
@@ -172,7 +172,7 @@ const getUpdateFormFields = () => {
             }),
         },
         {
-            label: "父级用户Id",
+            label: "父级用户ID",
             id: "UuserId",
             initialValue: "0",
             rules: [
@@ -242,7 +242,7 @@ let getSearchFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "父级用户ID",
+            label: "父级用户名",
             id: "fatherId",
             component: <Input placeholder="请输入" />,
         },
@@ -291,7 +291,7 @@ class userInfo extends React.PureComponent {
             let msg = res.message;
             if (res.code == 0) {
                 message.success(msg);
-                this.getData();
+                // this.getData();
             } else if (res.code == 20000) {
                 message.error(
                     msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
@@ -299,8 +299,6 @@ class userInfo extends React.PureComponent {
             } else {
                 message.error(msg);
             }
-            this.isAction = true;
-            this.getData();
         });
     };
     //更新记录
@@ -322,7 +320,7 @@ class userInfo extends React.PureComponent {
             let msg = res.message;
             if (res.code == 0) {
                 message.success(msg);
-                this.getData();
+                // this.getData();
             } else if (res.code == 20000) {
                 message.error(
                     msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
@@ -330,7 +328,7 @@ class userInfo extends React.PureComponent {
             } else {
                 message.error(msg);
             }
-            this.isAction = true;
+            // this.isAction = true;
         });
     };
     //填入更新数据
@@ -416,7 +414,7 @@ class userInfo extends React.PureComponent {
                 dataIndex: "uuserId",
             },
             {
-                title: "父级用户",
+                title: "父级用户名",
                 dataIndex: "fatherId",
             },
             {

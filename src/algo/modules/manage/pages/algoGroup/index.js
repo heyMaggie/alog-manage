@@ -131,7 +131,7 @@ class algoGroup extends React.PureComponent {
             let msg = res.message;
             if (res.code == 0) {
                 message.success(msg);
-                this.getData();
+                this.getData(this.searchParam, this.state.pagination);
                 this.setState({
                     updateModalVisible: false,
                 });
@@ -207,7 +207,7 @@ class algoGroup extends React.PureComponent {
             let msg = res.message;
             if (res.code == 0) {
                 message.success(msg);
-                this.getData();
+                // this.getData();
             } else if (res.code == 20000) {
                 message.error(
                     msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
@@ -229,12 +229,15 @@ class algoGroup extends React.PureComponent {
     };
 
     inputChange = (e) => {
+        // e.persist();
+        // console.log(e);
         let newAlgoArr = [...this.state.algoList];
         // let newAlgoArr = JSON.parse(JSON.stringify(this.state.algoList));
         newAlgoArr.forEach((item) => (item.isShow = "0"));
-        let val = ("0x" + e.target.value) / 1;
-        if (val > 0) {
-            // console.log(val);
+        // console.log("0x" + e.target.value);
+        // console.log(isNaN("0x" + e.target.value));
+        if (!isNaN("0x" + e.target.value)) {
+            let val = BigInt("0x" + e.target.value);
             let bin = val.toString(2);
             // console.log(bin);
             let showArr = bin.toString().split("").reverse();
@@ -318,7 +321,8 @@ class algoGroup extends React.PureComponent {
                 this.setState({
                     updateModalVisible: false,
                 });
-                this.getData();
+                // this.getData();
+                this.getData(this.searchParam, this.state.pagination);
             } else if (res.code == 20000) {
                 message.error(
                     msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
@@ -375,6 +379,7 @@ class algoGroup extends React.PureComponent {
         });
     };
     handleSearch = (params, pagination) => {
+        this.searchParam = params;
         this.getData(params, pagination);
     };
     getAlgoList = (
@@ -488,11 +493,6 @@ class algoGroup extends React.PureComponent {
                                                     required: true,
                                                     message: "请输入",
                                                 },
-                                                {
-                                                    message:
-                                                        "请输入16进制正整数",
-                                                    pattern: /^[A-Fa-f0-9]+$/i,
-                                                },
                                             ],
                                             initialValue: "0",
                                         })(
@@ -520,13 +520,16 @@ class algoGroup extends React.PureComponent {
                                                 message: "请输入16进制正整数",
                                                 pattern: /^[A-Fa-f0-9]+$/i,
                                             },
+                                            // {
+                                            //     message: "请输入16进制正整数",
+                                            //     max: 32,
+                                            // },
                                         ],
                                         initialValue: "0",
                                     })(
                                         <Input
                                             placeholder="请输入"
                                             onChange={this.inputChange}
-                                            // disabled={true}
                                         />
                                     )}
                                 </Form.Item>
