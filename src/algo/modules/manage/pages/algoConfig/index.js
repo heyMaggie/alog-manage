@@ -13,230 +13,245 @@ let getSearchFormFields = () => {
         },
     ];
 };
-const getInsertFormFields = () => {
-    return [
-        {
-            label: "算法名称",
-            id: "algoName",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "算法厂商名",
-            id: "ProviderName",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "算法类型",
-            id: "AlgorithmType",
-            initialValue: "1",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.algorithmType, {
-                placeholder: "请选择",
-                // allowClear: true,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "算法类型名称",
-            id: "AlgorithmTypeName",
-            // initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "是否显示",
-            id: "algorithmShow",
-            // initialValue: "",
-            valuePropName: "checked",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Switch size="small" />,
-        },
-        {
-            label: "是否可用",
-            id: "algorithmEnable",
-            // initialValue: "",
-            valuePropName: "checked",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Switch size="small" />,
-        },
-        {
-            label: "算法所需参数",
-            id: "Parameter",
-            initialValue: "",
-            rules: [
-                // {
-                //     required: true,
-                //     message: "参数不能为空",
-                // },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "算法风控组",
-            id: "RiskGroup",
-            initialValue: "",
-            rules: [
-                // {
-                //     required: true,
-                //     message: "参数不能为空",
-                // },
-            ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
-        },
-    ];
-};
-const getUpdateFormFields = () => {
-    return [
-        {
-            label: "算法名称",
-            id: "algoName",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "算法厂商名",
-            id: "ProviderName",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "算法类型",
-            id: "AlgorithmType",
-            initialValue: "1",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.algorithmType, {
-                placeholder: "请选择",
-                // allowClear: true,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "算法类型名称",
-            id: "AlgorithmTypeName",
-            // initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "是否显示",
-            id: "algorithmShow",
-            // initialValue: "",
-            valuePropName: "checked",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Switch size="small" />,
-        },
-        {
-            label: "是否可用",
-            id: "algorithmEnable",
-            // initialValue: "",
-            valuePropName: "checked",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Switch size="small" />,
-        },
-        {
-            label: "算法所需参数",
-            id: "Parameter",
-            initialValue: "",
-            rules: [
-                // {
-                //     required: true,
-                //     message: "参数不能为空",
-                // },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "算法风控组",
-            id: "RiskGroup",
-            initialValue: "",
-            rules: [
-                // {
-                //     required: true,
-                //     message: "参数不能为空",
-                // },
-            ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
-        },
-    ];
-};
 
 class algoConfig extends React.PureComponent {
+    getInsertFormFields = () => {
+        return [
+            {
+                label: "算法名称",
+                id: "AlgoName",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "算法厂商名",
+                id: "ProviderName",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "算法类型",
+                id: "AlgorithmType",
+                initialValue: "1",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(dict.algorithmType, {
+                    placeholder: "请选择",
+                    // allowClear: true,
+                    style: {
+                        width: 400,
+                    },
+                }),
+            },
+            {
+                label: "算法类型名称",
+                id: "AlgorithmTypeName",
+                // initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "是否显示",
+                id: "algorithmShow",
+                initialValue: false,
+                valuePropName: "checked",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Switch size="small" />,
+            },
+            {
+                label: "是否可用",
+                id: "algorithmEnable",
+                initialValue: false,
+                valuePropName: "checked",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Switch size="small" />,
+            },
+            {
+                label: "算法所需参数",
+                id: "Parameter",
+                initialValue: "",
+                rules: [
+                    // {
+                    //     required: true,
+                    //     message: "参数不能为空",
+                    // },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "算法风控组",
+                id: "RiskGroup",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        message: "请输入正整数",
+                        pattern: /^[1-9][0-9]*$/i,
+                    },
+                ],
+                component: (
+                    // <Input placeholder="请输入" readOnly disabled />
+                    <Input placeholder="请输入" onChange={this.inputChange} />
+                ),
+                // component: SelectOption(dict.algorithmType, {
+                //     placeholder: "请选择",
+                //     // allowClear: true,
+                //     style: {
+                //         width: 400,
+                //     },
+                // }),
+            },
+        ];
+    };
+    getUpdateFormFields = () => {
+        return [
+            {
+                label: "算法名称",
+                id: "AlgoName",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "算法厂商名",
+                id: "ProviderName",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "算法类型",
+                id: "AlgorithmType",
+                initialValue: "1",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(dict.algorithmType, {
+                    placeholder: "请选择",
+                    // allowClear: true,
+                    style: {
+                        width: 400,
+                    },
+                }),
+            },
+            {
+                label: "算法类型名称",
+                id: "AlgorithmTypeName",
+                // initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "是否显示",
+                id: "algorithmShow",
+                // initialValue: "",
+                valuePropName: "checked",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Switch size="small" />,
+            },
+            {
+                label: "是否可用",
+                id: "algorithmEnable",
+                // initialValue: "",
+                valuePropName: "checked",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Switch size="small" />,
+            },
+            {
+                label: "算法所需参数",
+                id: "Parameter",
+                initialValue: "",
+                rules: [
+                    // {
+                    //     required: true,
+                    //     message: "参数不能为空",
+                    // },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "算法风控组",
+                id: "RiskGroup",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        message: "请输入正整数",
+                        pattern: /^[1-9][0-9]*$/i,
+                    },
+                ],
+                component: (
+                    // <Input placeholder="请输入" readOnly disabled />
+                    <Input placeholder="请输入" onChange={this.inputChange} />
+                ),
+            },
+        ];
+    };
     columns = (params) => {
         return [
             {
@@ -256,8 +271,7 @@ class algoConfig extends React.PureComponent {
             },
             {
                 title: "算法类型",
-                dataIndex: "algorithmType",
-                key: "algorithmType",
+                dataIndex: "algorithmTypeValue",
             },
             {
                 title: "算法类型名称",
@@ -393,7 +407,7 @@ class algoConfig extends React.PureComponent {
                 message.success("修改管理状态成功");
                 // showTip(this, "修改管理状态成功");
                 // this.isAction = true;
-                this.getData();
+                this.getData({}, this.state.pagination);
             } else {
                 message.error("修改管理状态失败");
                 // this.isAction = true;
@@ -401,26 +415,42 @@ class algoConfig extends React.PureComponent {
         });
     };
     handleInsertRecord = (params) => {
-        // params = {
-        //     UserId: "atest0000003",
-        //     UserName: "test3",
-        //     UserPasswd: "test_0000003",
-        //     UserType: 1,
-        //     // RiskGroup: 1,
-        //     // AlgoGroup: 1,
-        //     // AlgoProperty: "20",
-        //     UuserId: 1,
-        // };
+        // {
+        //     "AlgoName": "日内回转(ZC)test",
+        //     "ProviderName": "自诚科技test",
+        //     "UuserId": 1,
+        //     "AlgorithmType": 1,
+        //     "AlgorithmTypeName": "自诚科技_1test",
+        //     "AlgorithmStatus": 3,
+        //     "Parameter": "{\"side\":2, \"qty\":\"null\"}",
+        //     "RiskGroup": 1
+        // }
+        let status = 0;
+        if (params.algorithmShow) {
+            if (params.algorithmEnable) {
+                status = 3;
+            } else {
+                status = 2;
+            }
+        } else {
+            if (params.algorithmEnable) {
+                status = 1;
+            }
+        }
+        params.AlgorithmStatus = status;
+        params.AlgorithmType = params.AlgorithmType / 1;
+        params.RiskGroup = params.RiskGroup / 1;
         console.log("新增接口", params);
-        // http.post({
-        //     url: "/user/addUserInfo",
-        //     data: params,
-        // }).then((res) => {
-        //     console.log(res);
-        //     message.success(res.msg);
-        //     this.isAction = true;
-        //     this.getData();
-        // });
+        // return;
+        http.post({
+            url: "/algo/addAlgoInfo",
+            data: params,
+        }).then((res) => {
+            console.log(res);
+            message.success(res.message);
+            // this.isAction = true;
+            this.getData({}, this.state.pagination);
+        });
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
@@ -436,17 +466,34 @@ class algoConfig extends React.PureComponent {
         //     "Parameter": "{\"side\":2, \"qty\":\"null\"}",
         //     "RiskGroup": 1
         // }
-        form.setFieldsValue({
-            AlgoName: record.AlgoName,
-            ProviderName: record.ProviderName,
+        let formData = {
+            AlgoName: record.algoName,
+            ProviderName: record.providerName,
             // UuserId: record.UuserId,
-            AlgorithmType: record.AlgorithmType,
+            AlgorithmType: record.algorithmType + "",
+            AlgorithmTypeName: record.algorithmTypeName,
             // AlgorithmStatus: record.AlgorithmStatus + "",
-            Parameter: record.Parameter,
-            RiskGroup: record.RiskGroup,
-        });
+            Parameter: record.parameter,
+            RiskGroup: record.riskGroup,
+        };
+        if (record.algorithmStatus == 0) {
+            formData.algorithmShow = 0;
+            formData.algorithmEnable = 0;
+        } else if (record.algorithmStatus == 1) {
+            formData.algorithmShow = 0;
+            formData.algorithmEnable = 1;
+        } else if (record.algorithmStatus == 2) {
+            formData.algorithmShow = 2;
+            formData.algorithmEnable = 0;
+        } else if (record.algorithmStatus == 3) {
+            formData.algorithmShow = 2;
+            formData.algorithmEnable = 1;
+        }
+        formData.algorithmShow = formData.algorithmShow == 2;
+        formData.algorithmEnable = formData.algorithmEnable == 1;
+        form.setFieldsValue(formData);
     };
-    handleUpdateRecord = (params) => {
+    handleUpdateRecord = ({ form }) => {
         // params = {
         //     UserId: "atest0000003",
         //     UserName: "test3",
@@ -457,15 +504,33 @@ class algoConfig extends React.PureComponent {
         //     // AlgoProperty: "20",
         //     UuserId: 1,
         // };
-        console.log("新增接口", params);
+        let params = form.getFieldsValue();
+        params.id = this.record.id;
+        let status = 0;
+        if (params.algorithmShow) {
+            if (params.algorithmEnable) {
+                status = 3;
+            } else {
+                status = 2;
+            }
+        } else {
+            if (params.algorithmEnable) {
+                status = 1;
+            }
+        }
+        params.AlgorithmStatus = status;
+        params.AlgorithmType = params.AlgorithmType / 1;
+        params.RiskGroup = params.RiskGroup / 1;
+        console.log("修改接口", params);
+        // return;
         http.post({
-            url: "/user/addUserInfo",
+            url: "/algo/updateAlgoInfo",
             data: params,
         }).then((res) => {
-            console.log(res);
-            message.success(res.msg);
-            this.isAction = true;
-            this.getData();
+            // console.log(res);
+            message.success(res.message);
+            // this.isAction = true;
+            this.getData({}, this.state.pagination);
         });
     };
     //填入更新记录
@@ -518,7 +583,7 @@ class algoConfig extends React.PureComponent {
                 message.success(res.message);
                 // showTip(this, "修改算法风控组成功");
                 this.isAction = true;
-                this.getData();
+                this.getData({}, this.state.pagination);
             } else if (res.code == 20000) {
                 message.error(
                     msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
@@ -549,9 +614,10 @@ class algoConfig extends React.PureComponent {
         }).then((res) => {
             console.log(res);
             if (res.code != 0) {
-                message.error("查询风控配置组失败！");
+                message.error("风控配置组不存在,请重新填写！");
                 return;
             }
+            return;
             let config = JSON.parse(res.data);
             // this.setState({ userRiskConfig: config });
             // console.log(config);
@@ -604,7 +670,8 @@ class algoConfig extends React.PureComponent {
             url: "/algo/list",
             data: params,
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
+            console.log(this.state.pagination);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
                 res.data.records.forEach((item) => {
@@ -623,7 +690,7 @@ class algoConfig extends React.PureComponent {
                         item.algorithmEnable = 1;
                     }
                 });
-                parseDict(res.data.records);
+                parseDictValue(res.data.records);
                 // showTip(this);
             } else {
                 message.info("查询结果为空");
@@ -668,16 +735,17 @@ class algoConfig extends React.PureComponent {
                     onSearchClick={this.handleSearch}
                     getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
-                    // insertBtnText={"新增"} // 不传 就没新增按钮
-                    // getInsertFormFields={getInsertFormFields}
-                    // insertRecord={this.handleInsertRecord}
+                    insertBtnText={"新增算法"} // 不传 就没新增按钮
+                    // insertModalText={"新增算法"}
+                    getInsertFormFields={this.getInsertFormFields}
+                    insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
                     pagination={this.state.pagination}
-                    // getUpdateFormFields={getUpdateFormFields}
-                    // setUpdateModal={this.setUpdateModal}
-                    // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
-                    // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
+                    getUpdateFormFields={this.getUpdateFormFields}
+                    setUpdateModal={this.setUpdateModal}
+                    updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                    deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     dtWidth="1200px"
                     dtColumns={this.columns()} //详情列表
                     centered={true}

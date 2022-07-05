@@ -34,7 +34,13 @@ class CurdComponent extends React.PureComponent {
             // insertRecord({ form: this.insertForm });
             this.insertForm.validateFields((err, values) => {
                 if (!err) {
-                    insertRecord(this.getInsertFormValue());
+                    let formData = this.getInsertFormValue();
+                    for (let key in formData) {
+                        if (!formData[key]) {
+                            formData[key] = "";
+                        }
+                    }
+                    insertRecord(formData);
                     this.insertForm.resetFields();
                     this.setState({
                         insertModalVisible: false,
