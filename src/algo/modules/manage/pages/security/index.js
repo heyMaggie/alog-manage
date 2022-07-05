@@ -63,7 +63,6 @@ const columns = (params) => {
         {
             title: "涨跌限制类型",
             dataIndex: "limitTypeValue",
-            key: "limitType",
         },
         {
             title: "上涨限价",
@@ -539,10 +538,10 @@ export default class uoeSetting extends React.PureComponent {
             SellQtyUpperLimit: fromData.sellQtyUpperLimit,
             MarketBuyQtyUpperLimit: fromData.marketBuyQtyUpperLimit,
             MarketSellQtyUpperLimit: fromData.marketSellQtyUpperLimit,
-            SecurityStatus: fromData.securityStatus,
-            HasPriceLimit: fromData.hasPriceLimit,
-            LimitType: fromData.limitType,
-            Property: fromData.property,
+            SecurityStatus: fromData.securityStatus / 1,
+            HasPriceLimit: fromData.hasPriceLimit / 1,
+            LimitType: fromData.limitType / 1,
+            Property: fromData.property / 1,
             UpperLimitPrice: fromData.upperLimitPrice,
             LowerLimitPrice: fromData.lowerLimitPrice,
             // BuyQtyUnit BuyQtyUnit:fromData.
@@ -583,10 +582,10 @@ export default class uoeSetting extends React.PureComponent {
             SellQtyUpperLimit: fromData.sellQtyUpperLimit,
             MarketBuyQtyUpperLimit: fromData.marketBuyQtyUpperLimit,
             MarketSellQtyUpperLimit: fromData.marketSellQtyUpperLimit,
-            SecurityStatus: fromData.securityStatus,
-            HasPriceLimit: fromData.hasPriceLimit,
-            LimitType: fromData.limitType,
-            Property: fromData.property,
+            SecurityStatus: fromData.securityStatus / 1,
+            HasPriceLimit: fromData.hasPriceLimit / 1,
+            LimitType: fromData.limitType / 1,
+            Property: fromData.property / 1,
             UpperLimitPrice: fromData.upperLimitPrice,
             LowerLimitPrice: fromData.lowerLimitPrice,
             // BuyQtyUnit BuyQtyUnit:fromData.
