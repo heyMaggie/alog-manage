@@ -90,24 +90,24 @@ const getInsertFormFields = () => {
                 },
             }),
         },
-        {
-            label: "登录状态",
-            id: "loginStatus",
-            initialValue: "0",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.loginStatus, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
+        // {
+        //     label: "登录状态",
+        //     id: "loginStatus",
+        //     initialValue: "0",
+        //     rules: [
+        //         {
+        //             required: true,
+        //             message: "参数不能为空",
+        //         },
+        //     ],
+        //     component: SelectOption(dict.loginStatus, {
+        //         placeholder: "请选择",
+        //         allowClear: false,
+        //         style: {
+        //             width: 400,
+        //         },
+        //     }),
+        // },
         {
             label: "客户类型",
             id: "clientType",
@@ -214,23 +214,23 @@ const getUpdateFormFields = () => {
                 },
             }),
         },
-        {
-            label: "登录状态",
-            id: "loginStatus",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.loginStatus, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
+        // {
+        //     label: "登录状态",
+        //     id: "loginStatus",
+        //     rules: [
+        //         {
+        //             required: true,
+        //             message: "参数不能为空",
+        //         },
+        //     ],
+        //     component: SelectOption(dict.loginStatus, {
+        //         placeholder: "请选择",
+        //         allowClear: false,
+        //         style: {
+        //             width: 400,
+        //         },
+        //     }),
+        // },
         {
             label: "客户类型",
             id: "clientType",
@@ -498,7 +498,7 @@ class CounterGw extends React.PureComponent {
     handleUpdateRecord = ({ form }) => {
         let formData = form.getFieldsValue();
         let params = {
-            Id: formData.id,
+            Id: this.record.id,
             UserId: formData.userId,
             UserName: formData.userName,
             UserPasswd: formData.userPasswd,
