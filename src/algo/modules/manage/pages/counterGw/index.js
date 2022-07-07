@@ -487,7 +487,7 @@ class CounterGw extends React.PureComponent {
                 // this.getData();
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("\n"))
                 );
             } else {
                 message.error(msg);
@@ -520,7 +520,7 @@ class CounterGw extends React.PureComponent {
                 this.getData(this.searchParam, this.state.pagination);
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("\n"))
                 );
             } else {
                 message.error(msg);

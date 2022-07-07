@@ -137,7 +137,7 @@ class algoGroup extends React.PureComponent {
                 });
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("\n"))
                 );
                 this.setState({
                     updateModalVisible: false,
@@ -210,7 +210,7 @@ class algoGroup extends React.PureComponent {
                 // this.getData();
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("\n"))
                 );
             } else {
                 message.error(msg);
@@ -325,7 +325,7 @@ class algoGroup extends React.PureComponent {
                 this.getData(this.searchParam, this.state.pagination);
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("\n"))
                 );
                 this.setState({
                     updateModalVisible: true,
@@ -507,7 +507,11 @@ class algoGroup extends React.PureComponent {
                             )}
                             <Col span={this.isInsert ? 24 : 12}>
                                 <Form.Item
-                                    label="权限"
+                                    label={
+                                        <label title="通过算法组给用户分配权限，客户端只显示用户有权限的算法,算法组最多有32字节,每个字节4位,对应4个算法是否可用(打开:代表有权限,关闭:无权限),点击权限开关,即可设置算法权限">
+                                            权限
+                                        </label>
+                                    }
                                     style={{ height: "59px" }}
                                 >
                                     {getFieldDecorator("AlgoProperty", {

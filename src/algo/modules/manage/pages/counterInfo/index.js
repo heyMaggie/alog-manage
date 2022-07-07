@@ -252,7 +252,7 @@ export default class uoeSetting extends React.PureComponent {
                 // this.getData();
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("\n"))
                 );
             } else {
                 message.error(msg);
@@ -285,7 +285,7 @@ export default class uoeSetting extends React.PureComponent {
                 // this.getData();
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("HTTP"))
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("\n"))
                 );
             } else {
                 message.error(msg);
