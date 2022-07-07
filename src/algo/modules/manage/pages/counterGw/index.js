@@ -517,7 +517,7 @@ class CounterGw extends React.PureComponent {
             if (res.code == 0) {
                 message.success(msg);
                 // this.getData();
-                this.getData(this.searchParam, this.state.pagination);
+                // this.getData(this.searchParam, this.state.pagination);
             } else if (res.code == 20000) {
                 message.error(
                     msg.substring(msg.indexOf("[") + 1, msg.indexOf("\n"))
@@ -565,6 +565,7 @@ class CounterGw extends React.PureComponent {
                 this.setState({
                     updateModalVisible: false,
                 });
+                this.getData(this.searchParam, this.state.pagination);
                 // this.getData();
             } else {
                 message.error("修改柜台网关Id失败");

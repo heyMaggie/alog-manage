@@ -506,7 +506,8 @@ class userInfo extends React.PureComponent {
                 // message.success(res.message);
                 showTip(this, res.message);
                 this.isAction = true;
-                this.getData();
+                this.getData(this.searchParam, this.state.pagination);
+                // this.getData();
             } else {
                 message.error(res.message);
                 this.isAction = true;
@@ -601,6 +602,7 @@ class userInfo extends React.PureComponent {
         });
     };
     handleSearch = (params, pagination) => {
+        this.searchParam = params;
         this.getData(params, pagination);
     };
     handleDownload = () => {

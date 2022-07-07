@@ -41,9 +41,17 @@ const columns = (params) => {
             key: "buyQtyUpperLimit",
         },
         {
+            title: "限价买数量单位",
+            dataIndex: "buyQtyUnit",
+        },
+        {
             title: "限价卖数量上限",
             dataIndex: "sellQtyUpperLimit",
             key: "sellQtyUpperLimit",
+        },
+        {
+            title: "限价卖数量单位",
+            dataIndex: "sellQtyUnit",
         },
         {
             title: "市价买数量上限",
@@ -51,9 +59,17 @@ const columns = (params) => {
             key: "marketBuyQtyUpperLimit",
         },
         {
+            title: "市价买数量单位",
+            dataIndex: "marketBuyQtyUnit",
+        },
+        {
             title: "市价卖数量上限",
             dataIndex: "marketSellQtyUpperLimit",
             key: "marketSellQtyUpperLimit",
+        },
+        {
+            title: "市价卖数量单位",
+            dataIndex: "marketSellQtyUnit",
         },
         {
             title: "是否有涨跌限制",
@@ -198,6 +214,18 @@ const getInsertFormFields = () => {
             ),
         },
         {
+            label: "限价买数量单位",
+            id: "buyQtyUnit",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
             label: "限价卖数量上限",
             id: "sellQtyUpperLimit",
             initialValue: "",
@@ -210,8 +238,32 @@ const getInsertFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
+            label: "限价卖数量单位",
+            id: "sellQtyUnit",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
             label: "市价买数量上限",
             id: "marketBuyQtyUpperLimit",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "市价买数量单位",
+            id: "marketBuyQtyUnit",
             initialValue: "",
             rules: [
                 {
@@ -235,6 +287,18 @@ const getInsertFormFields = () => {
                 // <Input placeholder="请输入" readOnly disabled />
                 <Input placeholder="请输入" />
             ),
+        },
+        {
+            label: "市价卖数量单位",
+            id: "marketSellQtyUnit",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "是否有涨跌限制",
@@ -409,6 +473,18 @@ const getUpdateFormFields = () => {
             ),
         },
         {
+            label: "限价买数量单位",
+            id: "buyQtyUnit",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
             label: "限价卖数量上限",
             id: "sellQtyUpperLimit",
             initialValue: "",
@@ -421,8 +497,32 @@ const getUpdateFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
+            label: "限价卖数量单位",
+            id: "sellQtyUnit",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
             label: "市价买数量上限",
             id: "marketBuyQtyUpperLimit",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "市价买数量单位",
+            id: "marketBuyQtyUnit",
             initialValue: "",
             rules: [
                 {
@@ -446,6 +546,18 @@ const getUpdateFormFields = () => {
                 // <Input placeholder="请输入" readOnly disabled />
                 <Input placeholder="请输入" />
             ),
+        },
+        {
+            label: "市价卖数量单位",
+            id: "marketSellQtyUnit",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "是否有涨跌限制",
@@ -544,10 +656,10 @@ export default class uoeSetting extends React.PureComponent {
             Property: fromData.property * 1,
             UpperLimitPrice: fromData.upperLimitPrice * 10000,
             LowerLimitPrice: fromData.lowerLimitPrice * 10000,
-            // BuyQtyUnit BuyQtyUnit:fromData.
-            // SellQtyUnit SellQtyUnit:fromData.
-            // MarketBuyQtyUnit MarketBuyQtyUnit:fromData.
-            // MarketSellQtyUnit MarketSellQtyUnit:fromData.
+            BuyQtyUnit: fromData.buyQtyUnit * 100,
+            SellQtyUnit: fromData.sellQtyUnit * 100,
+            MarketBuyQtyUnit: fromData.marketBuyQtyUnit * 100,
+            MarketSellQtyUnit: fromData.marketSellQtyUnit * 100,
         };
         http.post({
             url: "/security/addSecurityInfo",
@@ -588,10 +700,10 @@ export default class uoeSetting extends React.PureComponent {
             Property: fromData.property * 1,
             UpperLimitPrice: fromData.upperLimitPrice * 10000,
             LowerLimitPrice: fromData.lowerLimitPrice * 10000,
-            // BuyQtyUnit BuyQtyUnit:fromData/ 100.
-            // SellQtyUnit SellQtyUnit:fromData/ 100.
-            // MarketBuyQtyUnit MarketBuyQtyUnit:fromData/ 100.
-            // MarketSellQtyUnit MarketSellQtyUnit:fromData/ 100.
+            BuyQtyUnit: fromData.buyQtyUnit * 100,
+            SellQtyUnit: fromData.sellQtyUnit * 100,
+            MarketBuyQtyUnit: fromData.marketBuyQtyUnit * 100,
+            MarketSellQtyUnit: fromData.marketSellQtyUnit * 100,
         };
         // 发送更新请求
         http.post({
@@ -634,6 +746,10 @@ export default class uoeSetting extends React.PureComponent {
             property: record.property + "",
             upperLimitPrice: record.upperLimitPrice,
             lowerLimitPrice: record.lowerLimitPrice,
+            buyQtyUnit: record.buyQtyUnit,
+            sellQtyUnit: record.sellQtyUnit,
+            marketBuyQtyUnit: record.marketBuyQtyUnit,
+            marketSellQtyUnit: record.marketSellQtyUnit,
             // BuyQtyUnit:record.
             // SellQtyUnit:record.
             // MarketBuyQtyUnit:record.

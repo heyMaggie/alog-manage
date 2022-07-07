@@ -163,11 +163,6 @@ const configData = {
         { key: "7", value: "完全成交" },
         { key: "8", value: "已撤单" },
     ],
-    //是否有涨跌限制
-    hasPriceLimit: [
-        { key: "Y", value: "有价格限制" },
-        { key: "N", value: "无价格限制" },
-    ],
     productType: [{ key: "1", value: "股票" }],
     feeType: [
         { key: "0", value: "手续费" },
@@ -297,6 +292,8 @@ const configData = {
     ],
     // 运维系统 : 证券信息管理 - 是否有涨跌限制'是否有涨跌停价格限制,Y=是,N=否',
     hasPriceLimit: [
+        // { key: "Y", value: "有价格限制" },
+        // { key: "N", value: "无价格限制" },
         { key: "0", value: "否" },
         { key: "1", value: "是" },
     ],
