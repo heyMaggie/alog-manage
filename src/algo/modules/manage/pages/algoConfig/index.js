@@ -1096,7 +1096,7 @@ class algoConfig extends React.PureComponent {
                                 </Form.Item>
                             </div>
                         </div>
-                        <div>
+                        <div style={{ display: "none" }}>
                             <div
                                 className={styles.tit}
                                 title="账户/算法总委托笔数超过【风控启用委托数量】后,账户委托成交比小于【委托成交比(%)】后,后续委托前端会有相应体术(不影响委托);"

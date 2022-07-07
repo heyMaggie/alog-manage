@@ -102,7 +102,7 @@ class RegularWay extends React.PureComponent {
             },
             grid: {
                 left: "34px",
-                right: "52px",
+                right: "5%",
                 bottom: "24px",
                 top: "75px",
                 containLabel: true,

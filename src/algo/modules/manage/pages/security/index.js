@@ -533,17 +533,17 @@ export default class uoeSetting extends React.PureComponent {
             SecurityId: fromData.securityId,
             SecurityIdSource: fromData.securityIdSource,
             SecurityName: fromData.securityName,
-            PrevClosePx: fromData.prevClosePx / 1,
-            BuyQtyUpperLimit: fromData.buyQtyUpperLimit / 1,
-            SellQtyUpperLimit: fromData.sellQtyUpperLimit / 1,
-            MarketBuyQtyUpperLimit: fromData.marketBuyQtyUpperLimit / 1,
-            MarketSellQtyUpperLimit: fromData.marketSellQtyUpperLimit / 1,
-            SecurityStatus: fromData.securityStatus / 1,
-            HasPriceLimit: fromData.hasPriceLimit / 1,
-            LimitType: fromData.limitType / 1,
-            Property: fromData.property / 1,
-            UpperLimitPrice: fromData.upperLimitPrice / 1,
-            LowerLimitPrice: fromData.lowerLimitPrice / 1,
+            PrevClosePx: fromData.prevClosePx * 1,
+            BuyQtyUpperLimit: fromData.buyQtyUpperLimit * 100,
+            SellQtyUpperLimit: fromData.sellQtyUpperLimit * 100,
+            MarketBuyQtyUpperLimit: fromData.marketBuyQtyUpperLimit * 100,
+            MarketSellQtyUpperLimit: fromData.marketSellQtyUpperLimit * 100,
+            SecurityStatus: fromData.securityStatus * 1,
+            HasPriceLimit: fromData.hasPriceLimit * 1,
+            LimitType: fromData.limitType * 1,
+            Property: fromData.property * 1,
+            UpperLimitPrice: fromData.upperLimitPrice * 10000,
+            LowerLimitPrice: fromData.lowerLimitPrice * 10000,
             // BuyQtyUnit BuyQtyUnit:fromData.
             // SellQtyUnit SellQtyUnit:fromData.
             // MarketBuyQtyUnit MarketBuyQtyUnit:fromData.
@@ -577,21 +577,21 @@ export default class uoeSetting extends React.PureComponent {
             SecurityId: fromData.securityId,
             SecurityIdSource: fromData.securityIdSource,
             SecurityName: fromData.securityName,
-            PrevClosePx: fromData.prevClosePx / 1,
-            BuyQtyUpperLimit: fromData.buyQtyUpperLimit / 1,
-            SellQtyUpperLimit: fromData.sellQtyUpperLimit / 1,
-            MarketBuyQtyUpperLimit: fromData.marketBuyQtyUpperLimit / 1,
-            MarketSellQtyUpperLimit: fromData.marketSellQtyUpperLimit / 1,
-            SecurityStatus: fromData.securityStatus / 1,
-            HasPriceLimit: fromData.hasPriceLimit / 1,
-            LimitType: fromData.limitType / 1,
-            Property: fromData.property / 1,
-            UpperLimitPrice: fromData.upperLimitPrice / 1,
-            LowerLimitPrice: fromData.lowerLimitPrice / 1,
-            // BuyQtyUnit BuyQtyUnit:fromData.
-            // SellQtyUnit SellQtyUnit:fromData.
-            // MarketBuyQtyUnit MarketBuyQtyUnit:fromData.
-            // MarketSellQtyUnit MarketSellQtyUnit:fromData.
+            PrevClosePx: fromData.prevClosePx * 1,
+            BuyQtyUpperLimit: fromData.buyQtyUpperLimit * 100,
+            SellQtyUpperLimit: fromData.sellQtyUpperLimit * 100,
+            MarketBuyQtyUpperLimit: fromData.marketBuyQtyUpperLimit * 100,
+            MarketSellQtyUpperLimit: fromData.marketSellQtyUpperLimit * 100,
+            SecurityStatus: fromData.securityStatus * 1,
+            HasPriceLimit: fromData.hasPriceLimit * 1,
+            LimitType: fromData.limitType * 1,
+            Property: fromData.property * 1,
+            UpperLimitPrice: fromData.upperLimitPrice * 10000,
+            LowerLimitPrice: fromData.lowerLimitPrice * 10000,
+            // BuyQtyUnit BuyQtyUnit:fromData/ 100.
+            // SellQtyUnit SellQtyUnit:fromData/ 100.
+            // MarketBuyQtyUnit MarketBuyQtyUnit:fromData/ 100.
+            // MarketSellQtyUnit MarketSellQtyUnit:fromData/ 100.
         };
         // 发送更新请求
         http.post({
