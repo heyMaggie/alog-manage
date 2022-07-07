@@ -597,7 +597,7 @@ class CounterGw extends React.PureComponent {
                 message.info("查询结果为空");
             }
             let pgn = {
-                current: pagination.current,
+                current: res.data.current,
                 pageSize: pagination.pageSize,
                 total: res.data.total || 0,
             };
