@@ -28,6 +28,11 @@ class algoGroup extends React.PureComponent {
                 width: 200,
             },
             {
+                title: "算法权限组名称",
+                dataIndex: "groupName",
+                width: 200,
+            },
+            {
                 title: "权限",
                 dataIndex: "algoProperty",
                 width: 200,
@@ -164,6 +169,12 @@ class algoGroup extends React.PureComponent {
                 ],
                 component: <Input placeholder="请输入" />,
             },
+            {
+                label: "算法权限组名称",
+                id: "GroupName",
+                initialValue: "",
+                component: <Input placeholder="请输入" />,
+            },
         ];
     };
     getUpdateFormFields = () => {
@@ -180,6 +191,12 @@ class algoGroup extends React.PureComponent {
                 ],
                 component: <Input placeholder="请输入" />,
             },
+            {
+                label: "算法权限组名称",
+                id: "GroupName",
+                initialValue: "",
+                component: <Input placeholder="请输入" />,
+            },
         ];
     };
     //填入更新数据
@@ -189,6 +206,7 @@ class algoGroup extends React.PureComponent {
         form.setFieldsValue({
             Id: record.id,
             AlgoProperty: record.algoProperty,
+            GroupName: record.groupName,
         });
     };
     //更新记录
@@ -282,6 +300,7 @@ class algoGroup extends React.PureComponent {
                 this.props.form.setFieldsValue({
                     Id: record.id,
                     AlgoProperty: record.algoProperty,
+                    GroupName: record.groupName,
                 });
                 let val = { target: { value: record.algoProperty } };
                 this.inputChange(val);
@@ -505,7 +524,7 @@ class algoGroup extends React.PureComponent {
                                     </Form.Item>
                                 </Col>
                             )}
-                            <Col span={this.isInsert ? 24 : 12}>
+                            <Col span={12}>
                                 <Form.Item
                                     label={
                                         <label title="通过算法组给用户分配权限，客户端只显示用户有权限的算法,算法组最多有32字节,每个字节4位,对应4个算法是否可用(打开:代表有权限,关闭:无权限),点击权限开关,即可设置算法权限">
@@ -535,6 +554,16 @@ class algoGroup extends React.PureComponent {
                                             placeholder="请输入"
                                             onChange={this.inputChange}
                                         />
+                                    )}
+                                </Form.Item>
+                            </Col>
+                            <Col span={this.isInsert ? 12 : 24}>
+                                <Form.Item
+                                    label={<label>算法权限组名称</label>}
+                                    style={{ height: "59px" }}
+                                >
+                                    {getFieldDecorator("GroupName")(
+                                        <Input placeholder="请输入" />
                                     )}
                                 </Form.Item>
                             </Col>
