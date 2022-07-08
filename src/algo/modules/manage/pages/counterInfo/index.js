@@ -15,6 +15,11 @@ const columns = (params) => {
             key: "brokerCode",
         },
         {
+            title: "券商名称",
+            dataIndex: "brokerName",
+            key: "brokerName",
+        },
+        {
             title: "支持业务类型",
             dataIndex: "supportTypeValue",
         },
@@ -48,6 +53,21 @@ const getInsertFormFields = () => {
         {
             label: "券商编码",
             id: "brokerCode",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "券商名称",
+            id: "brokerName",
             initialValue: "",
             rules: [
                 {
@@ -137,11 +157,26 @@ const getUpdateFormFields = () => {
                     message: "参数不能为空",
                 },
             ],
-            component: <Input placeholder="请输入" />,
+            component: <Input placeholder="请输入" disabled readOnly />,
         },
         {
             label: "券商编码",
             id: "brokerCode",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: (
+                // <Input placeholder="请输入" readOnly disabled />
+                <Input placeholder="请输入" />
+            ),
+        },
+        {
+            label: "券商名称",
+            id: "brokerName",
             initialValue: "",
             rules: [
                 {
@@ -304,6 +339,7 @@ export default class uoeSetting extends React.PureComponent {
         form.setFieldsValue({
             id: record.id,
             brokerCode: record.brokerCode,
+            brokerName: record.brokerName,
             supportType: record.supportType + "",
             gwAddr: record.gwAddr,
             version: record.version,
