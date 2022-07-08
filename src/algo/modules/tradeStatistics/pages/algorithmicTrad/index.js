@@ -72,6 +72,9 @@ class AlgorithmicTrad extends React.PureComponent {
         });
     };
     generateChart = (list, type) => {
+        if (list.length == 1) {
+            list.push({ x: "", y: list[0].y });
+        }
         let lineObj = {
             algoOrder: { name: "母单信息", color: "#F78B7F" },
             childOrder: { name: "子单信息", color: "#FFD747" },

@@ -63,6 +63,9 @@ class RegularWay extends React.PureComponent {
         });
     };
     generateChart = (list, type) => {
+        if (list.length == 1) {
+            list.push({ x: "", y: list[0].y });
+        }
         let lineObj = {
             tradeOrder: { name: "普通单信息", color: "#F78B7F" },
             cancelTradeOrder: { name: "撤单信息", color: "#FFD747" },
