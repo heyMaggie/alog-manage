@@ -219,7 +219,7 @@ class riskConfigManage extends React.PureComponent {
                     byte7: enableArr[1],
                     byte8: enableArr[0],
                     riskName: config.RiskName,
-                    riskType: config.RiskType,
+                    riskType: config.RiskType + "",
                     entrustItemThreshold: config.EntrustItemThreshold,
                     entrustItemLimit: config.EntrustItemLimit,
                     entrustSeconds: config.EntrustSeconds,
@@ -461,19 +461,39 @@ class riskConfigManage extends React.PureComponent {
     //查询风控列表
     getData = (params = {}) => {
         // return;
-        http.get({
-            url: "/risk/queryRisk",
-            // data: params,
+        http.post({
+            // url: "/risk/queryRisk",
+            url: "/risk/riskList",
+            data: params,
         }).then((res) => {
-            // console.log(res);
+            console.log(res);
             let arr = [];
+            // if (res.data && res.data.length > 0) {
+            //     let dataObj = JSON.parse(res.data);
+            //     console.log(dataObj);
+            //     if (dataObj.TotalCount > 0) {
+            //         arr = dataObj.Datas;
+            //         // console.log(arr);
+            //         // parseDict(arr);
+            //         parseDictValue(arr);
+            //     }
+            // } else {
+            //     message.info(res.message || "查询结果为空", 4);
+            // }
             if (res.data && res.data.length > 0) {
-                let dataObj = JSON.parse(res.data);
-                console.log(dataObj);
-                if (dataObj.TotalCount > 0) {
-                    arr = dataObj.Datas;
+                let dataArr = res.data;
+                if (dataArr.length > 0) {
+                    arr = dataArr;
+                    let keys = Object.keys(arr[0]);
+                    let upperKeys = keys.map((item) => {
+                        return item.slice(0, 1).toUpperCase() + item.slice(1);
+                    });
+                    arr.forEach((item) => {
+                        for (let i = 0; i < upperKeys.length; i++) {
+                            item[upperKeys[i]] = item[keys[i]];
+                        }
+                    });
                     // console.log(arr);
-                    // parseDict(arr);
                     parseDictValue(arr);
                 }
             } else {
@@ -511,14 +531,19 @@ class riskConfigManage extends React.PureComponent {
         });
     };
     handleSearch = (params, pagination) => {
+        params.Id = params.id;
+        params.RiskName = params.riskName;
+        delete params.id;
+        delete params.riskName;
         console.log(params);
-        if (params.id == "" && params.riskName == "") {
-            // console.log("getData");
-            this.getData(params, pagination);
-        } else {
-            // console.log("getDataByParams");
-            this.getDataByParams(params, pagination);
-        }
+        this.getData(params);
+        // if (params.id == "" && params.riskName == "") {
+        //     // console.log("getData");
+        //     this.getData(params, pagination);
+        // } else {
+        //     // console.log("getDataByParams");
+        //     this.getDataByParams(params, pagination);
+        // }
     };
     formChange = (idx) => {
         // console.log("formChange!", idx);
