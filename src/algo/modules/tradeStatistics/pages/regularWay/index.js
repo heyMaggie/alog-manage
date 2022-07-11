@@ -51,6 +51,9 @@ class RegularWay extends React.PureComponent {
                     let data = res.data;
                     let echartLen = Object.keys(data);
                     echartLen.forEach((item) => {
+                        if (!data[item].length) {
+                            message.error("该时间段暂无数据");
+                        }
                         this.generateChart(data[item], item);
                     });
                 }
@@ -102,7 +105,7 @@ class RegularWay extends React.PureComponent {
             },
             grid: {
                 left: "34px",
-                right: "5%",
+                right: "55px",
                 bottom: "24px",
                 top: "75px",
                 containLabel: true,

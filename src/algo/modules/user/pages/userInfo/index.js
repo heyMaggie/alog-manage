@@ -294,7 +294,7 @@ class userInfo extends React.PureComponent {
                 // this.getData();
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("\n"))
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
                 );
             } else {
                 message.error(msg);
@@ -323,7 +323,7 @@ class userInfo extends React.PureComponent {
                 // this.getData();
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("\n"))
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
                 );
             } else {
                 message.error(msg);

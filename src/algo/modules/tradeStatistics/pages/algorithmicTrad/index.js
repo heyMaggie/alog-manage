@@ -59,7 +59,11 @@ class AlgorithmicTrad extends React.PureComponent {
             if (res.code == 0) {
                 let data = res.data;
                 let echartLen = Object.keys(data);
+                console.log(data, "data");
                 echartLen.forEach((item) => {
+                    if (!data[item].length) {
+                        message.error("该时间段暂无数据");
+                    }
                     this.generateChart(data[item], item);
                 });
             } else {
