@@ -264,6 +264,7 @@ class userInfo extends React.PureComponent {
         selectRow: [],
         info: [],
         updateModalVisible: false,
+        updateModalVisible2: false,
         riskGroup: [],
         userRiskConfig: {},
         pagination: { total: 0 },
@@ -399,19 +400,18 @@ class userInfo extends React.PureComponent {
                 title: "算法权限组",
                 dataIndex: "algoGroup",
                 // width: 120,
-                // render: (text, record) => (
-                //     <div
-                //         onClick={(e) => {
-                //             console.log("修改算法权限组");
-                //             // this.handleUpdate(record);
-                //         }}
-                //     >
-                //         <Tooltip title="修改算法权限组">
-                //             {record.algoGroup}
-                //             <Icon type="edit" style={{ color: "#1899ff" }} />
-                //         </Tooltip>
-                //     </div>
-                // ),
+                render: (text, record) => (
+                    <div
+                        onClick={(e) => {
+                            this.handleUpdateAlgo(record);
+                        }}
+                    >
+                        <Tooltip title="修改算法权限组">
+                            {record.algoGroup}
+                            <Icon type="edit" style={{ color: "#1899ff" }} />
+                        </Tooltip>
+                    </div>
+                ),
             },
             // {
             //     title: "业务类型",
@@ -471,23 +471,23 @@ class userInfo extends React.PureComponent {
         );
     };
     //修改算法权限组
-    // handleUpdateAlgo = (record) => {
-    //     console.log("修改算法权限组", record);
-    //     this.record = record;
-    //     this.setState(
-    //         {
-    //             updateModalVisible: true,
-    //             riskGroup: [],
-    //         },
-    //         () => {
-    //             this.getRiskGroup(record.riskGroup);
-    //             this.props.form.setFieldsValue({
-    //                 riskGroup: record.riskGroup + "",
-    //                 userName: record.userName,
-    //             });
-    //         }
-    //     );
-    // };
+    handleUpdateAlgo = (record) => {
+        console.log("修改算法权限组", record);
+        this.record = record;
+        this.setState(
+            {
+                updateModalVisible: true,
+                riskGroup: [],
+            },
+            () => {
+                this.getRiskGroup(record.riskGroup);
+                this.props.form.setFieldsValue({
+                    riskGroup: record.riskGroup + "",
+                    userName: record.userName,
+                });
+            }
+        );
+    };
 
     handleUpdateModalOk = () => {
         let data = this.props.form.getFieldsValue();
@@ -786,6 +786,8 @@ class userInfo extends React.PureComponent {
                                         SelectOption(this.state.riskList, {
                                             placeholder: "请选择",
                                             onChange: this.inputChange,
+                                            getPopupContainer: () =>
+                                                document.getElementById("area"),
                                         })
                                         // <Input
                                         //     placeholder=""
@@ -1575,6 +1577,81 @@ class userInfo extends React.PureComponent {
                                             suffix="元"
                                             disabled={true}
                                         />
+                                    )}
+                                </Form.Item>
+                            </div>
+                        </div>
+                    </Form>
+                </Modal>
+                <Modal
+                    title={"修改算法权限组"}
+                    visible={this.state.updateModalVisible2}
+                    onOk={this.handleUpdateModalOk}
+                    onCancel={this.handleUpdateModalCancel}
+                    width={788}
+                    centered
+                >
+                    <Form layout={"vertical"}>
+                        <div>
+                            <div className={styles.tit}>
+                                <div className={styles.text}>风控组</div>
+                            </div>
+                            <div
+                                className={styles.rowFlex}
+                                style={{
+                                    position: "relative",
+                                }}
+                                id="area"
+                            >
+                                <Form.Item label="用户名">
+                                    {getFieldDecorator("userName")(
+                                        <Input placeholder="请输入" disabled />
+                                    )}
+                                </Form.Item>
+                                <div style={{ width: 60 }}></div>
+                                <Form.Item
+                                    // className={styles.marLose14}
+                                    label={
+                                        <label title="请输入已配置成功的风控组,否则风控组不能修改成功!">
+                                            修改风控组
+                                        </label>
+                                    }
+                                >
+                                    {getFieldDecorator("riskGroup", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: "请输入",
+                                            },
+                                        ],
+                                    })(
+                                        // <AutoComplete
+                                        //     style={{ width: 200 }}
+                                        //     dataSource={this.state.riskList}
+                                        //     placeholder="请输入风控组ID"
+                                        //     getPopupContainer={() =>
+                                        //         document.getElementById("area")
+                                        //     }
+                                        //     onChange={this.inputChange}
+                                        //     filterOption={(
+                                        //         inputValue,
+                                        //         option
+                                        //     ) =>
+                                        //         option.props.children
+                                        //             .toUpperCase()
+                                        //             .indexOf(
+                                        //                 inputValue.toUpperCase()
+                                        //             ) !== -1
+                                        //     }
+                                        // />
+                                        SelectOption(this.state.riskList, {
+                                            placeholder: "请选择",
+                                            onChange: this.inputChange,
+                                        })
+                                        // <Input
+                                        //     placeholder=""
+                                        //     onChange={this.inputChange}
+                                        // />
                                     )}
                                 </Form.Item>
                             </div>
