@@ -3,7 +3,16 @@ import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 // import UploadWrap from "@/components/UploadWrap";
 
-import { Input, Modal, Switch, Form, message, Tooltip, Icon } from "antd";
+import {
+    Input,
+    Modal,
+    Switch,
+    Form,
+    message,
+    Tooltip,
+    Icon,
+    AutoComplete,
+} from "antd";
 import styles from "./style.module.less";
 const getInsertFormFields = () => {
     return [
@@ -258,6 +267,7 @@ class userInfo extends React.PureComponent {
         riskGroup: [],
         userRiskConfig: {},
         pagination: { total: 0 },
+        riskList: [],
     };
     //批量选择
     handleTableChange = (selectedRowKeys) => {
@@ -460,6 +470,24 @@ class userInfo extends React.PureComponent {
             }
         );
     };
+    //修改算法权限组
+    // handleUpdateAlgo = (record) => {
+    //     console.log("修改算法权限组", record);
+    //     this.record = record;
+    //     this.setState(
+    //         {
+    //             updateModalVisible: true,
+    //             riskGroup: [],
+    //         },
+    //         () => {
+    //             this.getRiskGroup(record.riskGroup);
+    //             this.props.form.setFieldsValue({
+    //                 riskGroup: record.riskGroup + "",
+    //                 userName: record.userName,
+    //             });
+    //         }
+    //     );
+    // };
 
     handleUpdateModalOk = () => {
         let data = this.props.form.getFieldsValue();
@@ -481,13 +509,42 @@ class userInfo extends React.PureComponent {
         console.log("删除记录 ", record);
     };
     inputChange = (e) => {
-        let val = e.target.value;
+        // console.log(e);
+        // let val = e.target.value;
+        let val = e;
         if (this.inputTimeout) {
             clearTimeout(this.inputTimeout);
         }
         this.inputTimeout = setTimeout(() => {
             this.getRiskGroup(val);
         }, 1000);
+    };
+    //获取所有风控组
+    getAllRiskGroup = (params = {}) => {
+        // return;
+        http.post({
+            // url: "/risk/queryRisk",
+            url: "/risk/riskList",
+            data: params,
+        }).then((res) => {
+            // console.log(res);
+            let idArr = [];
+            if (res.data && res.data.length > 0) {
+                let dataArr = res.data;
+                if (dataArr.length > 0) {
+                    idArr = dataArr.map((item) => {
+                        let obj = {};
+                        obj.key = item.id;
+                        obj.value = item.id;
+                        return obj;
+                    });
+                    // console.log(idArr);
+                }
+            }
+            this.setState({
+                riskList: idArr,
+            });
+        });
     };
     //修改用户风控组
     updateUserRiskGroup = (data) => {
@@ -503,9 +560,9 @@ class userInfo extends React.PureComponent {
         }).then((res) => {
             // console.log(res);
             if (res.code == 0) {
-                // message.success(res.message);
-                showTip(this, res.message);
-                this.isAction = true;
+                message.success(res.message);
+                // showTip(this, res.message);
+                // this.isAction = true;
                 this.getData(this.searchParam, this.state.pagination);
                 // this.getData();
             } else {
@@ -610,6 +667,7 @@ class userInfo extends React.PureComponent {
     };
     componentDidMount() {
         this.getData();
+        this.getAllRiskGroup();
     }
     render() {
         let scroll = { x: 1000, y: 445 };
@@ -677,7 +735,13 @@ class userInfo extends React.PureComponent {
                             <div className={styles.tit}>
                                 <div className={styles.text}>风控组</div>
                             </div>
-                            <div className={styles.rowFlex}>
+                            <div
+                                className={styles.rowFlex}
+                                style={{
+                                    position: "relative",
+                                }}
+                                id="area"
+                            >
                                 <Form.Item label="用户名">
                                     {getFieldDecorator("userName")(
                                         <Input placeholder="请输入" disabled />
@@ -700,10 +764,33 @@ class userInfo extends React.PureComponent {
                                             },
                                         ],
                                     })(
-                                        <Input
-                                            placeholder=""
-                                            onChange={this.inputChange}
-                                        />
+                                        // <AutoComplete
+                                        //     style={{ width: 200 }}
+                                        //     dataSource={this.state.riskList}
+                                        //     placeholder="请输入风控组ID"
+                                        //     getPopupContainer={() =>
+                                        //         document.getElementById("area")
+                                        //     }
+                                        //     onChange={this.inputChange}
+                                        //     filterOption={(
+                                        //         inputValue,
+                                        //         option
+                                        //     ) =>
+                                        //         option.props.children
+                                        //             .toUpperCase()
+                                        //             .indexOf(
+                                        //                 inputValue.toUpperCase()
+                                        //             ) !== -1
+                                        //     }
+                                        // />
+                                        SelectOption(this.state.riskList, {
+                                            placeholder: "请选择",
+                                            onChange: this.inputChange,
+                                        })
+                                        // <Input
+                                        //     placeholder=""
+                                        //     onChange={this.inputChange}
+                                        // />
                                     )}
                                 </Form.Item>
                             </div>
