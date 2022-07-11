@@ -306,7 +306,7 @@ class RegularWay extends React.PureComponent {
                                     allowClear={true}
                                     showSearch
                                     style={{ width: 160 }}
-                                    placeholder="请输入用户ID"
+                                    placeholder="请输入用户名"
                                     optionFilterProp="children"
                                     filterOption={(input, option) =>
                                         option.props.children

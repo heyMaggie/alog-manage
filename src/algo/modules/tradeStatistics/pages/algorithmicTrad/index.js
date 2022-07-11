@@ -348,12 +348,12 @@ class AlgorithmicTrad extends React.PureComponent {
                         </Form.Item>
                         <Form.Item style={{ marginLeft: "12px" }}>
                             {getFieldDecorator("uuserId")(
-                                // <Input placeholder="请输入用户ID" />
+                                // <Input placeholder="请输入用户名" />
                                 <Select
                                     allowClear={true}
                                     showSearch
                                     style={{ width: 160 }}
-                                    placeholder="请输入用户ID"
+                                    placeholder="请输入用户名"
                                     optionFilterProp="children"
                                     filterOption={(input, option) =>
                                         option.props.children
