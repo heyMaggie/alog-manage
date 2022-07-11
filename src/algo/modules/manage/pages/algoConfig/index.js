@@ -123,10 +123,13 @@ class algoConfig extends React.PureComponent {
                         pattern: /^[1-9][0-9]*$/i,
                     },
                 ],
-                component: (
+                component:
                     // <Input placeholder="请输入" readOnly disabled />
-                    <Input placeholder="请输入" onChange={this.inputChange} />
-                ),
+                    // <Input placeholder="请输入" onChange={this.inputChange} />
+                    SelectOption(this.state.riskList, {
+                        placeholder: "请选择",
+                        onChange: this.inputChange,
+                    }),
                 // component: SelectOption(dict.algorithmType, {
                 //     placeholder: "请选择",
                 //     // allowClear: true,
@@ -245,10 +248,13 @@ class algoConfig extends React.PureComponent {
                         pattern: /^[1-9][0-9]*$/i,
                     },
                 ],
-                component: (
+                component:
                     // <Input placeholder="请输入" readOnly disabled />
-                    <Input placeholder="请输入" onChange={this.inputChange} />
-                ),
+                    // <Input placeholder="请输入" onChange={this.inputChange} />
+                    SelectOption(this.state.riskList, {
+                        placeholder: "请选择",
+                        onChange: this.inputChange,
+                    }),
             },
         ];
     };
@@ -373,6 +379,7 @@ class algoConfig extends React.PureComponent {
         riskGroup: [],
         userRiskConfig: {},
         pagination: { total: 0 },
+        riskList: [],
     };
     // type 1 : 是否显示    type:2  是否可用
     onSwitchChange = (val, record, type) => {
@@ -447,7 +454,20 @@ class algoConfig extends React.PureComponent {
             data: params,
         }).then((res) => {
             console.log(res);
-            message.success(res.message);
+            // message.success(res.message);
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                // showTip(this, "修改算法风控组成功");
+                // this.isAction = true;
+                this.getData(this.searchParam, this.state.pagination);
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                );
+            } else {
+                message.error(msg);
+            }
             // this.isAction = true;
             // this.getData(this.searchParam, this.state.pagination);
         });
@@ -528,9 +548,23 @@ class algoConfig extends React.PureComponent {
             data: params,
         }).then((res) => {
             // console.log(res);
-            message.success(res.message);
+            // message.success(res.message);
             // this.isAction = true;
             // this.getData(this.searchParam, this.state.pagination);
+            // message.success(res.message);
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                // showTip(this, "修改算法风控组成功");
+                // this.isAction = true;
+                this.getData(this.searchParam, this.state.pagination);
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                );
+            } else {
+                message.error(msg);
+            }
         });
     };
     //填入更新记录
@@ -594,13 +628,42 @@ class algoConfig extends React.PureComponent {
         });
     };
     inputChange = (e) => {
-        let val = e.target.value;
+        // console.log(e);
+        // let val = e.target.value;
+        let val = e;
         if (this.inputTimeout) {
             clearTimeout(this.inputTimeout);
         }
         this.inputTimeout = setTimeout(() => {
             this.getRiskGroup(val);
         }, 1000);
+    };
+    //获取所有风控组
+    getAllRiskGroup = (params = {}) => {
+        // return;
+        http.post({
+            // url: "/risk/queryRisk",
+            url: "/risk/riskList",
+            data: params,
+        }).then((res) => {
+            // console.log(res);
+            let idArr = [];
+            if (res.data && res.data.length > 0) {
+                let dataArr = res.data;
+                if (dataArr.length > 0) {
+                    idArr = dataArr.map((item) => {
+                        let obj = {};
+                        obj.key = item.id;
+                        obj.value = item.id;
+                        return obj;
+                    });
+                    // console.log(idArr);
+                }
+            }
+            this.setState({
+                riskList: idArr,
+            });
+        });
     };
     //查询用户风控配置
     getRiskGroup = (id) => {
@@ -672,6 +735,7 @@ class algoConfig extends React.PureComponent {
     };
     componentDidMount() {
         this.getData();
+        this.getAllRiskGroup();
     }
     render() {
         let scroll = { x: 1000, y: 445 };
@@ -755,10 +819,10 @@ class algoConfig extends React.PureComponent {
                                     ],
                                     // initialValue: "0",
                                 })(
-                                    <Input
-                                        placeholder=""
-                                        onChange={this.inputChange}
-                                    />
+                                    SelectOption(this.state.riskList, {
+                                        placeholder: "请选择",
+                                        onChange: this.inputChange,
+                                    })
                                 )}
                             </Form.Item>
                         </div>
