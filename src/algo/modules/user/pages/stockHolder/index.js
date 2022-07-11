@@ -46,6 +46,10 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    message: "请输入数字",
+                    pattern: /^[0-9]*[1-9][0-9]*$/i,
+                },
             ],
             component: <Input placeholder="请输入" />,
         },
@@ -112,6 +116,10 @@ const getUpdateFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    message: "请输入数字",
+                    pattern: /^[0-9]*[1-9][0-9]*$/i,
                 },
             ],
             component: <Input placeholder="请输入" />,
