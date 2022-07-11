@@ -268,7 +268,8 @@ class userInfo extends React.PureComponent {
         riskGroup: [],
         userRiskConfig: {},
         pagination: { total: 0 },
-        riskList: [],
+        riskList: [], //算法列表
+        algoList: [],
     };
     //批量选择
     handleTableChange = (selectedRowKeys) => {
@@ -476,14 +477,13 @@ class userInfo extends React.PureComponent {
         this.record = record;
         this.setState(
             {
-                updateModalVisible: true,
-                riskGroup: [],
+                updateModalVisible2: true,
+                algoGroup: [],
             },
             () => {
-                this.getRiskGroup(record.riskGroup);
+                this.getAllAlgoGroup(record.riskGroup);
                 this.props.form.setFieldsValue({
-                    riskGroup: record.riskGroup + "",
-                    userName: record.userName,
+                    algoGroup: record.algoGroup + "",
                 });
             }
         );
@@ -504,6 +504,20 @@ class userInfo extends React.PureComponent {
             updateModalVisible: false,
         });
     };
+    handleUpdateModalOk2 = () => {
+        // let data = this.props.form.getFieldsValue();
+        // data.userId = this.record.id;
+        // console.log(data);
+        // this.updateUserRiskGroup(data);
+        this.setState({
+            updateModalVisible2: false,
+        });
+    };
+    handleUpdateModalCancel2 = () => {
+        this.setState({
+            updateModalVisible2: false,
+        });
+    };
     //删除记录
     handleDeleteRecord = (record) => {
         console.log("删除记录 ", record);
@@ -519,6 +533,7 @@ class userInfo extends React.PureComponent {
             this.getRiskGroup(val);
         }, 1000);
     };
+
     //获取所有风控组
     getAllRiskGroup = (params = {}) => {
         // return;
@@ -543,6 +558,37 @@ class userInfo extends React.PureComponent {
             }
             this.setState({
                 riskList: idArr,
+            });
+        });
+    };
+    //获取所有风控组
+    getAllAlgoGroup = (gid, params = { pageId: 1, pageNum: 10000 }) => {
+        params = { pageId: 1, pageNum: 10000 };
+        if (gid !== undefined) {
+            params.id = gid;
+        }
+        // return;
+        http.post({
+            // url: "/risk/queryRisk",
+            url: "/algo/list",
+            data: params,
+        }).then((res) => {
+            console.log(res);
+            let idArr = [];
+            if (res.data && res.data.records) {
+                let dataArr = res.data.records;
+                if (dataArr.length > 0) {
+                    idArr = dataArr.map((item) => {
+                        let obj = {};
+                        obj.key = item.id;
+                        obj.value = item.id;
+                        return obj;
+                    });
+                    // console.log(idArr);
+                }
+            }
+            this.setState({
+                algoList: idArr,
             });
         });
     };
@@ -668,6 +714,7 @@ class userInfo extends React.PureComponent {
     componentDidMount() {
         this.getData();
         this.getAllRiskGroup();
+        this.getAllAlgoGroup();
     }
     render() {
         let scroll = { x: 1000, y: 445 };
@@ -1586,38 +1633,30 @@ class userInfo extends React.PureComponent {
                 <Modal
                     title={"修改算法权限组"}
                     visible={this.state.updateModalVisible2}
-                    onOk={this.handleUpdateModalOk}
-                    onCancel={this.handleUpdateModalCancel}
+                    onOk={this.handleUpdateModalOk2}
+                    onCancel={this.handleUpdateModalCancel2}
                     width={788}
                     centered
                 >
                     <Form layout={"vertical"}>
                         <div>
-                            <div className={styles.tit}>
-                                <div className={styles.text}>风控组</div>
-                            </div>
                             <div
                                 className={styles.rowFlex}
                                 style={{
                                     position: "relative",
                                 }}
-                                id="area"
+                                id="area2"
                             >
-                                <Form.Item label="用户名">
-                                    {getFieldDecorator("userName")(
-                                        <Input placeholder="请输入" disabled />
-                                    )}
-                                </Form.Item>
                                 <div style={{ width: 60 }}></div>
                                 <Form.Item
                                     // className={styles.marLose14}
                                     label={
                                         <label title="请输入已配置成功的风控组,否则风控组不能修改成功!">
-                                            修改风控组
+                                            修改算法风控组
                                         </label>
                                     }
                                 >
-                                    {getFieldDecorator("riskGroup", {
+                                    {getFieldDecorator("algoGroup", {
                                         rules: [
                                             {
                                                 required: true,
@@ -1625,26 +1664,7 @@ class userInfo extends React.PureComponent {
                                             },
                                         ],
                                     })(
-                                        // <AutoComplete
-                                        //     style={{ width: 200 }}
-                                        //     dataSource={this.state.riskList}
-                                        //     placeholder="请输入风控组ID"
-                                        //     getPopupContainer={() =>
-                                        //         document.getElementById("area")
-                                        //     }
-                                        //     onChange={this.inputChange}
-                                        //     filterOption={(
-                                        //         inputValue,
-                                        //         option
-                                        //     ) =>
-                                        //         option.props.children
-                                        //             .toUpperCase()
-                                        //             .indexOf(
-                                        //                 inputValue.toUpperCase()
-                                        //             ) !== -1
-                                        //     }
-                                        // />
-                                        SelectOption(this.state.riskList, {
+                                        SelectOption(this.state.algoList, {
                                             placeholder: "请选择",
                                             onChange: this.inputChange,
                                         })
