@@ -440,7 +440,6 @@ class riskConfigManage extends React.PureComponent {
             RiskGroup: this.record.Id, // 风控组
             RiskPara: riskArr,
         };
-        console.log(params);
         // return;
         http.post({
             url: "/risk/modifyRiskConfig",
