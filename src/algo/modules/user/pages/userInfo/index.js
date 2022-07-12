@@ -15,250 +15,6 @@ import {
     AutoComplete,
 } from "antd";
 import styles from "./style.module.less";
-const getInsertFormFields = () => {
-    return [
-        {
-            label: "用户ID",
-            id: "UserId",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "用户密码",
-            id: "UserPasswd",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "用户名",
-            id: "UserName",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "用户类型",
-            id: "UserType",
-            initialValue: "1",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.userType, {
-                placeholder: "请选择",
-                // allowClear: true,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "父级用户ID",
-            id: "UuserId",
-            initialValue: "0",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "用户风控组",
-            id: "RiskGroup",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
-        },
-        {
-            label: "算法权限组",
-            id: "AlgoGroup",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        // {
-        //     label: "算法属性",
-        //     id: "AlgoProperty",
-        //     initialValue: "",
-        //     rules: [
-        //         // {
-        //         //     required: true,
-        //         //     message: "参数不能为空",
-        //         // },
-        //     ],
-        //     component: <Input placeholder="请输入" />,
-        // },
-    ];
-};
-
-const getUpdateFormFields = () => {
-    return [
-        {
-            label: "用户ID",
-            id: "UserId",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "用户密码",
-            id: "UserPasswd",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "用户名",
-            id: "UserName",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "用户类型",
-            id: "UserType",
-            initialValue: "1",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.userType, {
-                placeholder: "请选择",
-                // allowClear: true,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "父级用户ID",
-            id: "UuserId",
-            initialValue: "0",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "用户风控组",
-            id: "RiskGroup",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
-        },
-        {
-            label: "算法权限组",
-            id: "AlgoGroup",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-    ];
-};
-let getSearchFormFields = () => {
-    return [
-        {
-            label: "用户ID",
-            id: "userId",
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "用户类型",
-            id: "userType",
-            // initialValue: "1",
-            component: SelectOption(dict.userType, {
-                placeholder: "请选择",
-                allowClear: true,
-                style: {
-                    width: 183,
-                },
-            }),
-        },
-        {
-            label: "用户风控组",
-            id: "riskGroup",
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "算法权限组",
-            id: "algoGroup",
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "父级用户名",
-            id: "fatherId",
-            component: <Input placeholder="请输入" />,
-        },
-    ];
-};
-
 class userInfo extends React.PureComponent {
     state = {
         searchLoading: false,
@@ -272,6 +28,348 @@ class userInfo extends React.PureComponent {
         riskList: [], //算法列表
         algoList: [],
         algoSecList: [],
+        algoGroupList: [],
+    };
+    getInsertFormFields = () => {
+        return [
+            {
+                label: "用户ID",
+                id: "UserId",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "用户密码",
+                id: "UserPasswd",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "用户名",
+                id: "UserName",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "用户类型",
+                id: "UserType",
+                initialValue: "1",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(dict.userType, {
+                    placeholder: "请选择",
+                    // allowClear: true,
+                    style: {
+                        width: 400,
+                    },
+                }),
+            },
+            {
+                label: "父级用户ID",
+                id: "UuserId",
+                initialValue: "0",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "用户风控组",
+                id: "RiskGroup",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component:
+                    // <Input placeholder="请输入" readOnly disabled />
+                    SelectOption(this.state.riskList, {
+                        placeholder: "请选择用户风控组",
+                    }),
+            },
+            {
+                label: "算法权限组",
+                id: "AlgoGroup",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component:
+                    // <Input placeholder="请输入" readOnly disabled />
+                    SelectOption(this.state.algoGroupList, {
+                        placeholder: "请选择算法权限组",
+                    }),
+            },
+            // {
+            //     label: "算法属性",
+            //     id: "AlgoProperty",
+            //     initialValue: "",
+            //     rules: [
+            //         // {
+            //         //     required: true,
+            //         //     message: "参数不能为空",
+            //         // },
+            //     ],
+            //     component: <Input placeholder="请输入" />,
+            // },
+        ];
+    };
+    getUpdateFormFields = () => {
+        return [
+            {
+                label: "用户ID",
+                id: "UserId",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "用户密码",
+                id: "UserPasswd",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "用户名",
+                id: "UserName",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "用户类型",
+                id: "UserType",
+                initialValue: "1",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(dict.userType, {
+                    placeholder: "请选择",
+                    // allowClear: true,
+                    style: {
+                        width: 400,
+                    },
+                }),
+            },
+            {
+                label: "父级用户ID",
+                id: "UuserId",
+                initialValue: "0",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "用户风控组",
+                id: "RiskGroup",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component:
+                    // <Input placeholder="请输入" readOnly disabled />
+                    SelectOption(this.state.riskList, {
+                        placeholder: "请选择用户风控组",
+                    }),
+            },
+            {
+                label: "算法权限组",
+                id: "AlgoGroup",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(this.state.algoGroupList, {
+                    placeholder: "请选择算法权限组",
+                }),
+            },
+        ];
+    };
+    getSearchFormFields = () => {
+        return [
+            {
+                label: "用户ID",
+                id: "userId",
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "用户类型",
+                id: "userType",
+                // initialValue: "1",
+                component: SelectOption(dict.userType, {
+                    placeholder: "请选择",
+                    allowClear: true,
+                    style: {
+                        width: 183,
+                    },
+                }),
+            },
+            {
+                label: "用户风控组",
+                id: "riskGroup",
+                component: SelectOption(this.state.riskList, {
+                    placeholder: "请选择用户风控组",
+                }),
+            },
+            {
+                label: "算法权限组",
+                id: "algoGroup",
+                component: SelectOption(this.state.algoGroupList, {
+                    placeholder: "请选择算法权限组",
+                }),
+            },
+            {
+                label: "父级用户名",
+                id: "fatherId",
+                component: <Input placeholder="请输入" />,
+            },
+        ];
+    };
+    //批量选择
+    handleTableChange = (selectedRowKeys) => {
+        console.log("批量选择");
+        this.setState({
+            selectRow: selectedRowKeys,
+        });
+    };
+
+    handleInsertRecord = (params) => {
+        // params = {
+        //     UserId: "atest0000003",
+        //     UserName: "test3",
+        //     UserPasswd: "test_0000003",
+        //     UserType: 1,
+        //     // RiskGroup: 1,
+        //     // AlgoGroup: 1,
+        //     // AlgoProperty: "20",
+        //     UuserId: 1,
+        // };
+        params.UserType = params.UserType / 1;
+        params.RiskGroup = params.RiskGroup / 1;
+        params.AlgoGroup = params.AlgoGroup / 1;
+        params.UuserId = params.UuserId / 1;
+        console.log("新增接口", params);
+        http.post({
+            url: "/user/addUserInfo",
+            data: params,
+        }).then((res) => {
+            console.log(res);
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                // this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                );
+            } else {
+                message.error(msg);
+            }
+        });
+    };
+    //更新记录
+    handleUpdateRecord = ({ form }) => {
+        // console.log(form.getFieldsValue());
+        // return;
+        let params = form.getFieldsValue();
+        params.id = this.record.id / 1;
+        params.UserType = params.UserType / 1;
+        params.RiskGroup = params.RiskGroup / 1;
+        params.AlgoGroup = params.AlgoGroup / 1;
+        params.UuserId = params.UuserId / 1;
+        //发送更新请求
+        http.post({
+            url: "/user/updateUserInfo",
+            data: params,
+        }).then((res) => {
+            console.log(res);
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                // this.getData();
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                );
+            } else {
+                message.error(msg);
+            }
+            // this.isAction = true;
+        });
+    };
+    //填入更新数据
+    setUpdateModal = ({ form, record }) => {
+        // console.log(record, form);
+        this.record = record;
+        form.setFieldsValue({
+            UserId: record.userId,
+            UserName: record.userName,
+            UserPasswd: record.userPasswd,
+            UserType: record.userType + "",
+            RiskGroup: record.riskGroup,
+            AlgoGroup: record.algoGroup,
+            UuserId: record.uuserId,
+            // UserType: record.UserType,
+        });
     };
     columns = (params) => {
         return [
@@ -855,7 +953,7 @@ class userInfo extends React.PureComponent {
         //     onChange: this.handleTableChange,
         // };
         let { getFieldDecorator } = this.props.form;
-        let scroll2 = { x: 1000, y: 1200 };
+        let scroll2 = { x: 1000, y: 450 };
         return (
             <div className={styles.userInfo}>
                 <CurdComponent
@@ -864,15 +962,15 @@ class userInfo extends React.PureComponent {
                     // isShowSearchForm={false}
                     // btnText2="查全部"
                     onSearchClick={this.handleSearch}
-                    getSearchFormFields={getSearchFormFields}
+                    getSearchFormFields={this.getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     insertBtnText={"新增"} // 不传 就没新增按钮
-                    getInsertFormFields={getInsertFormFields}
+                    getInsertFormFields={this.getInsertFormFields}
                     insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
                     pagination={this.state.pagination}
-                    getUpdateFormFields={getUpdateFormFields}
+                    getUpdateFormFields={this.getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
                     updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
@@ -1298,7 +1396,8 @@ class userInfo extends React.PureComponent {
                                 </Form.Item>
                             </div>
                         </div>
-                        <div style={{ display: "none" }}>
+                        {/* <div style={{ display: "none" }}> */}
+                        <div className={styles.hide}>
                             <div
                                 className={styles.tit}
                                 title="账户/算法总委托笔数超过【风控启用委托数量】后,账户委托成交比小于【委托成交比(%)】后,后续委托前端会有相应体术(不影响委托);"
@@ -1758,14 +1857,17 @@ class userInfo extends React.PureComponent {
                     width={1288}
                     centered
                 >
-                    <Form layout={"vertical"}>
+                    <Form
+                        layout={"vertical"}
+                        style={{ maxHeight: "690px", overflow: "hidden" }}
+                    >
                         <div>
                             <div
                                 className={styles.rowFlex}
                                 style={{
                                     position: "relative",
                                 }}
-                                id="area2"
+                                id="algo1"
                             >
                                 <Form.Item label="用户ID">
                                     {getFieldDecorator("userId")(
@@ -1792,6 +1894,10 @@ class userInfo extends React.PureComponent {
                                         SelectOption(this.state.algoSecList, {
                                             placeholder: "请选择",
                                             onChange: this.algoSelectChange,
+                                            getPopupContainer: () =>
+                                                document.getElementById(
+                                                    "algo1"
+                                                ),
                                         })
                                         // <Input
                                         //     placeholder=""
@@ -1813,7 +1919,7 @@ class userInfo extends React.PureComponent {
                                 )}
                             </Form.Item>
                         </div>
-                        <div ref="counterTable" className="counterTable">
+                        <div>
                             <Table
                                 rowKey={"id"}
                                 columns={this.columns2()}

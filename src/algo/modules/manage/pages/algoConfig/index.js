@@ -30,6 +30,43 @@ class algoConfig extends React.PureComponent {
                 component: <Input placeholder="请输入" />,
             },
             {
+                label: "算法风控组",
+                id: "RiskGroup",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        message: "请输入正整数",
+                        pattern: /^[1-9][0-9]*$/i,
+                    },
+                ],
+                component:
+                    // <Input placeholder="请输入" onChange={this.inputChange} />
+                    SelectOption(this.state.riskList, {
+                        placeholder: "请选择",
+                        onChange: this.inputChange,
+                    }),
+            },
+            {
+                label: "算法厂商ID",
+                id: "UuserId",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        message: "请输入正整数",
+                        pattern: /^\d+$/i,
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
                 label: "算法厂商名",
                 id: "ProviderName",
                 initialValue: "",
@@ -108,32 +145,6 @@ class algoConfig extends React.PureComponent {
                     // },
                 ],
                 component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "算法风控组",
-                id: "RiskGroup",
-                initialValue: "",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        message: "请输入正整数",
-                        pattern: /^[1-9][0-9]*$/i,
-                    },
-                ],
-                component: (
-                    // <Input placeholder="请输入" readOnly disabled />
-                    <Input placeholder="请输入" onChange={this.inputChange} />
-                ),
-                // component: SelectOption(dict.algorithmType, {
-                //     placeholder: "请选择",
-                //     // allowClear: true,
-                //     style: {
-                //         width: 400,
-                //     },
-                // }),
             },
         ];
     };
@@ -152,6 +163,44 @@ class algoConfig extends React.PureComponent {
                 component: <Input placeholder="请输入" />,
             },
             {
+                label: "算法风控组",
+                id: "RiskGroup",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        message: "请输入正整数",
+                        pattern: /^[1-9][0-9]*$/i,
+                    },
+                ],
+                component:
+                    // <Input placeholder="请输入" readOnly disabled />
+                    // <Input placeholder="请输入" onChange={this.inputChange} />
+                    SelectOption(this.state.riskList, {
+                        placeholder: "请选择",
+                        onChange: this.inputChange,
+                    }),
+            },
+            {
+                label: "算法厂商ID",
+                id: "UuserId",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        message: "请输入正整数",
+                        pattern: /^\d+$/i,
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
                 label: "算法厂商名",
                 id: "ProviderName",
                 initialValue: "",
@@ -230,25 +279,6 @@ class algoConfig extends React.PureComponent {
                     // },
                 ],
                 component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "算法风控组",
-                id: "RiskGroup",
-                initialValue: "",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        message: "请输入正整数",
-                        pattern: /^[1-9][0-9]*$/i,
-                    },
-                ],
-                component: (
-                    // <Input placeholder="请输入" readOnly disabled />
-                    <Input placeholder="请输入" onChange={this.inputChange} />
-                ),
             },
         ];
     };
@@ -373,6 +403,7 @@ class algoConfig extends React.PureComponent {
         riskGroup: [],
         userRiskConfig: {},
         pagination: { total: 0 },
+        riskList: [],
     };
     // type 1 : 是否显示    type:2  是否可用
     onSwitchChange = (val, record, type) => {
@@ -438,6 +469,7 @@ class algoConfig extends React.PureComponent {
             }
         }
         params.AlgorithmStatus = status;
+        params.UuserId = params.UuserId / 1;
         params.AlgorithmType = params.AlgorithmType / 1;
         params.RiskGroup = params.RiskGroup / 1;
         console.log("新增接口", params);
@@ -447,7 +479,20 @@ class algoConfig extends React.PureComponent {
             data: params,
         }).then((res) => {
             console.log(res);
-            message.success(res.message);
+            // message.success(res.message);
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                // showTip(this, "修改算法风控组成功");
+                // this.isAction = true;
+                this.getData(this.searchParam, this.state.pagination);
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                );
+            } else {
+                message.error(msg);
+            }
             // this.isAction = true;
             // this.getData(this.searchParam, this.state.pagination);
         });
@@ -469,7 +514,7 @@ class algoConfig extends React.PureComponent {
         let formData = {
             AlgoName: record.algoName,
             ProviderName: record.providerName,
-            // UuserId: record.UuserId,
+            UuserId: record.uuserId,
             AlgorithmType: record.algorithmType + "",
             AlgorithmTypeName: record.algorithmTypeName,
             // AlgorithmStatus: record.AlgorithmStatus + "",
@@ -519,6 +564,7 @@ class algoConfig extends React.PureComponent {
             }
         }
         params.AlgorithmStatus = status;
+        params.UuserId = params.UuserId / 1;
         params.AlgorithmType = params.AlgorithmType / 1;
         params.RiskGroup = params.RiskGroup / 1;
         console.log("修改接口", params);
@@ -528,9 +574,23 @@ class algoConfig extends React.PureComponent {
             data: params,
         }).then((res) => {
             // console.log(res);
-            message.success(res.message);
+            // message.success(res.message);
             // this.isAction = true;
             // this.getData(this.searchParam, this.state.pagination);
+            // message.success(res.message);
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                // showTip(this, "修改算法风控组成功");
+                // this.isAction = true;
+                this.getData(this.searchParam, this.state.pagination);
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                );
+            } else {
+                message.error(msg);
+            }
         });
     };
     //填入更新记录
@@ -594,13 +654,42 @@ class algoConfig extends React.PureComponent {
         });
     };
     inputChange = (e) => {
-        let val = e.target.value;
+        // console.log(e);
+        // let val = e.target.value;
+        let val = e;
         if (this.inputTimeout) {
             clearTimeout(this.inputTimeout);
         }
         this.inputTimeout = setTimeout(() => {
             this.getRiskGroup(val);
         }, 1000);
+    };
+    //获取所有风控组
+    getAllRiskGroup = (params = {}) => {
+        // return;
+        http.post({
+            // url: "/risk/queryRisk",
+            url: "/risk/riskList",
+            data: params,
+        }).then((res) => {
+            // console.log(res);
+            let idArr = [];
+            if (res.data && res.data.length > 0) {
+                let dataArr = res.data;
+                if (dataArr.length > 0) {
+                    idArr = dataArr.map((item) => {
+                        let obj = {};
+                        obj.key = item.id;
+                        obj.value = item.id;
+                        return obj;
+                    });
+                    // console.log(idArr);
+                }
+            }
+            this.setState({
+                riskList: idArr,
+            });
+        });
     };
     //查询用户风控配置
     getRiskGroup = (id) => {
@@ -617,6 +706,46 @@ class algoConfig extends React.PureComponent {
                 message.error("风控配置组不存在,请重新填写！");
                 return;
             }
+            let config = JSON.parse(res.data);
+            // this.setState({ userRiskConfig: config });
+            // console.log(config);
+            let enable = (config.RiskEnable / 1).toString(2).padStart(9, "0");
+            // let enableArr = enable.split("");
+            let enableArr = enable.split("").map((item) => item == 1);
+            // console.log(enableArr);
+            this.props.form.setFieldsValue({
+                // riskGroup: record.riskGroup + "",
+                byte0: enableArr[8],
+                byte1: enableArr[7],
+                byte2: enableArr[6],
+                byte3: enableArr[5],
+                byte4: enableArr[4],
+                byte5: enableArr[3],
+                byte6: enableArr[2],
+                byte7: enableArr[1],
+                byte8: enableArr[0],
+                // riskName: config.RiskName,
+                entrustItemThreshold: config.EntrustItemThreshold,
+                entrustItemLimit: config.EntrustItemLimit,
+                entrustSeconds: config.EntrustSeconds,
+                entrustTotalThreshold: config.EntrustTotalThreshold,
+                cancelEntrustItemThreshold: config.CancelEntrustItemThreshold,
+                cancelRatioLimit: config.CancelRatioLimit,
+                failedEntrustItemThreshold: config.FailedEntrustItemThreshold,
+                failedRatioLimit: config.FailedRatioLimit,
+                entrustExecEntrustItemThreshold:
+                    config.EntrustExecEntrustItemThreshold,
+                entrustExecRatioLimit: config.EntrustExecRatioLimit,
+                netBuyEntrustItemThreshold: config.NetBuyEntrustItemThreshold,
+                netBuyAmountLimit: config.NetBuyAmountLimit,
+                cancelItemLimit: config.CancelItemLimit,
+                cancelSeconds: config.CancelSeconds,
+                cancelGapSeconds: config.CancelGapSeconds,
+                tradeItemLimit: config.TradeItemLimit,
+                tradeSeconds: config.TradeSeconds,
+                tradeQtyLimit: config.TradeQtyLimit,
+                tradeAmountLimit: config.TradeAmountLimit,
+            });
         });
     };
     getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
@@ -672,6 +801,7 @@ class algoConfig extends React.PureComponent {
     };
     componentDidMount() {
         this.getData();
+        this.getAllRiskGroup();
     }
     render() {
         let scroll = { x: 1000, y: 445 };
@@ -720,7 +850,12 @@ class algoConfig extends React.PureComponent {
                     centered
                 >
                     <Form layout={"vertical"}>
-                        <div>
+                        <div
+                            style={{
+                                position: "relative",
+                            }}
+                            id="algo1"
+                        >
                             <div className={styles.tit}>
                                 <div className={styles.text}>风控组</div>
                             </div>
@@ -744,6 +879,7 @@ class algoConfig extends React.PureComponent {
                                         修改风控组
                                     </label>
                                 }
+
                                 // {...formItemLayout}
                             >
                                 {getFieldDecorator("riskGroup", {
@@ -755,14 +891,16 @@ class algoConfig extends React.PureComponent {
                                     ],
                                     // initialValue: "0",
                                 })(
-                                    <Input
-                                        placeholder=""
-                                        onChange={this.inputChange}
-                                    />
+                                    SelectOption(this.state.riskList, {
+                                        placeholder: "请选择",
+                                        onChange: this.inputChange,
+                                        getPopupContainer: () =>
+                                            document.getElementById("algo1"),
+                                    })
                                 )}
                             </Form.Item>
                         </div>
-                        <div style={{ display: "none" }}>
+                        <div className={styles.hide}>
                             <div
                                 className={styles.tit}
                                 title="账户总委托笔数超过【风控启用数量】后,在【时间量(s)】时间内,委托数量不能超过【时间量总委托笔数】,超过的数量将会被拒绝"
@@ -1096,7 +1234,7 @@ class algoConfig extends React.PureComponent {
                                 </Form.Item>
                             </div>
                         </div>
-                        <div style={{ display: "none" }}>
+                        <div className={styles.hide}>
                             <div
                                 className={styles.tit}
                                 title="账户/算法总委托笔数超过【风控启用委托数量】后,账户委托成交比小于【委托成交比(%)】后,后续委托前端会有相应体术(不影响委托);"
@@ -1270,7 +1408,7 @@ class algoConfig extends React.PureComponent {
                                 </Form.Item>
                             </div>
                         </div>
-                        <div style={{ display: "none" }}>
+                        <div className={styles.hide}>
                             <div
                                 className={styles.tit}
                                 title="账户撤单频率在【时间量(s)】时间内,撤单数量不能超过【撤单频率笔数】,超过的撤单将会被拒绝;"
@@ -1401,7 +1539,7 @@ class algoConfig extends React.PureComponent {
                                 )}
                             </Form.Item>
                         </div>
-                        <div style={{ display: "none" }}>
+                        <div className={styles.hide}>
                             <div
                                 className={styles.tit}
                                 title="在【时间量(s)】时间内，账户下单频率笔数不能超过【下单频率笔数】,账户下单总量不能超过【下单总量】,账户下单总金额不能超过【下单总金额】,超过上面的任意一个将会拒绝该委托"

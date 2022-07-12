@@ -435,7 +435,7 @@ class algoGroup extends React.PureComponent {
     }
     render() {
         let scroll = { x: 1000, y: 445 };
-        let scroll2 = { x: 1000, y: 1200 };
+        let scroll2 = { x: 1000, y: 500 };
         let info = this.state.info;
         //批量
         let { getFieldDecorator } = this.props.form;
@@ -498,7 +498,10 @@ class algoGroup extends React.PureComponent {
                     width={1288}
                     centered
                 >
-                    <Form layout={"vertical"}>
+                    <Form
+                        layout={"vertical"}
+                        style={{ maxHeight: "690px", overflow: "hidden" }}
+                    >
                         <Row gutter={[60]}>
                             {this.isUpdate && (
                                 <Col span={12}>
@@ -568,7 +571,7 @@ class algoGroup extends React.PureComponent {
                                 </Form.Item>
                             </Col>
                         </Row>
-                        <div ref="counterTable" className="counterTable">
+                        <div>
                             <Table
                                 rowKey={"id"}
                                 columns={this.columns2()}

@@ -37,6 +37,10 @@
         }
     }
 }
+.hide {
+    overflow: hidden;
+    height: 0;
+}
 .rowFlex {
     display: flex;
     justify-content: space-between;
@@ -45,11 +49,13 @@
             // width: 50%;
             flex: 1;
         }
-        .ant-select {
-            width: 100% !important;
-        }
     }
 }
 .marLose14 {
     margin-top: -14px;
+    :global {
+        .ant-select {
+            width: 100% !important;
+        }
+    }
 }
