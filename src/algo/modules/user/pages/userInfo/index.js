@@ -28,7 +28,6 @@ class userInfo extends React.PureComponent {
         riskList: [], //算法列表
         algoList: [],
         algoSecList: [],
-        algoGroupList: [],
     };
     getInsertFormFields = () => {
         return [
@@ -126,7 +125,7 @@ class userInfo extends React.PureComponent {
                 ],
                 component:
                     // <Input placeholder="请输入" readOnly disabled />
-                    SelectOption(this.state.algoGroupList, {
+                    SelectOption(this.state.algoSecList, {
                         placeholder: "请选择算法权限组",
                     }),
             },
@@ -238,7 +237,7 @@ class userInfo extends React.PureComponent {
                         message: "参数不能为空",
                     },
                 ],
-                component: SelectOption(this.state.algoGroupList, {
+                component: SelectOption(this.state.algoSecList, {
                     placeholder: "请选择算法权限组",
                 }),
             },
@@ -273,7 +272,7 @@ class userInfo extends React.PureComponent {
             {
                 label: "算法权限组",
                 id: "algoGroup",
-                component: SelectOption(this.state.algoGroupList, {
+                component: SelectOption(this.state.algoSecList, {
                     placeholder: "请选择算法权限组",
                 }),
             },
@@ -792,6 +791,7 @@ class userInfo extends React.PureComponent {
                 // res.data.forEach((item) => (item.isShow = "是"));
                 // console.log(idArr);
             }
+            console.log(res.data);
             this.setState({
                 algoSecList: idArr,
                 algoList: res.data,
