@@ -318,7 +318,7 @@ class userInfo extends React.PureComponent {
                 // this.getData();
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
                 );
             } else {
                 message.error(msg);
@@ -347,7 +347,7 @@ class userInfo extends React.PureComponent {
                 // this.getData();
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
                 );
             } else {
                 message.error(msg);
@@ -543,7 +543,7 @@ class userInfo extends React.PureComponent {
                 // this.getData();
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
                 );
             } else {
                 message.error(msg);
@@ -573,7 +573,7 @@ class userInfo extends React.PureComponent {
                 // this.getData();
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
                 );
             } else {
                 message.error(msg);
@@ -662,7 +662,7 @@ class userInfo extends React.PureComponent {
 
         params.AlgoGroup = data.algoGroup / 1;
 
-        params.AlgoProperty = this.record2.algoProperty;
+        // params.AlgoProperty = this.record2.algoProperty;
         params.UuserId = this.record2.uuserId / 1;
         // console.log(this.record2);
         // console.log("参数", params);
@@ -678,7 +678,7 @@ class userInfo extends React.PureComponent {
                 this.getData(this.searchParam, this.state.pagination);
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
                 );
             } else {
                 message.error(msg);
@@ -791,7 +791,7 @@ class userInfo extends React.PureComponent {
                 // res.data.forEach((item) => (item.isShow = "是"));
                 // console.log(idArr);
             }
-            console.log(res.data);
+            // console.log(res.data);
             this.setState({
                 algoSecList: idArr,
                 algoList: res.data,
