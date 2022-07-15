@@ -50,10 +50,14 @@ class RegularWay extends React.PureComponent {
                 } else {
                     let data = res.data;
                     let echartLen = Object.keys(data);
+                    if (
+                        !data["tradeOrder"].length &&
+                        !data["cancelTradeOrder"].length &&
+                        !data["dealTradeOrder"].length
+                    ) {
+                        message.error("该时间段暂无数据");
+                    }
                     echartLen.forEach((item) => {
-                        if (!data[item].length) {
-                            message.error("该时间段暂无数据");
-                        }
                         this.generateChart(data[item], item);
                     });
                 }
