@@ -50,24 +50,24 @@ class algoConfig extends React.PureComponent {
                         onChange: this.inputChange,
                     }),
             },
+            // {
+            //     label: "算法厂商ID",
+            //     id: "UuserId",
+            //     initialValue: "",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //         {
+            //             message: "请输入正整数",
+            //             pattern: /^\d+$/i,
+            //         },
+            //     ],
+            //     component: <Input placeholder="请输入" />,
+            // },
             {
-                label: "算法厂商ID",
-                id: "UuserId",
-                initialValue: "",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        message: "请输入正整数",
-                        pattern: /^\d+$/i,
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "算法厂商名",
+                label: "算法厂商",
                 id: "ProviderName",
                 initialValue: "",
                 rules: [
@@ -76,7 +76,11 @@ class algoConfig extends React.PureComponent {
                         message: "参数不能为空",
                     },
                 ],
-                component: <Input placeholder="请输入" />,
+                // component: <Input placeholder="请输入" />,
+                component: SelectOption(this.state.providerList, {
+                    placeholder: "请选择",
+                    // onChange: this.inputChange,
+                }),
             },
             {
                 label: "算法类型",
@@ -184,24 +188,24 @@ class algoConfig extends React.PureComponent {
                         onChange: this.inputChange,
                     }),
             },
+            // {
+            //     label: "算法厂商ID",
+            //     id: "UuserId",
+            //     initialValue: "",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //         {
+            //             message: "请输入正整数",
+            //             pattern: /^\d+$/i,
+            //         },
+            //     ],
+            //     component: <Input placeholder="请输入" />,
+            // },
             {
-                label: "算法厂商ID",
-                id: "UuserId",
-                initialValue: "",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        message: "请输入正整数",
-                        pattern: /^\d+$/i,
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "算法厂商名",
+                label: "算法厂商",
                 id: "ProviderName",
                 initialValue: "",
                 rules: [
@@ -210,7 +214,11 @@ class algoConfig extends React.PureComponent {
                         message: "参数不能为空",
                     },
                 ],
-                component: <Input placeholder="请输入" />,
+                // component: <Input placeholder="请输入" />,
+                component: SelectOption(this.state.providerList, {
+                    placeholder: "请选择",
+                    // onChange: this.inputChange,
+                }),
             },
             {
                 label: "算法类型",
@@ -404,6 +412,7 @@ class algoConfig extends React.PureComponent {
         userRiskConfig: {},
         pagination: { total: 0 },
         riskList: [],
+        providerList: [],
     };
     // type 1 : 是否显示    type:2  是否可用
     onSwitchChange = (val, record, type) => {
@@ -469,9 +478,13 @@ class algoConfig extends React.PureComponent {
             }
         }
         params.AlgorithmStatus = status;
-        params.UuserId = params.UuserId / 1;
+        // params.UuserId = params.UuserId / 1;
         params.AlgorithmType = params.AlgorithmType / 1;
         params.RiskGroup = params.RiskGroup / 1;
+        let valArr = params.ProviderName.split("-");
+        // console.log(valArr);
+        params.ProviderName = valArr[0];
+        params.UuserId = valArr[1] / 1;
         console.log("新增接口", params);
         // return;
         http.post({
@@ -488,7 +501,7 @@ class algoConfig extends React.PureComponent {
                 this.getData(this.searchParam, this.state.pagination);
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
                 );
             } else {
                 message.error(msg);
@@ -511,10 +524,12 @@ class algoConfig extends React.PureComponent {
         //     "Parameter": "{\"side\":2, \"qty\":\"null\"}",
         //     "RiskGroup": 1
         // }
+        // console.log(object);
         let formData = {
             AlgoName: record.algoName,
-            ProviderName: record.providerName,
-            UuserId: record.uuserId,
+            // ProviderName: record.providerName,
+            ProviderName: record.providerName + "-" + record.uuserId,
+            // UuserId: record.uuserId,
             AlgorithmType: record.algorithmType + "",
             AlgorithmTypeName: record.algorithmTypeName,
             // AlgorithmStatus: record.AlgorithmStatus + "",
@@ -564,9 +579,13 @@ class algoConfig extends React.PureComponent {
             }
         }
         params.AlgorithmStatus = status;
-        params.UuserId = params.UuserId / 1;
+        // params.UuserId = params.UuserId / 1;
         params.AlgorithmType = params.AlgorithmType / 1;
         params.RiskGroup = params.RiskGroup / 1;
+        let valArr = params.ProviderName.split("-");
+        // console.log(valArr);
+        params.ProviderName = valArr[0];
+        params.UuserId = valArr[1] / 1;
         console.log("修改接口", params);
         // return;
         http.post({
@@ -586,7 +605,7 @@ class algoConfig extends React.PureComponent {
                 this.getData(this.searchParam, this.state.pagination);
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
                 );
             } else {
                 message.error(msg);
@@ -646,7 +665,7 @@ class algoConfig extends React.PureComponent {
                 this.getData(this.searchParam, this.state.pagination);
             } else if (res.code == 20000) {
                 message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.indexOf("]"))
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
                 );
             } else {
                 message.error(msg);
@@ -688,6 +707,33 @@ class algoConfig extends React.PureComponent {
             }
             this.setState({
                 riskList: idArr,
+            });
+        });
+    };
+    //获取所有厂商
+    getProvider = (params = {}) => {
+        // return;
+        http.get({
+            // url: "/risk/queryRisk",
+            url: "/algo/listProvider",
+            data: params,
+        }).then((res) => {
+            console.log(res);
+            let idArr = [];
+            if (res.data && res.data.length > 0) {
+                let dataArr = res.data;
+                if (dataArr.length > 0) {
+                    idArr = dataArr.map((item) => {
+                        let obj = {};
+                        obj.key = item.providerName + "-" + item.uuserId;
+                        obj.value = item.providerName + "-" + item.uuserId;
+                        return obj;
+                    });
+                    // console.log(idArr);
+                }
+            }
+            this.setState({
+                providerList: idArr,
             });
         });
     };
@@ -802,6 +848,7 @@ class algoConfig extends React.PureComponent {
     componentDidMount() {
         this.getData();
         this.getAllRiskGroup();
+        this.getProvider();
     }
     render() {
         let scroll = { x: 1000, y: 445 };
