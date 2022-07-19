@@ -725,8 +725,10 @@ class algoConfig extends React.PureComponent {
                 if (dataArr.length > 0) {
                     idArr = dataArr.map((item) => {
                         let obj = {};
-                        obj.key = item.providerName + "-" + item.uuserId;
-                        obj.value = item.providerName + "-" + item.uuserId;
+                        // obj.key = item.providerName + "-" + item.uuserId;
+                        // obj.value = item.providerName + "-" + item.uuserId;
+                        obj.key = item.userName + "-" + item.id;
+                        obj.value = item.userName + "-" + item.id;
                         return obj;
                     });
                     // console.log(idArr);
