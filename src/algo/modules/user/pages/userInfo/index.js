@@ -375,7 +375,7 @@ class userInfo extends React.PureComponent {
             {
                 title: "ID",
                 dataIndex: "id",
-                width: 80,
+                width: 100,
             },
             {
                 title: "用户ID",

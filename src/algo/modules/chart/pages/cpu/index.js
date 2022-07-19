@@ -27,12 +27,12 @@ class Cpu extends React.PureComponent {
                 startTime: noTime
                     ? ""
                     : moment(values["pickerTime"][0]).format(
-                          "YYYY/MM/DD HH:mm:ss"
+                          "YYYY-MM-DD HH:mm:ss"
                       ),
                 endTime: noTime
                     ? ""
                     : moment(values["pickerTime"][1]).format(
-                          "YYYY/MM/DD HH:mm:ss"
+                          "YYYY-MM-DD HH:mm:ss"
                       ),
             };
             this.getData(params);
@@ -179,7 +179,7 @@ class Cpu extends React.PureComponent {
         // console.timeEnd("echarts");
     };
     componentDidMount() {
-        let yesterday = moment(new Date()).format("YYYY/MM/DD");
+        let yesterday = moment(new Date()).format("YYYY-MM-DD");
         this.getData({
             hostId: "1",
             startTime: `${yesterday} 00:00:00`,
@@ -197,7 +197,7 @@ class Cpu extends React.PureComponent {
             console.log("cpu摧毁");
         }
         const { getFieldDecorator } = this.props.form;
-        let yesterday = moment(new Date()).format("YYYY/MM/DD");
+        let yesterday = moment(new Date()).format("YYYY-MM-DD");
         let dataFormatter = "YYYY-MM-DD HH:mm:ss";
         return (
             <div className={styles.container}>
