@@ -108,7 +108,12 @@ class CurdComponent extends React.PureComponent {
         let newCol = columns;
         let { updateRecord, deleteRecord, setUpdateModal } = this.props;
         columns.forEach((item) => (item.ellipsis = true));
-        if (updateRecord || deleteRecord) {
+        // if (updateRecord || deleteRecord) {
+        //增加只读权限
+        if (
+            (updateRecord || deleteRecord) &&
+            sessionStorage.userPrivilege != 2
+        ) {
             newCol = [
                 ...columns,
                 {
@@ -420,20 +425,23 @@ class CurdComponent extends React.PureComponent {
                             pageId={this.pageId}
                             onReady={this.onSearchReady}
                         >
-                            {!this.props.hasSearchSlot && insertBtnText && (
-                                <Button
-                                    type="primary"
-                                    icon="plus"
-                                    onClick={this.handleInsertBtn}
-                                >
-                                    {insertBtnText}
-                                </Button>
-                            )}
-                            {this.props.hasSearchSlot && (
-                                <React.Fragment>
-                                    {this.props.addBtn}
-                                </React.Fragment>
-                            )}
+                            {!this.props.hasSearchSlot &&
+                                hasInsert &&
+                                insertBtnText && (
+                                    <Button
+                                        type="primary"
+                                        icon="plus"
+                                        onClick={this.handleInsertBtn}
+                                    >
+                                        {insertBtnText}
+                                    </Button>
+                                )}
+                            {this.props.hasSearchSlot &&
+                                sessionStorage.userPrivilege != 2 && (
+                                    <React.Fragment>
+                                        {this.props.addBtn}
+                                    </React.Fragment>
+                                )}
                         </SearchForm>
                         {/* <div
                             style={{

@@ -374,7 +374,12 @@ class algoConfig extends React.PureComponent {
                     >
                         <Tooltip title="修改风控组">
                             {record.riskGroup}
-                            <Icon type="edit" style={{ color: "#1899ff" }} />
+                            {sessionStorage.userPrivilege != 2 && (
+                                <Icon
+                                    type="edit"
+                                    style={{ color: "#1899ff" }}
+                                />
+                            )}
                         </Tooltip>
                     </div>
                 ),
@@ -416,6 +421,9 @@ class algoConfig extends React.PureComponent {
     };
     // type 1 : 是否显示    type:2  是否可用
     onSwitchChange = (val, record, type) => {
+        if (sessionStorage.userPrivilege == 2) {
+            return;
+        }
         // console.log(val, record, type);
         // console.log(type);
         let algorithmStatus;

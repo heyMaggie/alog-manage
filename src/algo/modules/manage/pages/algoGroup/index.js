@@ -21,7 +21,7 @@ let getSearchFormFields = () => {
 
 class algoGroup extends React.PureComponent {
     columns = (params) => {
-        return [
+        let tab = [
             {
                 title: "ID",
                 dataIndex: "id",
@@ -57,6 +57,10 @@ class algoGroup extends React.PureComponent {
                 ),
             },
         ];
+        if (sessionStorage.userPrivilege == 2) {
+            tab.pop();
+        }
+        return tab;
     };
     columns2 = (params) => {
         return [

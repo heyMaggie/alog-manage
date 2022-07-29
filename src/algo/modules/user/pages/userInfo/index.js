@@ -266,6 +266,7 @@ class userInfo extends React.PureComponent {
                 label: "用户风控组",
                 id: "riskGroup",
                 component: SelectOption(this.state.riskList, {
+                    allowClear: true,
                     placeholder: "请选择用户风控组",
                 }),
             },
@@ -273,6 +274,7 @@ class userInfo extends React.PureComponent {
                 label: "算法权限组",
                 id: "algoGroup",
                 component: SelectOption(this.state.algoSecList, {
+                    allowClear: true,
                     placeholder: "请选择算法权限组",
                 }),
             },
@@ -404,7 +406,12 @@ class userInfo extends React.PureComponent {
                     >
                         <Tooltip title="修改风控组">
                             {record.riskGroup}
-                            <Icon type="edit" style={{ color: "#1899ff" }} />
+                            {sessionStorage.userPrivilege != 2 && (
+                                <Icon
+                                    type="edit"
+                                    style={{ color: "#1899ff" }}
+                                />
+                            )}
                         </Tooltip>
                     </div>
                 ),
@@ -421,7 +428,12 @@ class userInfo extends React.PureComponent {
                     >
                         <Tooltip title="修改算法权限组">
                             {record.algoGroup}
-                            <Icon type="edit" style={{ color: "#1899ff" }} />
+                            {sessionStorage.userPrivilege != 2 && (
+                                <Icon
+                                    type="edit"
+                                    style={{ color: "#1899ff" }}
+                                />
+                            )}
                         </Tooltip>
                     </div>
                 ),
