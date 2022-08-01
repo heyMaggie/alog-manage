@@ -31,7 +31,17 @@ export default class UploadWrap extends React.PureComponent {
                                 this.props.sucCallback();
                             }
                         } else {
-                            message.error(`${info.file.response.message}`);
+                            let msg = info.file.response.message;
+                            if (msg.lastIndexOf("]") > msg.indexOf("[")) {
+                                message.error(
+                                    msg.substring(
+                                        msg.indexOf("[") + 1,
+                                        msg.lastIndexOf("]")
+                                    )
+                                );
+                            } else {
+                                message.error(`${info.file.response.message}`);
+                            }
                         }
                     } else if (info.file.status === "error") {
                         message.error(`${info.file.name} 上传失败`);

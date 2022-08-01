@@ -87,8 +87,8 @@ class FormLogin extends React.Component {
                     </div>
                     <FormItem>
                         {getFieldDecorator("userName", {
-                            // initialValue: "admin",
-                            initialValue: "user_read_only",
+                            initialValue: "admin",
+                            // initialValue: "user_read_only",
                             rules: [
                                 {
                                     required: true,
