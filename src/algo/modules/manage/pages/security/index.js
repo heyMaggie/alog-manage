@@ -94,6 +94,7 @@ const columns = (params) => {
             title: "更新时间",
             dataIndex: "updateTime",
             key: "updateTime",
+            width: 180,
         },
     ];
 };

@@ -1,58 +1,49 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
-import { Input } from "antd";
+import { Input, AutoComplete } from "antd";
 
 let columns = (params) => {
     return [
         {
             title: "ID",
-            dataIndex: "securityId",
-            key: "securityId",
+            dataIndex: "id",
         },
         {
             title: "算法厂商",
-            dataIndex: "securityIdSource",
-            key: "securityIdSource",
+            dataIndex: "provider_name",
         },
         {
             title: "算法类型",
-            dataIndex: "securityName",
-            key: "securityName",
+            dataIndex: "algo_typeValue",
         },
         {
             title: "算法名称",
-            dataIndex: "prevClosePx",
-            key: "prevClosePx",
+            dataIndex: "algo_name",
         },
         {
             title: "股票代码",
-            dataIndex: "securityStatusValue",
-            key: "securityStatus",
+            dataIndex: "sec_id",
         },
         {
             title: "股票名称",
-            dataIndex: "securityStatusValue",
-            key: "securityStatus",
+            dataIndex: "sec_name",
         },
         {
-            title: "开仓率",
-            dataIndex: "propertyValue",
-            key: "property",
+            title: "开仓率(%)",
+            dataIndex: "open_rate",
         },
         {
-            title: "收益率",
-            dataIndex: "buyQtyUpperLimit",
-            key: "buyQtyUpperLimit",
+            title: "收益率(%)",
+            dataIndex: "income_rate",
         },
         {
             title: "基点",
-            dataIndex: "buyQtyUnit",
+            dataIndex: "basis_point",
         },
         {
             title: "创建时间",
-            dataIndex: "sellQtyUpperLimit",
-            key: "sellQtyUpperLimit",
+            dataIndex: "create_time",
         },
     ];
 };
@@ -62,49 +53,134 @@ export default class algoBest extends React.PureComponent {
         searchLoading: false,
         selectRow: [],
         info: [],
-        pagination: { total: 0 },
+        pagination: { current: 1, pageSize: 11, total: 0 },
         providerList: [],
+        algoList: [],
+        algoInfoList: [],
+        securityList: [],
+        currentDataLists: [],
+        currentDataListsAdd: [],
+        securityObj: {},
     };
     getSearchFormFields = () => {
         return [
             {
                 label: "算法厂商",
-                id: "securityId",
+                id: "provider_id",
                 component: SelectOption(this.state.providerList, {
                     placeholder: "请选择",
                     allowClear: true,
                     // onChange: this.inputChange,
                 }),
             },
+            // {
+            //     label: "算法类型",
+            //     id: "algo_type",
+            //     component: SelectOption(dict.algorithmType, {
+            //         placeholder: "请选择",
+            //         allowClear: true,
+            //     }),
+            // },
             {
-                label: "算法类型",
-                id: "securityId4",
-                component: SelectOption(dict.algorithmType, {
+                label: "算法",
+                id: "algo_id",
+                component: SelectOption(this.state.algoList, {
                     placeholder: "请选择",
                     allowClear: true,
-                    // style: {
-                    //     width: 400,
-                    // },
                 }),
             },
             {
-                label: "算法",
-                id: "securityId3",
-                component: <Input placeholder="请输入：接口返回？" />,
-            },
-            {
-                label: "股票",
-                id: "securityId2",
-                component: <Input placeholder="请输入：接口返回？" />,
+                label: "股票代码",
+                id: "sec_id",
+                // component: <Input placeholder="请输入：接口返回？" />,
+                component: (
+                    <AutoComplete
+                        dataSource={this.state.currentDataLists}
+                        onChange={this.handleChange}
+                        allowClear={true}
+                    />
+                ),
             },
         ];
     };
-
+    handleChange = (value) => {
+        // console.log(value);
+        if (value) {
+            const { securityList } = this.state;
+            let currentDataLists = securityList.filter((item) =>
+                item.toUpperCase().includes(value.toUpperCase())
+            );
+            // console.log(currentDataLists);
+            let optionArr = [];
+            if (currentDataLists.length > 0) {
+                optionArr =
+                    currentDataLists.length > 10
+                        ? currentDataLists.slice(0, 10)
+                        : currentDataLists;
+            }
+            this.setState({ currentDataLists: optionArr });
+        } else {
+            const { securityList } = this.state;
+            let currentDataLists = securityList;
+            let optionArr = [];
+            if (currentDataLists.length > 0) {
+                optionArr =
+                    currentDataLists.length > 10
+                        ? currentDataLists.slice(0, 10)
+                        : currentDataLists;
+            }
+            this.setState({ currentDataLists: optionArr });
+        }
+    };
+    handleChange2 = (value) => {
+        if (value) {
+            const { securityList } = this.state;
+            let currentDataLists = securityList.filter((item) =>
+                item.toUpperCase().includes(value.toUpperCase())
+            );
+            // console.log(currentDataLists);
+            let optionArr = [];
+            if (currentDataLists.length > 0) {
+                optionArr =
+                    currentDataLists.length > 10
+                        ? currentDataLists.slice(0, 10)
+                        : currentDataLists;
+            }
+            this.setState({ currentDataLists2: optionArr });
+        } else {
+            const { securityList } = this.state;
+            let currentDataLists = securityList;
+            let optionArr = [];
+            if (currentDataLists.length > 0) {
+                optionArr =
+                    currentDataLists.length > 10
+                        ? currentDataLists.slice(0, 10)
+                        : currentDataLists;
+            }
+            this.setState({ currentDataLists2: optionArr });
+        }
+    };
     getInsertFormFields = () => {
         return [
+            // {
+            //     label: "算法厂商",
+            //     id: "provider_id",
+            //     initialValue: "",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //     ],
+            //     // component: <Input placeholder="请输入" />,
+            //     component: SelectOption(this.state.providerList, {
+            //         placeholder: "请选择",
+            //         // onChange: this.inputChange,
+            //     }),
+            // },
             {
-                label: "算法厂商",
-                id: "ProviderName",
+                label: "算法",
+                id: "algo_id",
                 initialValue: "",
                 rules: [
                     {
@@ -113,65 +189,58 @@ export default class algoBest extends React.PureComponent {
                     },
                 ],
                 // component: <Input placeholder="请输入" />,
-                component: SelectOption(this.state.providerList, {
+                component: SelectOption(this.state.algoList, {
                     placeholder: "请选择",
                     // onChange: this.inputChange,
                 }),
             },
             {
-                label: "算法类型",
-                id: "AlgorithmType",
-                initialValue: "1",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                ],
-                component: SelectOption(dict.algorithmType, {
-                    placeholder: "请选择",
-                    // allowClear: true,
-                    style: {
-                        width: 400,
-                    },
-                }),
-            },
-            {
                 label: "股票代码",
-                id: "securityName",
-                initialValue: "",
+                id: "sec_id",
+                initialValue: "000001",
                 rules: [
                     {
                         required: true,
                         message: "参数不能为空",
                     },
                 ],
+                // component: (
+                //     // <Input placeholder="请输入" readOnly disabled />
+                //     <Input placeholder="请输入" />
+                // ),
                 component: (
-                    // <Input placeholder="请输入" readOnly disabled />
-                    <Input placeholder="请输入" />
+                    <AutoComplete
+                        dataSource={this.state.currentDataLists2}
+                        allowClear={true}
+                        onChange={this.handleChange2}
+                    />
                 ),
             },
             {
                 label: "开仓率",
-                id: "prevClosePx",
-                initialValue: "",
+                id: "open_rate",
+                initialValue: "0",
                 rules: [
                     {
                         required: true,
                         message: "参数不能为空",
                     },
+                    // {
+                    //     message: "请输入0%-100% 之间的数",
+                    //     pattern: new RegExp(
+                    //         "(^(\\d|[1-9]\\d)(\\.\\d{1,2})?$)|(^100$)"
+                    //     ),
+                    // },
                     {
-                        message: "请输入0%-100% 之间的数",
-                        pattern: new RegExp(
-                            "(^(\\d|[1-9]\\d)(\\.\\d{1,2})?$)|(^100$)"
-                        ),
+                        message: "请输入数字",
+                        pattern: new RegExp("^\\d+$"),
                     },
                 ],
                 component: <Input placeholder="请输入" suffix="%" />,
             },
             {
                 label: "收益率",
-                id: "securityStatus",
+                id: "income_rate",
                 initialValue: "0",
                 rules: [
                     {
@@ -179,22 +248,24 @@ export default class algoBest extends React.PureComponent {
                         message: "参数不能为空",
                     },
                     {
-                        message: "请输入0%-100% 之间的数",
-                        pattern: new RegExp(
-                            "(^(\\d|[1-9]\\d)(\\.\\d{1,2})?$)|(^100$)"
-                        ),
+                        message: "请输入数字",
+                        pattern: new RegExp("^\\d+$"),
                     },
                 ],
                 component: <Input placeholder="请输入" suffix="%" />,
             },
             {
                 label: "基点",
-                id: "property",
+                id: "basis_point",
                 initialValue: "0",
                 rules: [
                     {
                         required: true,
                         message: "参数不能为空",
+                    },
+                    {
+                        message: "请输入数字",
+                        pattern: new RegExp("^\\d+$"),
                     },
                 ],
                 component: <Input placeholder="请输入" />,
@@ -203,9 +274,25 @@ export default class algoBest extends React.PureComponent {
     };
     getUpdateFormFields = () => {
         return [
+            // {
+            //     label: "算法厂商",
+            //     id: "provider_id",
+            //     initialValue: "",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //     ],
+            //     // component: <Input placeholder="请输入" />,
+            //     component: SelectOption(this.state.providerList, {
+            //         placeholder: "请选择",
+            //         // onChange: this.inputChange,
+            //     }),
+            // },
             {
-                label: "算法厂商",
-                id: "ProviderName",
+                label: "算法",
+                id: "algo_id",
                 initialValue: "",
                 rules: [
                     {
@@ -214,33 +301,16 @@ export default class algoBest extends React.PureComponent {
                     },
                 ],
                 // component: <Input placeholder="请输入" />,
-                component: SelectOption(this.state.providerList, {
+                component: SelectOption(this.state.algoList, {
                     placeholder: "请选择",
+                    disabled: true,
                     // onChange: this.inputChange,
                 }),
             },
             {
-                label: "算法类型",
-                id: "AlgorithmType",
-                initialValue: "1",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                ],
-                component: SelectOption(dict.algorithmType, {
-                    placeholder: "请选择",
-                    // allowClear: true,
-                    style: {
-                        width: 400,
-                    },
-                }),
-            },
-            {
                 label: "股票代码",
-                id: "securityName",
-                initialValue: "",
+                id: "sec_id",
+                initialValue: "000001",
                 rules: [
                     {
                         required: true,
@@ -249,30 +319,34 @@ export default class algoBest extends React.PureComponent {
                 ],
                 component: (
                     // <Input placeholder="请输入" readOnly disabled />
-                    <Input placeholder="请输入" />
+                    <Input placeholder="请输入" disabled />
                 ),
             },
             {
                 label: "开仓率",
-                id: "prevClosePx",
-                initialValue: "",
+                id: "open_rate",
+                initialValue: "0",
                 rules: [
                     {
                         required: true,
                         message: "参数不能为空",
                     },
+                    // {
+                    //     message: "请输入0%-100% 之间的数",
+                    //     pattern: new RegExp(
+                    //         "(^(\\d|[1-9]\\d)(\\.\\d{1,2})?$)|(^100$)"
+                    //     ),
+                    // },
                     {
-                        message: "请输入0%-100% 之间的数",
-                        pattern: new RegExp(
-                            "(^(\\d|[1-9]\\d)(\\.\\d{1,2})?$)|(^100$)"
-                        ),
+                        message: "请输入数字",
+                        pattern: new RegExp("^\\d+$"),
                     },
                 ],
                 component: <Input placeholder="请输入" suffix="%" />,
             },
             {
                 label: "收益率",
-                id: "securityStatus",
+                id: "income_rate",
                 initialValue: "0",
                 rules: [
                     {
@@ -280,22 +354,24 @@ export default class algoBest extends React.PureComponent {
                         message: "参数不能为空",
                     },
                     {
-                        message: "请输入0%-100% 之间的数",
-                        pattern: new RegExp(
-                            "(^(\\d|[1-9]\\d)(\\.\\d{1,2})?$)|(^100$)"
-                        ),
+                        message: "请输入数字",
+                        pattern: new RegExp("^\\d+$"),
                     },
                 ],
                 component: <Input placeholder="请输入" suffix="%" />,
             },
             {
                 label: "基点",
-                id: "property",
+                id: "basis_point",
                 initialValue: "0",
                 rules: [
                     {
                         required: true,
                         message: "参数不能为空",
+                    },
+                    {
+                        message: "请输入数字",
+                        pattern: new RegExp("^\\d+$"),
                     },
                 ],
                 component: <Input placeholder="请输入" />,
@@ -312,88 +388,110 @@ export default class algoBest extends React.PureComponent {
 
     handleInsertRecord = (fromData) => {
         console.log("新增接口", fromData);
+        // let provider = this.state.providerList.find(
+        //     (item) => item.key == fromData.provider_id
+        // );
+        // if (!provider) {
+        //     message.error("算法厂商名不存在");
+        //     return;
+        // }
+        let algo = this.state.algoInfoList.find(
+            (item) => item.id == fromData.algo_id
+        );
+        console.log(algo);
+        if (!algo) {
+            message.error("算法不存在");
+            return;
+        }
+        let sec = this.state.securityList.find(
+            (item) => item == fromData.sec_id
+        );
+        // console.log(this.state.securityList,sec);
+        if (!sec) {
+            message.error("股票代码不存在");
+            return;
+        }
         let params = {
-            SecurityId: fromData.securityId,
-            SecurityIdSource: fromData.securityIdSource,
-            SecurityName: fromData.securityName,
-            PrevClosePx: fromData.prevClosePx * 1,
-            BuyQtyUpperLimit: fromData.buyQtyUpperLimit * 100,
-            SellQtyUpperLimit: fromData.sellQtyUpperLimit * 100,
-            MarketBuyQtyUpperLimit: fromData.marketBuyQtyUpperLimit * 100,
-            MarketSellQtyUpperLimit: fromData.marketSellQtyUpperLimit * 100,
-            SecurityStatus: fromData.securityStatus * 1,
-            HasPriceLimit: fromData.hasPriceLimit * 1,
-            LimitType: fromData.limitType * 1,
-            Property: fromData.property * 1,
-            UpperLimitPrice: fromData.upperLimitPrice * 10000,
-            LowerLimitPrice: fromData.lowerLimitPrice * 10000,
-            BuyQtyUnit: fromData.buyQtyUnit * 100,
-            SellQtyUnit: fromData.sellQtyUnit * 100,
-            MarketBuyQtyUnit: fromData.marketBuyQtyUnit * 100,
-            MarketSellQtyUnit: fromData.marketSellQtyUnit * 100,
+            provider_id: algo.uuserId / 1,
+            provider_name: algo.algoName,
+            sec_id: fromData.sec_id,
+            sec_name: this.securityObj[sec],
+            algo_id: algo.id / 1,
+            algo_type: algo.algorithmType / 1,
+            algo_name: algo.algoName,
+            open_rate: fromData.open_rate / 1,
+            income_rate: fromData.income_rate / 1,
+            basis_point: fromData.basis_point / 1,
         };
-        http.post({
-            url: "/security/addSecurityInfo",
-            data: params,
-        }).then((res) => {
-            let msg = res.message;
-            if (res.code == 0) {
-                message.success(msg);
-                // this.getData();
-            } else if (res.code == 20000) {
-                message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
-                );
-            } else {
-                message.error(msg);
-            }
-            this.isAction = true;
-        });
+        // console.log(params);
+        // return;
+        pfhttp
+            .post({
+                url: "/algo-assess/v1/assess/add-optimize-base",
+                data: params,
+            })
+            .then((res) => {
+                console.log(res);
+                let msg = res.msg;
+                if (res.code == 0) {
+                    message.success(msg);
+                    // this.getData();
+                } else if (res.code == 20000) {
+                    message.error(
+                        msg.substring(
+                            msg.indexOf("[") + 1,
+                            msg.lastIndexOf("]")
+                        )
+                    );
+                } else {
+                    message.error(msg);
+                }
+                this.isAction = true;
+            });
     };
     //更新记录
     handleUpdateRecord = ({ form }) => {
-        console.log(form.getFieldsValue());
-        // return;
-        let fromData = form.getFieldsValue();
+        // console.log(form.getFieldsValue());
+        // console.log(this.record);
+        let formData = form.getFieldsValue();
         let params = {
-            Id: this.record.id,
-            SecurityId: fromData.securityId,
-            SecurityIdSource: fromData.securityIdSource,
-            SecurityName: fromData.securityName,
-            PrevClosePx: fromData.prevClosePx * 1,
-            BuyQtyUpperLimit: fromData.buyQtyUpperLimit * 100,
-            SellQtyUpperLimit: fromData.sellQtyUpperLimit * 100,
-            MarketBuyQtyUpperLimit: fromData.marketBuyQtyUpperLimit * 100,
-            MarketSellQtyUpperLimit: fromData.marketSellQtyUpperLimit * 100,
-            SecurityStatus: fromData.securityStatus * 1,
-            HasPriceLimit: fromData.hasPriceLimit * 1,
-            LimitType: fromData.limitType * 1,
-            Property: fromData.property * 1,
-            UpperLimitPrice: fromData.upperLimitPrice * 10000,
-            LowerLimitPrice: fromData.lowerLimitPrice * 10000,
-            BuyQtyUnit: fromData.buyQtyUnit * 100,
-            SellQtyUnit: fromData.sellQtyUnit * 100,
-            MarketBuyQtyUnit: fromData.marketBuyQtyUnit * 100,
-            MarketSellQtyUnit: fromData.marketSellQtyUnit * 100,
+            id: this.record.id,
+            provider_id: this.record.provider_id / 1,
+            provider_name: this.record.provider_name,
+            sec_id: this.record.sec_id,
+            sec_name: this.record.sec_name,
+            algo_id: this.record.algo_id / 1,
+            algo_type: this.record.algo_type / 1,
+            algo_name: this.record.algo_name,
+            open_rate: formData.open_rate / 1,
+            income_rate: formData.income_rate / 1,
+            basis_point: formData.basis_point / 1,
         };
+        // console.log(params);
+        // return;
         // 发送更新请求
-        http.post({
-            url: "/security/updateSecurityInfo",
-            data: params,
-        }).then((res) => {
-            let msg = res.message;
-            if (res.code == 0) {
-                message.success(msg);
-                // this.getData();
-            } else if (res.code == 20000) {
-                message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
-                );
-            } else {
-                message.error(msg);
-            }
-            this.isAction = true;
-        });
+        pfhttp
+            .post({
+                url: "/algo-assess/v1/assess/update-optimize-base",
+                data: params,
+            })
+            .then((res) => {
+                let msg = res.msg;
+                if (res.code == 0) {
+                    message.success(msg);
+                    // this.getData();
+                } else if (res.code == 20000) {
+                    message.error(
+                        msg.substring(
+                            msg.indexOf("[") + 1,
+                            msg.lastIndexOf("]")
+                        )
+                    );
+                } else {
+                    message.error(msg);
+                }
+                this.isAction = true;
+            });
     };
     //删除记录
     handleDeleteRecord = (record) => {
@@ -403,60 +501,72 @@ export default class algoBest extends React.PureComponent {
     setUpdateModal = ({ form, record }) => {
         this.record = record;
         form.setFieldsValue({
-            securityId: record.securityId,
-            securityIdSource: record.securityIdSource,
-            securityName: record.securityName,
-            prevClosePx: record.prevClosePx,
-            buyQtyUpperLimit: record.buyQtyUpperLimit,
-            sellQtyUpperLimit: record.sellQtyUpperLimit,
-            marketBuyQtyUpperLimit: record.marketBuyQtyUpperLimit,
-            marketSellQtyUpperLimit: record.marketSellQtyUpperLimit,
-            securityStatus: record.securityStatus + "",
-            hasPriceLimit: record.hasPriceLimit + "",
-            limitType: record.limitType + "",
-            property: record.property + "",
-            upperLimitPrice: record.upperLimitPrice,
-            lowerLimitPrice: record.lowerLimitPrice,
-            buyQtyUnit: record.buyQtyUnit,
-            sellQtyUnit: record.sellQtyUnit,
-            marketBuyQtyUnit: record.marketBuyQtyUnit,
-            marketSellQtyUnit: record.marketSellQtyUnit,
-            // BuyQtyUnit:record.
-            // SellQtyUnit:record.
-            // MarketBuyQtyUnit:record.
-            // MarketSellQtyUnit:record.
+            // provider_id: record.uuserId / 1,
+            // provider_name: record.algoName,
+            sec_id: record.sec_id,
+            // sec_name: record.sec_name,
+            algo_id: record.algo_id,
+            // algo_type: record.algo_id,
+            // algo_name: record.algo_id,
+            open_rate: record.open_rate,
+            income_rate: record.income_rate,
+            basis_point: record.basis_point,
         });
     };
     getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+        if (!params.provider_id) {
+            params.provider_id = 0;
+        } else {
+        }
+        if (!params.algo_id) {
+            params.algo_id = 0;
+        }
+        if (!params.sec_id) {
+            params.sec_id = "";
+        }
+        params.provider_id = params.provider_id / 1;
+        params.algo_id = params.algo_id / 1;
+        params.algo_type = 1;
         params = {
             ...params,
-            pageId: pagination.current,
-            pageNum: pagination.pageSize,
+            page: pagination.current / 1,
+            limit: pagination.pageSize / 1,
         };
-        // params.token = "";
-        http.post({
-            url: "/security/list",
-            data: params,
-        }).then((res) => {
-            console.log(res);
-            //解析数据字典
-            if (res.data.records && res.data.records.length > 0) {
-                // parseDict(res.data.records);
-                parseDictValue(res.data.records);
-                // showTip(this);
-            } else {
-                message.info("查询结果为空");
-            }
-            let pgn = {
-                current: res.data.current,
-                pageSize: pagination.pageSize,
-                total: res.data.total || 0,
-            };
-            this.setState({
-                info: res.data.records,
-                pagination: pgn,
+        // console.log(params);
+        pfhttp
+            .post({
+                // url: "/risk/queryRisk",
+                url: "/algo-assess/v1/assess/select-optimize-base",
+                data: params,
+            })
+            .then((res) => {
+                // console.log(res);
+                // return;
+                //解析数据字典
+                if (res.data && res.data.length > 0) {
+                    // parseDict(res.data.records);
+                    parseArrDictValue(res.data, "algo_type", "algorithmType");
+                    // parseDictValue(res.data);
+                    // showTip(this);
+                } else {
+                    message.info("查询结果为空");
+                }
+                let pgn = {
+                    // current: res.data.current,
+                    // pageSize: pagination.pageSize,
+                    current: pagination.current,
+                    pageSize: pagination.pageSize,
+                    total: res.total || 0,
+                };
+                let resArr = res.data;
+                if (!res.data) {
+                    resArr = [];
+                }
+                this.setState({
+                    info: resArr,
+                    pagination: pgn,
+                });
             });
-        });
     };
     //获取所有厂商
     getProvider = (params = {}) => {
@@ -466,7 +576,7 @@ export default class algoBest extends React.PureComponent {
             url: "/algo/listProvider",
             data: params,
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             let idArr = [];
             if (res.data && res.data.length > 0) {
                 let dataArr = res.data;
@@ -475,8 +585,9 @@ export default class algoBest extends React.PureComponent {
                         let obj = {};
                         // obj.key = item.providerName + "-" + item.uuserId;
                         // obj.value = item.providerName + "-" + item.uuserId;
-                        obj.key = item.userName + "-" + item.id;
-                        obj.value = item.userName + "-" + item.id;
+                        obj.key = item.id;
+                        // obj.value = item.userName + "-" + item.id;
+                        obj.value = item.userName;
                         return obj;
                     });
                     // console.log(idArr);
@@ -487,13 +598,82 @@ export default class algoBest extends React.PureComponent {
             });
         });
     };
+    //获取所有T0算法
+    getT0AlgoList = (params = {}) => {
+        // return;
+        http.get({
+            // url: "/risk/queryRisk",
+            url: "/algo/listAll",
+            data: params,
+        }).then((res) => {
+            // console.log(res);
+            let idArr = [];
+            let infoArr = [];
+            if (res.data && res.data.length > 0) {
+                let dataArr = res.data;
+                if (dataArr.length > 0) {
+                    infoArr = dataArr;
+                    idArr = dataArr.map((item) => {
+                        let obj = {};
+                        obj.key = item.id;
+                        obj.value = item.algoName;
+                        return obj;
+                    });
+                    // console.log(idArr);
+                }
+            }
+            this.setState({
+                algoList: idArr,
+                algoInfoList: infoArr,
+            });
+        });
+    };
+    //获取所有股票
+    getSecurityList = (params = {}) => {
+        // return;
+        http.get({
+            // url: "/risk/queryRisk",
+            url: "/security/listAll",
+            data: params,
+        }).then((res) => {
+            // console.log(res);
+            let optionArr = [];
+            let securityIdArr = [];
+            this.securityObj = {};
+            if (res.data && res.data.length > 0) {
+                let dataArr = res.data;
+                if (dataArr.length > 0) {
+                    dataArr.forEach((item) => {
+                        let sec = item.securityId.trim();
+                        if (!securityIdArr.includes(sec)) {
+                            securityIdArr.push(sec);
+                            this.securityObj[sec] = item.securityName;
+                        }
+                    });
+                    if (securityIdArr.length > 0) {
+                        optionArr =
+                            securityIdArr.length > 10
+                                ? securityIdArr.slice(0, 10)
+                                : securityIdArr;
+                    }
+                }
+            }
+            this.setState({
+                securityList: securityIdArr,
+                currentDataLists: optionArr,
+            });
+        });
+    };
     handleSearch = (params, pagination) => {
         this.getData(params, pagination);
     };
     componentDidMount() {
         this.getData();
         this.getProvider();
+        this.getT0AlgoList();
+        this.getSecurityList();
     }
+
     render() {
         let scroll = { x: 1200, y: 445 };
         let info = this.state.info;
@@ -522,6 +702,8 @@ export default class algoBest extends React.PureComponent {
                     setUpdateModal={this.setUpdateModal}
                     updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
+                    insertModalText="新增T0优选算法"
+                    updateModalText="修改T0优选算法"
                     centered={true}
                     columns={columns}
                     dataSource={info}
