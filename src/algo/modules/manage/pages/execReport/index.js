@@ -89,6 +89,18 @@ const getSearchFormFields = () => {
             initialValue: "",
             component: <Input placeholder="请输入" />,
         },
+        {
+            label: "母单号",
+            id: "algoOrderId",
+            initialValue: "",
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "子单号",
+            id: "childOrderId",
+            initialValue: "",
+            component: <Input placeholder="请输入" />,
+        },
     ];
 };
 export default class execReport extends React.PureComponent {

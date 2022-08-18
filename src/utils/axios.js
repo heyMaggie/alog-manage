@@ -43,7 +43,8 @@ export default class Axios {
                             res.code == "0" ||
                             res.code == "2000" ||
                             res.code == "10000" ||
-                            res.code == "20000"
+                            res.code == "20000" ||
+                            res.assessOperateConnect
                         ) {
                             resolve(res);
                         } else {

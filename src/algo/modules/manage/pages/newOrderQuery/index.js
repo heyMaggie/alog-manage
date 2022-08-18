@@ -29,7 +29,7 @@ const columns = (params) => {
         {
             title: "算法类型",
             dataIndex: "algorithmType",
-            width: 100,
+            width: 150,
         },
         {
             title: "算法ID",

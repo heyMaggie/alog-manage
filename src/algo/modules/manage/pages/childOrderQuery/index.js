@@ -109,7 +109,7 @@ const columns = (params) => {
         {
             title: "子单状态",
             dataIndex: "childOrdStatus",
-            width: 120,
+            width: 150,
         },
         {
             title: "请求用户ID",

@@ -9,16 +9,25 @@ export default class UploadWrap extends React.PureComponent {
         } else {
             window.location.href =
                 window.baseURL + this.props.urlPrefix + "/download";
+            if (this.props.downloadUrl) {
+                console.log(window.pfBaseUrl + this.props.downloadUrl);
+                window.location.href =
+                    window.pfBaseUrl + this.props.downloadUrl;
+            }
         }
     };
     render() {
         let uploadOption = this.props.uploadOption;
+        let url = window.baseURL + this.props.urlPrefix + "/upload";
+        if (this.props.uploadUrl) {
+            url = window.pfBaseUrl + this.props.uploadUrl;
+        }
         if (!uploadOption) {
             uploadOption = {
                 name: "file",
                 accept: ".xml",
                 showUploadList: false,
-                action: window.baseURL + this.props.urlPrefix + "/upload",
+                action: url,
                 onChange: (info) => {
                     if (info.file.status !== "uploading") {
                         // console.log(info.file, info.fileList);

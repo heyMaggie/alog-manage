@@ -58,12 +58,12 @@ const menuList = [
                 title: "算法权限组",
                 path: "/main/manage/algoGroup",
             },
-            // {
-            //     id: "1-16",
-            //     icon: "",
-            //     title: "算法优选",
-            //     path: "/main/manage/algoBest",
-            // },
+            {
+                id: "1-16",
+                icon: "",
+                title: "算法优选",
+                path: "/main/manage/algoBest",
+            },
             {
                 id: "1-14",
                 icon: "",

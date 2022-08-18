@@ -4,7 +4,7 @@ message.config({
     top: 200,
     duration: 1.5,
 });
-let baseUrl;
+let baseUrl = "";
 //根据环境  自动切换 IP
 if (process.env.NODE_ENV == "development") {
     //开发环境
@@ -15,6 +15,7 @@ if (process.env.NODE_ENV == "development") {
     //生产环境
     baseUrl = "/perfApi";
 }
+window.pfBaseUrl = baseUrl;
 export default class PfAxios {
     static get(options, showLoading = false) {
         if (showLoading) {

@@ -44,6 +44,7 @@ let columns = (params) => {
         {
             title: "创建时间",
             dataIndex: "create_time",
+            width: 180,
         },
     ];
 };
@@ -95,6 +96,7 @@ export default class algoBest extends React.PureComponent {
                 // component: <Input placeholder="请输入：接口返回？" />,
                 component: (
                     <AutoComplete
+                        placeholder="请输入"
                         dataSource={this.state.currentDataLists}
                         onChange={this.handleChange}
                         allowClear={true}
@@ -516,7 +518,6 @@ export default class algoBest extends React.PureComponent {
     getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
         if (!params.provider_id) {
             params.provider_id = 0;
-        } else {
         }
         if (!params.algo_id) {
             params.algo_id = 0;
@@ -606,11 +607,13 @@ export default class algoBest extends React.PureComponent {
             url: "/algo/listAll",
             data: params,
         }).then((res) => {
-            // console.log(res);
+            console.log(res);
             let idArr = [];
             let infoArr = [];
             if (res.data && res.data.length > 0) {
-                let dataArr = res.data;
+                let dataArr = res.data.filter(
+                    (item) => item.algorithmType == 1
+                );
                 if (dataArr.length > 0) {
                     infoArr = dataArr;
                     idArr = dataArr.map((item) => {
@@ -667,11 +670,41 @@ export default class algoBest extends React.PureComponent {
     handleSearch = (params, pagination) => {
         this.getData(params, pagination);
     };
+    getPfUrl = (sucCallback) => {
+        // return;
+        console.log(2222);
+        http.get({
+            // url: "/risk/queryRisk",
+            url: "/connect/getConnect",
+            // data: {},
+        }).then((res) => {
+            if (
+                res.assessOperateConnect &&
+                res.assessOperateConnect.ip &&
+                res.assessOperateConnect.port
+            ) {
+                window.pfBaseUrl =
+                    res.assessOperateConnect.ip +
+                    ":" +
+                    res.assessOperateConnect.port;
+                if (window.pfBaseUrl.indexOf("http://") < 0) {
+                    window.pfBaseUrl = "http://" + window.pfBaseUrl;
+                }
+                console.log(window.pfBaseUrl);
+                if (sucCallback) {
+                    sucCallback();
+                }
+            }
+        });
+    };
     componentDidMount() {
-        this.getData();
         this.getProvider();
         this.getT0AlgoList();
         this.getSecurityList();
+        let sucCallback = () => {
+            this.getData();
+        };
+        this.getPfUrl(sucCallback);
     }
 
     render() {
@@ -711,8 +744,10 @@ export default class algoBest extends React.PureComponent {
                     // rowSelection={rowSelection} //批量选择 操作
                 >
                     <div
-                        urlPrefix="/security"
+                        urlPrefix="/algo-assess/v1/assess/download-optimize-base"
                         title="算法优选"
+                        downloadUrl="/algo-assess/v1/assess/download-optimize-base"
+                        uploadUrl="/algo-assess/v1/assess/upload-optimize-base"
                         sucCallback={this.getData}
                     ></div>
                 </CurdComponent>
