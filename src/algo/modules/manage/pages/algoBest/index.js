@@ -607,7 +607,7 @@ export default class algoBest extends React.PureComponent {
             url: "/algo/listAll",
             data: params,
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             let idArr = [];
             let infoArr = [];
             if (res.data && res.data.length > 0) {
@@ -672,7 +672,6 @@ export default class algoBest extends React.PureComponent {
     };
     getPfUrl = (sucCallback) => {
         // return;
-        console.log(2222);
         http.get({
             // url: "/risk/queryRisk",
             url: "/connect/getConnect",
@@ -690,7 +689,6 @@ export default class algoBest extends React.PureComponent {
                 if (window.pfBaseUrl.indexOf("http://") < 0) {
                     window.pfBaseUrl = "http://" + window.pfBaseUrl;
                 }
-                console.log(window.pfBaseUrl);
                 if (sucCallback) {
                     sucCallback();
                 }
