@@ -26,6 +26,10 @@ class algoConfig extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        validator: checkLength(32),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -109,6 +113,10 @@ class algoConfig extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        validator: checkLength(16),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -147,6 +155,10 @@ class algoConfig extends React.PureComponent {
                     //     required: true,
                     //     message: "参数不能为空",
                     // },
+                    {
+                        validator: checkLength(2000),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -162,6 +174,10 @@ class algoConfig extends React.PureComponent {
                     {
                         required: true,
                         message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(32),
+                        trigger: ["change", "blur"],
                     },
                 ],
                 component: <Input placeholder="请输入" />,
@@ -247,6 +263,10 @@ class algoConfig extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        validator: checkLength(16),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -285,6 +305,10 @@ class algoConfig extends React.PureComponent {
                     //     required: true,
                     //     message: "参数不能为空",
                     // },
+                    {
+                        validator: checkLength(2000),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },

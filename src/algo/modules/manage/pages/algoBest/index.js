@@ -205,6 +205,10 @@ export default class algoBest extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        validator: checkLength(8),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 // component: (
                 //     // <Input placeholder="请输入" readOnly disabled />
@@ -237,6 +241,10 @@ export default class algoBest extends React.PureComponent {
                         message: "请输入数字",
                         pattern: new RegExp("^\\d+$"),
                     },
+                    {
+                        validator: checkLength(10),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" suffix="%" />,
             },
@@ -253,6 +261,10 @@ export default class algoBest extends React.PureComponent {
                         message: "请输入数字",
                         pattern: new RegExp("^\\d+$"),
                     },
+                    {
+                        validator: checkLength(10),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" suffix="%" />,
             },
@@ -268,6 +280,10 @@ export default class algoBest extends React.PureComponent {
                     {
                         message: "请输入数字",
                         pattern: new RegExp("^\\d+$"),
+                    },
+                    {
+                        validator: checkLength(10),
+                        trigger: ["change", "blur"],
                     },
                 ],
                 component: <Input placeholder="请输入" />,
@@ -343,6 +359,10 @@ export default class algoBest extends React.PureComponent {
                         message: "请输入数字",
                         pattern: new RegExp("^\\d+$"),
                     },
+                    {
+                        validator: checkLength(10),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" suffix="%" />,
             },
@@ -359,6 +379,10 @@ export default class algoBest extends React.PureComponent {
                         message: "请输入数字",
                         pattern: new RegExp("^\\d+$"),
                     },
+                    {
+                        validator: checkLength(10),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" suffix="%" />,
             },
@@ -374,6 +398,10 @@ export default class algoBest extends React.PureComponent {
                     {
                         message: "请输入数字",
                         pattern: new RegExp("^\\d+$"),
+                    },
+                    {
+                        validator: checkLength(10),
+                        trigger: ["change", "blur"],
                     },
                 ],
                 component: <Input placeholder="请输入" />,
@@ -431,6 +459,7 @@ export default class algoBest extends React.PureComponent {
             .post({
                 url: "/algo-assess/v1/assess/add-optimize-base",
                 data: params,
+                baseUrl: window.pfBaseUrl,
             })
             .then((res) => {
                 console.log(res);
@@ -476,6 +505,7 @@ export default class algoBest extends React.PureComponent {
             .post({
                 url: "/algo-assess/v1/assess/update-optimize-base",
                 data: params,
+                baseUrl: window.pfBaseUrl,
             })
             .then((res) => {
                 let msg = res.msg;
@@ -539,6 +569,7 @@ export default class algoBest extends React.PureComponent {
                 // url: "/risk/queryRisk",
                 url: "/algo-assess/v1/assess/select-optimize-base",
                 data: params,
+                baseUrl: window.pfBaseUrl,
             })
             .then((res) => {
                 // console.log(res);

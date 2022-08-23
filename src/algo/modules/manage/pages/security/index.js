@@ -118,6 +118,10 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(8),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: <Input placeholder="请输入" />,
         },
@@ -129,6 +133,10 @@ const getInsertFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(4),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: (
@@ -145,6 +153,10 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(40),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: (
                 // <Input placeholder="请输入" readOnly disabled />
@@ -159,6 +171,10 @@ const getInsertFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(20),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -208,6 +224,10 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(20),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: (
                 // <Input placeholder="请输入" readOnly disabled />
@@ -223,6 +243,10 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(10),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: <Input placeholder="请输入" />,
         },
@@ -234,6 +258,10 @@ const getInsertFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(20),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -247,6 +275,10 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(10),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: <Input placeholder="请输入" />,
         },
@@ -258,6 +290,10 @@ const getInsertFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(20),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -271,6 +307,10 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(10),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: <Input placeholder="请输入" />,
         },
@@ -282,6 +322,10 @@ const getInsertFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(20),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: (
@@ -297,6 +341,10 @@ const getInsertFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(10),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -346,6 +394,10 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(20),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: (
                 // <Input placeholder="请输入" readOnly disabled />
@@ -360,6 +412,10 @@ const getInsertFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(20),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -367,263 +423,7 @@ const getInsertFormFields = () => {
     ];
 };
 const getUpdateFormFields = () => {
-    return [
-        {
-            label: "证券代码",
-            id: "securityId",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "证券代码源",
-            id: "securityIdSource",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
-        },
-        {
-            label: "证券名称",
-            id: "securityName",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
-        },
-        {
-            label: "昨收价",
-            id: "prevClosePx",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "证券状态",
-            id: "securityStatus",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.securityStatus, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "股票板块属性",
-            id: "property",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.property, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "限价买数量上限",
-            id: "buyQtyUpperLimit",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
-        },
-        {
-            label: "限价买数量单位",
-            id: "buyQtyUnit",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "限价卖数量上限",
-            id: "sellQtyUpperLimit",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "限价卖数量单位",
-            id: "sellQtyUnit",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "市价买数量上限",
-            id: "marketBuyQtyUpperLimit",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "市价买数量单位",
-            id: "marketBuyQtyUnit",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "市价卖数量上限",
-            id: "marketSellQtyUpperLimit",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
-        },
-        {
-            label: "市价卖数量单位",
-            id: "marketSellQtyUnit",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "是否有涨跌限制",
-            id: "hasPriceLimit",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.hasPriceLimit, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "涨跌限制类型",
-            id: "limitType",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.limitType, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "上涨限价",
-            id: "upperLimitPrice",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
-        },
-        {
-            label: "下跌限价",
-            id: "lowerLimitPrice",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-    ];
+    return getInsertFormFields();
 };
 export default class uoeSetting extends React.PureComponent {
     state = {

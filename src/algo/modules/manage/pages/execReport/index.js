@@ -163,6 +163,7 @@ export default class execReport extends React.PureComponent {
         });
     };
     handleSearch = (params, pagination) => {
+        // console.log(pagination);
         this.getData(params, pagination);
     };
     componentDidMount() {

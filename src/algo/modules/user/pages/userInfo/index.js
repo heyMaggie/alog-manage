@@ -40,6 +40,10 @@ class userInfo extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        validator: checkLength(12),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -52,6 +56,10 @@ class userInfo extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        validator: checkLength(32),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -63,6 +71,10 @@ class userInfo extends React.PureComponent {
                     {
                         required: true,
                         message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(32),
+                        trigger: ["change", "blur"],
                     },
                 ],
                 component: <Input placeholder="请输入" />,
@@ -93,6 +105,10 @@ class userInfo extends React.PureComponent {
                     {
                         required: true,
                         message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(10),
+                        trigger: ["change", "blur"],
                     },
                 ],
                 component: <Input placeholder="请输入" />,
@@ -154,6 +170,10 @@ class userInfo extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        validator: checkLength(12),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -166,6 +186,10 @@ class userInfo extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        validator: checkLength(32),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -177,6 +201,10 @@ class userInfo extends React.PureComponent {
                     {
                         required: true,
                         message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(32),
+                        trigger: ["change", "blur"],
                     },
                 ],
                 component: <Input placeholder="请输入" />,
@@ -207,6 +235,10 @@ class userInfo extends React.PureComponent {
                     {
                         required: true,
                         message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(10),
+                        trigger: ["change", "blur"],
                     },
                 ],
                 component: <Input placeholder="请输入" />,

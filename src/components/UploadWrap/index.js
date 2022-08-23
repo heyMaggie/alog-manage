@@ -28,6 +28,7 @@ export default class UploadWrap extends React.PureComponent {
                 accept: ".xml",
                 showUploadList: false,
                 action: url,
+                headers: { "X-Requested-With": null },
                 onChange: (info) => {
                     if (info.file.status !== "uploading") {
                         // console.log(info.file, info.fileList);
@@ -35,7 +36,6 @@ export default class UploadWrap extends React.PureComponent {
                     if (info.file.status === "done") {
                         if (info.file.response.code == 0) {
                             message.success(`${info.file.name} 上传成功`);
-                            console.log(this.props.sucCallback);
                             if (this.props.sucCallback) {
                                 this.props.sucCallback();
                             }

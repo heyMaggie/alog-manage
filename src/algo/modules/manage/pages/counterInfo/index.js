@@ -59,6 +59,10 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(24),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: (
                 // <Input placeholder="请输入" readOnly disabled />
@@ -73,6 +77,10 @@ const getInsertFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(36),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: (
@@ -107,6 +115,10 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(22),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: <Input placeholder="请输入" />,
         },
@@ -118,6 +130,10 @@ const getInsertFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(32),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: (
@@ -168,6 +184,10 @@ const getUpdateFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(24),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: (
                 // <Input placeholder="请输入" readOnly disabled />
@@ -183,6 +203,10 @@ const getUpdateFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(36),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: (
                 // <Input placeholder="请输入" readOnly disabled />
@@ -192,6 +216,7 @@ const getUpdateFormFields = () => {
         {
             label: "支持业务类型",
             id: "supportType",
+            initialValue: "1",
             rules: [
                 {
                     required: true,
@@ -215,6 +240,10 @@ const getUpdateFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(22),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: <Input placeholder="请输入" />,
         },
@@ -226,6 +255,10 @@ const getUpdateFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(32),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: (

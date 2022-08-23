@@ -665,6 +665,10 @@ class riskConfigManage extends React.PureComponent {
                                                 required: true,
                                                 message: "请输入",
                                             },
+                                            {
+                                                validator: checkLength(32),
+                                                trigger: ["change", "blur"],
+                                            },
                                         ],
                                     })(<Input placeholder="请输入" />)}
                                 </Form.Item>
@@ -1239,9 +1243,9 @@ class riskConfigManage extends React.PureComponent {
                                             },
                                             {
                                                 message:
-                                                    "请输入正数,最多保留4位小数",
+                                                    "整数位最多13位,小数最多保留4位",
                                                 pattern:
-                                                    /^0$|^[1-9]\d{0,15}$|^[1-9]\d{0,15}\.{1}\d{1,4}$|^0\.{1}\d{1,4}$/i,
+                                                    /^0$|^[1-9]\d{0,13}$|^[1-9]\d{0,13}\.{1}\d{1,4}$|^0\.{1}\d{1,4}$/i,
                                             },
                                         ],
                                         initialValue: "0",
@@ -1506,8 +1510,8 @@ class riskConfigManage extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                             {
-                                                message: "请输入正整数",
-                                                pattern: /^\d+$/i,
+                                                message: "请输入1-13位正整数",
+                                                pattern: /^\d{1,13}$/i,
                                             },
                                         ],
                                         initialValue: "0",
@@ -1536,9 +1540,9 @@ class riskConfigManage extends React.PureComponent {
                                             },
                                             {
                                                 message:
-                                                    "请输入正数,最多保留4位小数",
+                                                    "整数位最多13位,小数最多保留4位",
                                                 pattern:
-                                                    /^0$|^[1-9]\d{0,15}$|^[1-9]\d{0,15}\.{1}\d{1,4}$|^0\.{1}\d{1,4}$/i,
+                                                    /^0$|^[1-9]\d{0,13}$|^[1-9]\d{0,13}\.{1}\d{1,4}$|^0\.{1}\d{1,4}$/i,
                                             },
                                         ],
                                         initialValue: "0",

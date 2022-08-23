@@ -24,8 +24,12 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(12),
+                    trigger: ["change", "blur"],
+                },
             ],
-            component: <Input />,
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "用户名",
@@ -35,8 +39,12 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(32),
+                    trigger: ["change", "blur"],
+                },
             ],
-            component: <Input />,
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "用户密码",
@@ -46,6 +54,10 @@ const getInsertFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(32),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -58,8 +70,12 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "柜台网关Id不能为空",
                 },
+                {
+                    validator: checkLength(10),
+                    trigger: ["change", "blur"],
+                },
             ],
-            component: <Input placeholder="请输入交换机编号" />,
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "来自柜台",
@@ -69,8 +85,12 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(10),
+                    trigger: ["change", "blur"],
+                },
             ],
-            component: <Input />,
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "业务类型",
@@ -134,8 +154,12 @@ const getInsertFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(10),
+                    trigger: ["change", "blur"],
+                },
             ],
-            component: <Input />,
+            component: <Input placeholder="请输入" />,
         },
     ];
 };
@@ -149,8 +173,12 @@ const getUpdateFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(12),
+                    trigger: ["change", "blur"],
+                },
             ],
-            component: <Input />,
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "用户名",
@@ -160,8 +188,12 @@ const getUpdateFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(32),
+                    trigger: ["change", "blur"],
+                },
             ],
-            component: <Input />,
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "用户密码",
@@ -171,6 +203,10 @@ const getUpdateFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(32),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -183,8 +219,12 @@ const getUpdateFormFields = () => {
                     required: true,
                     message: "柜台网关Id不能为空",
                 },
+                {
+                    validator: checkLength(10),
+                    trigger: ["change", "blur"],
+                },
             ],
-            component: <Input placeholder="请输入交换机编号" />,
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "来自柜台",
@@ -194,12 +234,17 @@ const getUpdateFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(10),
+                    trigger: ["change", "blur"],
+                },
             ],
-            component: <Input />,
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "业务类型",
             id: "businessType",
+            initialValue: "1",
             rules: [
                 {
                     required: true,
@@ -217,6 +262,7 @@ const getUpdateFormFields = () => {
         // {
         //     label: "登录状态",
         //     id: "loginStatus",
+        //     initialValue: "0",
         //     rules: [
         //         {
         //             required: true,
@@ -234,6 +280,7 @@ const getUpdateFormFields = () => {
         {
             label: "客户类型",
             id: "clientType",
+            initialValue: "0",
             rules: [
                 {
                     required: true,
@@ -256,8 +303,12 @@ const getUpdateFormFields = () => {
                     required: true,
                     message: "参数不能为空",
                 },
+                {
+                    validator: checkLength(10),
+                    trigger: ["change", "blur"],
+                },
             ],
-            component: <Input />,
+            component: <Input placeholder="请输入" />,
         },
         {
             label: "更新时间",
