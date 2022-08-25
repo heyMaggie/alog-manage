@@ -62,6 +62,8 @@ export default class algoBest extends React.PureComponent {
         currentDataLists: [],
         currentDataListsAdd: [],
         securityObj: {},
+        uploadUrl: "",
+        downloadUrl: "",
     };
     getSearchFormFields = () => {
         return [
@@ -720,6 +722,14 @@ export default class algoBest extends React.PureComponent {
                 if (window.pfBaseUrl.indexOf("http://") < 0) {
                     window.pfBaseUrl = "http://" + window.pfBaseUrl;
                 }
+                this.setState({
+                    uploadUrl:
+                        window.pfBaseUrl +
+                        "/algo-assess/v1/assess/upload-optimize-base",
+                    downloadUrl:
+                        window.pfBaseUrl +
+                        "/algo-assess/v1/assess/download-optimize-base",
+                });
                 if (sucCallback) {
                     sucCallback();
                 }
@@ -775,8 +785,8 @@ export default class algoBest extends React.PureComponent {
                     <div
                         urlPrefix="/algo-assess/v1/assess/download-optimize-base"
                         title="算法优选"
-                        downloadUrl="/algo-assess/v1/assess/download-optimize-base"
-                        uploadUrl="/algo-assess/v1/assess/upload-optimize-base"
+                        downloadUrl={this.state.downloadUrl}
+                        uploadUrl={this.state.uploadUrl}
                         sucCallback={this.getData}
                     ></div>
                 </CurdComponent>
