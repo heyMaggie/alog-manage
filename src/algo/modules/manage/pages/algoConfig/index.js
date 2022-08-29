@@ -28,10 +28,14 @@ class algoConfig extends React.PureComponent {
                     },
                     {
                         validator: checkLength(32),
-                        trigger: ["change", "blur"],
+                        trigger: ["change"],
+                    },
+                    {
+                        message: "算法名称格式不正确",
+                        pattern: /[\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/i,
                     },
                 ],
-                component: <Input placeholder="请输入" />,
+                component: <Input placeholder="请输入名称,例:智能委托(ZC)" />,
             },
             {
                 label: "算法风控组",
@@ -179,8 +183,12 @@ class algoConfig extends React.PureComponent {
                         validator: checkLength(32),
                         trigger: ["change", "blur"],
                     },
+                    {
+                        message: "算法名称格式不正确",
+                        pattern: /[\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/i,
+                    },
                 ],
-                component: <Input placeholder="请输入" />,
+                component: <Input placeholder="请输入名称,例:智能委托(ZC)" />,
             },
             {
                 label: "算法风控组",
@@ -320,6 +328,7 @@ class algoConfig extends React.PureComponent {
                 title: "算法名称",
                 dataIndex: "algoName",
                 key: "algoName",
+                width: 160,
             },
             {
                 title: "算法厂商ID",
@@ -518,6 +527,14 @@ class algoConfig extends React.PureComponent {
         params.ProviderName = valArr[0];
         params.UuserId = valArr[1] / 1;
         console.log("新增接口", params);
+        let isok = params.AlgoName.match(/[\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/);
+        if (!isok) {
+            message.error(
+                "算法名称格式不正确,格式:中文(英文或数字),eg:智能委托(ZC)",
+                3.5
+            );
+            return;
+        }
         // return;
         http.post({
             url: "/algo/addAlgoInfo",
@@ -619,6 +636,14 @@ class algoConfig extends React.PureComponent {
         params.ProviderName = valArr[0];
         params.UuserId = valArr[1] / 1;
         console.log("修改接口", params);
+        let isok = params.AlgoName.match(/[\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/);
+        if (!isok) {
+            message.error(
+                "算法名称格式不正确,格式:中文(英文或数字),eg:智能委托(ZC)",
+                3.5
+            );
+            return;
+        }
         // return;
         http.post({
             url: "/algo/updateAlgoInfo",

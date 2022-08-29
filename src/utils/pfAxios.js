@@ -13,8 +13,8 @@ if (process.env.NODE_ENV == "development") {
     // baseUrl = "http://192.168.1.80:20080";
 } else {
     //生产环境
-    // baseUrl = "/perfApi";
-    baseUrl = window.pfBaseUrl;
+    baseUrl = "/assess";
+    // baseUrl = window.pfBaseUrl;
 }
 // window.pfBaseUrl = baseUrl;
 export default class PfAxios {

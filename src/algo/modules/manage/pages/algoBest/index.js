@@ -461,7 +461,7 @@ export default class algoBest extends React.PureComponent {
             .post({
                 url: "/algo-assess/v1/assess/add-optimize-base",
                 data: params,
-                baseUrl: window.pfBaseUrl,
+                // baseUrl: window.pfBaseUrl,
             })
             .then((res) => {
                 console.log(res);
@@ -507,7 +507,7 @@ export default class algoBest extends React.PureComponent {
             .post({
                 url: "/algo-assess/v1/assess/update-optimize-base",
                 data: params,
-                baseUrl: window.pfBaseUrl,
+                // baseUrl: window.pfBaseUrl,
             })
             .then((res) => {
                 let msg = res.msg;
@@ -571,7 +571,7 @@ export default class algoBest extends React.PureComponent {
                 // url: "/risk/queryRisk",
                 url: "/algo-assess/v1/assess/select-optimize-base",
                 data: params,
-                baseUrl: window.pfBaseUrl,
+                // baseUrl: window.pfBaseUrl,
             })
             .then((res) => {
                 // console.log(res);
@@ -705,36 +705,45 @@ export default class algoBest extends React.PureComponent {
     };
     getPfUrl = (sucCallback) => {
         // return;
-        http.get({
-            // url: "/risk/queryRisk",
-            url: "/connect/getConnect",
-            // data: {},
-        }).then((res) => {
-            if (
-                res.assessOperateConnect &&
-                res.assessOperateConnect.ip &&
-                res.assessOperateConnect.port
-            ) {
-                window.pfBaseUrl =
-                    res.assessOperateConnect.ip +
-                    ":" +
-                    res.assessOperateConnect.port;
-                if (window.pfBaseUrl.indexOf("http://") < 0) {
-                    window.pfBaseUrl = "http://" + window.pfBaseUrl;
-                }
-                this.setState({
-                    uploadUrl:
-                        window.pfBaseUrl +
-                        "/algo-assess/v1/assess/upload-optimize-base",
-                    downloadUrl:
-                        window.pfBaseUrl +
-                        "/algo-assess/v1/assess/download-optimize-base",
-                });
-                if (sucCallback) {
-                    sucCallback();
-                }
-            }
+        // http.get({
+        //     // url: "/risk/queryRisk",
+        //     url: "/connect/getConnect",
+        //     // data: {},
+        // }).then((res) => {
+        //     if (
+        //         res.assessOperateConnect &&
+        //         res.assessOperateConnect.ip &&
+        //         res.assessOperateConnect.port
+        //     ) {
+        //         window.pfBaseUrl =
+        //             res.assessOperateConnect.ip +
+        //             ":" +
+        //             res.assessOperateConnect.port;
+        //         if (window.pfBaseUrl.indexOf("http://") < 0) {
+        //             window.pfBaseUrl = "http://" + window.pfBaseUrl;
+        //         }
+        //         this.setState({
+        //             uploadUrl:
+        //                 window.pfBaseUrl +
+        //                 "/algo-assess/v1/assess/upload-optimize-base",
+        //             downloadUrl:
+        //                 window.pfBaseUrl +
+        //                 "/algo-assess/v1/assess/download-optimize-base",
+        //         });
+        //         if (sucCallback) {
+        //             sucCallback();
+        //         }
+        //     }
+        // });
+        this.setState({
+            uploadUrl:
+                "/assess" + "/algo-assess/v1/assess/upload-optimize-base",
+            downloadUrl:
+                "/assess" + "/algo-assess/v1/assess/download-optimize-base",
         });
+        if (sucCallback) {
+            sucCallback();
+        }
     };
     componentDidMount() {
         this.getProvider();
