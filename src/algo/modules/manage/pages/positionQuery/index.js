@@ -123,7 +123,7 @@ const getInsertFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "当前开盘前的原始仓位数量",
+            label: "日初持仓数量",
             id: "originQty",
             initialValue: "",
             rules: [
@@ -138,7 +138,7 @@ const getInsertFormFields = () => {
             ),
         },
         {
-            label: "当天前的原始持仓的平均开仓价格",
+            label: "日初开仓均价",
             id: "originOpenPrice",
             initialValue: "",
             rules: [
@@ -277,7 +277,7 @@ const getUpdateFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "当前开盘前的原始仓位数量",
+            label: "日初持仓数量",
             id: "originQty",
             initialValue: "",
             rules: [
@@ -292,7 +292,7 @@ const getUpdateFormFields = () => {
             ),
         },
         {
-            label: "当天前的原始持仓的平均开仓价格",
+            label: "日初开仓均价",
             id: "originOpenPrice",
             initialValue: "",
             rules: [
@@ -390,12 +390,12 @@ let columns = () => {
             width: 100,
         },
         {
-            title: "当前开盘前的原始仓位数量",
+            title: "日初持仓数量",
             dataIndex: "originQty",
             width: 200,
         },
         {
-            title: "当天前的原始持仓的平均开仓价格",
+            title: "日初开仓均价",
             dataIndex: "originOpenPrice",
             width: 250,
         },

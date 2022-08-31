@@ -55,17 +55,17 @@ class riskConfigManage extends React.PureComponent {
                 width: 100,
             },
             {
-                title: "风控启用委托数量",
+                title: "阈值（总委比）",
                 dataIndex: "EntrustItemThreshold",
                 width: 200,
             },
             {
-                title: "时间量:总委托笔数",
+                title: "笔数（总委比）",
                 dataIndex: "EntrustItemLimit",
                 width: 200,
             },
             {
-                title: "总委托:时间量(s)",
+                title: "时间（总委比）",
                 dataIndex: "EntrustSeconds",
                 width: 150,
             },
@@ -75,7 +75,7 @@ class riskConfigManage extends React.PureComponent {
                 key: "EntrustTotalThreshold",
             },
             {
-                title: "撤单比:风控启用委托数量",
+                title: "阈值（撤单比）",
                 dataIndex: "CancelEntrustItemThreshold",
                 key: "CancelEntrustItemThreshold",
                 width: 200,
@@ -86,7 +86,7 @@ class riskConfigManage extends React.PureComponent {
                 width: 110,
             },
             {
-                title: "废单比:风控启用委托数量",
+                title: "阈值（废单比）",
                 dataIndex: "FailedEntrustItemThreshold",
                 key: "FailedEntrustItemThreshold",
                 width: 200,
@@ -97,7 +97,7 @@ class riskConfigManage extends React.PureComponent {
                 key: "FailedRatioLimit",
             },
             {
-                title: "委托成交比:风控启用委托数量",
+                title: "阈值（委托成交比）",
                 dataIndex: "EntrustExecEntrustItemThreshold",
                 key: "EntrustExecEntrustItemThreshold",
                 width: 240,
@@ -108,7 +108,7 @@ class riskConfigManage extends React.PureComponent {
                 key: "EntrustExecRatioLimit",
             },
             {
-                title: "净买入额度:风控启用委托数量",
+                title: "阈值（净买入）",
                 dataIndex: "NetBuyEntrustItemThreshold",
                 key: "NetBuyEntrustItemThreshold",
                 width: 240,
