@@ -797,7 +797,8 @@ class userInfo extends React.PureComponent {
             // console.log(res);
             let idArr = [];
             if (res.data && res.data.length > 0) {
-                let dataArr = res.data;
+                // RiskType: [{ key: "1", value: "用户" },{ key: "2", value: "算法" },
+                let dataArr = res.data.filter((item) => item.riskType != 2);
                 if (dataArr.length > 0) {
                     idArr = dataArr.map((item) => {
                         let obj = {};
@@ -805,7 +806,6 @@ class userInfo extends React.PureComponent {
                         obj.value = item.id;
                         return obj;
                     });
-                    // console.log(idArr);
                 }
             }
             this.setState({
