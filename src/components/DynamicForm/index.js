@@ -46,7 +46,7 @@ class DynamicForm extends React.PureComponent {
                                     : getFieldDecorator(item.id, {
                                           initialValue: item.initialValue
                                               ? item.initialValue
-                                              : undefined,
+                                              : "",
                                           rules: item.rules,
                                       })(item.component)}
                             </FormItem>

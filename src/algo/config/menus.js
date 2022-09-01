@@ -59,6 +59,12 @@ const menuList = [
                 path: "/main/manage/algoGroup",
             },
             {
+                id: "1-16",
+                icon: "",
+                title: "算法优选",
+                path: "/main/manage/algoBest",
+            },
+            {
                 id: "1-14",
                 icon: "",
                 title: "柜台用户",

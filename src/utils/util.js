@@ -37,6 +37,33 @@ export let routeModule = (moduleName, routeArr) => {
     });
     return routeArr;
 };
+//获取二进制 位数
+window.getLength = function (str) {
+    var totalLength = 0;
+    var charCode;
+    for (var i = 0; i < str.length; i++) {
+        charCode = str.charCodeAt(i);
+        if (charCode < 0x007f) {
+            totalLength++;
+        } else if (0x0080 <= charCode && charCode <= 0x07ff) {
+            totalLength += 2;
+        } else if (0x0800 <= charCode && charCode <= 0xffff) {
+            totalLength += 3;
+        } else {
+            totalLength += 4;
+        }
+    }
+    return totalLength;
+};
+window.checkLength = (len) => {
+    return (rule, value, callback) => {
+        if (getLength(value) > len) {
+            return Promise.resolve("位数超过限制");
+        } else {
+            return Promise.resolve(); //成功
+        }
+    };
+};
 //解析全部数据字典-覆盖原key值
 export let parseDict = (dict) => {
     window.parseDict = (resArr) => {

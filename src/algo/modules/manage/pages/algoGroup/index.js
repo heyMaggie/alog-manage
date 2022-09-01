@@ -3,6 +3,7 @@ import CurdComponent from "@/components/CurdComponent";
 // import SelectOption from "@/components/SelectOption";
 import { Input, Button, Modal, Form, Switch, Row, Col } from "antd";
 import Table from "@/components/Table";
+import styles from "./style.module.less";
 
 let getSearchFormFields = () => {
     return [
@@ -21,7 +22,7 @@ let getSearchFormFields = () => {
 
 class algoGroup extends React.PureComponent {
     columns = (params) => {
-        return [
+        let tab = [
             {
                 title: "ID",
                 dataIndex: "id",
@@ -57,6 +58,10 @@ class algoGroup extends React.PureComponent {
                 ),
             },
         ];
+        if (sessionStorage.userPrivilege == 2) {
+            tab.pop();
+        }
+        return tab;
     };
     columns2 = (params) => {
         return [
@@ -448,7 +453,7 @@ class algoGroup extends React.PureComponent {
             modalTitle = "修改算法权限组";
         }
         return (
-            <div>
+            <div className={styles.algoGroup}>
                 <CurdComponent
                     // rowKey={"index"}
                     // btnText2="查全部"
@@ -546,10 +551,10 @@ class algoGroup extends React.PureComponent {
                                                 message: "请输入16进制正整数",
                                                 pattern: /^[A-Fa-f0-9]+$/i,
                                             },
-                                            // {
-                                            //     message: "请输入16进制正整数",
-                                            //     max: 32,
-                                            // },
+                                            {
+                                                validator: checkLength(32),
+                                                trigger: ["change", "blur"],
+                                            },
                                         ],
                                         initialValue: "0",
                                     })(
@@ -565,9 +570,18 @@ class algoGroup extends React.PureComponent {
                                     label={<label>算法权限组名称</label>}
                                     style={{ height: "59px" }}
                                 >
-                                    {getFieldDecorator("GroupName")(
-                                        <Input placeholder="请输入" />
-                                    )}
+                                    {getFieldDecorator("GroupName", {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: " ",
+                                            },
+                                            {
+                                                validator: checkLength(32),
+                                                trigger: ["change", "blur"],
+                                            },
+                                        ],
+                                    })(<Input placeholder="请输入" />)}
                                 </Form.Item>
                             </Col>
                         </Row>

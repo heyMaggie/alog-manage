@@ -50,6 +50,10 @@ const getInsertFormFields = () => {
                     message: "请输入数字",
                     pattern: /^[0-9]*[1-9][0-9]*$/i,
                 },
+                {
+                    validator: checkLength(10),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: <Input placeholder="请输入" />,
         },
@@ -61,6 +65,10 @@ const getInsertFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(12),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: (
@@ -121,6 +129,10 @@ const getUpdateFormFields = () => {
                     message: "请输入数字",
                     pattern: /^[0-9]*[1-9][0-9]*$/i,
                 },
+                {
+                    validator: checkLength(10),
+                    trigger: ["change", "blur"],
+                },
             ],
             component: <Input placeholder="请输入" />,
         },
@@ -132,6 +144,10 @@ const getUpdateFormFields = () => {
                 {
                     required: true,
                     message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(12),
+                    trigger: ["change", "blur"],
                 },
             ],
             component: (

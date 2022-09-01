@@ -26,8 +26,16 @@ class algoConfig extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        validator: checkLength(32),
+                        trigger: ["change"],
+                    },
+                    {
+                        message: "算法名称格式不正确",
+                        pattern: /[\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/i,
+                    },
                 ],
-                component: <Input placeholder="请输入" />,
+                component: <Input placeholder="请输入名称,例:智能委托(ZC)" />,
             },
             {
                 label: "算法风控组",
@@ -109,6 +117,10 @@ class algoConfig extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        validator: checkLength(16),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -147,6 +159,10 @@ class algoConfig extends React.PureComponent {
                     //     required: true,
                     //     message: "参数不能为空",
                     // },
+                    {
+                        validator: checkLength(2000),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -163,8 +179,16 @@ class algoConfig extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        validator: checkLength(32),
+                        trigger: ["change", "blur"],
+                    },
+                    {
+                        message: "算法名称格式不正确",
+                        pattern: /[\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/i,
+                    },
                 ],
-                component: <Input placeholder="请输入" />,
+                component: <Input placeholder="请输入名称,例:智能委托(ZC)" />,
             },
             {
                 label: "算法风控组",
@@ -247,6 +271,10 @@ class algoConfig extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        validator: checkLength(16),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -285,6 +313,10 @@ class algoConfig extends React.PureComponent {
                     //     required: true,
                     //     message: "参数不能为空",
                     // },
+                    {
+                        validator: checkLength(2000),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -296,6 +328,7 @@ class algoConfig extends React.PureComponent {
                 title: "算法名称",
                 dataIndex: "algoName",
                 key: "algoName",
+                width: 160,
             },
             {
                 title: "算法厂商ID",
@@ -374,7 +407,12 @@ class algoConfig extends React.PureComponent {
                     >
                         <Tooltip title="修改风控组">
                             {record.riskGroup}
-                            <Icon type="edit" style={{ color: "#1899ff" }} />
+                            {sessionStorage.userPrivilege != 2 && (
+                                <Icon
+                                    type="edit"
+                                    style={{ color: "#1899ff" }}
+                                />
+                            )}
                         </Tooltip>
                     </div>
                 ),
@@ -416,6 +454,9 @@ class algoConfig extends React.PureComponent {
     };
     // type 1 : 是否显示    type:2  是否可用
     onSwitchChange = (val, record, type) => {
+        if (sessionStorage.userPrivilege == 2) {
+            return;
+        }
         // console.log(val, record, type);
         // console.log(type);
         let algorithmStatus;
@@ -486,6 +527,14 @@ class algoConfig extends React.PureComponent {
         params.ProviderName = valArr[0];
         params.UuserId = valArr[1] / 1;
         console.log("新增接口", params);
+        let isok = params.AlgoName.match(/[\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/);
+        if (!isok) {
+            message.error(
+                "算法名称格式不正确,格式:中文(英文或数字),eg:智能委托(ZC)",
+                3.5
+            );
+            return;
+        }
         // return;
         http.post({
             url: "/algo/addAlgoInfo",
@@ -587,6 +636,14 @@ class algoConfig extends React.PureComponent {
         params.ProviderName = valArr[0];
         params.UuserId = valArr[1] / 1;
         console.log("修改接口", params);
+        let isok = params.AlgoName.match(/[\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/);
+        if (!isok) {
+            message.error(
+                "算法名称格式不正确,格式:中文(英文或数字),eg:智能委托(ZC)",
+                3.5
+            );
+            return;
+        }
         // return;
         http.post({
             url: "/algo/updateAlgoInfo",
@@ -725,8 +782,10 @@ class algoConfig extends React.PureComponent {
                 if (dataArr.length > 0) {
                     idArr = dataArr.map((item) => {
                         let obj = {};
-                        obj.key = item.providerName + "-" + item.uuserId;
-                        obj.value = item.providerName + "-" + item.uuserId;
+                        // obj.key = item.providerName + "-" + item.uuserId;
+                        // obj.value = item.providerName + "-" + item.uuserId;
+                        obj.key = item.userName + "-" + item.id;
+                        obj.value = item.userName + "-" + item.id;
                         return obj;
                     });
                     // console.log(idArr);

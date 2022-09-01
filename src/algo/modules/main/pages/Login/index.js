@@ -27,6 +27,7 @@ class FormLogin extends React.Component {
                         // 0  有   导入导出权限
                         // 1  没有 导入导出权限
                         sessionStorage.userPrivilege = res.data.userPrivilege;
+                        // sessionStorage.userPrivilege = 1;
                         // sessionStorage.userArr = JSON.stringify(res.data);
                         // this.props.history.push("/main/updown/userInfo");
                         this.props.history.push("/main/user/userInfo");
@@ -87,6 +88,7 @@ class FormLogin extends React.Component {
                     <FormItem>
                         {getFieldDecorator("userName", {
                             initialValue: "admin",
+                            // initialValue: "user_read_only",
                             rules: [
                                 {
                                     required: true,

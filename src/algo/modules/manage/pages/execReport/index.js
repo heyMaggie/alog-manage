@@ -89,6 +89,18 @@ const getSearchFormFields = () => {
             initialValue: "",
             component: <Input placeholder="请输入" />,
         },
+        {
+            label: "母单号",
+            id: "algoOrderId",
+            initialValue: "",
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "子单号",
+            id: "childOrderId",
+            initialValue: "",
+            component: <Input placeholder="请输入" />,
+        },
     ];
 };
 export default class execReport extends React.PureComponent {
@@ -151,6 +163,7 @@ export default class execReport extends React.PureComponent {
         });
     };
     handleSearch = (params, pagination) => {
+        // console.log(pagination);
         this.getData(params, pagination);
     };
     componentDidMount() {

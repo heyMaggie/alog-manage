@@ -10,7 +10,9 @@ import store from "./store/index";
 // import configStore from "./store/index";
 import { Provider } from "react-redux";
 import axios from "./utils/axios";
+import pfAxios from "./utils/pfAxios";
 window.http = axios;
+window.pfhttp = pfAxios;
 
 // let store;
 ReactDOM.render(

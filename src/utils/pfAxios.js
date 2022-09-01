@@ -4,18 +4,20 @@ message.config({
     top: 200,
     duration: 1.5,
 });
-
-//  https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api
+let baseUrl = "";
 //根据环境  自动切换 IP
-// if (process.env.NODE_ENV == "development") {
-//   //开发环境
-//   axios.defaults.baseURL = "http://192.168.1.55:9012";
-//   //   axios.defaults.baseURL = "http://192.168.1.55:9013";
-// } else {
-//   //生产环境
-//   axios.defaults.baseURL = "http://192.168.1.78:9012";
-// }
-export default class Axios {
+if (process.env.NODE_ENV == "development") {
+    //开发环境
+    baseUrl = "http://192.168.2.105:20080";
+    // baseUrl = "http://192.168.1.81:20080";
+    // baseUrl = "http://192.168.1.80:20080";
+} else {
+    //生产环境
+    baseUrl = "/assess";
+    // baseUrl = window.pfBaseUrl;
+}
+// window.pfBaseUrl = baseUrl;
+export default class PfAxios {
     static get(options, showLoading = false) {
         if (showLoading) {
             if (!this.loading) {
@@ -28,9 +30,7 @@ export default class Axios {
                 url: options.url,
                 method: "get",
                 timeout: 5000,
-                baseURL: options.baseUrl
-                    ? options.baseUrl
-                    : axios.defaults.baseURL,
+                baseURL: options.baseUrl ? options.baseUrl : baseUrl,
                 params: options.data || "",
             })
                 .then((response) => {
@@ -43,8 +43,7 @@ export default class Axios {
                             res.code == "0" ||
                             res.code == "2000" ||
                             res.code == "10000" ||
-                            res.code == "20000" ||
-                            res.assessOperateConnect
+                            res.code == "20000"
                         ) {
                             resolve(res);
                         } else {
@@ -83,9 +82,7 @@ export default class Axios {
                 url: options.url,
                 method: "post",
                 timeout: 5000,
-                baseURL: options.baseUrl
-                    ? options.baseUrl
-                    : axios.defaults.baseURL,
+                baseURL: options.baseUrl ? options.baseUrl : baseUrl,
                 data: options.data || {},
             })
                 .then((response) => {
@@ -133,9 +130,7 @@ export default class Axios {
                 method: options.method || "get",
                 url: options.url,
                 timeout: 5000,
-                baseURL: options.baseUrl
-                    ? options.baseUrl
-                    : axios.defaults.baseURL,
+                baseURL: options.baseUrl ? options.baseUrl : baseUrl,
                 data: options.data || {},
             })
                 .then((response) => {

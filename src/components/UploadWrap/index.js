@@ -9,16 +9,25 @@ export default class UploadWrap extends React.PureComponent {
         } else {
             window.location.href =
                 window.baseURL + this.props.urlPrefix + "/download";
+            if (this.props.downloadUrl) {
+                window.location.href = this.props.downloadUrl;
+            }
         }
     };
     render() {
         let uploadOption = this.props.uploadOption;
+        let url = window.baseURL + this.props.urlPrefix + "/upload";
+        // console.log(this.props.uploadUrl, window.pfBaseUrl);
+        if (this.props.uploadUrl) {
+            url = this.props.uploadUrl;
+        }
         if (!uploadOption) {
             uploadOption = {
                 name: "file",
                 accept: ".xml",
                 showUploadList: false,
-                action: window.baseURL + this.props.urlPrefix + "/upload",
+                action: url,
+                headers: { "X-Requested-With": null },
                 onChange: (info) => {
                     if (info.file.status !== "uploading") {
                         // console.log(info.file, info.fileList);
@@ -26,12 +35,21 @@ export default class UploadWrap extends React.PureComponent {
                     if (info.file.status === "done") {
                         if (info.file.response.code == 0) {
                             message.success(`${info.file.name} 上传成功`);
-                            console.log(this.props.sucCallback);
                             if (this.props.sucCallback) {
                                 this.props.sucCallback();
                             }
                         } else {
-                            message.error(`${info.file.response.message}`);
+                            let msg = info.file.response.message;
+                            if (msg.lastIndexOf("]") > msg.indexOf("[")) {
+                                message.error(
+                                    msg.substring(
+                                        msg.indexOf("[") + 1,
+                                        msg.lastIndexOf("]")
+                                    )
+                                );
+                            } else {
+                                message.error(`${info.file.response.message}`);
+                            }
                         }
                     } else if (info.file.status === "error") {
                         message.error(`${info.file.name} 上传失败`);
