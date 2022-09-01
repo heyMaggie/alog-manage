@@ -67,7 +67,7 @@ class AlgorithmStatistical extends React.PureComponent {
                         },
                     },
                     legend: {
-                        data: ["股票数量", "人数"],
+                        data: ["标的数量", "人数"],
                         left: 0,
                     },
                     grid: {
@@ -105,7 +105,7 @@ class AlgorithmStatistical extends React.PureComponent {
                     yAxis: [
                         {
                             type: "value",
-                            name: "单位：（股）",
+                            name: "单位：（个）",
                             nameLocation: "end",
                             axisLine: {
                                 show: false,
@@ -149,7 +149,7 @@ class AlgorithmStatistical extends React.PureComponent {
                     ],
                     series: [
                         {
-                            name: "股票数量",
+                            name: "标的数量",
                             type: "line",
                             smooth: true,
                             showSymbol: false,
