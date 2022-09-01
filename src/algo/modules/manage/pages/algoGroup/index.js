@@ -26,17 +26,17 @@ class algoGroup extends React.PureComponent {
             {
                 title: "ID",
                 dataIndex: "id",
-                width: 200,
+                width: 100,
             },
             {
                 title: "算法权限组名称",
                 dataIndex: "groupName",
-                width: 200,
+                width: 310,
             },
             {
                 title: "权限",
                 dataIndex: "algoProperty",
-                width: 200,
+                width: 120,
             },
             {
                 title: "可用算法",
@@ -505,7 +505,7 @@ class algoGroup extends React.PureComponent {
                 >
                     <Form
                         layout={"vertical"}
-                        style={{ maxHeight: "690px", overflow: "hidden" }}
+                        style={{ maxHeight: "720px", overflow: "hidden" }}
                     >
                         <Row gutter={[60]}>
                             {this.isUpdate && (
