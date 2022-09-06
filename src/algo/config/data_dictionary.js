@@ -56,8 +56,8 @@ const configData = {
         { key: "2", value: "启动" },
     ],
     counterStatus: [
-        { key: "0", value: "使能" },
-        { key: "1", value: "关闭" },
+        { key: "0", value: "关闭" },
+        { key: "1", value: "使能" },
     ],
     RiskType: [
         // { key: "0", value: "" },

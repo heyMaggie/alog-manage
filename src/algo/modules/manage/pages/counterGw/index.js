@@ -161,162 +161,43 @@ const getInsertFormFields = () => {
             ],
             component: <Input placeholder="请输入" />,
         },
+        {
+            label: "终端信息",
+            id: "TerminalInfo",
+            rules: [
+                {
+                    validator: checkLength(256),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "营业号",
+            id: "CustOrgId",
+            rules: [
+                {
+                    validator: checkLength(256),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "系统编号",
+            id: "ClSystemId",
+            rules: [
+                {
+                    validator: checkLength(256),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
     ];
 };
 const getUpdateFormFields = () => {
-    return [
-        {
-            label: "用户ID",
-            id: "userId",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(12),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "用户名",
-            id: "userName",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(32),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "用户密码",
-            id: "userPasswd",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(32),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "柜台网关ID",
-            id: "counterGwId",
-            rules: [
-                {
-                    required: true,
-                    message: "柜台网关Id不能为空",
-                },
-                {
-                    validator: checkLength(10),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "来自柜台",
-            id: "counterUserId",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(10),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "业务类型",
-            id: "businessType",
-            initialValue: "1",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.businessType, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        // {
-        //     label: "登录状态",
-        //     id: "loginStatus",
-        //     initialValue: "0",
-        //     rules: [
-        //         {
-        //             required: true,
-        //             message: "参数不能为空",
-        //         },
-        //     ],
-        //     component: SelectOption(dict.loginStatus, {
-        //         placeholder: "请选择",
-        //         allowClear: false,
-        //         style: {
-        //             width: 400,
-        //         },
-        //     }),
-        // },
-        {
-            label: "客户类型",
-            id: "clientType",
-            initialValue: "0",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.clientType, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "算法平台用户ID",
-            id: "uuserId",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(10),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "更新时间",
-            id: "createTime",
-            initialValue: "",
-            component: <Input placeholder="请输入" readOnly disabled />,
-        },
-    ];
+    return getInsertFormFields();
 };
 class CounterGw extends React.PureComponent {
     columns = (params) => {
@@ -369,6 +250,21 @@ class CounterGw extends React.PureComponent {
                 title: "算法平台用户ID",
                 dataIndex: "uuserId",
                 width: 150,
+            },
+            {
+                title: "终端信息",
+                dataIndex: "terminalInfo",
+                width: 300,
+            },
+            {
+                title: "营业号",
+                dataIndex: "custOrgid",
+                // width: 100,
+            },
+            {
+                title: "系统编号",
+                dataIndex: "clSystemId",
+                width: 300,
             },
             {
                 title: "创建时间",
@@ -509,24 +405,30 @@ class CounterGw extends React.PureComponent {
             counterGwId: record.counterGwId,
             counterUserId: record.counterUserId,
             businessType: record.businessType + "",
-            loginStatus: record.loginStatus + "",
+            // loginStatus: record.loginStatus + "",
             clientType: record.clientType + "",
             uuserId: record.uuserId,
-            createTime: record.createTime,
+            // createTime: record.createTime,
             userPasswd: record.userPasswd,
+            TerminalInfo: record.terminalInfo,
+            CustOrgId: record.custOrgid,
+            ClSystemId: record.clSystemId,
         });
     };
-    handleInsertRecord = (fromData) => {
-        console.log("新增接口", fromData);
+    handleInsertRecord = (formData) => {
+        console.log("新增接口", formData);
         let params = {
-            UserId: fromData.userId,
-            UserName: fromData.userName,
-            UserPasswd: fromData.userPasswd,
-            CounterUserId: fromData.counterUserId / 1,
-            BusinessType: fromData.businessType / 1,
-            ClientType: fromData.clientType / 1,
-            UuserId: fromData.uuserId / 1,
-            CounterGwId: fromData.counterGwId / 1,
+            UserId: formData.userId,
+            UserName: formData.userName,
+            UserPasswd: formData.userPasswd,
+            CounterUserId: formData.counterUserId / 1,
+            BusinessType: formData.businessType / 1,
+            ClientType: formData.clientType / 1,
+            UuserId: formData.uuserId / 1,
+            CounterGwId: formData.counterGwId / 1,
+            TerminalInfo: formData.TerminalInfo,
+            CustOrgId: formData.CustOrgId,
+            ClSystemId: formData.ClSystemId,
         };
         http.post({
             url: "/counter/addCounterUserInfo",
@@ -558,6 +460,9 @@ class CounterGw extends React.PureComponent {
             ClientType: formData.clientType / 1,
             UuserId: formData.uuserId / 1,
             CounterGwId: formData.counterGwId / 1,
+            TerminalInfo: formData.TerminalInfo,
+            CustOrgId: formData.CustOrgId,
+            ClSystemId: formData.ClSystemId,
         };
         console.log("更新编辑记录", params);
         http.post({
@@ -667,7 +572,7 @@ class CounterGw extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 1000, y: 445 };
+        let scroll = { x: 2200, y: 445 };
         let scroll2 = { x: 1000, y: 900 };
         let info = this.state.info;
         let { getFieldDecorator } = this.props.form;
