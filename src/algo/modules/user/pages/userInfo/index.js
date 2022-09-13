@@ -798,7 +798,7 @@ class userInfo extends React.PureComponent {
             let idArr = [];
             if (res.data && res.data.length > 0) {
                 // RiskType: [{ key: "1", value: "用户" },{ key: "2", value: "算法" },
-                let dataArr = res.data.filter((item) => item.riskType != 2);
+                let dataArr = res.data.filter((item) => item.riskType == 1);
                 if (dataArr.length > 0) {
                     idArr = dataArr.map((item) => {
                         let obj = {};
