@@ -318,6 +318,14 @@ const configData = {
         { key: "100010", value: "系统错误" },
         { key: "100011", value: "客户端类型错误" },
     ],
+    // 下单类型
+    fileTypeList: [
+        { key: "0", value: "全部" },
+        { key: "1", value: "下单报单" },
+        { key: "2", value: "下单回执" },
+        { key: "3", value: "撤单报单" },
+        { key: "4", value: "撤单回执" },
+    ],
     //下单/撤单
     retCode: [
         { key: "0", value: "成功" },
@@ -392,6 +400,30 @@ const configData = {
         { key: "67", value: "母单和篮子的算法不一致" },
         { key: "68", value: "行情客户端未找到" },
         { key: "69", value: "获取静态文件失败" },
+
+        { key: "525", value: "securityId重复" },
+        { key: "526", value: "响应超时" },
+        { key: "527", value: "资金账号未登陆" },
+        { key: "528", value: "资金账号不一致" },
+        { key: "529", value: "开始时间应小于结束时间" },
+        { key: "530", value: "操作类型错误" },
+        { key: "531", value: "操作类型不一致" },
+        { key: "532", value: "数据解析错误" },
+        { key: "533", value: "sessionId为空" },
+        { key: "534", value: "funcNo为空" },
+        { key: "535", value: "文件解析异常" },
+        { key: "536", value: "未登录" },
+        { key: "537", value: "token失效" },
+        { key: "538", value: "上传文件失败" },
+        { key: "539", value: "下载文件失败" },
+        { key: "540", value: "删除文件失败" },
+        { key: "541", value: "算法不一致" },
+        { key: "542", value: "无应答" },
+        { key: "541", value: "文件执行成功的部分被修改" },
+        { key: "542", value: "文件格式错误" },
+        { key: "543", value: "文件用户名错误" },
+        { key: "544", value: "文件执行方式错误" },
+        { key: "545", value: "文件未新增执行命令" },
     ],
 };
 

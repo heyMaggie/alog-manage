@@ -76,6 +76,11 @@ const main = (root = "/main/manage") => [
         component: `${pages}/counterInfo`,
         title: "柜台信息",
     },
+    {
+        path: `${root}/fileOrder`,
+        component: `${pages}/fileOrder`,
+        title: "文件下单",
+    },
     // {
     //     path: `${root}/securityQuery`,
     //     component: `${pages}/securityQuery`,

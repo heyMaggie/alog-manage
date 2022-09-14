@@ -113,6 +113,12 @@ const menuList = [
                 title: "柜台信息",
                 path: "/main/manage/counterInfo",
             },
+            {
+                id: "1-9",
+                icon: "",
+                title: "文件下单",
+                path: "/main/manage/fileOrder",
+            },
         ],
     },
     {
