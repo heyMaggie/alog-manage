@@ -24,6 +24,7 @@ class FormLogin extends React.Component {
                     console.log(res);
                     if (res.code == 0) {
                         sessionStorage.isLogin = true;
+                        sessionStorage.userName = params.userName;
                         // 0  有   导入导出权限
                         // 1  没有 导入导出权限
                         sessionStorage.userPrivilege = res.data.userPrivilege;

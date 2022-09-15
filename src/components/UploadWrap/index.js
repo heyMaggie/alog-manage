@@ -21,12 +21,22 @@ export default class UploadWrap extends React.PureComponent {
         if (this.props.uploadUrl) {
             url = this.props.uploadUrl;
         }
+        if (this.props.upLoadCSvUrl) {
+            url = window.baseURL + this.props.upLoadCSvUrl;
+        }
+        let fileType = ".xml";
+        let data = null;
+        if (this.props.type == ".csv") {
+            fileType = ".csv";
+            data = { fileSource: sessionStorage.userName };
+        }
         if (!uploadOption) {
             uploadOption = {
                 name: "file",
-                accept: ".xml",
+                accept: fileType,
                 showUploadList: false,
                 action: url,
+                data: data,
                 headers: { "X-Requested-With": null },
                 onChange: (info) => {
                     if (info.file.status !== "uploading") {

@@ -76,15 +76,18 @@ class FileOrder extends React.PureComponent {
     handleUpdateBtn = (record) => {
         console.log("下载按钮", record);
         this.record = record;
-        this.getDownLoadFile(record);
+        let downFilePath = `${window.baseURL}/file-scan/downloadFileScan?fileName=${record.fileName}&filePath=${record.filePath}`;
+        downFilePath = encodeURI(downFilePath);
+        window.location.href = downFilePath;
+        // this.getDownLoadFile(record);
     };
     getDownLoadFile = (record) => {
         let params = {
             fileName: record.fileName,
             filePath: record.filePath,
         };
-        http.post({
-            url: "/file-scan/downloadFile",
+        http.get({
+            url: "/file-scan/downloadFileScan",
             data: params,
         })
             .then((res) => {
@@ -98,10 +101,6 @@ class FileOrder extends React.PureComponent {
                 link.href = url;
                 document.body.appendChild(link);
                 link.click();
-                if (res.data.length > 0) {
-                } else {
-                    message.info("下载失败");
-                }
             })
             .catch((e) => {
                 message.error("下载失败");
@@ -137,7 +136,7 @@ class FileOrder extends React.PureComponent {
     };
     handleSearch = (params, pagination) => {
         this.searchParam = params;
-        console.log(params, "params");
+        // console.log(params, "params");
         this.getData(params, pagination);
     };
     componentDidMount() {
@@ -160,10 +159,11 @@ class FileOrder extends React.PureComponent {
                     scroll={scroll}
                 >
                     <div
-                        urlPrefix="/counter-user-info"
+                        upLoadCSvUrl="/file-scan/uploadFile"
                         noDownload={true}
                         title="文件"
                         sucCallback={this.getData}
+                        type=".csv"
                     ></div>
                 </CurdComponent>
             </div>
