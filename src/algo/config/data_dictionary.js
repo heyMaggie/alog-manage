@@ -56,8 +56,8 @@ const configData = {
         { key: "2", value: "启动" },
     ],
     counterStatus: [
-        { key: "0", value: "使能" },
-        { key: "1", value: "关闭" },
+        { key: "0", value: "关闭" },
+        { key: "1", value: "使能" },
     ],
     RiskType: [
         // { key: "0", value: "" },
@@ -292,10 +292,10 @@ const configData = {
     ],
     // 运维系统 : 证券信息管理 - 是否有涨跌限制'是否有涨跌停价格限制,Y=是,N=否',
     hasPriceLimit: [
-        // { key: "Y", value: "有价格限制" },
-        // { key: "N", value: "无价格限制" },
-        { key: "0", value: "否" },
-        { key: "1", value: "是" },
+        { key: "Y", value: "是" },
+        { key: "N", value: "否" },
+        // { key: "0", value: "否" },
+        // { key: "1", value: "是" },
     ],
     property: [
         { key: "1", value: "主板A股" },
