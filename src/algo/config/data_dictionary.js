@@ -401,6 +401,8 @@ const configData = {
         { key: "68", value: "行情客户端未找到" },
         { key: "69", value: "获取静态文件失败" },
 
+        { key: "79", value: "从属同一user的篮子名重复" },
+
         { key: "525", value: "securityId重复" },
         { key: "526", value: "响应超时" },
         { key: "527", value: "资金账号未登陆" },
@@ -419,11 +421,12 @@ const configData = {
         { key: "540", value: "删除文件失败" },
         { key: "541", value: "算法不一致" },
         { key: "542", value: "无应答" },
-        { key: "541", value: "文件执行成功的部分被修改" },
-        { key: "542", value: "文件格式错误" },
-        { key: "543", value: "文件用户名错误" },
-        { key: "544", value: "文件执行方式错误" },
-        { key: "545", value: "文件未新增执行命令" },
+        { key: "543", value: "文件执行成功的部分被修改" },
+        { key: "544", value: "文件格式错误" },
+        { key: "545", value: "文件用户名错误" },
+        { key: "546", value: "文件执行方式错误" },
+        { key: "544", value: "文件未新增执行命令" },
+        { key: "548", value: "文件过大" },
     ],
 };
 
