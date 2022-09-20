@@ -159,6 +159,8 @@ class Cpu extends React.PureComponent {
                         {
                             type: "slider",
                             height: "20px",
+                            left: 130,
+                            right: 130,
                         },
                     ],
                 };
