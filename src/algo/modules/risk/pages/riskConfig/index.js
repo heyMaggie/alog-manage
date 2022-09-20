@@ -65,9 +65,9 @@ class riskConfigManage extends React.PureComponent {
                 width: 200,
             },
             {
-                title: "时间（总委比）",
+                title: "时间（总委比）(s)",
                 dataIndex: "EntrustSeconds",
-                width: 150,
+                width: 165,
             },
             {
                 title: "总委托笔数",

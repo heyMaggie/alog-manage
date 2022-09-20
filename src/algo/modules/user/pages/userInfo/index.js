@@ -818,10 +818,10 @@ class userInfo extends React.PureComponent {
         // return;
         http.get({
             // url: "/risk/queryRisk",
-            url: "/algo/listAll",
+            url: "/algo-group-info/algoList",
             // data: params,
         }).then((res) => {
-            console.log(res);
+            // console.log("算法风控组",res);
             let idArr = [];
             if (res.data && res.data.length > 0) {
                 let dataArr = res.data;
@@ -838,6 +838,30 @@ class userInfo extends React.PureComponent {
             // console.log(res.data);
             this.setState({
                 algoSecList: idArr,
+            });
+        });
+    };
+    //获取所有算法
+    getAlgoList = () => {
+        // return;
+        http.get({
+            // url: "/risk/queryRisk",
+            url: "/algo/listAll",
+            // data: params,
+        }).then((res) => {
+            console.log("所有算法", res);
+            let idArr = [];
+            if (res.data && res.data.length > 0) {
+                let dataArr = res.data;
+                idArr = dataArr.map((item) => {
+                    let obj = {};
+                    obj.key = item.id;
+                    obj.value = item.id;
+                    return obj;
+                });
+                parseDict(res.data);
+            }
+            this.setState({
                 algoList: res.data,
             });
         });
@@ -986,6 +1010,7 @@ class userInfo extends React.PureComponent {
         this.getData();
         this.getAllRiskGroup();
         this.getAllAlgoGroup();
+        this.getAlgoList();
     }
     render() {
         let scroll = { x: 1000, y: 445 };

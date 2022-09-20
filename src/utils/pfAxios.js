@@ -12,8 +12,8 @@ if (process.env.NODE_ENV == "development") {
     // baseUrl = "http://192.168.1.81:20080";
     // baseUrl = "http://192.168.1.80:20080";
 } else {
-    //生产环境
-    baseUrl = "/assess";
+    //生产环境  一键优选
+    baseUrl = "/api";
     // baseUrl = window.pfBaseUrl;
 }
 // window.pfBaseUrl = baseUrl;
