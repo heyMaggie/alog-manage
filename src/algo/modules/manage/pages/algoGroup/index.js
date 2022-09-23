@@ -36,7 +36,7 @@ class algoGroup extends React.PureComponent {
             {
                 title: "权限",
                 dataIndex: "algoProperty",
-                width: 120,
+                width: 300,
             },
             {
                 title: "可用算法",
@@ -248,7 +248,24 @@ class algoGroup extends React.PureComponent {
             updateModalVisible: true,
         });
         this.props.form.resetFields();
-        this.getAlgoList();
+        let callback = () => {
+            let idMax = 0;
+            for (let i = 0; i < this.state.algoList.length; i++) {
+                let id = this.state.algoList[i].id;
+                if (id > idMax) {
+                    idMax = id;
+                }
+            }
+            // console.log("idMax", idMax);
+            if (!this.configArr) {
+                this.configArr = [];
+                for (let j = 0; j < idMax; j++) {
+                    this.configArr.push(0);
+                }
+            }
+            // console.log(this.configArr);
+        };
+        this.getAlgoList({}, { current: 1, pageSize: 1000 }, callback);
     };
 
     inputChange = (e) => {
@@ -273,23 +290,46 @@ class algoGroup extends React.PureComponent {
             }
         }
     };
-    onSwitchChange = (val, record) => {
-        // console.log(val, record);
+    onSwitchChange = (checked, record) => {
+        // console.log(checked, record);
+
         let algoArr = [...this.state.algoList];
         for (let i = 0; i < algoArr.length; i++) {
             let algo = algoArr[i];
             if (algo.id == record.id) {
-                algo.isShow = val ? 1 : 0;
+                algo.isShow = checked ? 1 : 0;
+                if (checked) {
+                    this.configArr[this.configArr.length - record.id] = 1;
+                } else {
+                    this.configArr[this.configArr.length - record.id] = 0;
+                }
             }
         }
         this.setState({ algoList: algoArr });
-        let showArr = algoArr.map((item) => item.isShow).reverse();
+        // console.log("configArr", this.configArr);
+        // console.log("configStr", this.configArr.join(""));
+        // console.log(algoArr);
+        // let showArr = algoArr.map((item) => item.isShow).reverse();
         // console.log(showArr);
-        let binStr = showArr.join("");
+        let binStr = this.configArr.join("");
+        const reg = /(\d)(?=(?:\d{4})+$)/g;
+        const newNumber = binStr.replace(reg, "$1,");
+        console.log(newNumber);
+        let arr = newNumber.split(",");
+        // console.log(arr);
+        let sixteenAllStr = "";
+        for (let i = 0; i < arr.length; i++) {
+            // console.log(arr[i]);
+            let sixteenStr = parseInt(arr[i] / 1, 2).toString(16);
+            // console.log(sixteenStr);
+            sixteenAllStr += sixteenStr;
+        }
+        console.log(sixteenAllStr);
+
         //先使用parseInt()函数将二进制转换为十进制，语法“parseInt(string,2);”；然后使用toString()函数将十进制转换为十六进制即可，语法格式“number.toString(16)”。
-        let sixteenStr = parseInt(binStr, 2).toString(16);
-        console.log(sixteenStr);
-        this.props.form.setFieldsValue({ AlgoProperty: sixteenStr });
+        // let sixteenStr = parseInt(binStr, 2).toString(16);
+        // console.log(sixteenStr);
+        this.props.form.setFieldsValue({ AlgoProperty: sixteenAllStr });
     };
     // 编辑按钮点击事件
     handleUpdateBtn = (record) => {
@@ -317,7 +357,7 @@ class algoGroup extends React.PureComponent {
         this.props.form.validateFields((err) => {
             if (!err) {
                 let data = this.props.form.getFieldsValue();
-                // console.log(data);
+                console.log(data);
                 if (this.isInsert) {
                     console.log("新增算法组");
                     this.handleInsertRecord(data);
@@ -408,7 +448,8 @@ class algoGroup extends React.PureComponent {
     };
     getAlgoList = (
         params = {},
-        pagination = { current: 1, pageSize: 1000 }
+        pagination = { current: 1, pageSize: 1000 },
+        callback
     ) => {
         params = {
             ...params,
@@ -428,6 +469,9 @@ class algoGroup extends React.PureComponent {
                 this.setState({ algoList: res.data.records });
                 // console.log("算法列表", this.state.algoList);
                 // showTip(this);
+                if (callback) {
+                    callback();
+                }
             } else {
                 message.info("算法列表为空");
             }
