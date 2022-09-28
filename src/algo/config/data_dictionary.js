@@ -281,8 +281,8 @@ const configData = {
     ],
     // 运维系统 : 证券信息管理 - 涨跌限制类型
     limitType: [
-        { key: "1", value: "幅度（百分比）" },
-        { key: "2", value: "价格（绝对值）" },
+        { key: "1", value: "幅度(百分比)" },
+        { key: "2", value: "价格(绝对值)" },
     ],
     // 运维系统 : 证券信息管理 - 证券状态0正常, 1停盘, 2退市',
     securityStatus: [
@@ -427,6 +427,22 @@ const configData = {
         { key: "546", value: "文件执行方式错误" },
         { key: "544", value: "文件未新增执行命令" },
         { key: "548", value: "文件过大" },
+    ],
+    // 两融
+    settleStatus: [
+        { key: "0", value: "未了结" },
+        { key: "1", value: "了结" },
+    ],
+    // bit0-可融资 bit1-可融券 bit2-可作担保品 bit3-新股
+    creditType: [
+        { key: "1", value: "可融资" },
+        { key: "2", value: "可融券" },
+        { key: "3", value: "可融资,可融券" },
+        { key: "4", value: "可作担保品" },
+        { key: "5", value: "可融资,可担保" },
+        { key: "6", value: "可融券,可担保" },
+        { key: "7", value: "可融资,可融券,可担保" },
+        { key: "8", value: "新股" },
     ],
 };
 

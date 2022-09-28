@@ -6,108 +6,152 @@ import { Input } from "antd";
 const columns = (params) => {
     return [
         {
+            title: "总资金",
+            dataIndex: "totalBalance",
+        },
+        {
+            title: "可用资金",
+            dataIndex: "freeBalance",
+        },
+        {
             title: "证券代码",
             dataIndex: "securityId",
-            key: "securityId",
         },
         {
-            title: "证券代码源",
-            dataIndex: "securityIdSourceValue",
-            width: 170,
+            title: "冻结资金",
+            dataIndex: "frozenBalance",
         },
         {
-            title: "证券名称",
-            dataIndex: "securityName",
-            key: "securityName",
+            title: "可还款资金",
+            dataIndex: "repayBalance",
         },
         {
-            title: "昨收价",
-            dataIndex: "prevClosePx",
-            key: "prevClosePx",
+            title: "融券卖出所得资金",
+            dataIndex: "shortBalance",
         },
         {
-            title: "证券状态",
-            dataIndex: "securityStatusValue",
-            key: "securityStatus",
+            title: "可买券还券资金",
+            dataIndex: "enBuybackBalance",
         },
         {
-            title: "信用标识",
-            dataIndex: "creditTypeValue",
-            width: 190,
+            title: "净资产",
+            dataIndex: "netAsset",
         },
         {
-            title: "股票板块属性",
-            dataIndex: "propertyValue",
-            key: "property",
+            title: "担保资产",
+            dataIndex: "mortgageAsset",
         },
         {
-            title: "限价买数量上限",
-            dataIndex: "buyQtyUpperLimit",
-            key: "buyQtyUpperLimit",
+            title: "可转出资产",
+            dataIndex: "fetchAsset",
         },
         {
-            title: "限价买数量单位",
-            dataIndex: "buyQtyUnit",
+            title: "现金资产",
+            dataIndex: "cashAsset",
         },
         {
-            title: "限价卖数量上限",
-            dataIndex: "sellQtyUpperLimit",
-            key: "sellQtyUpperLimit",
+            title: "可用保证金",
+            dataIndex: "availMargin",
         },
         {
-            title: "限价卖数量单位",
-            dataIndex: "sellQtyUnit",
+            title: "担保证券市值",
+            dataIndex: "mortgageMarketValue",
         },
         {
-            title: "市价买数量上限",
-            dataIndex: "marketBuyQtyUpperLimit",
-            key: "marketBuyQtyUpperLimit",
+            title: "融资市值",
+            dataIndex: "longMarketValue",
         },
         {
-            title: "市价买数量单位",
-            dataIndex: "marketBuyQtyUnit",
+            title: "融券市值",
+            dataIndex: "shortMarketValue",
         },
         {
-            title: "市价卖数量上限",
-            dataIndex: "marketSellQtyUpperLimit",
-            key: "marketSellQtyUpperLimit",
+            title: "维持担保品比例",
+            dataIndex: "maintenanceLevel",
         },
         {
-            title: "市价卖数量单位",
-            dataIndex: "marketSellQtyUnit",
+            title: "总利息",
+            dataIndex: "totalSwap",
+        },
+
+        {
+            title: "融资合约利息及费用",
+            dataIndex: "longSwap",
         },
         {
-            title: "是否有涨跌限制",
-            dataIndex: "hasPriceLimitValue",
-            key: "hasPriceLimit",
+            title: "融券合约利息及费用",
+            dataIndex: "shortSwap",
         },
         {
-            title: "涨跌限制类型",
-            dataIndex: "limitTypeValue",
+            title: "授信额度",
+            dataIndex: "creditQuote",
         },
         {
-            title: "上涨限价",
-            dataIndex: "upperLimitPrice",
-            key: "upperLimitPrice",
+            title: "可融资额度",
+            dataIndex: "longQuote",
         },
         {
-            title: "下跌限价",
-            dataIndex: "lowerLimitPrice",
-            key: "lowerLimitPrice",
+            title: "可融券额度",
+            dataIndex: "shortQuote",
         },
         {
-            title: "更新时间",
-            dataIndex: "updateTime",
-            key: "updateTime",
-            width: 180,
+            title: "总负债",
+            dataIndex: "totalDebt",
         },
+        {
+            title: "融资负债金额",
+            dataIndex: "longDebt",
+        },
+        {
+            title: "融券负债金额",
+            dataIndex: "shortDebt",
+        },
+        {
+            title: "费用负债",
+            dataIndex: "feeDebt",
+        },
+        {
+            title: "融资盈亏",
+            dataIndex: "longProfit",
+        },
+        {
+            title: "融券盈亏",
+            dataIndex: "shortProfit",
+        },
+        {
+            title: "其他合约金额",
+            dataIndex: "otherContractAmount",
+        },
+        // {
+        //     title: "创建时间",
+        //     dataIndex: "createTime",
+        //     width: 180,
+        // },
+        // {
+        //     title: "更新时间",
+        //     dataIndex: "updateTime",
+        //     key: "updateTime",
+        //     width: 180,
+        // },
     ];
 };
+console.log(columns.length);
+
 let getSearchFormFields = () => {
     return [
         {
+            label: "证券账户",
+            id: "uuserId",
+            component: <Input placeholder="请输入" />,
+        },
+        {
             label: "证券代码",
             id: "securityId",
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "合约编号",
+            id: "sno",
             component: <Input placeholder="请输入" />,
         },
     ];
@@ -430,7 +474,7 @@ const getInsertFormFields = () => {
 const getUpdateFormFields = () => {
     return getInsertFormFields();
 };
-export default class uoeSetting extends React.PureComponent {
+export default class mtradeSecurity extends React.PureComponent {
     state = {
         searchLoading: false,
         selectRow: [],
@@ -570,15 +614,14 @@ export default class uoeSetting extends React.PureComponent {
         };
         // params.token = "";
         http.post({
-            url: "/security/list",
+            url: "/credit-asset-info/pageList",
             data: params,
         }).then((res) => {
             console.log(res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
-                // parseDict(res.data.records);
-                parseDictValue(res.data.records);
-                console.log(res.data.records);
+                parseDict(res.data.records);
+                // parseDictValue(res.data.records);
                 // showTip(this);
             } else {
                 message.info("查询结果为空");
@@ -601,7 +644,7 @@ export default class uoeSetting extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 3200, y: 445 };
+        let scroll = { x: 3000, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;
@@ -626,7 +669,7 @@ export default class uoeSetting extends React.PureComponent {
                     pagination={this.state.pagination}
                     getUpdateFormFields={getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
-                    updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                    // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={columns}
@@ -634,11 +677,11 @@ export default class uoeSetting extends React.PureComponent {
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
                 >
-                    <div
+                    {/* <div
                         urlPrefix="/security"
-                        title="证券信息"
+                        title="券源信息"
                         sucCallback={this.getData}
-                    ></div>
+                    ></div> */}
                 </CurdComponent>
             </div>
         );

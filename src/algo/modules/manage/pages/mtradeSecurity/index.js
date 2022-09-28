@@ -6,94 +6,61 @@ import { Input } from "antd";
 const columns = (params) => {
     return [
         {
+            title: "用户Id",
+            dataIndex: "uuserId",
+        },
+        {
+            title: "市场代码",
+            dataIndex: "market",
+        },
+        {
             title: "证券代码",
             dataIndex: "securityId",
             key: "securityId",
         },
         {
-            title: "证券代码源",
-            dataIndex: "securityIdSourceValue",
-            width: 170,
-        },
-        {
-            title: "证券名称",
-            dataIndex: "securityName",
-            key: "securityName",
-        },
-        {
-            title: "昨收价",
-            dataIndex: "prevClosePx",
-            key: "prevClosePx",
-        },
-        {
-            title: "证券状态",
-            dataIndex: "securityStatusValue",
-            key: "securityStatus",
-        },
-        {
             title: "信用标识",
-            dataIndex: "creditTypeValue",
+            dataIndex: "creditType",
             width: 190,
         },
         {
-            title: "股票板块属性",
-            dataIndex: "propertyValue",
-            key: "property",
+            title: "最大可融券数量",
+            dataIndex: "leaveQty",
+            width: 140,
         },
         {
-            title: "限价买数量上限",
-            dataIndex: "buyQtyUpperLimit",
-            key: "buyQtyUpperLimit",
+            title: "当前融券数量",
+            dataIndex: "shortQty",
+            width: 125,
         },
         {
-            title: "限价买数量单位",
-            dataIndex: "buyQtyUnit",
+            title: "当前可还券数量",
+            dataIndex: "repayStock",
+            width: 140,
         },
         {
-            title: "限价卖数量上限",
-            dataIndex: "sellQtyUpperLimit",
-            key: "sellQtyUpperLimit",
+            title: "当前已还券数量",
+            dataIndex: "payedQty",
+            width: 140,
         },
         {
-            title: "限价卖数量单位",
-            dataIndex: "sellQtyUnit",
+            title: "融资保证金比例",
+            dataIndex: "marginLongRatio",
+            width: 150,
         },
         {
-            title: "市价买数量上限",
-            dataIndex: "marketBuyQtyUpperLimit",
-            key: "marketBuyQtyUpperLimit",
+            title: "融券保证金比例",
+            dataIndex: "marginShortRatio",
+            width: 150,
         },
         {
-            title: "市价买数量单位",
-            dataIndex: "marketBuyQtyUnit",
+            title: "折算率",
+            dataIndex: "convertRatio",
         },
         {
-            title: "市价卖数量上限",
-            dataIndex: "marketSellQtyUpperLimit",
-            key: "marketSellQtyUpperLimit",
-        },
-        {
-            title: "市价卖数量单位",
-            dataIndex: "marketSellQtyUnit",
-        },
-        {
-            title: "是否有涨跌限制",
-            dataIndex: "hasPriceLimitValue",
-            key: "hasPriceLimit",
-        },
-        {
-            title: "涨跌限制类型",
-            dataIndex: "limitTypeValue",
-        },
-        {
-            title: "上涨限价",
-            dataIndex: "upperLimitPrice",
-            key: "upperLimitPrice",
-        },
-        {
-            title: "下跌限价",
-            dataIndex: "lowerLimitPrice",
-            key: "lowerLimitPrice",
+            title: "创建时间",
+            dataIndex: "createTime",
+            width: 180,
         },
         {
             title: "更新时间",
@@ -103,12 +70,26 @@ const columns = (params) => {
         },
     ];
 };
+let typeArr = [
+    { key: "", value: "全部" },
+    { key: 8, value: "新股" },
+];
+
 let getSearchFormFields = () => {
     return [
         {
             label: "证券代码",
             id: "securityId",
             component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "交易类型",
+            id: "creditType",
+            initialValue: "",
+            component: SelectOption(typeArr, {
+                allowClear: true,
+                placeholder: "请选择交易类型",
+            }),
         },
     ];
 };
@@ -430,7 +411,7 @@ const getInsertFormFields = () => {
 const getUpdateFormFields = () => {
     return getInsertFormFields();
 };
-export default class uoeSetting extends React.PureComponent {
+export default class mtradeSecurity extends React.PureComponent {
     state = {
         searchLoading: false,
         selectRow: [],
@@ -570,15 +551,14 @@ export default class uoeSetting extends React.PureComponent {
         };
         // params.token = "";
         http.post({
-            url: "/security/list",
+            url: "/mtrade-security-info/pageList",
             data: params,
         }).then((res) => {
             console.log(res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
-                // parseDict(res.data.records);
-                parseDictValue(res.data.records);
-                console.log(res.data.records);
+                parseDict(res.data.records);
+                // parseDictValue(res.data.records);
                 // showTip(this);
             } else {
                 message.info("查询结果为空");
@@ -601,7 +581,7 @@ export default class uoeSetting extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 3200, y: 445 };
+        let scroll = { x: 2000, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;
@@ -626,7 +606,7 @@ export default class uoeSetting extends React.PureComponent {
                     pagination={this.state.pagination}
                     getUpdateFormFields={getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
-                    updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                    // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={columns}
@@ -634,11 +614,11 @@ export default class uoeSetting extends React.PureComponent {
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
                 >
-                    <div
+                    {/* <div
                         urlPrefix="/security"
-                        title="证券信息"
+                        title="券源信息"
                         sucCallback={this.getData}
-                    ></div>
+                    ></div> */}
                 </CurdComponent>
             </div>
         );
