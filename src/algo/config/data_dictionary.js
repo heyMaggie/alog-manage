@@ -74,6 +74,12 @@ const configData = {
         { key: "2", value: "智能委托" },
         { key: "3", value: "调仓" },
     ],
+    // 1:日内回转、:智能委托 2：POV  3:股指
+    algorithmTypeId: [
+        { key: 1, value: "日内/智能" },
+        { key: 2, value: "POV" },
+        { key: 3, value: "股指" },
+    ],
     userStatus: [
         { key: "0", value: "正常" },
         { key: "1", value: "黑名单客户" },

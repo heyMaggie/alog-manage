@@ -32,7 +32,7 @@ class algoConfig extends React.PureComponent {
                     },
                     {
                         message: "算法名称格式不正确",
-                        pattern: /[\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/i,
+                        pattern: /^[a-zA-Z-\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/i,
                     },
                 ],
                 component: <Input placeholder="请输入名称,例:智能委托(ZC)" />,
@@ -101,6 +101,24 @@ class algoConfig extends React.PureComponent {
                     },
                 ],
                 component: SelectOption(dict.algorithmType, {
+                    placeholder: "请选择",
+                    // allowClear: true,
+                    style: {
+                        width: 400,
+                    },
+                }),
+            },
+            {
+                label: "算法类型ID",
+                id: "AlgorithmTypeId",
+                initialValue: 1,
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(dict.algorithmTypeId, {
                     placeholder: "请选择",
                     // allowClear: true,
                     style: {
@@ -185,7 +203,7 @@ class algoConfig extends React.PureComponent {
                     },
                     {
                         message: "算法名称格式不正确",
-                        pattern: /[\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/i,
+                        pattern: /^[a-zA-Z-\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/i,
                     },
                 ],
                 component: <Input placeholder="请输入名称,例:智能委托(ZC)" />,
@@ -255,6 +273,24 @@ class algoConfig extends React.PureComponent {
                     },
                 ],
                 component: SelectOption(dict.algorithmType, {
+                    placeholder: "请选择",
+                    // allowClear: true,
+                    style: {
+                        width: 400,
+                    },
+                }),
+            },
+            {
+                label: "算法类型ID",
+                id: "AlgorithmTypeId",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(dict.algorithmTypeId, {
                     placeholder: "请选择",
                     // allowClear: true,
                     style: {
@@ -343,6 +379,10 @@ class algoConfig extends React.PureComponent {
             {
                 title: "算法类型",
                 dataIndex: "algorithmTypeValue",
+            },
+            {
+                title: "算法类型ID",
+                dataIndex: "algorithmTypeIdValue",
             },
             {
                 title: "算法类型名称",
@@ -527,10 +567,12 @@ class algoConfig extends React.PureComponent {
         params.ProviderName = valArr[0];
         params.UuserId = valArr[1] / 1;
         console.log("新增接口", params);
-        let isok = params.AlgoName.match(/[\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/);
+        let isok = params.AlgoName.match(
+            /^[a-zA-Z-\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/i
+        );
         if (!isok) {
             message.error(
-                "算法名称格式不正确,格式:中文(英文或数字),eg:智能委托(ZC)",
+                "算法名称格式不正确,格式:中文/英文(英文或数字),eg:智能委托(ZC)",
                 3.5
             );
             return;
@@ -573,13 +615,14 @@ class algoConfig extends React.PureComponent {
         //     "Parameter": "{\"side\":2, \"qty\":\"null\"}",
         //     "RiskGroup": 1
         // }
-        // console.log(object);
+        console.log(record);
         let formData = {
             AlgoName: record.algoName,
             // ProviderName: record.providerName,
             ProviderName: record.providerName + "-" + record.uuserId,
             // UuserId: record.uuserId,
             AlgorithmType: record.algorithmType + "",
+            AlgorithmTypeId: record.algorithmTypeId,
             AlgorithmTypeName: record.algorithmTypeName,
             // AlgorithmStatus: record.AlgorithmStatus + "",
             Parameter: record.parameter,
@@ -636,7 +679,9 @@ class algoConfig extends React.PureComponent {
         params.ProviderName = valArr[0];
         params.UuserId = valArr[1] / 1;
         console.log("修改接口", params);
-        let isok = params.AlgoName.match(/[\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/);
+        let isok = params.AlgoName.match(
+            /^[a-zA-Z-\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/i
+        );
         if (!isok) {
             message.error(
                 "算法名称格式不正确,格式:中文(英文或数字),eg:智能委托(ZC)",
