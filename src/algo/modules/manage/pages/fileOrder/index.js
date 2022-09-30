@@ -77,8 +77,10 @@ class FileOrder extends React.PureComponent {
         console.log("下载按钮", record);
         this.record = record;
         let downFilePath = `${window.baseURL}/file-scan/downloadFileScan?fileName=${record.fileName}&filePath=${record.filePath}`;
+
         downFilePath = encodeURI(downFilePath);
-        window.location.href = downFilePath;
+        console.log(downFilePath);
+        window.location.href = encodeURI(downFilePath, "utf-8");
         // this.getDownLoadFile(record);
     };
     getDownLoadFile = (record) => {
