@@ -24,16 +24,15 @@ const getSearchFormFields = () => {
             // initialValue: "",
             component: <Input placeholder="请输入" />,
         },
-        // {
-        //     label: "开始时间",
-        //     id: "startTime",
-        //     component: <TimePicker placeholder="请输入" />,
-        // },
-        // {
-        //     label: "结束时间",
-        //     id: "endTime",
-        //     component: <TimePicker placeholder="请输入" />,
-        // },
+        {
+            label: "业务类型",
+            id: "accountType",
+            initialValue: "1",
+            component: SelectOption(dict.businessTypeSelect, {
+                placeholder: "请选择",
+                // allowClear: true,
+            }),
+        },
     ];
 };
 const getInsertFormFields = () => {

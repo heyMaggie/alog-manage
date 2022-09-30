@@ -1,6 +1,6 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
-// import SelectOption from "@/components/SelectOption";
+import SelectOption from "@/components/SelectOption";
 import { Input } from "antd";
 
 const columns = (params) => {
@@ -110,6 +110,15 @@ const getSearchFormFields = () => {
             initialValue: "",
             component: <Input placeholder="请输入" />,
         },
+        {
+            label: "业务类型",
+            id: "type",
+            initialValue: "1",
+            component: SelectOption(dict.businessTypeSelect, {
+                placeholder: "请选择",
+                // allowClear: true,
+            }),
+        },
     ];
 };
 export default class uoeSetting extends React.PureComponent {
@@ -164,6 +173,13 @@ export default class uoeSetting extends React.PureComponent {
     };
     getData = (params = {}) => {
         // params.token = "";
+        console.log(params);
+        if (params.type) {
+            params.type = params.type / 1;
+        } else {
+            params.type = 1;
+        }
+        console.log(params);
         http.post({
             url: "/basket-info/list",
             data: params,

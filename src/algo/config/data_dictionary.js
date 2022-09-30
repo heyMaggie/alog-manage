@@ -17,6 +17,10 @@ const configData = {
         { key: "2", value: "期权" },
         { key: "3", value: "两融" },
     ],
+    businessTypeSelect: [
+        { key: "1", value: "现货" },
+        { key: "3", value: "两融" },
+    ],
     market: [
         { key: "1", value: "深交所" },
         { key: "2", value: "上交所" },
@@ -443,6 +447,15 @@ const configData = {
         { key: "6", value: "可融券,可担保" },
         { key: "7", value: "可融资,可融券,可担保" },
         { key: "8", value: "新股" },
+    ],
+    //持仓方向 0现货 1权利持仓(期权) 2义务持仓(期权) 3备兑持仓(期权) 4两融多仓 5两融空仓"),
+    positionType: [
+        { key: "0", value: "现货" },
+        { key: "1", value: "权利持仓(期权)" },
+        { key: "2", value: "义务持仓(期权)" },
+        { key: "3", value: "备兑持仓(期权)" },
+        { key: "4", value: "两融多仓" },
+        { key: "5", value: "两融空仓" },
     ],
 };
 

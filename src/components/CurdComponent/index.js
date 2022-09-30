@@ -276,6 +276,7 @@ class CurdComponent extends React.PureComponent {
     };
     handleSearch = () => {
         let params = this.getSearchFormValue();
+        window.searchFun = this.getSearchFormValue;
         if (this.props.pagination) {
             let newPag = { ...this.props.pagination };
             newPag.current = 1;

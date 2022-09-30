@@ -6,16 +6,18 @@ import { Input } from "antd";
 const columns = (params) => {
     return [
         {
+            title: "用户id",
+            dataIndex: "id",
+        },
+        {
             title: "总资金",
             dataIndex: "totalBalance",
+            width: 170,
         },
         {
             title: "可用资金",
             dataIndex: "freeBalance",
-        },
-        {
-            title: "证券代码",
-            dataIndex: "securityId",
+            width: 170,
         },
         {
             title: "冻结资金",
@@ -24,38 +26,47 @@ const columns = (params) => {
         {
             title: "可还款资金",
             dataIndex: "repayBalance",
+            width: 170,
         },
         {
             title: "融券卖出所得资金",
             dataIndex: "shortBalance",
+            width: 170,
         },
         {
             title: "可买券还券资金",
             dataIndex: "enBuybackBalance",
+            width: 170,
         },
         {
             title: "净资产",
             dataIndex: "netAsset",
+            width: 170,
         },
         {
             title: "担保资产",
             dataIndex: "mortgageAsset",
+            width: 170,
         },
         {
             title: "可转出资产",
             dataIndex: "fetchAsset",
+            width: 170,
         },
         {
             title: "现金资产",
             dataIndex: "cashAsset",
+            width: 170,
         },
         {
             title: "可用保证金",
             dataIndex: "availMargin",
+            width: 170,
         },
         {
             title: "担保证券市值",
             dataIndex: "mortgageMarketValue",
+            width: 170,
         },
         {
             title: "融资市值",
@@ -122,6 +133,19 @@ const columns = (params) => {
             title: "其他合约金额",
             dataIndex: "otherContractAmount",
         },
+        {
+            title: "其他合约利息",
+            dataIndex: "otherContractSwap",
+        },
+        {
+            title: "其他费用",
+            dataIndex: "otherFee",
+        },
+        {
+            title: "其它担保物价值",
+            dataIndex: "otherMortgage",
+            width: 160,
+        },
         // {
         //     title: "创建时间",
         //     dataIndex: "createTime",
@@ -135,25 +159,24 @@ const columns = (params) => {
         // },
     ];
 };
-console.log(columns.length);
 
 let getSearchFormFields = () => {
     return [
         {
-            label: "证券账户",
-            id: "uuserId",
+            label: "用户Id",
+            id: "id",
             component: <Input placeholder="请输入" />,
         },
-        {
-            label: "证券代码",
-            id: "securityId",
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "合约编号",
-            id: "sno",
-            component: <Input placeholder="请输入" />,
-        },
+        // {
+        //     label: "证券代码",
+        //     id: "securityId",
+        //     component: <Input placeholder="请输入" />,
+        // },
+        // {
+        //     label: "合约编号",
+        //     id: "sno",
+        //     component: <Input placeholder="请输入" />,
+        // },
     ];
 };
 const getInsertFormFields = () => {
@@ -612,6 +635,13 @@ export default class mtradeSecurity extends React.PureComponent {
             pageId: pagination.current,
             pageNum: pagination.pageSize,
         };
+        if (params.hasOwnProperty("id")) {
+            if (params.id == "") {
+                params.id = "";
+            } else {
+                params.id = params.id / 1;
+            }
+        }
         // params.token = "";
         http.post({
             url: "/credit-asset-info/pageList",
@@ -644,7 +674,7 @@ export default class mtradeSecurity extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 3000, y: 445 };
+        let scroll = { x: 4700, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;
