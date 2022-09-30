@@ -6,108 +6,121 @@ import { Input } from "antd";
 const columns = (params) => {
     return [
         {
+            title: "用户Id",
+            dataIndex: "uuserId",
+        },
+        {
+            title: "证券账户",
+            dataIndex: "accountId",
+        },
+        {
+            title: "市场代码",
+            dataIndex: "market",
+        },
+        {
             title: "证券代码",
             dataIndex: "securityId",
             key: "securityId",
         },
+        // {
+        //     title: "证券名称",
+        //     dataIndex: "securityName",
+        //     width: 190,
+        // },
         {
-            title: "证券代码源",
-            dataIndex: "securityIdSourceValue",
-            width: 170,
+            title: "合约编号",
+            dataIndex: "sno",
+            width: 140,
         },
         {
-            title: "证券名称",
-            dataIndex: "securityName",
-            key: "securityName",
+            title: "合约状态",
+            dataIndex: "settleStatus",
+            width: 125,
         },
         {
-            title: "昨收价",
-            dataIndex: "prevClosePx",
-            key: "prevClosePx",
+            title: "合约总金额",
+            dataIndex: "totalBalance",
+            width: 140,
         },
         {
-            title: "证券状态",
-            dataIndex: "securityStatusValue",
-            key: "securityStatus",
+            title: "未偿还金额",
+            dataIndex: "curBalance",
+            width: 150,
         },
         {
-            title: "信用标识",
-            dataIndex: "creditTypeValue",
-            width: 190,
+            title: "息费",
+            dataIndex: "totaInterestlFee",
+            width: 150,
         },
         {
-            title: "股票板块属性",
-            dataIndex: "propertyValue",
-            key: "property",
+            title: "未偿还息费",
+            dataIndex: "curInterestFee",
         },
         {
-            title: "限价买数量上限",
-            dataIndex: "buyQtyUpperLimit",
-            key: "buyQtyUpperLimit",
+            title: "利率",
+            dataIndex: "interest",
         },
         {
-            title: "限价买数量单位",
-            dataIndex: "buyQtyUnit",
+            title: "可还款金额",
+            dataIndex: "payAbleBalance",
         },
         {
-            title: "限价卖数量上限",
-            dataIndex: "sellQtyUpperLimit",
-            key: "sellQtyUpperLimit",
+            title: "期初应付融资",
+            dataIndex: "beginRePayBalance",
         },
         {
-            title: "限价卖数量单位",
-            dataIndex: "sellQtyUnit",
+            title: "期初应付负债息费",
+            dataIndex: "beginRePayInterestlFee",
         },
         {
-            title: "市价买数量上限",
-            dataIndex: "marketBuyQtyUpperLimit",
-            key: "marketBuyQtyUpperLimit",
+            title: "当日归还负债金额",
+            dataIndex: "curPayedDebt",
         },
         {
-            title: "市价买数量单位",
-            dataIndex: "marketBuyQtyUnit",
+            title: "当日归还负债息费",
+            dataIndex: "curPayedDebtInterestlFee",
         },
         {
-            title: "市价卖数量上限",
-            dataIndex: "marketSellQtyUpperLimit",
-            key: "marketSellQtyUpperLimit",
+            title: "合约发生日期",
+            dataIndex: "createDate",
         },
         {
-            title: "市价卖数量单位",
-            dataIndex: "marketSellQtyUnit",
+            title: "负债截止日期",
+            dataIndex: "endDate",
         },
         {
-            title: "是否有涨跌限制",
-            dataIndex: "hasPriceLimitValue",
-            key: "hasPriceLimit",
+            title: "最后展期请求时间",
+            dataIndex: "lastExtendDate",
         },
-        {
-            title: "涨跌限制类型",
-            dataIndex: "limitTypeValue",
-        },
-        {
-            title: "上涨限价",
-            dataIndex: "upperLimitPrice",
-            key: "upperLimitPrice",
-        },
-        {
-            title: "下跌限价",
-            dataIndex: "lowerLimitPrice",
-            key: "lowerLimitPrice",
-        },
-        {
-            title: "更新时间",
-            dataIndex: "updateTime",
-            key: "updateTime",
-            width: 180,
-        },
+        // {
+        //     title: "创建时间",
+        //     dataIndex: "createTime",
+        //     width: 180,
+        // },
+        // {
+        //     title: "更新时间",
+        //     dataIndex: "updateTime",
+        //     key: "updateTime",
+        //     width: 180,
+        // },
     ];
 };
+
 let getSearchFormFields = () => {
     return [
         {
+            label: "用户Id",
+            id: "uuserId",
+            component: <Input placeholder="请输入" />,
+        },
+        {
             label: "证券代码",
             id: "securityId",
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "合约编号",
+            id: "sno",
             component: <Input placeholder="请输入" />,
         },
     ];
@@ -430,7 +443,7 @@ const getInsertFormFields = () => {
 const getUpdateFormFields = () => {
     return getInsertFormFields();
 };
-export default class uoeSetting extends React.PureComponent {
+export default class mtradeSecurity extends React.PureComponent {
     state = {
         searchLoading: false,
         selectRow: [],
@@ -570,15 +583,14 @@ export default class uoeSetting extends React.PureComponent {
         };
         // params.token = "";
         http.post({
-            url: "/security/list",
+            url: "/long-contract-info/pageList",
             data: params,
         }).then((res) => {
             console.log(res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
-                // parseDict(res.data.records);
-                parseDictValue(res.data.records);
-                console.log(res.data.records);
+                parseDict(res.data.records);
+                // parseDictValue(res.data.records);
                 // showTip(this);
             } else {
                 message.info("查询结果为空");
@@ -601,7 +613,7 @@ export default class uoeSetting extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 3200, y: 445 };
+        let scroll = { x: 2200, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;
@@ -626,7 +638,7 @@ export default class uoeSetting extends React.PureComponent {
                     pagination={this.state.pagination}
                     getUpdateFormFields={getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
-                    updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                    // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={columns}
@@ -634,11 +646,11 @@ export default class uoeSetting extends React.PureComponent {
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
                 >
-                    <div
+                    {/* <div
                         urlPrefix="/security"
-                        title="证券信息"
+                        title="券源信息"
                         sucCallback={this.getData}
-                    ></div>
+                    ></div> */}
                 </CurdComponent>
             </div>
         );

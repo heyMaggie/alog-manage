@@ -17,8 +17,13 @@ const main = (root = "/main/manage") => [
     //     title: "资金信息",
     // },
     {
-        path: `${root}/security`,
+        path: `/main/prod/security`,
         component: `${pages}/security`,
+        title: "证券信息",
+    },
+    {
+        path: `/main/prod/mtradeSecurity`,
+        component: `${pages}/mtradeSecurity`,
         title: "证券信息",
     },
     {
@@ -81,11 +86,21 @@ const main = (root = "/main/manage") => [
         component: `${pages}/fileOrder`,
         title: "文件下单",
     },
-    // {
-    //     path: `${root}/securityQuery`,
-    //     component: `${pages}/securityQuery`,
-    //     title: "证券信息",
-    // },
+    {
+        path: `${root}/longContract`,
+        component: `${pages}/longContract`,
+        title: "融资合约列表",
+    },
+    {
+        path: `${root}/shortContract`,
+        component: `${pages}/shortContract`,
+        title: "融券合约列表",
+    },
+    {
+        path: `${root}/creditAsset`,
+        component: `${pages}/creditAsset`,
+        title: "两融资金信息",
+    },
 ];
 
 export default main;
