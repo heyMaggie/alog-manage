@@ -1,6 +1,6 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
-// import SelectOption from "@/components/SelectOption";
+import SelectOption from "@/components/SelectOption";
 import { Input } from "antd";
 
 const getUpdateFormFields = () => {};
@@ -304,6 +304,15 @@ const getSearchFormFields = () => {
             id: "securityId",
             initialValue: "",
             component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "业务类型",
+            id: "businessType",
+            initialValue: "1",
+            component: SelectOption(dict.businessTypeSelect, {
+                placeholder: "请选择",
+                // allowClear: true,
+            }),
         },
     ];
 };

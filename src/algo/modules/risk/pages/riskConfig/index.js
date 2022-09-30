@@ -266,6 +266,31 @@ class riskConfigManage extends React.PureComponent {
                     this.updateRiskGroup(data);
                 }
             } else {
+                let data = this.props.form.getFieldsValue();
+                let errKey = Object.keys(err);
+                // console.log(errKey);
+                if (data.riskType == 2) {
+                    let notOk =
+                        errKey.includes("entrustTotalThreshold") ||
+                        errKey.includes("cancelEntrustItemThreshold") ||
+                        errKey.includes("cancelRatioLimit") ||
+                        errKey.includes("failedEntrustItemThreshold") ||
+                        errKey.includes("failedRatioLimit") ||
+                        errKey.includes("netBuyEntrustItemThreshold") ||
+                        errKey.includes("failedRatioLimit") ||
+                        errKey.includes("cancelGapSeconds");
+                    // console.log("校验不通过 ", notOk);
+                    if (!notOk) {
+                        if (this.isInsert) {
+                            console.log("新增风控");
+                            this.addRiskGroup(data);
+                        } else {
+                            console.log("修改风控");
+                            this.updateRiskGroup(data);
+                        }
+                    }
+                    return;
+                }
                 message.error("输入内容不正确,请完善");
             }
         });
@@ -327,7 +352,7 @@ class riskConfigManage extends React.PureComponent {
     };
     //修改风控组
     updateRiskGroup = (data) => {
-        console.log(data);
+        // console.log(data);
         let enable =
             ("0b" +
                 Number(data.byte8) +
@@ -446,13 +471,14 @@ class riskConfigManage extends React.PureComponent {
             url: "/risk/modifyRiskConfig",
             data: params,
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             if (res.code == 0) {
                 message.success(res.message);
                 this.setState({
                     updateModalVisible: false,
                 });
-                this.getData();
+                // this.getData();
+                this.handleSearch(window.searchFun());
             } else {
                 message.error("风控配置修改失败！");
             }
@@ -555,7 +581,7 @@ class riskConfigManage extends React.PureComponent {
         }
     };
     typeChange = (type) => {
-        console.log("typeChange", type);
+        // console.log("typeChange", type);
         if (type == 1) {
             //用户
             this.setState({

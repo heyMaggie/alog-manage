@@ -31,12 +31,12 @@ class algoGroup extends React.PureComponent {
             {
                 title: "算法权限组名称",
                 dataIndex: "groupName",
-                width: 310,
+                width: 180,
             },
             {
                 title: "权限",
                 dataIndex: "algoProperty",
-                width: 120,
+                width: 220,
             },
             {
                 title: "可用算法",
@@ -121,6 +121,7 @@ class algoGroup extends React.PureComponent {
         updateModalVisible: false,
         algoList: [], //算法列表
         modalTitle: "新增算法权限组",
+        configArr: [], // 算法组配置 数据
     };
     //批量选择
     handleTableChange = (selectedRowKeys) => {
@@ -248,52 +249,137 @@ class algoGroup extends React.PureComponent {
             updateModalVisible: true,
         });
         this.props.form.resetFields();
-        this.getAlgoList();
+        this.getAlgoList({}, { current: 1, pageSize: 1000 });
     };
 
     inputChange = (e) => {
         // e.persist();
-        // console.log(e);
-        let newAlgoArr = [...this.state.algoList];
-        // let newAlgoArr = JSON.parse(JSON.stringify(this.state.algoList));
+        let configArr = e.target.value.split("");
+        // console.log(e.target.value);
+        console.log(configArr);
+        let binArr = [];
+        for (let j = 0; j < configArr.length; j++) {
+            // let num = configArr[j] / 1;
+            // 16进制 转 10进制    b => 11
+            let num = parseInt(configArr[j], 16);
+            // console.log(configArr[j], num);
+            let tArr = num.toString(2).split("");
+            if (tArr.length == 1) {
+                tArr.unshift("0");
+                tArr.unshift("0");
+                tArr.unshift("0");
+            }
+            if (tArr.length == 2) {
+                tArr.unshift("0");
+                tArr.unshift("0");
+            }
+            if (tArr.length == 3) {
+                tArr.unshift("0");
+            }
+            // console.log(tArr);
+            binArr = binArr.concat(tArr);
+        }
+        console.log(binArr);
+
+        let newAlgoArr = JSON.parse(JSON.stringify(this.state.algoList));
         newAlgoArr.forEach((item) => (item.isShow = "0"));
-        // console.log("0x" + e.target.value);
-        // console.log(isNaN("0x" + e.target.value));
-        if (!isNaN("0x" + e.target.value)) {
-            let val = BigInt("0x" + e.target.value);
-            let bin = val.toString(2);
-            // console.log(bin);
-            let showArr = bin.toString().split("").reverse();
-            // console.log(showArr);
-            let showLen = showArr.length;
-            let algoLen = this.state.algoList.length;
-            let minLen = Math.min(showLen, algoLen);
-            for (let i = 0; i < minLen; i++) {
-                newAlgoArr[i].isShow = showArr[i];
+        for (let i = 0; i < newAlgoArr.length; i++) {
+            let algo = newAlgoArr[i];
+            // console.log(algo.id, algo.isShow);
+            for (let j = 0; j < binArr.length; j++) {
+                // const element = array[j];
+                if (algo.id == binArr.length - j) {
+                    // console.log(i, j);
+                    algo.isShow = binArr[j];
+                    break;
+                }
             }
         }
+        console.log(newAlgoArr);
+        this.setState({ algoList: newAlgoArr });
+
+        // // console.log("0x" + e.target.value);
+        // // console.log(isNaN("0x" + e.target.value));
+        // if (!isNaN("0x" + e.target.value)) {
+        //     let val = BigInt("0x" + e.target.value);
+        //     let bin = val.toString(2);
+        //     // console.log(bin);
+        //     let showArr = bin.toString().split("").reverse();
+        //     // console.log(showArr);
+        //     let showLen = showArr.length;
+        //     let algoLen = this.state.algoList.length;
+        //     let minLen = Math.min(showLen, algoLen);
+        //     for (let i = 0; i < minLen; i++) {
+        //         newAlgoArr[i].isShow = showArr[i];
+        //     }
+        // }
     };
-    onSwitchChange = (val, record) => {
-        // console.log(val, record);
-        let algoArr = [...this.state.algoList];
+
+    onSwitchChange = (checked, record) => {
+        // console.log(checked, record);
+        // console.log("是否新增", this.isInsert, this.isUpdate);
+        // let algoArr = [...this.state.algoList];
+        let algoArr = JSON.parse(JSON.stringify(this.state.algoList));
+        // console.log(algoArr);
+        // 算法开关 数组
+        let configArr = this.configArr;
+        // if (this.isInsert) {
+        //     console.log("新增---------");
+        // } else {
+        //     console.log("更新---------");
+        // }
+        console.log("-------------");
+
         for (let i = 0; i < algoArr.length; i++) {
             let algo = algoArr[i];
             if (algo.id == record.id) {
-                algo.isShow = val ? 1 : 0;
+                algo.isShow = checked ? 1 : 0;
+                // console.log("算法id: ", record.id, checked);
+                // 改变选中 状态
+                if (checked) {
+                    configArr[this.configArr.length - record.id] = 1;
+                } else {
+                    configArr[this.configArr.length - record.id] = 0;
+                }
+                // console.log(algo);
+            } else {
+                // configArr[this.configArr.length - 1 - i] = algo.isShow;
+                if (algo.isShow == 1) {
+                    console.log(algo);
+                    configArr[this.configArr.length - algo.id] = 1;
+                }
             }
         }
+        console.log(configArr);
         this.setState({ algoList: algoArr });
-        let showArr = algoArr.map((item) => item.isShow).reverse();
+        // console.log("configArr", this.configArr);
+        // console.log("configStr", this.configArr.join(""));
+        // console.log(algoArr);
+        // let showArr = algoArr.map((item) => item.isShow).reverse();
         // console.log(showArr);
-        let binStr = showArr.join("");
+        let binStr = this.configArr.join("");
+        const reg = /(\d)(?=(?:\d{4})+$)/g;
+        const newNumber = binStr.replace(reg, "$1,");
+        // console.log(newNumber);
+        let arr = newNumber.split(",");
+        console.log(arr);
+        let sixteenAllStr = "";
+        for (let i = 0; i < arr.length; i++) {
+            // console.log(arr[i]);
+            let sixteenStr = parseInt(arr[i] / 1, 2).toString(16);
+            // console.log(sixteenStr);
+            sixteenAllStr += sixteenStr;
+        }
+        console.log(sixteenAllStr);
+
         //先使用parseInt()函数将二进制转换为十进制，语法“parseInt(string,2);”；然后使用toString()函数将十进制转换为十六进制即可，语法格式“number.toString(16)”。
-        let sixteenStr = parseInt(binStr, 2).toString(16);
-        console.log(sixteenStr);
-        this.props.form.setFieldsValue({ AlgoProperty: sixteenStr });
+        // let sixteenStr = parseInt(binStr, 2).toString(16);
+        // console.log(sixteenStr);
+        this.props.form.setFieldsValue({ AlgoProperty: sixteenAllStr });
     };
     // 编辑按钮点击事件
     handleUpdateBtn = (record) => {
-        console.log("更新记录", record);
+        // console.log("更新记录", record);
         this.record = record;
         this.isInsert = false;
         this.isUpdate = true;
@@ -383,7 +469,7 @@ class algoGroup extends React.PureComponent {
             url: "/algo-group-info/list",
             data: params,
         }).then((res) => {
-            console.log(res);
+            // console.log("算法风控组 返回",res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
                 parseDict(res.data.records);
@@ -408,7 +494,8 @@ class algoGroup extends React.PureComponent {
     };
     getAlgoList = (
         params = {},
-        pagination = { current: 1, pageSize: 1000 }
+        pagination = { current: 1, pageSize: 1000 },
+        callback
     ) => {
         params = {
             ...params,
@@ -419,7 +506,7 @@ class algoGroup extends React.PureComponent {
             url: "/algo/list",
             data: params,
         }).then((res) => {
-            // console.log(res);
+            // console.log("算法列表", res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
                 parseDict(res.data.records);
@@ -427,7 +514,24 @@ class algoGroup extends React.PureComponent {
                 res.data.records.forEach((item) => (item.isShow = "0"));
                 this.setState({ algoList: res.data.records });
                 // console.log("算法列表", this.state.algoList);
+                // 算法配置 初始化为0
+                let idMax = 0;
+                for (let i = 0; i < this.state.algoList.length; i++) {
+                    let id = this.state.algoList[i].id;
+                    if (id > idMax) {
+                        idMax = id;
+                    }
+                }
+                // console.log("最大id ", idMax);
+                this.configArr = [];
+                for (let j = 0; j < idMax; j++) {
+                    this.configArr.push(0);
+                }
+                // console.log("configArr", this.configArr);
                 // showTip(this);
+                if (callback) {
+                    callback();
+                }
             } else {
                 message.info("算法列表为空");
             }
@@ -561,6 +665,7 @@ class algoGroup extends React.PureComponent {
                                         <Input
                                             placeholder="请输入"
                                             onChange={this.inputChange}
+                                            disabled
                                         />
                                     )}
                                 </Form.Item>

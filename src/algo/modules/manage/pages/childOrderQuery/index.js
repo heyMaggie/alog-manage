@@ -197,6 +197,15 @@ const getSearchFormFields = () => {
             initialValue: "",
             component: <Input placeholder="请输入" />,
         },
+        {
+            label: "业务类型",
+            id: "businessType",
+            initialValue: "1",
+            component: SelectOption(dict.businessTypeSelect, {
+                placeholder: "请选择",
+                // allowClear: true,
+            }),
+        },
     ];
 };
 export default class newOrderQuery extends React.PureComponent {

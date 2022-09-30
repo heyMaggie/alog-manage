@@ -70,9 +70,10 @@ export let parseDict = (dict) => {
         let dictKeys = Object.keys(dict);
         // console.log(dictKeys);
         resArr.forEach((item, index) => {
-            if (!item.hasOwnProperty("id")) {
-                item.id = index;
-            }
+            // if (!item.hasOwnProperty("id")) {
+            //     item.id = Math.random();
+            // }
+            item.id = Math.random();
             for (let i = 0; i < dictKeys.length; i++) {
                 let key = dictKeys[i];
                 if (item.hasOwnProperty(key)) {
@@ -93,9 +94,10 @@ export let parseDict = (dict) => {
         let dictKeys = Object.keys(dict);
         // console.log(dictKeys);
         resArr.forEach((item, index) => {
-            if (!item.hasOwnProperty("id")) {
-                item.id = index;
-            }
+            // if (!item.hasOwnProperty("id")) {
+            //     item.id = index;;
+            // }
+            item.id = Math.random();
             for (let i = 0; i < dictKeys.length; i++) {
                 let key = dictKeys[i];
                 if (item.hasOwnProperty(key)) {
