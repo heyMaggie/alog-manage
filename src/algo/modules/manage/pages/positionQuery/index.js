@@ -547,6 +547,8 @@ export default class Cccx extends React.PureComponent {
             console.log(res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
+                res.data.records.forEach((item) => (item.rnd = Math.random()));
+                console.log(res.data.records);
                 parseDictValue(res.data.records);
                 // showTip(this);
             } else {
@@ -676,7 +678,7 @@ export default class Cccx extends React.PureComponent {
                 searchLoading={this.state.searchLoading}
                 isShowInsert={false}
                 width="789px"
-                // rowKey="sno"
+                rowKey="rnd"
                 pagination={this.state.pagination}
                 dataSource={info}
                 insertBtnText={"新增"} // 不传 就没新增按钮
