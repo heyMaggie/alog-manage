@@ -62,10 +62,12 @@ const configData = {
         { key: "32", value: "两融(证券交易端)" },
     ],
     bStatus: [
-        //0初始态 1删除 2启动
+        // IBS_INITIAL   = 0, // Initial
+        // IBS_FROZEN    = 1, // 冻结：启动中,临时冻结
+        // IBS_DELETE    = 2, // delete
         { key: "0", value: "初始态" },
-        { key: "1", value: "删除" },
-        { key: "2", value: "启动" },
+        { key: "1", value: "启动中冻结" },
+        { key: "2", value: "删除" },
     ],
     counterStatus: [
         { key: "0", value: "关闭" },
