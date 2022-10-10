@@ -48,10 +48,18 @@ const configData = {
         { key: "8", value: "篮子运行中" },
         { key: "16", value: "篮子停止" },
         { key: "32", value: "篮子运行结束" },
+        { key: "64", value: "篮子已补单" },
     ],
     basketType: [
-        { key: "0", value: "客户创建" },
-        { key: "1", value: "自动创建" },
+        // { key: "0", value: "客户创建" },
+        // { key: "1", value: "自动创建" },
+        //改
+        { key: "1", value: "客户创建" },
+        { key: "2", value: "一键优选" },
+        { key: "4", value: "后台创建" },
+        { key: "8", value: "两融(算法交易端)" },
+        { key: "16", value: "两融(一键优选)" },
+        { key: "32", value: "两融(证券交易端)" },
     ],
     bStatus: [
         //0初始态 1删除 2启动

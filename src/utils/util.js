@@ -84,6 +84,11 @@ export let parseDict = (dict) => {
                             // item[key] = dictionary.value;
                             item[key] = item[key] + "-" + dictionary.value;
                         }
+                        // else if (item[key]) {
+                        //     if (item[key].toString().trim() == dictionary.key) {
+                        //         item[key] = item[key] + "-" + dictionary.value;
+                        //     }
+                        // }
                     }
                 }
             }
@@ -109,6 +114,11 @@ export let parseDict = (dict) => {
                             // item[key] = dictionary.value;
                             item[key + "Value"] =
                                 item[key] + "-" + dictionary.value;
+                        } else if (item[key]) {
+                            if (item[key].toString().trim() == dictionary.key) {
+                                item[key + "Value"] =
+                                    item[key] + "-" + dictionary.value;
+                            }
                         }
                     }
                 }

@@ -46,12 +46,12 @@ const menuList = [
                 title: "证券信息",
                 path: "/main/prod/security",
             },
-            // {
-            //     id: "8-2",
-            //     icon: "",
-            //     title: "券源信息",
-            //     path: "/main/prod/mtradeSecurity",
-            // },
+            {
+                id: "8-2",
+                icon: "",
+                title: "券源信息",
+                path: "/main/prod/mtradeSecurity",
+            },
         ],
     },
     {
@@ -139,24 +139,24 @@ const menuList = [
                 title: "文件下单",
                 path: "/main/manage/fileOrder",
             },
-            // {
-            //     id: "1-10",
-            //     icon: "",
-            //     title: "融资合约列表",
-            //     path: "/main/manage/longContract",
-            // },
-            // {
-            //     id: "1-11",
-            //     icon: "",
-            //     title: "融券合约列表",
-            //     path: "/main/manage/shortContract",
-            // },
-            // {
-            //     id: "1-12",
-            //     icon: "",
-            //     title: "两融资金信息",
-            //     path: "/main/manage/creditAsset",
-            // },
+            {
+                id: "1-10",
+                icon: "",
+                title: "融资合约列表",
+                path: "/main/manage/longContract",
+            },
+            {
+                id: "1-11",
+                icon: "",
+                title: "融券合约列表",
+                path: "/main/manage/shortContract",
+            },
+            {
+                id: "1-12",
+                icon: "",
+                title: "两融资金信息",
+                path: "/main/manage/creditAsset",
+            },
         ],
     },
     {
