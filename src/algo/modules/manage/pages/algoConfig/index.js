@@ -111,20 +111,18 @@ class algoConfig extends React.PureComponent {
             {
                 label: "算法类型ID",
                 id: "AlgorithmTypeId",
-                initialValue: 1,
+                initialValue: "",
                 rules: [
                     {
                         required: true,
                         message: "参数不能为空",
                     },
-                ],
-                component: SelectOption(dict.algorithmTypeId, {
-                    placeholder: "请选择",
-                    // allowClear: true,
-                    style: {
-                        width: 400,
+                    {
+                        message: "请输入正整数",
+                        pattern: /^\d+$/i,
                     },
-                }),
+                ],
+                component: <Input placeholder="请输入" />,
             },
             {
                 label: "算法类型名称",
@@ -289,14 +287,12 @@ class algoConfig extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
-                ],
-                component: SelectOption(dict.algorithmTypeId, {
-                    placeholder: "请选择",
-                    // allowClear: true,
-                    style: {
-                        width: 400,
+                    {
+                        message: "请输入正整数",
+                        pattern: /^\d+$/i,
                     },
-                }),
+                ],
+                component: <Input placeholder="请输入" />,
             },
             {
                 label: "算法类型名称",
@@ -379,6 +375,7 @@ class algoConfig extends React.PureComponent {
             {
                 title: "算法类型",
                 dataIndex: "algorithmTypeValue",
+                width: 130,
             },
             {
                 title: "算法类型ID",
@@ -561,6 +558,7 @@ class algoConfig extends React.PureComponent {
         params.AlgorithmStatus = status;
         // params.UuserId = params.UuserId / 1;
         params.AlgorithmType = params.AlgorithmType / 1;
+        params.AlgorithmTypeId = params.AlgorithmTypeId / 1;
         params.RiskGroup = params.RiskGroup / 1;
         let valArr = params.ProviderName.split("-");
         // console.log(valArr);
@@ -622,7 +620,7 @@ class algoConfig extends React.PureComponent {
             ProviderName: record.providerName + "-" + record.uuserId,
             // UuserId: record.uuserId,
             AlgorithmType: record.algorithmType + "",
-            AlgorithmTypeId: record.algorithmTypeId,
+            AlgorithmTypeId: record.algorithmTypeId / 1,
             AlgorithmTypeName: record.algorithmTypeName,
             // AlgorithmStatus: record.AlgorithmStatus + "",
             Parameter: record.parameter,
@@ -673,6 +671,7 @@ class algoConfig extends React.PureComponent {
         params.AlgorithmStatus = status;
         // params.UuserId = params.UuserId / 1;
         params.AlgorithmType = params.AlgorithmType / 1;
+        params.AlgorithmTypeId = params.AlgorithmTypeId / 1;
         params.RiskGroup = params.RiskGroup / 1;
         let valArr = params.ProviderName.split("-");
         // console.log(valArr);
