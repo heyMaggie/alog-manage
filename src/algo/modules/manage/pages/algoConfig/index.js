@@ -121,6 +121,10 @@ class algoConfig extends React.PureComponent {
                         message: "请输入正整数",
                         pattern: /^\d+$/i,
                     },
+                    {
+                        validator: checkLength(2),
+                        trigger: ["change", "blur"],
+                    },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -379,7 +383,7 @@ class algoConfig extends React.PureComponent {
             },
             {
                 title: "算法类型ID",
-                dataIndex: "algorithmTypeIdValue",
+                dataIndex: "algorithmTypeId",
             },
             {
                 title: "算法类型名称",
