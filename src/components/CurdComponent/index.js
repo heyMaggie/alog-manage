@@ -276,7 +276,7 @@ class CurdComponent extends React.PureComponent {
     };
     handleSearch = () => {
         let params = this.getSearchFormValue();
-        window.searchFun = this.getSearchFormValue;
+        // window.searchFun = this.getSearchFormValue;
         if (this.props.pagination) {
             let newPag = { ...this.props.pagination };
             newPag.current = 1;
@@ -325,6 +325,7 @@ class CurdComponent extends React.PureComponent {
     componentDidMount() {
         // this.computeTableY();
         window.addEventListener("resize", this.handleResize);
+        window.searchFun = this.getSearchFormValue;
         // this.handleResize();
     }
     // static getDerivedStateFromProps(nextProps, prevState) {
