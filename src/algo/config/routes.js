@@ -17,7 +17,7 @@ if (process.env.NODE_ENV == "development") {
     //开发环境
     // axios.defaults.baseURL = "http://192.168.2.105:20010";
     // axios.defaults.baseURL = "http://192.168.2.105:30025";
-    axios.defaults.baseURL = "http://192.168.1.86:20010";
+    axios.defaults.baseURL = "http://192.168.1.84:20010";
     // axios.defaults.baseURL = "http://192.168.1.81:20010";
     // axios.defaults.baseURL = "http://192.168.1.84:20010";
 } else {

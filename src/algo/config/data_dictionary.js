@@ -94,7 +94,6 @@ const configData = {
         { key: "2", value: "禁止买卖" },
     ],
     algorithmStatus: [
-        // 0未开始 1运行中 2已停止 3正在停止 4暂停 5准备运行 6补单 7补单结束 8运行结束部分成交 9运行结束完全成交
         { key: "0", value: "未开始" },
         { key: "1", value: "运行中" },
         { key: "2", value: "已停止" },
@@ -103,8 +102,7 @@ const configData = {
         { key: "5", value: "准备运行" },
         { key: "6", value: "补单" },
         { key: "7", value: "补单结束" },
-        { key: "8", value: "运行结束部分成交" },
-        { key: "9", value: "运行结束完全成交" },
+        { key: "8", value: "运行结束" },
     ],
     // algorithmEnable: [
     //     { key: "0", value: "不可用" },
@@ -112,11 +110,14 @@ const configData = {
     // ],
     algoOrdStatus: [
         //0总线接收 1总线拒绝 2算法平台接收 3算法平台拒绝 4撤销
-        { key: "0", value: "总线接收" },
-        { key: "1", value: "总线拒绝" },
-        { key: "2", value: "算法平台接收" },
-        { key: "3", value: "算法平台拒绝" },
-        { key: "4", value: "撤销" },
+        { key: "0", value: "已接收" },
+        { key: "1", value: "已拒绝" },
+        { key: "2", value: "已接收" },
+        { key: "3", value: "已拒绝" },
+        { key: "4", value: "已撤销" },
+        { key: "5", value: "部分成交" },
+        { key: "6", value: "完全成交" },
+        { key: "7", value: "未成交" },
     ],
     //1限价委托 2本方最优 3对手方最优 4市价立即成交剩余撤销 5市价全额成交或撤销 6市价最优五档全额成交剩余撤销 7限价全额成交或撤销
     orderType: [

@@ -388,6 +388,7 @@ class algoConfig extends React.PureComponent {
             {
                 title: "算法类型名称",
                 dataIndex: "algorithmTypeName",
+                width: 130,
             },
             {
                 title: "是否显示",
@@ -435,6 +436,7 @@ class algoConfig extends React.PureComponent {
                 title: "算法所需参数",
                 dataIndex: "parameter",
                 key: "parameter",
+                width: 130,
             },
             {
                 title: "算法风控组",
@@ -960,7 +962,7 @@ class algoConfig extends React.PureComponent {
         this.getProvider();
     }
     render() {
-        let scroll = { x: 1000, y: 445 };
+        let scroll = { x: 1500, y: 445 };
         let info = this.state.info;
         let { getFieldDecorator } = this.props.form;
         return (
