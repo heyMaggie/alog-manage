@@ -17,7 +17,7 @@ import {
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 class Cpu extends React.PureComponent {
-    state = {};
+    state = { hostList: [] };
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -181,6 +181,7 @@ class Cpu extends React.PureComponent {
         // console.timeEnd("echarts");
     };
     componentDidMount() {
+        this.getHostList();
         let yesterday = moment(new Date()).format("YYYY-MM-DD");
         this.getData({
             hostId: "1",
@@ -188,6 +189,16 @@ class Cpu extends React.PureComponent {
             endTime: `${yesterday} 23:59:59`,
         });
     }
+    getHostList = () => {
+        // 用户
+        http.get({
+            url: "/ssh-host-info/list",
+        }).then((res) => {
+            this.setState({
+                hostList: res.data,
+            });
+        });
+    };
     render() {
         console.log(this.props.path);
         window.cpuResize = this.chartResize;
@@ -201,6 +212,10 @@ class Cpu extends React.PureComponent {
         const { getFieldDecorator } = this.props.form;
         let yesterday = moment(new Date()).format("YYYY-MM-DD");
         let dataFormatter = "YYYY-MM-DD HH:mm:ss";
+        const { hostList } = this.state;
+        const children = hostList.map((d) => (
+            <Option key={d.id}>{d.hostName}</Option>
+        ));
         return (
             <div className={styles.container}>
                 <div className={styles.search}>
@@ -220,8 +235,9 @@ class Cpu extends React.PureComponent {
                                             .indexOf(input.toLowerCase()) >= 0
                                     }
                                 >
-                                    <Option value="">全部</Option>
-                                    <Option value="1">80</Option>
+                                    {children}
+                                    {/* <Option value="">全部</Option>
+                                    <Option value="1">80</Option> */}
                                 </Select>
                             )}
                         </Form.Item>
