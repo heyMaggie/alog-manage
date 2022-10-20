@@ -70,8 +70,10 @@ const columns = (params) => {
             width: 170,
         },
         {
-            title: "母单状态",
+            // title: "母单状态",
+            title: "订单状态",
             dataIndex: "algoOrdStatus",
+            width: 150,
         },
         {
             title: "母单在篮子表中的状态",
