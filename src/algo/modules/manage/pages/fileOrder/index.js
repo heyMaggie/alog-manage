@@ -43,6 +43,7 @@ class FileOrder extends React.PureComponent {
             {
                 title: "错误信息",
                 dataIndex: "errCode",
+                width: 300,
             },
             {
                 title: "下载",
