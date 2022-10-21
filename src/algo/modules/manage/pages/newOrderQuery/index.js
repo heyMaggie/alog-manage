@@ -351,6 +351,9 @@ export default class newOrderQuery extends React.PureComponent {
         // params.token = "";
         // params.pageId = 1;
         // params.pageNum = 20;
+        if (!params.businessType) {
+            params.businessType = 1;
+        }
         params = {
             ...params,
             pageId: pagination.current,
