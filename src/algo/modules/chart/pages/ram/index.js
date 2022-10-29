@@ -49,7 +49,7 @@ class Ram extends React.PureComponent {
             if (res.code == 0) {
                 let list = res.data;
                 let seriesList = list.series;
-                let maxGB = (list.memTotal / 1024 / 2024).toFixed(0);
+                let maxGB = (list.memTotal / 1024 / 1024).toFixed(0);
                 let isNull = false;
                 if (seriesList.length == 0) {
                     message.error("该时间段暂无数据");
