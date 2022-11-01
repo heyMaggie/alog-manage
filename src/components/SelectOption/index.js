@@ -10,10 +10,11 @@ let SelectOption = (array, attrObj = {}) => {
     // if (attrObj.hasOwnProperty("style")) {
     //     style = attrObj.style;
     // }
-    let { style={}, ...rest } = attrObj;
-    if (!style.hasOwnProperty("width")) {
-        style.width=183
-    }
+    let { style = {}, ...rest } = attrObj;
+    // if (!style.hasOwnProperty("width")) {
+    //     style.width = 190;
+    // }
+    style.width = 190;
     return (
         <Select style={style} placeholder={placeholder} {...rest}>
             {array.map((item, index) => {
