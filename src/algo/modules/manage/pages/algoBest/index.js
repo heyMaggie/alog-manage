@@ -672,16 +672,16 @@ export default class algoBest extends React.PureComponent {
             url: "/security/listAll",
             data: params,
         }).then((res) => {
-            // console.log(res);
+            console.log("获取所有股票", res);
             let optionArr = [];
             let securityIdArr = [];
             this.securityObj = {};
             if (res.data && res.data.length > 0) {
                 let dataArr = res.data;
                 if (dataArr.length > 0) {
-                    dataArr.forEach((item) => {
+                    dataArr.forEach((item, i) => {
                         let sec = item.securityId.trim();
-                        if (!securityIdArr.includes(sec)) {
+                        if (!securityIdArr.includes(sec) && sec.length > 0) {
                             securityIdArr.push(sec);
                             this.securityObj[sec] = item.securityName;
                         }
@@ -694,6 +694,7 @@ export default class algoBest extends React.PureComponent {
                     }
                 }
             }
+            // console.log(securityIdArr);
             this.setState({
                 securityList: securityIdArr,
                 currentDataLists: optionArr,

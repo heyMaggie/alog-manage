@@ -30,6 +30,20 @@ class Menus extends PureComponent {
                     </SubMenu>
                 );
             }
+            if (item.icon) {
+                return (
+                    <Menu.Item
+                        key={item.path}
+                        onClick={this.handleMenuClick}
+                        className="level1"
+                    >
+                        <div className="iconDiv">
+                            <span className={styles[`${item.icon}`]}></span>
+                            <span>{item.title}</span>
+                        </div>
+                    </Menu.Item>
+                );
+            }
             return (
                 <Menu.Item key={item.path} onClick={this.handleMenuClick}>
                     {item.title}

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./index.module.less";
-// import { Icon } from "antd";
+import { Popover, Icon } from "antd";
 // import { withRouter } from "react-router-dom";
 // import { connect } from "react-redux";
 
@@ -15,15 +15,37 @@ class Header extends React.PureComponent {
         }
     };
     render() {
+        let content = (
+            <div>
+                <div className={styles.item}>
+                    修改密码
+                    <Icon type="right" className={styles.icon} />
+                </div>
+                <div
+                    style={{ borderTop: "solid 1px #DEE0E3" }}
+                    className={styles.quit}
+                    onClick={this.handleClick}
+                >
+                    退出登录
+                </div>
+            </div>
+        );
         return (
             <div className={styles.flexbox}>
                 <div className={styles.left}>
                     <div className={styles.logo}>华云信息</div>
                 </div>
+                <div className={styles.message}>消息</div>
+                <div className={styles.help}>帮助中心</div>
                 <div className={styles.right}>
-                    <div className={styles.out} onClick={this.handleClick}>
+                    <Popover content={content}>
+                        <div className={styles.user}>
+                            {sessionStorage.userName}
+                        </div>
+                    </Popover>
+                    {/* <div className={styles.out} onClick={this.handleClick}>
                         退出
-                    </div>
+                    </div> */}
                 </div>
             </div>
         );

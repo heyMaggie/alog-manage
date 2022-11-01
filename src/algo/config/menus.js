@@ -2,6 +2,20 @@
 // 交易管理     证券信息  算法管理 订单列表 持仓列表 成交回执  撤单列表   篮子管理
 // 风控管理  风控配置， 用户风险统计，算法风险统计
 const menuList = [
+    // {
+    //     id: "2",
+    //     path: "/main/dashboard",
+    //     title: "Dashboard",
+    //     icon: "icon8",
+    //     // children: [
+    //     //     {
+    //     //         id: "2-1",
+    //     //         icon: "",
+    //     //         title: "用户信息",
+    //     //         path: "/main/updown/userInfo",
+    //     //     },
+    //     // ],
+    // },
     {
         id: "4",
         path: "/main/user",
@@ -37,7 +51,7 @@ const menuList = [
     {
         id: "8",
         path: "/main/prod",
-        icon: "icon1",
+        icon: "icon10",
         title: "产品管理",
         children: [
             {
@@ -56,7 +70,7 @@ const menuList = [
     },
     {
         id: "1",
-        path: "/main/trade",
+        path: "/main/trade1",
         icon: "icon7",
         title: "交易管理",
         children: [
@@ -66,30 +80,6 @@ const menuList = [
             //     title: "证券信息",
             //     path: "/main/manage/security",
             // },
-            {
-                id: "1-2",
-                icon: "",
-                title: "算法管理",
-                path: "/main/manage/algoConfig",
-            },
-            {
-                id: "1-15",
-                icon: "",
-                title: "算法权限组",
-                path: "/main/manage/algoGroup",
-            },
-            {
-                id: "1-16",
-                icon: "",
-                title: "算法优选",
-                path: "/main/manage/algoBest",
-            },
-            {
-                id: "1-14",
-                icon: "",
-                title: "柜台用户",
-                path: "/main/manage/counterGw",
-            },
             // 订单列表 持仓列表 成交回执  撤单列表   篮子管理
             {
                 id: "1-3",
@@ -128,12 +118,6 @@ const menuList = [
                 path: "/main/manage/basketConfig",
             },
             {
-                id: "1-8",
-                icon: "",
-                title: "柜台信息",
-                path: "/main/manage/counterInfo",
-            },
-            {
                 id: "1-9",
                 icon: "",
                 title: "文件下单",
@@ -156,6 +140,52 @@ const menuList = [
                 icon: "",
                 title: "两融资金信息",
                 path: "/main/manage/creditAsset",
+            },
+        ],
+    },
+    {
+        id: "9",
+        path: "/main/trade",
+        icon: "icon11",
+        title: "算法管理",
+        children: [
+            {
+                id: "9-2",
+                icon: "",
+                title: "算法管理",
+                path: "/main/manage/algoConfig",
+            },
+            {
+                id: "9-15",
+                icon: "",
+                title: "算法权限组",
+                path: "/main/manage/algoGroup",
+            },
+            {
+                id: "9-16",
+                icon: "",
+                title: "算法优选",
+                path: "/main/manage/algoBest",
+            },
+        ],
+    },
+    {
+        id: "10",
+        path: "/main/trade2",
+        icon: "icon12",
+        title: "网关管理",
+        children: [
+            {
+                id: "10-14",
+                icon: "",
+                title: "柜台用户",
+                path: "/main/manage/counterGw",
+            },
+            {
+                id: "10-8",
+                icon: "",
+                title: "柜台信息",
+                path: "/main/manage/counterInfo",
             },
         ],
     },
@@ -185,110 +215,6 @@ const menuList = [
             },
         ],
     },
-    // {
-    //     id: "2",
-    //     path: "/main/updown",
-    //     title: "数据导入导出",
-    //     icon: "icon3",
-    //     children: [
-    //         // {
-    //         //     id: "2-31",
-    //         //     icon: "",
-    //         //     title: "全部信息",
-    //         //     path: "/main/updown/allInfo",
-    //         // },
-    //         {
-    //             id: "2-1",
-    //             icon: "",
-    //             title: "用户信息",
-    //             path: "/main/updown/userInfo",
-    //         },
-    //         // {
-    //         //     id: "2-2",
-    //         //     icon: "",
-    //         //     title: "资金信息",
-    //         //     path: "/main/updown/assetInfo",
-    //         // },
-    //         {
-    //             id: "2-3",
-    //             icon: "",
-    //             title: "股东信息",
-    //             path: "/main/updown/stockHolder",
-    //         },
-    //         // {
-    //         //     id: "2-4",
-    //         //     icon: "",
-    //         //     title: "用户网关",
-    //         //     path: "/main/updown/userPbuGwConfig",
-    //         // },
-    //         {
-    //             id: "2-5",
-    //             icon: "",
-    //             title: "证券信息",
-    //             path: "/main/updown/security",
-    //         },
-    //         {
-    //             id: "2-6",
-    //             icon: "",
-    //             title: "柜台信息",
-    //             path: "/main/updown/counterInfo",
-    //         },
-    //         {
-    //             id: "2-7",
-    //             icon: "",
-    //             title: "算法风控配置",
-    //             path: "/main/updown/riskConfig",
-    //         },
-    //         {
-    //             id: "2-8",
-    //             icon: "",
-    //             title: "算法信息",
-    //             path: "/main/updown/algoInfo",
-    //         },
-    //         {
-    //             id: "2-9",
-    //             icon: "",
-    //             title: "柜台用户",
-    //             path: "/main/updown/counterGw",
-    //         },
-    //         // {
-    //         //     id: "2-10",
-    //         //     icon: "",
-    //         //     title: "期权持仓",
-    //         //     path: "/main/updown/optionPosition",
-    //         // },
-    //         // {
-    //         //     id: "2-11",
-    //         //     icon: "",
-    //         //     title: "交易网关",
-    //         //     path: "/main/updown/gwConfig",
-    //         // },
-    //         // {
-    //         //     id: "2-12",
-    //         //     icon: "",
-    //         //     title: "费率配置",
-    //         //     path: "/main/updown/feeRateConfig",
-    //         // },
-    //         // {
-    //         //     id: "2-13",
-    //         //     icon: "",
-    //         //     title: "组合持仓策略",
-    //         //     path: "/main/updown/strategyPosition",
-    //         // },
-    //         // {
-    //         //     id: "2-13",
-    //         //     icon: "",
-    //         //     title: "组合持仓配置",
-    //         //     path: "/main/updown/strategyConfig",
-    //         // },
-    //         // {
-    //         //     id: "2-14",
-    //         //     icon: "",
-    //         //     title: "合约品种持仓",
-    //         //     path: "/main/updown/contractVarietyPos",
-    //         // },
-    //     ],
-    // },
     {
         id: "3",
         path: "/main/chart",

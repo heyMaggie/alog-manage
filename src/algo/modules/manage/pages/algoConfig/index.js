@@ -175,10 +175,10 @@ class algoConfig extends React.PureComponent {
                 id: "Parameter",
                 initialValue: "",
                 rules: [
-                    // {
-                    //     required: true,
-                    //     message: "参数不能为空",
-                    // },
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
                     {
                         validator: checkLength(2000),
                         trigger: ["change", "blur"],
@@ -349,10 +349,10 @@ class algoConfig extends React.PureComponent {
                 id: "Parameter",
                 initialValue: "",
                 rules: [
-                    // {
-                    //     required: true,
-                    //     message: "参数不能为空",
-                    // },
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
                     {
                         validator: checkLength(2000),
                         trigger: ["change", "blur"],

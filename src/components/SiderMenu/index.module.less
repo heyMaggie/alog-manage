@@ -10,7 +10,7 @@
                 display: inline-block;
             }
         }
-        .ant-menu-inline .ant-menu-item {
+        .ant-menu-inline.ant-menu-sub .ant-menu-item {
             margin-left: 16px;
             padding-left: 36px !important;
             width: 184px !important;
@@ -25,6 +25,20 @@
                 opacity: 0;
             }
         }
+        .iconDiv {
+            border-radius: 8px;
+        }
+        .level1.ant-menu-item-selected {
+            // background-color: rgba(50, 129, 255, 0.08) !important;
+            background-color: white !important;
+            color: #3281ff;
+            > .iconDiv {
+                background-color: rgba(50, 129, 255, 0.08) !important;
+            }
+        }
+        > .ant-menu-item-selected::after {
+            opacity: 0;
+        }
     }
 }
 .slider {
@@ -35,12 +49,18 @@
 .icon3,
 .icon5,
 .icon6,
-.icon7 {
+.icon7,
+.icon8,
+.icon9,
+.icon10,
+.icon11,
+.icon12 {
     display: inline-block;
     background: center url(icon1.png) no-repeat;
     width: 16px;
     height: 16px;
     margin-right: 12px;
+    vertical-align: text-bottom;
 }
 .icon2 {
     background-image: url(icon2.png);
@@ -56,4 +76,19 @@
 }
 .icon7 {
     background-image: url(icon7.png);
+}
+.icon8 {
+    background-image: url(dashboard.png);
+}
+.icon9 {
+    background-image: url(icon9.png);
+}
+.icon10 {
+    background-image: url(icon10.png);
+}
+.icon11 {
+    background-image: url(algo.png);
+}
+.icon12 {
+    background-image: url(gate.png);
 }

@@ -126,6 +126,7 @@ export default class uoeSetting extends React.PureComponent {
         searchLoading: false,
         selectRow: [],
         info: [],
+        pagination: { total: 0 },
     };
     //批量选择
     handleTableChange = (selectedRowKeys) => {
@@ -171,8 +172,13 @@ export default class uoeSetting extends React.PureComponent {
             enable: record.enable + "",
         });
     };
-    getData = (params = {}) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
         // params.token = "";
+        params = {
+            ...params,
+            pageId: pagination.current,
+            pageNum: pagination.pageSize,
+        };
         console.log(params);
         if (params.type) {
             params.type = params.type / 1;
@@ -185,16 +191,33 @@ export default class uoeSetting extends React.PureComponent {
             data: params,
         }).then((res) => {
             console.log(res);
-            //解析数据字典
-            if (res.data.length > 0) {
+            // //解析数据字典
+            // if (res.data.length > 0) {
+            //     parseArrDict(res.data, "status", "basketStatus");
+            //     parseDict(res.data);
+            //     // showTip(this);
+            // } else {
+            //     message.info("查询结果为空");
+            // }
+            // this.setState({
+            //     info: res.data,
+            // });
+            if (res.data.records && res.data.records.length > 0) {
                 parseArrDict(res.data, "status", "basketStatus");
-                parseDict(res.data);
+                parseDict(res.data.records);
+                // parseDictValue(res.data.records);
                 // showTip(this);
             } else {
                 message.info("查询结果为空");
             }
+            let pgn = {
+                current: res.data.current,
+                pageSize: pagination.pageSize,
+                total: res.data.total || 0,
+            };
             this.setState({
-                info: res.data,
+                info: res.data.records,
+                pagination: pgn,
             });
         });
     };
@@ -233,6 +256,7 @@ export default class uoeSetting extends React.PureComponent {
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     // dtCol={2}
                     dtWidth="800px"
+                    pagination={this.state.pagination}
                     dtColumns={columns()} //详情列表
                     centered={true}
                     columns={columns}
