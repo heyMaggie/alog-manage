@@ -203,7 +203,7 @@ export default class uoeSetting extends React.PureComponent {
             //     info: res.data,
             // });
             if (res.data.records && res.data.records.length > 0) {
-                parseArrDict(res.data, "status", "basketStatus");
+                parseArrDict(res.data.records, "status", "basketStatus");
                 parseDict(res.data.records);
                 // parseDictValue(res.data.records);
                 // showTip(this);
