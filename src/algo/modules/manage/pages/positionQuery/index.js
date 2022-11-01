@@ -13,7 +13,7 @@ const getSearchFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "证券帐户",
+            label: "证券账户",
             id: "accountId",
             // initialValue: "",
             component: <Input placeholder="请输入" />,
@@ -54,7 +54,7 @@ const getInsertFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "证券帐户",
+            label: "证券账户",
             id: "accountId",
             initialValue: "",
             rules: [
@@ -248,7 +248,7 @@ const getUpdateFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "证券帐户",
+            label: "证券账户",
             id: "accountId",
             initialValue: "",
             rules: [
@@ -439,7 +439,7 @@ let columns = () => {
             width: 80,
         },
         {
-            title: "证券帐户",
+            title: "证券账户",
             dataIndex: "accountId",
             key: "accountId",
             width: 120,
