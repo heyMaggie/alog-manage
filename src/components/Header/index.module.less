@@ -11,7 +11,8 @@
         flex-shrink: 0;
     }
     .right {
-        width: 116px;
+        // width: 116px;
+        padding-right: 40px;
     }
 }
 .logo {
@@ -21,11 +22,12 @@
     background: 21px 14px url(./logo.png) no-repeat;
     background-size: 44px 33px;
 }
-.out {
+.out,
+.user {
     display: inline-block;
     box-sizing: border-box;
     padding-left: 32px;
-    width: 68px;
+    // width: 68px;
     height: 40px;
     line-height: 40px;
     margin-top: 10px;
@@ -35,4 +37,41 @@
     &:hover {
         background-color: rgba(255, 255, 255, 0.16);
     }
+}
+.user {
+    padding-left: 36px;
+    background: 0px 6px url(./user.png) no-repeat;
+}
+:global {
+    .ant-popover-inner-content {
+        padding: 0;
+    }
+}
+.quit {
+    text-align: center;
+    color: rgba(240, 95, 94, 1);
+    font-size: 14px;
+    height: 36px;
+    line-height: 36px;
+    width: 152px;
+}
+.item {
+    height: 36px;
+    line-height: 36px;
+    padding: 0 12px;
+    color: #333333;
+}
+.icon {
+    height: 16px;
+    margin-top: 10px;
+    float: right;
+}
+.help,
+.message {
+    padding-left: 24px;
+    padding-right: 32px;
+    background: 0px 23px url(./question.png) no-repeat;
+}
+.message {
+    background-image: url(./message.png);
 }

@@ -290,7 +290,7 @@ class userInfo extends React.PureComponent {
                     placeholder: "请选择",
                     allowClear: true,
                     style: {
-                        width: 183,
+                        width: 190,
                     },
                 }),
             },
@@ -299,6 +299,9 @@ class userInfo extends React.PureComponent {
                 id: "riskGroup",
                 component: SelectOption(this.state.riskList, {
                     allowClear: true,
+                    style: {
+                        width: 190,
+                    },
                     placeholder: "请选择用户风控组",
                 }),
             },

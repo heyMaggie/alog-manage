@@ -574,12 +574,12 @@ export default class Cccx extends React.PureComponent {
             SecurityId: fromData.securityId,
             SecurityIdSource: fromData.securityIdSource,
             PositionType: fromData.positionType / 1,
-            PositionQty: fromData.positionQty / 1,
-            OriginQty: fromData.originQty / 1,
-            OriginOpenPrice: fromData.originOpenPrice / 1,
-            FreeQty: fromData.freeQty / 1,
-            FrozenQty: fromData.frozenQty / 1,
-            AvgPrice: fromData.avgPrice / 1,
+            PositionQty: fromData.positionQty * 100,
+            OriginQty: fromData.originQty * 100,
+            OriginOpenPrice: fromData.originOpenPrice * 10000,
+            FreeQty: fromData.freeQty * 100,
+            FrozenQty: fromData.frozenQty * 100,
+            AvgPrice: fromData.avgPrice * 10000,
         };
         http.post({
             url: "/user-position/addUserPosition",
@@ -611,12 +611,12 @@ export default class Cccx extends React.PureComponent {
             SecurityId: fromData.securityId,
             SecurityIdSource: fromData.securityIdSource,
             PositionType: fromData.positionType / 1,
-            PositionQty: fromData.positionQty / 1,
-            OriginQty: fromData.originQty / 1,
-            OriginOpenPrice: fromData.originOpenPrice / 1,
-            FreeQty: fromData.freeQty / 1,
-            FrozenQty: fromData.frozenQty / 1,
-            AvgPrice: fromData.avgPrice / 1,
+            PositionQty: fromData.positionQty * 100,
+            OriginQty: fromData.originQty * 100,
+            OriginOpenPrice: fromData.originOpenPrice * 10000,
+            FreeQty: fromData.freeQty * 100,
+            FrozenQty: fromData.frozenQty * 100,
+            AvgPrice: fromData.avgPrice * 10000,
         };
         // 发送更新请求
         http.post({
