@@ -15,6 +15,7 @@ import {
     AutoComplete,
 } from "antd";
 import styles from "./style.module.less";
+import md5 from "js-md5"; //全局引入
 class userInfo extends React.PureComponent {
     state = {
         searchLoading: false,
@@ -182,16 +183,16 @@ class userInfo extends React.PureComponent {
                 id: "UserPasswd",
                 initialValue: "",
                 rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
+                    // {
+                    //     required: true,
+                    //     message: "参数不能为空",
+                    // },
                     {
                         validator: checkLength(32),
                         trigger: ["change", "blur"],
                     },
                 ],
-                component: <Input placeholder="请输入" />,
+                component: <Input placeholder="需修改密码，请输入新密码" />,
             },
             {
                 label: "用户名",
@@ -320,93 +321,7 @@ class userInfo extends React.PureComponent {
             },
         ];
     };
-    //批量选择
-    handleTableChange = (selectedRowKeys) => {
-        console.log("批量选择");
-        this.setState({
-            selectRow: selectedRowKeys,
-        });
-    };
 
-    handleInsertRecord = (params) => {
-        // params = {
-        //     UserId: "atest0000003",
-        //     UserName: "test3",
-        //     UserPasswd: "test_0000003",
-        //     UserType: 1,
-        //     // RiskGroup: 1,
-        //     // AlgoGroup: 1,
-        //     // AlgoProperty: "20",
-        //     UuserId: 1,
-        // };
-        params.UserType = params.UserType / 1;
-        params.RiskGroup = params.RiskGroup / 1;
-        params.AlgoGroup = params.AlgoGroup / 1;
-        params.UuserId = params.UuserId / 1;
-        console.log("新增接口", params);
-        http.post({
-            url: "/user/addUserInfo",
-            data: params,
-        }).then((res) => {
-            console.log(res);
-            let msg = res.message;
-            if (res.code == 0) {
-                message.success(msg);
-                // this.getData();
-            } else if (res.code == 20000) {
-                message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
-                );
-            } else {
-                message.error(msg);
-            }
-        });
-    };
-    //更新记录
-    handleUpdateRecord = ({ form }) => {
-        // console.log(form.getFieldsValue());
-        // return;
-        let params = form.getFieldsValue();
-        params.id = this.record.id / 1;
-        params.UserType = params.UserType / 1;
-        params.RiskGroup = params.RiskGroup / 1;
-        params.AlgoGroup = params.AlgoGroup / 1;
-        params.UuserId = params.UuserId / 1;
-        //发送更新请求
-        http.post({
-            url: "/user/updateUserInfo",
-            data: params,
-        }).then((res) => {
-            console.log(res);
-            let msg = res.message;
-            if (res.code == 0) {
-                message.success(msg);
-                // this.getData();
-            } else if (res.code == 20000) {
-                message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
-                );
-            } else {
-                message.error(msg);
-            }
-            // this.isAction = true;
-        });
-    };
-    //填入更新数据
-    setUpdateModal = ({ form, record }) => {
-        // console.log(record, form);
-        this.record = record;
-        form.setFieldsValue({
-            UserId: record.userId,
-            UserName: record.userName,
-            UserPasswd: record.userPasswd,
-            UserType: record.userType + "",
-            RiskGroup: record.riskGroup,
-            AlgoGroup: record.algoGroup,
-            UuserId: record.uuserId,
-            // UserType: record.UserType,
-        });
-    };
     columns = (params) => {
         return [
             {
@@ -578,6 +493,7 @@ class userInfo extends React.PureComponent {
         params.RiskGroup = params.RiskGroup / 1;
         params.AlgoGroup = params.AlgoGroup / 1;
         params.UuserId = params.UuserId / 1;
+        params.UserPasswd = md5(params.UserPasswd);
         console.log("新增接口", params);
         http.post({
             url: "/user/addUserInfo",
@@ -607,6 +523,12 @@ class userInfo extends React.PureComponent {
         params.RiskGroup = params.RiskGroup / 1;
         params.AlgoGroup = params.AlgoGroup / 1;
         params.UuserId = params.UuserId / 1;
+        // console.log(this.record);
+        if (params.UserPasswd == "") {
+            params.UserPasswd = this.record.userPasswd;
+        } else {
+            params.UserPasswd = md5(params.UserPasswd);
+        }
         console.log(params);
         //发送更新请求
         http.post({
@@ -635,7 +557,7 @@ class userInfo extends React.PureComponent {
         form.setFieldsValue({
             UserId: record.userId,
             UserName: record.userName,
-            UserPasswd: record.userPasswd,
+            UserPasswd: "",
             UserType: record.userType + "",
             RiskGroup: record.riskGroup,
             AlgoGroup: record.algoGroup,
