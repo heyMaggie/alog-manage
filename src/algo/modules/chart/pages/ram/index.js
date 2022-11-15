@@ -83,10 +83,11 @@ class Ram extends React.PureComponent {
                     },
                     legend: {
                         // data: ["CPU1"],
-                        left: 0,
+                        left: "auto",
+                        itemWidth: 35,
                     },
                     grid: {
-                        left: "2%",
+                        left: "-31px",
                         right: "0%",
                         bottom: "9%",
                         top: "60px",
@@ -137,9 +138,9 @@ class Ram extends React.PureComponent {
                                 formatter: "{value}%",
                             },
                             position: "right",
-                            // nameTextStyle: {
-                            //     padding: [0, 0, 0, 0],
-                            // },
+                            nameTextStyle: {
+                                padding: [0, -35, 0, 0],
+                            },
                         },
                         {
                             type: "value",
@@ -163,10 +164,16 @@ class Ram extends React.PureComponent {
                             },
                             axisLabel: {
                                 formatter: "{value} GB",
+                                margin: 55,
+                                textStyle: {
+                                    align: "left",
+                                },
                             },
-                            // nameTextStyle: {
-                            //     padding: [0, 15, 0, 0],
-                            // },
+                            nameTextStyle: {
+                                padding: [0, 40, 0, 0],
+                                // padding: [0, 0, 0, -250],
+                            },
+                            // max: isNull ? 16 : 16,
                             max: isNull ? 16 : maxGB,
                             min: "0",
                             // max: maxGB,

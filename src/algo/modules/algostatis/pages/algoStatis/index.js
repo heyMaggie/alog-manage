@@ -71,7 +71,7 @@ class AlgorithmStatistical extends React.PureComponent {
                         left: 0,
                     },
                     grid: {
-                        left: "1%",
+                        left: "-70",
                         right: "20px",
                         bottom: "9%",
                         top: "60px",
@@ -126,9 +126,15 @@ class AlgorithmStatistical extends React.PureComponent {
                             min: isNull ? 0 : null,
                             max: isNull ? 100 : null,
                             // nameGap: "40",
-                            // nameTextStyle: {
-                            //     padding: [0, 83, 0, 0],
-                            // },
+                            axisLabel: {
+                                margin: 75,
+                                textStyle: {
+                                    align: "left",
+                                },
+                            },
+                            nameTextStyle: {
+                                padding: [0, 75, 0, 0],
+                            },
                         },
                         {
                             gridIndex: 0,
