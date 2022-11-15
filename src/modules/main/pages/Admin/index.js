@@ -56,6 +56,10 @@ class Admin extends React.PureComponent {
             firstTitle = "交易统计";
         } else if (menuPath.indexOf("/main/prod") > -1) {
             firstTitle = "产品管理";
+        } else if (menuPath.indexOf("/main/algo") > -1) {
+            firstTitle = "算法管理";
+        } else if (menuPath.indexOf("/main/counter") > -1) {
+            firstTitle = "网关管理";
         }
 
         return (

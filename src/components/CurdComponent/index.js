@@ -127,7 +127,7 @@ class CurdComponent extends React.PureComponent {
                             <div>
                                 {updateRecord && (
                                     <a
-                                        style={{ color: "rgba(94,156,221,1)" }}
+                                        style={{ color: "#3281ff" }}
                                         onClick={() => {
                                             this.setState({
                                                 updateModalVisible: true,
@@ -396,6 +396,7 @@ class CurdComponent extends React.PureComponent {
         if (this.props.pageSize) {
             pageSize = this.props.pageSize;
         }
+        pageSize = pageSize + 2;
         // console.log("CurdComponent 渲染 ", this.pageId);
         // console.log("insertBtnText", insertBtnText);
         // console.log("hasSlot", this.props.hasSlot);

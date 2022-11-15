@@ -61,7 +61,8 @@ let getSearchFormFields = () => {
         //     component: <Input placeholder="请输入保证金账户" />,
         // },
         {
-            label: "用户ID",
+            // label: "用户ID",
+            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
             // id: "userId",
             id: "id",
             component: <Input placeholder="请输入" />,
@@ -378,7 +379,7 @@ export default class uoeSetting extends React.PureComponent {
             version: record.version,
         });
     };
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
         // params.token = "";
         params = {
             ...params,

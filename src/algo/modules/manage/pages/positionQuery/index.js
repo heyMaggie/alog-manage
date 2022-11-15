@@ -533,7 +533,7 @@ export default class Cccx extends React.PureComponent {
         // console.log("获取搜索栏数据 ", params);
         this.getData(params, pagination);
     };
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
         params = {
             ...params,
             pageId: pagination.current,

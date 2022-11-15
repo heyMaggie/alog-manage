@@ -8,6 +8,7 @@ let getSearchFormFields = () => {
     return [
         {
             label: "风控组ID",
+            label: <span>风&nbsp;控&nbsp;组&nbsp;ID</span>,
             id: "id",
             component: <Input placeholder="请输入" />,
         },

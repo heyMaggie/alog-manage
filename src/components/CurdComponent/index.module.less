@@ -10,7 +10,7 @@
         // padding: 1px 24px;
         // flex: 0 0 48px;
         // padding: 0px 24px;
-        padding: 22px 32px 0 0;
+        padding: 20px 32px 0 0;
         flex: 0 0 44px;
         text-align: right;
         button {
@@ -41,7 +41,7 @@
         }
     }
     .pad22 {
-        height: 22px;
+        height: 16px;
         margin: 0 32px;
         // box-sizing: content-box;
         border-bottom: solid 1px rgba(235, 235, 235, 1);
@@ -56,6 +56,18 @@
 :global {
     .ant-table-header {
         background: #f2f3fc;
+    }
+    .ant-table-thead > tr > th {
+        // padding: 9px 16px !important;
+        padding-top: 9px !important;
+        padding-bottom: 9px !important  ;
+    }
+    .ant-table-tbody > tr > td {
+        padding-top: 13px !important;
+        padding-bottom: 13px !important;
+    }
+    .ant-table-placeholder {
+        border-bottom: 0 !important;
     }
     .ant-time-picker {
         width: 174px;

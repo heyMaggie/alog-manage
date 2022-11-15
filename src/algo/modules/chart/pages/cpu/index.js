@@ -141,9 +141,9 @@ class Cpu extends React.PureComponent {
                             axisLabel: {
                                 formatter: "{value} GB",
                             },
-                            // nameTextStyle: {
-                            //     padding: [0, 43, 0, 0],
-                            // },
+                            nameTextStyle: {
+                                padding: [0, 43, 0, 0],
+                            },
                             min: isNull ? 0 : null,
                             max: isNull ? 100 : null,
                             axisLabel: {
@@ -220,7 +220,7 @@ class Cpu extends React.PureComponent {
             <div className={styles.container}>
                 <div className={styles.search}>
                     <Form layout="inline" onSubmit={this.handleSubmit}>
-                        <Form.Item>
+                        <Form.Item label="服务器">
                             {getFieldDecorator("hostId", {
                                 initialValue: "1",
                             })(
@@ -241,7 +241,7 @@ class Cpu extends React.PureComponent {
                                 </Select>
                             )}
                         </Form.Item>
-                        <Form.Item style={{ marginLeft: "12px" }}>
+                        <Form.Item label="时间" style={{ marginLeft: "12px" }}>
                             {getFieldDecorator("pickerTime", {
                                 initialValue: [
                                     moment(
@@ -263,7 +263,7 @@ class Cpu extends React.PureComponent {
                         </Form.Item>
                         <Form.Item style={{ float: "right" }}>
                             <Button
-                                type="primary"
+                                type="ghost"
                                 htmlType="submit"
                                 style={{ width: 76 }}
                             >

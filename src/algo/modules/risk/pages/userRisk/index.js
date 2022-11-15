@@ -7,7 +7,7 @@ import CurdComponent from "@/components/CurdComponent";
 let getSearchFormFields = () => {
     return [
         {
-            label: "用户ID",
+            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
             id: "id",
             component: <Input placeholder="请输入" />,
         },
@@ -112,7 +112,7 @@ export default class userRisk extends React.PureComponent {
         // console.log("获取搜索栏数据 ", params);
         this.getData(params, pagination);
     };
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
         params = {
             ...params,
             pageId: pagination.current,

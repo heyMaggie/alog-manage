@@ -279,12 +279,14 @@ class userInfo extends React.PureComponent {
     getSearchFormFields = () => {
         return [
             {
-                label: "用户ID",
+                // label: "用户ID",
+                label: <span>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;ID</span>,
                 id: "userId",
                 component: <Input placeholder="请输入" />,
             },
             {
-                label: "用户类型",
+                // label: "用户类型",
+                label: <span>用&nbsp;户&nbsp;类&nbsp;型</span>,
                 id: "userType",
                 // initialValue: "1",
                 component: SelectOption(dict.userType, {
@@ -894,7 +896,7 @@ class userInfo extends React.PureComponent {
             });
         });
     };
-    getData = (params = {}, pagination = { current: 1, pageSize: 10 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 12 }) => {
         params = {
             ...params,
             pageId: pagination.current,

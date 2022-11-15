@@ -8,7 +8,7 @@ import styles from "./style.module.less";
 let getSearchFormFields = () => {
     return [
         {
-            label: "用户ID",
+            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
             id: "userId",
             component: <Input placeholder="请输入" />,
         },
@@ -533,7 +533,7 @@ class CounterGw extends React.PureComponent {
             updateModalVisible: false,
         });
     };
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
         params = {
             ...params,
             pageId: pagination.current,

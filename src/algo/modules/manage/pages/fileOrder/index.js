@@ -17,6 +17,7 @@ let getSearchFormFields = () => {
         },
         {
             label: "用户ID",
+            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
             id: "userId",
             component: <Input placeholder="请输入用户ID" />,
         },
@@ -109,7 +110,7 @@ class FileOrder extends React.PureComponent {
                 message.error("下载失败");
             });
     };
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
         params = {
             ...params,
             pageId: pagination.current,

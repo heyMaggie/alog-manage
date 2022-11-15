@@ -16,9 +16,9 @@ import { connect } from "react-redux";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
-import moment from "moment";
-import { lte } from "semver";
-import { tuple } from "antd/lib/_util/type";
+// import moment from "moment";
+// import { lte } from "semver";
+// import { tuple } from "antd/lib/_util/type";
 class AlgorithmicTrad extends React.PureComponent {
     state = {
         numberText: "笔",
@@ -289,7 +289,7 @@ class AlgorithmicTrad extends React.PureComponent {
             <div className={styles.container}>
                 <div className={styles.search}>
                     <Form layout="inline" onSubmit={this.handleSubmit}>
-                        <Form.Item>
+                        <Form.Item label="交易类型">
                             {getFieldDecorator("countWay", {
                                 initialValue: "0",
                             })(
@@ -309,7 +309,10 @@ class AlgorithmicTrad extends React.PureComponent {
                                 </Select>
                             )}
                         </Form.Item>
-                        <Form.Item style={{ marginLeft: "12px" }}>
+                        <Form.Item
+                            label="证券代码"
+                            style={{ marginLeft: "12px" }}
+                        >
                             {getFieldDecorator("securityId", {
                                 initialValue: "",
                             })(
@@ -329,7 +332,10 @@ class AlgorithmicTrad extends React.PureComponent {
                                 // </Select>
                             )}
                         </Form.Item>
-                        <Form.Item style={{ marginLeft: "12px" }}>
+                        <Form.Item
+                            label="算法ID"
+                            style={{ marginLeft: "12px" }}
+                        >
                             {getFieldDecorator("algorithmId")(
                                 // <Input placeholder="请输入算法ID" />
 
@@ -349,7 +355,10 @@ class AlgorithmicTrad extends React.PureComponent {
                                 </Select>
                             )}
                         </Form.Item>
-                        <Form.Item style={{ marginLeft: "12px" }}>
+                        <Form.Item
+                            label="用户名称"
+                            style={{ marginLeft: "12px" }}
+                        >
                             {getFieldDecorator("uuserId")(
                                 // <Input placeholder="请输入用户名" />
                                 <Select
@@ -368,12 +377,12 @@ class AlgorithmicTrad extends React.PureComponent {
                                 </Select>
                             )}
                         </Form.Item>
-                        <Form.Item style={{ marginLeft: "12px" }}>
+                        <Form.Item label="日期" style={{ marginLeft: "12px" }}>
                             {getFieldDecorator("pickerTime", {
                                 initialValue: [],
                             })(
                                 <RangePicker
-                                    style={{ width: 432 }}
+                                    style={{ width: 380 }}
                                     showTime
                                     format="YYYY-MM-DD HH:mm:ss"
                                 />
@@ -381,7 +390,7 @@ class AlgorithmicTrad extends React.PureComponent {
                         </Form.Item>
                         <Form.Item style={{ float: "right" }}>
                             <Button
-                                type="primary"
+                                type="ghost"
                                 htmlType="submit"
                                 style={{ width: 76 }}
                             >

@@ -9,6 +9,7 @@ let getSearchFormFields = () => {
     return [
         {
             label: "权限ID",
+            label: <span>权&nbsp;&nbsp;限&nbsp;ID</span>,
             id: "id",
             component: <Input placeholder="请输入" />,
         },
@@ -458,7 +459,7 @@ class algoGroup extends React.PureComponent {
         console.log("删除记录 ", record);
     };
 
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
         params = {
             ...params,
             pageId: pagination.current,

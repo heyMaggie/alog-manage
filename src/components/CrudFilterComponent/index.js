@@ -98,7 +98,8 @@ export default class CrudFilterComponent extends React.PureComponent {
                             <div>
                                 {updateRecord && (
                                     <a
-                                        style={{ color: "rgba(94,156,221,1)" }}
+                                        // style={{ color: "#3281ff" }}
+                                        style={{ color: "#3281ff" }}
                                         onClick={() => {
                                             this.setState({
                                                 updateModalVisible: true,
@@ -133,7 +134,7 @@ export default class CrudFilterComponent extends React.PureComponent {
                                     >
                                         <a
                                             style={{
-                                                color: "rgba(94,156,221,1)",
+                                                color: "#3281ff",
                                                 margin: "0 16px",
                                             }}
                                         >

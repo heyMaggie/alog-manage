@@ -96,11 +96,13 @@ const getSearchFormFields = () => {
     return [
         {
             label: "用户ID",
+            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
             id: "uuserId",
             component: <Input placeholder="请输入" />,
         },
         {
             label: "篮子ID",
+            label: <span>篮&nbsp;&nbsp;子&nbsp;ID</span>,
             id: "id",
             component: <Input placeholder="请输入" />,
         },
@@ -172,7 +174,7 @@ export default class uoeSetting extends React.PureComponent {
             enable: record.enable + "",
         });
     };
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
         // params.token = "";
         params = {
             ...params,

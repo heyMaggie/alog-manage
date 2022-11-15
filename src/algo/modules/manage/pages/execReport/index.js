@@ -80,6 +80,7 @@ const getSearchFormFields = () => {
     return [
         {
             label: "用户ID",
+            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
             id: "uuserId",
             component: <Input placeholder="请输入" />,
         },
@@ -91,12 +92,14 @@ const getSearchFormFields = () => {
         },
         {
             label: "母单号",
+            label: <span>母&nbsp;&nbsp;单&nbsp;号</span>,
             id: "algoOrderId",
             initialValue: "",
             component: <Input placeholder="请输入" />,
         },
         {
             label: "子单号",
+            label: <span>子&nbsp;&nbsp;单&nbsp;号</span>,
             id: "childOrderId",
             initialValue: "",
             component: <Input placeholder="请输入" />,
@@ -141,7 +144,7 @@ export default class execReport extends React.PureComponent {
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {};
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
         params = {
             ...params,
             pageId: pagination.current,

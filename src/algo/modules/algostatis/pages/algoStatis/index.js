@@ -262,7 +262,7 @@ class AlgorithmStatistical extends React.PureComponent {
             <div className={styles.container}>
                 <div className={styles.search}>
                     <Form layout="inline" onSubmit={this.handleSubmit}>
-                        <Form.Item>
+                        <Form.Item label="算法ID">
                             {getFieldDecorator("algorithmId")(
                                 // <Input placeholder="请输入算法ID" />
                                 <Select
@@ -281,7 +281,7 @@ class AlgorithmStatistical extends React.PureComponent {
                                 </Select>
                             )}
                         </Form.Item>
-                        <Form.Item style={{ marginLeft: "12px" }}>
+                        <Form.Item label="日期" style={{ marginLeft: "12px" }}>
                             {getFieldDecorator("pickerTime", {
                                 initialValue: [],
                             })(
@@ -294,7 +294,7 @@ class AlgorithmStatistical extends React.PureComponent {
                         </Form.Item>
                         <Form.Item style={{ float: "right" }}>
                             <Button
-                                type="primary"
+                                type="ghost"
                                 htmlType="submit"
                                 style={{ width: 76 }}
                             >

@@ -379,7 +379,7 @@ export default class uoeSetting extends React.PureComponent {
             status: record.status + "",
         });
     };
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
         params = {
             ...params,
             pageId: pagination.current,

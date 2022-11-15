@@ -1,6 +1,10 @@
 const pages = "@/algo/modules/manage/pages";
 
-const main = (root = "/main/manage") => [
+const main = (
+    root = "/main/manage",
+    menu2 = "/main/algo",
+    menu3 = "/main/counter"
+) => [
     // {
     //     path: `/main/user/userInfo`,
     //     component: `${pages}/userInfo`,
@@ -27,22 +31,22 @@ const main = (root = "/main/manage") => [
         title: "证券信息",
     },
     {
-        path: `${root}/algoConfig`,
+        path: `${menu2}/algoConfig`,
         component: `${pages}/algoConfig`,
         title: "算法管理",
     },
     {
-        path: `${root}/algoGroup`,
+        path: `${menu2}/algoGroup`,
         component: `${pages}/algoGroup`,
         title: "算法权限组",
     },
     {
-        path: `${root}/algoBest`,
+        path: `${menu2}/algoBest`,
         component: `${pages}/algoBest`,
         title: "算法优选",
     },
     {
-        path: `${root}/counterGw`,
+        path: `${menu3}/counterGw`,
         component: `${pages}/counterGw`,
         title: "柜台用户",
     },
@@ -77,7 +81,7 @@ const main = (root = "/main/manage") => [
         title: "篮子管理",
     },
     {
-        path: `${root}/counterInfo`,
+        path: `${menu3}/counterInfo`,
         component: `${pages}/counterInfo`,
         title: "柜台信息",
     },

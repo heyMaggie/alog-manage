@@ -262,7 +262,7 @@ class RegularWay extends React.PureComponent {
             <div className={styles.container}>
                 <div className={styles.search}>
                     <Form layout="inline" onSubmit={this.handleSubmit}>
-                        <Form.Item>
+                        <Form.Item label="交易类型">
                             {getFieldDecorator("countWay", {
                                 initialValue: "0",
                             })(
@@ -282,7 +282,10 @@ class RegularWay extends React.PureComponent {
                                 </Select>
                             )}
                         </Form.Item>
-                        <Form.Item style={{ marginLeft: "12px" }}>
+                        <Form.Item
+                            label="证券代码"
+                            style={{ marginLeft: "12px" }}
+                        >
                             {getFieldDecorator("securityId", {
                                 initialValue: "",
                             })(
@@ -303,7 +306,10 @@ class RegularWay extends React.PureComponent {
                                 // </Select>
                             )}
                         </Form.Item>
-                        <Form.Item style={{ marginLeft: "12px" }}>
+                        <Form.Item
+                            label="用户名称"
+                            style={{ marginLeft: "12px" }}
+                        >
                             {getFieldDecorator("uuserId")(
                                 // <Input placeholder="" />
                                 <Select
@@ -322,7 +328,7 @@ class RegularWay extends React.PureComponent {
                                 </Select>
                             )}
                         </Form.Item>
-                        <Form.Item style={{ marginLeft: "12px" }}>
+                        <Form.Item label="日期" style={{ marginLeft: "12px" }}>
                             {getFieldDecorator("pickerTime", {
                                 initialValue: [],
                             })(
@@ -335,7 +341,7 @@ class RegularWay extends React.PureComponent {
                         </Form.Item>
                         <Form.Item style={{ float: "right" }}>
                             <Button
-                                type="primary"
+                                type="ghost"
                                 htmlType="submit"
                                 style={{ width: 76 }}
                             >

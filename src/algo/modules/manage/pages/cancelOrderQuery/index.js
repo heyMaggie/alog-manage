@@ -120,7 +120,7 @@ const columns = (params) => {
 const getSearchFormFields = () => {
     return [
         {
-            label: "用户ID",
+            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
             id: "uuserId",
             component: <Input placeholder="请输入" />,
         },
@@ -161,7 +161,7 @@ export default class cancelOrderQuery extends React.PureComponent {
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {};
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
         params = {
             ...params,
             pageId: pagination.current,

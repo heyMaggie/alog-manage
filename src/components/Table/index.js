@@ -1,6 +1,7 @@
 import React from "react";
-import { Table } from "antd";
+import { Table, Empty } from "antd";
 import styles from "./index.module.less";
+import nodata from "./nodata.png";
 
 class BasicTable extends React.PureComponent {
     state = {
@@ -83,7 +84,20 @@ class BasicTable extends React.PureComponent {
                 };
             };
         }
-
+        let empty = {
+            emptyText: (
+                <Empty
+                    image={nodata}
+                    imageStyle={{
+                        height: 84,
+                        width: 84,
+                        marginLeft: "calc(50% - 42px)",
+                        marginTop: "186px",
+                        marginBottom: "4px",
+                    }}
+                />
+            ),
+        };
         return (
             <div className={styles.tableWrap}>
                 <Table
@@ -95,6 +109,7 @@ class BasicTable extends React.PureComponent {
                     scroll={scroll}
                     pagination={newPagination}
                     onChange={(p, f, s, e) => this.handlePagination(p, f, s, e)}
+                    locale={empty}
                     onRow={onRow}
                 />
                 {dataSource.length == 0 ? (

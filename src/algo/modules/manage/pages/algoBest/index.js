@@ -86,6 +86,7 @@ export default class algoBest extends React.PureComponent {
             // },
             {
                 label: "算法",
+                label: <span>算&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;法</span>,
                 id: "algo_id",
                 component: SelectOption(this.state.algoList, {
                     placeholder: "请选择",
@@ -547,7 +548,7 @@ export default class algoBest extends React.PureComponent {
             basis_point: record.basis_point,
         });
     };
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
         if (!params.provider_id) {
             params.provider_id = 0;
         }

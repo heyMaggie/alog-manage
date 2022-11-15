@@ -171,22 +171,26 @@ const columns = (params) => {
 const getSearchFormFields = () => {
     return [
         {
-            label: "子单ID",
+            // label: "子单ID",
+            label: <span>子&nbsp;&nbsp;单&nbsp;ID</span>,
             id: "id",
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "用户ID",
+            // label: "用户ID",
+            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
             id: "uuserId",
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "篮子ID",
+            // label: "篮子ID",
+            label: <span>篮&nbsp;&nbsp;子&nbsp;ID</span>,
             id: "basketId",
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "算法ID",
+            // label: "算法ID",
+            label: <span>算&nbsp;&nbsp;法&nbsp;ID</span>,
             id: "algorithmId",
             initialValue: "",
             component: <Input placeholder="请输入" />,
@@ -241,7 +245,7 @@ export default class newOrderQuery extends React.PureComponent {
         // console.log("获取搜索栏数据 ", params);
         this.getData(params, pagination);
     };
-    getData = (params = {}, pagination = { current: 1, pageSize: 11 }) => {
+    getData = (params = {}, pagination = { current: 1, pageSize: 12 }) => {
         // params.token = "";
         params = {
             ...params,
