@@ -111,7 +111,7 @@ class RegularWay extends React.PureComponent {
                 source: list,
             },
             grid: {
-                left: "34px",
+                left: isNull ? 15 : "0px",
                 right: "55px",
                 bottom: "24px",
                 top: "75px",
@@ -173,7 +173,17 @@ class RegularWay extends React.PureComponent {
                     // nameLocation: "200px",
                     nameTextStyle: {
                         align: "center",
-                        // padding: [0, 0, 0, 20],
+                        padding: [0, 43, 0, 20],
+                    },
+                    axisLabel: {
+                        margin: 55,
+                        textStyle: {
+                            align: "left",
+                        },
+                    },
+                    nameTextStyle: {
+                        padding: [0, 55, 0, 0],
+                        // padding: [0, 0, 0, -250],
                     },
                 },
             ],

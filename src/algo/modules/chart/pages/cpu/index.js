@@ -79,10 +79,15 @@ class Cpu extends React.PureComponent {
                     },
                     legend: {
                         // data: ["CPU1", "CPU2", "CPU3"],
-                        left: 0,
+                        left: "auto",
+                        itemWidth: 35,
+                        // left: "8",
+                        // align: "left",
                     },
                     grid: {
-                        left: "1%",
+                        // left: "1%",
+                        // right: "40px",
+                        left: "-30px",
                         right: "40px",
                         bottom: "9%",
                         top: "60px",
@@ -140,14 +145,23 @@ class Cpu extends React.PureComponent {
                             },
                             axisLabel: {
                                 formatter: "{value} GB",
+                                margin: 150,
+                                textStyle: {
+                                    align: "left",
+                                },
                             },
                             nameTextStyle: {
-                                padding: [0, 43, 0, 0],
+                                padding: [0, 40, 0, 0],
+                                // padding: [0, 0, 0, -250],
                             },
                             min: isNull ? 0 : null,
                             max: isNull ? 100 : null,
                             axisLabel: {
                                 formatter: "{value}%",
+                                margin: 50,
+                                textStyle: {
+                                    align: "left",
+                                },
                             },
                         },
                     ],
