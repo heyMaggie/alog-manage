@@ -63,10 +63,10 @@ const configData = {
     ],
     bStatus: [
         // IBS_INITIAL   = 0, // Initial
-        // IBS_FROZEN    = 1, // 冻结：启动中,临时冻结
+        // IBS_FROZEN    = 1, // 锁定
         // IBS_DELETE    = 2, // delete
         { key: "0", value: "初始态" },
-        { key: "1", value: "启动中冻结" },
+        { key: "1", value: "锁定" },
         { key: "2", value: "删除" },
     ],
     counterStatus: [

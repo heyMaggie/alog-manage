@@ -281,6 +281,12 @@ class userInfo extends React.PureComponent {
             {
                 // label: "用户ID",
                 label: <span>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;ID</span>,
+                id: "id",
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                // label: "用户ID",
+                label: <span>用&nbsp;户&nbsp;编&nbsp;码</span>,
                 id: "userId",
                 component: <Input placeholder="请输入" />,
             },
@@ -327,12 +333,12 @@ class userInfo extends React.PureComponent {
     columns = (params) => {
         return [
             {
-                title: "ID",
+                title: "用户ID",
                 dataIndex: "id",
                 width: 100,
             },
             {
-                title: "用户ID",
+                title: "用户编码",
                 dataIndex: "userId",
                 width: 150,
             },
