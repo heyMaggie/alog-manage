@@ -2,6 +2,7 @@ import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 import { Input } from "antd";
+import TagLabel from "@/components/Tag";
 
 const getUpdateFormFields = () => {};
 const columns = (params) => {
@@ -74,6 +75,56 @@ const columns = (params) => {
             title: "订单状态",
             dataIndex: "algoOrdStatus",
             width: 150,
+            render: (text, record) => {
+                // return (
+                //     <TagLabel
+                //         record={record.algoOrdStatus}
+                //         type="success"
+                //     ></TagLabel>
+                // );
+                if (
+                    record.algoOrdStatus.indexOf("0") == 0 ||
+                    record.algoOrdStatus.indexOf("2") == 0
+                ) {
+                    return (
+                        <div>
+                            <TagLabel
+                                record={record.algoOrdStatus}
+                                // type="success"
+                            ></TagLabel>
+                        </div>
+                    );
+                } else if (
+                    record.algoOrdStatus.indexOf("1") == 0 ||
+                    record.algoOrdStatus.indexOf("3") == 0 ||
+                    record.algoOrdStatus.indexOf("4") == 0
+                ) {
+                    return (
+                        <TagLabel
+                            record={record.algoOrdStatus}
+                            type="fail"
+                        ></TagLabel>
+                    );
+                } else if (
+                    record.algoOrdStatus.indexOf("5") == 0 ||
+                    record.algoOrdStatus.indexOf("7") == 0
+                ) {
+                    return (
+                        <TagLabel
+                            record={record.algoOrdStatus}
+                            type="warn"
+                        ></TagLabel>
+                    );
+                } else if (record.algoOrdStatus.indexOf("6") == 0) {
+                    return (
+                        <TagLabel
+                            record={record.algoOrdStatus}
+                            type="success"
+                        ></TagLabel>
+                    );
+                }
+                return <TagLabel record={record.algoOrdStatus}></TagLabel>;
+            },
         },
         {
             title: "母单在篮子表中的状态",

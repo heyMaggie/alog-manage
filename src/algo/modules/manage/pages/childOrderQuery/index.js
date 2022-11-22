@@ -2,6 +2,7 @@ import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 import { Input } from "antd";
+import TagLabel from "@/components/Tag";
 
 // const getUpdateFormFields = () => {};
 const columns = (params) => {
@@ -47,6 +48,11 @@ const columns = (params) => {
             width: 100,
         },
         {
+            title: "订单编号",
+            dataIndex: "clOrdId",
+            width: 150,
+        },
+        {
             title: "订单数量 ",
             dataIndex: "orderQty",
             width: 120,
@@ -57,19 +63,74 @@ const columns = (params) => {
             width: 120,
         },
         {
-            title: "止损价",
-            dataIndex: "stopPx",
-            width: 120,
-        },
-        {
             title: "订单类型",
             dataIndex: "orderType",
-            width: 260,
+            width: 160,
+        },
+        {
+            title: "子单状态",
+            dataIndex: "childOrdStatus",
+            width: 150,
+            render: (text, record) => {
+                // return (
+                //     <TagLabel
+                //         record={record.childOrdStatus}
+                //         type="success"
+                //     ></TagLabel>
+                // );
+                //接收
+                if (
+                    record.childOrdStatus.indexOf("0") == 0 ||
+                    record.childOrdStatus.indexOf("2") == 0 ||
+                    record.childOrdStatus.indexOf("4") == 0
+                ) {
+                    return (
+                        <div>
+                            <TagLabel
+                                record={record.childOrdStatus}
+                                // type="success"
+                            ></TagLabel>
+                        </div>
+                    );
+                } else if (
+                    record.childOrdStatus.indexOf("1") == 0 ||
+                    record.childOrdStatus.indexOf("3") == 0 ||
+                    record.childOrdStatus.indexOf("5") == 0 ||
+                    record.childOrdStatus.indexOf("8") == 0
+                ) {
+                    return (
+                        <TagLabel
+                            record={record.childOrdStatus}
+                            type="fail"
+                        ></TagLabel>
+                    );
+                } else if (record.childOrdStatus.indexOf("6") == 0) {
+                    return (
+                        <TagLabel
+                            record={record.childOrdStatus}
+                            type="warn"
+                        ></TagLabel>
+                    );
+                } else if (record.childOrdStatus.indexOf("7") == 0) {
+                    return (
+                        <TagLabel
+                            record={record.childOrdStatus}
+                            type="success"
+                        ></TagLabel>
+                    );
+                }
+                return <TagLabel record={record.childOrdStatus}></TagLabel>;
+            },
         },
         {
             title: "买卖方向",
             dataIndex: "side",
             width: 100,
+        },
+        {
+            title: "止损价",
+            dataIndex: "stopPx",
+            width: 120,
         },
         {
             title: "平仓标识",
@@ -101,16 +162,7 @@ const columns = (params) => {
             dataIndex: "basketId",
             width: 150,
         },
-        {
-            title: "订单编号",
-            dataIndex: "clOrdId",
-            width: 150,
-        },
-        {
-            title: "子单状态",
-            dataIndex: "childOrdStatus",
-            width: 150,
-        },
+
         {
             title: "请求用户ID",
             dataIndex: "reqUserId",

@@ -2,6 +2,8 @@ import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 // import SelectOption from "@/components/SelectOption";
 import { Input } from "antd";
+import TagLabel from "@/components/Tag";
+
 // import UploadWrap from "@/components/UploadWrap";
 
 const columns = (params) => {
@@ -29,7 +31,39 @@ const columns = (params) => {
         {
             title: "状态",
             dataIndex: "sessionStatus",
-            width: 150,
+            width: 170,
+            render: (text, record) => {
+                // console.log(record);
+                // return (
+                //     <TagLabel
+                //         record={record.sessionStatus}
+                //         type="warn"
+                //     ></TagLabel>
+                // );
+                if (record.sessionStatus.indexOf("1") == 0) {
+                    return (
+                        <div>
+                            <TagLabel
+                                record={record.sessionStatus}
+                                type="success"
+                            ></TagLabel>
+                        </div>
+                    );
+                } else if (
+                    record.sessionStatus.indexOf("2") == 0 ||
+                    record.sessionStatus.indexOf("3") == 0
+                ) {
+                    return (
+                        <TagLabel
+                            record={record.sessionStatus}
+                            type="warn"
+                        ></TagLabel>
+                    );
+                } else if (record.sessionStatus.indexOf("4") == 0) {
+                    return <TagLabel record={record.sessionStatus}></TagLabel>;
+                }
+                return <TagLabel record={record.sessionStatus}></TagLabel>;
+            },
         },
         {
             title: "套接字",

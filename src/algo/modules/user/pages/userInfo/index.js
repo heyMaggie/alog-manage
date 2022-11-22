@@ -350,7 +350,38 @@ class userInfo extends React.PureComponent {
             {
                 title: "用户类型",
                 dataIndex: "userTypeValue",
+                width: 200,
                 // key: "userType",
+                render: (text, record) => {
+                    // console.log(record);
+                    if (record.userType == 1) {
+                        return (
+                            <div className={styles.typeWrap}>
+                                <span className={styles.userType1}>个</span>
+                                <span>{record.userTypeValue}</span>
+                            </div>
+                        );
+                    } else if (record.userType == 2) {
+                        return (
+                            <div className={styles.typeWrap}>
+                                <span className={styles.userType2}>算</span>
+                                <span>{record.userTypeValue}</span>
+                            </div>
+                        );
+                    } else if (record.userType == 3) {
+                        return (
+                            <div className={styles.typeWrap}>
+                                <span className={styles.userType3}>多</span>
+                                <span>{record.userTypeValue}</span>
+                            </div>
+                        );
+                    }
+                    return (
+                        <div className={styles.typeWrap}>
+                            {record.userTypeValue}
+                        </div>
+                    );
+                },
             },
             {
                 title: "用户风控组",
