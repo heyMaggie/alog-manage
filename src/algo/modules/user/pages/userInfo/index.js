@@ -33,7 +33,7 @@ class userInfo extends React.PureComponent {
     getInsertFormFields = () => {
         return [
             {
-                label: "用户ID",
+                label: "用户编码",
                 id: "UserId",
                 initialValue: "",
                 rules: [
@@ -163,7 +163,7 @@ class userInfo extends React.PureComponent {
     getUpdateFormFields = () => {
         return [
             {
-                label: "用户ID",
+                label: "用户编码",
                 id: "UserId",
                 initialValue: "",
                 rules: [

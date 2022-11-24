@@ -22,8 +22,8 @@ const configData = {
         { key: "3", value: "两融" },
     ],
     market: [
-        { key: "1", value: "深交所" },
-        { key: "2", value: "上交所" },
+        { key: "1", value: "上交所" },
+        { key: "2", value: "深交所" },
     ],
     accountType: [
         { key: "1", value: "股票" },
