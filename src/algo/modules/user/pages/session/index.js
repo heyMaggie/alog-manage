@@ -18,11 +18,11 @@ const columns = (params) => {
             dataIndex: "uuserId",
             width: 100,
         },
-        {
-            title: "会话token",
-            dataIndex: "token",
-            width: 320,
-        },
+        // {
+        //     title: "会话token",
+        //     dataIndex: "token",
+        //     width: 320,
+        // },
         {
             title: "客户端类型",
             dataIndex: "clientType",
