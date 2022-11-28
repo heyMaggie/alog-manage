@@ -681,12 +681,12 @@ export default class Cccx extends React.PureComponent {
                 rowKey="rnd"
                 pagination={this.state.pagination}
                 dataSource={info}
-                insertBtnText={"新增"} // 不传 就没新增按钮
+                // insertBtnText={"新增"} // 不传 就没新增按钮
                 getInsertFormFields={getInsertFormFields}
                 insertRecord={this.handleInsertRecord}
                 getUpdateFormFields={getUpdateFormFields}
                 setUpdateModal={this.setUpdateModal}
-                updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                 // deleteRecord={this.handleDeleteRecord}
                 centered={true}
                 columns={columns}
