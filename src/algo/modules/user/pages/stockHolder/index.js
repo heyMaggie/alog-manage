@@ -29,6 +29,10 @@ const columns = (params) => {
             dataIndex: "accountTypeValue",
         },
         {
+            title: "账户状态",
+            dataIndex: "accountStatus",
+        },
+        {
             title: "创建时间",
             dataIndex: "createTime",
             key: "createTime",
@@ -112,6 +116,24 @@ const getInsertFormFields = () => {
                 },
             }),
         },
+        {
+            label: "账户状态",
+            id: "AccountStatus",
+            initialValue: "1",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.userStatusType, {
+                placeholder: "请选择",
+                // allowClear: true,
+                style: {
+                    width: 400,
+                },
+            }),
+        },
     ];
 };
 const getUpdateFormFields = () => {
@@ -190,6 +212,24 @@ const getUpdateFormFields = () => {
             component: SelectOption(dict.accountType, {
                 placeholder: "请选择",
                 allowClear: false,
+                style: {
+                    width: 400,
+                },
+            }),
+        },
+        {
+            label: "账户状态",
+            id: "AccountStatus",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.userStatusType, {
+                placeholder: "请选择",
+                // allowClear: true,
                 style: {
                     width: 400,
                 },

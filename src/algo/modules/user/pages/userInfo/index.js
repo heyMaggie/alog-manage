@@ -146,6 +146,24 @@ class userInfo extends React.PureComponent {
                         placeholder: "请选择算法权限组",
                     }),
             },
+            {
+                label: "用户状态",
+                id: "UserStatus",
+                initialValue: "1",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(dict.userStatusType, {
+                    placeholder: "请选择",
+                    // allowClear: true,
+                    style: {
+                        width: 400,
+                    },
+                }),
+            },
             // {
             //     label: "算法属性",
             //     id: "AlgoProperty",
@@ -272,6 +290,24 @@ class userInfo extends React.PureComponent {
                 ],
                 component: SelectOption(this.state.algoSecList, {
                     placeholder: "请选择算法权限组",
+                }),
+            },
+            {
+                label: "用户状态",
+                id: "UserStatus",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(dict.userStatusType, {
+                    placeholder: "请选择用户状态",
+                    // allowClear: true,
+                    style: {
+                        width: 400,
+                    },
                 }),
             },
         ];
@@ -444,6 +480,10 @@ class userInfo extends React.PureComponent {
                 dataIndex: "fatherId",
             },
             {
+                title: "用户状态",
+                dataIndex: "userStatus",
+            },
+            {
                 title: "注册时间",
                 dataIndex: "createTime",
                 key: "createTime",
@@ -532,6 +572,7 @@ class userInfo extends React.PureComponent {
         params.RiskGroup = params.RiskGroup / 1;
         params.AlgoGroup = params.AlgoGroup / 1;
         params.UuserId = params.UuserId / 1;
+        params.UserStatus = params.UserStatus / 1;
         params.UserPasswd = md5(params.UserPasswd);
         console.log("新增接口", params);
         http.post({
@@ -562,6 +603,7 @@ class userInfo extends React.PureComponent {
         params.RiskGroup = params.RiskGroup / 1;
         params.AlgoGroup = params.AlgoGroup / 1;
         params.UuserId = params.UuserId / 1;
+        params.UserStatus = params.UserStatus;
         // console.log(this.record);
         if (params.UserPasswd == "") {
             params.UserPasswd = this.record.userPasswd;

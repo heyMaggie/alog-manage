@@ -654,6 +654,12 @@ const configData = {
         { key: "4", value: "两融多仓" },
         { key: "5", value: "两融空仓" },
     ],
+    // 用户状态
+    userStatusType: [
+        { key: "1", value: "正常" },
+        { key: "2", value: "注销" },
+        { key: "3", value: "冻结" },
+    ],
 };
 
 export default configData;
