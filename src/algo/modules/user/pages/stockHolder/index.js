@@ -30,7 +30,19 @@ const columns = (params) => {
         },
         {
             title: "账户状态",
-            dataIndex: "accountStatus",
+            dataIndex: "accountStatusValue",
+        },
+        {
+            title: "资金账户",
+            dataIndex: "assetAccount",
+        },
+        {
+            title: "机构编码",
+            dataIndex: "custOrgid",
+        },
+        {
+            title: "分支编码",
+            dataIndex: "custBranchid",
         },
         {
             title: "创建时间",
@@ -118,7 +130,7 @@ const getInsertFormFields = () => {
         },
         {
             label: "账户状态",
-            id: "AccountStatus",
+            id: "accountStatus",
             initialValue: "1",
             rules: [
                 {
@@ -126,13 +138,61 @@ const getInsertFormFields = () => {
                     message: "参数不能为空",
                 },
             ],
-            component: SelectOption(dict.userStatusType, {
+            component: SelectOption(dict.accountStatus, {
                 placeholder: "请选择",
                 // allowClear: true,
                 style: {
                     width: 400,
                 },
             }),
+        },
+        {
+            label: "资金账户",
+            id: "assetAccount",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(25),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "机构编码",
+            id: "custOrgid",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(25),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "分支编码",
+            id: "custBranchid",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(25),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
         },
     ];
 };
@@ -219,7 +279,7 @@ const getUpdateFormFields = () => {
         },
         {
             label: "账户状态",
-            id: "AccountStatus",
+            id: "accountStatus",
             initialValue: "",
             rules: [
                 {
@@ -227,13 +287,61 @@ const getUpdateFormFields = () => {
                     message: "参数不能为空",
                 },
             ],
-            component: SelectOption(dict.userStatusType, {
+            component: SelectOption(dict.accountStatus, {
                 placeholder: "请选择",
                 // allowClear: true,
                 style: {
                     width: 400,
                 },
             }),
+        },
+        {
+            label: "资金账户",
+            id: "assetAccount",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(25),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "机构编码",
+            id: "custOrgid",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(25),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "分支编码",
+            id: "custBranchid",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(25),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
         },
         // {
         //     label: "网关",
@@ -333,6 +441,10 @@ export default class uoeSetting extends React.PureComponent {
             AccountId: fromData.accountId,
             Market: fromData.market / 1,
             AccountType: fromData.accountType / 1,
+            AccountStatus: fromData.accountStatus / 1,
+            AssetAccount: fromData.assetAccount,
+            CustOrgid: fromData.custOrgid,
+            CustBranchid: fromData.custBranchid,
         };
         http.post({
             url: "/stockHolder/addStockHolderInfo",
@@ -363,6 +475,10 @@ export default class uoeSetting extends React.PureComponent {
             AccountId: fromData.accountId,
             Market: fromData.market / 1,
             AccountType: fromData.accountType / 1,
+            AccountStatus: fromData.accountStatus / 1,
+            AssetAccount: fromData.assetAccount,
+            CustOrgid: fromData.custOrgid,
+            CustBranchid: fromData.custBranchid,
         };
         // 发送更新请求
         http.post({
@@ -396,6 +512,10 @@ export default class uoeSetting extends React.PureComponent {
             market: record.market + "",
             accountType: record.accountType + "",
             accountId: record.accountId,
+            accountStatus: record.accountStatus + "",
+            assetAccount: record.assetAccount,
+            custOrgid: record.custOrgid,
+            custBranchid: record.custBranchid,
         });
     };
     getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {

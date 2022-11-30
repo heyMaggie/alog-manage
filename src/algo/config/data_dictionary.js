@@ -89,9 +89,9 @@ const configData = {
         { key: "3", value: "调仓" },
     ],
     userStatus: [
-        { key: "0", value: "正常" },
-        { key: "1", value: "黑名单客户" },
-        { key: "2", value: "禁止买卖" },
+        { key: "1", value: "正常" },
+        { key: "2", value: "注销" },
+        { key: "3", value: "冻结" },
     ],
     algorithmStatus: [
         { key: "0", value: "未开始" },
@@ -654,10 +654,9 @@ const configData = {
         { key: "4", value: "两融多仓" },
         { key: "5", value: "两融空仓" },
     ],
-    // 用户状态
-    userStatusType: [
+    // 股东账户状态
+    accountStatus: [
         { key: "1", value: "正常" },
-        { key: "2", value: "注销" },
         { key: "3", value: "冻结" },
     ],
 };
