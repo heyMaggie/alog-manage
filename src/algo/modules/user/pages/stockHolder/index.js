@@ -11,9 +11,9 @@ import { Input } from "antd";
 const columns = (params) => {
     return [
         {
-            title: "用户ID",
-            dataIndex: "uuserId",
-            key: "uuserId",
+            title: "用户名称",
+            dataIndex: "userName",
+            key: "userName",
         },
         {
             title: "股东账户",
@@ -54,20 +54,20 @@ const columns = (params) => {
 const getInsertFormFields = () => {
     return [
         {
-            label: "用户ID",
-            id: "uuserId",
+            label: "用户名称",
+            id: "userName",
             initialValue: "",
             rules: [
                 {
                     required: true,
                     message: "参数不能为空",
                 },
+                // {
+                //     message: "请输入数字",
+                //     pattern: /^[0-9]*[1-9][0-9]*$/i,
+                // },
                 {
-                    message: "请输入数字",
-                    pattern: /^[0-9]*[1-9][0-9]*$/i,
-                },
-                {
-                    validator: checkLength(10),
+                    validator: checkLength(20),
                     trigger: ["change", "blur"],
                 },
             ],
@@ -199,20 +199,20 @@ const getInsertFormFields = () => {
 const getUpdateFormFields = () => {
     return [
         {
-            label: "用户ID",
-            id: "uuserId",
+            label: "用户名称",
+            id: "userName",
             initialValue: "",
             rules: [
                 {
                     required: true,
                     message: "参数不能为空",
                 },
+                // {
+                //     message: "请输入数字",
+                //     pattern: /^[0-9]*[1-9][0-9]*$/i,
+                // },
                 {
-                    message: "请输入数字",
-                    pattern: /^[0-9]*[1-9][0-9]*$/i,
-                },
-                {
-                    validator: checkLength(10),
+                    validator: checkLength(20),
                     trigger: ["change", "blur"],
                 },
             ],
@@ -397,9 +397,9 @@ const getUpdateFormFields = () => {
 let getSearchFormFields = () => {
     return [
         {
-            // label: "用户ID",
-            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
-            id: "uuserId",
+            label: "用户名称",
+            // label: <span>用户名称</span>,
+            id: "userName",
             component: <Input placeholder="请输入" />,
         },
         {
@@ -437,7 +437,7 @@ export default class uoeSetting extends React.PureComponent {
     handleInsertRecord = (fromData) => {
         console.log("新增接口", fromData);
         let params = {
-            UuserId: fromData.uuserId / 1,
+            UserName: fromData.userName,
             AccountId: fromData.accountId,
             Market: fromData.market / 1,
             AccountType: fromData.accountType / 1,
@@ -471,7 +471,7 @@ export default class uoeSetting extends React.PureComponent {
         let fromData = form.getFieldsValue();
         let params = {
             Id: this.record.id,
-            UuserId: fromData.uuserId / 1,
+            UserName: fromData.userName,
             AccountId: fromData.accountId,
             Market: fromData.market / 1,
             AccountType: fromData.accountType / 1,
@@ -508,7 +508,7 @@ export default class uoeSetting extends React.PureComponent {
         // console.log(record, form);
         this.record = record;
         form.setFieldsValue({
-            uuserId: record.uuserId,
+            userName: record.userName,
             market: record.market + "",
             accountType: record.accountType + "",
             accountId: record.accountId,

@@ -7,8 +7,8 @@ import CurdComponent from "@/components/CurdComponent";
 let getSearchFormFields = () => {
     return [
         {
-            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
-            id: "id",
+            label: "用户名称",
+            id: "userName",
             component: <Input placeholder="请输入" />,
         },
     ];
@@ -23,8 +23,8 @@ const getUpdateFormFields = () => {
 let columns = () => {
     return [
         {
-            title: "用户ID",
-            dataIndex: "id",
+            title: "用户名称",
+            dataIndex: "userName",
             width: 150,
         },
         {

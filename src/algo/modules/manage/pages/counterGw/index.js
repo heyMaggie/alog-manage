@@ -8,7 +8,7 @@ import styles from "./style.module.less";
 let getSearchFormFields = () => {
     return [
         {
-            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
+            label: "用户编码",
             id: "userId",
             component: <Input placeholder="请输入" />,
         },
@@ -17,7 +17,7 @@ let getSearchFormFields = () => {
 const getInsertFormFields = () => {
     return [
         {
-            label: "用户ID",
+            label: "用户编码",
             id: "userId",
             rules: [
                 {
@@ -203,7 +203,7 @@ class CounterGw extends React.PureComponent {
     columns = (params) => {
         return [
             {
-                title: "用户ID",
+                title: "用户编码",
                 dataIndex: "userId",
             },
             {

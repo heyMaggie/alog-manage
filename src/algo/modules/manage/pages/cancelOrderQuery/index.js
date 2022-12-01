@@ -8,13 +8,13 @@ const columns = (params) => {
     return [
         // {
         //     title: "个人账户",
-        //     dataIndex: "uuserId",
+        //     dataIndex: "userName",
         //     width: 100,
         // },
         {
-            title: "用户ID",
-            dataIndex: "uuserId",
-            key: "uuserId",
+            title: "用户名称",
+            dataIndex: "userName",
+            key: "userName",
             width: 100,
         },
         {
@@ -85,7 +85,7 @@ const columns = (params) => {
         //     width: 180,
         // },
         {
-            title: "请求用户ID",
+            title: "请求用户名称",
             dataIndex: "reqUserId",
             width: 150,
         },
@@ -120,8 +120,9 @@ const columns = (params) => {
 const getSearchFormFields = () => {
     return [
         {
-            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
-            id: "uuserId",
+            label: "用户名称",
+            // label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
+            id: "userName",
             component: <Input placeholder="请输入" />,
         },
         {

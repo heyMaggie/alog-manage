@@ -7,10 +7,10 @@ const getUpdateFormFields = () => {};
 const columns = (params) => {
     return [
         {
-            title: "用户ID",
-            dataIndex: "uuserId",
-            key: "uuserId",
-            width: 80,
+            title: "用户名称",
+            dataIndex: "userName",
+            key: "userName",
+            width: 100,
         },
         {
             title: "证券代码",
@@ -79,9 +79,9 @@ const columns = (params) => {
 const getSearchFormFields = () => {
     return [
         {
-            label: "用户ID",
-            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
-            id: "uuserId",
+            label: "用户名称",
+            // label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
+            id: "userName",
             component: <Input placeholder="请输入" />,
         },
         {
