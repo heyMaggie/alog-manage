@@ -7,8 +7,8 @@ import SelectOption from "@/components/SelectOption";
 const getSearchFormFields = () => {
     return [
         {
-            label: "用户ID",
-            id: "uuserId",
+            label: "用户名称",
+            id: "userName",
             // initialValue: "",
             component: <Input placeholder="请输入" />,
         },
@@ -38,8 +38,8 @@ const getSearchFormFields = () => {
 const getInsertFormFields = () => {
     return [
         {
-            label: "用户ID",
-            id: "uuserId",
+            label: "用户名称",
+            id: "userName",
             initialValue: "",
             rules: [
                 {
@@ -232,8 +232,8 @@ const getInsertFormFields = () => {
 const getUpdateFormFields = () => {
     return [
         {
-            label: "用户ID",
-            id: "uuserId",
+            label: "用户名称",
+            id: "userName",
             initialValue: "",
             rules: [
                 {
@@ -433,9 +433,9 @@ const getUpdateFormFields = () => {
 let columns = () => {
     return [
         {
-            title: "用户ID",
-            dataIndex: "uuserId",
-            key: "uuserId",
+            title: "用户名称",
+            dataIndex: "userName",
+            key: "userName",
             width: 80,
         },
         {
@@ -569,7 +569,7 @@ export default class Cccx extends React.PureComponent {
     handleInsertRecord = (fromData) => {
         console.log("新增接口", fromData);
         let params = {
-            UuserId: fromData.uuserId / 1,
+            UserName: fromData.userName / 1,
             AccountId: fromData.accountId,
             SecurityId: fromData.securityId,
             SecurityIdSource: fromData.securityIdSource,
@@ -606,7 +606,7 @@ export default class Cccx extends React.PureComponent {
         let fromData = form.getFieldsValue();
         let params = {
             Id: this.record.id / 1,
-            UuserId: fromData.uuserId,
+            UserName: fromData.userName,
             AccountId: fromData.accountId,
             SecurityId: fromData.securityId,
             SecurityIdSource: fromData.securityIdSource,
@@ -647,7 +647,7 @@ export default class Cccx extends React.PureComponent {
         form.setFieldsValue({
             // userName1: record.v_gthth,
             // id: record.id,
-            uuserId: record.uuserId,
+            userName: record.userName,
             accountId: record.accountId,
             securityId: record.securityId,
             securityIdSource: record.securityIdSource,
@@ -681,12 +681,12 @@ export default class Cccx extends React.PureComponent {
                 rowKey="rnd"
                 pagination={this.state.pagination}
                 dataSource={info}
-                insertBtnText={"新增"} // 不传 就没新增按钮
+                // insertBtnText={"新增"} // 不传 就没新增按钮
                 getInsertFormFields={getInsertFormFields}
                 insertRecord={this.handleInsertRecord}
                 getUpdateFormFields={getUpdateFormFields}
                 setUpdateModal={this.setUpdateModal}
-                updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                 // deleteRecord={this.handleDeleteRecord}
                 centered={true}
                 columns={columns}

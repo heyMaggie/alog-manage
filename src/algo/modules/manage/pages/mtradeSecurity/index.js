@@ -6,8 +6,8 @@ import { Input } from "antd";
 const columns = (params) => {
     return [
         {
-            title: "用户Id",
-            dataIndex: "uuserId",
+            title: "用户名称",
+            dataIndex: "userName",
         },
         {
             title: "市场代码",

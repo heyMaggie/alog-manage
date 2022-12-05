@@ -12,8 +12,8 @@ const columns = (params) => {
             width: 150,
         },
         {
-            title: "用户ID",
-            dataIndex: "id",
+            title: "用户名称",
+            dataIndex: "userName",
             width: 150,
         },
         {
@@ -61,10 +61,10 @@ let getSearchFormFields = () => {
         //     component: <Input placeholder="请输入保证金账户" />,
         // },
         {
-            // label: "用户ID",
-            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
+            label: "用户名称",
+            // label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
             // id: "userId",
-            id: "id",
+            id: "userName",
             component: <Input placeholder="请输入" />,
         },
     ];
@@ -88,8 +88,8 @@ const getInsertFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "用户ID",
-            id: "id",
+            label: "用户名称",
+            id: "userName",
             initialValue: "",
             rules: [
                 {
@@ -97,7 +97,7 @@ const getInsertFormFields = () => {
                     message: "参数不能为空",
                 },
                 {
-                    validator: checkLength(10),
+                    validator: checkLength(30),
                     trigger: ["change", "blur"],
                 },
             ],
@@ -178,8 +178,8 @@ const getUpdateFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "用户ID",
-            id: "id",
+            label: "用户名称",
+            id: "userName",
             initialValue: "",
             rules: [
                 {
@@ -187,7 +187,7 @@ const getUpdateFormFields = () => {
                     message: "参数不能为空",
                 },
                 {
-                    validator: checkLength(10),
+                    validator: checkLength(30),
                     trigger: ["change", "blur"],
                 },
             ],
@@ -309,7 +309,7 @@ export default class uoeSetting extends React.PureComponent {
     handleInsertRecord = (fromData) => {
         console.log("新增接口", fromData);
         let params = {
-            Id: fromData.id / 1,
+            UserName: fromData.userName,
             AssetAccount: fromData.assetAccount,
             Balance: fromData.balance / 1,
             Frozen: fromData.frozen / 1,
@@ -339,7 +339,7 @@ export default class uoeSetting extends React.PureComponent {
         // return;
         let fromData = form.getFieldsValue();
         let params = {
-            Id: fromData.id / 1,
+            UserName: fromData.userName,
             AssetAccount: fromData.assetAccount,
             Balance: fromData.balance / 1,
             Frozen: fromData.frozen / 1,
@@ -370,7 +370,7 @@ export default class uoeSetting extends React.PureComponent {
         this.record = record;
         form.setFieldsValue({
             assetAccount: record.assetAccount,
-            id: record.id,
+            userName: record.userName,
             balance: record.balance,
             frozen: record.frozen,
             marginAmount: record.marginAmount,

@@ -16,10 +16,10 @@ let getSearchFormFields = () => {
             }),
         },
         {
-            label: "用户ID",
-            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
+            label: "用户编码",
+            // label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
             id: "userId",
-            component: <Input placeholder="请输入用户ID" />,
+            component: <Input placeholder="请输入用户编码" />,
         },
     ];
 };
@@ -28,7 +28,7 @@ class FileOrder extends React.PureComponent {
     columns = (params) => {
         return [
             {
-                title: "用户ID",
+                title: "用户编码",
                 dataIndex: "userId",
                 width: 150,
             },

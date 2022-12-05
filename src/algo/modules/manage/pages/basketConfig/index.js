@@ -6,8 +6,8 @@ import { Input } from "antd";
 const columns = (params) => {
     return [
         {
-            title: "用户ID",
-            dataIndex: "uuserId",
+            title: "用户名称",
+            dataIndex: "userName",
             width: 100,
         },
         {
@@ -95,9 +95,9 @@ const columns = (params) => {
 const getSearchFormFields = () => {
     return [
         {
-            label: "用户ID",
-            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
-            id: "uuserId",
+            label: "用户名称",
+            // label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
+            id: "userName",
             component: <Input placeholder="请输入" />,
         },
         {

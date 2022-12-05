@@ -11,9 +11,9 @@ import { Input } from "antd";
 const columns = (params) => {
     return [
         {
-            title: "用户ID",
-            dataIndex: "uuserId",
-            key: "uuserId",
+            title: "用户名称",
+            dataIndex: "userName",
+            key: "userName",
         },
         {
             title: "股东账户",
@@ -29,6 +29,22 @@ const columns = (params) => {
             dataIndex: "accountTypeValue",
         },
         {
+            title: "账户状态",
+            dataIndex: "accountStatusValue",
+        },
+        {
+            title: "资金账户",
+            dataIndex: "assetAccount",
+        },
+        {
+            title: "机构编码",
+            dataIndex: "custOrgid",
+        },
+        {
+            title: "分支编码",
+            dataIndex: "custBranchid",
+        },
+        {
             title: "创建时间",
             dataIndex: "createTime",
             key: "createTime",
@@ -38,20 +54,20 @@ const columns = (params) => {
 const getInsertFormFields = () => {
     return [
         {
-            label: "用户ID",
-            id: "uuserId",
+            label: "用户名称",
+            id: "userName",
             initialValue: "",
             rules: [
                 {
                     required: true,
                     message: "参数不能为空",
                 },
+                // {
+                //     message: "请输入数字",
+                //     pattern: /^[0-9]*[1-9][0-9]*$/i,
+                // },
                 {
-                    message: "请输入数字",
-                    pattern: /^[0-9]*[1-9][0-9]*$/i,
-                },
-                {
-                    validator: checkLength(10),
+                    validator: checkLength(20),
                     trigger: ["change", "blur"],
                 },
             ],
@@ -112,13 +128,27 @@ const getInsertFormFields = () => {
                 },
             }),
         },
-    ];
-};
-const getUpdateFormFields = () => {
-    return [
         {
-            label: "用户ID",
-            id: "uuserId",
+            label: "账户状态",
+            id: "accountStatus",
+            initialValue: "1",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.accountStatus, {
+                placeholder: "请选择",
+                // allowClear: true,
+                style: {
+                    width: 400,
+                },
+            }),
+        },
+        {
+            label: "资金账户",
+            id: "assetAccount",
             initialValue: "",
             rules: [
                 {
@@ -126,11 +156,63 @@ const getUpdateFormFields = () => {
                     message: "参数不能为空",
                 },
                 {
-                    message: "请输入数字",
-                    pattern: /^[0-9]*[1-9][0-9]*$/i,
+                    validator: checkLength(25),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "机构编码",
+            id: "custOrgid",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
                 },
                 {
-                    validator: checkLength(10),
+                    validator: checkLength(25),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "分支编码",
+            id: "custBranchid",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(25),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+    ];
+};
+const getUpdateFormFields = () => {
+    return [
+        {
+            label: "用户名称",
+            id: "userName",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+                // {
+                //     message: "请输入数字",
+                //     pattern: /^[0-9]*[1-9][0-9]*$/i,
+                // },
+                {
+                    validator: checkLength(20),
                     trigger: ["change", "blur"],
                 },
             ],
@@ -195,6 +277,72 @@ const getUpdateFormFields = () => {
                 },
             }),
         },
+        {
+            label: "账户状态",
+            id: "accountStatus",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+            ],
+            component: SelectOption(dict.accountStatus, {
+                placeholder: "请选择",
+                // allowClear: true,
+                style: {
+                    width: 400,
+                },
+            }),
+        },
+        {
+            label: "资金账户",
+            id: "assetAccount",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(25),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "机构编码",
+            id: "custOrgid",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(25),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "分支编码",
+            id: "custBranchid",
+            initialValue: "",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(25),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
         // {
         //     label: "网关",
         //     id: "gateway",
@@ -249,9 +397,9 @@ const getUpdateFormFields = () => {
 let getSearchFormFields = () => {
     return [
         {
-            // label: "用户ID",
-            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
-            id: "uuserId",
+            label: "用户名称",
+            // label: <span>用户名称</span>,
+            id: "userName",
             component: <Input placeholder="请输入" />,
         },
         {
@@ -289,10 +437,14 @@ export default class uoeSetting extends React.PureComponent {
     handleInsertRecord = (fromData) => {
         console.log("新增接口", fromData);
         let params = {
-            UuserId: fromData.uuserId / 1,
+            UserName: fromData.userName,
             AccountId: fromData.accountId,
             Market: fromData.market / 1,
             AccountType: fromData.accountType / 1,
+            AccountStatus: fromData.accountStatus / 1,
+            AssetAccount: fromData.assetAccount,
+            CustOrgid: fromData.custOrgid,
+            CustBranchid: fromData.custBranchid,
         };
         http.post({
             url: "/stockHolder/addStockHolderInfo",
@@ -319,10 +471,14 @@ export default class uoeSetting extends React.PureComponent {
         let fromData = form.getFieldsValue();
         let params = {
             Id: this.record.id,
-            UuserId: fromData.uuserId / 1,
+            UserName: fromData.userName,
             AccountId: fromData.accountId,
             Market: fromData.market / 1,
             AccountType: fromData.accountType / 1,
+            AccountStatus: fromData.accountStatus / 1,
+            AssetAccount: fromData.assetAccount,
+            CustOrgid: fromData.custOrgid,
+            CustBranchid: fromData.custBranchid,
         };
         // 发送更新请求
         http.post({
@@ -352,10 +508,14 @@ export default class uoeSetting extends React.PureComponent {
         // console.log(record, form);
         this.record = record;
         form.setFieldsValue({
-            uuserId: record.uuserId,
+            userName: record.userName,
             market: record.market + "",
             accountType: record.accountType + "",
             accountId: record.accountId,
+            accountStatus: record.accountStatus + "",
+            assetAccount: record.assetAccount,
+            custOrgid: record.custOrgid,
+            custBranchid: record.custBranchid,
         });
     };
     getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {

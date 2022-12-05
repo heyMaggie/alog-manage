@@ -13,8 +13,8 @@ const columns = (params) => {
             width: 100,
         },
         {
-            title: "用户ID",
-            dataIndex: "uuserId",
+            title: "用户名称",
+            dataIndex: "userName",
             width: 100,
         },
         {
@@ -338,9 +338,9 @@ const getSearchFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
-            // label: "用户ID",
-            label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
-            id: "uuserId",
+            label: "用户名称",
+            // label: <span>用&nbsp;&nbsp;户&nbsp;ID</span>,
+            id: "userName",
             component: <Input placeholder="请输入" />,
         },
         {

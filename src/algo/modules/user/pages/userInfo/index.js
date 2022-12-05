@@ -2,6 +2,7 @@ import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 import Table from "@/components/Table";
+import { Select } from "antd";
 // import UploadWrap from "@/components/UploadWrap";
 
 import {
@@ -27,6 +28,7 @@ class userInfo extends React.PureComponent {
         userRiskConfig: {},
         pagination: { total: 0 },
         riskList: [], //算法列表
+        parentInfoList: [], //操作人用户列表
         algoList: [],
         algoSecList: [],
     };
@@ -99,20 +101,37 @@ class userInfo extends React.PureComponent {
                 }),
             },
             {
-                label: "父级用户ID",
+                label: "管理员用户",
                 id: "UuserId",
-                initialValue: "0",
+                initialValue: [],
                 rules: [
                     {
                         required: true,
                         message: "参数不能为空",
                     },
-                    {
-                        validator: checkLength(10),
-                        trigger: ["change", "blur"],
-                    },
+                    // {
+                    //     validator: checkLength(10),
+                    //     trigger: ["change", "blur"],
+                    // },
                 ],
-                component: <Input placeholder="请输入" />,
+                component: (
+                    <Select
+                        mode="multiple"
+                        style={{ width: "100%" }}
+                        placeholder="请选择"
+                    >
+                        {this.state.parentInfoList.map((item, index) => {
+                            return (
+                                <Select.Option
+                                    key={item.id}
+                                    value={item.id / 1}
+                                >
+                                    {item.userName}
+                                </Select.Option>
+                            );
+                        })}
+                    </Select>
+                ),
             },
             {
                 label: "用户风控组",
@@ -145,6 +164,72 @@ class userInfo extends React.PureComponent {
                     SelectOption(this.state.algoSecList, {
                         placeholder: "请选择算法权限组",
                     }),
+            },
+            {
+                label: "用户状态",
+                id: "UserStatus",
+                initialValue: "1",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(dict.userStatus, {
+                    placeholder: "请选择",
+                    // allowClear: true,
+                    style: {
+                        width: 400,
+                    },
+                }),
+            },
+            {
+                label: "证件号码",
+                id: "IdentityId",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(18),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "机构编码",
+                id: "OrganizaId",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(12),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "机构名称",
+                id: "OrganizaName",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(28),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
             },
             // {
             //     label: "算法属性",
@@ -229,20 +314,37 @@ class userInfo extends React.PureComponent {
                 }),
             },
             {
-                label: "父级用户ID",
+                label: "管理员用户",
                 id: "UuserId",
-                initialValue: "0",
+                initialValue: [],
                 rules: [
                     {
                         required: true,
                         message: "参数不能为空",
                     },
-                    {
-                        validator: checkLength(10),
-                        trigger: ["change", "blur"],
-                    },
+                    // {
+                    //     validator: checkLength(10),
+                    //     trigger: ["change", "blur"],
+                    // },
                 ],
-                component: <Input placeholder="请输入" />,
+                component: (
+                    <Select
+                        mode="multiple"
+                        style={{ width: "100%" }}
+                        placeholder="请选择"
+                    >
+                        {this.state.parentInfoList.map((item, index) => {
+                            return (
+                                <Select.Option
+                                    key={item.id}
+                                    value={item.id / 1}
+                                >
+                                    {item.userName}
+                                </Select.Option>
+                            );
+                        })}
+                    </Select>
+                ),
             },
             {
                 label: "用户风控组",
@@ -274,14 +376,80 @@ class userInfo extends React.PureComponent {
                     placeholder: "请选择算法权限组",
                 }),
             },
+            {
+                label: "用户状态",
+                id: "UserStatus",
+                initialValue: "1",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(dict.userStatus, {
+                    placeholder: "请选择",
+                    // allowClear: true,
+                    style: {
+                        width: 400,
+                    },
+                }),
+            },
+            {
+                label: "证件号码",
+                id: "IdentityId",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(18),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "机构编码",
+                id: "OrganizaId",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(12),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "机构名称",
+                id: "OrganizaName",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(28),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
         ];
     };
     getSearchFormFields = () => {
         return [
             {
                 // label: "用户ID",
-                label: <span>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;ID</span>,
-                id: "id",
+                label: <span>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名</span>,
+                id: "userName",
                 component: <Input placeholder="请输入" />,
             },
             {
@@ -322,11 +490,11 @@ class userInfo extends React.PureComponent {
                     placeholder: "请选择算法权限组",
                 }),
             },
-            {
-                label: "父级用户名",
-                id: "fatherId",
-                component: <Input placeholder="请输入" />,
-            },
+            // {
+            //     label: "管理员用户名",
+            //     id: "fatherId",
+            //     component: <Input placeholder="请输入" />,
+            // },
         ];
     };
 
@@ -340,12 +508,13 @@ class userInfo extends React.PureComponent {
             {
                 title: "用户编码",
                 dataIndex: "userId",
-                width: 150,
+                width: 140,
             },
             {
                 title: "用户名",
                 dataIndex: "userName",
                 key: "userName",
+                width: 140,
             },
             {
                 title: "用户类型",
@@ -436,12 +605,29 @@ class userInfo extends React.PureComponent {
             //     dataIndex: "loginStatus",
             // },
             {
-                title: "父级用户ID",
-                dataIndex: "uuserId",
+                title: "管理员用户名",
+                dataIndex: "parentName",
+                width: 180,
             },
             {
-                title: "父级用户名",
-                dataIndex: "fatherId",
+                title: "用户状态",
+                dataIndex: "userStatusValue",
+                width: 140,
+            },
+            {
+                title: "证件号码",
+                dataIndex: "identityId",
+                width: 200,
+            },
+            {
+                title: "机构编码",
+                dataIndex: "organizaId",
+                width: 140,
+            },
+            {
+                title: "机构名称",
+                dataIndex: "organizaName",
+                width: 150,
             },
             {
                 title: "注册时间",
@@ -518,21 +704,11 @@ class userInfo extends React.PureComponent {
     };
 
     handleInsertRecord = (params) => {
-        // params = {
-        //     UserId: "atest0000003",
-        //     UserName: "test3",
-        //     UserPasswd: "test_0000003",
-        //     UserType: 1,
-        //     // RiskGroup: 1,
-        //     // AlgoGroup: 1,
-        //     // AlgoProperty: "20",
-        //     UuserId: 1,
-        // };
         params.UserType = params.UserType / 1;
         params.RiskGroup = params.RiskGroup / 1;
         params.AlgoGroup = params.AlgoGroup / 1;
-        params.UuserId = params.UuserId / 1;
         params.UserPasswd = md5(params.UserPasswd);
+        params.UserStatus = params.UserStatus / 1;
         console.log("新增接口", params);
         http.post({
             url: "/user/addUserInfo",
@@ -561,7 +737,8 @@ class userInfo extends React.PureComponent {
         params.UserType = params.UserType / 1;
         params.RiskGroup = params.RiskGroup / 1;
         params.AlgoGroup = params.AlgoGroup / 1;
-        params.UuserId = params.UuserId / 1;
+        params.UuserId = params.UuserId;
+        params.UserStatus = params.UserStatus / 1;
         // console.log(this.record);
         if (params.UserPasswd == "") {
             params.UserPasswd = this.record.userPasswd;
@@ -593,6 +770,14 @@ class userInfo extends React.PureComponent {
     setUpdateModal = ({ form, record }) => {
         // console.log(record, form);
         this.record = record;
+        console.log(this.record, "this.record");
+        let parentId = [];
+        if (this.record.parentInfos.length) {
+            this.record.parentInfos.forEach((item) => {
+                parentId.push(item.muserId);
+            });
+        }
+        console.log(parentId, "parentIdparentId");
         form.setFieldsValue({
             UserId: record.userId,
             UserName: record.userName,
@@ -600,7 +785,12 @@ class userInfo extends React.PureComponent {
             UserType: record.userType + "",
             RiskGroup: record.riskGroup,
             AlgoGroup: record.algoGroup,
-            UuserId: record.uuserId,
+            UuserId: parentId,
+            // UuserId: record.parentInfos,
+            UserStatus: record.userStatus + "",
+            IdentityId: record.identityId,
+            OrganizaId: record.organizaId,
+            OrganizaName: record.organizaName,
             // UserType: record.UserType,
         });
     };
@@ -750,6 +940,20 @@ class userInfo extends React.PureComponent {
         }
     };
 
+    //获取所有操作人用户
+    getParentInfoList = (params = {}) => {
+        // return;
+        http.post({
+            url: "/user/getParentInfo",
+            data: params,
+        }).then((res) => {
+            if (res.data && res.data.length > 0) {
+                this.setState({
+                    parentInfoList: res.data,
+                });
+            }
+        });
+    };
     //获取所有风控组
     getAllRiskGroup = (params = {}) => {
         // return;
@@ -947,8 +1151,18 @@ class userInfo extends React.PureComponent {
             // console.log(res);
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
-                parseDictValue(res.data.records);
-                // showTip(this);
+                let userList = res.data.records;
+                userList.forEach((item) => {
+                    item.parentName = "";
+                    let parentNameList = [];
+                    if (item.parentInfos.length) {
+                        item.parentInfos.forEach((sonItem) => {
+                            parentNameList.push(sonItem.muserName);
+                        });
+                        item.parentName = parentNameList.join("，");
+                    }
+                });
+                parseDictValue(userList);
             } else {
                 message.info("查询结果为空");
             }
@@ -975,6 +1189,7 @@ class userInfo extends React.PureComponent {
         this.getAllRiskGroup();
         this.getAllAlgoGroup();
         this.getAlgoList();
+        this.getParentInfoList();
     }
     render() {
         let scroll = { x: 1000, y: 445 };
