@@ -15,7 +15,7 @@ const configData = {
         { key: "1", value: "个人用户" },
         { key: "2", value: "算法厂商用户" },
         { key: "3", value: "多用户管理员" },
-        // { key: "4", value: "多用户管理员" },
+        { key: "4", value: "行情用户" },
     ],
     businessType: [
         { key: "1", value: "现货" },
@@ -663,6 +663,13 @@ const configData = {
     accountStatus: [
         { key: "1", value: "正常" },
         { key: "3", value: "冻结" },
+    ],
+
+    // 币种
+    currencyType: [
+        { key: "1", value: "人民币" },
+        { key: "2", value: "港币" },
+        { key: "3", value: "美元" },
     ],
 };
 

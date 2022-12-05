@@ -511,7 +511,7 @@ class userInfo extends React.PureComponent {
                 width: 140,
             },
             {
-                title: "用户名",
+                title: "用户名称",
                 dataIndex: "userName",
                 key: "userName",
                 width: 140,
@@ -541,6 +541,13 @@ class userInfo extends React.PureComponent {
                         return (
                             <div className={styles.typeWrap}>
                                 <span className={styles.userType3}>多</span>
+                                <span>{record.userTypeValue}</span>
+                            </div>
+                        );
+                    } else if (record.userType == 4) {
+                        return (
+                            <div className={styles.typeWrap}>
+                                <span className={styles.userType4}>行</span>
                                 <span>{record.userTypeValue}</span>
                             </div>
                         );
