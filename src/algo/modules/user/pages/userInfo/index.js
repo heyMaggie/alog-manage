@@ -448,8 +448,8 @@ class userInfo extends React.PureComponent {
         return [
             {
                 // label: "用户ID",
-                label: <span>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;ID</span>,
-                id: "id",
+                label: <span>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名</span>,
+                id: "userName",
                 component: <Input placeholder="请输入" />,
             },
             {
@@ -490,11 +490,11 @@ class userInfo extends React.PureComponent {
                     placeholder: "请选择算法权限组",
                 }),
             },
-            {
-                label: "管理员用户名",
-                id: "fatherId",
-                component: <Input placeholder="请输入" />,
-            },
+            // {
+            //     label: "管理员用户名",
+            //     id: "fatherId",
+            //     component: <Input placeholder="请输入" />,
+            // },
         ];
     };
 
