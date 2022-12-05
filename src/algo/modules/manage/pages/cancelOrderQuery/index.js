@@ -86,7 +86,7 @@ const columns = (params) => {
         // },
         {
             title: "请求用户名称",
-            dataIndex: "reqUserId",
+            dataIndex: "reqUserName",
             width: 150,
         },
         {

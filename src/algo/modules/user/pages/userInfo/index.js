@@ -280,7 +280,7 @@ class userInfo extends React.PureComponent {
                 component: <Input placeholder="需修改密码，请输入新密码" />,
             },
             {
-                label: "用户名",
+                label: "用户名称",
                 id: "UserName",
                 initialValue: "",
                 rules: [
