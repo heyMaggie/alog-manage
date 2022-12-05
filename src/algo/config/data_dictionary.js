@@ -1,10 +1,15 @@
 const configData = {
     clientType: [
+        // { key: "0", value: "API" },
+        // { key: "1", value: "PC" },
+        // { key: "2", value: "WEB" },
+        // { key: "3", value: "WINDOWS" },
+        // { key: "4", value: "MAC" },
         { key: "0", value: "API" },
-        { key: "1", value: "PC" },
-        { key: "2", value: "WEB" },
-        { key: "3", value: "WINDOWS" },
-        { key: "4", value: "MAC" },
+        { key: "1", value: "WEB" },
+        { key: "2", value: "WINDOWS" },
+        { key: "3", value: "安卓" },
+        { key: "4", value: "IOS" },
     ],
     userType: [
         { key: "1", value: "个人用户" },
