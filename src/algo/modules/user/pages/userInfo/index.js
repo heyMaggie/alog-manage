@@ -562,7 +562,7 @@ class userInfo extends React.PureComponent {
             {
                 title: "用户风控组",
                 dataIndex: "riskGroup",
-                // width: 120,
+                width: 120,
                 render: (text, record) => (
                     <div
                         onClick={(e) => {
@@ -584,7 +584,7 @@ class userInfo extends React.PureComponent {
             {
                 title: "算法权限组",
                 dataIndex: "algoGroup",
-                // width: 120,
+                width: 120,
                 render: (text, record) => (
                     <div
                         onClick={(e) => {
