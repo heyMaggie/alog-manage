@@ -574,11 +574,18 @@ export default class uoeSetting extends React.PureComponent {
             data: params,
         }).then((res) => {
             console.log(res);
+            let list;
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
                 // parseDict(res.data.records);
                 parseDictValue(res.data.records);
-                console.log(res.data.records);
+                list = res.data.records;
+                list.forEach((item) => {
+                    if (item.creditTypeValue == 0) {
+                        item.creditTypeValue = "";
+                    }
+                });
+                console.log(list);
                 // showTip(this);
             } else {
                 message.info("查询结果为空");
@@ -589,7 +596,7 @@ export default class uoeSetting extends React.PureComponent {
                 total: res.data.total || 0,
             };
             this.setState({
-                info: res.data.records,
+                info: list,
                 pagination: pgn,
             });
         });

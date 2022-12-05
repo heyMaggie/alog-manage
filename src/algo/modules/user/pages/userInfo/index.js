@@ -67,7 +67,7 @@ class userInfo extends React.PureComponent {
                 component: <Input placeholder="请输入" />,
             },
             {
-                label: "用户名",
+                label: "用户名称",
                 id: "UserName",
                 initialValue: "",
                 rules: [
@@ -447,8 +447,10 @@ class userInfo extends React.PureComponent {
     getSearchFormFields = () => {
         return [
             {
-                // label: "用户ID",
-                label: <span>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名</span>,
+                label: "用户名称",
+                // label: (
+                //     <span>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名称</span>
+                // ),
                 id: "userName",
                 component: <Input placeholder="请输入" />,
             },
