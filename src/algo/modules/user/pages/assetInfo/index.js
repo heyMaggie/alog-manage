@@ -14,12 +14,12 @@ const columns = (params) => {
         {
             title: "用户名称",
             dataIndex: "userName",
-            width: 150,
+            width: 120,
         },
         {
             title: "余额",
             dataIndex: "balance",
-            width: 150,
+            width: 160,
         },
         {
             title: "冻结资金",
@@ -31,15 +31,42 @@ const columns = (params) => {
             dataIndex: "marginAmount",
             width: 150,
         },
+        /**
+         * 币种:1 人民币 2 港币 3 美元
+         */
+
+        /**
+         * 账户类型:1股票 2期权 3融资融券 同BusinessType
+         */
+        {
+            title: "币种",
+            dataIndex: "currencyType",
+            width: 150,
+        },
+        {
+            title: "账户类型",
+            dataIndex: "accountType",
+            width: 150,
+        },
+        {
+            title: "机构编码",
+            dataIndex: "custOrgid",
+            width: 150,
+        },
+        {
+            title: "分支编码",
+            dataIndex: "custBranchid",
+            width: 150,
+        },
         {
             title: "注册时间",
             dataIndex: "createTime",
-            // width: 200,
+            width: 200,
         },
         {
             title: "更新时间",
             dataIndex: "updateTime",
-            // width: 200,
+            width: 200,
         },
         // {
         //     title: "资金版本号",
@@ -434,7 +461,7 @@ export default class uoeSetting extends React.PureComponent {
                     onSearchClick={this.handleSearch}
                     getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
-                    insertBtnText={"新增"} // 不传 就没新增按钮
+                    // insertBtnText={"新增"} // 不传 就没新增按钮
                     getInsertFormFields={getInsertFormFields}
                     insertRecord={this.handleInsertRecord}
                     // col="2"
@@ -442,7 +469,7 @@ export default class uoeSetting extends React.PureComponent {
                     pagination={this.state.pagination}
                     getUpdateFormFields={getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
-                    updateRecord={this.handleUpdateRecord} // 不传 就没编辑
+                    // updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={columns}
