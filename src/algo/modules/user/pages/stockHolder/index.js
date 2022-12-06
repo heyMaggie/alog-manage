@@ -48,6 +48,7 @@ const columns = (params) => {
             title: "创建时间",
             dataIndex: "createTime",
             key: "createTime",
+            width: 180,
         },
     ];
 };
@@ -472,6 +473,7 @@ export default class uoeSetting extends React.PureComponent {
         let params = {
             Id: this.record.id,
             UserName: fromData.userName,
+            UuserId: this.record.uuserId,
             AccountId: fromData.accountId,
             Market: fromData.market / 1,
             AccountType: fromData.accountType / 1,

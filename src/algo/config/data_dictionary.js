@@ -641,7 +641,6 @@ const configData = {
     ],
     // bit0-可融资 bit1-可融券 bit2-可作担保品 bit3-新股
     creditType: [
-        { key: "0", value: "" },
         { key: "1", value: "可融资" },
         { key: "2", value: "可融券" },
         { key: "3", value: "可融资,可融券" },
