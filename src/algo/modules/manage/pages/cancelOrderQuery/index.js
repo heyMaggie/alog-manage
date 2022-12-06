@@ -58,14 +58,14 @@ const columns = (params) => {
             dataIndex: "childOrdStatus",
             width: 140,
         },
-        {
-            title: "柜台序列号",
-            dataIndex: "counter_seq",
-            width: 120,
-        },
+        // {
+        //     title: "柜台序列号",
+        //     dataIndex: "counter_seq",
+        //     width: 120,
+        // },
         {
             title: "原始订单号",
-            dataIndex: "origTradeOrderId",
+            dataIndex: "origChildOrderId",
             width: 120,
         },
         {
