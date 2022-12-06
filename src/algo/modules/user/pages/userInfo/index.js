@@ -447,7 +447,7 @@ class userInfo extends React.PureComponent {
     getSearchFormFields = () => {
         return [
             {
-                label: "用户名称",
+                label: <span>用&nbsp;户&nbsp;名&nbsp;称</span>,
                 // label: (
                 //     <span>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名称</span>
                 // ),
@@ -792,7 +792,7 @@ class userInfo extends React.PureComponent {
             UserName: record.userName,
             UserPasswd: "",
             UserType: record.userType + "",
-            RiskGroup: record.riskGroup,
+            RiskGroup: record.riskGroup + "",
             AlgoGroup: record.algoGroup,
             UuserId: parentId,
             // UuserId: record.parentInfos,
@@ -834,7 +834,7 @@ class userInfo extends React.PureComponent {
             () => {
                 this.getAlgoGroupById(record.algoGroup);
                 this.props.form.setFieldsValue({
-                    algoGroup: record.algoGroup + "",
+                    algoGroup: record.algoGroup,
                     userId: record.userId,
                 });
             }
@@ -980,7 +980,7 @@ class userInfo extends React.PureComponent {
                     idArr = dataArr.map((item) => {
                         let obj = {};
                         obj.key = item.id;
-                        obj.value = item.id;
+                        obj.value = item.riskName;
                         return obj;
                     });
                 }
@@ -1005,7 +1005,7 @@ class userInfo extends React.PureComponent {
                 idArr = dataArr.map((item) => {
                     let obj = {};
                     obj.key = item.id;
-                    obj.value = item.id;
+                    obj.value = item.groupName;
                     return obj;
                 });
                 parseDict(res.data);
@@ -2136,7 +2136,7 @@ class userInfo extends React.PureComponent {
                                     // className={styles.marLose14}
                                     label={
                                         <label title="请输入已配置成功的风控组,否则风控组不能修改成功!">
-                                            修改算法风控组
+                                            修改算法权限组
                                         </label>
                                     }
                                 >
