@@ -452,9 +452,9 @@ let columns = () => {
         },
         {
             title: "证券代码源",
-            dataIndex: "securityIdSource",
-            key: "securityIdSource",
-            width: 120,
+            dataIndex: "securityIdSourceValue",
+            key: "securityIdSourceValue",
+            width: 150,
         },
         {
             title: "持仓类型",
