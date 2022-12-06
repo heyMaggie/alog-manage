@@ -11,6 +11,7 @@ import user from "@/algo/modules/user";
 import algostatis from "@/algo/modules/algostatis";
 import tradeStatistics from "@/algo/modules/tradeStatistics";
 import dashboard from "@/algo/modules/dashboard";
+import auth from "@/algo/modules/auth";
 
 import axios from "axios";
 //根据环境  自动切换 IP
@@ -37,6 +38,7 @@ let routes = [
     ...algostatis(),
     ...tradeStatistics(),
     ...dashboard(),
+    ...auth(),
 ];
 //动态引入 component对应地址的组件
 let res = withDynamicImport(main("/main", routes));
