@@ -452,9 +452,9 @@ let columns = () => {
         },
         {
             title: "证券代码源",
-            dataIndex: "securityIdSource",
-            key: "securityIdSource",
-            width: 120,
+            dataIndex: "securityIdSourceValue",
+            key: "securityIdSourceValue",
+            width: 150,
         },
         {
             title: "持仓类型",
@@ -548,7 +548,6 @@ export default class Cccx extends React.PureComponent {
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
                 res.data.records.forEach((item) => (item.rnd = Math.random()));
-                console.log(res.data.records);
                 parseDictValue(res.data.records);
                 // showTip(this);
             } else {
