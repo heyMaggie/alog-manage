@@ -24,7 +24,7 @@ export default class UploadWrap extends React.PureComponent {
         if (this.props.upLoadCSvUrl) {
             url = window.baseURL + this.props.upLoadCSvUrl;
         }
-        let fileType = ".xml";
+        let fileType = ".csv";
         let data = null;
         if (this.props.type == ".csv") {
             fileType = ".csv";
