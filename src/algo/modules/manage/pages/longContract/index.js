@@ -71,14 +71,17 @@ const columns = (params) => {
         {
             title: "期初应付负债息费",
             dataIndex: "beginRePayInterestlFee",
+            width: 160,
         },
         {
             title: "当日归还负债金额",
             dataIndex: "curPayedDebt",
+            width: 160,
         },
         {
             title: "当日归还负债息费",
             dataIndex: "curPayedDebtInterestlFee",
+            width: 160,
         },
         {
             title: "合约发生日期",
@@ -91,6 +94,7 @@ const columns = (params) => {
         {
             title: "最后展期请求时间",
             dataIndex: "lastExtendDate",
+            width: 160,
         },
         // {
         //     title: "创建时间",
@@ -614,7 +618,7 @@ export default class mtradeSecurity extends React.PureComponent {
         this.getData();
     }
     render() {
-        let scroll = { x: 2200, y: 445 };
+        let scroll = { x: 2600, y: 445 };
         let info = this.state.info;
         //批量
         // let { selectRow } = this.state;

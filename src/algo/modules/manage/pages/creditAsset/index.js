@@ -88,10 +88,12 @@ const columns = (params) => {
         {
             title: "融资合约利息及费用",
             dataIndex: "longSwap",
+            width: 180,
         },
         {
             title: "融券合约利息及费用",
             dataIndex: "shortSwap",
+            width: 180,
         },
         {
             title: "授信额度",
