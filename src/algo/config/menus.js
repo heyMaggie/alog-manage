@@ -49,6 +49,58 @@ const menuList = [
         ],
     },
     {
+        id: "9",
+        path: "/main/trade",
+        icon: "icon11",
+        title: "算法管理",
+        children: [
+            {
+                id: "9-2",
+                icon: "",
+                title: "算法管理",
+                path: "/main/algo/algoConfig",
+            },
+            {
+                id: "9-15",
+                icon: "",
+                title: "算法权限组",
+                path: "/main/algo/algoGroup",
+            },
+            {
+                id: "9-16",
+                icon: "",
+                title: "算法优选",
+                path: "/main/algo/algoBest",
+            },
+        ],
+    },
+    {
+        id: "5",
+        path: "/main/risk",
+        icon: "icon2",
+        title: "风控管理",
+        children: [
+            {
+                id: "5-1",
+                icon: "",
+                title: "风控配置",
+                path: "/main/risk/riskConfig",
+            },
+            {
+                id: "5-2",
+                icon: "",
+                title: "用户风险统计",
+                path: "/main/risk/userRisk",
+            },
+            {
+                id: "5-3",
+                icon: "",
+                title: "算法风险统计",
+                path: "/main/risk/algoRisk",
+            },
+        ],
+    },
+    {
         id: "8",
         path: "/main/prod",
         icon: "icon10",
@@ -144,32 +196,6 @@ const menuList = [
         ],
     },
     {
-        id: "9",
-        path: "/main/trade",
-        icon: "icon11",
-        title: "算法管理",
-        children: [
-            {
-                id: "9-2",
-                icon: "",
-                title: "算法管理",
-                path: "/main/algo/algoConfig",
-            },
-            {
-                id: "9-15",
-                icon: "",
-                title: "算法权限组",
-                path: "/main/algo/algoGroup",
-            },
-            {
-                id: "9-16",
-                icon: "",
-                title: "算法优选",
-                path: "/main/algo/algoBest",
-            },
-        ],
-    },
-    {
         id: "10",
         path: "/main/trade2",
         icon: "icon12",
@@ -186,32 +212,6 @@ const menuList = [
                 icon: "",
                 title: "柜台信息",
                 path: "/main/counter/counterInfo",
-            },
-        ],
-    },
-    {
-        id: "5",
-        path: "/main/risk",
-        icon: "icon2",
-        title: "风控管理",
-        children: [
-            {
-                id: "5-1",
-                icon: "",
-                title: "风控配置",
-                path: "/main/risk/riskConfig",
-            },
-            {
-                id: "5-2",
-                icon: "",
-                title: "用户风险统计",
-                path: "/main/risk/userRisk",
-            },
-            {
-                id: "5-3",
-                icon: "",
-                title: "算法风险统计",
-                path: "/main/risk/algoRisk",
             },
         ],
     },
