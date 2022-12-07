@@ -521,7 +521,7 @@ class userInfo extends React.PureComponent {
             {
                 title: "用户类型",
                 dataIndex: "userTypeValue",
-                width: 200,
+                width: 170,
                 // key: "userType",
                 render: (text, record) => {
                     // console.log(record);
@@ -563,8 +563,8 @@ class userInfo extends React.PureComponent {
             },
             {
                 title: "用户风控组",
-                dataIndex: "riskGroup",
-                width: 120,
+                dataIndex: "riskName",
+                width: 150,
                 render: (text, record) => (
                     <div
                         onClick={(e) => {
@@ -572,7 +572,7 @@ class userInfo extends React.PureComponent {
                         }}
                     >
                         <Tooltip title="修改风控组">
-                            {record.riskGroup}
+                            {record.riskName}
                             {sessionStorage.userPrivilege != 2 && (
                                 <Icon
                                     type="edit"
@@ -585,7 +585,7 @@ class userInfo extends React.PureComponent {
             },
             {
                 title: "算法权限组",
-                dataIndex: "algoGroup",
+                dataIndex: "groupName",
                 width: 120,
                 render: (text, record) => (
                     <div
@@ -594,7 +594,7 @@ class userInfo extends React.PureComponent {
                         }}
                     >
                         <Tooltip title="修改算法权限组">
-                            {record.algoGroup}
+                            {record.groupName}
                             {sessionStorage.userPrivilege != 2 && (
                                 <Icon
                                     type="edit"
@@ -866,9 +866,8 @@ class userInfo extends React.PureComponent {
         params.UserPasswd = this.record2.userPasswd;
         params.UserType = this.record2.userType / 1;
         params.RiskGroup = this.record2.riskGroup / 1;
-
+        params.UserStatus = this.record2.userStatus / 1;
         params.AlgoGroup = data.algoGroup / 1;
-
         // params.AlgoProperty = this.record2.algoProperty;
         params.UuserId = this.record2.uuserId / 1;
         // console.log(this.record2);
