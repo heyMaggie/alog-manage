@@ -31,11 +31,52 @@ class userInfo extends React.PureComponent {
         parentInfoList: [], //操作人用户列表
         algoList: [],
         algoSecList: [],
+        seUserType: "", //新增编辑选择的用户类型
     };
     getInsertFormFields = () => {
         return [
             {
-                label: "用户编码",
+                label: "机构名称",
+                id: "OrganizaName",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(28),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "产品",
+                id: "UuserId",
+                initialValue: [],
+                rules: this.validateIsRequired(),
+                component: (
+                    <Select
+                        mode="multiple"
+                        style={{ width: "100%" }}
+                        placeholder="请选择"
+                    >
+                        {this.state.parentInfoList.map((item, index) => {
+                            return (
+                                <Select.Option
+                                    key={item.id}
+                                    value={item.id / 1}
+                                >
+                                    {item.userName}
+                                </Select.Option>
+                            );
+                        })}
+                    </Select>
+                ),
+            },
+            {
+                label: "用户账户",
                 id: "UserId",
                 initialValue: "",
                 rules: [
@@ -85,7 +126,7 @@ class userInfo extends React.PureComponent {
             {
                 label: "用户类型",
                 id: "UserType",
-                initialValue: "1",
+                initialValue: "",
                 rules: [
                     {
                         required: true,
@@ -93,45 +134,13 @@ class userInfo extends React.PureComponent {
                     },
                 ],
                 component: SelectOption(dict.userType, {
+                    onChange: this.userTypeChange,
                     placeholder: "请选择",
                     // allowClear: true,
                     style: {
                         width: 400,
                     },
                 }),
-            },
-            {
-                label: "管理员用户",
-                id: "UuserId",
-                initialValue: [],
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    // {
-                    //     validator: checkLength(10),
-                    //     trigger: ["change", "blur"],
-                    // },
-                ],
-                component: (
-                    <Select
-                        mode="multiple"
-                        style={{ width: "100%" }}
-                        placeholder="请选择"
-                    >
-                        {this.state.parentInfoList.map((item, index) => {
-                            return (
-                                <Select.Option
-                                    key={item.id}
-                                    value={item.id / 1}
-                                >
-                                    {item.userName}
-                                </Select.Option>
-                            );
-                        })}
-                    </Select>
-                ),
             },
             {
                 label: "用户风控组",
@@ -199,38 +208,22 @@ class userInfo extends React.PureComponent {
                 ],
                 component: <Input placeholder="请输入" />,
             },
-            {
-                label: "机构编码",
-                id: "OrganizaId",
-                initialValue: "",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        validator: checkLength(12),
-                        trigger: ["change", "blur"],
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "机构名称",
-                id: "OrganizaName",
-                initialValue: "",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        validator: checkLength(28),
-                        trigger: ["change", "blur"],
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
+            // {
+            //     label: "机构编码",
+            //     id: "OrganizaId",
+            //     initialValue: "",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //         {
+            //             validator: checkLength(12),
+            //             trigger: ["change", "blur"],
+            //         },
+            //     ],
+            //     component: <Input placeholder="请输入" />,
+            // },
             // {
             //     label: "算法属性",
             //     id: "AlgoProperty",
@@ -248,7 +241,47 @@ class userInfo extends React.PureComponent {
     getUpdateFormFields = () => {
         return [
             {
-                label: "用户编码",
+                label: "机构名称",
+                id: "OrganizaName",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(28),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "产品",
+                id: "UuserId",
+                initialValue: [],
+                rules: this.validateIsRequired(),
+                component: (
+                    <Select
+                        mode="multiple"
+                        style={{ width: "100%" }}
+                        placeholder="请选择"
+                    >
+                        {this.state.parentInfoList.map((item, index) => {
+                            return (
+                                <Select.Option
+                                    key={item.id}
+                                    value={item.id / 1}
+                                >
+                                    {item.userName}
+                                </Select.Option>
+                            );
+                        })}
+                    </Select>
+                ),
+            },
+            {
+                label: "用户账户",
                 id: "UserId",
                 initialValue: "",
                 rules: [
@@ -306,6 +339,7 @@ class userInfo extends React.PureComponent {
                     },
                 ],
                 component: SelectOption(dict.userType, {
+                    onChange: this.userTypeChange,
                     placeholder: "请选择",
                     // allowClear: true,
                     style: {
@@ -313,39 +347,7 @@ class userInfo extends React.PureComponent {
                     },
                 }),
             },
-            {
-                label: "管理员用户",
-                id: "UuserId",
-                initialValue: [],
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    // {
-                    //     validator: checkLength(10),
-                    //     trigger: ["change", "blur"],
-                    // },
-                ],
-                component: (
-                    <Select
-                        mode="multiple"
-                        style={{ width: "100%" }}
-                        placeholder="请选择"
-                    >
-                        {this.state.parentInfoList.map((item, index) => {
-                            return (
-                                <Select.Option
-                                    key={item.id}
-                                    value={item.id / 1}
-                                >
-                                    {item.userName}
-                                </Select.Option>
-                            );
-                        })}
-                    </Select>
-                ),
-            },
+
             {
                 label: "用户风控组",
                 id: "RiskGroup",
@@ -410,38 +412,22 @@ class userInfo extends React.PureComponent {
                 ],
                 component: <Input placeholder="请输入" />,
             },
-            {
-                label: "机构编码",
-                id: "OrganizaId",
-                initialValue: "",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        validator: checkLength(12),
-                        trigger: ["change", "blur"],
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "机构名称",
-                id: "OrganizaName",
-                initialValue: "",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        validator: checkLength(28),
-                        trigger: ["change", "blur"],
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
+            // {
+            //     label: "机构编码",
+            //     id: "OrganizaId",
+            //     initialValue: "",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //         {
+            //             validator: checkLength(12),
+            //             trigger: ["change", "blur"],
+            //         },
+            //     ],
+            //     component: <Input placeholder="请输入" />,
+            // },
         ];
     };
     getSearchFormFields = () => {
@@ -456,7 +442,7 @@ class userInfo extends React.PureComponent {
             },
             {
                 // label: "用户ID",
-                label: <span>用&nbsp;户&nbsp;编&nbsp;码</span>,
+                label: <span>用&nbsp;户&nbsp;账&nbsp;户</span>,
                 id: "userId",
                 component: <Input placeholder="请输入" />,
             },
@@ -492,11 +478,29 @@ class userInfo extends React.PureComponent {
                     placeholder: "请选择算法权限组",
                 }),
             },
-            // {
-            //     label: "管理员用户名",
-            //     id: "fatherId",
-            //     component: <Input placeholder="请输入" />,
-            // },
+            {
+                label: "机构名称",
+                id: "organizaName",
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "产品",
+                id: "fatherId",
+                component: (
+                    <Select style={{ width: "100%" }} placeholder="请选择">
+                        {this.state.parentInfoList.map((item, index) => {
+                            return (
+                                <Select.Option
+                                    key={item.id}
+                                    value={item.id / 1}
+                                >
+                                    {item.userName}
+                                </Select.Option>
+                            );
+                        })}
+                    </Select>
+                ),
+            },
         ];
     };
 
@@ -508,7 +512,17 @@ class userInfo extends React.PureComponent {
                 width: 100,
             },
             {
-                title: "用户编码",
+                title: "机构名称",
+                dataIndex: "organizaName",
+                width: 150,
+            },
+            {
+                title: "产品",
+                dataIndex: "parentName",
+                width: 180,
+            },
+            {
+                title: "用户账户",
                 dataIndex: "userId",
                 width: 140,
             },
@@ -613,11 +627,7 @@ class userInfo extends React.PureComponent {
             //     title: "登录状态",
             //     dataIndex: "loginStatus",
             // },
-            {
-                title: "管理员用户名",
-                dataIndex: "parentName",
-                width: 180,
-            },
+
             {
                 title: "用户状态",
                 dataIndex: "userStatusValue",
@@ -628,16 +638,11 @@ class userInfo extends React.PureComponent {
                 dataIndex: "identityId",
                 width: 200,
             },
-            {
-                title: "机构编码",
-                dataIndex: "organizaId",
-                width: 140,
-            },
-            {
-                title: "机构名称",
-                dataIndex: "organizaName",
-                width: 150,
-            },
+            // {
+            //     title: "机构编码",
+            //     dataIndex: "organizaId",
+            //     width: 140,
+            // },
             {
                 title: "注册时间",
                 dataIndex: "createTime",
@@ -779,14 +784,15 @@ class userInfo extends React.PureComponent {
     setUpdateModal = ({ form, record }) => {
         // console.log(record, form);
         this.record = record;
-        console.log(this.record, "this.record");
+        this.setState({
+            seUserType: this.record.userType,
+        });
         let parentId = [];
         if (this.record.parentInfos.length) {
             this.record.parentInfos.forEach((item) => {
                 parentId.push(item.muserId);
             });
         }
-        console.log(parentId, "parentIdparentId");
         form.setFieldsValue({
             UserId: record.userId,
             UserName: record.userName,
@@ -1199,6 +1205,21 @@ class userInfo extends React.PureComponent {
         this.getAlgoList();
         this.getParentInfoList();
     }
+    validateIsRequired = (rule, value, callback) => {
+        let arr = [];
+        arr = [
+            {
+                required: this.state.seUserType == 1 ? true : false,
+                message: "参数不能为空",
+            },
+        ];
+        return arr;
+    };
+    userTypeChange = (value) => {
+        this.setState({
+            seUserType: value,
+        });
+    };
     render() {
         let scroll = { x: 1000, y: 445 };
         let info = this.state.info;
