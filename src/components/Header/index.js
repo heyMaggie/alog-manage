@@ -38,7 +38,12 @@ class Header extends React.PureComponent {
                 <div className={styles.message}>消息</div>
                 <div className={styles.help}>帮助中心</div>
                 <div className={styles.right}>
-                    <Popover content={content}>
+                    <Popover
+                        content={content}
+                        className={styles.headerPop}
+                        style={{ padding: "0!important" }}
+                        overlayClassName={styles.headerPop}
+                    >
                         <div className={styles.user}>
                             {sessionStorage.userName}
                         </div>

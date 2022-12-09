@@ -2,21 +2,23 @@ import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 import Table from "@/components/Table";
-import { Select, Tree } from "antd";
 // import UploadWrap from "@/components/UploadWrap";
-
 import {
     Input,
     Modal,
     Switch,
+    Button,
     Form,
     message,
     Tooltip,
     Icon,
-    AutoComplete,
+    Select,
+    Tree,
 } from "antd";
 import styles from "./style.module.less";
 import md5 from "js-md5"; //全局引入
+const { TreeNode } = Tree;
+
 class userInfo extends React.PureComponent {
     state = {
         searchLoading: false,
@@ -31,6 +33,81 @@ class userInfo extends React.PureComponent {
         parentInfoList: [], //操作人用户列表
         algoList: [],
         algoSecList: [],
+
+        expandedKeys: ["0-0-0", "0-0-1"],
+        autoExpandParent: true,
+        checkedKeys: ["0-0-0"],
+        treeData: [
+            {
+                title: "0-0",
+                key: "0-0",
+                children: [
+                    {
+                        title: "0-0-0",
+                        key: "0-0-0",
+                        children: [
+                            { title: "0-0-0-0", key: "0-0-0-0" },
+                            { title: "0-0-0-1", key: "0-0-0-1" },
+                            { title: "0-0-0-2", key: "0-0-0-2" },
+                        ],
+                    },
+                    {
+                        title: "0-0-1",
+                        key: "0-0-1",
+                        children: [
+                            { title: "0-0-1-0", key: "0-0-1-0" },
+                            { title: "0-0-1-1", key: "0-0-1-1" },
+                            { title: "0-0-1-2", key: "0-0-1-2" },
+                        ],
+                    },
+                    {
+                        title: "0-0-2",
+                        key: "0-0-2",
+                    },
+                ],
+            },
+            {
+                title: "0-1",
+                key: "0-1",
+                children: [
+                    { title: "0-1-0-0", key: "0-1-0-0" },
+                    { title: "0-1-0-1", key: "0-1-0-1" },
+                    { title: "0-1-0-2", key: "0-1-0-2" },
+                ],
+            },
+            {
+                title: "0-2",
+                key: "0-2",
+            },
+        ],
+    };
+    onExpand = (expandedKeys) => {
+        console.log("onExpand", expandedKeys);
+        // if not set autoExpandParent to false, if children expanded, parent can not collapse.
+        // or, you can remove all expanded children keys.
+        this.setState({
+            expandedKeys,
+            // autoExpandParent: false,
+        });
+    };
+
+    onCheck = (checkedKeys) => {
+        console.log("onCheck", checkedKeys);
+        this.setState({ checkedKeys });
+    };
+
+    renderTreeNodes = (data) => {
+        // console.log(data);
+        return data.map((item) => {
+            if (item.children) {
+                return (
+                    <TreeNode title={item.title} key={item.key} dataRef={item}>
+                        {this.renderTreeNodes(item.children)}
+                    </TreeNode>
+                );
+            }
+            return <TreeNode key={item.key} {...item} />;
+        });
     };
     getInsertFormFields = () => {
         return [
@@ -447,218 +524,44 @@ class userInfo extends React.PureComponent {
     getSearchFormFields = () => {
         return [
             {
-                label: "用户名称",
-                // label: (
-                //     <span>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名称</span>
-                // ),
-                id: "userName",
+                label: <span>角&nbsp;色&nbsp;名&nbsp;称</span>,
+                id: "role_name",
                 component: <Input placeholder="请输入" />,
             },
-            {
-                // label: "用户ID",
-                label: <span>用&nbsp;户&nbsp;编&nbsp;码</span>,
-                id: "userId",
-                component: <Input placeholder="请输入" />,
-            },
-            {
-                // label: "用户类型",
-                label: <span>用&nbsp;户&nbsp;类&nbsp;型</span>,
-                id: "userType",
-                // initialValue: "1",
-                component: SelectOption(dict.userType, {
-                    placeholder: "请选择",
-                    allowClear: true,
-                    style: {
-                        width: 190,
-                    },
-                }),
-            },
-            {
-                label: "用户风控组",
-                id: "riskGroup",
-                component: SelectOption(this.state.riskList, {
-                    allowClear: true,
-                    style: {
-                        width: 190,
-                    },
-                    placeholder: "请选择用户风控组",
-                }),
-            },
-            {
-                label: "算法权限组",
-                id: "algoGroup",
-                component: SelectOption(this.state.algoSecList, {
-                    allowClear: true,
-                    placeholder: "请选择算法权限组",
-                }),
-            },
-            // {
-            //     label: "管理员用户名",
-            //     id: "fatherId",
-            //     component: <Input placeholder="请输入" />,
-            // },
         ];
     };
 
     columns = (params) => {
         return [
             {
-                title: "用户ID",
+                title: "ID",
                 dataIndex: "id",
+                width: 80,
+            },
+            {
+                title: "角色ID",
+                dataIndex: "role_id",
                 width: 100,
             },
             {
-                title: "用户编码",
-                dataIndex: "userId",
-                width: 140,
+                title: "角色名称",
+                dataIndex: "role_name",
+                width: 160,
             },
             {
-                title: "用户名称",
-                dataIndex: "userName",
-                key: "userName",
-                width: 140,
+                title: "权限",
+                dataIndex: "role_desc",
             },
             {
-                title: "用户类型",
-                dataIndex: "userTypeValue",
-                width: 200,
-                // key: "userType",
-                render: (text, record) => {
-                    // console.log(record);
-                    if (record.userType == 1) {
-                        return (
-                            <div className={styles.typeWrap}>
-                                <span className={styles.userType1}>个</span>
-                                <span>{record.userTypeValue}</span>
-                            </div>
-                        );
-                    } else if (record.userType == 2) {
-                        return (
-                            <div className={styles.typeWrap}>
-                                <span className={styles.userType2}>算</span>
-                                <span>{record.userTypeValue}</span>
-                            </div>
-                        );
-                    } else if (record.userType == 3) {
-                        return (
-                            <div className={styles.typeWrap}>
-                                <span className={styles.userType3}>多</span>
-                                <span>{record.userTypeValue}</span>
-                            </div>
-                        );
-                    } else if (record.userType == 4) {
-                        return (
-                            <div className={styles.typeWrap}>
-                                <span className={styles.userType4}>行</span>
-                                <span>{record.userTypeValue}</span>
-                            </div>
-                        );
-                    }
-                    return (
-                        <div className={styles.typeWrap}>
-                            {record.userTypeValue}
-                        </div>
-                    );
-                },
+                title: "状态",
+                dataIndex: "statusValue",
+                width: 100,
             },
             {
-                title: "用户风控组",
-                dataIndex: "riskGroup",
-                width: 120,
-                render: (text, record) => (
-                    <div
-                        onClick={(e) => {
-                            this.handleUpdate(record);
-                        }}
-                    >
-                        <Tooltip title="修改风控组">
-                            {record.riskGroup}
-                            {sessionStorage.userPrivilege != 2 && (
-                                <Icon
-                                    type="edit"
-                                    style={{ color: "#1899ff" }}
-                                />
-                            )}
-                        </Tooltip>
-                    </div>
-                ),
-            },
-            {
-                title: "算法权限组",
-                dataIndex: "algoGroup",
-                width: 120,
-                render: (text, record) => (
-                    <div
-                        onClick={(e) => {
-                            this.handleUpdateAlgo(record);
-                        }}
-                    >
-                        <Tooltip title="修改算法权限组">
-                            {record.algoGroup}
-                            {sessionStorage.userPrivilege != 2 && (
-                                <Icon
-                                    type="edit"
-                                    style={{ color: "#1899ff" }}
-                                />
-                            )}
-                        </Tooltip>
-                    </div>
-                ),
-            },
-            // {
-            //     title: "业务类型",
-            //     dataIndex: "businessType",
-            // },
-            // {
-            //     title: "登录状态",
-            //     dataIndex: "loginStatus",
-            // },
-            {
-                title: "管理员用户名",
-                dataIndex: "parentName",
+                title: "创建时间",
+                dataIndex: "create_time",
                 width: 180,
             },
-            {
-                title: "用户状态",
-                dataIndex: "userStatusValue",
-                width: 140,
-            },
-            {
-                title: "证件号码",
-                dataIndex: "identityId",
-                width: 200,
-            },
-            {
-                title: "机构编码",
-                dataIndex: "organizaId",
-                width: 140,
-            },
-            {
-                title: "机构名称",
-                dataIndex: "organizaName",
-                width: 150,
-            },
-            {
-                title: "注册时间",
-                dataIndex: "createTime",
-                key: "createTime",
-                width: 180,
-            },
-            // {
-            //     title: "操作",
-            //     key: "operation",
-            //     fixed: "right",
-            //     width: 100,
-            //     render: (text, record) => (
-            //         <a
-            //             onClick={(e) => {
-            //                 this.handleUpdate(record);
-            //             }}
-            //         >
-            //             编辑
-            //         </a>
-            //     ),
-            // },
         ];
     };
     columns2 = (params) => {
@@ -814,7 +717,6 @@ class userInfo extends React.PureComponent {
                 riskGroup: [],
             },
             () => {
-                this.getRiskGroup(record.riskGroup);
                 this.props.form.setFieldsValue({
                     riskGroup: record.riskGroup + "",
                     userId: record.userId,
@@ -840,16 +742,97 @@ class userInfo extends React.PureComponent {
             }
         );
     };
-
+    // 新增按钮点击事件
+    handleInsertBtn = (params) => {
+        this.isInsert = true;
+        this.isUpdate = false;
+        this.setState({
+            updateModalVisible: true,
+        });
+        this.props.form.resetFields();
+    };
+    // 编辑按钮点击事件
+    handleUpdateBtn = (record) => {
+        console.log("更新记录", record);
+        this.record = record;
+        this.isInsert = false;
+        this.isUpdate = true;
+        this.typeChange(record.RiskType);
+        this.setState(
+            {
+                updateModalVisible: true,
+                disabled0: false,
+                disabled1: false,
+                disabled2: false,
+                disabled3: false,
+                disabled4: false,
+                disabled5: false,
+                disabled6: false,
+                disabled7: false,
+                disabled8: false,
+            },
+            () => {
+                let config = record;
+                let enable = (record.RiskEnable / 1)
+                    .toString(2)
+                    .padStart(9, "0");
+                let enableArr = enable.split("").map((item) => item == 1);
+                // console.log(enableArr);
+                // return;
+                this.props.form.setFieldsValue({
+                    // riskGroup: record.riskGroup + "",
+                    byte0: enableArr[8],
+                    byte1: enableArr[7],
+                    byte2: enableArr[6],
+                    byte3: enableArr[5],
+                    byte4: enableArr[4],
+                    byte5: enableArr[3],
+                    byte6: enableArr[2],
+                    byte7: enableArr[1],
+                    byte8: enableArr[0],
+                    riskName: config.RiskName,
+                    riskType: config.RiskType + "",
+                    entrustItemThreshold: config.EntrustItemThreshold,
+                    entrustItemLimit: config.EntrustItemLimit,
+                    entrustSeconds: config.EntrustSeconds,
+                    entrustTotalThreshold: config.EntrustTotalThreshold,
+                    cancelEntrustItemThreshold:
+                        config.CancelEntrustItemThreshold,
+                    cancelRatioLimit: config.CancelRatioLimit,
+                    failedEntrustItemThreshold:
+                        config.FailedEntrustItemThreshold,
+                    failedRatioLimit: config.FailedRatioLimit,
+                    entrustExecEntrustItemThreshold:
+                        config.EntrustExecEntrustItemThreshold,
+                    entrustExecRatioLimit: config.EntrustExecRatioLimit,
+                    netBuyEntrustItemThreshold:
+                        config.NetBuyEntrustItemThreshold,
+                    netBuyAmountLimit: config.NetBuyAmountLimit,
+                    cancelItemLimit: config.CancelItemLimit,
+                    cancelSeconds: config.CancelSeconds,
+                    cancelGapSeconds: config.CancelGapSeconds,
+                    tradeItemLimit: config.TradeItemLimit,
+                    tradeSeconds: config.TradeSeconds,
+                    tradeQtyLimit: config.TradeQtyLimit,
+                    tradeAmountLimit: config.TradeAmountLimit,
+                });
+                // this.props.form.setFieldsValue({
+                //     riskGroup: record.riskGroup + "",
+                //     userName: record.userName,
+                // });
+            }
+        );
+    };
     handleUpdateModalOk = () => {
         let data = this.props.form.getFieldsValue();
-        data.userId = this.record.id;
+        // data.userId = this.record.id;
         console.log(data);
-        this.updateUserRiskGroup(data);
+        console.log("treedata ", this.state.treeData);
+        console.log("checked", this.state.checkedKeys);
 
-        this.setState({
-            updateModalVisible: false,
-        });
+        // this.setState({
+        //     updateModalVisible: false,
+        // });
     };
     handleUpdateModalCancel = () => {
         this.setState({
@@ -892,7 +875,6 @@ class userInfo extends React.PureComponent {
             }
             // this.isAction = true;
         });
-        // this.updateUserRiskGroup(data);
         this.setState({
             updateModalVisible2: false,
         });
@@ -906,282 +888,37 @@ class userInfo extends React.PureComponent {
     handleDeleteRecord = (record) => {
         console.log("删除记录 ", record);
     };
-    inputChange = (e) => {
-        // console.log(e);
-        // let val = e.target.value;
-        let val = e;
-        // if (this.inputTimeout) {
-        //     clearTimeout(this.inputTimeout);
-        // }
-        // this.inputTimeout = setTimeout(() => {
-        //     this.getRiskGroup(val);
-        // }, 1000);
-        this.getRiskGroup(val);
-    };
-    //算法风控组 改变
-    algoSelectChange = (e) => {
-        // console.log(e);
-        let val = e;
-        this.getAlgoGroupById(val);
-    };
-    algoChange = (str) => {
-        // console.log(str);
-        let newAlgoArr = Object.assign([], this.state.algoList);
-        newAlgoArr.forEach((item) => (item.isShow = "否"));
-        // console.log("0x" + e.target.value);
-        // console.log(isNaN("0x" + e.target.value));
-        if (!isNaN("0x" + str)) {
-            let val = BigInt("0x" + str);
-            let bin = val.toString(2);
-            // console.log(bin);
-            let showArr = bin
-                .toString()
-                .split("")
-                .reverse()
-                .map((item) => (item == "1" ? "是" : "否"));
-            let showLen = showArr.length;
-            let algoLen = this.state.algoList.length;
-            let minLen = Math.min(showLen, algoLen);
-            for (let i = 0; i < minLen; i++) {
-                newAlgoArr[i].isShow = showArr[i];
-            }
-            this.setState({ algoList: newAlgoArr });
-        }
-    };
-
-    //获取所有操作人用户
-    getParentInfoList = (params = {}) => {
-        // return;
-        http.post({
-            url: "/user/getParentInfo",
-            data: params,
-        }).then((res) => {
-            if (res.data && res.data.length > 0) {
-                this.setState({
-                    parentInfoList: res.data,
-                });
-            }
-        });
-    };
-    //获取所有风控组
-    getAllRiskGroup = (params = {}) => {
-        // return;
-        http.post({
-            // url: "/risk/queryRisk",
-            url: "/risk/riskList",
-            data: params,
-        }).then((res) => {
-            // console.log(res);
-            let idArr = [];
-            if (res.data && res.data.length > 0) {
-                // RiskType: [{ key: "1", value: "用户" },{ key: "2", value: "算法" },
-                let dataArr = res.data.filter((item) => item.riskType == 1);
-                if (dataArr.length > 0) {
-                    idArr = dataArr.map((item) => {
-                        let obj = {};
-                        obj.key = item.id;
-                        obj.value = item.id;
-                        return obj;
-                    });
-                }
-            }
-            this.setState({
-                riskList: idArr,
-            });
-        });
-    };
-    //获取所有风控组
-    getAllAlgoGroup = () => {
-        // return;
-        http.get({
-            // url: "/risk/queryRisk",
-            url: "/algo-group-info/algoList",
-            // data: params,
-        }).then((res) => {
-            // console.log("算法风控组",res);
-            let idArr = [];
-            if (res.data && res.data.length > 0) {
-                let dataArr = res.data;
-                idArr = dataArr.map((item) => {
-                    let obj = {};
-                    obj.key = item.id;
-                    obj.value = item.id;
-                    return obj;
-                });
-                parseDict(res.data);
-                // res.data.forEach((item) => (item.isShow = "是"));
-                // console.log(idArr);
-            }
-            // console.log(res.data);
-            this.setState({
-                algoSecList: idArr,
-            });
-        });
-    };
-    //获取所有算法
-    getAlgoList = () => {
-        // return;
-        http.get({
-            // url: "/risk/queryRisk",
-            url: "/algo/listAll",
-            // data: params,
-        }).then((res) => {
-            console.log("所有算法", res);
-            let idArr = [];
-            if (res.data && res.data.length > 0) {
-                let dataArr = res.data;
-                idArr = dataArr.map((item) => {
-                    let obj = {};
-                    obj.key = item.id;
-                    obj.value = item.id;
-                    return obj;
-                });
-                parseDict(res.data);
-            }
-            this.setState({
-                algoList: res.data,
-            });
-        });
-    };
-    getAlgoGroupById = (gid, params = { pageId: 1, pageNum: 10000 }) => {
-        if (gid !== undefined) {
-            params.id = gid;
-        }
-        // return;
-        http.post({
-            // url: "/risk/queryRisk",
-            url: "/algo-group-info/list",
-            data: params,
-        }).then((res) => {
-            // console.log("getAlgoGroupById", res);
-            let property = "";
-            if (res.data && res.data.records && res.data.records.length > 0) {
-                property = res.data.records[0].algoProperty;
-                this.algoChange(property);
-                this.props.form.setFieldsValue({
-                    algoProperty: property,
-                });
-            }
-        });
-    };
-    //修改用户风控组
-    updateUserRiskGroup = (data) => {
-        let params = {
-            userId: data.userId,
-            riskGroup: data.riskGroup / 1,
-        };
-        console.log(params);
-        // return;
-        http.post({
-            url: "/risk/modifyUserRiskGroup",
-            data: params,
-        }).then((res) => {
-            // console.log(res);
-            if (res.code == 0) {
-                message.success(res.message);
-                // showTip(this, res.message);
-                // this.isAction = true;
-                this.getData(this.searchParam, this.state.pagination);
-                // this.getData();
-            } else {
-                message.error(res.message);
-                this.isAction = true;
-            }
-        });
-    };
-    //查询用户风控配置
-    getRiskGroup = (id) => {
-        let params = {
-            id: id / 1,
-        };
-        // console.log(params);
-        http.post({
-            url: "/risk/queryRiskConfig",
-            data: params,
-        }).then((res) => {
-            console.log(res);
-            if (res.code != 0) {
-                message.error("查询风控配置组失败！");
-                return;
-            }
-            let config = JSON.parse(res.data);
-            // this.setState({ userRiskConfig: config });
-            // console.log(config);
-            let enable = (config.RiskEnable / 1).toString(2).padStart(9, "0");
-            // let enableArr = enable.split("");
-            let enableArr = enable.split("").map((item) => item == 1);
-            // console.log(enableArr);
-            this.props.form.setFieldsValue({
-                // riskGroup: record.riskGroup + "",
-                byte0: enableArr[8],
-                byte1: enableArr[7],
-                byte2: enableArr[6],
-                byte3: enableArr[5],
-                byte4: enableArr[4],
-                byte5: enableArr[3],
-                byte6: enableArr[2],
-                byte7: enableArr[1],
-                byte8: enableArr[0],
-                // riskName: config.RiskName,
-                entrustItemThreshold: config.EntrustItemThreshold,
-                entrustItemLimit: config.EntrustItemLimit,
-                entrustSeconds: config.EntrustSeconds,
-                entrustTotalThreshold: config.EntrustTotalThreshold,
-                cancelEntrustItemThreshold: config.CancelEntrustItemThreshold,
-                cancelRatioLimit: config.CancelRatioLimit,
-                failedEntrustItemThreshold: config.FailedEntrustItemThreshold,
-                failedRatioLimit: config.FailedRatioLimit,
-                entrustExecEntrustItemThreshold:
-                    config.EntrustExecEntrustItemThreshold,
-                entrustExecRatioLimit: config.EntrustExecRatioLimit,
-                netBuyEntrustItemThreshold: config.NetBuyEntrustItemThreshold,
-                netBuyAmountLimit: config.NetBuyAmountLimit,
-                cancelItemLimit: config.CancelItemLimit,
-                cancelSeconds: config.CancelSeconds,
-                cancelGapSeconds: config.CancelGapSeconds,
-                tradeItemLimit: config.TradeItemLimit,
-                tradeSeconds: config.TradeSeconds,
-                tradeQtyLimit: config.TradeQtyLimit,
-                tradeAmountLimit: config.TradeAmountLimit,
-            });
-        });
-    };
     getData = (params = {}, pagination = { current: 1, pageSize: 12 }) => {
         params = {
             ...params,
-            pageId: pagination.current,
-            pageNum: pagination.pageSize,
+            scene: 1,
+            role_id: 0,
+            // role_name: "",
+            page: pagination.current,
+            limit: pagination.pageSize,
         };
+        // console.log(params);
         http.post({
-            // url: "/option/assetInfo/selectList",
-            url: "/user/selectByCondition",
+            url: "/tell-info/roleList",
+            // url: "algo-assess/v1/auth/rolelist",
             data: params,
         }).then((res) => {
-            // console.log(res);
+            console.log(res);
             //解析数据字典
-            if (res.data.records && res.data.records.length > 0) {
-                let userList = res.data.records;
-                userList.forEach((item) => {
-                    item.parentName = "";
-                    let parentNameList = [];
-                    if (item.parentInfos.length) {
-                        item.parentInfos.forEach((sonItem) => {
-                            parentNameList.push(sonItem.muserName);
-                        });
-                        item.parentName = parentNameList.join("，");
-                    }
-                });
-                parseDictValue(userList);
+            if (res.list && res.list.length > 0) {
+                let userList = res.list;
+                // parseDictValue(userList);
+                parseArrDictValue(userList, "status", "authStatus");
             } else {
                 message.info("查询结果为空");
             }
             let pgn = {
-                current: res.data.current,
+                current: pagination.current,
                 pageSize: pagination.pageSize,
-                total: res.data.total || 0,
+                total: res.total || 0,
             };
             this.setState({
-                info: res.data.records,
+                info: res.list,
                 pagination: pgn,
             });
         });
@@ -1195,10 +932,6 @@ class userInfo extends React.PureComponent {
     };
     componentDidMount() {
         this.getData();
-        this.getAllRiskGroup();
-        this.getAllAlgoGroup();
-        this.getAlgoList();
-        this.getParentInfoList();
     }
     render() {
         let scroll = { x: 1000, y: 445 };
@@ -1222,6 +955,16 @@ class userInfo extends React.PureComponent {
                     getSearchFormFields={this.getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     insertBtnText={"新增"} // 不传 就没新增按钮
+                    hasSearchSlot={true}
+                    addBtn={
+                        <Button
+                            type="primary"
+                            icon="plus"
+                            onClick={this.handleInsertBtn}
+                        >
+                            新增角色
+                        </Button>
+                    }
                     getInsertFormFields={this.getInsertFormFields}
                     insertRecord={this.handleInsertRecord}
                     // col="2"
@@ -1230,18 +973,18 @@ class userInfo extends React.PureComponent {
                     getUpdateFormFields={this.getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
                     updateRecord={this.handleUpdateRecord} // 不传 就没编辑
-                    // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
+                    deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={this.columns}
                     dataSource={info}
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
                 >
-                    <div
+                    {/* <div
                         urlPrefix="/user"
-                        title="用户信息"
+                        title="角色管理"
                         sucCallback={this.getData}
-                    ></div>
+                    ></div> */}
                 </CurdComponent>
 
                 <Modal
@@ -1261,19 +1004,15 @@ class userInfo extends React.PureComponent {
                                 }}
                                 id="area"
                             >
-                                <Form.Item label="用户ID">
+                                <Form.Item label="角色ID">
                                     {getFieldDecorator("userId")(
-                                        <Input placeholder="请输入" disabled />
+                                        <Input placeholder="请输入" />
                                     )}
                                 </Form.Item>
                                 <div style={{ width: 60 }}></div>
                                 <Form.Item
                                     // className={styles.marLose14}
-                                    label={
-                                        <label title="请输入已配置成功的风控组,否则风控组不能修改成功!">
-                                            修改风控组
-                                        </label>
-                                    }
+                                    label="角色名称"
                                 >
                                     {getFieldDecorator("riskGroup", {
                                         rules: [
@@ -1282,12 +1021,7 @@ class userInfo extends React.PureComponent {
                                                 message: "请输入",
                                             },
                                         ],
-                                    })(
-                                        <Input
-                                            placeholder=""
-                                            onChange={this.inputChange}
-                                        />
-                                    )}
+                                    })(<Input placeholder="" />)}
                                 </Form.Item>
                             </div>
                         </div>
@@ -1296,7 +1030,23 @@ class userInfo extends React.PureComponent {
                                 <div className={styles.text}>权限</div>
                             </div>
                         </div>
-                        <div></div>
+                        <div className={styles.treeWrap}>
+                            <Tree
+                                checkable
+                                className={styles.tree}
+                                onExpand={this.onExpand}
+                                // expandedKeys={this.state.expandedKeys}
+                                defaultExpandAll={true}
+                                autoExpandParent={this.state.autoExpandParent}
+                                onCheck={this.onCheck}
+                                checkedKeys={this.state.checkedKeys}
+                                onSelect={this.onSelect}
+                                selectable={false}
+                                // selectedKeys={this.state.selectedKeys}
+                            >
+                                {this.renderTreeNodes(this.state.treeData)}
+                            </Tree>
+                        </div>
                     </Form>
                 </Modal>
                 <Modal
@@ -1351,7 +1101,6 @@ class userInfo extends React.PureComponent {
                                         })
                                         // <Input
                                         //     placeholder=""
-                                        //     onChange={this.inputChange}
                                         // />
                                     )}
                                 </Form.Item>

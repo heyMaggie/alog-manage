@@ -153,6 +153,10 @@ const configData = {
         { key: "6", value: "期权可用、两融可用" },
         { key: "7", value: "现货可用、期权可用、两融可用" },
     ],
+    authStatus: [
+        { key: 1, value: "正常" },
+        { key: 2, value: "作废" },
+    ],
     //0:未登录 1正常登录状态 2 网络异常断开 3 会话超时 4 正常登出
     sessionStatus: [
         { key: "0", value: "未登录" },

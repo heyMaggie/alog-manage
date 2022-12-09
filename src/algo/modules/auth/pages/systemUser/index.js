@@ -3,6 +3,7 @@ import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 // import UploadWrap from "@/components/UploadWrap";
 import { Input } from "antd";
+import md5 from "js-md5"; //全局引入
 
 // const getUpdateFormFields = () => {
 //     return []
@@ -11,421 +12,246 @@ import { Input } from "antd";
 const columns = (params) => {
     return [
         {
+            title: "ID",
+            dataIndex: "id",
+            width: 100,
+        },
+        {
+            title: "用户ID",
+            dataIndex: "user_id",
+            // width: 100,
+        },
+        {
             title: "用户名称",
-            dataIndex: "userName",
-            key: "userName",
+            dataIndex: "user_name",
+            // width: 140,
         },
         {
-            title: "股东账户",
-            dataIndex: "accountId",
-            key: "accountId",
+            title: "角色ID",
+            dataIndex: "role_id",
+            // width: 100,
         },
         {
-            title: "市场代码",
-            dataIndex: "marketValue",
+            title: "角色",
+            dataIndex: "role_name",
+            // width: 140,
         },
         {
-            title: "账户类型",
-            dataIndex: "accountTypeValue",
-        },
-        {
-            title: "账户状态",
-            dataIndex: "accountStatusValue",
-        },
-        {
-            title: "资金账户",
-            dataIndex: "assetAccount",
-        },
-        {
-            title: "机构编码",
-            dataIndex: "custOrgid",
-        },
-        {
-            title: "分支编码",
-            dataIndex: "custBranchid",
+            title: "状态",
+            dataIndex: "statusValue",
+            // width: 100,
         },
         {
             title: "创建时间",
-            dataIndex: "createTime",
-            key: "createTime",
-            width: 180,
+            dataIndex: "create_time",
+            width: 240,
         },
     ];
 };
-const getInsertFormFields = () => {
-    return [
-        {
-            label: "用户名称",
-            id: "userName",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                // {
-                //     message: "请输入数字",
-                //     pattern: /^[0-9]*[1-9][0-9]*$/i,
-                // },
-                {
-                    validator: checkLength(20),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "股东账户",
-            id: "accountId",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(12),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
-        },
-        {
-            label: "市场代码",
-            id: "market",
-            initialValue: "1",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.market, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "账户类型",
-            id: "accountType",
-            initialValue: "1",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.accountType, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "账户状态",
-            id: "accountStatus",
-            initialValue: "1",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.accountStatus, {
-                placeholder: "请选择",
-                // allowClear: true,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "资金账户",
-            id: "assetAccount",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(25),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "机构编码",
-            id: "custOrgid",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(25),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "分支编码",
-            id: "custBranchid",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(25),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-    ];
-};
-const getUpdateFormFields = () => {
-    return [
-        {
-            label: "用户名称",
-            id: "userName",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                // {
-                //     message: "请输入数字",
-                //     pattern: /^[0-9]*[1-9][0-9]*$/i,
-                // },
-                {
-                    validator: checkLength(20),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "股东账户",
-            id: "accountId",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(12),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: (
-                // <Input placeholder="请输入" readOnly disabled />
-                <Input placeholder="请输入" />
-            ),
-        },
-        {
-            label: "市场代码",
-            id: "market",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            // component: (
-            //     // <Input placeholder="请输入" readOnly disabled />
-            //     <Input placeholder="请输入" />
-            // ),
-            component: SelectOption(dict.market, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "账户类型",
-            id: "accountType",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.accountType, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "账户状态",
-            id: "accountStatus",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.accountStatus, {
-                placeholder: "请选择",
-                // allowClear: true,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "资金账户",
-            id: "assetAccount",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(25),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "机构编码",
-            id: "custOrgid",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(25),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "分支编码",
-            id: "custBranchid",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(25),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        // {
-        //     label: "网关",
-        //     id: "gateway",
-        //     rules: [
-        //         {
-        //             required: true,
-        //             message: "网关不能为空",
-        //         },
-        //         {
-        //             message: "请输入正确的IP地址",
-        //             pattern:
-        //                 /^((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}$/,
-        //         },
-        //     ],
-        //     component: <Input placeholder="请输入网关" />,
-        // },
-        // {
-        //     label: "Mac地址",
-        //     id: "mac",
-        //     initialValue: "",
-        //     rules: [
-        //         {
-        //             required: true,
-        //             message: "Mac地址不能为空",
-        //         },
-        //         {
-        //             message: "请输入正确的mac地址,例如：1A-6F-38-C8-A4-07",
-        //             pattern: /^([a-f0-9]{2}-){5}[a-f0-9]{2}$/i,
-        //         },
-        //     ],
-        //     component: <Input placeholder="请输入Mac地址" />,
-        // },
-        // {
-        //     label: "子网掩码",
-        //     id: "mask",
-        //     initialValue: "",
-        //     rules: [
-        //         {
-        //             required: true,
-        //             message: "子网掩码不能为空",
-        //         },
-        //         {
-        //             message: "请输入正确的IP地址",
-        //             pattern:
-        //                 /^((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}$/,
-        //         },
-        //     ],
-        //     component: <Input placeholder="请输入子网掩码" />,
-        // },
-    ];
-};
+
 let getSearchFormFields = () => {
     return [
         {
-            label: "用户名称",
-            // label: <span>用户名称</span>,
-            id: "userName",
+            // label: "用户名称",
+            label: <span>用&nbsp;户&nbsp;名&nbsp;称</span>,
+            id: "user_name",
             component: <Input placeholder="请输入" />,
         },
-        {
-            label: "股东账户",
-            id: "accountId",
-            component: <Input placeholder="请输入" />,
-        },
-        // {
-        //     label: "合约简称",
-        //     id: "contractName",
-        //     component: <Input placeholder="请输入合约简称" />,
-        // },
-        // {
-        //     label: "合约账户标识",
-        //     id: "contractAccountCode",
-        //     component: <Input placeholder="请输入合约账户标识" />,
-        // },
     ];
 };
 export default class uoeSetting extends React.PureComponent {
+    getInsertFormFields = () => {
+        return [
+            {
+                label: "用户ID（*ID名称只能为字母与数字的组合）",
+                id: "user_id",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        message: "请检查格式",
+                        pattern: /^[a-zA-Z0-9]+$/i,
+                    },
+                    {
+                        validator: checkLength(20),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "用户名称",
+                id: "user_name",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(20),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: (
+                    // <Input placeholder="请输入" readOnly disabled />
+                    <Input placeholder="请输入" />
+                ),
+            },
+            {
+                label: "角色",
+                id: "role_id",
+                // initialValue: this.state.roleList[0]
+                //     ? this.state.roleList[0].key
+                //     : "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(this.state.roleList, {
+                    placeholder: "请选择",
+                    allowClear: false,
+                    style: {
+                        width: 400,
+                    },
+                }),
+            },
+            {
+                label: "设置密码",
+                id: "password",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input.Password placeholder="请输入" />,
+            },
+            {
+                label: "确认密码",
+                id: "password2",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: <Input.Password placeholder="请输入" />,
+            },
+        ];
+    };
+    getUpdateFormFields = () => {
+        return [
+            {
+                label: "用户ID（*ID名称只能为字母与数字的组合）",
+                id: "user_id",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        message: "请检查格式",
+                        pattern: /^[a-zA-Z0-9]+$/i,
+                    },
+                    {
+                        validator: checkLength(20),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" disabled />,
+            },
+            {
+                label: "用户名称",
+                id: "user_name",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(20),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: (
+                    // <Input placeholder="请输入" readOnly disabled />
+                    <Input placeholder="请输入" />
+                ),
+            },
+            {
+                label: "角色",
+                id: "role_id",
+                // initialValue: this.state.roleList[0]
+                //     ? this.state.roleList[0].key
+                //     : "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(this.state.roleList, {
+                    placeholder: "请选择",
+                    allowClear: false,
+                    style: {
+                        width: 400,
+                    },
+                }),
+            },
+            {
+                label: "原密码",
+                id: "passwordOld",
+                initialValue: "",
+                // rules: [
+                //     {
+                //         required: true,
+                //         message: "参数不能为空",
+                //     },
+                // ],
+                component: <Input.Password placeholder="请输入" />,
+            },
+            {
+                label: "设置密码",
+                id: "password",
+                initialValue: "",
+                // rules: [
+                //     {
+                //         required: true,
+                //         message: "参数不能为空",
+                //     },
+                // ],
+                component: <Input.Password placeholder="请输入" />,
+            },
+            {
+                label: "确认密码",
+                id: "password2",
+                initialValue: "",
+                // rules: [
+                //     {
+                //         required: true,
+                //         message: "参数不能为空",
+                //     },
+                // ],
+                component: <Input.Password placeholder="请输入" />,
+            },
+        ];
+    };
     state = {
         searchLoading: false,
         selectRow: [],
         info: [],
         pagination: { total: 0 },
+        roleList: [], //角色列表
     };
     //批量选择
     handleTableChange = (selectedRowKeys) => {
@@ -435,117 +261,202 @@ export default class uoeSetting extends React.PureComponent {
         });
     };
 
-    handleInsertRecord = (fromData) => {
-        console.log("新增接口", fromData);
+    handleInsertRecord = (formData) => {
+        console.log("新增接口", formData);
+        let role = this.state.roleList.filter(
+            (item) => item.role_id == formData.role_id
+        );
         let params = {
-            UserName: fromData.userName,
-            AccountId: fromData.accountId,
-            Market: fromData.market / 1,
-            AccountType: fromData.accountType / 1,
-            AccountStatus: fromData.accountStatus / 1,
-            AssetAccount: fromData.assetAccount,
-            CustOrgid: fromData.custOrgid,
-            CustBranchid: fromData.custBranchid,
+            oper_type: 1, //oper_type // 操作类型  1-新增， 2-修改   3-删除
+            user_id: formData.user_id,
+            user_name: formData.user_name,
+            role_id: role[0].role_id,
+            role_name: role[0].role_name,
+            password: md5(formData.password),
         };
+        // console.log(params);
+        if (formData.password != formData.password2) {
+            message.error("密码与确认密码不一致");
+            return;
+        }
+        // return;
         http.post({
-            url: "/stockHolder/addStockHolderInfo",
+            url: "/tell-info/userModify",
             data: params,
         }).then((res) => {
-            let msg = res.message;
-            if (res.code == 0) {
-                message.success(msg);
+            // console.log(res);
+            if (res.code == 200) {
+                message.success("新增成功");
                 // this.getData();
-            } else if (res.code == 20000) {
-                message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
-                );
             } else {
-                message.error(msg);
+                message.error("新增失败");
             }
-            this.isAction = true;
         });
     };
     //更新记录
     handleUpdateRecord = ({ form }) => {
-        console.log(form.getFieldsValue());
-        // return;
-        let fromData = form.getFieldsValue();
+        let formData = form.getFieldsValue();
+        console.log("更新记录", form.getFieldsValue());
+        if (formData.password != formData.password2) {
+            message.error("密码与确认密码不一致");
+            window.isUpdateOk = "fail";
+            return;
+        }
+        if (formData.passwordOld) {
+            // console.log("passwordOld", formData.passwordOld);
+            this.checkPassword(form).then((res) => {
+                if (res.code == 200) {
+                    // console.log("checkPassword 成功");
+                    this.updateUser(form);
+                } else {
+                    message.error("原密码校验失败");
+                    window.isUpdateOk = "fail";
+                }
+            });
+        } else {
+            this.updateUser(form);
+        }
+    };
+    checkPassword = (form) => {
+        let formData = form.getFieldsValue();
         let params = {
-            Id: this.record.id,
-            UserName: fromData.userName,
-            UuserId: this.record.uuserId,
-            AccountId: fromData.accountId,
-            Market: fromData.market / 1,
-            AccountType: fromData.accountType / 1,
-            AccountStatus: fromData.accountStatus / 1,
-            AssetAccount: fromData.assetAccount,
-            CustOrgid: fromData.custOrgid,
-            CustBranchid: fromData.custBranchid,
+            user_id: formData.user_id,
+            ori_passwd: md5(formData.passwordOld),
         };
-        // 发送更新请求
+        // console.log(params);
+        // return;
+        return http.post({
+            url: "/tell-info/checkPassword",
+            data: params,
+        });
+    };
+    updateUser = (form) => {
+        let formData = form.getFieldsValue();
+        // console.log("更新记录", form.getFieldsValue());
+        let role = this.state.roleList.filter(
+            (item) => item.role_id == formData.role_id
+        );
+        if (formData.password.length == 0) {
+            message.error("密码不能为空");
+            window.isUpdateOk = "fail";
+            return;
+        }
+        let params = {
+            oper_type: 2, //oper_type // 操作类型  1-新增， 2-修改   3-删除
+            user_id: formData.user_id,
+            user_name: formData.user_name,
+            role_id: role[0].role_id,
+            role_name: role[0].role_name,
+            password: md5(formData.password),
+        };
+        // console.log(params);
+        // return;
         http.post({
-            url: "/stockHolder/updateStockHolderInfo",
+            url: "/tell-info/userModify",
             data: params,
         }).then((res) => {
-            let msg = res.message;
-            if (res.code == 0) {
-                message.success(msg);
-                // this.getData();
-            } else if (res.code == 20000) {
-                message.error(
-                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
-                );
+            console.log(res);
+            // let msg = res.message;
+            if (res.code == 200) {
+                message.success("修改成功");
             } else {
-                message.error(msg);
+                message.error("修改失败");
+                window.isUpdateOk = "fail";
             }
-            this.isAction = true;
         });
     };
     //删除记录
     handleDeleteRecord = (record) => {
         console.log("删除记录 ", record);
+        let params = {
+            oper_type: 3, //oper_type // 操作类型  1-新增， 2-修改   3-删除
+            user_id: record.user_id,
+        };
+        http.post({
+            url: "/tell-info/userModify",
+            data: params,
+        }).then((res) => {
+            // console.log(res);
+            if (res.code == 200) {
+                message.success("删除成功");
+            }
+            this.getData();
+        });
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
         // console.log(record, form);
         this.record = record;
         form.setFieldsValue({
-            userName: record.userName,
-            market: record.market + "",
-            accountType: record.accountType + "",
-            accountId: record.accountId,
-            accountStatus: record.accountStatus + "",
-            assetAccount: record.assetAccount,
-            custOrgid: record.custOrgid,
-            custBranchid: record.custBranchid,
+            user_id: record.user_id,
+            user_name: record.user_name,
+            role_id: record.role_id,
+            // role_name: role[0].role_name,
+            passwordOld: "",
+            password: "",
+            password2: "",
+        });
+    };
+    getRoleList = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
+        params = {
+            ...params,
+            scene: 1,
+            role_id: 0,
+            // role_name: "",
+            page: pagination.current,
+            limit: pagination.pageSize,
+        };
+        // console.log(params);
+        http.post({
+            url: "/tell-info/roleList",
+            data: params,
+        }).then((res) => {
+            // console.log("getRoleList", res);
+            //解析数据字典
+            if (res.list && res.list.length > 0) {
+                let roleList = res.list
+                    .filter((item) => item.status == 1)
+                    .map((item) => {
+                        return {
+                            role_id: item.role_id,
+                            role_name: item.role_name,
+                            key: item.role_id,
+                            value: item.role_name,
+                        };
+                    });
+                this.setState({
+                    roleList: roleList,
+                });
+            }
         });
     };
     getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
         params = {
             ...params,
-            pageId: pagination.current,
-            pageNum: pagination.pageSize,
+            page: pagination.current,
+            limit: pagination.pageSize,
         };
         http.post({
-            // url: "/option/assetInfo/selectList",
-            url: "/stockHolder/list",
+            // url: "/stockHolder/list",
+            url: "/tell-info/authUserList",
             data: params,
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             //解析数据字典
-            if (res.data.records && res.data.records.length > 0) {
-                //parseDict(res.data.records);
-                parseDictValue(res.data.records);
+            if (res.list && res.list.length > 0) {
+                let userList = res.list;
+                // parseDictValue(userList);
+                parseArrDictValue(userList, "status", "authStatus");
             } else {
                 message.info("查询结果为空");
             }
             let pgn = {
-                current: res.data.current,
+                current: pagination.current,
                 pageSize: pagination.pageSize,
-                total: res.data.total || 0,
+                total: res.total || 0,
             };
             this.setState({
-                info: res.data.records,
+                info: res.list,
                 pagination: pgn,
             });
         });
@@ -555,6 +466,7 @@ export default class uoeSetting extends React.PureComponent {
     };
     componentDidMount() {
         this.getData();
+        this.getRoleList();
     }
     render() {
         let scroll = { x: 1000, y: 445 };
@@ -574,27 +486,28 @@ export default class uoeSetting extends React.PureComponent {
                     onSearchClick={this.handleSearch}
                     getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
-                    insertBtnText={"新增"} // 不传 就没新增按钮
-                    getInsertFormFields={getInsertFormFields}
+                    insertBtnText={"新增用户"} // 不传 就没新增按钮
+                    getInsertFormFields={this.getInsertFormFields}
                     insertRecord={this.handleInsertRecord}
-                    // col="2"
-                    width="789px"
+                    insertModalText={"新增用户"}
+                    // col="1"
+                    width="668px"
                     pagination={this.state.pagination}
-                    getUpdateFormFields={getUpdateFormFields}
+                    getUpdateFormFields={this.getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
                     updateRecord={this.handleUpdateRecord} // 不传 就没编辑
-                    // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
+                    deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={columns}
                     dataSource={info}
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
                 >
-                    <div
+                    {/* <div
                         urlPrefix="/stockHolder"
-                        title="股东信息"
+                        title="系统用户"
                         sucCallback={this.getData}
-                    ></div>
+                    ></div> */}
                 </CurdComponent>
             </div>
         );

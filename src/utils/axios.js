@@ -41,6 +41,8 @@ export default class Axios {
                         let res = response.data;
                         if (
                             res.code == "0" ||
+                            res.code == "200" ||
+                            res.code == "360" ||
                             res.code == "2000" ||
                             res.code == "10000" ||
                             res.code == "20000" ||
@@ -57,6 +59,7 @@ export default class Axios {
                             if (typeof options.error == "function") {
                                 options.error();
                             }
+                            resolve(res);
                         }
                     } else {
                         reject(response.data);
@@ -96,6 +99,8 @@ export default class Axios {
                         let res = response.data;
                         if (
                             res.code == "0" ||
+                            res.code == "200" ||
+                            res.code == "360" ||
                             res.code == "2000" ||
                             res.code == "10000" ||
                             res.code == "20000"
@@ -143,6 +148,8 @@ export default class Axios {
                         let res = response.data;
                         if (
                             res.code == "0" ||
+                            res.code == "200" ||
+                            res.code == "360" ||
                             res.code == "2000" ||
                             res.code == "10000"
                         ) {

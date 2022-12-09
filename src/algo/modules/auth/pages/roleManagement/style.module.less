@@ -3,7 +3,7 @@
     //     height: 21px;
     // }
     height: 10px !important;
-    line-height: 23px!important;;
+    line-height: 23px !important;
     // position: relative;
     // vertical-align: top;
     // & > span {
@@ -17,8 +17,7 @@
 .userType1,
 .userType2,
 .userType3,
-.userType4
- {
+.userType4 {
     width: 24px;
     height: 24px;
     // line-height: 24px;
@@ -39,7 +38,7 @@
     background: linear-gradient(200deg, #8c60ff 0%, #6732ff 100%);
 }
 .userType4 {
-    background: linear-gradient(200deg, #F78B7F 0%, #F05F5E 100%);
+    background: linear-gradient(200deg, #f78b7f 0%, #f05f5e 100%);
 }
 .tit {
     font-size: 14px;
@@ -78,6 +77,25 @@
         .ant-form-item {
             margin-bottom: -8px;
         }
+    }
+}
+.treeWrap {
+    height: 550px;
+    overflow: auto;
+}
+.tree {
+    & > li > ul {
+        :global {
+            li.ant-tree-treenode-switcher-open[role="treeitem"] {
+                display: inline-block;
+            }
+        }
+    }
+    & > li {
+        display: block !important;
+    }
+    & > li > ul > li {
+        display: block !important;
     }
 }
 .hide {
