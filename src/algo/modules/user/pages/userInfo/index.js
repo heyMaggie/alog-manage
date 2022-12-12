@@ -32,6 +32,7 @@ class userInfo extends React.PureComponent {
         algoList: [],
         algoSecList: [],
         seUserType: "", //新增编辑选择的用户类型
+        organizationList: [], //机构名称
     };
     getInsertFormFields = () => {
         return [
@@ -44,12 +45,15 @@ class userInfo extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
-                    {
-                        validator: checkLength(28),
-                        trigger: ["change", "blur"],
-                    },
+                    // {
+                    //     validator: checkLength(28),
+                    //     trigger: ["change", "blur"],
+                    // },
                 ],
-                component: <Input placeholder="请输入" />,
+                // component: <Input placeholder="请输入" />,
+                component: SelectOption(this.state.organizationList, {
+                    placeholder: "请选择机构名称",
+                }),
             },
             {
                 label: "产品",
@@ -249,12 +253,15 @@ class userInfo extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
-                    {
-                        validator: checkLength(28),
-                        trigger: ["change", "blur"],
-                    },
+                    // {
+                    //     validator: checkLength(28),
+                    //     trigger: ["change", "blur"],
+                    // },
                 ],
-                component: <Input placeholder="请输入" />,
+                // component: <Input placeholder="请输入" />,
+                component: SelectOption(this.state.organizationList, {
+                    placeholder: "请选择机构名称",
+                }),
             },
             {
                 label: "产品",
@@ -481,7 +488,10 @@ class userInfo extends React.PureComponent {
             {
                 label: "机构名称",
                 id: "organizaName",
-                component: <Input placeholder="请输入" />,
+                component: SelectOption(this.state.organizationList, {
+                    placeholder: "请选择机构名称",
+                }),
+                // component: <Input placeholder="请输入" />,
             },
             {
                 label: "产品",
@@ -968,6 +978,28 @@ class userInfo extends React.PureComponent {
             }
         });
     };
+    //获取机构名称
+    getOrganizationList = (params = {}) => {
+        // return;
+        http.post({
+            url: "/user/getOrganiza",
+            data: params,
+        }).then((res) => {
+            let idArr = [];
+            if (res.data && res.data.length > 0) {
+                let dataArr = res.data;
+                idArr = dataArr.map((item) => {
+                    let obj = {};
+                    obj.key = item.organizaName;
+                    obj.value = item.organizaName;
+                    return obj;
+                });
+                this.setState({
+                    organizationList: idArr,
+                });
+            }
+        });
+    };
     //获取所有风控组
     getAllRiskGroup = (params = {}) => {
         // return;
@@ -1204,6 +1236,7 @@ class userInfo extends React.PureComponent {
         this.getAllAlgoGroup();
         this.getAlgoList();
         this.getParentInfoList();
+        this.getOrganizationList();
     }
     validateIsRequired = (rule, value, callback) => {
         let arr = [];
