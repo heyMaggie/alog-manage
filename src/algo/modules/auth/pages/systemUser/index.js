@@ -306,7 +306,12 @@ export default class uoeSetting extends React.PureComponent {
             // console.log("passwordOld", formData.passwordOld);
             this.checkPassword(form).then((res) => {
                 if (res.code == 200) {
-                    // console.log("checkPassword 成功");
+                    // console.log("checkPassword 成功", formData);
+                    if (formData.password.length == 0) {
+                        message.error("密码不能为空");
+                        window.isUpdateOk = "fail";
+                        return;
+                    }
                     this.updateUser(form);
                 } else {
                     message.error("原密码校验失败");
@@ -336,11 +341,11 @@ export default class uoeSetting extends React.PureComponent {
         let role = this.state.roleList.filter(
             (item) => item.role_id == formData.role_id
         );
-        if (formData.password.length == 0) {
-            message.error("密码不能为空");
-            window.isUpdateOk = "fail";
-            return;
-        }
+        // if (formData.password.length == 0) {
+        //     message.error("密码不能为空");
+        //     window.isUpdateOk = "fail";
+        //     return;
+        // }
         let params = {
             oper_type: 2, //oper_type // 操作类型  1-新增， 2-修改   3-删除
             user_id: formData.user_id,
@@ -442,6 +447,7 @@ export default class uoeSetting extends React.PureComponent {
             data: params,
         }).then((res) => {
             // console.log(res);
+
             //解析数据字典
             if (res.list && res.list.length > 0) {
                 let userList = res.list;
@@ -456,7 +462,7 @@ export default class uoeSetting extends React.PureComponent {
                 total: res.total || 0,
             };
             this.setState({
-                info: res.list,
+                info: res.list ? res.list : [],
                 pagination: pgn,
             });
         });
@@ -490,6 +496,7 @@ export default class uoeSetting extends React.PureComponent {
                     getInsertFormFields={this.getInsertFormFields}
                     insertRecord={this.handleInsertRecord}
                     insertModalText={"新增用户"}
+                    updateModalText={"修改用户"}
                     // col="1"
                     width="668px"
                     pagination={this.state.pagination}

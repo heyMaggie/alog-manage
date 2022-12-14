@@ -16,26 +16,26 @@ const menuList = [
     //     //     },
     //     // ],
     // },
-    {
-        id: "11",
-        path: "/main/auth",
-        icon: "icon1",
-        title: "权限管理",
-        children: [
-            {
-                id: "11-1",
-                icon: "",
-                title: "角色管理",
-                path: "/main/auth/roleManagement",
-            },
-            {
-                id: "11-2",
-                icon: "",
-                title: "系统用户",
-                path: "/main/auth/systemUser",
-            },
-        ],
-    },
+    // {
+    //     id: "11",
+    //     path: "/main/auth",
+    //     icon: "icon1",
+    //     title: "权限管理",
+    //     children: [
+    //         {
+    //             id: "11-1",
+    //             icon: "",
+    //             title: "角色管理",
+    //             path: "/main/auth/roleManagement",
+    //         },
+    //         {
+    //             id: "11-2",
+    //             icon: "",
+    //             title: "系统用户",
+    //             path: "/main/auth/systemUser",
+    //         },
+    //     ],
+    // },
     {
         id: "4",
         path: "/main/user",

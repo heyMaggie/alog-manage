@@ -94,7 +94,17 @@ class Menus extends PureComponent {
         // this.setState({
         //   openKeys: t
         // });
+        // this.changeMenus();
     }
+    changeMenus = () => {
+        let menu = JSON.parse(sessionStorage.auth);
+        // console.log(window.menus);
+        // console.log(menu);
+        for (let i = 0; i < window.menus.length; i++) {
+            let item = window.menus[i];
+            // console.log(item, menu[i]);
+        }
+    };
     render() {
         // console.log(this.props);
         let { path } = this.props;
