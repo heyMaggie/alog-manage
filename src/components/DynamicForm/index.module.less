@@ -1,15 +1,21 @@
 .dynamicForm {
     display: flex !important;
     flex-wrap: wrap;
-    
+
     .rowFlex {
         width: calc(50% - 30px);
-        &:nth-child(2n+1){
+        &:nth-child(2n + 1) {
             margin-right: 60px !important;
         }
-        :global { 
+        :global {
             .ant-select {
                 width: 100% !important;
+            }
+        }
+        &.col1 {
+            width: calc(100% - 30px);
+            &:nth-child(2n + 1) {
+                margin-right: 0 !important;
             }
         }
     }

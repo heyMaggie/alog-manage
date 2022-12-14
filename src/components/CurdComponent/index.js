@@ -83,9 +83,18 @@ class CurdComponent extends React.PureComponent {
                             this.props.pagination
                         );
                     }, 200);
-                    this.setState({
-                        updateModalVisible: false,
-                    });
+                    // this.setState({
+                    //     updateModalVisible: false,
+                    // });
+                    setTimeout(() => {
+                        if (window.isUpdateOk == "fail") {
+                            window.isUpdateOk = false;
+                        } else {
+                            this.setState({
+                                updateModalVisible: false,
+                            });
+                        }
+                    }, 200);
                 }
             });
         }
@@ -431,7 +440,7 @@ class CurdComponent extends React.PureComponent {
                             onReady={this.onSearchReady}
                         >
                             {!this.props.hasSearchSlot &&
-                                hasInsert &&
+                                // hasInsert &&
                                 insertBtnText && (
                                     <Button
                                         type="primary"

@@ -24,12 +24,30 @@ class DynamicForm extends React.PureComponent {
             // labelCol,
             // wrapperCol,
         };
-        // console.log(formItemLayout);
         return (
             <Form layout="vertical" className={styles.dynamicForm}>
                 {fields.map((item, index) => {
+                    let getDec = function (item) {
+                        if (item.initialValue) {
+                            return getFieldDecorator(item.id, {
+                                initialValue: item.initialValue,
+                                rules: item.rules,
+                            });
+                        } else {
+                            return getFieldDecorator(item.id, {
+                                rules: item.rules,
+                            });
+                        }
+                    };
                     return (
-                        <div className={styles.rowFlex} key={item.id}>
+                        <div
+                            className={
+                                styles.rowFlex +
+                                " " +
+                                styles["col" + this.props.col]
+                            }
+                            key={item.id}
+                        >
                             <FormItem
                                 className={"col" + this.props.col}
                                 key={item.id}
@@ -43,12 +61,7 @@ class DynamicForm extends React.PureComponent {
                                               item.initialValue === true,
                                           rules: item.rules,
                                       })(item.component)
-                                    : getFieldDecorator(item.id, {
-                                          initialValue: item.initialValue
-                                              ? item.initialValue
-                                              : "",
-                                          rules: item.rules,
-                                      })(item.component)}
+                                    : getDec(item)(item.component)}
                             </FormItem>
                         </div>
                     );
