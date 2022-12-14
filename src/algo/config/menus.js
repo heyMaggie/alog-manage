@@ -18,9 +18,9 @@ const menuList = [
     // },
     // {
     //     id: "11",
-    //     path: "/main/auth",
+    //     path: "/main/user",
     //     icon: "icon1",
-    //     title: "权限管理",
+    //     title: "用户管理",
     //     children: [
     //         {
     //             id: "11-1",
@@ -295,6 +295,26 @@ const menuList = [
             //     title: "网络带宽",
             //     path: "/main/chart/network",
             // },
+        ],
+    },
+    {
+        id: "12",
+        path: "/main/oper_manage",
+        title: "运维管理",
+        icon: "icon5",
+        children: [
+            {
+                id: "12-1",
+                icon: "",
+                title: "操作日志",
+                path: "/main/oper_manage/operateLog",
+            },
+            {
+                id: "12-2",
+                icon: "",
+                title: "黑名单",
+                path: "/main/oper_manage/blacklist",
+            },
         ],
     },
     {
