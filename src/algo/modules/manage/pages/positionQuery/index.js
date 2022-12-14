@@ -27,7 +27,7 @@ const getSearchFormFields = () => {
         {
             label: "业务类型",
             id: "accountType",
-            initialValue: "1",
+            // initialValue: "1",
             component: SelectOption(dict.businessTypeSelect, {
                 placeholder: "请选择",
                 // allowClear: true,
@@ -457,11 +457,16 @@ let columns = () => {
             width: 150,
         },
         {
-            title: "持仓类型",
-            dataIndex: "positionTypeValue",
-            key: "positionType",
+            title: "业务类型",
+            dataIndex: "accountTypeValue",
             width: 100,
         },
+        // {
+        //     title: "持仓类型",
+        //     dataIndex: "positionTypeValue",
+        //     key: "positionType",
+        //     width: 100,
+        // },
         {
             title: "持仓数量",
             dataIndex: "positionQty",

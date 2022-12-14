@@ -115,7 +115,7 @@ const getSearchFormFields = () => {
         {
             label: "业务类型",
             id: "type",
-            initialValue: "1",
+            // initialValue: "1",
             component: SelectOption(dict.businessTypeSelect, {
                 placeholder: "请选择",
                 // allowClear: true,
@@ -185,7 +185,7 @@ export default class uoeSetting extends React.PureComponent {
         if (params.type) {
             params.type = params.type / 1;
         } else {
-            params.type = 1;
+            // params.type = 1;
         }
         console.log(params);
         http.post({
