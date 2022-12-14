@@ -18,9 +18,9 @@ const menuList = [
     // },
     // {
     //     id: "11",
-    //     path: "/main/user",
+    //     path: "/main/auth",
     //     icon: "icon1",
-    //     title: "用户管理",
+    //     title: "权限管理",
     //     children: [
     //         {
     //             id: "11-1",
