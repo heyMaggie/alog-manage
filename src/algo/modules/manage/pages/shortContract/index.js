@@ -449,31 +449,13 @@ export default class mtradeSecurity extends React.PureComponent {
             selectRow: selectedRowKeys,
         });
     };
-
+    // 新增
     handleInsertRecord = (fromData) => {
-        console.log("新增接口", fromData);
         let params = {
-            SecurityId: fromData.securityId,
-            SecurityIdSource: fromData.securityIdSource,
-            SecurityName: fromData.securityName,
-            PrevClosePx: fromData.prevClosePx * 1,
-            BuyQtyUpperLimit: fromData.buyQtyUpperLimit * 100,
-            SellQtyUpperLimit: fromData.sellQtyUpperLimit * 100,
-            MarketBuyQtyUpperLimit: fromData.marketBuyQtyUpperLimit * 100,
-            MarketSellQtyUpperLimit: fromData.marketSellQtyUpperLimit * 100,
-            SecurityStatus: fromData.securityStatus + "",
-            HasPriceLimit: fromData.hasPriceLimit + "",
-            LimitType: fromData.limitType + "",
-            Property: fromData.property + "",
-            UpperLimitPrice: fromData.upperLimitPrice * 10000,
-            LowerLimitPrice: fromData.lowerLimitPrice * 10000,
-            BuyQtyUnit: fromData.buyQtyUnit * 100,
-            SellQtyUnit: fromData.sellQtyUnit * 100,
-            MarketBuyQtyUnit: fromData.marketBuyQtyUnit * 100,
-            MarketSellQtyUnit: fromData.marketSellQtyUnit * 100,
+            ip: fromData.ip,
         };
         http.post({
-            url: "/security/addSecurityInfo",
+            url: "/blacklist/addBlacklist",
             data: params,
         }).then((res) => {
             let msg = res.message;
@@ -493,32 +475,14 @@ export default class mtradeSecurity extends React.PureComponent {
     //更新记录
     handleUpdateRecord = ({ form }) => {
         console.log(form.getFieldsValue());
-        // return;
         let fromData = form.getFieldsValue();
         let params = {
             Id: this.record.id,
-            SecurityId: fromData.securityId,
-            SecurityIdSource: fromData.securityIdSource,
-            SecurityName: fromData.securityName,
-            PrevClosePx: fromData.prevClosePx * 1,
-            BuyQtyUpperLimit: fromData.buyQtyUpperLimit * 100,
-            SellQtyUpperLimit: fromData.sellQtyUpperLimit * 100,
-            MarketBuyQtyUpperLimit: fromData.marketBuyQtyUpperLimit * 100,
-            MarketSellQtyUpperLimit: fromData.marketSellQtyUpperLimit * 100,
-            SecurityStatus: fromData.securityStatus + "",
-            HasPriceLimit: fromData.hasPriceLimit + "",
-            LimitType: fromData.limitType + "",
-            Property: fromData.property + "",
-            UpperLimitPrice: fromData.upperLimitPrice * 10000,
-            LowerLimitPrice: fromData.lowerLimitPrice * 10000,
-            BuyQtyUnit: fromData.buyQtyUnit * 100,
-            SellQtyUnit: fromData.sellQtyUnit * 100,
-            MarketBuyQtyUnit: fromData.marketBuyQtyUnit * 100,
-            MarketSellQtyUnit: fromData.marketSellQtyUnit * 100,
+            ip: fromData.ip,
         };
         // 发送更新请求
         http.post({
-            url: "/security/updateSecurityInfo",
+            url: "/blacklist/updateBlacklist",
             data: params,
         }).then((res) => {
             let msg = res.message;
@@ -543,28 +507,7 @@ export default class mtradeSecurity extends React.PureComponent {
     setUpdateModal = ({ form, record }) => {
         this.record = record;
         form.setFieldsValue({
-            securityId: record.securityId,
-            securityIdSource: record.securityIdSource,
-            securityName: record.securityName,
-            prevClosePx: record.prevClosePx,
-            buyQtyUpperLimit: record.buyQtyUpperLimit,
-            sellQtyUpperLimit: record.sellQtyUpperLimit,
-            marketBuyQtyUpperLimit: record.marketBuyQtyUpperLimit,
-            marketSellQtyUpperLimit: record.marketSellQtyUpperLimit,
-            securityStatus: record.securityStatus + "",
-            hasPriceLimit: record.hasPriceLimit + "",
-            limitType: record.limitType + "",
-            property: record.property + "",
-            upperLimitPrice: record.upperLimitPrice,
-            lowerLimitPrice: record.lowerLimitPrice,
-            buyQtyUnit: record.buyQtyUnit,
-            sellQtyUnit: record.sellQtyUnit,
-            marketBuyQtyUnit: record.marketBuyQtyUnit,
-            marketSellQtyUnit: record.marketSellQtyUnit,
-            // BuyQtyUnit:record.
-            // SellQtyUnit:record.
-            // MarketBuyQtyUnit:record.
-            // MarketSellQtyUnit:record.
+            ip: record.ip,
         });
     };
     getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
