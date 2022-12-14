@@ -32,6 +32,9 @@ export default class Axios {
                     ? options.baseUrl
                     : axios.defaults.baseURL,
                 params: options.data || "",
+                headers: {
+                    userId: sessionStorage.userName,
+                },
             })
                 .then((response) => {
                     if (showLoading) {
@@ -90,6 +93,9 @@ export default class Axios {
                     ? options.baseUrl
                     : axios.defaults.baseURL,
                 data: options.data || {},
+                headers: {
+                    userId: sessionStorage.userName,
+                },
             })
                 .then((response) => {
                     if (showLoading) {
@@ -142,6 +148,9 @@ export default class Axios {
                     ? options.baseUrl
                     : axios.defaults.baseURL,
                 data: options.data || {},
+                headers: {
+                    userId: sessionStorage.userName,
+                },
             })
                 .then((response) => {
                     if (response.status == "200") {
