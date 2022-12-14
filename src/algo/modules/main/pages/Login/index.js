@@ -16,37 +16,22 @@ class FormLogin extends React.Component {
                 let params = this.props.form.getFieldsValue();
                 params.password = md5(params.password);
                 // params.oper = "Q";
-                // console.log(params);
+                console.log(params);
                 http.post({
                     url: "/tell-info/login",
                     data: params,
                 }).then((res) => {
-                    // console.log(res);
-                    // if (res.code == 0) {
-                    //     sessionStorage.isLogin = true;
-                    //     sessionStorage.userName = params.userName;
-                    //     // 0  有   导入导出权限
-                    //     // 1  没有 导入导出权限
-                    //     sessionStorage.userPrivilege = res.data.userPrivilege;
-                    //     // sessionStorage.userPrivilege = 1;
-                    //     // sessionStorage.userArr = JSON.stringify(res.data);
-                    //     // this.props.history.push("/main/updown/userInfo");
-                    //     this.props.history.push("/main/user/userInfo");
-                    // } else {
-                    //     message.error(res.message || "用户名或密码错误");
-                    // }
-                    if (res.code == 200) {
+                    console.log(res);
+                    if (res.code == 0) {
                         sessionStorage.isLogin = true;
-                        sessionStorage.userName = params.user_id;
-                        // user_type 用户类型， 1-超级管理员，2-普通用户 6 总线超级管理员
+                        sessionStorage.userName = params.userName;
+                        // 0  有   导入导出权限
                         // 1  没有 导入导出权限
-                        if (res.allow == 1) {
-                            // this.props.history.push("/main/user/userInfo");
-                            localStorage.user_type = res.user_type;
-                            this.getUserAuth();
-                        } else {
-                            message.error("用户名或密码错误");
-                        }
+                        sessionStorage.userPrivilege = res.data.userPrivilege;
+                        // sessionStorage.userPrivilege = 1;
+                        // sessionStorage.userArr = JSON.stringify(res.data);
+                        // this.props.history.push("/main/updown/userInfo");
+                        this.props.history.push("/main/user/userInfo");
                     } else {
                         message.error(res.message || "用户名或密码错误");
                     }
@@ -54,28 +39,7 @@ class FormLogin extends React.Component {
             }
         });
     };
-    getUserAuth = (params = {}) => {
-        params = {
-            user_id: sessionStorage.userName,
-            user_type: localStorage.user_type / 1,
-        };
-        http.post({
-            url: "/tell-info/userAuth",
-            data: params,
-        }).then((res) => {
-            // console.log(res);
-            //解析数据字典
-            if (res.code == 200) {
-                sessionStorage.auth = res.auth;
-                // console.log(JSON.stringify(JSON.parse(res.auth)));
-                this.props.history.push("/main/user/userInfo");
-                // this.changeMenus(JSON.parse(res.auth));
-            } else {
-                message.info("获取用户权限失败");
-            }
-        });
-    };
-    // changeMenus = (menu) => {};
+
     handleSet = () => {
         console.log("设置");
     };
@@ -123,9 +87,8 @@ class FormLogin extends React.Component {
                         算法项目管理系统
                     </div>
                     <FormItem>
-                        {/* {getFieldDecorator("userName", { */}
-                        {getFieldDecorator("user_id", {
-                            initialValue: "algoAdmin",
+                        {getFieldDecorator("userName", {
+                            initialValue: "admin",
                             // initialValue: "user_read_only",
                             rules: [
                                 {
