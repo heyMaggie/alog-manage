@@ -2,6 +2,7 @@ import React from "react";
 import { Input, Menu } from "antd";
 import IpType from "./ipType";
 import MacType from "./macType";
+import styles from "./style.module.less";
 
 export default class uoeSetting extends React.PureComponent {
     state = {
@@ -25,7 +26,9 @@ export default class uoeSetting extends React.PureComponent {
                     selectedKeys={[this.state.currentTick]}
                     mode="horizontal"
                 >
-                    <Menu.Item key="1">mac地址</Menu.Item>
+                    <Menu.Item style={{ marginLeft: "12px" }} key="1">
+                        mac地址
+                    </Menu.Item>
                     <Menu.Item key="2">IP地址</Menu.Item>
                 </Menu>
                 {this.state.currentTick == "1" ? (

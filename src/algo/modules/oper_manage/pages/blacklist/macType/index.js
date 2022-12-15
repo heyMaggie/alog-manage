@@ -196,7 +196,7 @@ export default class macType extends React.PureComponent {
     }
     handleClick() {}
     render() {
-        let scroll = { x: 1000, y: 445 };
+        let scroll = { x: 1000, y: 395 };
         let info = this.state.info;
         return (
             <div>

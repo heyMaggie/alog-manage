@@ -2,7 +2,7 @@ import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 import { Input, DatePicker } from "antd";
-
+import styles from "./style.module.less";
 const { RangePicker } = DatePicker;
 const columns = (params) => {
     return [
