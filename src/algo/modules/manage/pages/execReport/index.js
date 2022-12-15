@@ -107,7 +107,7 @@ const getSearchFormFields = () => {
         {
             label: "业务类型",
             id: "businessType",
-            initialValue: "1",
+            // initialValue: "1",
             component: SelectOption(dict.businessTypeSelect, {
                 placeholder: "请选择",
                 // allowClear: true,

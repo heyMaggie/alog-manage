@@ -365,7 +365,7 @@ const getSearchFormFields = () => {
         {
             label: "业务类型",
             id: "businessType",
-            initialValue: "1",
+            // initialValue: "1",
             component: SelectOption(dict.businessTypeSelect, {
                 placeholder: "请选择",
                 // allowClear: true,
@@ -406,9 +406,9 @@ export default class newOrderQuery extends React.PureComponent {
         // params.token = "";
         // params.pageId = 1;
         // params.pageNum = 20;
-        if (!params.businessType) {
-            params.businessType = 1;
-        }
+        // if (!params.businessType) {
+        //     params.businessType = 1;
+        // }
         params = {
             ...params,
             pageId: pagination.current,

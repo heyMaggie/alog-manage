@@ -33,7 +33,7 @@ const configData = {
     accountType: [
         { key: "1", value: "股票" },
         { key: "2", value: "期权" },
-        { key: "3", value: "融资融券" },
+        { key: "3", value: "两融" },
     ],
     positionType: [
         { key: "0", value: "现货" },
