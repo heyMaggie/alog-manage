@@ -312,10 +312,10 @@ class userInfo extends React.PureComponent {
                     //     required: true,
                     //     message: "参数不能为空",
                     // },
-                    {
-                        validator: checkLength(32),
-                        trigger: ["change", "blur"],
-                    },
+                    // {
+                    //     validator: checkLength(32),
+                    //     trigger: ["change", "blur"],
+                    // },
                 ],
                 component: <Input placeholder="需修改密码，请输入新密码" />,
             },
@@ -486,7 +486,7 @@ class userInfo extends React.PureComponent {
                 }),
             },
             {
-                label: "机构名称",
+                label: <span>&nbsp;机&nbsp;构&nbsp;名&nbsp;称</span>,
                 id: "organizaName",
                 component: SelectOption(this.state.organizationList, {
                     placeholder: "请选择机构名称",
@@ -494,10 +494,19 @@ class userInfo extends React.PureComponent {
                 // component: <Input placeholder="请输入" />,
             },
             {
-                label: "产品",
+                label: (
+                    <span>
+                        产&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品
+                    </span>
+                ),
+                // label: "产品",
                 id: "fatherId",
                 component: (
-                    <Select style={{ width: "100%" }} placeholder="请选择">
+                    <Select
+                        style={{ width: 190 }}
+                        placeholder="请选择"
+                        allowClear={true}
+                    >
                         {this.state.parentInfoList.map((item, index) => {
                             return (
                                 <Select.Option
