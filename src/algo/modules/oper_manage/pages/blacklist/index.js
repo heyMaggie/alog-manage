@@ -1,5 +1,4 @@
 import React from "react";
-import CurdComponent from "@/components/CurdComponent";
 import { Input, Menu } from "antd";
 import IpType from "./ipType";
 import MacType from "./macType";
@@ -20,10 +19,10 @@ export default class uoeSetting extends React.PureComponent {
     };
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <Menu
                     onClick={this.handleClick}
-                    selectedKeys={[this.state.current]}
+                    selectedKeys={[this.state.currentTick]}
                     mode="horizontal"
                 >
                     <Menu.Item key="1">mac地址</Menu.Item>
@@ -34,7 +33,7 @@ export default class uoeSetting extends React.PureComponent {
                 ) : (
                     <IpType></IpType>
                 )}
-            </div>
+            </React.Fragment>
         );
     }
 }

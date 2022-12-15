@@ -81,7 +81,7 @@ export default class macType extends React.PureComponent {
             mac: fromData.mac,
         };
         http.post({
-            url: "/stockHolder/addStockHolderInfo",
+            url: "/blacklist/addBlacklist",
             data: params,
         }).then((res) => {
             let msg = res.message;
@@ -104,12 +104,12 @@ export default class macType extends React.PureComponent {
         // return;
         let fromData = form.getFieldsValue();
         let params = {
-            Id: this.record.id,
+            id: this.record.id,
             mac: fromData.mac,
         };
         // 发送更新请求
         http.post({
-            url: "/stockHolder/updateStockHolderInfo",
+            url: "/blacklist/updateBlacklist",
             data: params,
         }).then((res) => {
             let msg = res.message;
@@ -166,7 +166,7 @@ export default class macType extends React.PureComponent {
             pageNum: pagination.pageSize,
         };
         http.post({
-            url: "/blacklist/queryBlacklist",
+            url: "/blacklist/queryMac",
             data: params,
         }).then((res) => {
             console.log(res);
