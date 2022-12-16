@@ -675,6 +675,18 @@ const configData = {
         { key: "2", value: "港币" },
         { key: "3", value: "美元" },
     ],
+
+    // 操作项目
+    operateItem: [
+        { key: "1", value: "登录" },
+        { key: "2", value: "登出" },
+        { key: "3", value: "新增" },
+        { key: "4", value: "删除" },
+        { key: "5", value: "更新" },
+        { key: "6", value: "查询" },
+        { key: "7", value: "上传" },
+        { key: "8", value: "导出" },
+    ],
 };
 
 export default configData;

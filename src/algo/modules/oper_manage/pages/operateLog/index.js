@@ -22,7 +22,7 @@ const columns = (params) => {
         },
         {
             title: "操作项目",
-            dataIndex: "operateItem",
+            dataIndex: "operateItemValue",
         },
         {
             title: "操作内容",
