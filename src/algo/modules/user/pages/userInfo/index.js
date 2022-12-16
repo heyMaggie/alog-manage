@@ -474,7 +474,7 @@ class userInfo extends React.PureComponent {
                     style: {
                         width: 190,
                     },
-                    placeholder: "请选择用户风控组",
+                    placeholder: "请选择",
                 }),
             },
             {
@@ -482,14 +482,14 @@ class userInfo extends React.PureComponent {
                 id: "algoGroup",
                 component: SelectOption(this.state.algoSecList, {
                     allowClear: true,
-                    placeholder: "请选择算法权限组",
+                    placeholder: "请选择",
                 }),
             },
             {
                 label: <span>&nbsp;机&nbsp;构&nbsp;名&nbsp;称</span>,
                 id: "organizaName",
                 component: SelectOption(this.state.organizationList, {
-                    placeholder: "请选择机构名称",
+                    placeholder: "请选择",
                 }),
                 // component: <Input placeholder="请输入" />,
             },
