@@ -3,6 +3,7 @@ import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 import { Input, DatePicker } from "antd";
 import styles from "./style.module.less";
+import moment from "moment";
 const { RangePicker } = DatePicker;
 const columns = (params) => {
     return [
@@ -78,8 +79,12 @@ export default class uoeSetting extends React.PureComponent {
         let startTime = "";
         let endTime = "";
         if (params["createTime"]) {
-            startTime = params["createTime"][0];
-            endTime = params["createTime"][1];
+            startTime = moment(params["createTime"][0]).format(
+                "YYYY-MM-DD HH:mm:ss"
+            );
+            endTime = moment(params["createTime"][1]).format(
+                "YYYY-MM-DD HH:mm:ss"
+            );
         }
         params = {
             operateId: params.operateId,
