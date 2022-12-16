@@ -55,7 +55,7 @@ class OnlineUser extends React.PureComponent {
                         source: res.data,
                     },
                     grid: {
-                        left: "25px",
+                        left: "35px",
                         right: "50px",
                         bottom: "9%",
                         top: "33px",
