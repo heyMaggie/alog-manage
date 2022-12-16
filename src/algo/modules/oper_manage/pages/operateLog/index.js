@@ -148,7 +148,7 @@ export default class uoeSetting extends React.PureComponent {
                     // rowSelection={rowSelection} //批量选择 操作
                 >
                     <div
-                        urlPrefix="/stockHolder"
+                        urlPrefix="/operate-log"
                         title="操作日志"
                         noUpload={true}
                         sucCallback={this.getData}

@@ -224,7 +224,7 @@ export default class macType extends React.PureComponent {
                     // rowSelection={rowSelection} //批量选择 操作
                 >
                     <div
-                        urlPrefix="/stockHolder"
+                        urlPrefix="/blacklist"
                         title="黑名单"
                         sucCallback={this.getData}
                         noUpload={true}

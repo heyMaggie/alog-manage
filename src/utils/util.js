@@ -85,6 +85,11 @@ export let parseDict = (dict) => {
                         if (item[key] == dictionary.key) {
                             // item[key] = dictionary.value;
                             item[key] = item[key] + "-" + dictionary.value;
+                        } else if (
+                            key == "currencyType" ||
+                            key == "accountType"
+                        ) {
+                            item[key] = "";
                         }
                         // else if (item[key]) {
                         //     if (item[key].toString().trim() == dictionary.key) {
