@@ -67,18 +67,18 @@ export default class UploadWrap extends React.PureComponent {
                 },
             };
         }
-        let { title = "", noUpload, noDownload } = this.props;
+        let { title = "", noUpload, noDownload, authObj = {} } = this.props;
         // noUpload 没有上传按钮
         return (
             <React.Fragment>
-                {!noUpload && (
+                {!noUpload && authObj.isUpload && (
                     <Upload {...uploadOption}>
                         <Button type="primary">
                             <Icon type="upload" /> {`${title}上传`}
                         </Button>
                     </Upload>
                 )}
-                {!noDownload && (
+                {!noDownload && authObj.isDownload && (
                     <Button type="primary" onClick={this.handleDownload}>
                         <Icon type="download" /> {`${title}导出`}
                     </Button>

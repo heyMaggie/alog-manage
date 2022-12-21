@@ -3,6 +3,7 @@ import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 import { Input, Modal, Form, message, Switch, Tooltip, Icon } from "antd";
 import styles from "./style.module.less";
+import { connect } from "react-redux";
 
 let getSearchFormFields = () => {
     return [
@@ -454,7 +455,7 @@ class algoConfig extends React.PureComponent {
                     >
                         <Tooltip title="修改风控组">
                             {record.riskGroup}
-                            {sessionStorage.userPrivilege != 2 && (
+                            {this.authObj.isUpdate && (
                                 <Icon
                                     type="edit"
                                     style={{ color: "#1899ff" }}
@@ -501,7 +502,7 @@ class algoConfig extends React.PureComponent {
     };
     // type 1 : 是否显示    type:2  是否可用
     onSwitchChange = (val, record, type) => {
-        if (sessionStorage.userPrivilege == 2) {
+        if (!this.authObj.isUpdate) {
             return;
         }
         // console.log(val, record, type);
@@ -969,6 +970,52 @@ class algoConfig extends React.PureComponent {
         let scroll = { x: 1500, y: 445 };
         let info = this.state.info;
         let { getFieldDecorator } = this.props.form;
+        let cmpt = this.props.activeMenu.cmpt;
+        // console.log(cmpt);
+        let authObj = {
+            isQuery: true,
+            isAdd: true,
+            isUpload: true,
+            isDownload: true,
+            isDelete: false,
+            isUpdate: true,
+        };
+        // console.log("cmpt", cmpt);
+        if (cmpt) {
+            for (let i = 0; i < cmpt.length; i++) {
+                let item = cmpt[i];
+                // console.log(item);
+                if (item.type == 1 && item.auth != 1) {
+                    //查询 有权限
+                    authObj.isQuery = false;
+                }
+                if (item.type == 2 && item.auth != 1) {
+                    //新增 有权限
+                    authObj.isAdd = false;
+                }
+                if (item.type == 3 && item.auth != 1) {
+                    //上传 有权限
+                    authObj.isUpload = false;
+                }
+                if (item.type == 4 && item.auth != 1) {
+                    //下载 有权限
+                    authObj.isDownload = false;
+                }
+                // if (item.type == 5 && item.auth != 1) {
+                //     //下载报告 有权限 -- 绩效那边
+                //     authObj.isExportPdf = false;
+                // }
+                if (item.type == 6 && item.auth == 1) {
+                    //删除 有权限
+                    authObj.isDelete = true;
+                }
+                if (item.type == 7 && item.auth != 1) {
+                    //编辑 有权限
+                    authObj.isUpdate = false;
+                }
+            }
+        }
+        this.authObj = authObj;
         return (
             <div>
                 <CurdComponent
@@ -1852,4 +1899,10 @@ class algoConfig extends React.PureComponent {
         );
     }
 }
-export default Form.create()(algoConfig);
+// export default Form.create()(algoConfig);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        activeMenu: state.RouterModel.activeMenu,
+    };
+};
+export default connect(mapStateToProps, null)(Form.create()(algoConfig));

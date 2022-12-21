@@ -16,22 +16,37 @@ class FormLogin extends React.Component {
                 let params = this.props.form.getFieldsValue();
                 params.password = md5(params.password);
                 // params.oper = "Q";
-                console.log(params);
+                // console.log(params);
                 http.post({
                     url: "/tell-info/login",
                     data: params,
                 }).then((res) => {
-                    console.log(res);
-                    if (res.code == 0) {
+                    // console.log(res);
+                    // if (res.code == 0) {
+                    //     sessionStorage.isLogin = true;
+                    //     sessionStorage.userName = params.userName;
+                    //     // 0  有   导入导出权限
+                    //     // 1  没有 导入导出权限
+                    //     sessionStorage.userPrivilege = res.data.userPrivilege;
+                    //     // sessionStorage.userPrivilege = 1;
+                    //     // sessionStorage.userArr = JSON.stringify(res.data);
+                    //     // this.props.history.push("/main/updown/userInfo");
+                    //     this.props.history.push("/main/user/userInfo");
+                    // } else {
+                    //     message.error(res.message || "用户名或密码错误");
+                    // }
+                    if (res.code == 200) {
                         sessionStorage.isLogin = true;
-                        sessionStorage.userName = params.userName;
-                        // 0  有   导入导出权限
+                        sessionStorage.userName = params.user_id;
+                        // user_type 用户类型， 1-超级管理员，2-普通用户 6 总线超级管理员
                         // 1  没有 导入导出权限
-                        sessionStorage.userPrivilege = res.data.userPrivilege;
-                        // sessionStorage.userPrivilege = 1;
-                        // sessionStorage.userArr = JSON.stringify(res.data);
-                        // this.props.history.push("/main/updown/userInfo");
-                        this.props.history.push("/main/user/userInfo");
+                        if (res.allow == 1) {
+                            // this.props.history.push("/main/user/userInfo");
+                            localStorage.user_type = res.user_type;
+                            this.getUserAuth();
+                        } else {
+                            message.error("用户名或密码错误");
+                        }
                     } else {
                         message.error(res.message || "用户名或密码错误");
                     }
@@ -39,7 +54,96 @@ class FormLogin extends React.Component {
             }
         });
     };
-
+    getUserAuth = (params = {}) => {
+        params = {
+            user_id: sessionStorage.userName,
+            user_type: localStorage.user_type / 1,
+        };
+        http.post({
+            url: "/tell-info/userAuth",
+            data: params,
+        }).then((res) => {
+            // console.log(res);
+            //解析数据字典
+            if (res.code == 200) {
+                sessionStorage.auth = res.auth;
+                // console.log(JSON.stringify(JSON.parse(res.auth)));
+                this.changeMenus(JSON.parse(res.auth));
+                this.props.history.push("/main/user/userInfo");
+            } else {
+                message.info("获取用户权限失败");
+            }
+        });
+    };
+    changeMenus = () => {
+        // console.log("changeMenus-------");
+        let auth = sessionStorage.auth;
+        if (sessionStorage.menusBackup != undefined) {
+            window.menus = JSON.parse(sessionStorage.menusBackup);
+            // console.log(window.menus);
+        }
+        if (!auth) {
+            console.log("没有权限菜单，显示本地菜单");
+            return;
+        }
+        // let newAuth = auth.replace(/name/g, "title");
+        let authMenu = JSON.parse(auth);
+        // console.log(JSON.stringify(window.menus));
+        // console.log(window.menus);
+        // console.log("authMenu", authMenu);
+        // authMenu[0].auth = 0;
+        // window.menus = menu;
+        for (let i = 0; i < window.menus.length; i++) {
+            let localItem = window.menus[i];
+            // console.log("本地 ", localItem);
+            for (let j = 0; j < authMenu.length; j++) {
+                let authItem = authMenu[j];
+                // console.log("权限 ", authItem);
+                if (localItem.title == authItem.name) {
+                    localItem.auth = authItem.auth;
+                    //删除 不显示的菜单
+                    // console.log(localItem, i, j);
+                    if (authItem.auth != 1) {
+                        // console.log("不显示一级 ", localItem);
+                        window.menus.splice(i, 1);
+                        i--;
+                        break;
+                    }
+                    if (
+                        localItem.hasOwnProperty("children") &&
+                        authItem.hasOwnProperty("children")
+                    ) {
+                        let localChild = localItem.children;
+                        let authChild = authItem.children;
+                        for (let k = 0; k < localChild.length; k++) {
+                            let localChildItem = localChild[k];
+                            // console.log("local:--- ", k, localChildItem);
+                            for (let l = 0; l < authChild.length; l++) {
+                                // console.log("authChild: ",authChild[l]);
+                                if (localChildItem.title == authChild[l].name) {
+                                    localChildItem.auth = authChild[l].auth;
+                                    localChildItem.cmpt = authChild[l].cmpt;
+                                    if (authChild[l].auth != 1) {
+                                        // console.log(
+                                        //     "不显示二级菜单 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                                        //     localChildItem
+                                        // );
+                                        localChild.splice(k, 1);
+                                        k--;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        // console.log(window.menus);
+        sessionStorage.activeMenus = JSON.stringify(window.menus);
+        // console.log(JSON.stringify(window.menus));
+    };
     handleSet = () => {
         console.log("设置");
     };
@@ -87,8 +191,10 @@ class FormLogin extends React.Component {
                         算法项目管理系统
                     </div>
                     <FormItem>
-                        {getFieldDecorator("userName", {
-                            initialValue: "admin",
+                        {/* {getFieldDecorator("userName", { */}
+                        {getFieldDecorator("user_id", {
+                            initialValue: "algoAdmin",
+                            // initialValue: "11",
                             // initialValue: "user_read_only",
                             rules: [
                                 {

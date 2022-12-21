@@ -4,6 +4,7 @@ import CurdComponent from "@/components/CurdComponent";
 import { Input, Button, Modal, Form, Switch, Row, Col } from "antd";
 import Table from "@/components/Table";
 import styles from "./style.module.less";
+import { connect } from "react-redux";
 
 let getSearchFormFields = () => {
     return [
@@ -59,7 +60,7 @@ class algoGroup extends React.PureComponent {
                 ),
             },
         ];
-        if (sessionStorage.userPrivilege == 2) {
+        if (!this.authObj.isUpdate) {
             tab.pop();
         }
         return tab;
@@ -557,6 +558,52 @@ class algoGroup extends React.PureComponent {
         if (this.isUpdate) {
             modalTitle = "修改算法权限组";
         }
+        let cmpt = this.props.activeMenu.cmpt;
+        // console.log(cmpt);
+        let authObj = {
+            isQuery: true,
+            isAdd: true,
+            isUpload: true,
+            isDownload: true,
+            isDelete: false,
+            isUpdate: true,
+        };
+        // console.log("cmpt", cmpt);
+        if (cmpt) {
+            for (let i = 0; i < cmpt.length; i++) {
+                let item = cmpt[i];
+                // console.log(item);
+                if (item.type == 1 && item.auth != 1) {
+                    //查询 有权限
+                    authObj.isQuery = false;
+                }
+                if (item.type == 2 && item.auth != 1) {
+                    //新增 有权限
+                    authObj.isAdd = false;
+                }
+                if (item.type == 3 && item.auth != 1) {
+                    //上传 有权限
+                    authObj.isUpload = false;
+                }
+                if (item.type == 4 && item.auth != 1) {
+                    //下载 有权限
+                    authObj.isDownload = false;
+                }
+                // if (item.type == 5 && item.auth != 1) {
+                //     //下载报告 有权限 -- 绩效那边
+                //     authObj.isExportPdf = false;
+                // }
+                if (item.type == 6 && item.auth == 1) {
+                    //删除 有权限
+                    authObj.isDelete = true;
+                }
+                if (item.type == 7 && item.auth != 1) {
+                    //编辑 有权限
+                    authObj.isUpdate = false;
+                }
+            }
+        }
+        this.authObj = authObj;
         return (
             <div className={styles.algoGroup}>
                 <CurdComponent
@@ -713,4 +760,10 @@ class algoGroup extends React.PureComponent {
         );
     }
 }
-export default Form.create()(algoGroup);
+// export default Form.create()(algoGroup);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        activeMenu: state.RouterModel.activeMenu,
+    };
+};
+export default connect(mapStateToProps, null)(Form.create()(algoGroup));

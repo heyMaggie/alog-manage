@@ -3,6 +3,7 @@ import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 import { Input, Modal, Radio, Form, Button, Switch, Col } from "antd";
 import styles from "./style.module.less";
+import { connect } from "react-redux";
 
 let getSearchFormFields = () => {
     return [
@@ -39,7 +40,7 @@ class riskConfigManage extends React.PureComponent {
         configShow: false, // 风控是否显示
     };
     columns = (params) => {
-        return [
+        let arr = [
             {
                 title: "风控组ID",
                 dataIndex: "Id",
@@ -154,7 +155,9 @@ class riskConfigManage extends React.PureComponent {
                 dataIndex: "TradeAmountLimit",
                 key: "TradeAmountLimit",
             },
-            {
+        ];
+        if (this.authObj.isUpdate) {
+            arr.push({
                 title: "操作",
                 key: "operation",
                 fixed: "right",
@@ -168,8 +171,9 @@ class riskConfigManage extends React.PureComponent {
                         编辑
                     </a>
                 ),
-            },
-        ];
+            });
+        }
+        return arr;
     };
     // 新增按钮点击事件
     handleInsertBtn = (params) => {
@@ -625,6 +629,52 @@ class riskConfigManage extends React.PureComponent {
         // let pagination = { pageSize: 12 };
         let pageSize = 12;
         // console.log(byte0);
+        let cmpt = this.props.activeMenu.cmpt;
+        // console.log(cmpt);
+        let authObj = {
+            isQuery: true,
+            isAdd: true,
+            isUpload: true,
+            isDownload: true,
+            isDelete: false,
+            isUpdate: true,
+        };
+        // console.log("cmpt", cmpt);
+        if (cmpt) {
+            for (let i = 0; i < cmpt.length; i++) {
+                let item = cmpt[i];
+                // console.log(item);
+                if (item.type == 1 && item.auth != 1) {
+                    //查询 有权限
+                    authObj.isQuery = false;
+                }
+                if (item.type == 2 && item.auth != 1) {
+                    //新增 有权限
+                    authObj.isAdd = false;
+                }
+                if (item.type == 3 && item.auth != 1) {
+                    //上传 有权限
+                    authObj.isUpload = false;
+                }
+                if (item.type == 4 && item.auth != 1) {
+                    //下载 有权限
+                    authObj.isDownload = false;
+                }
+                // if (item.type == 5 && item.auth != 1) {
+                //     //下载报告 有权限 -- 绩效那边
+                //     authObj.isExportPdf = false;
+                // }
+                if (item.type == 6 && item.auth == 1) {
+                    //删除 有权限
+                    authObj.isDelete = true;
+                }
+                if (item.type == 7 && item.auth != 1) {
+                    //编辑 有权限
+                    authObj.isUpdate = false;
+                }
+            }
+        }
+        this.authObj = authObj;
         return (
             <div className={styles.userInfo}>
                 <CurdComponent
@@ -1590,4 +1640,10 @@ class riskConfigManage extends React.PureComponent {
     }
 }
 
-export default Form.create()(riskConfigManage);
+// export default Form.create()(riskConfigManage);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        activeMenu: state.RouterModel.activeMenu,
+    };
+};
+export default connect(mapStateToProps, null)(Form.create()(riskConfigManage));

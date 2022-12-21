@@ -17,7 +17,8 @@ import {
     Popconfirm,
 } from "antd";
 import styles from "./style.module.less";
-// import md5 from "js-md5"; //全局引入
+import { connect } from "react-redux";
+
 const { TreeNode } = Tree;
 
 class userInfo extends React.PureComponent {
@@ -76,7 +77,7 @@ class userInfo extends React.PureComponent {
         ];
     };
     columns = (params) => {
-        return [
+        let arr = [
             {
                 title: "ID",
                 dataIndex: "id",
@@ -106,21 +107,25 @@ class userInfo extends React.PureComponent {
                 dataIndex: "create_time",
                 width: 180,
             },
-            {
+        ];
+        if (this.authObj.isUpdate || this.authObj.isDelete) {
+            arr.push({
                 title: "操作",
                 key: "operation",
                 fixed: "right",
                 width: 100,
                 render: (text, record) => (
                     <div>
-                        <a
-                            onClick={(e) => {
-                                this.handleUpdateBtn(record);
-                            }}
-                        >
-                            编辑
-                        </a>
-                        {
+                        {this.authObj.isUpdate && (
+                            <a
+                                onClick={(e) => {
+                                    this.handleUpdateBtn(record);
+                                }}
+                            >
+                                编辑
+                            </a>
+                        )}
+                        {this.authObj.isDelete && (
                             <Popconfirm
                                 title="是否确认删除?"
                                 onConfirm={async () =>
@@ -132,17 +137,22 @@ class userInfo extends React.PureComponent {
                                 <a
                                     style={{
                                         color: "rgba(240, 95, 94, 1)",
-                                        margin: "0 0 0 24px",
+                                        margin:
+                                            "0 0 0 " +
+                                            (this.authObj.isUpdate
+                                                ? "24px"
+                                                : "0px"),
                                     }}
                                 >
                                     删除
                                 </a>
                             </Popconfirm>
-                        }
+                        )}
                     </div>
                 ),
-            },
-        ];
+            });
+        }
+        return arr;
     };
     //更新记录
     handleInsertRecord = (formData, roleAuth) => {
@@ -198,9 +208,10 @@ class userInfo extends React.PureComponent {
     };
     // 编辑按钮点击事件
     handleUpdateBtn = (record) => {
-        console.log("更新记录", record);
+        // console.log("更新记录", record);
         this.record = record;
         let role_auth = JSON.parse(record.role_auth);
+        console.log("更新记录", role_auth);
         this.isInsert = false;
         this.isUpdate = true;
         this.setState(
@@ -311,7 +322,9 @@ class userInfo extends React.PureComponent {
         let checkArr = [];
         for (let i = 0; i < roleAuth.length; i++) {
             let lv1 = roleAuth[i];
-            // lv1.key = i + 1 + "";
+            if (!lv1.key) {
+                lv1.key = i + 1 + "";
+            }
             if (lv1.auth == 1) {
                 checkArr.push(lv1.key);
             }
@@ -319,6 +332,9 @@ class userInfo extends React.PureComponent {
                 for (let j = 0; j < lv1.children.length; j++) {
                     let lv2 = lv1.children[j];
                     // lv2.key = lv1.key + "-" + (j + 1);
+                    if (!lv2.key) {
+                        lv2.key = lv1.key + "-" + (j + 1);
+                    }
                     if (lv2.auth == 1) {
                         checkArr.push(lv2.key);
                     }
@@ -326,6 +342,9 @@ class userInfo extends React.PureComponent {
                         for (let k = 0; k < lv2.cmpt.length; k++) {
                             let lv3 = lv2.cmpt[k];
                             // lv3.key = lv2.key + "-" + (k + 1);
+                            if (!lv3.key) {
+                                lv3.key = lv2.key + "-" + (k + 1);
+                            }
                             if (lv3.auth == 1) {
                                 checkArr.push(lv3.key);
                             }
@@ -409,7 +428,7 @@ class userInfo extends React.PureComponent {
             // url: "algo-assess/v1/auth/rolelist",
             data: params,
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             //解析数据字典
             if (res.list && res.list.length > 0) {
                 let userList = res.list;
@@ -448,6 +467,52 @@ class userInfo extends React.PureComponent {
         if (this.isUpdate) {
             modalTitle = "修改角色";
         }
+        let cmpt = this.props.activeMenu.cmpt;
+        // console.log(cmpt);
+        let authObj = {
+            isQuery: true,
+            isAdd: true,
+            isUpload: true,
+            isDownload: true,
+            isDelete: false,
+            isUpdate: true,
+        };
+        // console.log("cmpt", cmpt);
+        if (cmpt) {
+            for (let i = 0; i < cmpt.length; i++) {
+                let item = cmpt[i];
+                // console.log(item);
+                if (item.type == 1 && item.auth != 1) {
+                    //查询 有权限
+                    authObj.isQuery = false;
+                }
+                if (item.type == 2 && item.auth != 1) {
+                    //新增 有权限
+                    authObj.isAdd = false;
+                }
+                if (item.type == 3 && item.auth != 1) {
+                    //上传 有权限
+                    authObj.isUpload = false;
+                }
+                if (item.type == 4 && item.auth != 1) {
+                    //下载 有权限
+                    authObj.isDownload = false;
+                }
+                // if (item.type == 5 && item.auth != 1) {
+                //     //下载报告 有权限 -- 绩效那边
+                //     authObj.isExportPdf = false;
+                // }
+                if (item.type == 6 && item.auth == 1) {
+                    //删除 有权限
+                    authObj.isDelete = true;
+                }
+                if (item.type == 7 && item.auth != 1) {
+                    //编辑 有权限
+                    authObj.isUpdate = false;
+                }
+            }
+        }
+        this.authObj = authObj;
         return (
             <div className={styles.userInfo}>
                 <CurdComponent
@@ -569,4 +634,10 @@ class userInfo extends React.PureComponent {
     }
 }
 
-export default Form.create()(userInfo);
+// export default Form.create()(userInfo);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        activeMenu: state.RouterModel.activeMenu,
+    };
+};
+export default connect(mapStateToProps, null)(Form.create()(userInfo));
