@@ -63,7 +63,7 @@ export default class uoeSetting extends React.PureComponent {
     getInsertFormFields = () => {
         return [
             {
-                label: "用户ID（*ID名称只能为字母与数字的组合）",
+                label: "用户ID（*ID名称只能为字母或字母与数字的组合）",
                 id: "user_id",
                 initialValue: "",
                 rules: [
@@ -73,7 +73,7 @@ export default class uoeSetting extends React.PureComponent {
                     },
                     {
                         message: "请检查格式",
-                        pattern: /^[a-zA-Z0-9]+$/i,
+                        pattern: /^(?![0-9]+$)[a-zA-Z0-9]+$/i,
                     },
                     {
                         validator: checkLength(20),
@@ -150,7 +150,7 @@ export default class uoeSetting extends React.PureComponent {
     getUpdateFormFields = () => {
         return [
             {
-                label: "用户ID（*ID名称只能为字母与数字的组合）",
+                label: "用户ID（*ID名称只能为字母或字母与数字的组合）",
                 id: "user_id",
                 initialValue: "",
                 rules: [
@@ -160,7 +160,7 @@ export default class uoeSetting extends React.PureComponent {
                     },
                     {
                         message: "请检查格式",
-                        pattern: /^[a-zA-Z0-9]+$/i,
+                        pattern: /^(?![0-9]+$)[a-zA-Z0-9]+$/i,
                     },
                     {
                         validator: checkLength(20),
