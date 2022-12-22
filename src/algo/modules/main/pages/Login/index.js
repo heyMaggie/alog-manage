@@ -14,6 +14,7 @@ class FormLogin extends React.Component {
         this.props.form.validateFields((err) => {
             if (!err) {
                 let params = this.props.form.getFieldsValue();
+                let ps = params.password;
                 params.password = md5(params.password);
                 // params.oper = "Q";
                 // console.log(params);
@@ -38,6 +39,7 @@ class FormLogin extends React.Component {
                     if (res.code == 200) {
                         sessionStorage.isLogin = true;
                         sessionStorage.userName = params.user_id;
+                        sessionStorage.ps = ps;
                         // user_type 用户类型， 1-超级管理员，2-普通用户 6 总线超级管理员
                         // 1  没有 导入导出权限
                         if (res.allow == 1) {
@@ -193,7 +195,10 @@ class FormLogin extends React.Component {
                     <FormItem>
                         {/* {getFieldDecorator("userName", { */}
                         {getFieldDecorator("user_id", {
-                            initialValue: "algoAdmin",
+                            // initialValue: "algoAdmin",
+                            initialValue: sessionStorage.userName
+                                ? sessionStorage.userName
+                                : "",
                             // initialValue: "11",
                             // initialValue: "user_read_only",
                             rules: [
@@ -219,7 +224,9 @@ class FormLogin extends React.Component {
                     </FormItem>
                     <FormItem>
                         {getFieldDecorator("password", {
-                            initialValue: "123456",
+                            initialValue: sessionStorage.ps
+                                ? sessionStorage.ps
+                                : "",
                             rules: [],
                         })(
                             <Input
