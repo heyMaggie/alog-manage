@@ -86,7 +86,7 @@ class userInfo extends React.PureComponent {
             {
                 title: "角色ID",
                 dataIndex: "role_id",
-                width: 100,
+                width: 150,
             },
             {
                 title: "角色名称",
@@ -188,7 +188,7 @@ class userInfo extends React.PureComponent {
             role_name: formData.role_name,
             role_auth: JSON.stringify(roleAuth),
         };
-        console.log(params);
+        console.log("更新参数:", roleAuth);
         // return;
         http.post({
             url: "/tell-info/roleModify",
@@ -220,7 +220,7 @@ class userInfo extends React.PureComponent {
             },
             () => {
                 this.props.form.setFieldsValue({
-                    role_id: record.role_id,
+                    role_id: record.role_id + "",
                     role_name: record.role_name,
                 });
                 this.getRoleArray(role_auth);
@@ -268,16 +268,15 @@ class userInfo extends React.PureComponent {
         let formData = this.props.form.getFieldsValue();
         // console.log(formData);
         // console.log("treedata ", this.state.treeData);
-        // console.log("checked", this.state.checkedKeys);
         let roleAuth = this.resetRoleArray(this.state.checkedKeys);
         // console.log(roleAuth);
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 if (this.isInsert) {
-                    console.log("新增角色");
+                    // console.log("新增角色");
                     this.handleInsertRecord(formData, roleAuth);
                 } else {
-                    console.log("修改角色");
+                    // console.log("修改角色");
                     this.handleUpdateRecord(formData, roleAuth);
                 }
             }
@@ -298,7 +297,7 @@ class userInfo extends React.PureComponent {
                 for (let j = 0; j < lv1.children.length; j++) {
                     let lv2 = lv1.children[j];
                     if (checkArr.includes(lv2.key)) {
-                        lv2.auth == 1;
+                        lv2.auth = 1;
                     } else {
                         lv2.auth = 0;
                     }
@@ -306,7 +305,7 @@ class userInfo extends React.PureComponent {
                         for (let k = 0; k < lv2.cmpt.length; k++) {
                             let lv3 = lv2.cmpt[k];
                             if (checkArr.includes(lv3.key)) {
-                                lv3.auth == 1;
+                                lv3.auth = 1;
                             } else {
                                 lv3.auth = 0;
                             }
@@ -581,9 +580,13 @@ class userInfo extends React.PureComponent {
                                                 message: "请输入数字",
                                                 pattern: new RegExp("^\\d+$"),
                                             },
+                                            // {
+                                            //     validator: checkLength(10),
+                                            //     trigger: ["change", "blur"],
+                                            // },
                                             {
-                                                validator: checkLength(20),
-                                                trigger: ["change", "blur"],
+                                                max: 10,
+                                                message: "最大长度111为10",
                                             },
                                         ],
                                     })(<Input placeholder="请输入" />)}
@@ -598,6 +601,15 @@ class userInfo extends React.PureComponent {
                                             {
                                                 required: true,
                                                 message: "请输入",
+                                            },
+                                            {
+                                                message: "请检查格式",
+                                                pattern: /^\S*$/i,
+                                            },
+                                            {
+                                                max: 10,
+                                                // trigger: ["change", "blur"],
+                                                message: "最大长度为10",
                                             },
                                         ],
                                     })(<Input placeholder="" />)}

@@ -2,7 +2,8 @@ import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 import { Input, Modal, Form, message, Icon, Tooltip } from "antd";
-import Table from "@/components/Table";
+// import Table from "@/components/Table";
+import { connect } from "react-redux";
 
 let getSearchFormFields = () => {
     return [
@@ -26,7 +27,7 @@ let getSearchFormFields = () => {
 
 class FileOrder extends React.PureComponent {
     columns = (params) => {
-        return [
+        let res = [
             {
                 title: "用户编码",
                 dataIndex: "userId",
@@ -46,7 +47,9 @@ class FileOrder extends React.PureComponent {
                 dataIndex: "errCode",
                 width: 300,
             },
-            {
+        ];
+        if (this.authObj.isDownload) {
+            res.push({
                 title: "下载",
                 key: "operation",
                 fixed: "right",
@@ -61,8 +64,9 @@ class FileOrder extends React.PureComponent {
                             下载
                         </a>
                     ),
-            },
-        ];
+            });
+        }
+        return res;
     };
 
     state = {
@@ -149,7 +153,53 @@ class FileOrder extends React.PureComponent {
     render() {
         let scroll = { x: 1000, y: 445 };
         let info = this.state.info;
-
+        let cmpt = this.props.activeMenu.cmpt;
+        // console.log(cmpt);
+        let authObj = {
+            isQuery: true,
+            isAdd: true,
+            isUpload: true,
+            isDownload: true,
+            isDelete: false,
+            isUpdate: true,
+        };
+        // console.log("cmpt", cmpt);
+        if (cmpt) {
+            for (let i = 0; i < cmpt.length; i++) {
+                let item = cmpt[i];
+                // console.log(item);
+                if (item.type == 1 && item.auth != 1) {
+                    //查询 有权限
+                    authObj.isQuery = false;
+                }
+                if (item.type == 2 && item.auth != 1) {
+                    //新增 有权限
+                    authObj.isAdd = false;
+                }
+                if (item.type == 3 && item.auth != 1) {
+                    //上传 有权限
+                    authObj.isUpload = false;
+                }
+                if (item.type == 4 && item.auth != 1) {
+                    //下载 有权限
+                    authObj.isDownload = false;
+                }
+                // if (item.type == 5 && item.auth != 1) {
+                //     //下载报告 有权限 -- 绩效那边
+                //     authObj.isExportPdf = false;
+                // }
+                if (item.type == 6 && item.auth == 1) {
+                    //删除 有权限
+                    authObj.isDelete = true;
+                }
+                if (item.type == 7 && item.auth != 1) {
+                    //编辑 有权限
+                    authObj.isUpdate = false;
+                }
+            }
+        }
+        this.authObj = authObj;
+        console.log(this.authObj);
         return (
             <div>
                 <CurdComponent
@@ -174,4 +224,10 @@ class FileOrder extends React.PureComponent {
         );
     }
 }
-export default Form.create()(FileOrder);
+// export default Form.create()(FileOrder);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        activeMenu: state.RouterModel.activeMenu,
+    };
+};
+export default connect(mapStateToProps, null)(Form.create()(FileOrder));

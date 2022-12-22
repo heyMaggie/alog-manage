@@ -76,9 +76,10 @@ export default class uoeSetting extends React.PureComponent {
     };
 
     getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
+        // console.log(params);
         let startTime = "";
         let endTime = "";
-        if (params["createTime"]) {
+        if (params["createTime"] && params.createTime.length > 0) {
             startTime = moment(params["createTime"][0]).format(
                 "YYYY-MM-DD HH:mm:ss"
             );

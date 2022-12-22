@@ -48,10 +48,20 @@ class CurdComponent extends React.PureComponent {
                             this.props.pagination
                         );
                     }, 200);
-                    this.insertForm.resetFields();
-                    this.setState({
-                        insertModalVisible: false,
-                    });
+                    // this.insertForm.resetFields();
+                    // this.setState({
+                    //     insertModalVisible: false,
+                    // });
+                    setTimeout(() => {
+                        if (window.comfirmOk == "fail") {
+                            window.comfirmOk = false;
+                        } else {
+                            this.insertForm.resetFields();
+                            this.setState({
+                                insertModalVisible: false,
+                            });
+                        }
+                    }, 200);
                 }
             });
         }
@@ -88,8 +98,8 @@ class CurdComponent extends React.PureComponent {
                     //     updateModalVisible: false,
                     // });
                     setTimeout(() => {
-                        if (window.isUpdateOk == "fail") {
-                            window.isUpdateOk = false;
+                        if (window.comfirmOk == "fail") {
+                            window.comfirmOk = false;
                         } else {
                             this.setState({
                                 updateModalVisible: false,

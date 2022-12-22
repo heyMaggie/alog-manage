@@ -75,9 +75,13 @@ export default class uoeSetting extends React.PureComponent {
                         message: "请检查格式",
                         pattern: /^(?![0-9]+$)[a-zA-Z0-9]+$/i,
                     },
+                    // {
+                    //     validator: checkLength(10),
+                    //     trigger: ["change", "blur"],
+                    // },
                     {
-                        validator: checkLength(20),
-                        trigger: ["change", "blur"],
+                        max: 10,
+                        message: "最大长度为10",
                     },
                 ],
                 component: <Input placeholder="请输入" />,
@@ -91,9 +95,17 @@ export default class uoeSetting extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    // {
+                    //     validator: checkLength(20),
+                    //     trigger: ["change", "blur"],
+                    // },
                     {
-                        validator: checkLength(20),
-                        trigger: ["change", "blur"],
+                        message: "请检查格式",
+                        pattern: /^\S*$/i,
+                    },
+                    {
+                        max: 10,
+                        message: "最大长度为10",
                     },
                 ],
                 component: (
@@ -162,9 +174,13 @@ export default class uoeSetting extends React.PureComponent {
                         message: "请检查格式",
                         pattern: /^(?![0-9]+$)[a-zA-Z0-9]+$/i,
                     },
+                    // {
+                    //     validator: checkLength(20),
+                    //     trigger: ["change", "blur"],
+                    // },
                     {
-                        validator: checkLength(20),
-                        trigger: ["change", "blur"],
+                        max: 10,
+                        message: "最大长度为10",
                     },
                 ],
                 component: <Input placeholder="请输入" disabled />,
@@ -178,9 +194,17 @@ export default class uoeSetting extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    // {
+                    //     validator: checkLength(20),
+                    //     trigger: ["change", "blur"],
+                    // },
                     {
-                        validator: checkLength(20),
-                        trigger: ["change", "blur"],
+                        message: "请检查格式",
+                        pattern: /^\S*$/i,
+                    },
+                    {
+                        max: 10,
+                        message: "最大长度为10",
                     },
                 ],
                 component: (
@@ -277,6 +301,7 @@ export default class uoeSetting extends React.PureComponent {
         // console.log(params);
         if (formData.password != formData.password2) {
             message.error("密码与确认密码不一致");
+            window.comfirmOk = "fail";
             return;
         }
         // return;
@@ -299,7 +324,7 @@ export default class uoeSetting extends React.PureComponent {
         console.log("更新记录", form.getFieldsValue());
         if (formData.password != formData.password2) {
             message.error("密码与确认密码不一致");
-            window.isUpdateOk = "fail";
+            window.comfirmOk = "fail";
             return;
         }
         if (formData.passwordOld) {
@@ -309,13 +334,13 @@ export default class uoeSetting extends React.PureComponent {
                     // console.log("checkPassword 成功", formData);
                     if (formData.password.length == 0) {
                         message.error("密码不能为空");
-                        window.isUpdateOk = "fail";
+                        window.comfirmOk = "fail";
                         return;
                     }
                     this.updateUser(form);
                 } else {
                     message.error("原密码校验失败");
-                    window.isUpdateOk = "fail";
+                    window.comfirmOk = "fail";
                 }
             });
         } else {
@@ -343,7 +368,7 @@ export default class uoeSetting extends React.PureComponent {
         );
         // if (formData.password.length == 0) {
         //     message.error("密码不能为空");
-        //     window.isUpdateOk = "fail";
+        //     window.comfirmOk = "fail";
         //     return;
         // }
         let params = {
@@ -366,7 +391,7 @@ export default class uoeSetting extends React.PureComponent {
                 message.success("修改成功");
             } else {
                 message.error("修改失败");
-                window.isUpdateOk = "fail";
+                window.comfirmOk = "fail";
             }
         });
     };
