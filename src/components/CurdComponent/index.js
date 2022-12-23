@@ -143,53 +143,82 @@ class CurdComponent extends React.PureComponent {
                     fixed: "right",
                     width: 144,
                     render: (text, record) => {
+                        let updateA = (
+                            <a
+                                style={{ color: "#3281ff" }}
+                                onClick={() => {
+                                    this.setState({
+                                        updateModalVisible: true,
+                                    });
+                                    if (this.updateForm) {
+                                        setUpdateModal({
+                                            form: this.updateForm,
+                                            record,
+                                        });
+                                    } else {
+                                        //第一次 updateModal 需要创建 动态表单
+                                        setTimeout(() => {
+                                            setUpdateModal({
+                                                form: this.updateForm,
+                                                record,
+                                            });
+                                        }, 0);
+                                    }
+                                }}
+                            >
+                                编辑
+                            </a>
+                        );
+                        let deleteA = (
+                            <Popconfirm
+                                title="是否确认删除?"
+                                onConfirm={async () => deleteRecord(record)}
+                                okText="确认"
+                                cancelText="取消"
+                            >
+                                <a
+                                    style={{
+                                        color: "rgba(240, 95, 94, 1)",
+                                        margin: "0 0 0 24px",
+                                    }}
+                                >
+                                    删除
+                                </a>
+                            </Popconfirm>
+                        );
+                        if (record.status == 2) {
+                            updateA = (
+                                <a
+                                    style={{
+                                        color: "#c0c4cc",
+                                    }}
+                                >
+                                    编辑
+                                </a>
+                            );
+                            deleteA = (
+                                <a
+                                    style={{
+                                        color: "#c0c4cc",
+                                        margin:
+                                            "0 0 0 " +
+                                            (this.authObj.isUpdate
+                                                ? "24px"
+                                                : "0px"),
+                                    }}
+                                >
+                                    删除
+                                </a>
+                            );
+                        }
                         return (
                             <div>
-                                {updateRecord && this.authObj.isUpdate && (
-                                    <a
-                                        style={{ color: "#3281ff" }}
-                                        onClick={() => {
-                                            this.setState({
-                                                updateModalVisible: true,
-                                            });
-                                            if (this.updateForm) {
-                                                setUpdateModal({
-                                                    form: this.updateForm,
-                                                    record,
-                                                });
-                                            } else {
-                                                //第一次 updateModal 需要创建 动态表单
-                                                setTimeout(() => {
-                                                    setUpdateModal({
-                                                        form: this.updateForm,
-                                                        record,
-                                                    });
-                                                }, 0);
-                                            }
-                                        }}
-                                    >
-                                        编辑
-                                    </a>
-                                )}
-                                {deleteRecord && this.authObj.isDelete && (
-                                    <Popconfirm
-                                        title="是否确认删除?"
-                                        onConfirm={async () =>
-                                            deleteRecord(record)
-                                        }
-                                        okText="确认"
-                                        cancelText="取消"
-                                    >
-                                        <a
-                                            style={{
-                                                color: "rgba(240, 95, 94, 1)",
-                                                margin: "0 0 0 24px",
-                                            }}
-                                        >
-                                            删除
-                                        </a>
-                                    </Popconfirm>
-                                )}
+                                {updateRecord &&
+                                    this.authObj.isUpdate &&
+                                    updateA}
+                                {deleteRecord &&
+                                    this.authObj.isDelete &&
+                                    deleteA}
                             </div>
                         );
                     },

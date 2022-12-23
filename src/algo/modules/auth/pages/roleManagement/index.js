@@ -114,42 +114,71 @@ class userInfo extends React.PureComponent {
                 key: "operation",
                 fixed: "right",
                 width: 100,
-                render: (text, record) => (
-                    <div>
-                        {this.authObj.isUpdate && (
+                render: (text, record) => {
+                    let updateA = (
+                        <a
+                            onClick={(e) => {
+                                this.handleUpdateBtn(record);
+                            }}
+                        >
+                            编辑
+                        </a>
+                    );
+                    let deleteA = (
+                        <Popconfirm
+                            title="是否确认删除?"
+                            onConfirm={async () =>
+                                this.handleDeleteRecord(record)
+                            }
+                            okText="确认"
+                            cancelText="取消"
+                        >
                             <a
-                                onClick={(e) => {
-                                    this.handleUpdateBtn(record);
+                                style={{
+                                    color: "rgba(240, 95, 94, 1)",
+                                    margin:
+                                        "0 0 0 " +
+                                        (this.authObj.isUpdate
+                                            ? "24px"
+                                            : "0px"),
+                                }}
+                            >
+                                删除
+                            </a>
+                        </Popconfirm>
+                    );
+                    if (record.status == 2) {
+                        updateA = (
+                            <a
+                                style={{
+                                    color: "#c0c4cc",
                                 }}
                             >
                                 编辑
                             </a>
-                        )}
-                        {this.authObj.isDelete && (
-                            <Popconfirm
-                                title="是否确认删除?"
-                                onConfirm={async () =>
-                                    this.handleDeleteRecord(record)
-                                }
-                                okText="确认"
-                                cancelText="取消"
+                        );
+                        deleteA = (
+                            <a
+                                style={{
+                                    color: "#c0c4cc",
+                                    margin:
+                                        "0 0 0 " +
+                                        (this.authObj.isUpdate
+                                            ? "24px"
+                                            : "0px"),
+                                }}
                             >
-                                <a
-                                    style={{
-                                        color: "rgba(240, 95, 94, 1)",
-                                        margin:
-                                            "0 0 0 " +
-                                            (this.authObj.isUpdate
-                                                ? "24px"
-                                                : "0px"),
-                                    }}
-                                >
-                                    删除
-                                </a>
-                            </Popconfirm>
-                        )}
-                    </div>
-                ),
+                                删除
+                            </a>
+                        );
+                    }
+                    return (
+                        <div>
+                            {this.authObj.isUpdate && updateA}
+                            {this.authObj.isDelete && deleteA}
+                        </div>
+                    );
+                },
             });
         }
         return arr;

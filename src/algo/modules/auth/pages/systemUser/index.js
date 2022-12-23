@@ -515,11 +515,11 @@ class systemUser extends React.PureComponent {
         this.getData(params, pagination);
     };
     componentDidMount() {
-        // this.getData();
-        // this.getRoleList();
+        this.getData();
+        this.getRoleList();
     }
     getInfo = () => {
-        this.getData();
+        // this.getData();
         this.getRoleList();
     };
     debounceGet = () => {
