@@ -586,7 +586,7 @@ class userInfo extends React.PureComponent {
                                             // },
                                             {
                                                 max: 10,
-                                                message: "最大长度111为10",
+                                                message: "最大长度为10",
                                             },
                                         ],
                                     })(<Input placeholder="请输入" />)}

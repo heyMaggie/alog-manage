@@ -4,6 +4,7 @@ import SelectOption from "@/components/SelectOption";
 // import UploadWrap from "@/components/UploadWrap";
 import { Input } from "antd";
 import md5 from "js-md5"; //全局引入
+import { connect } from "react-redux";
 
 // const getUpdateFormFields = () => {
 //     return []
@@ -59,7 +60,8 @@ let getSearchFormFields = () => {
         },
     ];
 };
-export default class uoeSetting extends React.PureComponent {
+//export default
+class systemUser extends React.PureComponent {
     getInsertFormFields = () => {
         return [
             {
@@ -427,7 +429,10 @@ export default class uoeSetting extends React.PureComponent {
             password2: "",
         });
     };
-    getRoleList = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
+    getRoleList = (
+        params = {},
+        pagination = { current: 1, pageSize: 10000 }
+    ) => {
         params = {
             ...params,
             scene: 1,
@@ -454,9 +459,17 @@ export default class uoeSetting extends React.PureComponent {
                             value: item.role_name,
                         };
                     });
-                this.setState({
-                    roleList: roleList,
-                });
+                if (
+                    JSON.stringify(roleList) !=
+                    JSON.stringify(this.state.roleList)
+                ) {
+                    this.setState({
+                        roleList: roleList,
+                    });
+                }
+                // this.setState({
+                //     roleList: roleList,
+                // });
             }
         });
     };
@@ -486,19 +499,37 @@ export default class uoeSetting extends React.PureComponent {
                 pageSize: pagination.pageSize,
                 total: res.total || 0,
             };
-            this.setState({
-                info: res.list ? res.list : [],
-                pagination: pgn,
-            });
+            // this.setState({
+            //     info: res.list ? res.list : [],
+            //     pagination: pgn,
+            // });
+            if (JSON.stringify(res.list) != JSON.stringify(this.state.info)) {
+                this.setState({
+                    info: res.list ? res.list : [],
+                    pagination: pgn,
+                });
+            }
         });
     };
     handleSearch = (params, pagination) => {
         this.getData(params, pagination);
     };
     componentDidMount() {
+        // this.getData();
+        // this.getRoleList();
+    }
+    getInfo = () => {
         this.getData();
         this.getRoleList();
-    }
+    };
+    debounceGet = () => {
+        if (window.getInfoTimer) {
+            // console.log("清除 请求");
+            clearTimeout(window.getInfoTimer);
+            window.getInfoTimer = undefined;
+        }
+        window.getInfoTimer = setTimeout(window.login, 400);
+    };
     render() {
         let scroll = { x: 1000, y: 445 };
         let info = this.state.info;
@@ -508,6 +539,8 @@ export default class uoeSetting extends React.PureComponent {
         //     selectRow,
         //     onChange: this.handleTableChange,
         // };
+        window.login = this.getInfo;
+        this.debounceGet();
         return (
             <div>
                 <CurdComponent
@@ -545,3 +578,9 @@ export default class uoeSetting extends React.PureComponent {
         );
     }
 }
+const mapStateToProps = (state, ownProps) => {
+    return {
+        path: state.RouterModel.path,
+    };
+};
+export default connect(mapStateToProps, null)(systemUser);

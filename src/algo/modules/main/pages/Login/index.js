@@ -70,8 +70,29 @@ class FormLogin extends React.Component {
             if (res.code == 200) {
                 sessionStorage.auth = res.auth;
                 // console.log(JSON.stringify(JSON.parse(res.auth)));
+                this.hasUserInfo = false;
                 this.changeMenus(JSON.parse(res.auth));
-                this.props.history.push("/main/user/userInfo");
+                // this.props.history.push("/main/user/userInfo");
+                if (window.menus.length == 0) {
+                    message.info("用户菜单权限为空");
+                } else {
+                    if (this.hasUserInfo) {
+                        this.props.history.push("/main/user/userInfo");
+                    } else {
+                        let url = "";
+                        if (
+                            window.menus[0].hasOwnProperty("children") &&
+                            window.menus[0].children &&
+                            window.menus[0].children.length > 0
+                        ) {
+                            url = window.menus[0].children[0].path;
+                            console.log(url);
+                            this.props.history.push(url);
+                        } else {
+                            message.info("用户菜单权限为空");
+                        }
+                    }
+                }
             } else {
                 message.info("获取用户权限失败");
             }
@@ -125,6 +146,12 @@ class FormLogin extends React.Component {
                                 if (localChildItem.title == authChild[l].name) {
                                     localChildItem.auth = authChild[l].auth;
                                     localChildItem.cmpt = authChild[l].cmpt;
+                                    if (
+                                        authChild[l].name == "用户管理" &&
+                                        authChild[l].auth == 1
+                                    ) {
+                                        this.hasUserInfo = true;
+                                    }
                                     if (authChild[l].auth != 1) {
                                         // console.log(
                                         //     "不显示二级菜单 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
