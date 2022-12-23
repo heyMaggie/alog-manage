@@ -160,7 +160,8 @@ class Menus extends PureComponent {
         // console.log(JSON.stringify(window.menus));
     };
     render() {
-        this.changeMenus();
+        // this.changeMenus();
+        window.menus = JSON.parse(sessionStorage.activeMenus);
         let { path } = this.props;
         //获取默认 展开菜单
         this.keys = [];

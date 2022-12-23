@@ -352,7 +352,7 @@ const menuList = [
         ],
     },
 ];
-if (sessionStorage.menusBackup == undefined) {
-    sessionStorage.menusBackup = JSON.stringify(menuList);
-}
+// if (sessionStorage.menusBackup == undefined) {
+sessionStorage.menusBackup = JSON.stringify(menuList);
+// }
 export default menuList;

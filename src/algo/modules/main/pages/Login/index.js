@@ -101,6 +101,7 @@ class FormLogin extends React.Component {
     changeMenus = () => {
         // console.log("changeMenus-------");
         let auth = sessionStorage.auth;
+        // sessionStorage.menusBackup = undefined;
         if (sessionStorage.menusBackup != undefined) {
             window.menus = JSON.parse(sessionStorage.menusBackup);
             // console.log(window.menus);
@@ -166,6 +167,10 @@ class FormLogin extends React.Component {
                         }
                     }
                     break;
+                } else if (j == authMenu.length - 1) {
+                    // console.log("没有菜单", localItem, i);
+                    window.menus.splice(i, 1);
+                    i--;
                 }
             }
         }
