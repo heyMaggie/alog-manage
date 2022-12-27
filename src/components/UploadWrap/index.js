@@ -37,7 +37,10 @@ export default class UploadWrap extends React.PureComponent {
                 showUploadList: false,
                 action: url,
                 data: data,
-                headers: { "X-Requested-With": null },
+                headers: {
+                    "X-Requested-With": null,
+                    userId: sessionStorage.userName,
+                },
                 onChange: (info) => {
                     if (info.file.status !== "uploading") {
                         // console.log(info.file, info.fileList);
