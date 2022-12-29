@@ -94,19 +94,74 @@ class Menus extends PureComponent {
         // this.setState({
         //   openKeys: t
         // });
-        // this.changeMenus();
     }
     changeMenus = () => {
-        let menu = JSON.parse(sessionStorage.auth);
-        // console.log(window.menus);
-        // console.log(menu);
-        for (let i = 0; i < window.menus.length; i++) {
-            let item = window.menus[i];
-            // console.log(item, menu[i]);
+        // console.log("changeMenus 侧边栏");
+        let auth = sessionStorage.auth;
+        if (sessionStorage.menusBackup != undefined) {
+            window.menus = JSON.parse(sessionStorage.menusBackup);
+            // console.log(window.menus);
         }
+        if (!auth) {
+            console.log("没有权限菜单，显示本地菜单");
+            return;
+        }
+        // let newAuth = auth.replace(/name/g, "title");
+        let authMenu = JSON.parse(auth);
+        // console.log(JSON.stringify(window.menus));
+        // console.log(window.menus);
+        // console.log(authMenu);
+        // authMenu[0].auth = 0;
+        // window.menus = menu;
+        for (let i = 0; i < window.menus.length; i++) {
+            let localItem = window.menus[i];
+            // console.log("本地 ", localItem);
+            for (let j = 0; j < authMenu.length; j++) {
+                let authItem = authMenu[j];
+                // console.log("权限 ", authItem);
+                if (localItem.title == authItem.name) {
+                    localItem.auth = authItem.auth;
+                    //删除 不显示的菜单
+                    // console.log(localItem, i, j);
+                    if (authItem.auth != 1) {
+                        // console.log("不显示一级 ", localItem);
+                        window.menus.splice(i, 1);
+                        i--;
+                        break;
+                    }
+                    if (
+                        localItem.hasOwnProperty("children") &&
+                        authItem.hasOwnProperty("children")
+                    ) {
+                        let localChild = localItem.children;
+                        let authChild = authItem.children;
+                        for (let k = 0; k < localChild.length; k++) {
+                            let localChildItem = localChild[k];
+                            // console.log("local:--- ", k, localChildItem);
+                            for (let l = 0; l < authChild.length; l++) {
+                                // console.log("authChild: ",authChild[l]);
+                                if (localChildItem.title == authChild[l].name) {
+                                    localChildItem.auth = authChild[l].auth;
+                                    localChildItem.cmpt = authChild[l].cmpt;
+                                    if (authChild[l].auth != 1) {
+                                        // console.log("不显示二级菜单 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", localChildItem);
+                                        localChild.splice(k, 1);
+                                        k--;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        // console.log(JSON.stringify(window.menus));
     };
     render() {
-        // console.log(this.props);
+        // this.changeMenus();
+        window.menus = JSON.parse(sessionStorage.activeMenus);
         let { path } = this.props;
         //获取默认 展开菜单
         this.keys = [];

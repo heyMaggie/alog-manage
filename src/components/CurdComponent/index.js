@@ -7,6 +7,7 @@ import Table from "@/components/Table";
 import DynamicDescriptions from "@/components/DynamicDescriptions";
 // import SplitPane from "react-split-pane";
 import UploadWrap from "@/components/UploadWrap";
+import { connect } from "react-redux";
 
 class CurdComponent extends React.PureComponent {
     state = {
@@ -47,10 +48,20 @@ class CurdComponent extends React.PureComponent {
                             this.props.pagination
                         );
                     }, 200);
-                    this.insertForm.resetFields();
-                    this.setState({
-                        insertModalVisible: false,
-                    });
+                    // this.insertForm.resetFields();
+                    // this.setState({
+                    //     insertModalVisible: false,
+                    // });
+                    setTimeout(() => {
+                        if (window.comfirmOk == "fail") {
+                            window.comfirmOk = false;
+                        } else {
+                            this.insertForm.resetFields();
+                            this.setState({
+                                insertModalVisible: false,
+                            });
+                        }
+                    }, 200);
                 }
             });
         }
@@ -87,8 +98,8 @@ class CurdComponent extends React.PureComponent {
                     //     updateModalVisible: false,
                     // });
                     setTimeout(() => {
-                        if (window.isUpdateOk == "fail") {
-                            window.isUpdateOk = false;
+                        if (window.comfirmOk == "fail") {
+                            window.comfirmOk = false;
                         } else {
                             this.setState({
                                 updateModalVisible: false,
@@ -121,7 +132,7 @@ class CurdComponent extends React.PureComponent {
         //增加只读权限
         if (
             (updateRecord || deleteRecord) &&
-            sessionStorage.userPrivilege != 2
+            (this.authObj.isUpdate || this.authObj.isDelete)
         ) {
             newCol = [
                 ...columns,
@@ -132,53 +143,82 @@ class CurdComponent extends React.PureComponent {
                     fixed: "right",
                     width: 144,
                     render: (text, record) => {
+                        let updateA = (
+                            <a
+                                style={{ color: "#3281ff" }}
+                                onClick={() => {
+                                    this.setState({
+                                        updateModalVisible: true,
+                                    });
+                                    if (this.updateForm) {
+                                        setUpdateModal({
+                                            form: this.updateForm,
+                                            record,
+                                        });
+                                    } else {
+                                        //第一次 updateModal 需要创建 动态表单
+                                        setTimeout(() => {
+                                            setUpdateModal({
+                                                form: this.updateForm,
+                                                record,
+                                            });
+                                        }, 0);
+                                    }
+                                }}
+                            >
+                                编辑
+                            </a>
+                        );
+                        let deleteA = (
+                            <Popconfirm
+                                title="是否确认删除?"
+                                onConfirm={async () => deleteRecord(record)}
+                                okText="确认"
+                                cancelText="取消"
+                            >
+                                <a
+                                    style={{
+                                        color: "rgba(240, 95, 94, 1)",
+                                        margin: "0 0 0 24px",
+                                    }}
+                                >
+                                    删除
+                                </a>
+                            </Popconfirm>
+                        );
+                        if (record.status == 2) {
+                            updateA = (
+                                <a
+                                    style={{
+                                        color: "#c0c4cc",
+                                    }}
+                                >
+                                    编辑
+                                </a>
+                            );
+                            deleteA = (
+                                <a
+                                    style={{
+                                        color: "#c0c4cc",
+                                        margin:
+                                            "0 0 0 " +
+                                            (this.authObj.isUpdate
+                                                ? "24px"
+                                                : "0px"),
+                                    }}
+                                >
+                                    删除
+                                </a>
+                            );
+                        }
                         return (
                             <div>
-                                {updateRecord && (
-                                    <a
-                                        style={{ color: "#3281ff" }}
-                                        onClick={() => {
-                                            this.setState({
-                                                updateModalVisible: true,
-                                            });
-                                            if (this.updateForm) {
-                                                setUpdateModal({
-                                                    form: this.updateForm,
-                                                    record,
-                                                });
-                                            } else {
-                                                //第一次 updateModal 需要创建 动态表单
-                                                setTimeout(() => {
-                                                    setUpdateModal({
-                                                        form: this.updateForm,
-                                                        record,
-                                                    });
-                                                }, 0);
-                                            }
-                                        }}
-                                    >
-                                        编辑
-                                    </a>
-                                )}
-                                {deleteRecord && (
-                                    <Popconfirm
-                                        title="是否确认删除?"
-                                        onConfirm={async () =>
-                                            deleteRecord(record)
-                                        }
-                                        okText="确认"
-                                        cancelText="取消"
-                                    >
-                                        <a
-                                            style={{
-                                                color: "rgba(240, 95, 94, 1)",
-                                                margin: "0 0 0 24px",
-                                            }}
-                                        >
-                                            删除
-                                        </a>
-                                    </Popconfirm>
-                                )}
+                                {updateRecord &&
+                                    this.authObj.isUpdate &&
+                                    updateA}
+                                {deleteRecord &&
+                                    this.authObj.isDelete &&
+                                    deleteA}
                             </div>
                         );
                     },
@@ -385,18 +425,68 @@ class CurdComponent extends React.PureComponent {
             this.props.onRef(this);
         }
         let pageSize = 0;
-        // let hasInsert = this.props.hasSlot && sessionStorage.userPrivilege == 0;
+        // console.log("activeMenu ", this.props.activeMenu);
+        let cmpt = this.props.activeMenu.cmpt;
+        // console.log(cmpt);
+        let authObj = {
+            isQuery: true,
+            isAdd: true,
+            isUpload: true,
+            isDownload: true,
+            isDelete: false,
+            isUpdate: true,
+        };
+        // console.log("cmpt", cmpt);
+        if (cmpt) {
+            for (let i = 0; i < cmpt.length; i++) {
+                let item = cmpt[i];
+                // console.log(item);
+                if (item.type == 1 && item.auth != 1) {
+                    //查询 有权限
+                    authObj.isQuery = false;
+                }
+                if (item.type == 2 && item.auth != 1) {
+                    //新增 有权限
+                    authObj.isAdd = false;
+                }
+                if (item.type == 3 && item.auth != 1) {
+                    //上传 有权限
+                    authObj.isUpload = false;
+                }
+                if (item.type == 4 && item.auth != 1) {
+                    //下载 有权限
+                    authObj.isDownload = false;
+                }
+                // if (item.type == 5 && item.auth != 1) {
+                //     //下载报告 有权限 -- 绩效那边
+                //     authObj.isExportPdf = false;
+                // }
+                if (item.type == 6 && item.auth == 1) {
+                    //删除 有权限
+                    authObj.isDelete = true;
+                }
+                if (item.type == 7 && item.auth != 1) {
+                    //编辑 有权限
+                    authObj.isUpdate = false;
+                }
+            }
+        }
+        // console.log("权限 ", authObj);
+        this.authObj = authObj;
+        //上传/下载 都没有，不显示导入/导出 栏
         let hasInsert =
-            this.props.children && sessionStorage.userPrivilege == 0;
+            this.props.children && (authObj.isDownload || authObj.isUpload);
+        // let hasInsert = this.props.children ;
         // console.log(hasInsert);
         if (insertBtnText || hasInsert) {
             pageSize = 12;
         }
+        let hasSearchForm =
+            isShowSearchForm && (authObj.isQuery || authObj.isAdd);
         if (
             this.props.getSearchFormFields &&
             this.props.getSearchFormFields().length > 0
         ) {
-            // if (this.props.isShowSearchForm) {
             pageSize = 12;
             if (insertBtnText || hasInsert) {
                 pageSize = 11;
@@ -425,10 +515,13 @@ class CurdComponent extends React.PureComponent {
                 )} */}
                 {hasInsert && (
                     <div className={styles.insertWrap}>
-                        <UploadWrap {...this.props.children.props}></UploadWrap>
+                        <UploadWrap
+                            {...this.props.children.props}
+                            authObj={authObj}
+                        ></UploadWrap>
                     </div>
                 )}
-                {isShowSearchForm && (
+                {hasSearchForm && (
                     <div className={styles.searchWrap}>
                         <SearchForm
                             // fields={this.getSearchFormFields()}
@@ -438,9 +531,10 @@ class CurdComponent extends React.PureComponent {
                             searchLoading={searchLoading}
                             pageId={this.pageId}
                             onReady={this.onSearchReady}
+                            authObj={authObj}
                         >
                             {!this.props.hasSearchSlot &&
-                                // hasInsert &&
+                                authObj.isAdd &&
                                 insertBtnText && (
                                     <Button
                                         type="primary"
@@ -450,12 +544,11 @@ class CurdComponent extends React.PureComponent {
                                         {insertBtnText}
                                     </Button>
                                 )}
-                            {this.props.hasSearchSlot &&
-                                sessionStorage.userPrivilege != 2 && (
-                                    <React.Fragment>
-                                        {this.props.addBtn}
-                                    </React.Fragment>
-                                )}
+                            {this.props.hasSearchSlot && authObj.isAdd && (
+                                <React.Fragment>
+                                    {this.props.addBtn}
+                                </React.Fragment>
+                            )}
                         </SearchForm>
                         {/* <div
                             style={{
@@ -537,4 +630,10 @@ class CurdComponent extends React.PureComponent {
         );
     }
 }
-export default CurdComponent;
+// export default CurdComponent;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        activeMenu: state.RouterModel.activeMenu,
+    };
+};
+export default connect(mapStateToProps, null)(CurdComponent);

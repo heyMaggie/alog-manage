@@ -230,62 +230,114 @@ class Cpu extends React.PureComponent {
         const children = hostList.map((d) => (
             <Option key={d.id}>{d.hostName}</Option>
         ));
+        let cmpt = this.props.activeMenu.cmpt;
+        // console.log(cmpt);
+        let authObj = {
+            isQuery: true,
+            isAdd: true,
+            isUpload: true,
+            isDownload: true,
+            isDelete: false,
+            isUpdate: true,
+        };
+        // console.log("cmpt", cmpt);
+        if (cmpt) {
+            for (let i = 0; i < cmpt.length; i++) {
+                let item = cmpt[i];
+                // console.log(item);
+                if (item.type == 1 && item.auth != 1) {
+                    //查询 有权限
+                    authObj.isQuery = false;
+                }
+                if (item.type == 2 && item.auth != 1) {
+                    //新增 有权限
+                    authObj.isAdd = false;
+                }
+                if (item.type == 3 && item.auth != 1) {
+                    //上传 有权限
+                    authObj.isUpload = false;
+                }
+                if (item.type == 4 && item.auth != 1) {
+                    //下载 有权限
+                    authObj.isDownload = false;
+                }
+                // if (item.type == 5 && item.auth != 1) {
+                //     //下载报告 有权限 -- 绩效那边
+                //     authObj.isExportPdf = false;
+                // }
+                if (item.type == 6 && item.auth == 1) {
+                    //删除 有权限
+                    authObj.isDelete = true;
+                }
+                if (item.type == 7 && item.auth != 1) {
+                    //编辑 有权限
+                    authObj.isUpdate = false;
+                }
+            }
+        }
+        this.authObj = authObj;
         return (
             <div className={styles.container}>
-                <div className={styles.search}>
-                    <Form layout="inline" onSubmit={this.handleSubmit}>
-                        <Form.Item label="服务器">
-                            {getFieldDecorator("hostId", {
-                                initialValue: "1",
-                            })(
-                                <Select
-                                    showSearch
-                                    style={{ width: 160 }}
-                                    placeholder="选择CPU"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                        option.props.children
-                                            .toLowerCase()
-                                            .indexOf(input.toLowerCase()) >= 0
-                                    }
-                                >
-                                    {children}
-                                    {/* <Option value="">全部</Option>
+                {this.authObj.isQuery && (
+                    <div className={styles.search}>
+                        <Form layout="inline" onSubmit={this.handleSubmit}>
+                            <Form.Item label="服务器">
+                                {getFieldDecorator("hostId", {
+                                    initialValue: "1",
+                                })(
+                                    <Select
+                                        showSearch
+                                        style={{ width: 160 }}
+                                        placeholder="选择CPU"
+                                        optionFilterProp="children"
+                                        filterOption={(input, option) =>
+                                            option.props.children
+                                                .toLowerCase()
+                                                .indexOf(input.toLowerCase()) >=
+                                            0
+                                        }
+                                    >
+                                        {children}
+                                        {/* <Option value="">全部</Option>
                                     <Option value="1">80</Option> */}
-                                </Select>
-                            )}
-                        </Form.Item>
-                        <Form.Item label="时间" style={{ marginLeft: "12px" }}>
-                            {getFieldDecorator("pickerTime", {
-                                initialValue: [
-                                    moment(
-                                        `${yesterday} 00:00:00`,
-                                        dataFormatter
-                                    ),
-                                    moment(
-                                        `${yesterday} 23:59:59`,
-                                        dataFormatter
-                                    ),
-                                ],
-                            })(
-                                <RangePicker
-                                    style={{ width: 432 }}
-                                    showTime
-                                    format={dataFormatter}
-                                />
-                            )}
-                        </Form.Item>
-                        <Form.Item style={{ float: "right" }}>
-                            <Button
-                                type="ghost"
-                                htmlType="submit"
-                                style={{ width: 76 }}
+                                    </Select>
+                                )}
+                            </Form.Item>
+                            <Form.Item
+                                label="时间"
+                                style={{ marginLeft: "12px" }}
                             >
-                                确定
-                            </Button>
-                        </Form.Item>
-                    </Form>
-                </div>
+                                {getFieldDecorator("pickerTime", {
+                                    initialValue: [
+                                        moment(
+                                            `${yesterday} 00:00:00`,
+                                            dataFormatter
+                                        ),
+                                        moment(
+                                            `${yesterday} 23:59:59`,
+                                            dataFormatter
+                                        ),
+                                    ],
+                                })(
+                                    <RangePicker
+                                        style={{ width: 432 }}
+                                        showTime
+                                        format={dataFormatter}
+                                    />
+                                )}
+                            </Form.Item>
+                            <Form.Item style={{ float: "right" }}>
+                                <Button
+                                    type="ghost"
+                                    htmlType="submit"
+                                    style={{ width: 76 }}
+                                >
+                                    确定
+                                </Button>
+                            </Form.Item>
+                        </Form>
+                    </div>
+                )}
                 <div>
                     <div id="main1" className={styles.chart}></div>
                 </div>
@@ -296,6 +348,7 @@ class Cpu extends React.PureComponent {
 const mapStateToProps = (state, ownProps) => {
     return {
         path: state.RouterModel.path,
+        activeMenu: state.RouterModel.activeMenu,
     };
 };
 export default connect(mapStateToProps, null)(Form.create()(Cpu));

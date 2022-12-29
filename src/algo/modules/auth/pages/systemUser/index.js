@@ -4,6 +4,7 @@ import SelectOption from "@/components/SelectOption";
 // import UploadWrap from "@/components/UploadWrap";
 import { Input } from "antd";
 import md5 from "js-md5"; //全局引入
+import { connect } from "react-redux";
 
 // const getUpdateFormFields = () => {
 //     return []
@@ -59,11 +60,12 @@ let getSearchFormFields = () => {
         },
     ];
 };
-export default class uoeSetting extends React.PureComponent {
+//export default
+class systemUser extends React.PureComponent {
     getInsertFormFields = () => {
         return [
             {
-                label: "用户ID（*ID名称只能为字母与数字的组合）",
+                label: "用户ID（*ID名称只能为字母或字母与数字的组合）",
                 id: "user_id",
                 initialValue: "",
                 rules: [
@@ -73,11 +75,15 @@ export default class uoeSetting extends React.PureComponent {
                     },
                     {
                         message: "请检查格式",
-                        pattern: /^[a-zA-Z0-9]+$/i,
+                        pattern: /^(?![0-9]+$)[a-zA-Z0-9]+$/i,
                     },
+                    // {
+                    //     validator: checkLength(10),
+                    //     trigger: ["change", "blur"],
+                    // },
                     {
-                        validator: checkLength(20),
-                        trigger: ["change", "blur"],
+                        max: 10,
+                        message: "最大长度为10",
                     },
                 ],
                 component: <Input placeholder="请输入" />,
@@ -91,9 +97,17 @@ export default class uoeSetting extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    // {
+                    //     validator: checkLength(20),
+                    //     trigger: ["change", "blur"],
+                    // },
                     {
-                        validator: checkLength(20),
-                        trigger: ["change", "blur"],
+                        message: "请检查格式",
+                        pattern: /^\S*$/i,
+                    },
+                    {
+                        max: 10,
+                        message: "最大长度为10",
                     },
                 ],
                 component: (
@@ -150,7 +164,7 @@ export default class uoeSetting extends React.PureComponent {
     getUpdateFormFields = () => {
         return [
             {
-                label: "用户ID（*ID名称只能为字母与数字的组合）",
+                label: "用户ID（*ID名称只能为字母或字母与数字的组合）",
                 id: "user_id",
                 initialValue: "",
                 rules: [
@@ -160,11 +174,15 @@ export default class uoeSetting extends React.PureComponent {
                     },
                     {
                         message: "请检查格式",
-                        pattern: /^[a-zA-Z0-9]+$/i,
+                        pattern: /^(?![0-9]+$)[a-zA-Z0-9]+$/i,
                     },
+                    // {
+                    //     validator: checkLength(20),
+                    //     trigger: ["change", "blur"],
+                    // },
                     {
-                        validator: checkLength(20),
-                        trigger: ["change", "blur"],
+                        max: 10,
+                        message: "最大长度为10",
                     },
                 ],
                 component: <Input placeholder="请输入" disabled />,
@@ -178,9 +196,17 @@ export default class uoeSetting extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    // {
+                    //     validator: checkLength(20),
+                    //     trigger: ["change", "blur"],
+                    // },
                     {
-                        validator: checkLength(20),
-                        trigger: ["change", "blur"],
+                        message: "请检查格式",
+                        pattern: /^\S*$/i,
+                    },
+                    {
+                        max: 10,
+                        message: "最大长度为10",
                     },
                 ],
                 component: (
@@ -277,6 +303,7 @@ export default class uoeSetting extends React.PureComponent {
         // console.log(params);
         if (formData.password != formData.password2) {
             message.error("密码与确认密码不一致");
+            window.comfirmOk = "fail";
             return;
         }
         // return;
@@ -299,7 +326,7 @@ export default class uoeSetting extends React.PureComponent {
         console.log("更新记录", form.getFieldsValue());
         if (formData.password != formData.password2) {
             message.error("密码与确认密码不一致");
-            window.isUpdateOk = "fail";
+            window.comfirmOk = "fail";
             return;
         }
         if (formData.passwordOld) {
@@ -309,13 +336,13 @@ export default class uoeSetting extends React.PureComponent {
                     // console.log("checkPassword 成功", formData);
                     if (formData.password.length == 0) {
                         message.error("密码不能为空");
-                        window.isUpdateOk = "fail";
+                        window.comfirmOk = "fail";
                         return;
                     }
                     this.updateUser(form);
                 } else {
                     message.error("原密码校验失败");
-                    window.isUpdateOk = "fail";
+                    window.comfirmOk = "fail";
                 }
             });
         } else {
@@ -343,7 +370,7 @@ export default class uoeSetting extends React.PureComponent {
         );
         // if (formData.password.length == 0) {
         //     message.error("密码不能为空");
-        //     window.isUpdateOk = "fail";
+        //     window.comfirmOk = "fail";
         //     return;
         // }
         let params = {
@@ -366,7 +393,7 @@ export default class uoeSetting extends React.PureComponent {
                 message.success("修改成功");
             } else {
                 message.error("修改失败");
-                window.isUpdateOk = "fail";
+                window.comfirmOk = "fail";
             }
         });
     };
@@ -402,7 +429,10 @@ export default class uoeSetting extends React.PureComponent {
             password2: "",
         });
     };
-    getRoleList = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
+    getRoleList = (
+        params = {},
+        pagination = { current: 1, pageSize: 10000 }
+    ) => {
         params = {
             ...params,
             scene: 1,
@@ -429,9 +459,17 @@ export default class uoeSetting extends React.PureComponent {
                             value: item.role_name,
                         };
                     });
-                this.setState({
-                    roleList: roleList,
-                });
+                if (
+                    JSON.stringify(roleList) !=
+                    JSON.stringify(this.state.roleList)
+                ) {
+                    this.setState({
+                        roleList: roleList,
+                    });
+                }
+                // this.setState({
+                //     roleList: roleList,
+                // });
             }
         });
     };
@@ -461,10 +499,16 @@ export default class uoeSetting extends React.PureComponent {
                 pageSize: pagination.pageSize,
                 total: res.total || 0,
             };
-            this.setState({
-                info: res.list ? res.list : [],
-                pagination: pgn,
-            });
+            // this.setState({
+            //     info: res.list ? res.list : [],
+            //     pagination: pgn,
+            // });
+            if (JSON.stringify(res.list) != JSON.stringify(this.state.info)) {
+                this.setState({
+                    info: res.list ? res.list : [],
+                    pagination: pgn,
+                });
+            }
         });
     };
     handleSearch = (params, pagination) => {
@@ -474,6 +518,18 @@ export default class uoeSetting extends React.PureComponent {
         this.getData();
         this.getRoleList();
     }
+    getInfo = () => {
+        // this.getData();
+        this.getRoleList();
+    };
+    debounceGet = () => {
+        if (window.getInfoTimer) {
+            // console.log("清除 请求");
+            clearTimeout(window.getInfoTimer);
+            window.getInfoTimer = undefined;
+        }
+        window.getInfoTimer = setTimeout(window.login, 400);
+    };
     render() {
         let scroll = { x: 1000, y: 445 };
         let info = this.state.info;
@@ -483,6 +539,8 @@ export default class uoeSetting extends React.PureComponent {
         //     selectRow,
         //     onChange: this.handleTableChange,
         // };
+        window.login = this.getInfo;
+        this.debounceGet();
         return (
             <div>
                 <CurdComponent
@@ -520,3 +578,9 @@ export default class uoeSetting extends React.PureComponent {
         );
     }
 }
+const mapStateToProps = (state, ownProps) => {
+    return {
+        path: state.RouterModel.path,
+    };
+};
+export default connect(mapStateToProps, null)(systemUser);

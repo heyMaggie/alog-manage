@@ -28,6 +28,7 @@ class SearchForm extends React.PureComponent {
             searchLoading,
             btnText = "查询",
             insertBtnText = "新增",
+            authObj = {},
         } = this.props;
         let { getFieldDecorator } = form;
         // let labelCol = {
@@ -49,36 +50,39 @@ class SearchForm extends React.PureComponent {
             <div className={styles.searchform}>
                 <div className={styles.left}>
                     <Form layout="inline" onKeyUp={this.onKeyup}>
-                        {fields.map((item) => {
-                            return (
-                                <FormItem
-                                    key={item.id}
-                                    label={item.label}
-                                    // {...formItemLayout}
-                                >
-                                    {getFieldDecorator(
-                                        item.id,
-                                        item.initialValue
-                                            ? {
-                                                  initialValue:
-                                                      item.initialValue,
-                                                  rules: item.rules,
-                                              }
-                                            : { rules: item.rules }
-                                    )(item.component)}
-                                </FormItem>
-                            );
-                        })}
+                        {authObj.isQuery &&
+                            fields.map((item) => {
+                                return (
+                                    <FormItem
+                                        key={item.id}
+                                        label={item.label}
+                                        // {...formItemLayout}
+                                    >
+                                        {getFieldDecorator(
+                                            item.id,
+                                            item.initialValue
+                                                ? {
+                                                      initialValue:
+                                                          item.initialValue,
+                                                      rules: item.rules,
+                                                  }
+                                                : { rules: item.rules }
+                                        )(item.component)}
+                                    </FormItem>
+                                );
+                            })}
                     </Form>
                 </div>
                 <div className={styles[right]}>
-                    <Button
-                        type="ghost"
-                        loading={searchLoading}
-                        onClick={this.handleClick}
-                    >
-                        {btnText}
-                    </Button>
+                    {authObj.isQuery && (
+                        <Button
+                            type="ghost"
+                            loading={searchLoading}
+                            onClick={this.handleClick}
+                        >
+                            {btnText}
+                        </Button>
+                    )}
                     {/* <Button
                         type="primary"
                         icon="plus"

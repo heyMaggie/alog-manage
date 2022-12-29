@@ -17,7 +17,8 @@ import {
     Popconfirm,
 } from "antd";
 import styles from "./style.module.less";
-// import md5 from "js-md5"; //全局引入
+import { connect } from "react-redux";
+
 const { TreeNode } = Tree;
 
 class userInfo extends React.PureComponent {
@@ -76,7 +77,7 @@ class userInfo extends React.PureComponent {
         ];
     };
     columns = (params) => {
-        return [
+        let arr = [
             {
                 title: "ID",
                 dataIndex: "id",
@@ -85,7 +86,7 @@ class userInfo extends React.PureComponent {
             {
                 title: "角色ID",
                 dataIndex: "role_id",
-                width: 100,
+                width: 150,
             },
             {
                 title: "角色名称",
@@ -106,13 +107,15 @@ class userInfo extends React.PureComponent {
                 dataIndex: "create_time",
                 width: 180,
             },
-            {
+        ];
+        if (this.authObj.isUpdate || this.authObj.isDelete) {
+            arr.push({
                 title: "操作",
                 key: "operation",
                 fixed: "right",
                 width: 100,
-                render: (text, record) => (
-                    <div>
+                render: (text, record) => {
+                    let updateA = (
                         <a
                             onClick={(e) => {
                                 this.handleUpdateBtn(record);
@@ -120,29 +123,65 @@ class userInfo extends React.PureComponent {
                         >
                             编辑
                         </a>
-                        {
-                            <Popconfirm
-                                title="是否确认删除?"
-                                onConfirm={async () =>
-                                    this.handleDeleteRecord(record)
-                                }
-                                okText="确认"
-                                cancelText="取消"
+                    );
+                    let deleteA = (
+                        <Popconfirm
+                            title="是否确认删除?"
+                            onConfirm={async () =>
+                                this.handleDeleteRecord(record)
+                            }
+                            okText="确认"
+                            cancelText="取消"
+                        >
+                            <a
+                                style={{
+                                    color: "rgba(240, 95, 94, 1)",
+                                    margin:
+                                        "0 0 0 " +
+                                        (this.authObj.isUpdate
+                                            ? "24px"
+                                            : "0px"),
+                                }}
                             >
-                                <a
-                                    style={{
-                                        color: "rgba(240, 95, 94, 1)",
-                                        margin: "0 0 0 24px",
-                                    }}
-                                >
-                                    删除
-                                </a>
-                            </Popconfirm>
-                        }
-                    </div>
-                ),
-            },
-        ];
+                                删除
+                            </a>
+                        </Popconfirm>
+                    );
+                    if (record.status == 2) {
+                        updateA = (
+                            <a
+                                style={{
+                                    color: "#c0c4cc",
+                                }}
+                            >
+                                编辑
+                            </a>
+                        );
+                        deleteA = (
+                            <a
+                                style={{
+                                    color: "#c0c4cc",
+                                    margin:
+                                        "0 0 0 " +
+                                        (this.authObj.isUpdate
+                                            ? "24px"
+                                            : "0px"),
+                                }}
+                            >
+                                删除
+                            </a>
+                        );
+                    }
+                    return (
+                        <div>
+                            {this.authObj.isUpdate && updateA}
+                            {this.authObj.isDelete && deleteA}
+                        </div>
+                    );
+                },
+            });
+        }
+        return arr;
     };
     //更新记录
     handleInsertRecord = (formData, roleAuth) => {
@@ -178,7 +217,7 @@ class userInfo extends React.PureComponent {
             role_name: formData.role_name,
             role_auth: JSON.stringify(roleAuth),
         };
-        console.log(params);
+        console.log("更新参数:", roleAuth);
         // return;
         http.post({
             url: "/tell-info/roleModify",
@@ -198,9 +237,10 @@ class userInfo extends React.PureComponent {
     };
     // 编辑按钮点击事件
     handleUpdateBtn = (record) => {
-        console.log("更新记录", record);
+        // console.log("更新记录", record);
         this.record = record;
         let role_auth = JSON.parse(record.role_auth);
+        console.log("更新记录", role_auth);
         this.isInsert = false;
         this.isUpdate = true;
         this.setState(
@@ -209,7 +249,7 @@ class userInfo extends React.PureComponent {
             },
             () => {
                 this.props.form.setFieldsValue({
-                    role_id: record.role_id,
+                    role_id: record.role_id + "",
                     role_name: record.role_name,
                 });
                 this.getRoleArray(role_auth);
@@ -257,16 +297,15 @@ class userInfo extends React.PureComponent {
         let formData = this.props.form.getFieldsValue();
         // console.log(formData);
         // console.log("treedata ", this.state.treeData);
-        // console.log("checked", this.state.checkedKeys);
         let roleAuth = this.resetRoleArray(this.state.checkedKeys);
         // console.log(roleAuth);
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 if (this.isInsert) {
-                    console.log("新增角色");
+                    // console.log("新增角色");
                     this.handleInsertRecord(formData, roleAuth);
                 } else {
-                    console.log("修改角色");
+                    // console.log("修改角色");
                     this.handleUpdateRecord(formData, roleAuth);
                 }
             }
@@ -287,7 +326,7 @@ class userInfo extends React.PureComponent {
                 for (let j = 0; j < lv1.children.length; j++) {
                     let lv2 = lv1.children[j];
                     if (checkArr.includes(lv2.key)) {
-                        lv2.auth == 1;
+                        lv2.auth = 1;
                     } else {
                         lv2.auth = 0;
                     }
@@ -295,7 +334,7 @@ class userInfo extends React.PureComponent {
                         for (let k = 0; k < lv2.cmpt.length; k++) {
                             let lv3 = lv2.cmpt[k];
                             if (checkArr.includes(lv3.key)) {
-                                lv3.auth == 1;
+                                lv3.auth = 1;
                             } else {
                                 lv3.auth = 0;
                             }
@@ -311,7 +350,9 @@ class userInfo extends React.PureComponent {
         let checkArr = [];
         for (let i = 0; i < roleAuth.length; i++) {
             let lv1 = roleAuth[i];
-            // lv1.key = i + 1 + "";
+            if (!lv1.key) {
+                lv1.key = i + 1 + "";
+            }
             if (lv1.auth == 1) {
                 checkArr.push(lv1.key);
             }
@@ -319,6 +360,9 @@ class userInfo extends React.PureComponent {
                 for (let j = 0; j < lv1.children.length; j++) {
                     let lv2 = lv1.children[j];
                     // lv2.key = lv1.key + "-" + (j + 1);
+                    if (!lv2.key) {
+                        lv2.key = lv1.key + "-" + (j + 1);
+                    }
                     if (lv2.auth == 1) {
                         checkArr.push(lv2.key);
                     }
@@ -326,6 +370,9 @@ class userInfo extends React.PureComponent {
                         for (let k = 0; k < lv2.cmpt.length; k++) {
                             let lv3 = lv2.cmpt[k];
                             // lv3.key = lv2.key + "-" + (k + 1);
+                            if (!lv3.key) {
+                                lv3.key = lv2.key + "-" + (k + 1);
+                            }
                             if (lv3.auth == 1) {
                                 checkArr.push(lv3.key);
                             }
@@ -409,7 +456,7 @@ class userInfo extends React.PureComponent {
             // url: "algo-assess/v1/auth/rolelist",
             data: params,
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             //解析数据字典
             if (res.list && res.list.length > 0) {
                 let userList = res.list;
@@ -448,6 +495,52 @@ class userInfo extends React.PureComponent {
         if (this.isUpdate) {
             modalTitle = "修改角色";
         }
+        let cmpt = this.props.activeMenu.cmpt;
+        // console.log(cmpt);
+        let authObj = {
+            isQuery: true,
+            isAdd: true,
+            isUpload: true,
+            isDownload: true,
+            isDelete: false,
+            isUpdate: true,
+        };
+        // console.log("cmpt", cmpt);
+        if (cmpt) {
+            for (let i = 0; i < cmpt.length; i++) {
+                let item = cmpt[i];
+                // console.log(item);
+                if (item.type == 1 && item.auth != 1) {
+                    //查询 有权限
+                    authObj.isQuery = false;
+                }
+                if (item.type == 2 && item.auth != 1) {
+                    //新增 有权限
+                    authObj.isAdd = false;
+                }
+                if (item.type == 3 && item.auth != 1) {
+                    //上传 有权限
+                    authObj.isUpload = false;
+                }
+                if (item.type == 4 && item.auth != 1) {
+                    //下载 有权限
+                    authObj.isDownload = false;
+                }
+                // if (item.type == 5 && item.auth != 1) {
+                //     //下载报告 有权限 -- 绩效那边
+                //     authObj.isExportPdf = false;
+                // }
+                if (item.type == 6 && item.auth == 1) {
+                    //删除 有权限
+                    authObj.isDelete = true;
+                }
+                if (item.type == 7 && item.auth != 1) {
+                    //编辑 有权限
+                    authObj.isUpdate = false;
+                }
+            }
+        }
+        this.authObj = authObj;
         return (
             <div className={styles.userInfo}>
                 <CurdComponent
@@ -516,9 +609,13 @@ class userInfo extends React.PureComponent {
                                                 message: "请输入数字",
                                                 pattern: new RegExp("^\\d+$"),
                                             },
+                                            // {
+                                            //     validator: checkLength(10),
+                                            //     trigger: ["change", "blur"],
+                                            // },
                                             {
-                                                validator: checkLength(20),
-                                                trigger: ["change", "blur"],
+                                                max: 10,
+                                                message: "最大长度为10",
                                             },
                                         ],
                                     })(<Input placeholder="请输入" />)}
@@ -533,6 +630,15 @@ class userInfo extends React.PureComponent {
                                             {
                                                 required: true,
                                                 message: "请输入",
+                                            },
+                                            {
+                                                message: "请检查格式",
+                                                pattern: /^\S*$/i,
+                                            },
+                                            {
+                                                max: 10,
+                                                // trigger: ["change", "blur"],
+                                                message: "最大长度为10",
                                             },
                                         ],
                                     })(<Input placeholder="" />)}
@@ -569,4 +675,10 @@ class userInfo extends React.PureComponent {
     }
 }
 
-export default Form.create()(userInfo);
+// export default Form.create()(userInfo);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        activeMenu: state.RouterModel.activeMenu,
+    };
+};
+export default connect(mapStateToProps, null)(Form.create()(userInfo));
