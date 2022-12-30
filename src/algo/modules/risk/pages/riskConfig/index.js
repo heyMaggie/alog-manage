@@ -52,9 +52,9 @@ class riskConfigManage extends React.PureComponent {
                 width: 150,
             },
             {
-                title: "风控类型",
+                title: "风控组类型",
                 dataIndex: "RiskTypeValue",
-                width: 100,
+                width: 120,
             },
             {
                 title: "阈值（总委比）",

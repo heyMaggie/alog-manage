@@ -86,7 +86,7 @@ class FormLogin extends React.Component {
                             window.menus[0].children.length > 0
                         ) {
                             url = window.menus[0].children[0].path;
-                            console.log(url);
+                            // console.log(url);
                             this.props.history.push(url);
                         } else {
                             message.info("用户菜单权限为空");
@@ -112,9 +112,9 @@ class FormLogin extends React.Component {
         }
         // let newAuth = auth.replace(/name/g, "title");
         let authMenu = JSON.parse(auth);
+        // console.log("authMenu", authMenu);
         // console.log(JSON.stringify(window.menus));
         // console.log(window.menus);
-        // console.log("authMenu", authMenu);
         // authMenu[0].auth = 0;
         // window.menus = menu;
         for (let i = 0; i < window.menus.length; i++) {
