@@ -325,6 +325,7 @@ class systemUser extends React.PureComponent {
     handleUpdateRecord = ({ form }) => {
         let formData = form.getFieldsValue();
         console.log("更新记录", form.getFieldsValue());
+        console.log(this.record);
         if (formData.password != formData.password2) {
             message.error("密码与确认密码不一致");
             window.comfirmOk = "fail";
@@ -347,6 +348,7 @@ class systemUser extends React.PureComponent {
                 }
             });
         } else {
+            // console.log(formData.passwordOld, "不更新");
             this.updateUser(form);
         }
     };
@@ -380,9 +382,10 @@ class systemUser extends React.PureComponent {
             user_name: formData.user_name,
             role_id: role[0].role_id,
             role_name: role[0].role_name,
-            password: md5(formData.password),
+            // password: md5(formData.password),
+            password: formData.password ? md5(formData.password) : "",
         };
-        // console.log(params);
+        console.log(params);
         // return;
         http.post({
             url: "/tell-info/userModify",
