@@ -242,6 +242,12 @@ const menuList = [
         icon: "icon5",
         children: [
             {
+                id: "3-7",
+                icon: "",
+                title: "系统监控",
+                path: "/main/chart/systemMonitor",
+            },
+            {
                 id: "3-5",
                 icon: "",
                 title: "CPU信息",
@@ -259,12 +265,7 @@ const menuList = [
                 title: "在线人数",
                 path: "/main/chart/onlineUser",
             },
-            // {
-            //     id: "3-2",
-            //     icon: "",
-            //     title: "下单统计",
-            //     path: "/main/chart/order",
-            // },
+
             // {
             //     id: "3-3",
             //     icon: "",

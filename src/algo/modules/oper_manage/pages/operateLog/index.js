@@ -41,45 +41,52 @@ const columns = (params) => {
         },
     ];
 };
-let getSearchFormFields = () => {
-    return [
-        {
-            label: "用户名称",
-            id: "operateId",
-            component: <Input placeholder="请输入管理员名称" />,
-        },
-        {
-            label: "操作模块",
-            id: "operateModule",
-            component: <Input placeholder="请选择操作模块" />,
-        },
-        {
-            label: "日期",
-            id: "createTime",
-            initialValue: [],
-            component: (
-                <RangePicker
-                    style={{ width: 432 }}
-                    showTime
-                    format="YYYY-MM-DD HH:mm:ss"
-                />
-            ),
-        },
-    ];
-};
+
 export default class uoeSetting extends React.PureComponent {
     state = {
         searchLoading: false,
         selectRow: [],
         info: [],
         pagination: { total: 0 },
+        opModuleList: [],
     };
-
+    getSearchFormFields = () => {
+        return [
+            {
+                label: "用户名称",
+                id: "operateId",
+                component: <Input placeholder="请输入管理员名称" />,
+            },
+            {
+                label: "操作模块",
+                id: "operateModule",
+                component: SelectOption(this.state.opModuleList, {
+                    placeholder: "请选择",
+                }),
+            },
+            {
+                label: "日期",
+                id: "createTime",
+                initialValue: [],
+                component: (
+                    <RangePicker
+                        style={{ width: 432 }}
+                        showTime
+                        format="YYYY-MM-DD HH:mm:ss"
+                    />
+                ),
+            },
+        ];
+    };
     getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
         // console.log(params);
         let startTime = "";
         let endTime = "";
+<<<<<<< HEAD
+        if (params["createTime"].length) {
+=======
         if (params["createTime"] && params.createTime.length > 0) {
+>>>>>>> 98c892052c62e34ebb8c4b466bd71693a0477a92
             startTime = moment(params["createTime"][0]).format(
                 "YYYY-MM-DD HH:mm:ss"
             );
@@ -123,8 +130,32 @@ export default class uoeSetting extends React.PureComponent {
         this.getData(params, pagination);
     };
     componentDidMount() {
-        this.getData();
+        this.getData({ createTime: [] });
+        this.getOpModuleList();
     }
+    //获操作模块名称
+    getOpModuleList = (params = {}) => {
+        // return;
+        http.get({
+            url: "/operate-log/operateModule",
+            data: params,
+        }).then((res) => {
+            let idArr = [];
+            if (res.data && res.data.length > 0) {
+                let dataArr = res.data;
+                idArr = dataArr.map((item) => {
+                    let obj = {};
+                    obj.key = item;
+                    obj.value = item;
+                    return obj;
+                });
+                this.setState({
+                    opModuleList: idArr,
+                });
+                // console.log(this.state.opModuleList);
+            }
+        });
+    };
     render() {
         let scroll = { x: 1000, y: 445 };
         let info = this.state.info;
@@ -135,7 +166,7 @@ export default class uoeSetting extends React.PureComponent {
                     // isShowSearchForm={false}
                     // btnText2="查全部"
                     onSearchClick={this.handleSearch}
-                    getSearchFormFields={getSearchFormFields}
+                    getSearchFormFields={this.getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     // insertBtnText={"新增"} // 不传 就没新增按钮
                     // getInsertFormFields={getInsertFormFields}

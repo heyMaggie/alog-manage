@@ -41,6 +41,11 @@ const main = (root = "/main/chart") => [
         component: `${pages}/network`,
         title: "网络带宽",
     },
+    {
+        path: `${root}/systemMonitor`,
+        component: `${pages}/systemMonitor`,
+        title: "系统监控",
+    },
 ];
 
 export default main;
