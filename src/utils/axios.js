@@ -45,11 +45,10 @@ export default class Axios {
                         if (
                             res.code == "0" ||
                             res.code == "200" ||
-                            res.code == "360" ||
+                            (res.code > 200 && res.code < 400) ||
                             res.code == "2000" ||
                             res.code == "10000" ||
-                            res.code == "20000" ||
-                            res.assessOperateConnect
+                            res.code == "20000"
                         ) {
                             resolve(res);
                         } else {
@@ -106,7 +105,7 @@ export default class Axios {
                         if (
                             res.code == "0" ||
                             res.code == "200" ||
-                            res.code == "360" ||
+                            (res.code > 200 && res.code < 400) ||
                             res.code == "2000" ||
                             res.code == "10000" ||
                             res.code == "20000"
@@ -158,7 +157,7 @@ export default class Axios {
                         if (
                             res.code == "0" ||
                             res.code == "200" ||
-                            res.code == "360" ||
+                            (res.code > 200 && res.code < 400) ||
                             res.code == "2000" ||
                             res.code == "10000"
                         ) {

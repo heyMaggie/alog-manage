@@ -311,12 +311,13 @@ class systemUser extends React.PureComponent {
             url: "/tell-info/userModify",
             data: params,
         }).then((res) => {
-            // console.log(res);
+            console.log(res);
             if (res.code == 200) {
                 message.success("新增成功");
                 // this.getData();
             } else {
-                message.error("新增失败");
+                message.error(res.msg || "新增失败");
+                window.comfirmOk = "fail";
             }
         });
     };
