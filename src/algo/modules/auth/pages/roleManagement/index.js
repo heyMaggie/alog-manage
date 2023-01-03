@@ -205,7 +205,7 @@ class userInfo extends React.PureComponent {
                     updateModalVisible: false,
                 });
             } else {
-                message.error("新增失败");
+                message.error(res.msg || "新增失败");
             }
         });
     };
@@ -231,7 +231,7 @@ class userInfo extends React.PureComponent {
                     updateModalVisible: false,
                 });
             } else {
-                message.error("修改失败");
+                message.error(res.msg || "修改失败");
             }
         });
     };

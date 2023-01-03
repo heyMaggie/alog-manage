@@ -396,7 +396,7 @@ class systemUser extends React.PureComponent {
             if (res.code == 200) {
                 message.success("修改成功");
             } else {
-                message.error("修改失败");
+                message.error(res.msg || "修改失败");
                 window.comfirmOk = "fail";
             }
         });

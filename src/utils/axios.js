@@ -102,6 +102,10 @@ export default class Axios {
                     }
                     if (response.status == "200") {
                         let res = response.data;
+                        if (!res.hasOwnProperty("code")) {
+                            resolve(res);
+                            return;
+                        }
                         if (
                             res.code == "0" ||
                             res.code == "200" ||
