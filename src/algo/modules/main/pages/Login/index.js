@@ -124,10 +124,10 @@ class FormLogin extends React.Component {
                 let authItem = authMenu[j];
                 // console.log("权限 ", authItem);
                 if (localItem.title == authItem.name) {
-                    localItem.auth = authItem.auth;
+                    localItem.auth = authItem.authReal;
                     //删除 不显示的菜单
                     // console.log(localItem, i, j);
-                    if (authItem.auth != 1) {
+                    if (authItem.authReal != 1) {
                         // console.log("不显示一级 ", localItem);
                         window.menus.splice(i, 1);
                         i--;
@@ -145,15 +145,15 @@ class FormLogin extends React.Component {
                             for (let l = 0; l < authChild.length; l++) {
                                 // console.log("authChild: ",authChild[l]);
                                 if (localChildItem.title == authChild[l].name) {
-                                    localChildItem.auth = authChild[l].auth;
+                                    localChildItem.auth = authChild[l].authReal;
                                     localChildItem.cmpt = authChild[l].cmpt;
                                     if (
                                         authChild[l].name == "用户管理" &&
-                                        authChild[l].auth == 1
+                                        authChild[l].authReal == 1
                                     ) {
                                         this.hasUserInfo = true;
                                     }
-                                    if (authChild[l].auth != 1) {
+                                    if (authChild[l].authReal != 1) {
                                         // console.log(
                                         //     "不显示二级菜单 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                                         //     localChildItem

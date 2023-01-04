@@ -41,8 +41,9 @@ class userInfo extends React.PureComponent {
         });
     };
     onCheck = (checkedKeys) => {
-        // console.log("onCheck", checkedKeys.checked);
-        this.setState({ checkedKeys: checkedKeys.checked });
+        console.log("onCheck", checkedKeys);
+        // this.setState({ checkedKeys: checkedKeys.checked });
+        this.setState({ checkedKeys: checkedKeys });
     };
     renderTreeNodes = (treeData) => {
         // console.log("renderTreeNodes", data);
@@ -319,22 +320,28 @@ class userInfo extends React.PureComponent {
             let lv1 = roleAuth[i];
             if (checkArr.includes(lv1.key)) {
                 lv1.auth = 1;
+                lv1.authReal = 1;
             } else {
                 lv1.auth = 0;
+                lv1.authReal = 0;
             }
             if (lv1.children) {
                 for (let j = 0; j < lv1.children.length; j++) {
                     let lv2 = lv1.children[j];
                     if (checkArr.includes(lv2.key)) {
                         lv2.auth = 1;
+                        lv2.authReal = 1;
                     } else {
                         lv2.auth = 0;
+                        lv2.authReal = 0;
                     }
                     if (lv2.cmpt) {
                         for (let k = 0; k < lv2.cmpt.length; k++) {
                             let lv3 = lv2.cmpt[k];
                             if (checkArr.includes(lv3.key)) {
                                 lv3.auth = 1;
+                                lv1.authReal = 1;
+                                lv2.authReal = 1;
                             } else {
                                 lv3.auth = 0;
                             }
@@ -654,7 +661,7 @@ class userInfo extends React.PureComponent {
                             <Tree
                                 checkable
                                 className={styles.tree}
-                                checkStrictly={true}
+                                // checkStrictly={true}
                                 onExpand={this.onExpand}
                                 // expandedKeys={this.state.expandedKeys}
                                 defaultExpandAll={true}
