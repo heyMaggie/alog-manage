@@ -97,7 +97,7 @@ export default class uoeSetting extends React.PureComponent {
         return [
             {
                 label: "用户名称",
-                id: "userId",
+                id: "id",
                 initialValue: "",
                 rules: [
                     {
@@ -272,7 +272,6 @@ export default class uoeSetting extends React.PureComponent {
                         width: 400,
                     },
                 }),
-                // component: <Input placeholder="请输入" />,
             },
             {
                 label: "股东账户",
@@ -453,7 +452,7 @@ export default class uoeSetting extends React.PureComponent {
     handleInsertRecord = (fromData) => {
         console.log("新增接口", fromData);
         let params = {
-            UserId: fromData.userId,
+            UuserId: fromData.id,
             AccountId: fromData.accountId,
             Market: fromData.market / 1,
             AccountType: fromData.accountType / 1,
@@ -525,7 +524,7 @@ export default class uoeSetting extends React.PureComponent {
         // console.log(record, form);
         this.record = record;
         form.setFieldsValue({
-            userId: record.userId + "",
+            userId: record.uuserId,
             market: record.market + "",
             accountType: record.accountType + "",
             accountId: record.accountId,
@@ -579,10 +578,9 @@ export default class uoeSetting extends React.PureComponent {
             let idArr = [];
             if (res.data && res.data.length) {
                 // RiskType: [{ key: "1", value: "用户" },{ key: "2", value: "算法" },
-
                 idArr = res.data.map((item) => {
                     let obj = {};
-                    obj.key = item.userId;
+                    obj.key = item.id;
                     obj.value = item.userName;
                     return obj;
                 });
