@@ -499,8 +499,10 @@ class userInfo extends React.PureComponent {
         let info = this.state.info;
         let { getFieldDecorator } = this.props.form;
         let modalTitle = "新增角色";
+        let roleDisable = false;
         if (this.isUpdate) {
             modalTitle = "修改角色";
+            roleDisable = true;
         }
         let cmpt = this.props.activeMenu.cmpt;
         // console.log(cmpt);
@@ -625,7 +627,12 @@ class userInfo extends React.PureComponent {
                                                 message: "最大长度为10",
                                             },
                                         ],
-                                    })(<Input placeholder="请输入" />)}
+                                    })(
+                                        <Input
+                                            placeholder="请输入"
+                                            disabled={roleDisable}
+                                        />
+                                    )}
                                 </Form.Item>
                                 <div style={{ width: 60 }}></div>
                                 <Form.Item
