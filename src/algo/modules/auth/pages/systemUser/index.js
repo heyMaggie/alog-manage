@@ -311,12 +311,13 @@ class systemUser extends React.PureComponent {
             url: "/tell-info/userModify",
             data: params,
         }).then((res) => {
-            // console.log(res);
+            console.log(res);
             if (res.code == 200) {
                 message.success("新增成功");
                 // this.getData();
             } else {
-                message.error("新增失败");
+                message.error(res.msg || "新增失败");
+                window.comfirmOk = "fail";
             }
         });
     };
@@ -324,6 +325,7 @@ class systemUser extends React.PureComponent {
     handleUpdateRecord = ({ form }) => {
         let formData = form.getFieldsValue();
         console.log("更新记录", form.getFieldsValue());
+        console.log(this.record);
         if (formData.password != formData.password2) {
             message.error("密码与确认密码不一致");
             window.comfirmOk = "fail";
@@ -346,6 +348,7 @@ class systemUser extends React.PureComponent {
                 }
             });
         } else {
+            // console.log(formData.passwordOld, "不更新");
             this.updateUser(form);
         }
     };
@@ -379,9 +382,10 @@ class systemUser extends React.PureComponent {
             user_name: formData.user_name,
             role_id: role[0].role_id,
             role_name: role[0].role_name,
-            password: md5(formData.password),
+            // password: md5(formData.password),
+            password: formData.password ? md5(formData.password) : "",
         };
-        // console.log(params);
+        console.log(params);
         // return;
         http.post({
             url: "/tell-info/userModify",
@@ -392,7 +396,7 @@ class systemUser extends React.PureComponent {
             if (res.code == 200) {
                 message.success("修改成功");
             } else {
-                message.error("修改失败");
+                message.error(res.msg || "修改失败");
                 window.comfirmOk = "fail";
             }
         });
