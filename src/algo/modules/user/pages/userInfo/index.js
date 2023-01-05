@@ -51,10 +51,20 @@ class userInfo extends React.PureComponent {
                     //     trigger: ["change", "blur"],
                     // },
                 ],
-                // component: <Input placeholder="请输入" />,
-                component: SelectOption(this.state.organizationList, {
-                    placeholder: "请选择机构名称",
-                }),
+                component: (
+                    <AutoComplete
+                        dataSource={this.state.organizationList}
+                        placeholder="请输入机构名称"
+                        filterOption={(inputValue, option) =>
+                            option.props.children
+                                .toUpperCase()
+                                .indexOf(inputValue.toUpperCase()) !== -1
+                        }
+                    />
+                ),
+                // component: SelectOption(this.state.organizationList, {
+                //     placeholder: "请选择机构名称",
+                // }),
             },
             {
                 label: "产品",
@@ -110,7 +120,7 @@ class userInfo extends React.PureComponent {
                         trigger: ["change", "blur"],
                     },
                 ],
-                component: <Input placeholder="请输入" />,
+                component: <Input placeholder="请输入" type="password" />,
             },
             {
                 label: "用户名称",
@@ -260,9 +270,20 @@ class userInfo extends React.PureComponent {
                     // },
                 ],
                 // component: <Input placeholder="请输入" />,
-                component: SelectOption(this.state.organizationList, {
-                    placeholder: "请选择机构名称",
-                }),
+                // component: SelectOption(this.state.organizationList, {
+                //     placeholder: "请选择机构名称",
+                // }),
+                component: (
+                    <AutoComplete
+                        dataSource={this.state.organizationList}
+                        placeholder="请输入机构名称"
+                        filterOption={(inputValue, option) =>
+                            option.props.children
+                                .toUpperCase()
+                                .indexOf(inputValue.toUpperCase()) !== -1
+                        }
+                    />
+                ),
             },
             {
                 label: "产品",
@@ -318,7 +339,12 @@ class userInfo extends React.PureComponent {
                     //     trigger: ["change", "blur"],
                     // },
                 ],
-                component: <Input placeholder="需修改密码，请输入新密码" />,
+                component: (
+                    <Input
+                        placeholder="需修改密码，请输入新密码"
+                        type="password"
+                    />
+                ),
             },
             {
                 label: "用户名称",
@@ -489,9 +515,20 @@ class userInfo extends React.PureComponent {
             {
                 label: <span>&nbsp;机&nbsp;构&nbsp;名&nbsp;称</span>,
                 id: "organizaName",
-                component: SelectOption(this.state.organizationList, {
-                    placeholder: "请选择",
-                }),
+                component: (
+                    <AutoComplete
+                        dataSource={this.state.organizationList}
+                        placeholder="请输入机构名称"
+                        filterOption={(inputValue, option) =>
+                            option.props.children
+                                .toUpperCase()
+                                .indexOf(inputValue.toUpperCase()) !== -1
+                        }
+                    />
+                ),
+                // component: SelectOption(this.state.organizationList, {
+                //     placeholder: "请选择",
+                // }),
                 // component: <Input placeholder="请输入" />,
             },
             {
@@ -998,12 +1035,15 @@ class userInfo extends React.PureComponent {
             let idArr = [];
             if (res.data && res.data.length > 0) {
                 let dataArr = res.data;
-                idArr = dataArr.map((item) => {
-                    let obj = {};
-                    obj.key = item.organizaName;
-                    obj.value = item.organizaName;
-                    return obj;
+                dataArr.map((item) => {
+                    // let obj = {};
+                    // obj.key = item.organizaName;
+                    // obj.value = item.organizaName;
+                    // return obj;
+                    idArr.push(item.organizaName);
+                    // return item.organizaName;
                 });
+                // console.log(idArr);
                 this.setState({
                     organizationList: idArr,
                 });
