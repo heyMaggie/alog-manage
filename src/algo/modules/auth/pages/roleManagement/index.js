@@ -98,11 +98,11 @@ class userInfo extends React.PureComponent {
                 title: "权限",
                 dataIndex: "role_desc",
             },
-            {
-                title: "状态",
-                dataIndex: "statusValue",
-                width: 100,
-            },
+            // {
+            //     title: "状态",
+            //     dataIndex: "statusValue",
+            //     width: 100,
+            // },
             {
                 title: "创建时间",
                 dataIndex: "create_time",

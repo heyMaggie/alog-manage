@@ -154,8 +154,9 @@ const configData = {
         { key: "7", value: "现货可用、期权可用、两融可用" },
     ],
     authStatus: [
-        { key: 1, value: "正常" },
-        { key: 2, value: "作废" },
+        { key: "1", value: "正常" },
+        // { key: "2", value: "删除" },
+        { key: "3", value: "禁用" },
     ],
     //0:未登录 1正常登录状态 2 网络异常断开 3 会话超时 4 正常登出
     sessionStatus: [
