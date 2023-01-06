@@ -82,7 +82,7 @@ export default class uoeSetting extends React.PureComponent {
         // console.log(params);
         let startTime = "";
         let endTime = "";
-        if (params["createTime"] && params.createTime.length > 0) {
+        if (params["createTime"].length) {
             startTime = moment(params["createTime"][0]).format(
                 "YYYY-MM-DD HH:mm:ss"
             );
