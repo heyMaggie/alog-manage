@@ -1040,10 +1040,12 @@ class userInfo extends React.PureComponent {
                     // obj.key = item.organizaName;
                     // obj.value = item.organizaName;
                     // return obj;
-                    idArr.push(item.organizaName);
+                    if (item.organizaName) {
+                        idArr.push(item.organizaName);
+                    }
+                    // idArr.push(item.organizaName);
                     // return item.organizaName;
                 });
-                // console.log(idArr);
                 this.setState({
                     organizationList: idArr,
                 });
