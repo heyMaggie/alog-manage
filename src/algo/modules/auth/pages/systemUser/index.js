@@ -144,6 +144,10 @@ class systemUser extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        max: 20,
+                        message: "最大长度为20",
+                    },
                 ],
                 component: <Input.Password placeholder="请输入" />,
             },
@@ -155,6 +159,10 @@ class systemUser extends React.PureComponent {
                     {
                         required: true,
                         message: "参数不能为空",
+                    },
+                    {
+                        max: 20,
+                        message: "最大长度为20",
                     },
                 ],
                 component: <Input.Password placeholder="请输入" />,
@@ -252,36 +260,36 @@ class systemUser extends React.PureComponent {
                 label: "原密码",
                 id: "passwordOld",
                 initialValue: "",
-                // rules: [
-                //     {
-                //         required: true,
-                //         message: "参数不能为空",
-                //     },
-                // ],
+                rules: [
+                    {
+                        max: 20,
+                        message: "最大长度为20",
+                    },
+                ],
                 component: <Input.Password placeholder="请输入" />,
             },
             {
                 label: "设置密码",
                 id: "password",
                 initialValue: "",
-                // rules: [
-                //     {
-                //         required: true,
-                //         message: "参数不能为空",
-                //     },
-                // ],
+                rules: [
+                    {
+                        max: 20,
+                        message: "最大长度为20",
+                    },
+                ],
                 component: <Input.Password placeholder="请输入" />,
             },
             {
                 label: "确认密码",
                 id: "password2",
                 initialValue: "",
-                // rules: [
-                //     {
-                //         required: true,
-                //         message: "参数不能为空",
-                //     },
-                // ],
+                rules: [
+                    {
+                        max: 20,
+                        message: "最大长度为20",
+                    },
+                ],
                 component: <Input.Password placeholder="请输入" />,
             },
         ];
