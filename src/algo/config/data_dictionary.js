@@ -93,7 +93,13 @@ const configData = {
     algorithmType: [
         { key: "1", value: "T0日内回转" },
         { key: "2", value: "智能委托" },
-        { key: "3", value: "调仓" },
+        // { key: "3", value: "调仓" },
+    ],
+    algorithmTypeId: [
+        { key: "1", value: "智能委托" },
+        { key: "2", value: "POV" },
+        { key: "3", value: "股指" },
+        // { key: "3", value: "调仓" },
     ],
     userStatus: [
         { key: "1", value: "正常" },

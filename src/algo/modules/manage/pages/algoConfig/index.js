@@ -39,7 +39,7 @@ class algoConfig extends React.PureComponent {
                 component: <Input placeholder="请输入名称,例:智能委托(ZC)" />,
             },
             {
-                label: "算法风控组",
+                label: "算法风控组名称",
                 id: "RiskGroup",
                 initialValue: "",
                 rules: [
@@ -102,6 +102,7 @@ class algoConfig extends React.PureComponent {
                     },
                 ],
                 component: SelectOption(dict.algorithmType, {
+                    onChange: this.algorithmTypeChange,
                     placeholder: "请选择",
                     // allowClear: true,
                     style: {
@@ -118,33 +119,40 @@ class algoConfig extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
-                    {
-                        message: "请输入正整数",
-                        pattern: /^\d+$/i,
-                    },
-                    {
-                        validator: checkLength(2),
-                        trigger: ["change", "blur"],
-                    },
+                    // {
+                    //     message: "请输入正整数",
+                    //     pattern: /^\d+$/i,
+                    // },
+                    // {
+                    //     validator: checkLength(2),
+                    //     trigger: ["change", "blur"],
+                    // },
                 ],
-                component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "算法类型名称",
-                id: "AlgorithmTypeName",
-                // initialValue: "",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
+                component: SelectOption(this.state.algorithmTypeList, {
+                    placeholder: "请选择",
+                    // allowClear: true,
+                    style: {
+                        width: 400,
                     },
-                    {
-                        validator: checkLength(16),
-                        trigger: ["change", "blur"],
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
+                }),
+                // component: <Input placeholder="请输入" />,
             },
+            // {
+            //     label: "算法类型名称",
+            //     id: "AlgorithmTypeName",
+            //     // initialValue: "",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //         {
+            //             validator: checkLength(16),
+            //             trigger: ["change", "blur"],
+            //         },
+            //     ],
+            //     component: <Input placeholder="请输入" />,
+            // },
             {
                 label: "是否显示",
                 id: "algorithmShow",
@@ -212,7 +220,7 @@ class algoConfig extends React.PureComponent {
                 component: <Input placeholder="请输入名称,例:智能委托(ZC)" />,
             },
             {
-                label: "算法风控组",
+                label: "算法风控组名称",
                 id: "RiskGroup",
                 initialValue: "",
                 rules: [
@@ -276,6 +284,7 @@ class algoConfig extends React.PureComponent {
                     },
                 ],
                 component: SelectOption(dict.algorithmType, {
+                    onChange: this.algorithmTypeChange,
                     placeholder: "请选择",
                     // allowClear: true,
                     style: {
@@ -292,33 +301,40 @@ class algoConfig extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
-                    {
-                        message: "请输入正整数",
-                        pattern: /^\d+$/i,
-                    },
-                    {
-                        validator: checkLength(2),
-                        trigger: ["change", "blur"],
-                    },
+                    // {
+                    //     message: "请输入正整数",
+                    //     pattern: /^\d+$/i,
+                    // },
+                    // {
+                    //     validator: checkLength(2),
+                    //     trigger: ["change", "blur"],
+                    // },
                 ],
-                component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "算法类型名称",
-                id: "AlgorithmTypeName",
-                // initialValue: "",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
+                component: SelectOption(this.state.algorithmTypeList, {
+                    placeholder: "请选择",
+                    // allowClear: true,
+                    style: {
+                        width: 400,
                     },
-                    {
-                        validator: checkLength(16),
-                        trigger: ["change", "blur"],
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
+                }),
+                // component: <Input placeholder="请输入" />,
             },
+            // {
+            //     label: "算法类型名称",
+            //     id: "AlgorithmTypeName",
+            //     // initialValue: "",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //         {
+            //             validator: checkLength(16),
+            //             trigger: ["change", "blur"],
+            //         },
+            //     ],
+            //     component: <Input placeholder="请输入" />,
+            // },
             {
                 label: "是否显示",
                 id: "algorithmShow",
@@ -388,13 +404,13 @@ class algoConfig extends React.PureComponent {
             },
             {
                 title: "算法类型ID",
-                dataIndex: "algorithmTypeId",
+                dataIndex: "algorithmTypeIdValue",
             },
-            {
-                title: "算法类型名称",
-                dataIndex: "algorithmTypeName",
-                width: 130,
-            },
+            // {
+            //     title: "算法类型名称",
+            //     dataIndex: "algorithmTypeName",
+            //     width: 130,
+            // },
             {
                 title: "是否显示",
                 dataIndex: "algorithmShow",
@@ -444,7 +460,7 @@ class algoConfig extends React.PureComponent {
                 width: 130,
             },
             {
-                title: "算法风控组",
+                title: "算法风控组名称",
                 dataIndex: "riskGroup",
                 key: "riskGroup",
                 render: (text, record) => (
@@ -499,6 +515,8 @@ class algoConfig extends React.PureComponent {
         pagination: { total: 0 },
         riskList: [],
         providerList: [],
+        seAlgorithmType: "",
+        algorithmTypeList: [{ key: "1", value: "日内回转" }],
     };
     // type 1 : 是否显示    type:2  是否可用
     onSwitchChange = (val, record, type) => {
@@ -631,11 +649,11 @@ class algoConfig extends React.PureComponent {
             ProviderName: record.providerName + "-" + record.uuserId,
             // UuserId: record.uuserId,
             AlgorithmType: record.algorithmType + "",
-            AlgorithmTypeId: record.algorithmTypeId / 1,
+            AlgorithmTypeId: record.algorithmTypeId + "",
             AlgorithmTypeName: record.algorithmTypeName,
             // AlgorithmStatus: record.AlgorithmStatus + "",
             Parameter: record.parameter,
-            RiskGroup: record.riskGroup,
+            RiskGroup: record.riskGroup + "",
         };
         if (record.algorithmStatus == 0) {
             formData.algorithmShow = 0;
@@ -813,7 +831,7 @@ class algoConfig extends React.PureComponent {
                     idArr = dataArr.map((item) => {
                         let obj = {};
                         obj.key = item.id;
-                        obj.value = item.id;
+                        obj.value = item.riskName;
                         return obj;
                     });
                     // console.log(idArr);
@@ -908,6 +926,22 @@ class algoConfig extends React.PureComponent {
                 tradeQtyLimit: config.TradeQtyLimit,
                 tradeAmountLimit: config.TradeAmountLimit,
             });
+        });
+    };
+    // 改变算发类型
+    algorithmTypeChange = (value) => {
+        let selList = [];
+        if (value == 1) {
+            selList = [{ key: "1", value: "日内回转" }];
+        } else {
+            selList = [
+                { key: "1", value: "智能委托" },
+                { key: "2", value: "POV" },
+                { key: "3", value: "股指" },
+            ];
+        }
+        this.setState({
+            algorithmTypeList: selList,
         });
     };
     getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
