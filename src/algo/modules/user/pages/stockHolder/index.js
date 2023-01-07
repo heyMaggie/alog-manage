@@ -25,15 +25,15 @@ const columns = (params) => {
             dataIndex: "marketValue",
         },
         {
-            title: "账户类型",
+            title: "股东账户类型",
             dataIndex: "accountTypeValue",
         },
         {
-            title: "账户状态",
+            title: "股东账户状态",
             dataIndex: "accountStatusValue",
         },
         {
-            title: "资金账户",
+            title: "股东资金账户",
             dataIndex: "assetAccount",
         },
         {
@@ -160,7 +160,7 @@ export default class uoeSetting extends React.PureComponent {
                 }),
             },
             {
-                label: "账户类型",
+                label: "股东账户类型",
                 id: "accountType",
                 initialValue: "1",
                 rules: [
@@ -178,7 +178,7 @@ export default class uoeSetting extends React.PureComponent {
                 }),
             },
             {
-                label: "账户状态",
+                label: "股东账户状态",
                 id: "accountStatus",
                 initialValue: "1",
                 rules: [
@@ -196,7 +196,7 @@ export default class uoeSetting extends React.PureComponent {
                 }),
             },
             {
-                label: "资金账户",
+                label: "股东资金账户",
                 id: "assetAccount",
                 initialValue: "",
                 rules: [
@@ -216,14 +216,14 @@ export default class uoeSetting extends React.PureComponent {
                 id: "custOrgid",
                 initialValue: "",
                 rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        validator: checkLength(25),
-                        trigger: ["change", "blur"],
-                    },
+                    // {
+                    //     required: true,
+                    //     message: "参数不能为空",
+                    // },
+                    // {
+                    //     validator: checkLength(25),
+                    //     trigger: ["change", "blur"],
+                    // },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -232,14 +232,14 @@ export default class uoeSetting extends React.PureComponent {
                 id: "custBranchid",
                 initialValue: "",
                 rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        validator: checkLength(25),
-                        trigger: ["change", "blur"],
-                    },
+                    // {
+                    //     required: true,
+                    //     message: "参数不能为空",
+                    // },
+                    // {
+                    //     validator: checkLength(25),
+                    //     trigger: ["change", "blur"],
+                    // },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -315,7 +315,7 @@ export default class uoeSetting extends React.PureComponent {
                 }),
             },
             {
-                label: "账户类型",
+                label: "股东账户类型",
                 id: "accountType",
                 initialValue: "",
                 rules: [
@@ -333,7 +333,7 @@ export default class uoeSetting extends React.PureComponent {
                 }),
             },
             {
-                label: "账户状态",
+                label: "股东账户状态",
                 id: "accountStatus",
                 initialValue: "",
                 rules: [
@@ -351,7 +351,7 @@ export default class uoeSetting extends React.PureComponent {
                 }),
             },
             {
-                label: "资金账户",
+                label: "股东资金账户",
                 id: "assetAccount",
                 initialValue: "",
                 rules: [
@@ -371,14 +371,14 @@ export default class uoeSetting extends React.PureComponent {
                 id: "custOrgid",
                 initialValue: "",
                 rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        validator: checkLength(25),
-                        trigger: ["change", "blur"],
-                    },
+                    // {
+                    //     required: true,
+                    //     message: "参数不能为空",
+                    // },
+                    // {
+                    //     validator: checkLength(25),
+                    //     trigger: ["change", "blur"],
+                    // },
                 ],
                 component: <Input placeholder="请输入" />,
             },
@@ -387,14 +387,14 @@ export default class uoeSetting extends React.PureComponent {
                 id: "custBranchid",
                 initialValue: "",
                 rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        validator: checkLength(25),
-                        trigger: ["change", "blur"],
-                    },
+                    // {
+                    //     required: true,
+                    //     message: "参数不能为空",
+                    // },
+                    // {
+                    //     validator: checkLength(25),
+                    //     trigger: ["change", "blur"],
+                    // },
                 ],
                 component: <Input placeholder="请输入" />,
             },
