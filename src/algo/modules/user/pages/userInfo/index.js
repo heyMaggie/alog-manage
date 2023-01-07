@@ -262,7 +262,7 @@ class userInfo extends React.PureComponent {
         ];
     };
     beforeInsertFun = (next) => {
-        console.log("beforeInsertFun----------");
+        // console.log("beforeInsertFun----------");
         this.setState({ seUserType: 1 }, next);
     };
     getUpdateFormFields = () => {
