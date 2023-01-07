@@ -18,12 +18,12 @@ const columns = (params) => {
             width: 100,
         },
         {
-            title: "用户ID",
+            title: "系统用户ID",
             dataIndex: "user_id",
             // width: 100,
         },
         {
-            title: "用户名称",
+            title: "系统用户名称",
             dataIndex: "user_name",
             // width: 140,
         },
@@ -38,7 +38,7 @@ const columns = (params) => {
             // width: 140,
         },
         {
-            title: "用户状态",
+            title: "系统用户状态",
             dataIndex: "statusValue",
             // width: 100,
         },
@@ -53,8 +53,8 @@ const columns = (params) => {
 let getSearchFormFields = () => {
     return [
         {
-            // label: "用户名称",
-            label: <span>用&nbsp;户&nbsp;名&nbsp;称</span>,
+            label: "系统用户名称",
+            // label: <span>用&nbsp;户&nbsp;名&nbsp;称</span>,
             id: "user_name",
             component: <Input placeholder="请输入" />,
         },
@@ -65,7 +65,7 @@ class systemUser extends React.PureComponent {
     getInsertFormFields = () => {
         return [
             {
-                label: "用户ID（*ID名称只能为字母或字母与数字的组合）",
+                label: "系统用户ID（*ID名称只能为字母或字母与数字的组合）",
                 id: "user_id",
                 initialValue: "",
                 rules: [
@@ -89,7 +89,7 @@ class systemUser extends React.PureComponent {
                 component: <Input placeholder="请输入" />,
             },
             {
-                label: "用户名称",
+                label: "系统用户名称",
                 id: "user_name",
                 initialValue: "",
                 rules: [
@@ -172,7 +172,7 @@ class systemUser extends React.PureComponent {
     getUpdateFormFields = () => {
         return [
             {
-                label: "用户ID（*ID名称只能为字母或字母与数字的组合）",
+                label: "系统用户ID（*ID名称只能为字母或字母与数字的组合）",
                 id: "user_id",
                 initialValue: "",
                 rules: [
@@ -196,7 +196,7 @@ class systemUser extends React.PureComponent {
                 component: <Input placeholder="请输入" disabled />,
             },
             {
-                label: "用户名称",
+                label: "系统用户名称",
                 id: "user_name",
                 initialValue: "",
                 rules: [
@@ -223,7 +223,7 @@ class systemUser extends React.PureComponent {
                 ),
             },
             {
-                label: "用户状态",
+                label: "系统用户状态",
                 id: "status",
                 rules: [
                     {

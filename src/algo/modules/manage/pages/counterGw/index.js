@@ -8,8 +8,13 @@ import styles from "./style.module.less";
 let getSearchFormFields = () => {
     return [
         {
-            label: "用户编码",
+            label: "柜台用户编码",
             id: "userId",
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "用户名称",
+            id: "uuserId",
             component: <Input placeholder="请输入" />,
         },
     ];
@@ -17,7 +22,22 @@ let getSearchFormFields = () => {
 const getInsertFormFields = () => {
     return [
         {
-            label: "用户编码",
+            label: "用户名称",
+            id: "uuserId",
+            rules: [
+                {
+                    required: true,
+                    message: "参数不能为空",
+                },
+                {
+                    validator: checkLength(10),
+                    trigger: ["change", "blur"],
+                },
+            ],
+            component: <Input placeholder="请输入" />,
+        },
+        {
+            label: "柜台用户编码",
             id: "userId",
             rules: [
                 {
@@ -32,7 +52,7 @@ const getInsertFormFields = () => {
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "用户名",
+            label: "柜台用户名称",
             id: "userName",
             rules: [
                 {
@@ -46,52 +66,73 @@ const getInsertFormFields = () => {
             ],
             component: <Input placeholder="请输入" />,
         },
-        {
-            label: "用户密码",
-            id: "userPasswd",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(32),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "柜台网关ID",
-            id: "counterGwId",
-            rules: [
-                {
-                    required: true,
-                    message: "柜台网关Id不能为空",
-                },
-                {
-                    validator: checkLength(10),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "来自柜台",
-            id: "counterUserId",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(10),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
+        // {
+        //     label: "用户密码",
+        //     id: "userPasswd",
+        //     initialValue: "",
+        //     rules: [
+        //         {
+        //             required: true,
+        //             message: "参数不能为空",
+        //         },
+        //         {
+        //             validator: checkLength(32),
+        //             trigger: ["change", "blur"],
+        //         },
+        //     ],
+        //     component: <Input placeholder="请输入" />,
+        // },
+        // {
+        //     label: "柜台网关ID",
+        //     id: "counterGwId",
+        //     rules: [
+        //         {
+        //             required: true,
+        //             message: "柜台网关Id不能为空",
+        //         },
+        //         {
+        //             validator: checkLength(10),
+        //             trigger: ["change", "blur"],
+        //         },
+        //     ],
+        //     component: <Input placeholder="请输入" />,
+        // },
+        // {
+        //     label: "柜台网关",
+        //     id: "counterGwId",
+        //     rules: [
+        //         {
+        //             required: true,
+        //             message: "柜台网关Id不能为空",
+        //         },
+        //         {
+        //             max: 10,
+        //             message: "最大长度为10",
+        //         },
+        //     ],
+        //     component: SelectOption(this.state.updateArr, {
+        //         placeholder: "请选择",
+        //         allowClear: false,
+        //         style: {
+        //             width: 400,
+        //         },
+        //     }),
+        // },
+        // {
+        //     label: "来自柜台",
+        //     id: "counterUserId",
+        //     rules: [
+        //         {
+        //             required: true,
+        //             message: "参数不能为空",
+        //         },
+        //         {
+        //             validator: checkLength(10),
+        //             trigger: ["change", "blur"],
+        //         },
+        //     ],
+        //     component: <Input placeholder="请输入" />,
+        // },
         {
             label: "业务类型",
             id: "businessType",
@@ -128,57 +169,51 @@ const getInsertFormFields = () => {
         //         },
         //     }),
         // },
-        {
-            label: "客户类型",
-            id: "clientType",
-            initialValue: "0",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.clientType, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        {
-            label: "算法平台用户ID",
-            id: "uuserId",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(10),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
+        // {
+        //     label: "客户类型",
+        //     id: "clientType",
+        //     initialValue: "0",
+        //     rules: [
+        //         {
+        //             required: true,
+        //             message: "参数不能为空",
+        //         },
+        //     ],
+        //     component: SelectOption(dict.clientType, {
+        //         placeholder: "请选择",
+        //         allowClear: false,
+        //         style: {
+        //             width: 400,
+        //         },
+        //     }),
+        // },
+
         {
             label: "终端信息",
             id: "TerminalInfo",
             rules: [
+                // {
+                //     validator: checkLength(256),
+                //     trigger: ["change", "blur"],
+                // },
                 {
-                    validator: checkLength(256),
-                    trigger: ["change", "blur"],
+                    max: 256,
+                    message: "最大长度为256",
                 },
             ],
             component: <Input placeholder="请输入" />,
         },
         {
-            label: "营业号",
+            label: "营业编号",
             id: "CustOrgId",
             rules: [
+                // {
+                //     validator: checkLength(256),
+                //     trigger: ["change", "blur"],
+                // },
                 {
-                    validator: checkLength(256),
-                    trigger: ["change", "blur"],
+                    max: 50,
+                    message: "最大长度为50",
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -187,9 +222,13 @@ const getInsertFormFields = () => {
             label: "系统编号",
             id: "ClSystemId",
             rules: [
+                // {
+                //     validator: checkLength(256),
+                //     trigger: ["change", "blur"],
+                // },
                 {
-                    validator: checkLength(256),
-                    trigger: ["change", "blur"],
+                    max: 50,
+                    message: "最大长度为50",
                 },
             ],
             component: <Input placeholder="请输入" />,
@@ -203,11 +242,16 @@ class CounterGw extends React.PureComponent {
     columns = (params) => {
         return [
             {
-                title: "用户编码",
+                title: "用户名称",
+                dataIndex: "uuserId",
+                width: 150,
+            },
+            {
+                title: "柜台用户编码",
                 dataIndex: "userId",
             },
             {
-                title: "用户名",
+                title: "柜台用户名称",
                 dataIndex: "userName",
             },
             // {
@@ -230,10 +274,10 @@ class CounterGw extends React.PureComponent {
                     </div>
                 ),
             },
-            {
-                title: "来自柜台",
-                dataIndex: "counterUserId",
-            },
+            // {
+            //     title: "来自柜台",
+            //     dataIndex: "counterUserId",
+            // },
             {
                 title: "业务类型",
                 dataIndex: "businessTypeValue",
@@ -242,22 +286,17 @@ class CounterGw extends React.PureComponent {
                 title: "登录状态",
                 dataIndex: "loginStatusValue",
             },
-            {
-                title: "客户类型",
-                dataIndex: "clientTypeValue",
-            },
-            {
-                title: "算法平台用户ID",
-                dataIndex: "uuserId",
-                width: 150,
-            },
+            // {
+            //     title: "客户类型",
+            //     dataIndex: "clientTypeValue",
+            // },
             {
                 title: "终端信息",
                 dataIndex: "terminalInfo",
                 width: 300,
             },
             {
-                title: "营业号",
+                title: "营业编号",
                 dataIndex: "custOrgid",
                 // width: 100,
             },
@@ -351,6 +390,7 @@ class CounterGw extends React.PureComponent {
         // params.token = "";
         // console.log(this.record);
         params.businessType = this.record.businessType;
+        // params.businessType = 0;
         http.post({
             url: "/counter-info/listAll",
             data: params,
@@ -403,10 +443,10 @@ class CounterGw extends React.PureComponent {
             userId: record.userId,
             userName: record.userName,
             counterGwId: record.counterGwId,
-            counterUserId: record.counterUserId,
+            // counterUserId: record.counterUserId,
             businessType: record.businessType + "",
             // loginStatus: record.loginStatus + "",
-            clientType: record.clientType + "",
+            // clientType: record.clientType + "",
             uuserId: record.uuserId,
             // createTime: record.createTime,
             userPasswd: record.userPasswd,
@@ -420,16 +460,17 @@ class CounterGw extends React.PureComponent {
         let params = {
             UserId: formData.userId,
             UserName: formData.userName,
-            UserPasswd: formData.userPasswd,
-            CounterUserId: formData.counterUserId / 1,
+            // UserPasswd: formData.userPasswd,
+            // CounterUserId: formData.counterUserId / 1,
             BusinessType: formData.businessType / 1,
-            ClientType: formData.clientType / 1,
+            // ClientType: formData.clientType / 1,
             UuserId: formData.uuserId / 1,
             CounterGwId: formData.counterGwId / 1,
             TerminalInfo: formData.TerminalInfo,
             CustOrgId: formData.CustOrgId,
             ClSystemId: formData.ClSystemId,
         };
+        // console.log("新增 ",params);
         http.post({
             url: "/counter/addCounterUserInfo",
             data: params,
@@ -454,10 +495,10 @@ class CounterGw extends React.PureComponent {
             Id: this.record.id,
             UserId: formData.userId,
             UserName: formData.userName,
-            UserPasswd: formData.userPasswd,
-            CounterUserId: formData.counterUserId / 1,
+            // UserPasswd: formData.userPasswd,
+            // CounterUserId: formData.counterUserId / 1,
             BusinessType: formData.businessType / 1,
-            ClientType: formData.clientType / 1,
+            // ClientType: formData.clientType / 1,
             UuserId: formData.uuserId / 1,
             CounterGwId: formData.counterGwId / 1,
             TerminalInfo: formData.TerminalInfo,
@@ -570,6 +611,7 @@ class CounterGw extends React.PureComponent {
     };
     componentDidMount() {
         this.getData();
+        // this.getCounterInfo();
     }
     render() {
         let scroll = { x: 2200, y: 445 };

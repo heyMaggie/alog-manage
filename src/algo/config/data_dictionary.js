@@ -75,8 +75,10 @@ const configData = {
         { key: "2", value: "删除" },
     ],
     counterStatus: [
-        { key: "0", value: "关闭" },
-        { key: "1", value: "使能" },
+        // { key: "0", value: "关闭" },
+        // { key: "1", value: "使能" },
+        { key: "0", value: "不可用" },
+        { key: "1", value: "可用" },
     ],
     RiskType: [
         // { key: "0", value: "" },
@@ -137,11 +139,11 @@ const configData = {
     supportType: [
         { key: "1", value: "现货" },
         { key: "2", value: "期权" },
-        { key: "3", value: "现货、期权" },
+        // { key: "3", value: "现货、期权" },
         { key: "4", value: "两融" },
-        { key: "5", value: "现货、两融" },
-        { key: "6", value: "期权、两融" },
-        { key: "7", value: "现货、期权、两融" },
+        // { key: "5", value: "现货、两融" },
+        // { key: "6", value: "期权、两融" },
+        // { key: "7", value: "现货、期权、两融" },
     ],
     status: [
         { key: "0", value: "不可用" },
