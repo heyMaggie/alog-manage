@@ -1,5 +1,6 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
+import SelectOption from "@/components/SelectOption";
 import { Input } from "antd";
 
 const columns = (params) => {
@@ -10,54 +11,25 @@ const columns = (params) => {
             key: "id",
         },
         {
+            title: "用户名称",
+            dataIndex: "userName",
+            key: "userName",
+        },
+        {
             title: "mac地址",
             dataIndex: "mac",
             key: "mac",
         },
     ];
 };
-const getInsertFormFields = () => {
-    return [
-        {
-            label: "mac地址",
-            id: "mac",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(20),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入mac地址" />,
-        },
-    ];
-};
-const getUpdateFormFields = () => {
-    return [
-        {
-            label: "mac地址",
-            id: "mac",
-            initialValue: "",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(20),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入mac地址" />,
-        },
-    ];
-};
 let getSearchFormFields = () => {
     return [
+        {
+            label: "用户名称",
+            // label: <span>用户名称</span>,
+            id: "userName",
+            component: <Input placeholder="请输入" />,
+        },
         {
             label: "mac地址",
             id: "mac",
@@ -72,13 +44,98 @@ export default class macType extends React.PureComponent {
         info: [],
         pagination: { total: 0 },
         current: 1,
+        userList: [],
     };
-
+    getInsertFormFields = () => {
+        return [
+            {
+                label: "用户名称",
+                id: "userId",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(20),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: SelectOption(this.state.userList, {
+                    placeholder: "请选择",
+                    allowClear: false,
+                    style: {
+                        width: 400,
+                    },
+                }),
+            },
+            {
+                label: "mac地址",
+                id: "mac",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(20),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入mac地址" />,
+            },
+        ];
+    };
+    getUpdateFormFields = () => {
+        return [
+            {
+                label: "用户名称",
+                id: "userId",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(20),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: SelectOption(this.state.userList, {
+                    placeholder: "请选择",
+                    allowClear: false,
+                    style: {
+                        width: 400,
+                    },
+                }),
+            },
+            {
+                label: "mac地址",
+                id: "mac",
+                initialValue: "",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(20),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入mac地址" />,
+            },
+        ];
+    };
     //新增接口
     handleInsertRecord = (fromData) => {
         console.log("新增接口", fromData);
         let params = {
             mac: fromData.mac,
+            userId: fromData.userId,
         };
         http.post({
             url: "/blacklist/addBlacklist",
@@ -106,6 +163,7 @@ export default class macType extends React.PureComponent {
         let params = {
             id: this.record.id,
             mac: fromData.mac,
+            userId: fromData.userId,
         };
         // 发送更新请求
         http.post({
@@ -157,6 +215,7 @@ export default class macType extends React.PureComponent {
         this.record = record;
         form.setFieldsValue({
             mac: record.mac,
+            userId: record.userId,
         });
     };
     getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
@@ -193,7 +252,28 @@ export default class macType extends React.PureComponent {
     };
     componentDidMount() {
         this.getData();
+        this.getUserSelectList();
     }
+    getUserSelectList = () => {
+        http.get({
+            url: "/user/listAll",
+        }).then((res) => {
+            let idArr = [];
+            if (res.data && res.data.length) {
+                // RiskType: [{ key: "1", value: "用户" },{ key: "2", value: "算法" },
+                idArr = res.data.map((item) => {
+                    let obj = {};
+                    obj.key = item.id;
+                    obj.value = item.userName;
+                    return obj;
+                });
+            }
+            this.setState({
+                userList: idArr,
+            });
+            console.log(this.state.userList, "userList");
+        });
+    };
     handleClick() {}
     render() {
         let scroll = { x: 1000, y: 395 };
@@ -208,12 +288,12 @@ export default class macType extends React.PureComponent {
                     getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     insertBtnText={"新增"} // 不传 就没新增按钮
-                    getInsertFormFields={getInsertFormFields}
+                    getInsertFormFields={this.getInsertFormFields}
                     insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="789px"
                     pagination={this.state.pagination}
-                    getUpdateFormFields={getUpdateFormFields}
+                    getUpdateFormFields={this.getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
                     updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     deleteRecord={this.handleDeleteRecord} // 不传 就没删除
