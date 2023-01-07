@@ -285,6 +285,24 @@ class CurdComponent extends React.PureComponent {
                     this.insertId = parseInt(Math.random() * 100000000);
                 }
                 item.id = item.id + "_add" + this.insertId;
+                // 动态隐藏输入框
+                if (item.hidden) {
+                    delete dataArr[i];
+                }
+            }
+            return dataArr;
+        }
+    };
+    //添加随机id
+    getUpdateFormFields = () => {
+        if (typeof this.props.getUpdateFormFields == "function") {
+            let dataArr = this.props.getUpdateFormFields();
+            for (let i = 0; i < dataArr.length; i++) {
+                const item = dataArr[i];
+                // 动态隐藏输入框
+                if (item.hidden) {
+                    delete dataArr[i];
+                }
             }
             return dataArr;
         }
@@ -607,7 +625,7 @@ class CurdComponent extends React.PureComponent {
                 <DynamicModal
                     title={updateModalText}
                     visible={this.state.updateModalVisible}
-                    fields={getUpdateFormFields()}
+                    fields={this.getUpdateFormFields()}
                     onOk={this.handleUpdateModalOk}
                     onCancel={this.handleUpdateModalCancel}
                     onReady={this.handleUpdateModalReady}
