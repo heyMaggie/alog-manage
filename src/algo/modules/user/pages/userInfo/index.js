@@ -32,7 +32,7 @@ class userInfo extends React.PureComponent {
         parentInfoList: [], //操作人用户列表
         algoList: [],
         algoSecList: [],
-        seUserType: "", //新增编辑选择的用户类型
+        seUserType: "1", //新增编辑选择的用户类型
         organizationList: [], //机构名称
     };
     getInsertFormFields = () => {
@@ -40,7 +40,7 @@ class userInfo extends React.PureComponent {
             {
                 label: "用户类型",
                 id: "UserType",
-                initialValue: "",
+                initialValue: "1",
                 rules: [
                     {
                         required: true,
@@ -260,6 +260,10 @@ class userInfo extends React.PureComponent {
             //     component: <Input placeholder="请输入" />,
             // },
         ];
+    };
+    beforeInsertFun = (next) => {
+        console.log("beforeInsertFun----------");
+        this.setState({ seUserType: 1 }, next);
     };
     getUpdateFormFields = () => {
         return [
@@ -862,7 +866,8 @@ class userInfo extends React.PureComponent {
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
-        // console.log(record, form);
+        console.log("setUpdateModal--------");
+        console.log(record, form);
         this.record = record;
         this.setState({
             seUserType: this.record.userType,
@@ -1397,6 +1402,7 @@ class userInfo extends React.PureComponent {
                     // searchLoading={this.state.searchLoading}
                     insertBtnText={"新增"} // 不传 就没新增按钮
                     getInsertFormFields={this.getInsertFormFields}
+                    beforeInsertFun={this.beforeInsertFun}
                     insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"

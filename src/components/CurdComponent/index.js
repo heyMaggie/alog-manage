@@ -17,6 +17,15 @@ class CurdComponent extends React.PureComponent {
         scroll: this.props.scroll,
     };
     handleInsertBtn = () => {
+        if (this.props.beforeInsertFun) {
+            let next = () => {
+                this.setState({
+                    insertModalVisible: true,
+                });
+            };
+            this.props.beforeInsertFun(next);
+            return;
+        }
         this.setState({
             insertModalVisible: true,
             // updateModalVisible: true
