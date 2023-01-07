@@ -402,10 +402,10 @@ class algoConfig extends React.PureComponent {
                 dataIndex: "algorithmTypeValue",
                 width: 130,
             },
-            {
-                title: "算法类型ID",
-                dataIndex: "algorithmTypeIdValue",
-            },
+            // {
+            //     title: "算法类型ID",
+            //     dataIndex: "algorithmTypeIdValue",
+            // },
             // {
             //     title: "算法类型名称",
             //     dataIndex: "algorithmTypeName",
