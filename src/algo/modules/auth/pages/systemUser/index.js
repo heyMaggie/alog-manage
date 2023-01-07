@@ -38,7 +38,7 @@ const columns = (params) => {
             // width: 140,
         },
         {
-            title: "状态",
+            title: "用户状态",
             dataIndex: "statusValue",
             // width: 100,
         },
@@ -144,6 +144,10 @@ class systemUser extends React.PureComponent {
                         required: true,
                         message: "参数不能为空",
                     },
+                    {
+                        max: 20,
+                        message: "最大长度为20",
+                    },
                 ],
                 component: <Input.Password placeholder="请输入" />,
             },
@@ -155,6 +159,10 @@ class systemUser extends React.PureComponent {
                     {
                         required: true,
                         message: "参数不能为空",
+                    },
+                    {
+                        max: 20,
+                        message: "最大长度为20",
                     },
                 ],
                 component: <Input.Password placeholder="请输入" />,
@@ -215,6 +223,20 @@ class systemUser extends React.PureComponent {
                 ),
             },
             {
+                label: "用户状态",
+                id: "status",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(dict.authStatus, {
+                    placeholder: "请选择",
+                    allowClear: false,
+                }),
+            },
+            {
                 label: "角色",
                 id: "role_id",
                 // initialValue: this.state.roleList[0]
@@ -238,36 +260,36 @@ class systemUser extends React.PureComponent {
                 label: "原密码",
                 id: "passwordOld",
                 initialValue: "",
-                // rules: [
-                //     {
-                //         required: true,
-                //         message: "参数不能为空",
-                //     },
-                // ],
+                rules: [
+                    {
+                        max: 20,
+                        message: "最大长度为20",
+                    },
+                ],
                 component: <Input.Password placeholder="请输入" />,
             },
             {
                 label: "设置密码",
                 id: "password",
                 initialValue: "",
-                // rules: [
-                //     {
-                //         required: true,
-                //         message: "参数不能为空",
-                //     },
-                // ],
+                rules: [
+                    {
+                        max: 20,
+                        message: "最大长度为20",
+                    },
+                ],
                 component: <Input.Password placeholder="请输入" />,
             },
             {
                 label: "确认密码",
                 id: "password2",
                 initialValue: "",
-                // rules: [
-                //     {
-                //         required: true,
-                //         message: "参数不能为空",
-                //     },
-                // ],
+                rules: [
+                    {
+                        max: 20,
+                        message: "最大长度为20",
+                    },
+                ],
                 component: <Input.Password placeholder="请输入" />,
             },
         ];
@@ -382,6 +404,7 @@ class systemUser extends React.PureComponent {
             user_name: formData.user_name,
             role_id: role[0].role_id,
             role_name: role[0].role_name,
+            status: formData.status / 1,
             // password: md5(formData.password),
             password: formData.password ? md5(formData.password) : "",
         };
@@ -427,6 +450,7 @@ class systemUser extends React.PureComponent {
             user_id: record.user_id,
             user_name: record.user_name,
             role_id: record.role_id,
+            status: record.status + "",
             // role_name: role[0].role_name,
             passwordOld: "",
             password: "",
