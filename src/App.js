@@ -53,7 +53,7 @@ routeModule("/main", routes);
 
 class App extends React.Component {
     renderRoute = (routes) => {
-        let { enterRoute } = this.props;
+        let { enterRoute, popOtherTab } = this.props;
         let res = routes.map((route, idx) => {
             // console.log(route);
             if (route.children) {
@@ -67,6 +67,9 @@ class App extends React.Component {
                             // console.log("props ", props);
                             let { pathname, search } = props.location;
                             enterRoute(pathname);
+                            setTimeout(() => {
+                                popOtherTab(pathname);
+                            }, 100);
                             let { component: Component, title: routeTitle } =
                                 route;
                             document.title = routeTitle;
@@ -150,6 +153,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         enterRoute: (pathname) => {
             //dispatch({ type: "ENTER_ROUTE", payload: { path: pathname , routes } });
             dispatch({ type: "ENTER_ROUTE", payload: { path: pathname } });
+        },
+        popOtherTab: (pathname) => {
+            dispatch({ type: "POP_OTHER_TAB", payload: pathname });
         },
     };
 };

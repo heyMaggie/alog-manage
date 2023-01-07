@@ -144,7 +144,7 @@ const getInsertFormFields = () => {
         {
             label: "柜台状态",
             id: "status",
-            initialValue: "0",
+            initialValue: "1",
             rules: [
                 {
                     required: true,

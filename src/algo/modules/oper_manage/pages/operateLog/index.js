@@ -11,23 +11,28 @@ const columns = (params) => {
             title: "序号",
             dataIndex: "id",
             key: "id",
+            width: 120,
         },
         {
             title: "用户名称",
             dataIndex: "operateId",
             key: "operateId",
+            width: 160,
         },
         {
             title: "操作模块",
             dataIndex: "operateModule",
+            width: 200,
         },
         {
             title: "操作项目",
             dataIndex: "operateItemValue",
+            width: 150,
         },
         {
             title: "操作内容",
             dataIndex: "operateContent",
+            width: 240,
         },
         {
             title: "操作参数",
@@ -37,7 +42,7 @@ const columns = (params) => {
             title: "时间",
             dataIndex: "createTime",
             key: "createTime",
-            width: 180,
+            width: 200,
         },
     ];
 };
@@ -65,14 +70,15 @@ export default class uoeSetting extends React.PureComponent {
                 }),
             },
             {
-                label: "日期",
+                label: "时间",
                 id: "createTime",
                 initialValue: [],
                 component: (
                     <RangePicker
-                        style={{ width: 432 }}
                         showTime
+                        placeholder={["开始时间", "结束时间"]}
                         format="YYYY-MM-DD HH:mm:ss"
+                        className="rangePicker"
                     />
                 ),
             },

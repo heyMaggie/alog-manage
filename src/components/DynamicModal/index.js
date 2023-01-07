@@ -36,6 +36,7 @@ class DynamicModal extends React.PureComponent {
                     okText={okText}
                     cancelText={cancelText}
                     {...rest}
+                    destroyOnClose={true}
                 >
                     <DynamicForm
                         fields={fields}

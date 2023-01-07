@@ -61,7 +61,6 @@ const RouterModel = (state = RouterInitialState, action) => {
     switch (action.type) {
         case ENTER_ROUTE:
             let { path, routes } = action.payload;
-            // console.log(path);
             let menus = sessionStorage.activeMenus;
             if (!menus) {
                 menus = [];
@@ -153,6 +152,11 @@ const RouterModel = (state = RouterInitialState, action) => {
             var tabs = [...state.tabs];
             //要删除除 所选tab 之外的tab
             var newArr = tabs.filter((item) => item == action.payload);
+            // console.log("tabs", tabs, action.payload);
+            // console.log("newArr ", newArr);
+            if (newArr.length == 0) {
+                return state;
+            }
             return Object.assign({}, state, {
                 path: action.payload,
                 tabs: newArr,
