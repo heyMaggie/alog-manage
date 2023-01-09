@@ -11,6 +11,11 @@ const main = (root = "/main/oper_manage") => [
         component: `${pages}/blacklist`,
         title: "黑名单",
     },
+    {
+        path: `${root}/whitelist`,
+        component: `${pages}/whitelist`,
+        title: "白名单",
+    },
 ];
 
 export default main;
