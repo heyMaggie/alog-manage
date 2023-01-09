@@ -2,6 +2,7 @@ import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 import { Input, AutoComplete } from "antd";
+const { Option } = AutoComplete;
 
 let columns = (params) => {
     return [
@@ -60,6 +61,7 @@ export default class algoBest extends React.PureComponent {
         algoInfoList: [],
         securityList: [],
         currentDataLists: [],
+        currentDataLists2: [],
         currentDataListsAdd: [],
         securityObj: {},
         uploadUrl: "",
@@ -100,13 +102,23 @@ export default class algoBest extends React.PureComponent {
                 component: (
                     <AutoComplete
                         placeholder="请输入"
-                        dataSource={this.state.currentDataLists}
+                        dataSource={this.state.currentDataLists.map(
+                            this.renderOption
+                        )}
                         onChange={this.handleChange}
                         allowClear={true}
+                        optionLabelProp="text"
                     />
                 ),
             },
         ];
+    };
+    renderOption = (item) => {
+        return (
+            <Option key={item} text={item.substring(0, 6)}>
+                {item}
+            </Option>
+        );
     };
     handleChange = (value) => {
         // console.log(value);
@@ -202,16 +214,16 @@ export default class algoBest extends React.PureComponent {
             {
                 label: "股票代码",
                 id: "sec_id",
-                initialValue: "000001",
+                // initialValue: "000001",
                 rules: [
                     {
                         required: true,
                         message: "参数不能为空",
                     },
-                    {
-                        validator: checkLength(8),
-                        trigger: ["change", "blur"],
-                    },
+                    // {
+                    //     validator: checkLength(8),
+                    //     trigger: ["change", "blur"],
+                    // },
                 ],
                 // component: (
                 //     // <Input placeholder="请输入" readOnly disabled />
@@ -219,9 +231,13 @@ export default class algoBest extends React.PureComponent {
                 // ),
                 component: (
                     <AutoComplete
-                        dataSource={this.state.currentDataLists2}
+                        dataSource={this.state.currentDataLists2.map(
+                            this.renderOption
+                        )}
+                        // dataSource={this.state.currentDataLists2}
                         allowClear={true}
                         onChange={this.handleChange2}
+                        optionLabelProp="text"
                     />
                 ),
             },
@@ -436,10 +452,14 @@ export default class algoBest extends React.PureComponent {
             message.error("算法不存在");
             return;
         }
-        let sec = this.state.securityList.find(
-            (item) => item == fromData.sec_id
+        if (fromData.sec_id.length > 6) {
+            fromData.sec_id = fromData.sec_id.substring(0, 6);
+        }
+        // console.log(fromData.sec_id);
+        let sec = this.state.securityList.find((item) =>
+            item.includes(fromData.sec_id)
         );
-        // console.log(this.state.securityList,sec);
+        // console.log(this.state.securityList, sec);
         if (!sec) {
             message.error("股票代码不存在");
             return;
@@ -448,7 +468,7 @@ export default class algoBest extends React.PureComponent {
             provider_id: algo.uuserId / 1,
             provider_name: algo.algoName,
             sec_id: fromData.sec_id,
-            sec_name: this.securityObj[sec],
+            sec_name: this.securityObj[fromData.sec_id],
             algo_id: algo.id / 1,
             algo_type: algo.algorithmType / 1,
             algo_name: algo.algoName,
@@ -558,6 +578,10 @@ export default class algoBest extends React.PureComponent {
         if (!params.sec_id) {
             params.sec_id = "";
         }
+        if (params.sec_id.length > 6) {
+            params.sec_id = params.sec_id.substring(0, 6);
+        }
+        // console.log(params.sec_id);
         params.provider_id = params.provider_id / 1;
         params.algo_id = params.algo_id / 1;
         params.algo_type = 1;
@@ -683,7 +707,10 @@ export default class algoBest extends React.PureComponent {
                     dataArr.forEach((item, i) => {
                         let sec = item.securityId.trim();
                         if (!securityIdArr.includes(sec) && sec.length > 0) {
-                            securityIdArr.push(sec);
+                            // securityIdArr.push(sec);
+                            securityIdArr.push(
+                                sec + " " + item.securityName.trim()
+                            );
                             this.securityObj[sec] = item.securityName;
                         }
                     });
@@ -695,10 +722,10 @@ export default class algoBest extends React.PureComponent {
                     }
                 }
             }
-            // console.log(securityIdArr);
             this.setState({
                 securityList: securityIdArr,
                 currentDataLists: optionArr,
+                currentDataLists2: optionArr,
             });
         });
     };
