@@ -4,22 +4,28 @@ import { TimePicker, Form, Button, Icon, DatePicker, Select } from "antd";
 import { connect } from "react-redux";
 import TagLabel from "@/components/Tag";
 class SystemMonitor extends React.PureComponent {
-    state = {};
+    state = {
+        algoProviderArr: [], //算法厂商
+    };
     getAlgoMonitor = () => {
         http.get({
             url: "/user/algoMonitor",
         }).then((res) => {
             console.log(res);
             // let idArr = [];
-            // if (res.data && res.data.length) {
-            //     // RiskType: [{ key: "1", value: "用户" },{ key: "2", value: "算法" },
-            //     idArr = res.data.map((item) => {
-            //         let obj = {};
-            //         obj.key = item.id;
-            //         obj.value = item.userName;
-            //         return obj;
-            //     });
-            // }
+            if (res.data) {
+                if (res.data.algoProvider && res.data.algoProvider.length > 0) {
+                    this.setState({ algoProviderArr: res.data.algoProvider });
+                    console.log(res.data.algoProvider);
+                }
+                //     // RiskType: [{ key: "1", value: "用户" },{ key: "2", value: "算法" },
+                //     idArr = res.data.map((item) => {
+                //         let obj = {};
+                //         obj.key = item.id;
+                //         obj.value = item.userName;
+                //         return obj;
+                //     });
+            }
             // this.setState({
             //     userList: idArr,
             // });
