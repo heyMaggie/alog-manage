@@ -596,27 +596,6 @@ class userInfo extends React.PureComponent {
                 width: 100,
             },
             {
-                title: "机构名称",
-                dataIndex: "organizaName",
-                width: 150,
-            },
-            {
-                title: "产品",
-                dataIndex: "parentName",
-                width: 180,
-            },
-            {
-                title: "用户账户",
-                dataIndex: "userId",
-                width: 140,
-            },
-            {
-                title: "用户名称",
-                dataIndex: "userName",
-                key: "userName",
-                width: 140,
-            },
-            {
                 title: "用户类型",
                 dataIndex: "userTypeValue",
                 width: 170,
@@ -658,6 +637,37 @@ class userInfo extends React.PureComponent {
                         </div>
                     );
                 },
+            },
+            {
+                title: "用户账户",
+                dataIndex: "userId",
+                width: 140,
+            },
+            {
+                title: "用户名称",
+                dataIndex: "userName",
+                key: "userName",
+                width: 140,
+            },
+            {
+                title: "用户状态",
+                dataIndex: "userStatusValue",
+                width: 140,
+            },
+            {
+                title: "证件号码",
+                dataIndex: "identityId",
+                width: 200,
+            },
+            {
+                title: "机构名称",
+                dataIndex: "organizaName",
+                width: 150,
+            },
+            {
+                title: "产品",
+                dataIndex: "parentName",
+                width: 180,
             },
             {
                 title: "用户风控组",
@@ -711,17 +721,6 @@ class userInfo extends React.PureComponent {
             //     title: "登录状态",
             //     dataIndex: "loginStatus",
             // },
-
-            {
-                title: "用户状态",
-                dataIndex: "userStatusValue",
-                width: 140,
-            },
-            {
-                title: "证件号码",
-                dataIndex: "identityId",
-                width: 200,
-            },
             // {
             //     title: "机构编码",
             //     dataIndex: "organizaId",

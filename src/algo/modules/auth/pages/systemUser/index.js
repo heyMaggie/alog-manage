@@ -18,7 +18,7 @@ const columns = (params) => {
             width: 100,
         },
         {
-            title: "系统用户ID",
+            title: "系统用户编码",
             dataIndex: "user_id",
             // width: 100,
         },
@@ -28,12 +28,12 @@ const columns = (params) => {
             // width: 140,
         },
         {
-            title: "角色ID",
+            title: "角色编码",
             dataIndex: "role_id",
             // width: 100,
         },
         {
-            title: "角色",
+            title: "角色名称",
             dataIndex: "role_name",
             // width: 140,
         },
@@ -65,7 +65,7 @@ class systemUser extends React.PureComponent {
     getInsertFormFields = () => {
         return [
             {
-                label: "系统用户ID（*ID名称只能为字母或字母与数字的组合）",
+                label: "系统用户编码（*ID名称只能为字母或字母与数字的组合）",
                 id: "user_id",
                 initialValue: "",
                 rules: [
@@ -116,7 +116,7 @@ class systemUser extends React.PureComponent {
                 ),
             },
             {
-                label: "角色",
+                label: "角色名称",
                 id: "role_id",
                 // initialValue: this.state.roleList[0]
                 //     ? this.state.roleList[0].key
@@ -172,7 +172,7 @@ class systemUser extends React.PureComponent {
     getUpdateFormFields = () => {
         return [
             {
-                label: "系统用户ID（*ID名称只能为字母或字母与数字的组合）",
+                label: "系统用户编码（*ID名称只能为字母或字母与数字的组合）",
                 id: "user_id",
                 initialValue: "",
                 rules: [
@@ -237,7 +237,7 @@ class systemUser extends React.PureComponent {
                 }),
             },
             {
-                label: "角色",
+                label: "角色名称",
                 id: "role_id",
                 // initialValue: this.state.roleList[0]
                 //     ? this.state.roleList[0].key
