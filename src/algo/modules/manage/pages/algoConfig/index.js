@@ -76,7 +76,7 @@ class algoConfig extends React.PureComponent {
             //     component: <Input placeholder="请输入" />,
             // },
             {
-                label: "算法厂商",
+                label: "算法厂商名称",
                 id: "ProviderName",
                 initialValue: "",
                 rules: [
@@ -258,7 +258,7 @@ class algoConfig extends React.PureComponent {
             //     component: <Input placeholder="请输入" />,
             // },
             {
-                label: "算法厂商",
+                label: "算法厂商名称",
                 id: "ProviderName",
                 initialValue: "",
                 rules: [
@@ -387,13 +387,13 @@ class algoConfig extends React.PureComponent {
                 key: "algoName",
                 width: 160,
             },
+            // {
+            //     title: "算法厂商ID",
+            //     dataIndex: "uuserId",
+            //     key: "uuserId",
+            // },
             {
-                title: "算法厂商ID",
-                dataIndex: "uuserId",
-                key: "uuserId",
-            },
-            {
-                title: "算法厂商名",
+                title: "算法厂商名称",
                 dataIndex: "providerName",
                 key: "providerName",
             },
@@ -402,10 +402,10 @@ class algoConfig extends React.PureComponent {
                 dataIndex: "algorithmTypeValue",
                 width: 130,
             },
-            // {
-            //     title: "算法类型ID",
-            //     dataIndex: "algorithmTypeIdValue",
-            // },
+            {
+                title: "算法类型ID",
+                dataIndex: "algorithmTypeIdValue",
+            },
             // {
             //     title: "算法类型名称",
             //     dataIndex: "algorithmTypeName",
@@ -461,8 +461,8 @@ class algoConfig extends React.PureComponent {
             },
             {
                 title: "算法风控组名称",
-                dataIndex: "riskGroup",
-                key: "riskGroup",
+                dataIndex: "riskName",
+                key: "riskName",
                 render: (text, record) => (
                     <div
                         onClick={(e) => {
@@ -470,7 +470,7 @@ class algoConfig extends React.PureComponent {
                         }}
                     >
                         <Tooltip title="修改风控组">
-                            {record.riskGroup}
+                            {record.riskName}
                             {this.authObj.isUpdate && (
                                 <Icon
                                     type="edit"
@@ -755,7 +755,7 @@ class algoConfig extends React.PureComponent {
                 this.props.form.setFieldsValue({
                     algoId: record.id + "",
                     algoName: record.algoName,
-                    riskGroup: record.riskGroup,
+                    riskGroup: record.riskGroup + "",
                 });
             }
         );
@@ -1119,7 +1119,7 @@ class algoConfig extends React.PureComponent {
                                 className={styles.marLose14}
                                 label={
                                     <label title="请输入已配置成功的风控组,否则风控组不能修改成功!">
-                                        修改风控组
+                                        算法风控组名称
                                     </label>
                                 }
 

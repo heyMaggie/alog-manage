@@ -316,6 +316,12 @@ const menuList = [
                 title: "黑名单",
                 path: "/main/oper_manage/blacklist",
             },
+            {
+                id: "12-3",
+                icon: "",
+                title: "白名单",
+                path: "/main/oper_manage/whitelist",
+            },
         ],
     },
     {
