@@ -195,22 +195,22 @@ export default class uoeSetting extends React.PureComponent {
                     },
                 }),
             },
-            {
-                label: "股东资金账户",
-                id: "assetAccount",
-                initialValue: "",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        validator: checkLength(25),
-                        trigger: ["change", "blur"],
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
+            // {
+            //     label: "股东资金账户",
+            //     id: "assetAccount",
+            //     initialValue: "",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //         {
+            //             validator: checkLength(25),
+            //             trigger: ["change", "blur"],
+            //         },
+            //     ],
+            //     component: <Input placeholder="请输入" />,
+            // },
             {
                 label: "机构编码",
                 id: "custOrgid",
@@ -350,22 +350,22 @@ export default class uoeSetting extends React.PureComponent {
                     },
                 }),
             },
-            {
-                label: "股东资金账户",
-                id: "assetAccount",
-                initialValue: "",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        validator: checkLength(25),
-                        trigger: ["change", "blur"],
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
+            // {
+            //     label: "股东资金账户",
+            //     id: "assetAccount",
+            //     initialValue: "",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //         {
+            //             validator: checkLength(25),
+            //             trigger: ["change", "blur"],
+            //         },
+            //     ],
+            //     component: <Input placeholder="请输入" />,
+            // },
             {
                 label: "机构编码",
                 id: "custOrgid",

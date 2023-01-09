@@ -11,6 +11,11 @@ const columns = (params) => {
             key: "id",
         },
         {
+            title: "用户编码",
+            dataIndex: "userId",
+            key: "userId",
+        },
+        {
             title: "用户名称",
             dataIndex: "userName",
             key: "userName",
@@ -256,7 +261,7 @@ export default class macType extends React.PureComponent {
     }
     getUserSelectList = () => {
         http.get({
-            url: "/user/listAll",
+            url: "/write-list/userOption",
         }).then((res) => {
             let idArr = [];
             if (res.data && res.data.length) {

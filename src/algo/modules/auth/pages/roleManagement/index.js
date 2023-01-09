@@ -85,7 +85,7 @@ class userInfo extends React.PureComponent {
                 width: 80,
             },
             {
-                title: "角色ID",
+                title: "角色编码",
                 dataIndex: "role_id",
                 width: 150,
             },
@@ -607,7 +607,7 @@ class userInfo extends React.PureComponent {
                                 }}
                                 id="area"
                             >
-                                <Form.Item label="角色ID">
+                                <Form.Item label="角色编码">
                                     {getFieldDecorator("role_id", {
                                         rules: [
                                             {
