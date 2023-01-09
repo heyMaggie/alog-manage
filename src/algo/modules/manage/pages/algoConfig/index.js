@@ -643,6 +643,15 @@ class algoConfig extends React.PureComponent {
         //     "RiskGroup": 1
         // }
         console.log(record);
+        if (record.algorithmType == 1) {
+            this.state.algorithmTypeList = [{ key: "1", value: "日内回转" }];
+        } else {
+            this.state.algorithmTypeList = [
+                { key: "1", value: "智能委托" },
+                { key: "2", value: "POV" },
+                { key: "3", value: "股指" },
+            ];
+        }
         let formData = {
             AlgoName: record.algoName,
             // ProviderName: record.providerName,
@@ -956,6 +965,7 @@ class algoConfig extends React.PureComponent {
         }).then((res) => {
             // console.log(res);
             // console.log(this.state.pagination);
+            let selList = [];
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
                 res.data.records.forEach((item) => {
@@ -973,6 +983,21 @@ class algoConfig extends React.PureComponent {
                         item.algorithmShow = 2;
                         item.algorithmEnable = 1;
                     }
+                    // 算法类型ID字典
+                    if (item.algorithmType == 1) {
+                        selList = [{ key: "1", value: "日内回转" }];
+                    } else {
+                        selList = [
+                            { key: "1", value: "智能委托" },
+                            { key: "2", value: "POV" },
+                            { key: "3", value: "股指" },
+                        ];
+                    }
+                    selList.forEach((subItem) => {
+                        if (subItem.key == item.algorithmTypeId) {
+                            item.algorithmTypeIdValue = subItem.value;
+                        }
+                    });
                 });
                 parseDictValue(res.data.records);
                 // showTip(this);
