@@ -36,7 +36,11 @@ class CounterGw extends React.PureComponent {
                         trigger: ["change", "blur"],
                     },
                 ],
-                component: <Input placeholder="请输入" />,
+                // component: <Input placeholder="请输入" />,
+                component: SelectOption(this.state.userList, {
+                    placeholder: "请选择",
+                    allowClear: false,
+                }),
             },
             {
                 label: "柜台用户编码",
@@ -525,6 +529,7 @@ class CounterGw extends React.PureComponent {
         updataAllArr: [], //所有柜台
         counterArr: [],
         updateModalVisible: false,
+        userList: [], //用户列表
     };
     //批量选择
     handleTableChange = (selectedRowKeys, row) => {
@@ -615,6 +620,25 @@ class CounterGw extends React.PureComponent {
                     counterArr: [],
                 });
             });
+    };
+    getUserSelectList = () => {
+        http.get({
+            url: "/user/listAll",
+        }).then((res) => {
+            let idArr = [];
+            if (res.data && res.data.length) {
+                // RiskType: [{ key: "1", value: "用户" },{ key: "2", value: "算法" },
+                idArr = res.data.map((item) => {
+                    let obj = {};
+                    obj.key = item.id;
+                    obj.value = item.userName;
+                    return obj;
+                });
+            }
+            this.setState({
+                userList: idArr,
+            });
+        });
     };
     // 编辑按钮点击事件
     handleUpdateBtn = (record) => {
@@ -824,6 +848,7 @@ class CounterGw extends React.PureComponent {
     componentDidMount() {
         this.getData();
         this.getCounterArr();
+        this.getUserSelectList();
     }
     render() {
         let scroll = { x: 2200, y: 445 };
