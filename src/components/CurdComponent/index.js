@@ -50,7 +50,7 @@ class CurdComponent extends React.PureComponent {
                             formData[key] = "";
                         }
                     }
-                    insertRecord(formData);
+                    insertRecord(formData, this.insertForm);
                     setTimeout(() => {
                         this.props.onSearchClick(
                             this.getSearchFormValue(),
@@ -76,6 +76,8 @@ class CurdComponent extends React.PureComponent {
         }
     };
     handleInsertModalCancel = () => {
+        //取消 insertForm 表单输入
+        this.insertForm.resetFields();
         this.setState({
             insertModalVisible: false,
         });
@@ -293,7 +295,7 @@ class CurdComponent extends React.PureComponent {
                 if (!this.insertId) {
                     this.insertId = parseInt(Math.random() * 100000000);
                 }
-                item.id = item.id + "_add" + this.insertId;
+                // item.id = item.id + "_add" + this.insertId;
                 // 动态隐藏输入框
                 if (item.hidden) {
                     delete dataArr[i];

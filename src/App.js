@@ -67,9 +67,12 @@ class App extends React.Component {
                             // console.log("props ", props);
                             let { pathname, search } = props.location;
                             enterRoute(pathname);
+                            // setTimeout(() => {
+                            //     popOtherTab(pathname);
+                            // }, 100);
                             setTimeout(() => {
                                 popOtherTab(pathname);
-                            }, 100);
+                            }, 20);
                             let { component: Component, title: routeTitle } =
                                 route;
                             document.title = routeTitle;

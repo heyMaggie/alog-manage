@@ -14,236 +14,381 @@ let getSearchFormFields = () => {
         },
         {
             label: "用户名称",
-            id: "uuserId",
+            id: "algoUserName",
             component: <Input placeholder="请输入" />,
         },
     ];
 };
-const getInsertFormFields = () => {
-    return [
-        {
-            label: "用户名称",
-            id: "uuserId",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(10),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "柜台用户编码",
-            id: "userId",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(12),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "柜台用户名称",
-            id: "userName",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-                {
-                    validator: checkLength(32),
-                    trigger: ["change", "blur"],
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        // {
-        //     label: "用户密码",
-        //     id: "userPasswd",
-        //     initialValue: "",
-        //     rules: [
-        //         {
-        //             required: true,
-        //             message: "参数不能为空",
-        //         },
-        //         {
-        //             validator: checkLength(32),
-        //             trigger: ["change", "blur"],
-        //         },
-        //     ],
-        //     component: <Input placeholder="请输入" />,
-        // },
-        // {
-        //     label: "柜台网关ID",
-        //     id: "counterGwId",
-        //     rules: [
-        //         {
-        //             required: true,
-        //             message: "柜台网关Id不能为空",
-        //         },
-        //         {
-        //             validator: checkLength(10),
-        //             trigger: ["change", "blur"],
-        //         },
-        //     ],
-        //     component: <Input placeholder="请输入" />,
-        // },
-        // {
-        //     label: "柜台网关",
-        //     id: "counterGwId",
-        //     rules: [
-        //         {
-        //             required: true,
-        //             message: "柜台网关Id不能为空",
-        //         },
-        //         {
-        //             max: 10,
-        //             message: "最大长度为10",
-        //         },
-        //     ],
-        //     component: SelectOption(this.state.updateArr, {
-        //         placeholder: "请选择",
-        //         allowClear: false,
-        //         style: {
-        //             width: 400,
-        //         },
-        //     }),
-        // },
-        // {
-        //     label: "来自柜台",
-        //     id: "counterUserId",
-        //     rules: [
-        //         {
-        //             required: true,
-        //             message: "参数不能为空",
-        //         },
-        //         {
-        //             validator: checkLength(10),
-        //             trigger: ["change", "blur"],
-        //         },
-        //     ],
-        //     component: <Input placeholder="请输入" />,
-        // },
-        {
-            label: "业务类型",
-            id: "businessType",
-            initialValue: "1",
-            rules: [
-                {
-                    required: true,
-                    message: "参数不能为空",
-                },
-            ],
-            component: SelectOption(dict.businessType, {
-                placeholder: "请选择",
-                allowClear: false,
-                style: {
-                    width: 400,
-                },
-            }),
-        },
-        // {
-        //     label: "登录状态",
-        //     id: "loginStatus",
-        //     initialValue: "0",
-        //     rules: [
-        //         {
-        //             required: true,
-        //             message: "参数不能为空",
-        //         },
-        //     ],
-        //     component: SelectOption(dict.loginStatus, {
-        //         placeholder: "请选择",
-        //         allowClear: false,
-        //         style: {
-        //             width: 400,
-        //         },
-        //     }),
-        // },
-        // {
-        //     label: "客户类型",
-        //     id: "clientType",
-        //     initialValue: "0",
-        //     rules: [
-        //         {
-        //             required: true,
-        //             message: "参数不能为空",
-        //         },
-        //     ],
-        //     component: SelectOption(dict.clientType, {
-        //         placeholder: "请选择",
-        //         allowClear: false,
-        //         style: {
-        //             width: 400,
-        //         },
-        //     }),
-        // },
 
-        {
-            label: "终端信息",
-            id: "TerminalInfo",
-            rules: [
-                // {
-                //     validator: checkLength(256),
-                //     trigger: ["change", "blur"],
-                // },
-                {
-                    max: 256,
-                    message: "最大长度为256",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "营业编号",
-            id: "CustOrgId",
-            rules: [
-                // {
-                //     validator: checkLength(256),
-                //     trigger: ["change", "blur"],
-                // },
-                {
-                    max: 50,
-                    message: "最大长度为50",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-        {
-            label: "系统编号",
-            id: "ClSystemId",
-            rules: [
-                // {
-                //     validator: checkLength(256),
-                //     trigger: ["change", "blur"],
-                // },
-                {
-                    max: 50,
-                    message: "最大长度为50",
-                },
-            ],
-            component: <Input placeholder="请输入" />,
-        },
-    ];
-};
-const getUpdateFormFields = () => {
-    return getInsertFormFields();
-};
 class CounterGw extends React.PureComponent {
+    getInsertFormFields = () => {
+        return [
+            {
+                label: "用户名称",
+                id: "uuserId",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(10),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "柜台用户编码",
+                id: "userId",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(12),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "柜台用户名称",
+                id: "userName",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(32),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            // {
+            //     label: "用户密码",
+            //     id: "userPasswd",
+            //     initialValue: "",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //         {
+            //             validator: checkLength(32),
+            //             trigger: ["change", "blur"],
+            //         },
+            //     ],
+            //     component: <Input placeholder="请输入" />,
+            // },
+            // {
+            //     label: "柜台网关ID",
+            //     id: "counterGwId",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "柜台网关Id不能为空",
+            //         },
+            //         {
+            //             validator: checkLength(10),
+            //             trigger: ["change", "blur"],
+            //         },
+            //     ],
+            //     component: <Input placeholder="请输入" />,
+            // },
+            {
+                label: "业务类型",
+                id: "businessType",
+                initialValue: "1",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(dict.businessType, {
+                    placeholder: "请选择",
+                    allowClear: false,
+                    onChange: this.selectChange,
+                }),
+            },
+            {
+                label: "柜台网关",
+                id: "counterGwId",
+                rules: [
+                    {
+                        required: true,
+                        message: "柜台网关不能为空",
+                    },
+                    // {
+                    //     max: 10,
+                    //     message: "最大长度为10",
+                    // },
+                ],
+                component: SelectOption(this.state.counterArr, {
+                    placeholder: "请选择",
+                    allowClear: false,
+                }),
+            },
+            // {
+            //     label: "来自柜台",
+            //     id: "counterUserId",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //         {
+            //             validator: checkLength(10),
+            //             trigger: ["change", "blur"],
+            //         },
+            //     ],
+            //     component: <Input placeholder="请输入" />,
+            // },
+            // {
+            //     label: "登录状态",
+            //     id: "loginStatus",
+            //     initialValue: "0",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //     ],
+            //     component: SelectOption(dict.loginStatus, {
+            //         placeholder: "请选择",
+            //         allowClear: false,
+            //         style: {
+            //             width: 400,
+            //         },
+            //     }),
+            // },
+            // {
+            //     label: "客户类型",
+            //     id: "clientType",
+            //     initialValue: "0",
+            //     rules: [
+            //         {
+            //             required: true,
+            //             message: "参数不能为空",
+            //         },
+            //     ],
+            //     component: SelectOption(dict.clientType, {
+            //         placeholder: "请选择",
+            //         allowClear: false,
+            //         style: {
+            //             width: 400,
+            //         },
+            //     }),
+            // },
+
+            {
+                label: "终端信息",
+                id: "TerminalInfo",
+                rules: [
+                    // {
+                    //     validator: checkLength(256),
+                    //     trigger: ["change", "blur"],
+                    // },
+                    {
+                        max: 256,
+                        message: "最大长度为256",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "营业编号",
+                id: "CustOrgId",
+                rules: [
+                    // {
+                    //     validator: checkLength(256),
+                    //     trigger: ["change", "blur"],
+                    // },
+                    {
+                        max: 50,
+                        message: "最大长度为50",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "系统编号",
+                id: "ClSystemId",
+                rules: [
+                    // {
+                    //     validator: checkLength(256),
+                    //     trigger: ["change", "blur"],
+                    // },
+                    {
+                        max: 50,
+                        message: "最大长度为50",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+        ];
+    };
+    getUpdateFormFields = () => {
+        return this.getInsertFormFields();
+        return [
+            {
+                label: "用户名称",
+                id: "uuserId",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(10),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "柜台用户编码",
+                id: "userId",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(12),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "柜台用户名称",
+                id: "userName",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    {
+                        validator: checkLength(32),
+                        trigger: ["change", "blur"],
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "业务类型",
+                id: "businessType",
+                initialValue: "1",
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
+                component: SelectOption(dict.businessType, {
+                    placeholder: "请选择",
+                    allowClear: false,
+                    onChange: this.selectChange,
+                }),
+            },
+            {
+                label: "柜台网关",
+                id: "counterGwId",
+                rules: [
+                    {
+                        required: true,
+                        message: "柜台网关不能为空",
+                    },
+                    // {
+                    //     max: 10,
+                    //     message: "最大长度为10",
+                    // },
+                ],
+                component: SelectOption(this.state.counterArr, {
+                    placeholder: "请选择",
+                    allowClear: false,
+                }),
+            },
+            {
+                label: "终端信息",
+                id: "TerminalInfo",
+                rules: [
+                    // {
+                    //     validator: checkLength(256),
+                    //     trigger: ["change", "blur"],
+                    // },
+                    {
+                        max: 256,
+                        message: "最大长度为256",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "营业编号",
+                id: "CustOrgId",
+                rules: [
+                    // {
+                    //     validator: checkLength(256),
+                    //     trigger: ["change", "blur"],
+                    // },
+                    {
+                        max: 50,
+                        message: "最大长度为50",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+            {
+                label: "系统编号",
+                id: "ClSystemId",
+                rules: [
+                    // {
+                    //     validator: checkLength(256),
+                    //     trigger: ["change", "blur"],
+                    // },
+                    {
+                        max: 50,
+                        message: "最大长度为50",
+                    },
+                ],
+                component: <Input placeholder="请输入" />,
+            },
+        ];
+    };
+    // let keys = Object.keys(this.insertForm.getFieldsValue()).filter(
+    //     (item) => item.includes("counterGwId")
+    // );
+    // console.log(this.insertForm.getFieldsValue());
+    // if (keys.length > 0) {
+    //     this.insertForm.resetFields(keys);
+    // }
+    selectChange = (val) => {
+        // console.log("selectChange ", val);
+        this.getCounterArr(val);
+        if (this.updateForm) {
+            this.updateForm.resetFields(["counterGwId"]);
+        }
+        if (this.insertForm) {
+            // 清空柜台地址
+            this.insertForm.resetFields(["counterGwId"]);
+        }
+    };
     columns = (params) => {
         return [
             {
-                title: "用户名称",
+                title: "用户账户",
                 dataIndex: "uuserId",
+                width: 150,
+            },
+            {
+                title: "用户名称",
+                dataIndex: "algoUserName",
                 width: 150,
             },
             {
@@ -330,7 +475,7 @@ class CounterGw extends React.PureComponent {
     columns2 = (params) => {
         return [
             {
-                title: "网关ID",
+                title: "柜台网关ID",
                 dataIndex: "id",
                 width: 100,
                 ellipsis: true,
@@ -377,6 +522,8 @@ class CounterGw extends React.PureComponent {
         selectedRowKeys: [],
         info: [],
         updateArr: [],
+        updataAllArr: [], //所有柜台
+        counterArr: [],
         updateModalVisible: false,
     };
     //批量选择
@@ -420,11 +567,53 @@ class CounterGw extends React.PureComponent {
                         }
                     );
                 } else {
-                    message.info("柜台用户信息查询结果为空");
+                    message.info("获取柜台网关地址为空");
+                    this.setState({
+                        updateArr: [],
+                    });
                 }
             })
             .catch((e) => {
-                message.error("柜台用户信息查询失败");
+                message.error("获取柜台地址失败");
+                this.setState({
+                    updateArr: [],
+                });
+            });
+    };
+    getCounterArr = (type = 1) => {
+        // console.log(this.record);
+        let params = {};
+        params.businessType = type;
+        // params.businessType = 0;
+        return http
+            .post({
+                url: "/counter-info/listAll",
+                data: params,
+            })
+            .then((res) => {
+                console.log("柜台信息", res);
+                //解析数据字典
+                if (res.data.length > 0) {
+                    let arr = res.data.map((item) => {
+                        return { key: item.id + "", value: item.gwAddr };
+                    });
+                    // console.log(arr);
+                    this.setState({
+                        counterArr: arr,
+                    });
+                } else {
+                    message.info("获取柜台网关地址为空");
+                    this.setState({
+                        counterArr: [],
+                    });
+                }
+            })
+            .catch((e) => {
+                // message.error("柜台用户信息查询失败");
+                message.info("获取柜台网关地址失败");
+                this.setState({
+                    counterArr: [],
+                });
             });
     };
     // 编辑按钮点击事件
@@ -439,21 +628,38 @@ class CounterGw extends React.PureComponent {
     setUpdateModal = ({ form, record }) => {
         // console.log(record, form);
         this.record = record;
-        form.setFieldsValue({
-            userId: record.userId,
-            userName: record.userName,
-            counterGwId: record.counterGwId,
-            // counterUserId: record.counterUserId,
-            businessType: record.businessType + "",
-            // loginStatus: record.loginStatus + "",
-            // clientType: record.clientType + "",
-            uuserId: record.uuserId,
-            // createTime: record.createTime,
-            userPasswd: record.userPasswd,
-            TerminalInfo: record.terminalInfo,
-            CustOrgId: record.custOrgid,
-            ClSystemId: record.clSystemId,
+        this.getCounterArr(record.businessType / 1).then(() => {
+            form.setFieldsValue({
+                userId: record.userId,
+                userName: record.userName,
+                counterGwId: record.counterGwId + "",
+                // counterUserId: record.counterUserId,
+                businessType: record.businessType + "",
+                // loginStatus: record.loginStatus + "",
+                // clientType: record.clientType + "",
+                uuserId: record.uuserId,
+                // createTime: record.createTime,
+                // userPasswd: record.userPasswd,
+                TerminalInfo: record.terminalInfo,
+                CustOrgId: record.custOrgid,
+                ClSystemId: record.clSystemId,
+            });
         });
+        // form.setFieldsValue({
+        //     userId: record.userId,
+        //     userName: record.userName,
+        //     counterGwId: record.counterGwId + "",
+        //     // counterUserId: record.counterUserId,
+        //     businessType: record.businessType + "",
+        //     // loginStatus: record.loginStatus + "",
+        //     // clientType: record.clientType + "",
+        //     uuserId: record.uuserId,
+        //     // createTime: record.createTime,
+        //     // userPasswd: record.userPasswd,
+        //     TerminalInfo: record.terminalInfo,
+        //     CustOrgId: record.custOrgid,
+        //     ClSystemId: record.clSystemId,
+        // });
     };
     handleInsertRecord = (formData) => {
         console.log("新增接口", formData);
@@ -470,7 +676,7 @@ class CounterGw extends React.PureComponent {
             CustOrgId: formData.CustOrgId,
             ClSystemId: formData.ClSystemId,
         };
-        // console.log("新增 ",params);
+        // console.log("新增 ", params);
         http.post({
             url: "/counter/addCounterUserInfo",
             data: params,
@@ -488,6 +694,12 @@ class CounterGw extends React.PureComponent {
             }
             this.isAction = true;
         });
+    };
+    onInsertModalReady = ({ form }) => {
+        this.insertForm = form;
+    };
+    onUpdateModalReady = ({ form }) => {
+        this.updateForm = form;
     };
     handleUpdateRecord = ({ form }) => {
         let formData = form.getFieldsValue();
@@ -611,7 +823,7 @@ class CounterGw extends React.PureComponent {
     };
     componentDidMount() {
         this.getData();
-        // this.getCounterInfo();
+        this.getCounterArr();
     }
     render() {
         let scroll = { x: 2200, y: 445 };
@@ -644,13 +856,15 @@ class CounterGw extends React.PureComponent {
                     getSearchFormFields={getSearchFormFields}
                     // searchLoading={this.state.searchLoading}
                     insertBtnText={"新增"} // 不传 就没新增按钮
-                    getInsertFormFields={getInsertFormFields}
+                    getInsertFormFields={this.getInsertFormFields}
+                    onInsertModalReady={this.onInsertModalReady}
+                    onUpdateModalReady={this.onUpdateModalReady}
                     insertRecord={this.handleInsertRecord}
                     // col="2"
                     width="600px"
                     pagination={this.state.pagination}
                     // updateModalText="修改柜台网关Id"
-                    getUpdateFormFields={getUpdateFormFields}
+                    getUpdateFormFields={this.getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
                     updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
