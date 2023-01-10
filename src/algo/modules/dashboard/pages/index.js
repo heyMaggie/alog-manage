@@ -1296,12 +1296,12 @@ class RegularWay extends React.PureComponent {
             url: "/counter-info/networkInfo",
             // data: query,
         }).then((res) => {
-            console.log("getNetworkInfo ", res);
+            // console.log("getNetworkInfo ", res);
             let arr = res.data.map((item, index) => {
                 item.key = index;
                 return item;
             });
-            console.log(arr);
+            // console.log(arr);
             parseArrDict(arr, "status", "counterStatus");
             this.setState({
                 netData: arr,
