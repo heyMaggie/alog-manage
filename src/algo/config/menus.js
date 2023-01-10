@@ -2,12 +2,12 @@
 // 交易管理     证券信息  算法管理 订单列表 持仓列表 成交回执  撤单列表   篮子管理
 // 风控管理  风控配置， 用户风险统计，算法风险统计
 const menuList = [
-    {
-        id: "2",
-        path: "/main/dashboard",
-        title: "Dashboard",
-        icon: "icon8",
-    },
+    // {
+    //     id: "2",
+    //     path: "/main/dashboard",
+    //     title: "Dashboard",
+    //     icon: "icon8",
+    // },
     {
         id: "11",
         path: "/main/auth",
@@ -39,6 +39,12 @@ const menuList = [
                 icon: "",
                 title: "用户管理",
                 path: "/main/user/userInfo",
+            },
+            {
+                id: "10-14",
+                icon: "",
+                title: "柜台用户",
+                path: "/main/user/counterGw",
             },
             {
                 id: "4-2",
@@ -213,12 +219,12 @@ const menuList = [
         icon: "icon12",
         title: "网关管理",
         children: [
-            {
-                id: "10-14",
-                icon: "",
-                title: "柜台用户",
-                path: "/main/counter/counterGw",
-            },
+            // {
+            //     id: "10-14",
+            //     icon: "",
+            //     title: "柜台用户",
+            //     path: "/main/counter/counterGw",
+            // },
             {
                 id: "10-8",
                 icon: "",
@@ -302,12 +308,12 @@ const menuList = [
                 title: "操作日志",
                 path: "/main/oper_manage/operateLog",
             },
-            {
-                id: "12-2",
-                icon: "",
-                title: "黑名单",
-                path: "/main/oper_manage/blacklist",
-            },
+            // {
+            //     id: "12-2",
+            //     icon: "",
+            //     title: "黑名单",
+            //     path: "/main/oper_manage/blacklist",
+            // },
             {
                 id: "12-3",
                 icon: "",

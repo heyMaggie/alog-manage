@@ -60,7 +60,8 @@ window.checkLength = (len) => {
         if (!value) {
             return Promise.reject("");
         } else if (getLength(value) > len) {
-            return Promise.reject("位数超过限制");
+            // return Promise.reject("位数超过限制");
+            return Promise.reject("位数超过" + len + "位");
         } else {
             return Promise.resolve(); //成功
         }

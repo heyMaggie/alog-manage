@@ -398,18 +398,23 @@ class CounterGw extends React.PureComponent {
             {
                 title: "柜台用户编码",
                 dataIndex: "userId",
+                width: 150,
             },
             {
                 title: "柜台用户名称",
                 dataIndex: "userName",
+                width: 150,
             },
             // {
             //     title: "柜台网关Id",
             //     dataIndex: "counterGwId",
             // },
             {
-                title: "柜台网关ID",
-                dataIndex: "counterGwId",
+                // title: "柜台网关ID",
+                // dataIndex: "counterGwId",
+                title: "柜台网关",
+                dataIndex: "gwAddr",
+                width: 200,
                 render: (text, record) => (
                     <div
                         onClick={(e) => {
@@ -417,8 +422,14 @@ class CounterGw extends React.PureComponent {
                         }}
                     >
                         <Tooltip title="修改网关">
-                            {record.counterGwId}
-                            <Icon type="edit" style={{ color: "#1899ff" }} />
+                            {record.gwAddr}
+                            <Icon
+                                type="edit"
+                                style={{
+                                    paddingLeft: "5px",
+                                    color: "#1899ff",
+                                }}
+                            />
                         </Tooltip>
                     </div>
                 ),
@@ -430,10 +441,12 @@ class CounterGw extends React.PureComponent {
             {
                 title: "业务类型",
                 dataIndex: "businessTypeValue",
+                width: 120,
             },
             {
                 title: "登录状态",
                 dataIndex: "loginStatusValue",
+                width: 120,
             },
             // {
             //     title: "客户类型",
@@ -442,7 +455,7 @@ class CounterGw extends React.PureComponent {
             {
                 title: "终端信息",
                 dataIndex: "terminalInfo",
-                width: 300,
+                width: 200,
             },
             {
                 title: "营业编号",
@@ -452,7 +465,7 @@ class CounterGw extends React.PureComponent {
             {
                 title: "系统编号",
                 dataIndex: "clSystemId",
-                width: 300,
+                width: 200,
             },
             {
                 title: "创建时间",
@@ -481,7 +494,7 @@ class CounterGw extends React.PureComponent {
             {
                 title: "柜台网关ID",
                 dataIndex: "id",
-                width: 100,
+                width: 120,
                 ellipsis: true,
             },
             {

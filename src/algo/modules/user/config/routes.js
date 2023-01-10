@@ -21,6 +21,11 @@ const main = (root = "/main/user") => [
         component: `${pages}/session`,
         title: "用户会话",
     },
+    {
+        path: `${root}/counterGw`,
+        component: `${pages}/counterGw`,
+        title: "柜台用户",
+    },
 ];
 
 export default main;
