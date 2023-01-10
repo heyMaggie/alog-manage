@@ -2,20 +2,12 @@
 // 交易管理     证券信息  算法管理 订单列表 持仓列表 成交回执  撤单列表   篮子管理
 // 风控管理  风控配置， 用户风险统计，算法风险统计
 const menuList = [
-    // {
-    //     id: "2",
-    //     path: "/main/dashboard",
-    //     title: "Dashboard",
-    //     icon: "icon8",
-    //     // children: [
-    //     //     {
-    //     //         id: "2-1",
-    //     //         icon: "",
-    //     //         title: "用户信息",
-    //     //         path: "/main/updown/userInfo",
-    //     //     },
-    //     // ],
-    // },
+    {
+        id: "2",
+        path: "/main/dashboard",
+        title: "Dashboard",
+        icon: "icon8",
+    },
     {
         id: "11",
         path: "/main/auth",

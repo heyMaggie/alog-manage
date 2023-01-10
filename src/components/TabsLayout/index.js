@@ -99,7 +99,7 @@ class TabsLayout extends React.PureComponent {
                         onEdit={this.onEdit}
                         onChange={this.onChange}
                         activeKey={this.props.currentPath}
-                        className={styles.tablayout}
+                        className={styles.tablayout + " noTabs"}
                     >
                         {tabRoute.map((pane) => {
                             // console.log(pane);

@@ -25,7 +25,14 @@ class BasicTable extends React.PureComponent {
             total: pagination.total,
         };
         if (this.props.pagination) {
-            this.props.handlePagination(params);
+            // this.props.handlePagination(params);
+            if (this.props.handlePagination) {
+                this.props.handlePagination(params);
+            } else {
+                this.setState({
+                    pagination: pagination,
+                });
+            }
         } else {
             // console.log("自动分页 ", pagination);
             this.setState({

@@ -22,90 +22,105 @@
     }
 }
 :global {
-    .ant-tabs-bar {
-        border: 0;
+    .noTabs > .ant-tabs-bar {
+        display: none !important;
     }
-    .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
-        border: 0;
-        border-radius: 0px;
-        padding-left: 0px; //
-        padding-right: 0px;
-        margin-right: 0;
-        height: 40px;
-        // position: relative;
+    .noTabs .ant-tabs-nav .ant-tabs-tab {
+        padding: 12px 0;
+        font-size: 16px;
+        margin-right: 60px;
     }
-    // .ant-tabs-nav .ant-tabs-tab:not(:first-child)::before {
-    //     content: "|";
-    //     position: absolute;
-    //     top: -2px;
-    //     left: 0px;
-    //     height: 20px;
-    //     width: 1px;
-    // }
-    .ant-tabs-nav .ant-tabs-tab:not(:first-child)::before,
-    .ant-tabs-nav .ant-tabs-tab:last-child::after {
-        content: " ";
-        background: #8b8e92;
-        position: absolute;
-        top: 10px;
-        right: 0px;
-        height: 20px;
-        width: 1px;
+    .noTabs .ant-tabs-nav-container {
+        padding-left: 24px;
     }
-    .ant-tabs-nav .ant-tabs-tab-active::before {
-        background: transparent !important;
-    }
-    .ant-tabs-nav .ant-tabs-tab-active + .ant-tabs-tab::before {
-        background: transparent !important;
-    }
-    .ant-tabs-nav .ant-tabs-tab-active::after {
-        background: transparent !important;
-    }
-    .ant-tabs.ant-tabs-card .ant-tabs-card-bar {
-        background: #dee1e6 !important;
-        .ant-dropdown-trigger {
-            background: transparent !important;
-        }
-    }
-
-    .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
-        background: transparent;
-    }
-    .ant-tabs.ant-tabs-card
-        .ant-tabs-card-bar
-        .ant-tabs-tab.ant-tabs-tab-active {
-        color: #1890ff !important;
-        background: white !important;
-    }
-    .ant-tabs-close-x {
-        margin-right: 5px !important;
-    }
-
-    // .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
-    //     background: #e6f7ff !important;
-    //     color: #1890ff !important;
-    //     .ant-dropdown-trigger {
-    //         background: #e6f7ff !important;
-    //     }
-    // }
-    .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active::before {
-        content: "";
-    }
-    .ant-tabs.ant-tabs-card
-        .ant-tabs-card-bar
-        .ant-tabs-tab-active
-        + div::before {
-        content: "";
-    }
-    //右键菜单 扩展范围
-    .ant-dropdown-trigger {
-        // line-height: 38px;
-        line-height: 39px;
-        padding-left: 16px;
-        padding-right: 6px;
-        float: left;
-    }
-    // .ant-dropdown-trigger + i {
-    //     margin-left: -25px !important;
-    // }
 }
+
+// 去掉 多tab 样式
+// :global {
+//     .ant-tabs-bar {
+//         border: 0;
+//     }
+//     .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+//         border: 0;
+//         border-radius: 0px;
+//         padding-left: 0px; //
+//         padding-right: 0px;
+//         margin-right: 0;
+//         height: 40px;
+//         // position: relative;
+//     }
+//     // .ant-tabs-nav .ant-tabs-tab:not(:first-child)::before {
+//     //     content: "|";
+//     //     position: absolute;
+//     //     top: -2px;
+//     //     left: 0px;
+//     //     height: 20px;
+//     //     width: 1px;
+//     // }
+//     .ant-tabs-nav .ant-tabs-tab:not(:first-child)::before,
+//     .ant-tabs-nav .ant-tabs-tab:last-child::after {
+//         content: " ";
+//         background: #8b8e92;
+//         position: absolute;
+//         top: 10px;
+//         right: 0px;
+//         height: 20px;
+//         width: 1px;
+//     }
+//     .ant-tabs-nav .ant-tabs-tab-active::before {
+//         background: transparent !important;
+//     }
+//     .ant-tabs-nav .ant-tabs-tab-active + .ant-tabs-tab::before {
+//         background: transparent !important;
+//     }
+//     .ant-tabs-nav .ant-tabs-tab-active::after {
+//         background: transparent !important;
+//     }
+//     .ant-tabs.ant-tabs-card .ant-tabs-card-bar {
+//         background: #dee1e6 !important;
+//         .ant-dropdown-trigger {
+//             background: transparent !important;
+//         }
+//     }
+
+//     .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+//         background: transparent;
+//     }
+//     .ant-tabs.ant-tabs-card
+//         .ant-tabs-card-bar
+//         .ant-tabs-tab.ant-tabs-tab-active {
+//         color: #1890ff !important;
+//         background: white !important;
+//     }
+//     .ant-tabs-close-x {
+//         margin-right: 5px !important;
+//     }
+
+//     // .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+//     //     background: #e6f7ff !important;
+//     //     color: #1890ff !important;
+//     //     .ant-dropdown-trigger {
+//     //         background: #e6f7ff !important;
+//     //     }
+//     // }
+//     .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active::before {
+//         content: "";
+//     }
+//     .ant-tabs.ant-tabs-card
+//         .ant-tabs-card-bar
+//         .ant-tabs-tab-active
+//         + div::before {
+//         content: "";
+//     }
+//     //右键菜单 扩展范围
+//     .ant-dropdown-trigger {
+//         // line-height: 38px;
+//         line-height: 39px;
+//         padding-left: 16px;
+//         padding-right: 6px;
+//         float: left;
+//     }
+//     // .ant-dropdown-trigger + i {
+//     //     margin-left: -25px !important;
+//     // }
+// }
