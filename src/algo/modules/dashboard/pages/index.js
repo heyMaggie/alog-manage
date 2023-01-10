@@ -6,6 +6,7 @@ import echarts from "echarts";
 import "echarts-liquidfill";
 import { Form, Tabs, Badge } from "antd";
 import Table from "@/components/Table";
+import TagLabel from "@/components/Tag";
 
 const { TabPane } = Tabs;
 import { connect } from "react-redux";
@@ -1301,6 +1302,7 @@ class RegularWay extends React.PureComponent {
                 return item;
             });
             console.log(arr);
+            parseArrDict(arr, "status", "counterStatus");
             this.setState({
                 netData: arr,
             });
@@ -1330,6 +1332,30 @@ class RegularWay extends React.PureComponent {
             {
                 title: "状态",
                 dataIndex: "status",
+                render: (text, record) => {
+                    // return (
+                    //     <TagLabel record={record.status} type="warn"></TagLabel>
+                    // );
+                    if (record.status.indexOf("0") == 0) {
+                        return (
+                            <div>
+                                <TagLabel
+                                    record={record.status}
+                                    type="warn"
+                                ></TagLabel>
+                            </div>
+                        );
+                    } else if (record.status.indexOf("1") == 0) {
+                        return (
+                            <TagLabel
+                                record={record.status}
+                                type="success"
+                                color="#3281FF"
+                            ></TagLabel>
+                        );
+                    }
+                    return <TagLabel record={record.status}></TagLabel>;
+                },
             },
             {
                 title: "时间",
