@@ -27,7 +27,7 @@ export default class Axios {
             axios({
                 url: options.url,
                 method: "get",
-                timeout: 5000,
+                timeout: 10000,
                 baseURL: options.baseUrl
                     ? options.baseUrl
                     : axios.defaults.baseURL,
@@ -87,7 +87,7 @@ export default class Axios {
             axios({
                 url: options.url,
                 method: "post",
-                timeout: 5000,
+                timeout: 10000,
                 baseURL: options.baseUrl
                     ? options.baseUrl
                     : axios.defaults.baseURL,
@@ -146,7 +146,7 @@ export default class Axios {
                 ...options,
                 method: options.method || "get",
                 url: options.url,
-                timeout: 5000,
+                timeout: 10000,
                 baseURL: options.baseUrl
                     ? options.baseUrl
                     : axios.defaults.baseURL,
