@@ -202,12 +202,12 @@ class userInfo extends React.PureComponent {
                 id: "RiskGroup",
                 initialValue: "",
                 hidden: this.state.seUserType != 1 ? true : false,
-                // rules: [
-                //     {
-                //         required: true,
-                //         message: "参数不能为空",
-                //     },
-                // ],
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
                 component:
                     // <Input placeholder="请输入" readOnly disabled />
                     SelectOption(this.state.riskList, {
@@ -432,12 +432,12 @@ class userInfo extends React.PureComponent {
                 id: "RiskGroup",
                 initialValue: "",
                 hidden: this.state.seUserType != 1 ? true : false,
-                // rules: [
-                //     {
-                //         required: true,
-                //         message: "参数不能为空",
-                //     },
-                // ],
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                ],
                 component:
                     // <Input placeholder="请输入" readOnly disabled />
                     SelectOption(this.state.riskList, {

@@ -11,7 +11,7 @@ const menuList = [
     {
         id: "11",
         path: "/main/auth",
-        icon: "icon1",
+        icon: "icon9",
         title: "权限管理",
         children: [
             {
@@ -294,7 +294,7 @@ const menuList = [
         id: "12",
         path: "/main/oper_manage",
         title: "运维管理",
-        icon: "icon5",
+        icon: "icon13",
         children: [
             {
                 id: "12-1",
