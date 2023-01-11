@@ -628,6 +628,7 @@ class algoConfig extends React.PureComponent {
             // this.getData(this.searchParam, this.state.pagination);
         });
     };
+
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
         // console.log(record, form);
@@ -748,6 +749,33 @@ class algoConfig extends React.PureComponent {
                 );
             } else {
                 message.error(msg);
+            }
+        });
+    };
+    //删除记录
+    handleDeleteRecord = (record) => {
+        // console.log("删除记录11 ", record);
+        let params = record;
+        params.algorithmStatus = 4;
+        console.log("删除参数 ", record);
+        return;
+        http.post({
+            url: "/algo/updateAlgoInfo",
+            data: params,
+        }).then((res) => {
+            // console.log(res);
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success("删除成功");
+                // showTip(this, "修改算法风控组成功");
+                // this.isAction = true;
+                this.getData(this.searchParam, this.state.pagination);
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
+                );
+            } else {
+                message.error(msg || "删除失败");
             }
         });
     };
