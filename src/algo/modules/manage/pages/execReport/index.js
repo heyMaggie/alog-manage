@@ -110,7 +110,7 @@ const getSearchFormFields = () => {
             // initialValue: "1",
             component: SelectOption(dict.businessTypeSelect, {
                 placeholder: "请选择",
-                // allowClear: true,
+                allowClear: true,
             }),
         },
     ];
