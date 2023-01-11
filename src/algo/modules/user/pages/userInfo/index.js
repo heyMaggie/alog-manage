@@ -685,7 +685,7 @@ class userInfo extends React.PureComponent {
                     >
                         <Tooltip title="修改风控组">
                             {record.riskName}
-                            {this.authObj.isUpdate && (
+                            {this.authObj.isUpdate && record.riskName && (
                                 <Icon
                                     type="edit"
                                     style={{ color: "#1899ff" }}
@@ -707,7 +707,7 @@ class userInfo extends React.PureComponent {
                     >
                         <Tooltip title="修改算法权限组">
                             {record.groupName}
-                            {this.authObj.isUpdate && (
+                            {this.authObj.isUpdate && record.groupName && (
                                 <Icon
                                     type="edit"
                                     style={{ color: "#1899ff" }}
@@ -871,8 +871,8 @@ class userInfo extends React.PureComponent {
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
-        console.log("setUpdateModal--------");
-        console.log(record, form);
+        // console.log("setUpdateModal--------");
+        // console.log(record, form);
         this.record = record;
         this.setState({
             seUserType: this.record.userType,
