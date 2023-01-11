@@ -655,7 +655,7 @@ class algoConfig extends React.PureComponent {
         let formData = {
             AlgoName: record.algoName,
             // ProviderName: record.providerName,
-            ProviderName: record.providerName + "-" + record.uuserId,
+            ProviderName: record.providerName,
             // UuserId: record.uuserId,
             AlgorithmType: record.algorithmType + "",
             AlgorithmTypeId: record.algorithmTypeId + "",
@@ -859,7 +859,7 @@ class algoConfig extends React.PureComponent {
             url: "/algo/listProvider",
             data: params,
         }).then((res) => {
-            console.log(res);
+            console.log(res, "fffffffffffffffffffffffffff");
             let idArr = [];
             if (res.data && res.data.length > 0) {
                 let dataArr = res.data;
@@ -868,8 +868,8 @@ class algoConfig extends React.PureComponent {
                         let obj = {};
                         // obj.key = item.providerName + "-" + item.uuserId;
                         // obj.value = item.providerName + "-" + item.uuserId;
-                        obj.key = item.userName + "-" + item.id;
-                        obj.value = item.userName + "-" + item.id;
+                        obj.key = item.userName;
+                        obj.value = item.userName;
                         return obj;
                     });
                     // console.log(idArr);
