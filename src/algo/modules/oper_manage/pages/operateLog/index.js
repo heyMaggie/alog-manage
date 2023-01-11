@@ -14,7 +14,7 @@ const columns = (params) => {
             width: 120,
         },
         {
-            title: "用户名称",
+            title: "系统用户名称",
             dataIndex: "operateId",
             key: "operateId",
             width: 160,
@@ -58,9 +58,9 @@ export default class uoeSetting extends React.PureComponent {
     getSearchFormFields = () => {
         return [
             {
-                label: "用户名称",
+                label: "系统用户名称",
                 id: "operateId",
-                component: <Input placeholder="请输入管理员名称" />,
+                component: <Input placeholder="请输入" />,
             },
             {
                 label: "操作模块",

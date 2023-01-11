@@ -45,11 +45,11 @@ const main = (
         component: `${pages}/algoBest`,
         title: "算法优选",
     },
-    {
-        path: `${menu3}/counterGw`,
-        component: `${pages}/counterGw`,
-        title: "柜台用户",
-    },
+    // {
+    //     path: `${menu3}/counterGw`,
+    //     component: `${pages}/counterGw`,
+    //     title: "柜台用户",
+    // },
     {
         path: `${root}/newOrderQuery`,
         component: `${pages}/newOrderQuery`,

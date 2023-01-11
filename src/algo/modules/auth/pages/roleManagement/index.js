@@ -433,7 +433,8 @@ class userInfo extends React.PureComponent {
             // console.log(res);
             if (res.code == 200) {
                 if (res.role_auth.length > 0) {
-                    let roleAuth = JSON.parse(res.role_auth).list;
+                    // let roleAuth = JSON.parse(res.role_auth).list;
+                    let roleAuth = JSON.parse(res.role_auth);
                     this.handleRoleArray(roleAuth);
                     // console.log(roleAuth);
                     this.setState({
