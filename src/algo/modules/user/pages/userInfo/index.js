@@ -183,6 +183,12 @@ class userInfo extends React.PureComponent {
                         mode="multiple"
                         style={{ width: "100%" }}
                         placeholder="请选择"
+                        showSearch={true}
+                        filterOption={(input, option) =>
+                            option.props.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0
+                        }
                     >
                         {this.state.parentInfoList.map((item, index) => {
                             return (
@@ -212,6 +218,11 @@ class userInfo extends React.PureComponent {
                     // <Input placeholder="请输入" readOnly disabled />
                     SelectOption(this.state.riskList, {
                         placeholder: "请选择用户风控组",
+                        showSearch: true,
+                        filterOption: (input, option) =>
+                            option.props.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0,
                     }),
             },
             {
@@ -229,6 +240,11 @@ class userInfo extends React.PureComponent {
                     // <Input placeholder="请输入" readOnly disabled />
                     SelectOption(this.state.algoSecList, {
                         placeholder: "请选择算法权限组",
+                        showSearch: true,
+                        filterOption: (input, option) =>
+                            option.props.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0,
                     }),
             },
             // {
@@ -323,10 +339,10 @@ class userInfo extends React.PureComponent {
                 id: "UserPasswd",
                 initialValue: "",
                 rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
+                    // {
+                    //     required: true,
+                    //     message: "参数不能为空",
+                    // },
                     {
                         validator: checkLength(32),
                         trigger: ["change", "blur"],
@@ -413,6 +429,12 @@ class userInfo extends React.PureComponent {
                         mode="multiple"
                         style={{ width: "100%" }}
                         placeholder="请选择"
+                        showSearch={true}
+                        filterOption={(input, option) =>
+                            option.props.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0
+                        }
                     >
                         {this.state.parentInfoList.map((item, index) => {
                             return (
@@ -442,6 +464,11 @@ class userInfo extends React.PureComponent {
                     // <Input placeholder="请输入" readOnly disabled />
                     SelectOption(this.state.riskList, {
                         placeholder: "请选择用户风控组",
+                        showSearch: true,
+                        filterOption: (input, option) =>
+                            option.props.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0,
                     }),
             },
             {
@@ -459,6 +486,11 @@ class userInfo extends React.PureComponent {
                     // <Input placeholder="请输入" readOnly disabled />
                     SelectOption(this.state.algoSecList, {
                         placeholder: "请选择算法权限组",
+                        showSearch: true,
+                        filterOption: (input, option) =>
+                            option.props.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0,
                     }),
             },
             // {
@@ -525,6 +557,11 @@ class userInfo extends React.PureComponent {
                 id: "riskGroup",
                 component: SelectOption(this.state.riskList, {
                     allowClear: true,
+                    showSearch: true,
+                    filterOption: (input, option) =>
+                        option.props.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0,
                     style: {
                         width: 190,
                     },
@@ -537,6 +574,11 @@ class userInfo extends React.PureComponent {
                 component: SelectOption(this.state.algoSecList, {
                     allowClear: true,
                     placeholder: "请选择",
+                    showSearch: true,
+                    filterOption: (input, option) =>
+                        option.props.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0,
                 }),
             },
             {
@@ -575,6 +617,12 @@ class userInfo extends React.PureComponent {
                         style={{ width: 190 }}
                         placeholder="请选择"
                         allowClear={true}
+                        showSearch={true}
+                        filterOption={(input, option) =>
+                            option.props.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0
+                        }
                     >
                         {this.state.parentInfoList.map((item, index) => {
                             return (
@@ -1522,6 +1570,13 @@ class userInfo extends React.PureComponent {
                                             onChange: this.inputChange,
                                             getPopupContainer: () =>
                                                 document.getElementById("area"),
+                                            showSearch: true,
+                                            filterOption: (input, option) =>
+                                                option.props.children
+                                                    .toLowerCase()
+                                                    .indexOf(
+                                                        input.toLowerCase()
+                                                    ) >= 0,
                                         })
                                         // <Input
                                         //     placeholder=""
@@ -2367,6 +2422,13 @@ class userInfo extends React.PureComponent {
                                                 document.getElementById(
                                                     "algo1"
                                                 ),
+                                            showSearch: true,
+                                            filterOption: (input, option) =>
+                                                option.props.children
+                                                    .toLowerCase()
+                                                    .indexOf(
+                                                        input.toLowerCase()
+                                                    ) >= 0,
                                         })
                                         // <Input
                                         //     placeholder=""

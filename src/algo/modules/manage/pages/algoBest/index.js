@@ -75,6 +75,11 @@ export default class algoBest extends React.PureComponent {
                 component: SelectOption(this.state.providerList, {
                     placeholder: "请选择",
                     allowClear: true,
+                    showSearch: true,
+                    filterOption: (input, option) =>
+                        option.props.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0,
                     // onChange: this.inputChange,
                 }),
             },
@@ -93,6 +98,11 @@ export default class algoBest extends React.PureComponent {
                 component: SelectOption(this.state.algoList, {
                     placeholder: "请选择",
                     allowClear: true,
+                    showSearch: true,
+                    filterOption: (input, option) =>
+                        option.props.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0,
                 }),
             },
             {
@@ -208,6 +218,11 @@ export default class algoBest extends React.PureComponent {
                 // component: <Input placeholder="请输入" />,
                 component: SelectOption(this.state.algoList, {
                     placeholder: "请选择",
+                    showSearch: true,
+                    filterOption: (input, option) =>
+                        option.props.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0,
                     // onChange: this.inputChange,
                 }),
             },
@@ -341,6 +356,11 @@ export default class algoBest extends React.PureComponent {
                 component: SelectOption(this.state.algoList, {
                     placeholder: "请选择",
                     disabled: true,
+                    showSearch: true,
+                    filterOption: (input, option) =>
+                        option.props.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0,
                     // onChange: this.inputChange,
                 }),
             },
