@@ -540,12 +540,12 @@ class userInfo extends React.PureComponent {
                 }),
             },
             {
-                label: <span>&nbsp;机&nbsp;构&nbsp;名&nbsp;称</span>,
+                label: <span>机&nbsp;构&nbsp;名&nbsp;称</span>,
                 id: "organizaName",
                 component: (
                     <AutoComplete
                         dataSource={this.state.organizationList}
-                        placeholder="请输入机构名称"
+                        placeholder="请输入"
                         filterOption={(inputValue, option) =>
                             option.props.children
                                 .toUpperCase()
@@ -561,7 +561,11 @@ class userInfo extends React.PureComponent {
             {
                 label: (
                     <span>
-                        产&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品
+                        产
+                        <span
+                            style={{ display: "inline-block", width: "40px" }}
+                        ></span>
+                        品
                     </span>
                 ),
                 // label: "产品",
@@ -681,7 +685,7 @@ class userInfo extends React.PureComponent {
                     >
                         <Tooltip title="修改风控组">
                             {record.riskName}
-                            {this.authObj.isUpdate && (
+                            {this.authObj.isUpdate && record.riskName && (
                                 <Icon
                                     type="edit"
                                     style={{ color: "#1899ff" }}
@@ -703,7 +707,7 @@ class userInfo extends React.PureComponent {
                     >
                         <Tooltip title="修改算法权限组">
                             {record.groupName}
-                            {this.authObj.isUpdate && (
+                            {this.authObj.isUpdate && record.groupName && (
                                 <Icon
                                     type="edit"
                                     style={{ color: "#1899ff" }}
@@ -867,8 +871,8 @@ class userInfo extends React.PureComponent {
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
-        console.log("setUpdateModal--------");
-        console.log(record, form);
+        // console.log("setUpdateModal--------");
+        // console.log(record, form);
         this.record = record;
         this.setState({
             seUserType: this.record.userType,

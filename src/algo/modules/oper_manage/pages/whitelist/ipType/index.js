@@ -11,7 +11,7 @@ const columns = (params) => {
             key: "id",
         },
         {
-            title: "用户编码",
+            title: "用户账户",
             dataIndex: "userId",
             key: "userId",
         },
