@@ -540,12 +540,12 @@ class userInfo extends React.PureComponent {
                 }),
             },
             {
-                label: <span>&nbsp;机&nbsp;构&nbsp;名&nbsp;称</span>,
+                label: <span>机&nbsp;构&nbsp;名&nbsp;称</span>,
                 id: "organizaName",
                 component: (
                     <AutoComplete
                         dataSource={this.state.organizationList}
-                        placeholder="请输入机构名称"
+                        placeholder="请输入"
                         filterOption={(inputValue, option) =>
                             option.props.children
                                 .toUpperCase()
@@ -561,7 +561,11 @@ class userInfo extends React.PureComponent {
             {
                 label: (
                     <span>
-                        产&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品
+                        产
+                        <span
+                            style={{ display: "inline-block", width: "40px" }}
+                        ></span>
+                        品
                     </span>
                 ),
                 // label: "产品",

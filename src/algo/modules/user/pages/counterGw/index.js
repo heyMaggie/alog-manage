@@ -425,10 +425,10 @@ class CounterGw extends React.PureComponent {
                             {record.gwAddr}
                             <Icon
                                 type="edit"
-                                style={{
-                                    paddingLeft: "5px",
-                                    color: "#1899ff",
-                                }}
+                                // style={{
+                                //     paddingLeft: "5px",
+                                //     color: "#1899ff",
+                                // }}
                             />
                         </Tooltip>
                     </div>
