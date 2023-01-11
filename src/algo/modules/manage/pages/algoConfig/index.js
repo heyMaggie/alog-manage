@@ -57,6 +57,11 @@ class algoConfig extends React.PureComponent {
                     SelectOption(this.state.riskList, {
                         placeholder: "请选择",
                         onChange: this.inputChange,
+                        showSearch: true,
+                        filterOption: (input, option) =>
+                            option.props.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0,
                     }),
             },
             // {
@@ -88,6 +93,11 @@ class algoConfig extends React.PureComponent {
                 // component: <Input placeholder="请输入" />,
                 component: SelectOption(this.state.providerList, {
                     placeholder: "请选择",
+                    showSearch: true,
+                    filterOption: (input, option) =>
+                        option.props.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0,
                     // onChange: this.inputChange,
                 }),
             },
@@ -238,6 +248,11 @@ class algoConfig extends React.PureComponent {
                     // <Input placeholder="请输入" onChange={this.inputChange} />
                     SelectOption(this.state.riskList, {
                         placeholder: "请选择",
+                        showSearch: true,
+                        filterOption: (input, option) =>
+                            option.props.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0,
                         onChange: this.inputChange,
                     }),
             },
@@ -270,6 +285,11 @@ class algoConfig extends React.PureComponent {
                 // component: <Input placeholder="请输入" />,
                 component: SelectOption(this.state.providerList, {
                     placeholder: "请选择",
+                    showSearch: true,
+                    filterOption: (input, option) =>
+                        option.props.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0,
                     // onChange: this.inputChange,
                 }),
             },
@@ -1190,6 +1210,12 @@ class algoConfig extends React.PureComponent {
                                     SelectOption(this.state.riskList, {
                                         placeholder: "请选择",
                                         onChange: this.inputChange,
+                                        showSearch: true,
+                                        filterOption: (input, option) =>
+                                            option.props.children
+                                                .toLowerCase()
+                                                .indexOf(input.toLowerCase()) >=
+                                            0,
                                         getPopupContainer: () =>
                                             document.getElementById("algo1"),
                                     })
