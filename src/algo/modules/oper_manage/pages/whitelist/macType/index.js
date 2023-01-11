@@ -68,8 +68,13 @@ export default class macType extends React.PureComponent {
                     },
                 ],
                 component: SelectOption(this.state.userList, {
+                    showSearch: true,
                     placeholder: "请选择",
                     allowClear: false,
+                    filterOption: (input, option) =>
+                        option.props.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0,
                     style: {
                         width: 400,
                     },
@@ -110,8 +115,13 @@ export default class macType extends React.PureComponent {
                     },
                 ],
                 component: SelectOption(this.state.userList, {
+                    showSearch: true,
                     placeholder: "请选择",
                     allowClear: false,
+                    filterOption: (input, option) =>
+                        option.props.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0,
                     style: {
                         width: 400,
                     },

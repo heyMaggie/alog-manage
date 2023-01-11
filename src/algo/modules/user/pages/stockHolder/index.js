@@ -3,7 +3,6 @@ import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
 // import UploadWrap from "@/components/UploadWrap";
 import { Input } from "antd";
-
 // const getUpdateFormFields = () => {
 //     return []
 // };
@@ -114,8 +113,13 @@ export default class uoeSetting extends React.PureComponent {
                     },
                 ],
                 component: SelectOption(this.state.userList, {
+                    showSearch: true,
                     placeholder: "请选择",
                     allowClear: false,
+                    filterOption: (input, option) =>
+                        option.props.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0,
                     style: {
                         width: 400,
                     },
@@ -266,8 +270,13 @@ export default class uoeSetting extends React.PureComponent {
                     },
                 ],
                 component: SelectOption(this.state.userList, {
+                    showSearch: true,
                     placeholder: "请选择",
                     allowClear: false,
+                    filterOption: (input, option) =>
+                        option.props.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0,
                     style: {
                         width: 400,
                     },

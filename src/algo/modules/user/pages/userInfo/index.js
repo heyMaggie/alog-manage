@@ -102,7 +102,7 @@ class userInfo extends React.PureComponent {
                         trigger: ["change", "blur"],
                     },
                 ],
-                component: <Input placeholder="请输入" />,
+                component: <Input placeholder="请输入" type="password" />,
             },
             {
                 label: "用户状态",
@@ -332,7 +332,7 @@ class userInfo extends React.PureComponent {
                         trigger: ["change", "blur"],
                     },
                 ],
-                component: <Input placeholder="请输入" />,
+                component: <Input placeholder="请输入" type="password" />,
             },
             {
                 label: "用户状态",
