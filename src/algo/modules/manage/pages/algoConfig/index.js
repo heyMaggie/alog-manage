@@ -758,7 +758,7 @@ class algoConfig extends React.PureComponent {
         let params = record;
         params.algorithmStatus = 4;
         console.log("删除参数 ", record);
-        return;
+        // return;
         http.post({
             url: "/algo/updateAlgoInfo",
             data: params,
@@ -775,7 +775,7 @@ class algoConfig extends React.PureComponent {
                     msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
                 );
             } else {
-                message.error(msg || "删除失败");
+                message.error("删除失败");
             }
         });
     };
@@ -1067,7 +1067,6 @@ class algoConfig extends React.PureComponent {
             isDelete: false,
             isUpdate: true,
         };
-        // console.log("cmpt", cmpt);
         if (cmpt) {
             for (let i = 0; i < cmpt.length; i++) {
                 let item = cmpt[i];

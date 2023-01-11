@@ -1000,6 +1000,33 @@ class userInfo extends React.PureComponent {
     //删除记录
     handleDeleteRecord = (record) => {
         console.log("删除记录 ", record);
+        let params = record;
+        //     US_NORMAL = 1,  // 正常
+        // US_LOGOFF,      // 注销
+        // US_FROZEN,      // 冻结
+        // US_DELETE,      // 删除
+        record.userStatus = 4;
+        console.log(params);
+        // return;
+        //发送更新请求
+        http.post({
+            url: "/user/updateUserInfo",
+            data: params,
+        }).then((res) => {
+            console.log(res);
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success("删除成功");
+                this.getData(this.searchParam, this.state.pagination);
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
+                );
+            } else {
+                message.error("删除失败");
+            }
+            // this.isAction = true;
+        });
     };
     inputChange = (e) => {
         // console.log(e);
@@ -1415,7 +1442,7 @@ class userInfo extends React.PureComponent {
                     getUpdateFormFields={this.getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
                     updateRecord={this.handleUpdateRecord} // 不传 就没编辑
-                    // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
+                    deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={this.columns}
                     dataSource={info}

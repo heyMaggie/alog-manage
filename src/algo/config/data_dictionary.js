@@ -105,6 +105,7 @@ const configData = {
         { key: "1", value: "正常" },
         { key: "2", value: "注销" },
         { key: "3", value: "冻结" },
+        // { key: "4", value: "删除" },
     ],
     algorithmStatus: [
         { key: "0", value: "未开始" },
@@ -206,10 +207,6 @@ const configData = {
         { key: "0", value: "正常可交易可取消" },
         { key: "1", value: "不可交易" },
         { key: "2", value: "不可取消" },
-    ],
-    accountStatus: [
-        { key: "0", value: "正常" },
-        { key: "1", value: "冻结" },
     ],
     marketCode: [
         { key: "0", value: "SZ" },
@@ -675,6 +672,7 @@ const configData = {
     // 股东账户状态
     accountStatus: [
         { key: "1", value: "正常" },
+        // { key: "2", value: "删除" },
         { key: "3", value: "冻结" },
     ],
 

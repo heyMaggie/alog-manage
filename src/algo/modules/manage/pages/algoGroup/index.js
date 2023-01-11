@@ -1,7 +1,7 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 // import SelectOption from "@/components/SelectOption";
-import { Input, Button, Modal, Form, Switch, Row, Col } from "antd";
+import { Input, Button, Modal, Form, Switch, Row, Col, Popconfirm } from "antd";
 import Table from "@/components/Table";
 import styles from "./style.module.less";
 import { connect } from "react-redux";
@@ -24,7 +24,7 @@ let getSearchFormFields = () => {
 
 class algoGroup extends React.PureComponent {
     columns = (params) => {
-        let tab = [
+        let arr = [
             {
                 title: "ID",
                 dataIndex: "id",
@@ -44,26 +44,68 @@ class algoGroup extends React.PureComponent {
                 title: "可用算法",
                 dataIndex: "algoUsed",
             },
-            {
+        ];
+        // if (!this.authObj.isUpdate) {
+        //     tab.pop();
+        // }
+        if (this.authObj.isUpdate || this.authObj.isDelete) {
+            arr.push({
                 title: "操作",
                 key: "operation",
                 fixed: "right",
                 width: 100,
-                render: (text, record) => (
-                    <a
-                        onClick={(e) => {
-                            this.handleUpdateBtn(record);
-                        }}
-                    >
-                        编辑
-                    </a>
-                ),
-            },
-        ];
-        if (!this.authObj.isUpdate) {
-            tab.pop();
+                // render: (text, record) => (
+                //     <a
+                //         onClick={(e) => {
+                //             this.handleUpdateBtn(record);
+                //         }}
+                //     >
+                //         编辑
+                //     </a>
+                // ),
+                render: (text, record) => {
+                    let updateA = (
+                        <a
+                            onClick={(e) => {
+                                this.handleUpdateBtn(record);
+                            }}
+                        >
+                            编辑
+                        </a>
+                    );
+                    let deleteA = (
+                        <Popconfirm
+                            title="是否确认删除?"
+                            onConfirm={async () =>
+                                this.handleDeleteRecord(record)
+                            }
+                            okText="确认"
+                            cancelText="取消"
+                        >
+                            <a
+                                style={{
+                                    color: "rgba(240, 95, 94, 1)",
+                                    margin:
+                                        "0 0 0 " +
+                                        (this.authObj.isUpdate
+                                            ? "24px"
+                                            : "0px"),
+                                }}
+                            >
+                                删除
+                            </a>
+                        </Popconfirm>
+                    );
+                    return (
+                        <div>
+                            {this.authObj.isUpdate && updateA}
+                            {this.authObj.isDelete && deleteA}
+                        </div>
+                    );
+                },
+            });
         }
-        return tab;
+        return arr;
     };
     columns2 = (params) => {
         return [
@@ -450,14 +492,43 @@ class algoGroup extends React.PureComponent {
             }
         });
     };
+    //删除记录
+    handleDeleteRecord = (record) => {
+        console.log("删除记录1 ", record);
+        // 权限组状态: 1正常 2删除
+        record.status = 2;
+        http.post({
+            url: "/algo-group-info/updateAlgoGroupInfo",
+            data: record,
+        }).then((res) => {
+            console.log(res);
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                // this.setState({
+                //     updateModalVisible: false,
+                // });
+                // // this.getData();
+                this.getData(this.searchParam, this.state.pagination);
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
+                );
+                this.setState({
+                    updateModalVisible: true,
+                });
+            } else {
+                message.error(msg);
+                // this.setState({
+                //     updateModalVisible: true,
+                // });
+            }
+        });
+    };
     handleUpdateModalCancel = () => {
         this.setState({
             updateModalVisible: false,
         });
-    };
-    //删除记录
-    handleDeleteRecord = (record) => {
-        console.log("删除记录 ", record);
     };
 
     getData = (params = {}, pagination = { current: 1, pageSize: 13 }) => {
