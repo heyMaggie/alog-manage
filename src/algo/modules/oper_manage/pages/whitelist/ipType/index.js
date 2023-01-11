@@ -144,7 +144,7 @@ export default class IpType extends React.PureComponent {
             userId: fromData.userId,
         };
         http.post({
-            url: "/blacklist/addBlacklist",
+            url: "/write-list/addWriteList",
             data: params,
         }).then((res) => {
             let msg = res.message;
