@@ -815,6 +815,8 @@ class userInfo extends React.PureComponent {
             let msg = res.message;
             if (res.code == 0) {
                 message.success(msg);
+                this.getParentInfoList();
+                this.getOrganizationList();
                 // this.getData();
             } else if (res.code == 20000) {
                 message.error(
@@ -1038,7 +1040,7 @@ class userInfo extends React.PureComponent {
         }
     };
 
-    //获取所有操作人用户
+    //获取产品
     getParentInfoList = (params = {}) => {
         // return;
         http.post({
