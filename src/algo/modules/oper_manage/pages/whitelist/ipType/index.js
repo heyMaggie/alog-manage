@@ -96,7 +96,7 @@ export default class IpType extends React.PureComponent {
                     },
                 ],
                 component: (
-                    <Input placeholder="请输入IP地址（注意：*-*-*-*-*-* 不限制登录）" />
+                    <Input placeholder="请输入IP地址（注意：*.*.*.*  不限制登录）" />
                 ),
             },
         ];
@@ -145,7 +145,7 @@ export default class IpType extends React.PureComponent {
                     },
                 ],
                 component: (
-                    <Input placeholder="请输入IP地址（注意：*-*-*-*-*-* 不限制登录）" />
+                    <Input placeholder="请输入IP地址（注意：*.*.*.*  不限制登录）" />
                 ),
             },
         ];
