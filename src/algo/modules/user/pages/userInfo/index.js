@@ -57,6 +57,70 @@ class userInfo extends React.PureComponent {
                 }),
             },
             {
+                label: "机构名称",
+                id: "OrganizaName",
+                initialValue: "",
+                hidden:
+                    this.state.seUserType != 1 && this.state.seUserType != 3
+                        ? true
+                        : false,
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    // {
+                    //     validator: checkLength(28),
+                    //     trigger: ["change", "blur"],
+                    // },
+                ],
+                component: (
+                    <AutoComplete
+                        dataSource={this.state.organizationList}
+                        placeholder="请输入机构名称"
+                        filterOption={(inputValue, option) =>
+                            option.props.children
+                                .toUpperCase()
+                                .indexOf(inputValue.toUpperCase()) !== -1
+                        }
+                    />
+                ),
+                // component: SelectOption(this.state.organizationList, {
+                //     placeholder: "请选择机构名称",
+                // }),
+            },
+            {
+                label: "产品",
+                id: "UuserId",
+                initialValue: [],
+                hidden: this.state.seUserType != 1 ? true : false,
+                // rules: this.validateIsRequired(),
+                component: (
+                    <Select
+                        mode="multiple"
+                        style={{ width: "100%" }}
+                        placeholder="请选择"
+                        showSearch={true}
+                        filterOption={(input, option) =>
+                            option.props.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0
+                        }
+                    >
+                        {this.state.parentInfoList.map((item, index) => {
+                            return (
+                                <Select.Option
+                                    key={item.id}
+                                    value={item.id / 1}
+                                >
+                                    {item.userName}
+                                </Select.Option>
+                            );
+                        })}
+                    </Select>
+                ),
+            },
+            {
                 label: "用户账户",
                 id: "UserId",
                 initialValue: "",
@@ -140,70 +204,6 @@ class userInfo extends React.PureComponent {
                 component: <Input placeholder="请输入" />,
             },
             {
-                label: "机构名称",
-                id: "OrganizaName",
-                initialValue: "",
-                hidden:
-                    this.state.seUserType != 1 && this.state.seUserType != 3
-                        ? true
-                        : false,
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    // {
-                    //     validator: checkLength(28),
-                    //     trigger: ["change", "blur"],
-                    // },
-                ],
-                component: (
-                    <AutoComplete
-                        dataSource={this.state.organizationList}
-                        placeholder="请输入机构名称"
-                        filterOption={(inputValue, option) =>
-                            option.props.children
-                                .toUpperCase()
-                                .indexOf(inputValue.toUpperCase()) !== -1
-                        }
-                    />
-                ),
-                // component: SelectOption(this.state.organizationList, {
-                //     placeholder: "请选择机构名称",
-                // }),
-            },
-            {
-                label: "产品",
-                id: "UuserId",
-                initialValue: [],
-                hidden: this.state.seUserType != 1 ? true : false,
-                // rules: this.validateIsRequired(),
-                component: (
-                    <Select
-                        mode="multiple"
-                        style={{ width: "100%" }}
-                        placeholder="请选择"
-                        showSearch={true}
-                        filterOption={(input, option) =>
-                            option.props.children
-                                .toLowerCase()
-                                .indexOf(input.toLowerCase()) >= 0
-                        }
-                    >
-                        {this.state.parentInfoList.map((item, index) => {
-                            return (
-                                <Select.Option
-                                    key={item.id}
-                                    value={item.id / 1}
-                                >
-                                    {item.userName}
-                                </Select.Option>
-                            );
-                        })}
-                    </Select>
-                ),
-            },
-            {
                 label: "用户风控组",
                 id: "RiskGroup",
                 initialValue: "",
@@ -283,6 +283,70 @@ class userInfo extends React.PureComponent {
     };
     getUpdateFormFields = () => {
         return [
+            {
+                label: "机构名称",
+                id: "OrganizaName",
+                initialValue: "",
+                hidden:
+                    this.state.seUserType != 1 && this.state.seUserType != 3
+                        ? true
+                        : false,
+                rules: [
+                    {
+                        required: true,
+                        message: "参数不能为空",
+                    },
+                    // {
+                    //     validator: checkLength(28),
+                    //     trigger: ["change", "blur"],
+                    // },
+                ],
+                component: (
+                    <AutoComplete
+                        dataSource={this.state.organizationList}
+                        placeholder="请输入机构名称"
+                        filterOption={(inputValue, option) =>
+                            option.props.children
+                                .toUpperCase()
+                                .indexOf(inputValue.toUpperCase()) !== -1
+                        }
+                    />
+                ),
+                // component: SelectOption(this.state.organizationList, {
+                //     placeholder: "请选择机构名称",
+                // }),
+            },
+            {
+                label: "产品",
+                id: "UuserId",
+                initialValue: [],
+                hidden: this.state.seUserType != 1 ? true : false,
+                // rules: this.validateIsRequired(),
+                component: (
+                    <Select
+                        mode="multiple"
+                        style={{ width: "100%" }}
+                        placeholder="请选择"
+                        showSearch={true}
+                        filterOption={(input, option) =>
+                            option.props.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0
+                        }
+                    >
+                        {this.state.parentInfoList.map((item, index) => {
+                            return (
+                                <Select.Option
+                                    key={item.id}
+                                    value={item.id / 1}
+                                >
+                                    {item.userName}
+                                </Select.Option>
+                            );
+                        })}
+                    </Select>
+                ),
+            },
             {
                 label: "用户类型",
                 id: "UserType",
@@ -384,70 +448,6 @@ class userInfo extends React.PureComponent {
                     },
                 ],
                 component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "机构名称",
-                id: "OrganizaName",
-                initialValue: "",
-                hidden:
-                    this.state.seUserType != 1 && this.state.seUserType != 3
-                        ? true
-                        : false,
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    // {
-                    //     validator: checkLength(28),
-                    //     trigger: ["change", "blur"],
-                    // },
-                ],
-                component: (
-                    <AutoComplete
-                        dataSource={this.state.organizationList}
-                        placeholder="请输入机构名称"
-                        filterOption={(inputValue, option) =>
-                            option.props.children
-                                .toUpperCase()
-                                .indexOf(inputValue.toUpperCase()) !== -1
-                        }
-                    />
-                ),
-                // component: SelectOption(this.state.organizationList, {
-                //     placeholder: "请选择机构名称",
-                // }),
-            },
-            {
-                label: "产品",
-                id: "UuserId",
-                initialValue: [],
-                hidden: this.state.seUserType != 1 ? true : false,
-                // rules: this.validateIsRequired(),
-                component: (
-                    <Select
-                        mode="multiple"
-                        style={{ width: "100%" }}
-                        placeholder="请选择"
-                        showSearch={true}
-                        filterOption={(input, option) =>
-                            option.props.children
-                                .toLowerCase()
-                                .indexOf(input.toLowerCase()) >= 0
-                        }
-                    >
-                        {this.state.parentInfoList.map((item, index) => {
-                            return (
-                                <Select.Option
-                                    key={item.id}
-                                    value={item.id / 1}
-                                >
-                                    {item.userName}
-                                </Select.Option>
-                            );
-                        })}
-                    </Select>
-                ),
             },
             {
                 label: "用户风控组",
@@ -648,6 +648,16 @@ class userInfo extends React.PureComponent {
                 width: 100,
             },
             {
+                title: "机构名称",
+                dataIndex: "organizaName",
+                width: 150,
+            },
+            {
+                title: "产品",
+                dataIndex: "parentName",
+                width: 180,
+            },
+            {
                 title: "用户类型",
                 dataIndex: "userTypeValue",
                 width: 170,
@@ -711,16 +721,7 @@ class userInfo extends React.PureComponent {
                 dataIndex: "identityId",
                 width: 200,
             },
-            {
-                title: "机构名称",
-                dataIndex: "organizaName",
-                width: 150,
-            },
-            {
-                title: "产品",
-                dataIndex: "parentName",
-                width: 180,
-            },
+
             {
                 title: "用户风控组",
                 dataIndex: "riskName",
