@@ -344,12 +344,12 @@ class CounterGw extends React.PureComponent {
             {
                 title: "营业编号",
                 dataIndex: "custOrgid",
-                // width: 100,
+                width: 150,
             },
             {
                 title: "系统编号",
                 dataIndex: "clSystemId",
-                width: 200,
+                width: 300,
             },
             {
                 title: "创建时间",
@@ -774,7 +774,7 @@ class CounterGw extends React.PureComponent {
         this.getUserSelectList();
     }
     render() {
-        let scroll = { x: 2200, y: 445 };
+        let scroll = { x: 2000, y: 445 };
         let scroll2 = { x: 1000, y: 900 };
         let info = this.state.info;
         let { getFieldDecorator } = this.props.form;

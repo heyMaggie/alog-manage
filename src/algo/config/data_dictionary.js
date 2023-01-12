@@ -315,10 +315,14 @@ const configData = {
         { key: "2", value: "价格(绝对值)" },
     ],
     // 运维系统 : 证券信息管理 - 证券状态0正常, 1停盘, 2退市',
+    // 4-ST, 5-*ST,6-上市次日到5日(无涨跌幅)
     securityStatus: [
         { key: "0", value: "正常" },
         { key: "1", value: "停盘" },
         { key: "2", value: "退市" },
+        { key: "4", value: "ST" },
+        { key: "5", value: "*ST" },
+        { key: "6", value: "上市次日到5日" },
     ],
     // 运维系统 : 证券信息管理 - 是否有涨跌限制'是否有涨跌停价格限制,Y=是,N=否',
     hasPriceLimit: [

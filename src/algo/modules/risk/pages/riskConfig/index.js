@@ -156,71 +156,71 @@ class riskConfigManage extends React.PureComponent {
                 key: "TradeAmountLimit",
             },
         ];
-        if (this.authObj.isUpdate) {
-            arr.push({
-                title: "操作",
-                key: "operation",
-                fixed: "right",
-                width: 100,
-                render: (text, record) => (
-                    <a
-                        onClick={(e) => {
-                            this.handleUpdateBtn(record);
-                        }}
-                    >
-                        编辑
-                    </a>
-                ),
-            });
-        }
-        // if (this.authObj.isUpdate || this.authObj.isDelete) {
+        // if (this.authObj.isUpdate) {
         //     arr.push({
         //         title: "操作",
         //         key: "operation",
         //         fixed: "right",
         //         width: 100,
-        //         render: (text, record) => {
-        //             let updateA = (
-        //                 <a
-        //                     onClick={(e) => {
-        //                         this.handleUpdateBtn(record);
-        //                     }}
-        //                 >
-        //                     编辑
-        //                 </a>
-        //             );
-        //             let deleteA = (
-        //                 <Popconfirm
-        //                     title="是否确认删除?"
-        //                     onConfirm={async () =>
-        //                         this.handleDeleteRecord(record)
-        //                     }
-        //                     okText="确认"
-        //                     cancelText="取消"
-        //                 >
-        //                     <a
-        //                         style={{
-        //                             color: "rgba(240, 95, 94, 1)",
-        //                             margin:
-        //                                 "0 0 0 " +
-        //                                 (this.authObj.isUpdate
-        //                                     ? "24px"
-        //                                     : "0px"),
-        //                         }}
-        //                     >
-        //                         删除
-        //                     </a>
-        //                 </Popconfirm>
-        //             );
-        //             return (
-        //                 <div>
-        //                     {this.authObj.isUpdate && updateA}
-        //                     {this.authObj.isDelete && deleteA}
-        //                 </div>
-        //             );
-        //         },
+        //         render: (text, record) => (
+        //             <a
+        //                 onClick={(e) => {
+        //                     this.handleUpdateBtn(record);
+        //                 }}
+        //             >
+        //                 编辑
+        //             </a>
+        //         ),
         //     });
         // }
+        if (this.authObj.isUpdate || this.authObj.isDelete) {
+            arr.push({
+                title: "操作",
+                key: "operation",
+                fixed: "right",
+                width: 100,
+                render: (text, record) => {
+                    let updateA = (
+                        <a
+                            onClick={(e) => {
+                                this.handleUpdateBtn(record);
+                            }}
+                        >
+                            编辑
+                        </a>
+                    );
+                    let deleteA = (
+                        <Popconfirm
+                            title="是否确认删除?"
+                            onConfirm={async () =>
+                                this.handleDeleteRecord(record)
+                            }
+                            okText="确认"
+                            cancelText="取消"
+                        >
+                            <a
+                                style={{
+                                    color: "rgba(240, 95, 94, 1)",
+                                    margin:
+                                        "0 0 0 " +
+                                        (this.authObj.isUpdate
+                                            ? "24px"
+                                            : "0px"),
+                                }}
+                            >
+                                删除
+                            </a>
+                        </Popconfirm>
+                    );
+                    return (
+                        <div>
+                            {this.authObj.isUpdate && updateA}
+                            {this.authObj.isDelete && deleteA}
+                        </div>
+                    );
+                },
+            });
+        }
         return arr;
     };
     // 新增按钮点击事件
@@ -309,21 +309,21 @@ class riskConfigManage extends React.PureComponent {
         console.log("删除记录1 ", record);
         // 权限组状态: 1正常 2删除
         let params = {};
-        params.id = record.id;
-        return;
+        params.Id = record.id / 1;
+        // return;
         http.post({
-            url: "/algo-group-info/updateAlgoGroupInfo",
-            data: record,
+            url: "/risk/delRiskConfig",
+            data: params,
         }).then((res) => {
             console.log(res);
             let msg = res.message;
             if (res.code == 0) {
-                message.success(msg);
+                message.success("删除成功");
                 // this.setState({
                 //     updateModalVisible: false,
                 // });
                 // // this.getData();
-                this.getData(this.searchParam, this.state.pagination);
+                this.getData(this.searchParam, this.pagination);
             } else if (res.code == 20000) {
                 message.error(
                     msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
@@ -332,7 +332,7 @@ class riskConfigManage extends React.PureComponent {
                     updateModalVisible: true,
                 });
             } else {
-                message.error(msg);
+                message.error("删除失败");
                 // this.setState({
                 //     updateModalVisible: true,
                 // });
@@ -650,6 +650,7 @@ class riskConfigManage extends React.PureComponent {
         delete params.id;
         delete params.riskName;
         console.log(params);
+        this.searchParam = params;
         this.getData(params);
         // if (params.id == "" && params.riskName == "") {
         //     // console.log("getData");

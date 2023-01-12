@@ -533,6 +533,50 @@ export default class uoeSetting extends React.PureComponent {
     //删除记录
     handleDeleteRecord = (record) => {
         console.log("删除记录 ", record);
+        // let params = record;
+        let params = {
+            Id: record.id,
+            SecurityId: record.securityId,
+            SecurityIdSource: record.securityIdSource,
+            SecurityName: record.securityName,
+            PrevClosePx: record.prevClosePx * 1,
+            BuyQtyUpperLimit: record.buyQtyUpperLimit * 100,
+            SellQtyUpperLimit: record.sellQtyUpperLimit * 100,
+            MarketBuyQtyUpperLimit: record.marketBuyQtyUpperLimit * 100,
+            MarketSellQtyUpperLimit: record.marketSellQtyUpperLimit * 100,
+            // SecurityStatus: record.securityStatus + "",
+            HasPriceLimit: record.hasPriceLimit + "",
+            LimitType: record.limitType + "",
+            Property: record.property + "",
+            UpperLimitPrice: record.upperLimitPrice * 10000,
+            LowerLimitPrice: record.lowerLimitPrice * 10000,
+            BuyQtyUnit: record.buyQtyUnit * 100,
+            SellQtyUnit: record.sellQtyUnit * 100,
+            MarketBuyQtyUnit: record.marketBuyQtyUnit * 100,
+            MarketSellQtyUnit: record.marketSellQtyUnit * 100,
+        };
+        // 0正常, 1停盘, 2退市, 4-ST, 5-*ST,6-上市次日到5日(无涨跌幅), 7-删除
+        params.securityStatus = "7";
+        console.log("删除参数 ", params);
+        // return;
+        http.post({
+            url: "/security/updateSecurityInfo",
+            data: params,
+        }).then((res) => {
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success("删除成功");
+                // this.getData();
+                this.getData(this.searchParam, this.state.pagination);
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
+                );
+            } else {
+                message.error("删除失败");
+            }
+            this.isAction = true;
+        });
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
@@ -585,7 +629,7 @@ export default class uoeSetting extends React.PureComponent {
                         item.creditTypeValue = "";
                     }
                 });
-                console.log(list);
+                // console.log(list);
                 // showTip(this);
             } else {
                 message.info("查询结果为空");
@@ -602,6 +646,7 @@ export default class uoeSetting extends React.PureComponent {
         });
     };
     handleSearch = (params, pagination) => {
+        this.searchParam = params;
         this.getData(params, pagination);
     };
     componentDidMount() {
@@ -634,7 +679,7 @@ export default class uoeSetting extends React.PureComponent {
                     getUpdateFormFields={getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
                     updateRecord={this.handleUpdateRecord} // 不传 就没编辑
-                    // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
+                    deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={columns}
                     dataSource={info}

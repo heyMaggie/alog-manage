@@ -364,6 +364,37 @@ export default class uoeSetting extends React.PureComponent {
     //删除记录
     handleDeleteRecord = (record) => {
         console.log("删除记录 ", record);
+        //柜台状态:0-不可用,1-可用,2-删除
+        let params = {
+            Id: record.id,
+            BrokerCode: record.brokerCode,
+            BrokerName: record.brokerName,
+            SupportType: record.supportType / 1,
+            GwAddr: record.gwAddr,
+            Version: record.version,
+            Status: 2,
+        };
+        console.log(params);
+        // return;
+        // 发送更新请求
+        http.post({
+            url: "/counter-info/updateCounterInfo",
+            data: params,
+        }).then((res) => {
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success("删除成功");
+                // this.getData();
+                this.getData(this.searchParam, this.state.pagination);
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
+                );
+            } else {
+                message.success("删除失败");
+            }
+            this.isAction = true;
+        });
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
@@ -414,6 +445,7 @@ export default class uoeSetting extends React.PureComponent {
         });
     };
     handleSearch = (params, pagination) => {
+        this.searchParam = params;
         this.getData(params, pagination);
     };
     componentDidMount() {
@@ -446,7 +478,7 @@ export default class uoeSetting extends React.PureComponent {
                     getUpdateFormFields={getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
                     updateRecord={this.handleUpdateRecord} // 不传 就没编辑
-                    // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
+                    deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={columns}
                     dataSource={info}
