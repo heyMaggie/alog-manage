@@ -402,16 +402,16 @@ class userInfo extends React.PureComponent {
                 label: "用户密码",
                 id: "UserPasswd",
                 initialValue: "",
-                rules: [
-                    // {
-                    //     required: true,
-                    //     message: "参数不能为空",
-                    // },
-                    {
-                        validator: checkLength(32),
-                        trigger: ["change", "blur"],
-                    },
-                ],
+                // rules: [
+                //     // {
+                //     //     required: true,
+                //     //     message: "参数不能为空",
+                //     // },
+                //     {
+                //         validator: checkLength(32),
+                //         trigger: ["change", "blur"],
+                //     },
+                // ],
                 component: <Input.Password placeholder="请输入" />,
             },
             {
