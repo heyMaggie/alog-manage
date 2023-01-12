@@ -1,7 +1,7 @@
 import React from "react";
 import CurdComponent from "@/components/CurdComponent";
 import SelectOption from "@/components/SelectOption";
-import { Input, Modal, Radio, Form, Button, Switch, Col } from "antd";
+import { Input, Modal, Form, Button, Switch, Popconfirm } from "antd";
 import styles from "./style.module.less";
 import { connect } from "react-redux";
 
@@ -173,6 +173,54 @@ class riskConfigManage extends React.PureComponent {
                 ),
             });
         }
+        // if (this.authObj.isUpdate || this.authObj.isDelete) {
+        //     arr.push({
+        //         title: "操作",
+        //         key: "operation",
+        //         fixed: "right",
+        //         width: 100,
+        //         render: (text, record) => {
+        //             let updateA = (
+        //                 <a
+        //                     onClick={(e) => {
+        //                         this.handleUpdateBtn(record);
+        //                     }}
+        //                 >
+        //                     编辑
+        //                 </a>
+        //             );
+        //             let deleteA = (
+        //                 <Popconfirm
+        //                     title="是否确认删除?"
+        //                     onConfirm={async () =>
+        //                         this.handleDeleteRecord(record)
+        //                     }
+        //                     okText="确认"
+        //                     cancelText="取消"
+        //                 >
+        //                     <a
+        //                         style={{
+        //                             color: "rgba(240, 95, 94, 1)",
+        //                             margin:
+        //                                 "0 0 0 " +
+        //                                 (this.authObj.isUpdate
+        //                                     ? "24px"
+        //                                     : "0px"),
+        //                         }}
+        //                     >
+        //                         删除
+        //                     </a>
+        //                 </Popconfirm>
+        //             );
+        //             return (
+        //                 <div>
+        //                     {this.authObj.isUpdate && updateA}
+        //                     {this.authObj.isDelete && deleteA}
+        //                 </div>
+        //             );
+        //         },
+        //     });
+        // }
         return arr;
     };
     // 新增按钮点击事件
@@ -255,6 +303,41 @@ class riskConfigManage extends React.PureComponent {
                 // });
             }
         );
+    };
+    //删除记录
+    handleDeleteRecord = (record) => {
+        console.log("删除记录1 ", record);
+        // 权限组状态: 1正常 2删除
+        let params = {};
+        params.id = record.id;
+        return;
+        http.post({
+            url: "/algo-group-info/updateAlgoGroupInfo",
+            data: record,
+        }).then((res) => {
+            console.log(res);
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success(msg);
+                // this.setState({
+                //     updateModalVisible: false,
+                // });
+                // // this.getData();
+                this.getData(this.searchParam, this.state.pagination);
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
+                );
+                this.setState({
+                    updateModalVisible: true,
+                });
+            } else {
+                message.error(msg);
+                // this.setState({
+                //     updateModalVisible: true,
+                // });
+            }
+        });
     };
 
     //弹窗确定
@@ -679,7 +762,7 @@ class riskConfigManage extends React.PureComponent {
             <div className={styles.userInfo}>
                 <CurdComponent
                     rowKey={"Id"}
-                    pageSize={pageSize}
+                    // pageSize={pageSize}
                     // isShowSearchForm={false}
                     // btnText2="查全部"
                     onSearchClick={this.handleSearch}

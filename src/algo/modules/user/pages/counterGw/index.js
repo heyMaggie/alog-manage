@@ -246,132 +246,6 @@ class CounterGw extends React.PureComponent {
     };
     getUpdateFormFields = () => {
         return this.getInsertFormFields();
-        return [
-            {
-                label: "用户名称",
-                id: "uuserId",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        validator: checkLength(10),
-                        trigger: ["change", "blur"],
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "柜台用户编码",
-                id: "userId",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        validator: checkLength(12),
-                        trigger: ["change", "blur"],
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "柜台用户名称",
-                id: "userName",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                    {
-                        validator: checkLength(32),
-                        trigger: ["change", "blur"],
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "业务类型",
-                id: "businessType",
-                initialValue: "1",
-                rules: [
-                    {
-                        required: true,
-                        message: "参数不能为空",
-                    },
-                ],
-                component: SelectOption(dict.businessType, {
-                    placeholder: "请选择",
-                    allowClear: false,
-                    onChange: this.selectChange,
-                }),
-            },
-            {
-                label: "柜台网关",
-                id: "counterGwId",
-                rules: [
-                    {
-                        required: true,
-                        message: "柜台网关不能为空",
-                    },
-                    // {
-                    //     max: 10,
-                    //     message: "最大长度为10",
-                    // },
-                ],
-                component: SelectOption(this.state.counterArr, {
-                    placeholder: "请选择",
-                    allowClear: false,
-                }),
-            },
-            {
-                label: "终端信息",
-                id: "TerminalInfo",
-                rules: [
-                    // {
-                    //     validator: checkLength(256),
-                    //     trigger: ["change", "blur"],
-                    // },
-                    {
-                        max: 256,
-                        message: "最大长度为256",
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "营业编号",
-                id: "CustOrgId",
-                rules: [
-                    // {
-                    //     validator: checkLength(256),
-                    //     trigger: ["change", "blur"],
-                    // },
-                    {
-                        max: 50,
-                        message: "最大长度为50",
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
-            {
-                label: "系统编号",
-                id: "ClSystemId",
-                rules: [
-                    // {
-                    //     validator: checkLength(256),
-                    //     trigger: ["change", "blur"],
-                    // },
-                    {
-                        max: 50,
-                        message: "最大长度为50",
-                    },
-                ],
-                component: <Input placeholder="请输入" />,
-            },
-        ];
     };
     // let keys = Object.keys(this.insertForm.getFieldsValue()).filter(
     //     (item) => item.includes("counterGwId")
@@ -431,13 +305,15 @@ class CounterGw extends React.PureComponent {
                     >
                         <Tooltip title="修改网关">
                             {record.gwAddr}
-                            <Icon
-                                type="edit"
-                                style={{
-                                    // paddingLeft: "5px",
-                                    color: "#1899ff",
-                                }}
-                            />
+                            {record.gwAddr && (
+                                <Icon
+                                    type="edit"
+                                    style={{
+                                        // paddingLeft: "5px",
+                                        color: "#1899ff",
+                                    }}
+                                />
+                            )}
                         </Tooltip>
                     </div>
                 ),

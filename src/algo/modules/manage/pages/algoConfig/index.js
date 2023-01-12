@@ -491,7 +491,7 @@ class algoConfig extends React.PureComponent {
                     >
                         <Tooltip title="修改风控组">
                             {record.riskName}
-                            {this.authObj.isUpdate && (
+                            {this.authObj.isUpdate && record.riskName && (
                                 <Icon
                                     type="edit"
                                     style={{ color: "#1899ff" }}
