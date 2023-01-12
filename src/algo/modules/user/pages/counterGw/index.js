@@ -637,6 +637,7 @@ class CounterGw extends React.PureComponent {
             TerminalInfo: formData.TerminalInfo,
             CustOrgId: formData.CustOrgId,
             ClSystemId: formData.ClSystemId,
+            Status: 1,
         };
         console.log("更新编辑记录", params);
         http.post({
@@ -660,9 +661,24 @@ class CounterGw extends React.PureComponent {
     };
     //删除
     handleDeleteRecord = (record) => {
-        let params = record;
+        // let params = record;
+        let params = {
+            Id: record.id,
+            UserId: record.userId,
+            UserName: record.userName,
+            // UserPasswd: formData.userPasswd,
+            // CounterUserId: formData.counterUserId / 1,
+            BusinessType: record.businessType / 1,
+            // ClientType: formData.clientType / 1,
+            UuserId: record.uuserId / 1,
+            CounterGwId: record.counterGwId / 1,
+            TerminalInfo: record.TerminalInfo,
+            CustOrgId: record.CustOrgId,
+            ClSystemId: record.ClSystemId,
+            Status: 2,
+        };
         // 柜台用户状态: 1正常 2删除
-        params.status = 2;
+        // params.status = 2;
         console.log("删除", params);
         // return;
         http.post({
