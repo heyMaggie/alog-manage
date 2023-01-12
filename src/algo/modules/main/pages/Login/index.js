@@ -241,7 +241,7 @@ class FormLogin extends React.Component {
                             // initialValue: "algoAdmin",
                             initialValue: sessionStorage.userName
                                 ? sessionStorage.userName
-                                : "",
+                                : "algoAdmin",
                             // initialValue: "11",
                             // initialValue: "user_read_only",
                             rules: [
