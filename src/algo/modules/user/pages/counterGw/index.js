@@ -268,9 +268,9 @@ class CounterGw extends React.PureComponent {
     columns = (params) => {
         return [
             {
-                title: "用户账户",
-                dataIndex: "uuserId",
-                width: 150,
+                title: "柜台ID",
+                dataIndex: "id",
+                width: 100,
             },
             {
                 title: "用户名称",
