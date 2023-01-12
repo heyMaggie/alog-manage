@@ -95,7 +95,7 @@ export default class macType extends React.PureComponent {
                     },
                 ],
                 component: (
-                    <Input placeholder="请输入mac地址（注意：*-*-*-*-*-* 不限制登录）" />
+                    <Input placeholder="请输入mac地址（注意：*:*:*:*:*:* 不限制登录）" />
                 ),
             },
         ];
@@ -144,7 +144,7 @@ export default class macType extends React.PureComponent {
                     },
                 ],
                 component: (
-                    <Input placeholder="请输入mac地址（注意：*-*-*-*-*-* 不限制登录）" />
+                    <Input placeholder="请输入mac地址（注意：*:*:*:*:*:* 不限制登录）" />
                 ),
             },
         ];
