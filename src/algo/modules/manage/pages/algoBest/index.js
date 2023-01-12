@@ -570,7 +570,33 @@ export default class algoBest extends React.PureComponent {
     };
     //删除记录
     handleDeleteRecord = (record) => {
-        console.log("删除记录 ", record);
+        // console.log("删除记录11 ", record);
+        let params = { id: record.id };
+        // console.log("删除参数 ", params);
+        // return;
+        pfhttp
+            .post({
+                url: "/algo-assess/v1/assess/delete-optimize-base",
+                data: params,
+                // baseUrl: window.pfBaseUrl,
+            })
+            .then((res) => {
+                let msg = res.msg;
+                if (res.code == 0) {
+                    message.success("删除成功");
+                    this.getData();
+                } else if (res.code == 20000) {
+                    message.error(
+                        msg.substring(
+                            msg.indexOf("[") + 1,
+                            msg.lastIndexOf("]")
+                        )
+                    );
+                } else {
+                    message.error("删除失败");
+                }
+                this.isAction = true;
+            });
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
@@ -831,7 +857,7 @@ export default class algoBest extends React.PureComponent {
                     getUpdateFormFields={this.getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
                     updateRecord={this.handleUpdateRecord} // 不传 就没编辑
-                    // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
+                    deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     insertModalText="新增T0优选算法"
                     updateModalText="修改T0优选算法"
                     centered={true}

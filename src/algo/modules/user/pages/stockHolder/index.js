@@ -527,6 +527,28 @@ export default class uoeSetting extends React.PureComponent {
     //删除记录
     handleDeleteRecord = (record) => {
         console.log("删除记录 ", record);
+        let params = record;
+        params.accountStatus = 2;
+        // return;
+        // 发送更新请求
+        http.post({
+            url: "/stockHolder/updateStockHolderInfo",
+            data: params,
+        }).then((res) => {
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success("删除成功");
+                // this.getData();
+                this.getData(this.searchParam, this.state.pagination);
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
+                );
+            } else {
+                message.error("删除失败");
+            }
+            this.isAction = true;
+        });
     };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
@@ -574,6 +596,7 @@ export default class uoeSetting extends React.PureComponent {
         });
     };
     handleSearch = (params, pagination) => {
+        this.searchParam = params;
         this.getData(params, pagination);
     };
     componentDidMount() {
@@ -627,7 +650,7 @@ export default class uoeSetting extends React.PureComponent {
                     getUpdateFormFields={this.getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
                     updateRecord={this.handleUpdateRecord} // 不传 就没编辑
-                    // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
+                    deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={columns}
                     dataSource={info}

@@ -782,6 +782,32 @@ class CounterGw extends React.PureComponent {
             this.isAction = true;
         });
     };
+    //删除
+    handleDeleteRecord = (record) => {
+        let params = record;
+        // 柜台用户状态: 1正常 2删除
+        params.status = 2;
+        console.log("删除", params);
+        // return;
+        http.post({
+            url: "/counter/updateCounterUserInfo",
+            data: params,
+        }).then((res) => {
+            let msg = res.message;
+            if (res.code == 0) {
+                message.success("删除成功");
+                // this.getData();
+                this.getData(this.searchParam, this.state.pagination);
+            } else if (res.code == 20000) {
+                message.error(
+                    msg.substring(msg.indexOf("[") + 1, msg.lastIndexOf("]"))
+                );
+            } else {
+                message.error("删除失败");
+            }
+            this.isAction = true;
+        });
+    };
     //弹窗确定
     handleUpdateModalOk = () => {
         if (this.state.selectedRowKeys.length == 0) {
@@ -913,7 +939,7 @@ class CounterGw extends React.PureComponent {
                     getUpdateFormFields={this.getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
                     updateRecord={this.handleUpdateRecord} // 不传 就没编辑
-                    // deleteRecord={this.handleDeleteRecord} // 不传 就没删除
+                    deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     centered={true}
                     columns={this.columns}
                     dataSource={info}
