@@ -620,7 +620,7 @@ export default class uoeSetting extends React.PureComponent {
             this.setState({
                 userList: idArr,
             });
-            console.log(this.state.userList, "userList");
+            // console.log(this.state.userList, "userList");
         });
     };
     render() {

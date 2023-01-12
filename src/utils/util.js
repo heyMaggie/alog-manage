@@ -57,7 +57,7 @@ window.getLength = function (str) {
 };
 window.checkLength = (len) => {
     return (rule, value, callback) => {
-        if (!value) {
+        if (value != 0 && !value) {
             return Promise.reject("");
         } else if (getLength(value) > len) {
             // return Promise.reject("位数超过限制");
