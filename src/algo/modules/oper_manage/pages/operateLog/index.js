@@ -67,6 +67,7 @@ export default class uoeSetting extends React.PureComponent {
                 id: "operateModule",
                 component: SelectOption(this.state.opModuleList, {
                     placeholder: "请选择",
+                    allowClear: true,
                 }),
             },
             {
