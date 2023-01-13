@@ -463,6 +463,7 @@ class algoGroup extends React.PureComponent {
     //更新记录
     handleUpdateRecord2 = (params) => {
         console.log(params);
+        params.status = 1;
         // return;
         http.post({
             url: "/algo-group-info/updateAlgoGroupInfo",
