@@ -1333,9 +1333,11 @@ class RegularWay extends React.PureComponent {
                 title: "状态",
                 dataIndex: "status",
                 render: (text, record) => {
+                    console.log(record);
                     // return (
                     //     <TagLabel record={record.status} type="warn"></TagLabel>
                     // );
+                    record.status = record.status + "";
                     if (record.status.indexOf("0") == 0) {
                         return (
                             <div>
