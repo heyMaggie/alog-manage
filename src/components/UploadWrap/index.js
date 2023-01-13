@@ -12,6 +12,11 @@ export default class UploadWrap extends React.PureComponent {
             if (this.props.downloadUrl) {
                 window.location.href = this.props.downloadUrl;
             }
+            // let url = window.baseURL + this.props.urlPrefix + "/download";
+            // var newWin = window.open(url, "_blank");
+            // setTimeout(() => {
+            //     newWin.close();
+            // }, 3000);
         }
     };
     render() {
