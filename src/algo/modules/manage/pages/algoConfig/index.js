@@ -82,7 +82,7 @@ class algoConfig extends React.PureComponent {
             // },
             {
                 label: "算法厂商名称",
-                id: "ProviderName",
+                id: "UuserId",
                 initialValue: "",
                 rules: [
                     {
@@ -274,7 +274,7 @@ class algoConfig extends React.PureComponent {
             // },
             {
                 label: "算法厂商名称",
-                id: "ProviderName",
+                id: "UuserId",
                 initialValue: "",
                 rules: [
                     {
@@ -609,10 +609,10 @@ class algoConfig extends React.PureComponent {
         params.AlgorithmType = params.AlgorithmType / 1;
         params.AlgorithmTypeId = params.AlgorithmTypeId / 1;
         params.RiskGroup = params.RiskGroup / 1;
-        let valArr = params.ProviderName.split("-");
+        // let valArr = params.ProviderName.split("-");
         // console.log(valArr);
-        params.ProviderName = valArr[0];
-        params.UuserId = valArr[1] / 1;
+        // params.ProviderName = valArr[0];
+        params.UuserId = params.UuserId / 1;
         console.log("新增接口", params);
         let isok = params.AlgoName.match(
             /^[a-zA-Z-\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/i
@@ -676,8 +676,8 @@ class algoConfig extends React.PureComponent {
         let formData = {
             AlgoName: record.algoName,
             // ProviderName: record.providerName,
-            ProviderName: record.providerName,
-            // UuserId: record.uuserId,
+            // ProviderName: record.uuserId,
+            UuserId: record.uuserId,
             AlgorithmType: record.algorithmType + "",
             AlgorithmTypeId: record.algorithmTypeId + "",
             AlgorithmTypeName: record.algorithmTypeName,
@@ -732,10 +732,11 @@ class algoConfig extends React.PureComponent {
         params.AlgorithmType = params.AlgorithmType / 1;
         params.AlgorithmTypeId = params.AlgorithmTypeId / 1;
         params.RiskGroup = params.RiskGroup / 1;
-        let valArr = params.ProviderName.split("-");
+        // let valArr = params.ProviderName.split("-");
         // console.log(valArr);
-        params.ProviderName = valArr[0];
-        params.UuserId = valArr[1] / 1;
+        // params.ProviderName = valArr[0];
+        // params.UuserId = valArr[1] / 1;
+        params.UuserId = params.UuserId / 1;
         console.log("修改接口", params);
         let isok = params.AlgoName.match(
             /^[a-zA-Z-\u4e00-\u9fa5]{1,5}\(\w{1,5}\)/i
@@ -907,7 +908,6 @@ class algoConfig extends React.PureComponent {
             url: "/algo/listProvider",
             data: params,
         }).then((res) => {
-            console.log(res, "fffffffffffffffffffffffffff");
             let idArr = [];
             if (res.data && res.data.length > 0) {
                 let dataArr = res.data;
@@ -916,7 +916,7 @@ class algoConfig extends React.PureComponent {
                         let obj = {};
                         // obj.key = item.providerName + "-" + item.uuserId;
                         // obj.value = item.providerName + "-" + item.uuserId;
-                        obj.key = item.userName;
+                        obj.key = item.id;
                         obj.value = item.userName;
                         return obj;
                     });
