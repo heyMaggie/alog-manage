@@ -648,7 +648,13 @@ class algoConfig extends React.PureComponent {
             // this.getData(this.searchParam, this.state.pagination);
         });
     };
-
+    beforeInsertFun = (next) => {
+        console.log("beforeInsertFun----------");
+        this.setState(
+            { algorithmTypeList: [{ key: "1", value: "日内回转" }] },
+            next
+        );
+    };
     //填入更新数据
     setUpdateModal = ({ form, record }) => {
         // console.log(record, form);
@@ -664,43 +670,46 @@ class algoConfig extends React.PureComponent {
         //     "RiskGroup": 1
         // }
         console.log(record);
+        let typeList = [];
         if (record.algorithmType == 1) {
-            this.state.algorithmTypeList = [{ key: "1", value: "日内回转" }];
+            typeList = [{ key: "1", value: "日内回转" }];
         } else {
-            this.state.algorithmTypeList = [
+            typeList = [
                 { key: "1", value: "智能委托" },
                 { key: "2", value: "POV" },
                 { key: "3", value: "股指" },
             ];
         }
-        let formData = {
-            AlgoName: record.algoName,
-            // ProviderName: record.providerName,
-            // ProviderName: record.uuserId,
-            UuserId: record.uuserId,
-            AlgorithmType: record.algorithmType + "",
-            AlgorithmTypeId: record.algorithmTypeId + "",
-            AlgorithmTypeName: record.algorithmTypeName,
-            // AlgorithmStatus: record.AlgorithmStatus + "",
-            Parameter: record.parameter,
-            RiskGroup: record.riskGroup + "",
-        };
-        if (record.algorithmStatus == 0) {
-            formData.algorithmShow = 0;
-            formData.algorithmEnable = 0;
-        } else if (record.algorithmStatus == 1) {
-            formData.algorithmShow = 0;
-            formData.algorithmEnable = 1;
-        } else if (record.algorithmStatus == 2) {
-            formData.algorithmShow = 2;
-            formData.algorithmEnable = 0;
-        } else if (record.algorithmStatus == 3) {
-            formData.algorithmShow = 2;
-            formData.algorithmEnable = 1;
-        }
-        formData.algorithmShow = formData.algorithmShow == 2;
-        formData.algorithmEnable = formData.algorithmEnable == 1;
-        form.setFieldsValue(formData);
+        this.setState({ algorithmTypeList: typeList }, () => {
+            let formData = {
+                AlgoName: record.algoName,
+                // ProviderName: record.providerName,
+                // ProviderName: record.uuserId,
+                UuserId: record.uuserId,
+                AlgorithmType: record.algorithmType + "",
+                AlgorithmTypeId: record.algorithmTypeId + "",
+                // AlgorithmTypeName: record.algorithmTypeName,
+                // AlgorithmStatus: record.AlgorithmStatus + "",
+                Parameter: record.parameter,
+                RiskGroup: record.riskGroup + "",
+            };
+            if (record.algorithmStatus == 0) {
+                formData.algorithmShow = 0;
+                formData.algorithmEnable = 0;
+            } else if (record.algorithmStatus == 1) {
+                formData.algorithmShow = 0;
+                formData.algorithmEnable = 1;
+            } else if (record.algorithmStatus == 2) {
+                formData.algorithmShow = 2;
+                formData.algorithmEnable = 0;
+            } else if (record.algorithmStatus == 3) {
+                formData.algorithmShow = 2;
+                formData.algorithmEnable = 1;
+            }
+            formData.algorithmShow = formData.algorithmShow == 2;
+            formData.algorithmEnable = formData.algorithmEnable == 1;
+            form.setFieldsValue(formData);
+        });
     };
     handleUpdateRecord = ({ form }) => {
         // params = {
@@ -1140,6 +1149,7 @@ class algoConfig extends React.PureComponent {
                     pagination={this.state.pagination}
                     getUpdateFormFields={this.getUpdateFormFields}
                     setUpdateModal={this.setUpdateModal}
+                    beforeInsertFun={this.beforeInsertFun}
                     updateRecord={this.handleUpdateRecord} // 不传 就没编辑
                     deleteRecord={this.handleDeleteRecord} // 不传 就没删除
                     dtWidth="800px"
