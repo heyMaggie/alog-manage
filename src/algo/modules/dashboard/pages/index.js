@@ -68,7 +68,7 @@ class RegularWay extends React.PureComponent {
             }
         });
     };
-    generateChart = (list, type) => {
+    generateChart = (list = [], type) => {
         let fiexdDate = [
             "09:30",
             "09:31",
@@ -311,256 +311,32 @@ class RegularWay extends React.PureComponent {
             "14:58",
             "14:59",
             "15:00",
-            "15:01",
-            "15:02",
-            "15:03",
-            "15:04",
-            "15:05",
-            "15:06",
-            "15:07",
-            "15:08",
-            "15:09",
-            "15:10",
-            "15:11",
-            "15:12",
-            "15:13",
-            "15:14",
-            "15:15",
-            "15:16",
-            "15:17",
-            "15:18",
-            "15:19",
-            "15:20",
-            "15:21",
-            "15:22",
-            "15:23",
-            "15:24",
-            "15:25",
-            "15:26",
-            "15:27",
-            "15:28",
-            "15:29",
-            "15:30",
-            "15:31",
-            "15:32",
-            "15:33",
-            "15:34",
-            "15:35",
-            "15:36",
-            "15:37",
-            "15:38",
-            "15:39",
-            "15:40",
-            "15:41",
-            "15:42",
-            "15:43",
-            "15:44",
-            "15:45",
-            "15:46",
-            "15:47",
-            "15:48",
-            "15:49",
-            "15:50",
-            "15:51",
-            "15:52",
-            "15:53",
-            "15:54",
-            "15:55",
-            "15:56",
-            "15:57",
-            "15:58",
-            "15:59",
-            "16:00",
-            "16:01",
-            "16:02",
-            "16:03",
-            "16:04",
-            "16:05",
-            "16:06",
-            "16:07",
-            "16:08",
-            "16:09",
-            "16:10",
-            "16:11",
-            "16:12",
-            "16:13",
-            "16:14",
-            "16:15",
-            "16:16",
-            "16:17",
-            "16:18",
-            "16:19",
-            "16:20",
-            "16:21",
-            "16:22",
-            "16:23",
-            "16:24",
-            "16:25",
-            "16:26",
-            "16:27",
-            "16:28",
-            "16:29",
-            "16:30",
-            "16:31",
-            "16:32",
-            "16:33",
-            "16:34",
-            "16:35",
-            "16:36",
-            "16:37",
-            "16:38",
-            "16:39",
-            "16:40",
-            "16:41",
-            "16:42",
-            "16:43",
-            "16:44",
-            "16:45",
-            "16:46",
-            "16:47",
-            "16:48",
-            "16:49",
-            "16:50",
-            "16:51",
-            "16:52",
-            "16:53",
-            "16:54",
-            "16:55",
-            "16:56",
-            "16:57",
-            "16:58",
-            "16:59",
-            "17:00",
-            "17:01",
-            "17:02",
-            "17:03",
-            "17:04",
-            "17:05",
-            "17:06",
-            "17:07",
-            "17:08",
-            "17:09",
-            "17:10",
-            "17:11",
-            "17:12",
-            "17:13",
-            "17:14",
-            "17:15",
-            "17:16",
-            "17:17",
-            "17:18",
-            "17:19",
-            "17:20",
-            "17:21",
-            "17:22",
-            "17:23",
-            "17:24",
-            "17:25",
-            "17:26",
-            "17:27",
-            "17:28",
-            "17:29",
-            "17:30",
-            "17:31",
-            "17:32",
-            "17:33",
-            "17:34",
-            "17:35",
-            "17:36",
-            "17:37",
-            "17:38",
-            "17:39",
-            "17:40",
-            "17:41",
-            "17:42",
-            "17:43",
-            "17:44",
-            "17:45",
-            "17:46",
-            "17:47",
-            "17:48",
-            "17:49",
-            "17:50",
-            "17:51",
-            "17:52",
-            "17:53",
-            "17:54",
-            "17:55",
-            "17:56",
-            "17:57",
-            "17:58",
-            "17:59",
-            "18:00",
         ];
         let option;
         let isNull = false;
-        let seriesList = [];
-        function singelLine(params) {
-            let lineObj = { name: "", data: [] };
-            fiexdDate.forEach((item, i) => {
-                lineObj.name = params.algo_name;
-                lineObj.data[i] = "";
-                //容错处理
-                if (!params.time_line) {
-                    params.time_line = [];
-                } else {
-                    params.time_line.forEach((subitem) => {
-                        // console.log(subitem.time_point, item);
-                        if (subitem.time_point == item) {
-                            lineObj.data[i] = subitem.score;
-                        }
-                    });
-                }
-            });
-            return lineObj;
-        }
+        let shDelayList = [];
+        let szDelayList = [];
         if (!list.length) {
-            // this.$message.error('该时间段暂无数据');
             isNull = true;
         } else {
-            list.forEach((params) => {
-                seriesList.push(singelLine(params));
-            });
-            let colorList = ["#65A6FF", "#0be2ff", "#59CC7F", "#FAD337"];
-            seriesList.forEach((item, i) => {
-                // 有值
-                if (item.data.some((item) => item)) {
-                    isNull = false;
-                } else {
-                    isNull = true;
+            for (let y = 0; y < list.length; y++) {
+                const yItem = list[y];
+                // yItem.origTime = yItem.origTime.substr(0, 5);
+
+                for (let x = 0; x < fiexdDate.length; x++) {
+                    const xItem = fiexdDate[x];
+                    // console.log(yItem.origTime);
+
+                    if (yItem.origTime == xItem) {
+                        // console.log(xItem);
+                        shDelayList[x] = yItem.delaySh;
+                        szDelayList[x] = yItem.delaySz;
+                        continue;
+                    }
                 }
-                item.type = "line";
-                item.smooth = true;
-                item.showSymbol = true;
-                item.showAllSymbol = true;
-                item.itemStyle = {
-                    color: colorList[i],
-                };
-                item.connectNulls = true;
-                item.areaStyle = {
-                    color: new echarts.graphic.LinearGradient(
-                        0,
-                        0,
-                        0,
-                        1,
-                        [
-                            {
-                                offset: 0,
-                                color: colorList[i],
-                            },
-                            {
-                                offset: 1,
-                                color: "rgba(255,255,255,0)",
-                            },
-                        ],
-                        false
-                    ),
-                    opacity: 0.2,
-                    shadowColor: "rgba(0, 0, 0, 0.1)",
-                    shadowBlur: 10,
-                };
-            });
+            }
         }
+
         option = {
             legend: {
                 // data: ['算法1', '算法2', '算法3', '算法4'],
@@ -624,7 +400,7 @@ class RegularWay extends React.PureComponent {
             yAxis: [
                 {
                     type: "value",
-                    name: `单位：（分数）`,
+                    name: `单位：（ms）`,
                     axisLine: {
                         show: false,
                     },
@@ -647,11 +423,99 @@ class RegularWay extends React.PureComponent {
                     },
                     // min: isNull ? 0 : null,
                     // max: isNull ? 10 : null
-                    min: 0,
-                    max: 10,
                 },
             ],
-            series: seriesList,
+            series: [
+                {
+                    name: "上交所",
+                    type: "line",
+                    smooth: true,
+                    symbol: "circle",
+                    symbolSize: 5,
+                    showSymbol: false,
+                    showAllSymbol: true,
+                    lineStyle: {
+                        normal: {
+                            width: 1,
+                        },
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0,
+                                0,
+                                0,
+                                1,
+                                [
+                                    {
+                                        offset: 0,
+                                        color: "rgba(89, 204, 127, 0.2)",
+                                    },
+                                    {
+                                        offset: 0.8,
+                                        color: "rgba(137, 189, 27, 0)",
+                                    },
+                                ],
+                                false
+                            ),
+                            shadowColor: "rgba(0, 0, 0, 0.1)",
+                            shadowBlur: 10,
+                        },
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: "rgba(89, 204, 127, 1)",
+                            // borderColor: "rgba(89, 204, 127, 0.1)",
+                            // borderWidth: 12,
+                        },
+                    },
+                    data: shDelayList,
+                },
+                {
+                    name: "深交所",
+                    type: "line",
+                    smooth: true,
+                    symbol: "circle",
+                    symbolSize: 5,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 1,
+                        },
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0,
+                                1,
+                                0,
+                                0,
+                                [
+                                    {
+                                        offset: 0,
+                                        color: "rgba(50, 129, 255, 0.2)",
+                                    },
+                                    {
+                                        offset: 0.8,
+                                        color: "rgba(50, 129, 255, 0)",
+                                    },
+                                ],
+                                false
+                            ),
+                            shadowColor: "rgba(0, 0, 0, 0.1)",
+                            shadowBlur: 10,
+                        },
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: "rgb(50, 129, 255, 1)",
+                            // borderColor: "rgba(137,189,2,0.27)",
+                            // borderWidth: 12,
+                        },
+                    },
+                    data: szDelayList,
+                },
+            ],
         };
         var myChart = echarts.init(document.getElementById(type));
         myChart.clear();
@@ -826,7 +690,7 @@ class RegularWay extends React.PureComponent {
                     endAngle: 0,
                     min: 0,
                     max: 100,
-                    radius: "50%",
+                    radius: "60%",
                     progress: {
                         show: true,
                         width: 6,
@@ -859,6 +723,7 @@ class RegularWay extends React.PureComponent {
                     axisTick: { show: false },
                     splitLine: { show: false },
                     axisLabel: {
+                        show: false,
                         distance: 5,
                         color: "#666",
                         fontSize: 0,
@@ -899,7 +764,7 @@ class RegularWay extends React.PureComponent {
                                 color: "#999",
                                 fontSize: 12,
                                 fontWeight: "400",
-                                padding: [-20, 132, 0, 0],
+                                padding: [20, 132, 0, 0],
                             },
                         },
                     },
@@ -917,7 +782,7 @@ class RegularWay extends React.PureComponent {
                     endAngle: 0,
                     min: 0,
                     max: 100,
-                    radius: "50%",
+                    radius: "60%",
                     progress: {
                         show: true,
                         width: 6,
@@ -950,6 +815,7 @@ class RegularWay extends React.PureComponent {
                     axisTick: { show: false },
                     splitLine: { show: false },
                     axisLabel: {
+                        show: false,
                         distance: 5,
                         color: "#666",
                         fontSize: 0,
@@ -990,7 +856,7 @@ class RegularWay extends React.PureComponent {
                                 color: "#999",
                                 fontSize: 12,
                                 fontWeight: "400",
-                                padding: [-20, 132, 0, 0],
+                                padding: [20, 132, 0, 0],
                             },
                         },
                     },
@@ -1039,6 +905,7 @@ class RegularWay extends React.PureComponent {
                     axisTick: { show: false },
                     splitLine: { show: false },
                     axisLabel: {
+                        show: false,
                         distance: 5,
                         color: "#666",
                         fontSize: 0,
@@ -1065,7 +932,7 @@ class RegularWay extends React.PureComponent {
                             a: {
                                 color: "#999",
                                 fontSize: 14,
-                                padding: [-8, 120, 0, 0],
+                                padding: [8, 120, 0, 0],
                             },
                         },
                     },
@@ -1257,20 +1124,22 @@ class RegularWay extends React.PureComponent {
             // data: query,
         }).then((res) => {
             console.log("行情延迟 ", res);
-            let arr = res.data.map((item, index) => {
-                item.key = index;
-                return item;
-            });
-            this.setState(
-                {
-                    delayData: arr,
-                },
-                () => {
-                    //generateChart
-                    // this.generateChart([], "dashboardMain1");
-                    this.generateChart([], "dashboardMain1");
-                }
-            );
+            // let arr = res.data.map((item, index) => {
+            //     item.key = index;
+            //     return item;
+            // });
+            let arr = res.data;
+            this.generateChart(arr, "dashboardMain1");
+            // this.setState(
+            //     {
+            //         delayData: arr,
+            //     },
+            //     () => {
+            //         //generateChart
+            //         // this.generateChart([], "dashboardMain1");
+            //         this.generateChart(arr, "dashboardMain1");
+            //     }
+            // );
         });
     };
     //行情更新
