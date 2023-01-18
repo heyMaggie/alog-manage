@@ -50,6 +50,17 @@ export default class TagLabel extends React.PureComponent {
             };
             iconOpt.style.background = this.props.color;
         }
+        if (this.props.iconBg) {
+            sty.background = this.props.iconBg;
+            // iconOpt.style.background = this.props.textColor;
+        }
+        if (this.props.textColor) {
+            // sty = {
+            //     color: this.props.textColor,
+            // };
+            sty.color = this.props.textColor;
+            iconOpt.style.background = this.props.textColor;
+        }
         return (
             <div className={styles.tagWrap}>
                 <span className={styles.tag} style={sty}>
