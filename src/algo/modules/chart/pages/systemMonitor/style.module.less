@@ -72,7 +72,8 @@
         padding-right: 6px;
     }
     .content2 {
-        width: 402px;
+        min-width: 402px;
+        width: auto;
         .item {
             line-height: 48px;
             height: 48px;
@@ -85,10 +86,12 @@
 
         .text {
             padding: 6px 0px 6px 12px;
-            // .up,
-            // .down {
-            //     line-height: 18px;
-            // }
+            .up,
+            .down {
+                // line-height: 18px;
+                white-space: nowrap;
+                width: 205px;
+            }
         }
     }
     .text {

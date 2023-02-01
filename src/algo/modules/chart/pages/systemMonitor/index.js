@@ -32,7 +32,7 @@ class SystemMonitor extends React.PureComponent {
         http.get({
             url: "/user/algoMonitor",
         }).then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data) {
                 this.setState({
                     sysInfo: res.data,
@@ -48,9 +48,10 @@ class SystemMonitor extends React.PureComponent {
                 }
                 //算法厂商
                 if (res.data.algoProvider && res.data.algoProvider.length > 0) {
-                    let algo = res.data.algoProvider.filter(
-                        (item, index) => index < 3
-                    );
+                    let algo = res.data.algoProvider;
+                    // algo = res.data.algoProvider.filter(
+                    //     (item, index) => index < 3
+                    // );
                     this.setState({
                         algoProvider: algo,
                     });
@@ -73,7 +74,7 @@ class SystemMonitor extends React.PureComponent {
                     this.setState({
                         quoteCount: [res.data.quoteCount],
                     });
-                    console.log(this.state.quoteCount);
+                    // console.log(this.state.quoteCount);
                 }
                 //交易柜台
                 if (res.data.counterInfos && res.data.counterInfos.length > 0) {
@@ -172,10 +173,10 @@ class SystemMonitor extends React.PureComponent {
                         </div>
                     </div> */}
                     {terminalInfos.length > 0 &&
-                        terminalInfos.map((item) => {
-                            console.log(item);
+                        terminalInfos.map((item, index) => {
+                            // console.log(item);
                             let res = (
-                                <div className={styles.item}>
+                                <div className={styles.item} key={index}>
                                     <div className={styles.label}>
                                         {item.terminalName}
                                     </div>
@@ -217,7 +218,8 @@ class SystemMonitor extends React.PureComponent {
                 {/* 厂商 */}
                 <div
                     className={styles.content2}
-                    style={{ left: "116px", top: "420px" }}
+                    // style={{ left: "116px", top: "420px" }}
+                    style={{ left: "unset", right: "1134px", top: "420px" }}
                 >
                     <div className={styles.tit}>厂商</div>
                     {/* <div className={styles.item}>
@@ -238,9 +240,9 @@ class SystemMonitor extends React.PureComponent {
                         </div>
                     </div> */}
                     {algoProvider.length > 0 &&
-                        algoProvider.map((item) => {
+                        algoProvider.map((item, index) => {
                             let res = (
-                                <div className={styles.item}>
+                                <div className={styles.item} key={index}>
                                     <div className={styles.label}>
                                         {item.userName}
                                     </div>
@@ -290,9 +292,9 @@ class SystemMonitor extends React.PureComponent {
                         </div>
                     </div> */}
                     {stockPushInfos.length > 0 &&
-                        stockPushInfos.map((item) => {
+                        stockPushInfos.map((item, index) => {
                             let res = (
-                                <div className={styles.item}>
+                                <div className={styles.item} key={index}>
                                     <div
                                         className={styles.label}
                                         style={{ paddingRight: "16px" }}
@@ -328,9 +330,9 @@ class SystemMonitor extends React.PureComponent {
                         </div>
                     </div> */}
                     {quoteCount.length > 0 &&
-                        quoteCount.map((item) => {
+                        quoteCount.map((item, index) => {
                             let res = (
-                                <div className={styles.item}>
+                                <div className={styles.item} key={index}>
                                     <div className={styles.label}>
                                         {item.addr}
                                     </div>
@@ -385,9 +387,9 @@ class SystemMonitor extends React.PureComponent {
                         </div>
                     </div> */}
                     {counterInfos.length > 0 &&
-                        counterInfos.map((item) => {
+                        counterInfos.map((item, index) => {
                             let res = (
-                                <div className={styles.item}>
+                                <div className={styles.item} key={index}>
                                     <div className={styles.label}>
                                         {item.gwAddr}
                                     </div>
