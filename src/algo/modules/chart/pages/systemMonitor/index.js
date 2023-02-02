@@ -219,7 +219,7 @@ class SystemMonitor extends React.PureComponent {
                 <div
                     className={styles.content2}
                     // style={{ left: "116px", top: "420px" }}
-                    style={{ left: "unset", right: "1134px", top: "420px" }}
+                    style={{ left: "unset", right: "1134px", top: "340px" }}
                 >
                     <div className={styles.tit}>厂商</div>
                     {/* <div className={styles.item}>
