@@ -1183,6 +1183,7 @@ class RegularWay extends React.PureComponent {
             {
                 title: "更新时间",
                 dataIndex: "origTime",
+                width: 166,
             },
             {
                 title: "深市股票数量",
@@ -1351,6 +1352,7 @@ class RegularWay extends React.PureComponent {
                             backgroundColor: "white",
                             borderRadius: "12px",
                             marginBottom: "12px",
+                            minHeight: "321px",
                         }}
                     >
                         <Tabs onChange={this.callback}>

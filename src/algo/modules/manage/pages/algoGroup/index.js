@@ -713,11 +713,11 @@ class algoGroup extends React.PureComponent {
                     scroll={scroll}
                     // rowSelection={rowSelection} //批量选择 操作
                 >
-                    {/* <div
-                        urlPrefix="/security"
-                        title="证券信息"
+                    <div
+                        urlPrefix="/algo-group-info"
+                        title="算法权限组"
                         sucCallback={this.getData}
-                    ></div> */}
+                    ></div>
                 </CurdComponent>
                 <Modal
                     title={modalTitle}

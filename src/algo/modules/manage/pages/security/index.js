@@ -618,7 +618,7 @@ export default class uoeSetting extends React.PureComponent {
             data: params,
         }).then((res) => {
             console.log(res);
-            let list;
+            let list = [];
             //解析数据字典
             if (res.data.records && res.data.records.length > 0) {
                 // parseDict(res.data.records);

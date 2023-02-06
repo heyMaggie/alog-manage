@@ -458,45 +458,41 @@ class CurdComponent extends React.PureComponent {
         let cmpt = this.props.activeMenu.cmpt;
         // console.log(cmpt);
         let authObj = {
-            isQuery: true,
-            isAdd: true,
-            isUpload: true,
-            isDownload: true,
+            isQuery: false,
+            isAdd: false,
+            isUpload: false,
+            isDownload: false,
             isDelete: false,
-            isUpdate: true,
+            isUpdate: false,
         };
         // console.log("cmpt", cmpt);
         if (cmpt) {
             for (let i = 0; i < cmpt.length; i++) {
                 let item = cmpt[i];
                 // console.log(item);
-                if (item.type == 1 && item.auth != 1) {
+                if (item.type == 1 && item.auth == 1) {
                     //查询 有权限
-                    authObj.isQuery = false;
+                    authObj.isQuery = true;
                 }
-                if (item.type == 2 && item.auth != 1) {
+                if (item.type == 2 && item.auth == 1) {
                     //新增 有权限
-                    authObj.isAdd = false;
+                    authObj.isAdd = true;
                 }
-                if (item.type == 3 && item.auth != 1) {
+                if (item.type == 3 && item.auth == 1) {
                     //上传 有权限
-                    authObj.isUpload = false;
+                    authObj.isUpload = true;
                 }
-                if (item.type == 4 && item.auth != 1) {
+                if (item.type == 4 && item.auth == 1) {
                     //下载 有权限
-                    authObj.isDownload = false;
+                    authObj.isDownload = true;
                 }
-                // if (item.type == 5 && item.auth != 1) {
-                //     //下载报告 有权限 -- 绩效那边
-                //     authObj.isExportPdf = false;
-                // }
                 if (item.type == 6 && item.auth == 1) {
                     //删除 有权限
                     authObj.isDelete = true;
                 }
-                if (item.type == 7 && item.auth != 1) {
+                if (item.type == 7 && item.auth == 1) {
                     //编辑 有权限
-                    authObj.isUpdate = false;
+                    authObj.isUpdate = true;
                 }
             }
         }
