@@ -585,15 +585,34 @@ class userInfo extends React.PureComponent {
                 label: <span>机&nbsp;构&nbsp;名&nbsp;称</span>,
                 id: "organizaName",
                 component: (
-                    <AutoComplete
-                        dataSource={this.state.organizationList}
-                        placeholder="请输入"
-                        filterOption={(inputValue, option) =>
+                    <Select
+                        style={{ width: 190 }}
+                        placeholder="请选择"
+                        allowClear={true}
+                        showSearch={true}
+                        filterOption={(input, option) =>
                             option.props.children
-                                .toUpperCase()
-                                .indexOf(inputValue.toUpperCase()) !== -1
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0
                         }
-                    />
+                    >
+                        {this.state.organizationList.map((item, index) => {
+                            return (
+                                <Select.Option key={item} value={item}>
+                                    {item}
+                                </Select.Option>
+                            );
+                        })}
+                    </Select>
+                    // <AutoComplete
+                    //     dataSource={this.state.organizationList}
+                    //     placeholder="请输入"
+                    //     filterOption={(inputValue, option) =>
+                    //         option.props.children
+                    //             .toUpperCase()
+                    //             .indexOf(inputValue.toUpperCase()) !== -1
+                    //     }
+                    // />
                 ),
                 // component: SelectOption(this.state.organizationList, {
                 //     placeholder: "请选择",
@@ -907,6 +926,8 @@ class userInfo extends React.PureComponent {
             let msg = res.message;
             if (res.code == 0) {
                 message.success(msg);
+                this.getParentInfoList();
+                this.getOrganizationList();
                 // this.getData();
             } else if (res.code == 20000) {
                 message.error(
