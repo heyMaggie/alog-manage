@@ -156,7 +156,7 @@ class SystemMonitor extends React.PureComponent {
                 {/* 交易终端 */}
                 <div
                     className={styles.content2}
-                    style={{ width: "466px", left: "77px", top: "135px" }}
+                    style={{ width: "416px", left: "126px", top: "135px" }}
                 >
                     <div className={styles.tit}>交易终端</div>
                     {/* <div className={styles.item}>
@@ -319,7 +319,7 @@ class SystemMonitor extends React.PureComponent {
                 {/* 券商行情柜台 */}
                 <div
                     className={styles.content}
-                    style={{ width: "468px", left: "1070px", top: "115px" }}
+                    style={{ width: "418px", left: "1070px", top: "115px" }}
                 >
                     <div className={styles.tit}>券商行情柜台</div>
                     {/* <div className={styles.item}>
@@ -371,7 +371,7 @@ class SystemMonitor extends React.PureComponent {
                 {/* 券商交易柜台 */}
                 <div
                     className={styles.content2}
-                    style={{ width: "468px", left: "1098px", top: "440px" }}
+                    style={{ width: "418px", left: "1098px", top: "440px" }}
                 >
                     <div className={styles.tit}>券商交易柜台</div>
                     {/* <div className={styles.item}>
