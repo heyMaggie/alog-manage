@@ -98,7 +98,7 @@ class SystemMonitor extends React.PureComponent {
             counterInfos,
         } = this.state;
         let topHeight = "420px";
-        algoProvider = algoProvider.filter((item, index) => index < 8);
+        // algoProvider = algoProvider.filter((item, index) => index < 8);
         if (algoProvider.length == 7 || algoProvider.length == 8) {
             topHeight = "340px";
         } else if (algoProvider.length >= 9) {
