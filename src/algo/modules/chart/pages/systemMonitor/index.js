@@ -97,6 +97,13 @@ class SystemMonitor extends React.PureComponent {
             quoteCount,
             counterInfos,
         } = this.state;
+        let topHeight = "420px";
+        algoProvider = algoProvider.filter((item, index) => index < 8);
+        if (algoProvider.length == 7 || algoProvider.length == 8) {
+            topHeight = "340px";
+        } else if (algoProvider.length >= 9) {
+            topHeight = "290px";
+        }
         return (
             <div className={styles.container}>
                 <div className={styles.center}>
@@ -219,7 +226,7 @@ class SystemMonitor extends React.PureComponent {
                 <div
                     className={styles.content2}
                     // style={{ left: "116px", top: "420px" }}
-                    style={{ left: "unset", right: "1134px", top: "340px" }}
+                    style={{ left: "unset", right: "1134px", top: topHeight }}
                 >
                     <div className={styles.tit}>厂商</div>
                     {/* <div className={styles.item}>
