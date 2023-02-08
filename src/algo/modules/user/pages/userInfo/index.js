@@ -1118,27 +1118,70 @@ class userInfo extends React.PureComponent {
     };
     algoChange = (str) => {
         // console.log(str);
+        let binArr = this.changePropToArr(str);
         let newAlgoArr = Object.assign([], this.state.algoList);
+        // let newAlgoArr = JSON.parse(JSON.stringify(this.state.algoList));
         newAlgoArr.forEach((item) => (item.isShow = "否"));
-        // console.log("0x" + e.target.value);
-        // console.log(isNaN("0x" + e.target.value));
-        if (!isNaN("0x" + str)) {
-            let val = BigInt("0x" + str);
-            let bin = val.toString(2);
-            // console.log(bin);
-            let showArr = bin
-                .toString()
-                .split("")
-                .reverse()
-                .map((item) => (item == "1" ? "是" : "否"));
-            let showLen = showArr.length;
-            let algoLen = this.state.algoList.length;
-            let minLen = Math.min(showLen, algoLen);
-            for (let i = 0; i < minLen; i++) {
-                newAlgoArr[i].isShow = showArr[i];
+        // console.log("算法列表 ", JSON.parse(JSON.stringify(newAlgoArr)));
+        console.log("权限倒序数组 ", binArr);
+        for (let i = 0; i < newAlgoArr.length; i++) {
+            let algo = newAlgoArr[i];
+            // console.log(algo.id, algo.isShow);
+            for (let j = 0; j < binArr.length; j++) {
+                // const element = array[j];
+                if (algo.id == binArr.length - j) {
+                    // console.log(i, j);
+                    algo.isShow = binArr[j] == "1" ? "是" : "否";
+                    break;
+                }
             }
-            this.setState({ algoList: newAlgoArr });
         }
+        // console.log("newAlgoArr2 ", newAlgoArr);
+    };
+    changePropToArr = (str) => {
+        let configArr = str.split("");
+        // console.log(str);
+        // console.log(configArr);
+        let binArr = [];
+        for (let j = 0; j < configArr.length; j++) {
+            // let num = configArr[j] / 1;
+            // 16进制 转 10进制    b => 11
+            let num = parseInt(configArr[j], 16);
+            // console.log(configArr[j], num);
+            let tArr = num.toString(2).split("");
+            if (tArr.length == 1) {
+                tArr.unshift("0");
+                tArr.unshift("0");
+                tArr.unshift("0");
+            }
+            if (tArr.length == 2) {
+                tArr.unshift("0");
+                tArr.unshift("0");
+            }
+            if (tArr.length == 3) {
+                tArr.unshift("0");
+            }
+            // console.log(tArr);
+            binArr = binArr.concat(tArr);
+        }
+        // console.log(binArr);
+        return binArr;
+        // let newAlgoArr = JSON.parse(JSON.stringify(this.state.algoList));
+        // newAlgoArr.forEach((item) => (item.isShow = "0"));
+        // for (let i = 0; i < newAlgoArr.length; i++) {
+        //     let algo = newAlgoArr[i];
+        //     // console.log(algo.id, algo.isShow);
+        //     for (let j = 0; j < binArr.length; j++) {
+        //         // const element = array[j];
+        //         if (algo.id == binArr.length - j) {
+        //             // console.log(i, j);
+        //             algo.isShow = binArr[j];
+        //             break;
+        //         }
+        //     }
+        // }
+        // console.log(newAlgoArr);
+        // this.setState({ algoList: newAlgoArr });
     };
 
     //获取产品
@@ -1217,7 +1260,7 @@ class userInfo extends React.PureComponent {
             url: "/algo-group-info/algoList",
             // data: params,
         }).then((res) => {
-            // console.log("算法风控组",res);
+            console.log("算法风控组", res);
             let idArr = [];
             if (res.data && res.data.length > 0) {
                 let dataArr = res.data;
