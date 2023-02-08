@@ -195,7 +195,8 @@ class userInfo extends React.PureComponent {
         console.log(params);
         // return;
         http.post({
-            url: "/tell-info/roleModify",
+            // url: "/tell-info/roleModify",
+            url: "/tell-info/roleAdd",
             data: params,
         }).then((res) => {
             // console.log(res);
@@ -270,7 +271,8 @@ class userInfo extends React.PureComponent {
         console.log(params);
         // return;
         http.post({
-            url: "/tell-info/roleModify",
+            // url: "/tell-info/roleModify",
+            url: "/tell-info/roleDelete",
             data: params,
         }).then((res) => {
             // console.log(res);

@@ -330,7 +330,8 @@ class systemUser extends React.PureComponent {
         }
         // return;
         http.post({
-            url: "/tell-info/userModify",
+            // url: "/tell-info/userModify",
+            url: "/tell-info/userAdd",
             data: params,
         }).then((res) => {
             console.log(res);
@@ -432,7 +433,8 @@ class systemUser extends React.PureComponent {
             user_id: record.user_id,
         };
         http.post({
-            url: "/tell-info/userModify",
+            // url: "/tell-info/userModify",
+            url: "/tell-info/userDelete",
             data: params,
         }).then((res) => {
             // console.log(res);
