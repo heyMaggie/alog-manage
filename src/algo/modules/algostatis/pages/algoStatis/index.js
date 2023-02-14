@@ -139,7 +139,7 @@ class AlgorithmStatistical extends React.PureComponent {
                         {
                             gridIndex: 0,
                             type: "value",
-                            name: "单位：（个）",
+                            name: "单位：（人）",
                             splitLine: {
                                 show: false,
                             },
